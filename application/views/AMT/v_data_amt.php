@@ -4,23 +4,30 @@
               <!-- page start-->
               <section class="panel">
                   <header class="panel-heading">
-                      Editable Table
+                      Data Crew AMT
                   </header>
                   <div class="panel-body">
                       <div class="adv-table editable-table ">
                           <div class="clearfix">
                               <div class="btn-group">
-                                  <button id="editable-sample_new" class="btn green">
-                                      Add New <i class="icon-plus"></i>
-                                  </button>
+                                  								  
+								  <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahManual">
+                                  Tambah AMT <i class="icon-plus"></i>
+									</a>
+									
+									<a class="btn btn-success" data-toggle="modal" href="#ModalImportCSV">
+                                  Import CSV <i class="icon-plus"></i>
+									</a>
+																		
                               </div>
                               <div class="btn-group pull-right">
-                                  <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                  <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
                                   </button>
                                   <ul class="dropdown-menu pull-right">
-                                      <li><a href="#">Print</a></li>
-                                      <li><a href="#">Save as PDF</a></li>
-                                      <li><a href="#">Export to Excel</a></li>
+                                      <li><a href="javascript:FilterData('');">Semua</a></li>
+                                      <li><a href="javascript:FilterData('aktif');">Aktif</a></li>
+                                      <li><a href="javascript:FilterData('peringatan');">Dalam Peringatan</a></li>
+                                      <li><a href="javascript:FilterData('tidak aktif');">Tidak Aktif</a></li>
                                   </ul>
                               </div>
                           </div>
@@ -28,12 +35,11 @@
                           <table class="table table-striped table-hover table-bordered" id="editable-sample">
                               <thead>
                               <tr>
-                                  <th>Username</th>
-                                  <th>Full Name</th>
-                                  <th>Points</th>
-                                  <th>Notes</th>
-                                  <th>Edit</th>
-                                  <th>Delete</th>
+                                  <th>No</th>
+                                  <th>NIP</th>
+                                  <th>Nama</th>
+                                  <th>Jabatan</th>
+                                  <th>Klasifikasi</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -43,7 +49,6 @@
                                   <td>1234</td>
                                   <td class="center">super user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Dulal</td>
@@ -51,7 +56,6 @@
                                   <td>434</td>
                                   <td class="center">new user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Sumon</td>
@@ -59,7 +63,6 @@
                                   <td>232</td>
                                   <td class="center">super user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>vectorlab</td>
@@ -67,7 +70,6 @@
                                   <td>132</td>
                                   <td class="center">elite user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Admin</td>
@@ -75,7 +77,6 @@
                                   <td>462</td>
                                   <td class="center">new user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Rafiqul</td>
@@ -83,7 +84,6 @@
                                   <td>62</td>
                                   <td class="center">new user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Jhon Doe</td>
@@ -91,7 +91,6 @@
                                   <td>1234</td>
                                   <td class="center">super user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Dulal</td>
@@ -99,7 +98,6 @@
                                   <td>434</td>
                                   <td class="center">new user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Sumon</td>
@@ -107,7 +105,6 @@
                                   <td>232</td>
                                   <td class="center">super user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>vectorlab</td>
@@ -115,7 +112,6 @@
                                   <td>132</td>
                                   <td class="center">elite user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Admin</td>
@@ -123,7 +119,6 @@
                                   <td>462</td>
                                   <td class="center">new user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               <tr class="">
                                   <td>Rafiqul</td>
@@ -131,7 +126,6 @@
                                   <td>62</td>
                                   <td class="center">new user</td>
                                   <td><a class="edit" href="javascript:;">Edit</a></td>
-                                  <td><a class="delete" href="javascript:;">Delete</a></td>
                               </tr>
                               </tbody>
                           </table>
@@ -142,6 +136,47 @@
           </section>
       </section>
 	  
+	  <div class="modal fade" id="ModalTambahManual" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                              <h4 class="modal-title">Tambah AMT</h4>
+                                          </div>
+                                          <div class="modal-body">
+
+                                              Body goes here...
+
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                              <button class="btn btn-success" type="button">Save changes</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+	  
+	  
+	  <div class="modal fade" id="ModalImportCSV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                              <h4 class="modal-title">Import CSV</h4>
+                                          </div>
+                                          <div class="modal-body">
+
+                                              Body goes here...
+
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                              <button class="btn btn-success" type="button">Save changes</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+	  
 	<!--script for this page only-->
       <script src="<?php echo base_url()?>assets/js/editable-table.js"></script>
 
@@ -150,4 +185,12 @@
           jQuery(document).ready(function() {
               EditableTable.init();
           });
+		  	
+function FilterData(par) {
+    jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+				jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+}			
+		  
       </script>
+	  
+	  

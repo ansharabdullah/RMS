@@ -13,6 +13,8 @@
 
   
     <!-- js placed at the end of the document so the pages load faster -->
+	<script type="text/javascript" language="javascript" src="<?php echo base_url()?>assets/assets/advanced-datatable/media/js/jquery.js"></script>
+    
     <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
     
     <script src="<?php echo base_url()?>assets/js/bootstrap.min.js"></script>
@@ -20,6 +22,7 @@
     <script src="<?php echo base_url()?>assets/js/jquery.scrollTo.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 	
+	<!--untuk editable tabel-->
 	<script type="text/javascript" src="<?php echo base_url()?>assets/assets/data-tables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="<?php echo base_url()?>assets/assets/data-tables/DT_bootstrap.js"></script>
 	
@@ -29,18 +32,10 @@
     <script src="<?php echo base_url()?>assets/js/jquery.customSelect.min.js" ></script>
     <script src="<?php echo base_url()?>assets/js/respond.min.js" ></script>
 
-    <script class="include" type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.dcjqaccordion.2.7.js"></script>
-
     <!--common script for all pages-->
     <script src="<?php echo base_url()?>assets/js/common-scripts.js"></script>
 
-    <!--script for this page-->
-    <script src="<?php echo base_url()?>assets/js/sparkline-chart.js"></script>
-    <script src="<?php echo base_url()?>assets/js/easy-pie-chart.js"></script>
-    <script src="<?php echo base_url()?>assets/js/count.js"></script>
-
 	<!-- Highchart -->
-	
 	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts.js"></script>
 	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts-more.js"></script>
 	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/modules/exporting.js"></script>
