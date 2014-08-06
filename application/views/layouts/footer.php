@@ -37,6 +37,12 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url()?>assets/js/form-validation-script.js"></script>
 	
+        <script type="text/javascript" src="<?php echo base_url()?>assets/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+        
+        <script src="<?php echo base_url()?>assets/js/advanced-form-components.js"></script>
+        
 	<!-- Highchart -->
 	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts.js"></script>
 	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts-more.js"></script>
