@@ -25,7 +25,7 @@
                                   </button>
                                   <ul class="dropdown-menu pull-right">
                                       <li><a href="javascript:FilterData('');">Semua</a></li>
-                                      <li><a href="javascript:FilterData('aktif');">Aktif</a></li>
+                                      <li><a href="javascript:FilterData('aktif.');">Aktif</a></li>
                                       <li><a href="javascript:FilterData('peringatan');">Dalam Peringatan</a></li>
                                       <li><a href="javascript:FilterData('tidak aktif');">Tidak Aktif</a></li>
                                   </ul>
@@ -35,98 +35,77 @@
                           <table class="table table-striped table-hover table-bordered" id="editable-sample">
                               <thead>
                               <tr>
-                                  <th>No</th>
+                                  <th style="display:none;"></th>
+                                  <th width="30">No</th>
                                   <th>NIP</th>
                                   <th>Nama</th>
                                   <th>Jabatan</th>
-                                  <th>Klasifikasi</th>
+                                  <th width="30">Klasifikasi</th>
+								  <th width="30">Status</th>
                               </tr>
                               </thead>
                               <tbody>
+							  
                               <tr class="">
-                                  <td>Jondi Rose</td>
-                                  <td>Alfred Jondi Rose</td>
-                                  <td>1234</td>
-                                  <td class="center">super user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
+                                  <td style="display:none;"></td>
+                                  <td>1</td>
+                                  <td>3205190001</td>
+                                  <td>Firman</td>
+                                  <td>Supir</td>
+                                  <td>8</td>
+                                  <td><span class="label label-success">Aktif.</span></td>
                               </tr>
-                              <tr class="">
-                                  <td>Dulal</td>
-                                  <td>Jonathan Smith</td>
-                                  <td>434</td>
-                                  <td class="center">new user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
+							  
+							  <tr class="">
+                                  <td style="display:none;"></td>
+                                  <td>2</td>
+                                  <td>3205190002</td>
+                                  <td>Fiqri</td>
+                                  <td>Supir</td>
+                                  <td>16</td>
+                                  <td><span class="label label-success">Aktif.</span></td>
                               </tr>
-                              <tr class="">
-                                  <td>Sumon</td>
-                                  <td> Sumon Ahmed</td>
-                                  <td>232</td>
-                                  <td class="center">super user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
+							  
+							  <tr class="">
+                                  <td style="display:none;"></td>
+                                  <td>3</td>
+                                  <td>3205190003</td>
+                                  <td>Firdaus</td>
+                                  <td>Kernet</td>
+                                  <td>24</td>
+                                  <td><span class="label label-default">Tidak Aktif</span></td>
                               </tr>
-                              <tr class="">
-                                  <td>vectorlab</td>
-                                  <td>dk mosa</td>
-                                  <td>132</td>
-                                  <td class="center">elite user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
+							  
+							  <tr class="">
+                                  <td style="display:none;"></td>
+                                  <td>4</td>
+                                  <td>3205190004</td>
+                                  <td>Anshar</td>
+                                  <td>Supir</td>
+                                  <td>8</td>
+                                  <td><span class="label label-warning">Peringatan</span></td>
                               </tr>
-                              <tr class="">
-                                  <td>Admin</td>
-                                  <td> Flat Lab</td>
-                                  <td>462</td>
-                                  <td class="center">new user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
+							  
+							  <tr class="">
+                                  <td style="display:none;"></td>
+                                  <td>5</td>
+                                  <td>3205190005</td>
+                                  <td>Abdullah</td>
+                                  <td>Kernet</td>
+                                  <td>24</td>
+                                  <td><span class="label label-warning">Peringatan</span></td>
                               </tr>
-                              <tr class="">
-                                  <td>Rafiqul</td>
-                                  <td>Rafiqul dulal</td>
-                                  <td>62</td>
-                                  <td class="center">new user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
+							  
+							  <tr class="">
+                                  <td style="display:none;"></td>
+                                  <td>6</td>
+                                  <td>3205190006</td>
+                                  <td>Chepy</td>
+                                  <td>Kernet</td>
+                                  <td>40</td>
+                                  <td><span class="label label-success">Aktif.</span></td>
                               </tr>
-                              <tr class="">
-                                  <td>Jhon Doe</td>
-                                  <td>Jhon Doe </td>
-                                  <td>1234</td>
-                                  <td class="center">super user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
-                              </tr>
-                              <tr class="">
-                                  <td>Dulal</td>
-                                  <td>Jonathan Smith</td>
-                                  <td>434</td>
-                                  <td class="center">new user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
-                              </tr>
-                              <tr class="">
-                                  <td>Sumon</td>
-                                  <td> Sumon Ahmed</td>
-                                  <td>232</td>
-                                  <td class="center">super user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
-                              </tr>
-                              <tr class="">
-                                  <td>vectorlab</td>
-                                  <td>dk mosa</td>
-                                  <td>132</td>
-                                  <td class="center">elite user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
-                              </tr>
-                              <tr class="">
-                                  <td>Admin</td>
-                                  <td> Flat Lab</td>
-                                  <td>462</td>
-                                  <td class="center">new user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
-                              </tr>
-                              <tr class="">
-                                  <td>Rafiqul</td>
-                                  <td>Rafiqul dulal</td>
-                                  <td>62</td>
-                                  <td class="center">new user</td>
-                                  <td><a class="edit" href="javascript:;">Edit</a></td>
-                              </tr>
+							  
                               </tbody>
                           </table>
                       </div>
@@ -145,13 +124,59 @@
                                           </div>
                                           <div class="modal-body">
 
-                                              Body goes here...
+                                              <div class="row">
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          
+                          <div class="panel-body">
+						  
+						  
+							
+						  
+						  
+						  
+						  
+                              <div class=" form">
+                                  <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                                      <div class="form-group ">
+                                          <label for="cname" class="control-label col-lg-2">Name (required)</label>
+                                          <div class="col-lg-4">
+                                              <input class=" form-control" id="cname" name="name" minlength="2" type="text" required />
+                                          </div>
+                                      </div>
+                                      <div class="form-group ">
+                                          <label for="cemail" class="control-label col-lg-2">E-Mail (required)</label>
+                                          <div class="col-lg-4">
+                                              <input class="form-control " id="cemail" type="email" name="email" required />
+                                          </div>
+                                      </div>
+                                      <div class="form-group ">
+                                          <label for="curl" class="control-label col-lg-2">URL (optional)</label>
+                                          <div class="col-lg-4">
+                                              <input class="form-control " id="curl" type="url" name="url" />
+                                          </div>
+                                      </div>
+                                      <div class="form-group ">
+                                          <label for="ccomment" class="control-label col-lg-2">Your Comment (required)</label>
+                                          <div class="col-lg-4">
+                                              <textarea class="form-control " id="ccomment" name="comment" required></textarea>
+                                          </div>
+                                      </div>
+                                      
+                                  
+                              </div>
+
+                          </div>
+                      </section>
+                  </div>
+              </div>
 
                                           </div>
                                           <div class="modal-footer">
                                               <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                              <button class="btn btn-success" type="button">Save changes</button>
+                                              <input class="btn btn-success" type="submit" value="Simpan"/>
                                           </div>
+										  </form>
                                       </div>
                                   </div>
                               </div>

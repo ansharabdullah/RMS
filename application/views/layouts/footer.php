@@ -34,7 +34,9 @@
 
     <!--common script for all pages-->
     <script src="<?php echo base_url()?>assets/js/common-scripts.js"></script>
-
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.validate.min.js"></script>
+	<script src="<?php echo base_url()?>assets/js/form-validation-script.js"></script>
+	
 	<!-- Highchart -->
 	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts.js"></script>
 	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts-more.js"></script>
