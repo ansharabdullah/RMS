@@ -21,6 +21,9 @@
     <link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/css/style-responsive.css" rel="stylesheet" />
 
+	<!-- Untuk Dynamic Tabel -->
+	<link rel="stylesheet" href="<?php echo base_url()?>assets/assets/data-tables/DT_bootstrap.css" />
+	
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>

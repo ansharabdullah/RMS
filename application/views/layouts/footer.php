@@ -19,6 +19,10 @@
     <script class="include" type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo base_url()?>assets/js/jquery.scrollTo.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+	
+	<script type="text/javascript" src="<?php echo base_url()?>assets/assets/data-tables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>assets/assets/data-tables/DT_bootstrap.js"></script>
+	
     <script src="<?php echo base_url()?>assets/js/jquery.sparkline.js" type="text/javascript"></script>
     <script src="<?php echo base_url()?>assets/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="<?php echo base_url()?>assets/js/owl.carousel.js" ></script>
@@ -64,5 +68,9 @@
 
   </script>
 
+  
+  
+  
+  
   </body>
 </html>
