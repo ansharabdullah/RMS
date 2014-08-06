@@ -26,6 +26,9 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+	
+	<script src="<?php echo base_url()?>assets/js/jquery-1.8.3.min.js"></script>
+	
   </head>
   <body>
 <section id="container">

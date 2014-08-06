@@ -11,9 +11,10 @@
       <!--footer end-->
   </section>
 
+  
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
-    <script src="<?php echo base_url()?>assets/js/jquery-1.8.3.min.js"></script>
+    
     <script src="<?php echo base_url()?>assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo base_url()?>assets/js/jquery.scrollTo.min.js"></script>
@@ -34,6 +35,12 @@
     <script src="<?php echo base_url()?>assets/js/easy-pie-chart.js"></script>
     <script src="<?php echo base_url()?>assets/js/count.js"></script>
 
+	<!-- Highchart -->
+	
+	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts.js"></script>
+	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts-more.js"></script>
+	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/modules/exporting.js"></script>
+	
   <script>
 
       //owl carousel
