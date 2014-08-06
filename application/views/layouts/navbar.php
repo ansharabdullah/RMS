@@ -12,10 +12,10 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="icon-laptop"></i>
-                          <span>Layouts</span>
+                          <span>Layout</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="boxed_page.html">Boxed Page</a></li>
+                          <li><a  href="Data_MT.php">Boxed Page</a></li>
                           <li><a  href="horizontal_menu.html">Horizontal Menu</a></li>
                           <li><a  href="language_switch_bar.html">Language Switch Bar</a></li>
                       </ul>
