@@ -15,13 +15,15 @@
     <link href="<?php echo base_url()?>assets/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
     <link href="<?php echo base_url()?>assets/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="<?php echo base_url()?>assets/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/css/owl.carousel.css" type="text/css">
-    <!-- Custom styles for this template -->
+    
+	<!-- Untuk Dynamic Tabel -->
+	<link href="<?php echo base_url()?>assets/assets/advanced-datatable/media/css/demo_page.css" rel="stylesheet" />
+    <link href="<?php echo base_url()?>assets/assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+	
+	<!-- Custom styles for this template -->
     <link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/css/style-responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/assets/data-tables/DT_bootstrap.css" />
-    
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
