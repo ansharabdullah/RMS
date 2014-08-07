@@ -15,7 +15,7 @@
                                 Tambah AMT <i class="icon-plus"></i>
                             </a>
 
-                            <a class="btn btn-success" data-toggle="modal" href="#ModalImportCSV">
+                            <a class="btn btn-success" href="<?php echo base_url() ?>amt/import_amt">
                                 Import CSV <i class="icon-plus"></i>
                             </a>
 
@@ -49,7 +49,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>1</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190001</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190001</a></td>
                                 <td>Firman</td>
                                 <td>Supir</td>
                                 <td>8</td>
@@ -59,7 +59,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>2</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190002</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190002</a></td>
                                 <td>Fiqri</td>
                                 <td>Supir</td>
                                 <td>16</td>
@@ -69,7 +69,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>3</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190003</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190003</a></td>
                                 <td>Firdaus</td>
                                 <td>Kernet</td>
                                 <td>24</td>
@@ -79,7 +79,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>4</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190004</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190004</a></td>
                                 <td>Anshar</td>
                                 <td>Supir</td>
                                 <td>8</td>
@@ -89,7 +89,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>5</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190005</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190005</a></td>
                                 <td>Abdullah</td>
                                 <td>Kernet</td>
                                 <td>24</td>
@@ -100,7 +100,7 @@
 
                                 <td style="display:none;"></td>
                                 <td>6</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190006</a></td>                                
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190006</a></td>                                
 
                                 <td>Chepy</td>
                                 <td>Kernet</td>
@@ -276,27 +276,6 @@
                         <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="ModalImportCSV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Import CSV</h4>
-            </div>
-            <div class="modal-body">
-
-                Body goes here...
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                <button class="btn btn-success" type="button">Save changes</button>
             </div>
         </div>
     </div>

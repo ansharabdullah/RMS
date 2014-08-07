@@ -1,96 +1,40 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#EditProfile").hide();
+        $("#EditPass").hide();
     });
     
     function ShowProfile(){
         $("#ShowProfile").slideDown("slow");
         $("#EditProfile").hide();
+        $("#EditPass").hide();
         $("#btnProf").addClass("active");
         $("#btnEdit").removeClass("active");
+        $("#btnEditPass").removeClass("active");
     }
     
     function EditProfile(){
         $("#ShowProfile").hide();
         $("#EditProfile").slideDown("slow");
+        $("#EditPass").hide();
         $("#btnProf").removeClass("active");
         $("#btnEdit").addClass("active");
+        $("#btnEditPass").removeClass("active");
     }
     
+    function EditPass(){
+        $("#ShowProfile").hide();
+        $("#EditProfile").hide();
+        $("#EditPass").slideDown("slow");
+        $("#btnProf").removeClass("active");
+        $("#btnEdit").removeClass("active");
+        $("#btnEditPass").addClass("active");
+    }
     
-    
-    
-    $(function () {
-        $('#grafik').highcharts({
-            title: {
-                text: 'Grafik Kinerja Awak Mobil Tangki Juli',
-                x: -20 //center
-            },
-            subtitle: {
-                text: 'PT. Pertamina Patra Niaga',
-                x: -20
-            },
-            xAxis: {
-                title: {
-                    text: 'Tanggal'
-                },
-                categories: ['1', '2', '3', '4', '5', '6',
-                    '7', '8', '9', '10', '11', '12',
-                    '13', '14', '15', '16', '17', '18', '19', '20',
-                    '21', '22', '23', '24', '25', '26', '27', '28',
-                    '29', '30', '31', '16']
-            },
-            yAxis: {
-                title: {
-                    text: 'Kinerja'
-                },
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-            },
-            tooltip: {
-                valueSuffix: ''
-            },
-            legend: {
-                borderWidth: 1
-            },
-            series: [{
-                    name: 'KM',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 13.5, 10.2, 6.5, 5.3, 8.3, 13.9, 9.6,5,7,3,4,2,1,3,4,6,7,8,9,2,3,5,6,8,6,5]
-                }, {
-                    name: 'KL',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5,3,4,5,6,7,5,2,5,8,9,6,5,4,5,5,6,7,9,13]
-                }, {
-                    name: 'Rit',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,3,5,6,8,3,1,8,5,3,4,8,7,3,4,2,1,9,4,5]
-                }, {
-                    name: 'SPBU',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8,12,14,15,16,13,14,15,11,6,7,9,8,5,4,2,4,7,15,17]
-                }]
-        });
-    });
 </script>
 
 <section id="main-content">
     <section class="wrapper">
-
-
-        <section class="panel">
-            <header class="panel-heading">
-                Detail Awak Mobil Tangki
-            </header>
-            <div class="panel-body">
-                <a class="btn btn-warning" data-toggle="modal" href="#ModalPeringatan"><i class="icon-warning-sign"></i> Peringatan</a>
-
-                <a class="btn btn-danger" data-toggle="modal" href="#ModalHapus"><i class="icon-eraser"></i> Hapus</a>
-
-
-            </div>
-        </section>
-
-
 
         <!-- page start-->
         <div class="row">
@@ -106,8 +50,8 @@
 
                     <ul class="nav nav-pills nav-stacked">
                         <li id="btnProf" class="active"><a href="javascript:ShowProfile();"> <i class="icon-user" ></i> Profile</a></li>
-                        <li id="btnEdit"><a href="javascript:EditProfile();" > <i class="icon-edit"></i> Edit profile</a></li>
-                    
+                        <li id="btnEdit"><a href="javascript:EditProfile();" > <i class="icon-edit"></i> Edit Profile</a></li>
+                        <li id="btnEditPass"><a href="javascript:EditPass();" > <i class="icon-edit-sign"></i> Edit Password</a></li>
                     </ul>
 
                 </section>
@@ -306,23 +250,56 @@
                             </div>
                         </form>
                     </div>
+
+
+
+                    <div class="panel-body bio-graph-info" id="EditPass">
+                        <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
+
+                            <h1>Edit Password</h1>
+
+                            <div class="row">
+                                <div class="bio-row">
+
+                                    <label for="passwordlama" class="control-label col-lg-4">Password Lama</label>
+                                    <div class="col-lg-8">
+                                        <input class=" form-control " id="cpasswodlama" name="password" minlength="2" type="password" value="" required />
+                                    </div>
+                                </div>
+                                <div class="row"></div>                                
+                                <div class="bio-row">
+                                    <label for="passwordbaru" class="control-label col-lg-4">Password Baru</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control " id="password" name="password" type="password" />
+                                    </div>
+                                </div>
+                                <div class="row"></div>    
+                                <div class="bio-row">
+                                    <label for="confirm_password" class="control-label col-lg-4">Confirm Password</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control " id="confirm_password" name="confirm_password" type="password" />
+                                    </div>
+                                </div>
+                                <div class="row"></div>   
+                                <div class="bio-row">
+                                    <div class="col-lg-12">
+                                        <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+
+
                 </section>
 
             </aside>
         </div>
 
         <!-- page end-->
-
-
-        <section class="panel">
-            <div class="panel-body">
-                <div class="col-lg-12">
-                    <div id="grafik"></div>
-                </div>
-            </div>
-        </section>
-
-
 
         <section class="panel">
             <header class="panel-heading">
@@ -331,20 +308,15 @@
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
-                        <div class="btn-group">
 
-                            <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahKinerja">
-                                Tambah Kinerja <i class="icon-plus"></i>
-                            </a>
-
-                        </div>
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
                             </button>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="javascript:FilterData('');">Semua</a></li>
-                                <li><a href="javascript:FilterData('hadir');">Hadir</a></li>
-                                <li><a href="javascript:FilterData('absen');">Absen</a></li>
+                                <li><a href="javascript:FilterData('edit');">Edit</a></li>
+                                <li><a href="javascript:FilterData('tambah');">Tambah</a></li>
+                                <li><a href="javascript:FilterData('hapus');">Hapus</a></li>
                             </ul>
                         </div>
                     </div>
@@ -354,12 +326,11 @@
                             <tr>
                                 <th style="display:none;"></th>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>KM</th>
-                                <th>KL</th>
-                                <th>Rit</th>
-                                <th>SPBU</th>
-                                <th>Kehadiran</th>
+                                <th>Waktu</th>
+                                <th>User</th>
+                                <th>Hak Akses</th>
+                                <th>Aksi</th>
+                                <th>Kata Kunci</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -367,69 +338,62 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>1</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">07/08/2014</a></td>
-                                <td>30</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>24</td>
-                                <td><span class="label label-success">Hadir</span></td>
+                                <td>07/08/2014</td>
+                                <td>ansharabdullah</td>
+                                <td>Pengawas Operasi</td>
+                                <td>Import kinerja awak mobil tangki untuk tanggal 3 Jan 2014</td>
+                                <td><span class="label label-success">Tambah</span></td>
                             </tr>
 
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>2</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">08/08/2014</a></td>
-                                <td>20</td>
-                                <td>10</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td><span class="label label-success">Hadir</span></td>
+                                <td>08/08/2014</td>
+                                <td>renisas</td>
+                                <td>Pengawas Operasi</td>
+                                <td>Hapus data AMT NIP 234567897 Nama Jaja</td>
+                                <td><span class="label label-danger">Hapus</span></td>
                             </tr>
 
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>3</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">09/08/2014</a></td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td><span class="label label-warning">Absen</span></td>
+                                <td>09/08/2014</td>
+                                <td>cepi</td>
+                                <td>Supporting</td>
+                                <td>Edit data AMT NIP 345678 Nama Dadan</td>
+                                <td><span class="label label-warning">Edit</span></td>
                             </tr>
 
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>4</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">10/08/2014</a></td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td><span class="label label-warning">Absen</span></td>
+                                <td>10/08/2014</td>
+                                <td>cahyadi</td>
+                                <td>Site Supervisor</td>
+                                <td>Hapus kinerja AMT nip 7192497 nama Juju Tanggal 30/09/2012</td>
+                                <td><span class="label label-danger">Hapus</span></td>
                             </tr>
 
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>5</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">11/08/2014</a></td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td><span class="label label-warning">Absen</span></td>
+                                <td>11/08/2014</td>
+                                <td>dodi</td>
+                                <td>Staf OAM</td>
+                                <td>Insert MS2 Compliance</td>
+                                <td><span class="label label-success">Tambah</span></td>
                             </tr>
 
                             <tr class="">
 
                                 <td style="display:none;"></td>
                                 <td>6</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">12/08/2014</a></td>                                
-                                <td>55</td>
-                                <td>32</td>
-                                <td>2</td>
-                                <td>1</td>
-                                <td><span class="label label-success">Hadir</span></td>
-
+                                <td>12/08/2014</td>                                
+                                <td>yana</td>
+                                <td>OAM</td>
+                                <td>Input Rencana</td>
+                                <td><span class="label label-success">Tambah</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -442,167 +406,6 @@
     </section>
 </section>
 <!--main content end-->
-
-
-
-
-<div class="modal fade" id="ModalPeringatan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Peringatan</h4>
-            </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
-
-                <div class="modal-body">
-
-                    <div class="col-lg-12">
-                        <section class="panel">
-
-                            <div class="panel-body">
-
-                                <div class="form-group ">
-                                    <label for="cjenis" class="control-label col-lg-4">Jenis</label>
-                                    <div class="col-lg-8">
-                                        <select class="form-control input-sm m-bot15" id="cjenis" name="jenis">
-                                            <option>Teguran 1</option>
-                                            <option>Teguran 2</option>
-                                            <option>Teguran 3</option>
-                                            <option>Surat Peringatan 1</option>
-                                            <option>Surat Peringatan 2</option>
-                                            <option>Surat Peringatan 3</option>
-                                        </select>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="form-group ">                                            
-                                    <label for="ctglberlaku" class="control-label col-lg-4">Tanggal Berlaku</label>
-                                    <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="ctglberlaku" name="tglbelaku" size="16" type="date" value="" required/>
-                                        <span class="help-block">Select date</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group ">                                            
-                                    <label for="ctglhangus" class="control-label col-lg-4">Tanggal Hangus</label>
-                                    <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="ctglhangus" name="tglhangus" size="16" type="date" value="" required/>
-                                        <span class="help-block">Select date</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group ">
-                                    <label for="calasan" class="control-label col-lg-4">Alasan</label>
-                                    <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="calasan" name="alasan" minlength="2" type="text" required />
-                                    </div>
-
-
-                                </div>
-
-
-                            </div>
-                        </section>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Hapus Awak Mobil Tangki?</h4>
-            </div>
-            <div class="modal-body">
-
-                Yakin hapus data?
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                <button class="btn btn-success" type="button">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" id="ModalTambahKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Tambah Kinerja</h4>
-            </div>
-
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="get" action="">
-
-                <div class="modal-body">
-
-                    <div class="col-lg-12">
-                        <section class="panel">
-
-                            <div class="panel-body">
-
-
-
-                                <div class="form-group ">                                            
-                                    <label for="ctglkinerja" class="control-label col-lg-4">Tanggal Kinerja</label>
-                                    <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="ctglkinerja" name="tglkinerja" size="16" type="date" value="" required/>
-                                        <span class="help-block">Select date</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group ">
-                                    <label for="ckm" class="control-label col-lg-2">Kilometer</label>
-                                    <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="ckm" name="km" minlength="2" type="text" required />
-                                    </div>
-
-                                    <label for="ckl" class="control-label col-lg-2">Kiloliter</label>
-                                    <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="ckl" name="kl" minlength="2" type="text" required />
-                                    </div>
-                                </div>
-
-                                <div class="form-group ">
-                                    <label for="crit" class="control-label col-lg-2">Ritase</label>
-                                    <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="crit" name="rit" minlength="2" type="text" required />
-                                    </div>
-
-                                    <label for="cspbu" class="control-label col-lg-2">Jumlah SPBU</label>
-                                    <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="cspbu" name="spbu" minlength="2" type="text" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 
 

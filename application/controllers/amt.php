@@ -21,7 +21,7 @@ class amt extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function input_amt() {
+    public function import_amt() {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar');
