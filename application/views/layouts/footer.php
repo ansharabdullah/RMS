@@ -11,69 +11,82 @@
       <!--footer end-->
   </section>
 
-  
     <!-- js placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" language="javascript" src="<?php echo base_url()?>assets/assets/advanced-datatable/media/js/jquery.js"></script>
-    
-    <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
-    
+    <!--<script src="js/jquery.js"></script>-->
+    <script type="text/javascript" language="javascript" src="<?php echo base_url()?>assets/assets/advanced-datatable/media/js/jquery.js"></script>
     <script src="<?php echo base_url()?>assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="<?php echo base_url()?>assets/js/jquery.scrollTo.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-	
-	<!--untuk editable tabel-->
-	<script type="text/javascript" src="<?php echo base_url()?>assets/assets/data-tables/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="<?php echo base_url()?>assets/assets/data-tables/DT_bootstrap.js"></script>
-	
-    <script src="<?php echo base_url()?>assets/js/jquery.sparkline.js" type="text/javascript"></script>
-    <script src="<?php echo base_url()?>assets/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-    <script src="<?php echo base_url()?>assets/js/owl.carousel.js" ></script>
-    <script src="<?php echo base_url()?>assets/js/jquery.customSelect.min.js" ></script>
     <script src="<?php echo base_url()?>assets/js/respond.min.js" ></script>
+    <script type="text/javascript" language="javascript" src="<?php echo base_url()?>assets/assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+
 
     <!--common script for all pages-->
     <script src="<?php echo base_url()?>assets/js/common-scripts.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.validate.min.js"></script>
-	<script src="<?php echo base_url()?>assets/js/form-validation-script.js"></script>
-	
-        <script type="text/javascript" src="<?php echo base_url()?>assets/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
-        
-        <script src="<?php echo base_url()?>assets/js/advanced-form-components.js"></script>
-        
-	<!-- Highchart -->
-	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts.js"></script>
-	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/highcharts-more.js"></script>
-	<script src="<?php echo base_url();?>assets/highcharts-4.0.3/js/modules/exporting.js"></script>
-	
-  <script>
+    <script type="text/javascript">
+      /* Formating function for row details */
+      function fnFormatDetails ( oTable, nTr )
+      {
+          var aData = oTable.fnGetData( nTr );
+          var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+          sOut += '<tr><td>Rendering engine:</td><td>'+aData[1]+' '+aData[4]+'</td></tr>';
+          sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+          sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+          sOut += '</table>';
 
-      //owl carousel
+          return sOut;
+      }
 
       $(document).ready(function() {
-          $("#owl-demo").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true,
-			  autoPlay:true
+          /*
+           * Insert a 'details' column to the table
+           */
+          var nCloneTh = document.createElement( 'th' );
+          var nCloneTd = document.createElement( 'td' );
+          nCloneTd.innerHTML = '<img src="<?php echo base_url()?>assets/assets/advanced-datatable/examples/examples_support/details_open.png">';
+          nCloneTd.className = "center";
 
+          $('#hidden-table-info thead tr').each( function () {
+              this.insertBefore( nCloneTh, this.childNodes[0] );
+          } );
+
+          $('#hidden-table-info tbody tr').each( function () {
+              this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+          } );
+
+          /*
+           * Initialse DataTables, with no sorting on the 'details' column
+           */
+          var oTable = $('#hidden-table-info').dataTable( {
+              "aoColumnDefs": [
+                  { "bSortable": false, "aTargets": [ 0 ] }
+              ],
+              "aaSorting": [[1, 'asc']]
           });
-      });
 
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
+          /* Add event listener for opening and closing details
+           * Note that the indicator for showing which row is open is not controlled by DataTables,
+           * rather it is done here
+           */
+          $('#hidden-table-info tbody td img').live('click', function () {
+              var nTr = $(this).parents('tr')[0];
+              if ( oTable.fnIsOpen(nTr) )
+              {
+                  /* This row is already open - close it */
+                  this.src = "<?php echo base_url()?>assets/assets/advanced-datatable/examples/examples_support/details_open.png";
+                  oTable.fnClose( nTr );
+              }
+              else
+              {
+                  /* Open this row */
+                  this.src = "<?php echo base_url()?>assets/assets/advanced-datatable/examples/examples_support/details_close.png";
+                  oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+              }
+          } );
+      } );
   </script>
 
-  
-  
-  
-  
   </body>
 </html>

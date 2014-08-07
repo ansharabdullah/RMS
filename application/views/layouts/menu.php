@@ -4,14 +4,14 @@
                 <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
             </div>
             <!--logo start-->
-            <a href="index.html" class="logo">Flat<span>lab</span></a>
+            <a href="index.html" class="logo">RMS <span>Patra Niaga</span></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <ul class="nav top-menu">
                     <!-- settings start -->
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">MT
                             <i class="icon-tasks"></i>
                             <span class="badge bg-success">6</span>
                         </a>
@@ -94,7 +94,7 @@
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
                     <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">AMT
                             <i class="icon-envelope-alt"></i>
                             <span class="badge bg-important">5</span>
                         </a>
@@ -160,8 +160,8 @@
                     <!-- notification dropdown start-->
                     <li id="header_notification_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-                            <i class="icon-bell-alt"></i>
+                            Peringatan
+                            <i class="icon-warning-sign"></i>
                             <span class="badge bg-warning">7</span>
                         </a>
                         <ul class="dropdown-menu extended notification">
@@ -216,9 +216,6 @@
             <div class="top-nav ">
                 <!--search & user info start-->
                 <ul class="nav pull-right top-menu">
-                    <li>
-                        <input type="text" class="form-control search" placeholder="Search">
-                    </li>
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
