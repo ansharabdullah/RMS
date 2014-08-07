@@ -88,7 +88,6 @@
                                                               <option>Alumunium Aweco</option>
                                                               <option>Carbon Steel</option>
                                                               <option>steel</option>
-                                                              <option>32</option>
                                                           </select>
                                                       </div>
                                                   </div>
@@ -132,12 +131,6 @@
                                                       <label for="rasio" class="col-lg-2 col-sm-2 control-label">Rasio</label>
                                                       <div class="col-lg-10">
                                                           <input type="rasio" class="form-control" id="rasio" placeholder="Rasio">
-                                                      </div>
-                                                  </div>
-                                                  <div class="form-group">
-                                                      <label for="inputGps" class="col-lg-2 col-sm-2 control-label">GPS</label>
-                                                      <div class="col-lg-10">
-                                                          <input type="gps" class="form-control" id="gps" placeholder="GPS">
                                                       </div>
                                                   </div>
                                             </form> 
