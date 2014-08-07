@@ -38,9 +38,9 @@
 
         <!-- page start-->
         <div class="row">
-            <aside class="profile-nav col-lg-3">
+            <aside class="profile-nav col-lg-3 alt green-border">
                 <section class="panel">
-                    <div class="user-heading round">
+                    <div class="user-heading alt green-bg">
                         <a href="#">
                             <img src="<?php echo base_url() ?>assets/img/profile-avatar.jpg" alt="">
                         </a>
@@ -61,7 +61,7 @@
                 <section class="panel">
 
                     <div class="panel-body bio-graph-info" id="ShowProfile">
-                        <h1>Bio Graph</h1>
+                        <h1>Profile Pengguna</h1>
                         <div class="row">
                             <div class="bio-row">
                                 <p><span>NIP </span>: 085247395</p>
@@ -112,7 +112,7 @@
                     <div class="panel-body bio-graph-info" id="EditProfile">
                         <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
 
-                            <h1>Edit Bio Graph</h1>
+                            <h1>Edit Profile Pengguna</h1>
 
                             <div class="row">
                                 <div class="bio-row">
@@ -263,7 +263,7 @@
 
                                     <label for="passwordlama" class="control-label col-lg-4">Password Lama</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control " id="cpasswodlama" name="password" minlength="2" type="password" value="" required />
+                                        <input class=" form-control " id="cpasswodlama" name="passwordlama" minlength="2" type="password" value="" required />
                                     </div>
                                 </div>
                                 <div class="row"></div>                                

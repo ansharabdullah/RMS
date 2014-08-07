@@ -9,7 +9,6 @@ class Mt extends CI_Controller {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar');
-        $this->load->view('testing/page');
         $this->load->view('layouts/footer');
     }
 

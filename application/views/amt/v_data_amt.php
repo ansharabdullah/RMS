@@ -9,7 +9,7 @@
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
-                        <div class="btn-group">
+                        
 
                             <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahManual">
                                 Tambah AMT <i class="icon-plus"></i>
@@ -19,7 +19,7 @@
                                 Import CSV <i class="icon-plus"></i>
                             </a>
 
-                        </div>
+                        
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
                             </button>

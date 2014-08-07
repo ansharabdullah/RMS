@@ -5,7 +5,7 @@
             var ext = $("#fileName").val().split('.').pop();
             if(ext=="csv"){
                 $("#filePreview").hide();
-                $("#filePreview").show("slow");
+                $("#filePreview").slideDown("slow");
             }
             else
             {

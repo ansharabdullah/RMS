@@ -117,7 +117,7 @@
                 <section class="panel">
 
                     <div class="panel-body bio-graph-info" id="ShowProfile">
-                        <h1>Bio Graph</h1>
+                        <h1>Profile Awak Mobil Tangki</h1>
                         <div class="row">
                             <div class="bio-row">
                                 <p><span>NIP </span>: 085247395</p>
@@ -168,7 +168,7 @@
                     <div class="panel-body bio-graph-info" id="EditProfile">
                         <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
 
-                            <h1>Edit Bio Graph</h1>
+                            <h1>Edit Profile Awak Mobil Tangki</h1>
 
                             <div class="row">
                                 <div class="bio-row">
