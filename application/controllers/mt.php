@@ -15,19 +15,25 @@ class Mt extends CI_Controller {
 
     public function kinerja_manual() {
         $this->header();
-        $this->load->view('MT/v_kinerja_manual');
+        $this->load->view('mt/v_kinerja_manual');
         $this->footer();
     }
 
     public function kinerja_siod() {
         $this->header();
-        $this->load->view('MT/v_kinerja_siod');
+        $this->load->view('mt/v_kinerja_siod');
         $this->footer();
     }
 
     public function laporan() {
         $this->header();
-        $this->load->view('MT/v_laporan');
+        $this->load->view('mt/v_laporan');
+        $this->footer();
+    }
+    
+    public function pengingat() {
+        $this->header();
+        $this->load->view('mt/v_pengingat');
         $this->footer();
     }
 
