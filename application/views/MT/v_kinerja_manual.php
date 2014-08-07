@@ -238,8 +238,8 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                <button class="btn btn-success" type="button" onclick="closeModal()">Save changes</button>
+                                <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
+                                <button class="btn btn-success" type="button" onclick="closeModal()">Simpan</button>
                             </div>
                         </div>
                     </div>

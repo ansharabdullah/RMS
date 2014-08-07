@@ -22,7 +22,10 @@
                     </div>
                 </div>
                 <div class="adv-table editable-table " id="tabel-apar">
-                    <div class="space15"></div>
+                    <div class="space15">
+                        <h3><i class="icon-fire-extinguisher"></i> Pengingat Apar</h3>
+                        
+                    </div>
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
                         <thead>
                             <tr>
@@ -69,68 +72,175 @@
                         </tbody>
                     </table>
                 </div>
-                <br/><br/>
-                <table class="table table-striped table-hover table-bordered" id="tabel-ban">
-                    <thead>
-                        <tr>
-                            <th style="display: none;"></th>
-                            <th>No.</th>
-                            <th>Nopol</th>
-                            <th>Ban 1</th>
-                            <th>Ban 2</th>
-                            <th>Ban 3</th>
-                            <th>Ban 4</th>
-                            <th>Ban 5</th>
-                            <th>Ban 6</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
             </div>
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Edit Apar</h4>
-                        </div>
-                        <div class="modal-body">
 
-                            <form class="form-horizontal" role="form" id="form-edit" >
-                                <div class="form-group">
-                                    <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nopol" class="col-lg-2 col-sm-2 control-label">Jenis Apar</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="apar" readonly="readonly" name="nopol" placeholder="Jenis Apar">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control" type="date" value="" id="tgl" size="16" required="required"/>
-                                        <span class="help-block">Pilih Tanggal</span>
-                                    </div>
-                                </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                            <button class="btn btn-success" type="submit" onclick="editApar()">Save changes</button>
-
-                        </div>
-                        </form>
-
+            <div class="panel-body" >
+                <div class="adv-table editable-table " id="tabel-ban">
+                    <div class="space15">
+                        
+                        <h3><i class="icon-compass"></i> Pengingat Ban</h3>
+                        
                     </div>
+                    <table class="table table-hover table-bordered" id="editable-sample2">
+                        <thead>
+                            <tr>
+                                <th style="display: none;"></th>
+                                <th>No.</th>
+                                <th>Nopol</th>
+                                <th>Transportir</th>
+                                <th>Produk</th>
+                                <th>Ban</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $data = array('D 6308 AD', 'D 1725 AF', 'D 2245 AF', 'D 6066 AF', 'D 3038 AD', 'D 8557 AD', 'D 1346 AD', 'D 7152 AF', 'D 9487 AD', 'D 8827 AF', 'D 8711 AD', 'D 8277 AF');
+                            $transportir = array("PT MA'SOEM", "PT WANDISIRI", "PT PUSPITA CIPATA", "PT PATRA NIAGA", "PT INCOT", "PT JUJUR PARAMARTA", "PT MA'SOEM", "PT PATRA NIAGA", "PT TIARA", "PT PATRA NIAGA", "PT PUSPITA CIPATA", "PT NAGAMAS JAYA");
+                            $produk = array('Premium', 'Solar', 'Pertamax', 'Pertamax Plus', 'Bio Solar', 'Pertamax Dex', 'Premium', 'Solar', 'Pertamax', 'Bio Solar', 'Pertamax Dex', 'Premium');
+                            $apar1 = array(6, 12, 11, 3);
+                            $apar2 = array(22, 9, 10, 15);
+                            $apar3 = array(15, 1, 6, 18);
+                            for ($i = 0; $i < 12; $i++) {
+                                if ($i < 4) {
+                                    $color = "orange";
+                                } else {
+                                    $color = "transparent";
+                                }
+                                ?>
+                                <tr>
+                                    <th style="display: none;"></th>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1 ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $transportir[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $produk[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan"><button type="button" class="btn btn-success btn-sm" onClick="cekBan()">Cek Ban</button></a></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
         </section>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Edit Apar</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="form-horizontal" role="form" id="form-edit" >
+                            <div class="form-group">
+                                <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control"  id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nopol" class="col-lg-2 col-sm-2 control-label">Jenis Apar</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control"  id="apar" readonly="readonly" name="nopol" placeholder="Jenis Apar">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                                <div class="col-lg-10">
+                                    <input class="form-control" type="date" value="" id="tgl" size="16" required="required"/>
+                                    <span class="help-block">Pilih Tanggal</span>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
+                        <button class="btn btn-success" type="submit" onclick="editApar()">Simpan</button>
+
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!---Modal Ban-->
+        <div class="modal fade" id="modalBan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Edit Ban</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="form-horizontal" role="form" id="form-edit" >
+                            <div class="form-group">
+                                <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" value="D 6308 AD" id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nopol" class="col-lg-2 col-sm-2 control-label">Transportir</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" value="PT PATRA NIAGA" id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <label for="nopol" class="col-lg-2 col-sm-2 control-label">Produk</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" value="Premium" id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                                </div>
+                            </div>
+
+                        </form>
+                        <hr/>
+                        <form class="form-inline" role="form" id="form-edit-ban" >
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="ban" readonly="readonly" placeholder="Ban">
+
+                            </div>  
+                            <div class="form-group">
+                                <input class="form-control" type="date" required="required" value="" id="tgl-ban" size="16" required="required"/>
+
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit" >Simpan</button>
+                            </div>
+                        </form>
+                        <br/><br/>
+                        <table class="table table-hover table-bordered" >
+                            <tr>
+                                <th>Ban</th>
+                                <th>Sisa Waktu</th>
+                                <th>Aksi</th>
+                            </tr>
+                            <?php
+                            for ($i = 0; $i < 16; $i++) {
+                                $sisa = rand(0, 15);
+                                $color = "";
+                                if($sisa < 8)
+                                {
+                                    $color = "style='background-color: orange;'";
+                                }
+                                ?>
+                                <tr id="row-ban-<?php echo $i+1?>" <?php echo $color?>>
+                                    <td><?php echo $i + 1 ?></td>
+                                    <td><span id="aturban<?php echo $i + 1 ?>"><?php echo $sisa?></span> hari</td>
+                                    <td><button type="button" class="btn btn-success btn-sm" onclick="setBan('<?php echo $i + 1 ?>')">Atur</button></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <!-- page end-->
     </section>
 </section>
@@ -141,7 +251,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- END JAVASCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
         EditableTable.init();
         
     });
@@ -153,6 +263,7 @@
     var jenis;
     var highlight;
     var index;
+    var indexBan;
     function setDetail(np,apr,jenis,row){
         nopol = np;
         apar = apr;
@@ -169,14 +280,17 @@
         {
             $("#tabel-ban").hide();
             $("#tabel-apar").hide();
-            $("#tabel-apar").show("slow");
+            $("#tabel-apar").slideDown("slow");
         }
         else
         {
             $("#tabel-apar").hide();
             $("#tabel-ban").hide();
-            $("#tabel-ban").show("slow");
+            $("#tabel-ban").slideDown("slow");
         }
+        $(".dataTables_filter input").val("");
+        $('#editable-sample').dataTable().fnFilter( '' );
+        $('#editable-sample2').dataTable().fnFilter( '' );
     }
     
     $("#form-edit").submit(function(e){
@@ -211,5 +325,43 @@
         e.preventDefault();
      
     });
+    
+    $("#form-edit-ban").submit(function(e){
+        var date1 = new Date($("#tgl-ban").val());
+        var date2 = new Date();
+        var diffDays = date2.getDate() - date1.getDate(); 
+        var idBan = "#aturban"+indexBan;
+        var rowBan = "#row-ban-"+indexBan;
+        diffDays = diffDays*(-1);
+        if(diffDays > 0)
+        {
+            alert("Tanggal harus lebih dari sekarang");   
+        }
+        else
+        {
+            if(diffDays > 7)
+            {
+                $(rowBan).css({'background-color': 'transparent'});   
+            }
+            $(idBan).html(diffDays);
+            $("#form-edit-ban").hide();
+        }
+        e.preventDefault();
+    });
+    
+    function setBan(index)
+    {
+        indexBan = index;
+        $("#form-edit-ban").hide();
+        $("#form-edit-ban").show("slow");
+        $("#ban").val("Ban " + index);
+    }
+    
+    function cekBan()
+    {
+        $("#tgl-ban").val("");
+        $("#form-edit-ban").hide();
+    }
+    
     
 </script>
