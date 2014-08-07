@@ -36,18 +36,19 @@
                     <span>Mobil Tangki</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="boxed_page.html">Data MT</a></li>
+                    <li><a  href="<?php echo base_url()?>mt/data_mt">Data MT</a></li>
                     <li class="sub-menu">
                         <a  href="javascript:;">Kinerja</a>
                         <ul class="sub">
-                            <li><a  href="javascript:;">Input Manual</a></li>
-                            <li><a  href="javascript:;">Import SIOD</a></li>
+                            <li><a  href="<?php echo base_url()?>mt/input_mt">Input Manual</a></li>
+                            <li><a  href="<?php echo base_url()?>mt/import_siod">Import SIOD</a></li>
                         </ul>
                     </li>
-                    <li><a  href="language_switch_bar.html">Grafik</a></li>
-                    <li><a  href="language_switch_bar.html">Presensi</a></li>
-                    <li><a  href="language_switch_bar.html">Laporan</a></li>
-                    <li><a  href="language_switch_bar.html">Rencana</a></li>
+                    <li><a  href="<?php echo base_url()?>mt/grafik">Grafik</a></li>
+                    <li><a  href="<?php echo base_url()?>mt/presensi">Presensi</a></li>
+                    <li><a  href="<?php echo base_url()?>mt/laporan">Laporan</a></li>
+                    <li><a  href="<?php echo base_url()?>mt/reminder">Reminder</a></li>
+                    <li><a  href="<?php echo base_url()?>mt/rencana">Rencana</a></li>
                 </ul>
             </li>
             <li>
