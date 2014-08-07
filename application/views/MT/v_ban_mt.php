@@ -22,7 +22,6 @@
                 <a class="btn btn-info" data-toggle="modal" href="#myModal">
                     Ban MT <i class="icon-plus"></i>
                 </a>
-                </a>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
