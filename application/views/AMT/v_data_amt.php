@@ -214,7 +214,7 @@
                                                 <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="text" required />
                                             </div>
 
-                                            <label for="csim" class="control-label col-lg-2">Transportir Asal</label>
+                                            <label for="ctransportir" class="control-label col-lg-2">Transportir Asal</label>
                                             <div class="col-lg-4">
                                                 <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir" minlength="2" type="text" required />
                                             </div>
