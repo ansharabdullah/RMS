@@ -74,7 +74,7 @@
                             <tbody>
                                 <tr class="">
                                     <th style="display: none;"></th>
-                                    <td>2</td>
+                                    <td>1</td>
                                     <td>3205190200</td>
                                     <td>Suryahadikusumah</td>
                                     <td>Supir</td>
@@ -91,7 +91,7 @@
                                 
                                 <tr class="">
                                     <th style="display: none;"></th>
-                                    <td>1</td>
+                                    <td>2</td>
                                     <td>3205190100</td>
                                     <td>Renisa</td>
                                     <td>Supir</td>
