@@ -124,16 +124,17 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Tambah AMT</h4>
             </div>
-            <div class="modal-body">
+            <div class=" form">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
+                    <div class="modal-body">
 
-                            <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <section class="panel">
 
-                                <div class=" form">
-                                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                                    <div class="panel-body">
+
 
                                         <div class="form-group ">
                                             <label for="nip" class="control-label col-lg-2">NIP</label>
@@ -240,7 +241,7 @@
                                             <label class="control-label col-md-3">Image Upload</label>
                                             <div class="col-md-9">
                                                 <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                    
+
                                                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                     <div>
                                                         <span class="btn btn-white btn-file">
@@ -259,24 +260,25 @@
                                                 </span>
                                             </div>
                                         </div>
-                                
 
 
+
+
+
+                                    </div>
+                                </section>
                             </div>
+                        </div>
 
                     </div>
-                    </section>
-                </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                    </div>
+                </form>
             </div>
-
         </div>
-        <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-            <input class="btn btn-success" type="submit" value="Simpan"/>
-        </div>
-        </form>
     </div>
-</div>
 </div>
 
 
