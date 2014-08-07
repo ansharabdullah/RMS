@@ -37,17 +37,33 @@
                         <tbody>
                             <?php
                             $data = array('D 6308 AD', 'D 1725 AF', 'D 2245 AF', 'D 6066 AF', 'D 3038 AD', 'D 8557 AD', 'D 1346 AD', 'D 7152 AF', 'D 9487 AD', 'D 8827 AF', 'D 8711 AD', 'D 8277 AF');
+                            $apar1 = array(6, 12, 11, 3);
+                            $apar2 = array(22, 9, 10, 15);
+                            $apar3 = array(15, 1, 6, 18);
                             for ($i = 0; $i < 12; $i++) {
-                                ?>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td><?php echo $i + 1; ?></td>
-                                    <td><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
-                                    <td><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar1-" . $i; ?>','1')")><div id="<?php echo 'apar1-' . $i; ?>"><?php echo rand(0, 30); ?> hari</div></a></td>
-                                    <td><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar2-" . $i; ?>','2')")><div id="<?php echo 'apar2-' . $i; ?>"><?php echo rand(1, 30); ?> hari</div></a></td>
-                                    <td><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar3-" . $i; ?>','3')")><div id="<?php echo 'apar3-' . $i; ?>"><?php echo rand(0, 30); ?> hari</div></a></td>
-                                </tr>
-                                <?php
+                                if ($i >= 4) {
+                                    ?>
+                                    <tr>
+                                        <th style="display: none;"></th>
+                                        <td><?php echo $i + 1; ?></td>
+                                        <td><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
+                                        <td><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar1-" . $i; ?>','1')")><div id="<?php echo 'apar1-' . $i; ?>"><?php echo rand(8, 20); ?> hari</div></a></td>
+                                        <td><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar2-" . $i; ?>','2')")><div id="<?php echo 'apar2-' . $i; ?>"><?php echo rand(10, 25); ?> hari</div></a></td>
+                                        <td><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar3-" . $i; ?>','3')")><div id="<?php echo 'apar3-' . $i; ?>"><?php echo rand(12, 30); ?> hari</div></a></td>
+                                    </tr>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <th style="display: none;"></th>
+                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
+                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
+                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar1-" . $i; ?>','1','<?php echo $i ?>')")><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $apar1[$i]; ?> hari</div></a></td>
+                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar2-" . $i; ?>','2','<?php echo $i ?>')")><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $apar2[$i]; ?> hari</div></a></td>
+                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar3-" . $i; ?>','3','<?php echo $i ?>')")><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $apar3[$i]; ?> hari</div></a></td>
+                                    </tr>
+                                    <?php
+                                }
                             }
                             ?>
                         </tbody>
@@ -135,9 +151,13 @@
     var nopol;
     var apar;
     var jenis;
-    function setDetail(np,apr,jenis){
+    var highlight;
+    var index;
+    function setDetail(np,apr,jenis,row){
         nopol = np;
         apar = apr;
+        index = row;
+        highlight = ".peringatan" + row;
         $("#tgl").val("");
         $("#nopol").val(np);
         $("#apar").val("Apar " + jenis);
@@ -173,6 +193,19 @@
             diffDays = diffDays*(-1);
             apar = "#"+apar;
             $(apar).text(diffDays + " hari");
+            var apar1 = "#apar1-"+index;
+            var apar2 = "#apar2-"+index;
+            var apar3 = "#apar3-"+index;
+            var val1 =  $(apar1).text();
+            var val2 =  $(apar2).text();
+            var val3 =  $(apar3).text();
+            val1 = val1.substr(0, val1.length - 5);
+            val2 = val2.substr(0, val2.length - 5);
+            val2 = val3.substr(0, val3.length - 5);
+            if(parseInt(val1) > 7 && parseInt(val2) > 7 && parseInt(val3) > 7)
+            {
+                $(highlight).css({'background-color': 'transparent'});    
+            }
             $("#myModal").modal('toggle');
         }
         e.preventDefault();
