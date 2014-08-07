@@ -476,13 +476,52 @@
                                           </div>
                                           <div class="modal-body">
 
-                                              Body goes here...
+                                              <div class="row">
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          
+                          <div class="panel-body">
+                              <div class=" form">
+                                  <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                                      <div class="form-group ">
+                                          <label for="cname" class="control-label col-lg-2">Name (required)</label>
+                                          <div class="col-lg-10">
+                                              <input class=" form-control" id="cname" name="name" minlength="2" type="text" required />
+                                          </div>
+                                      </div>
+                                      <div class="form-group ">
+                                          <label for="cemail" class="control-label col-lg-2">E-Mail (required)</label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control " id="cemail" type="email" name="email" required />
+                                          </div>
+                                      </div>
+                                      <div class="form-group ">
+                                          <label for="curl" class="control-label col-lg-2">URL (optional)</label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control " id="curl" type="url" name="url" />
+                                          </div>
+                                      </div>
+                                      <div class="form-group ">
+                                          <label for="ccomment" class="control-label col-lg-2">Your Comment (required)</label>
+                                          <div class="col-lg-10">
+                                              <textarea class="form-control " id="ccomment" name="comment" required></textarea>
+                                          </div>
+                                      </div>
+                                      
+                                  
+                              </div>
+
+                          </div>
+                      </section>
+                  </div>
+              </div>
 
                                           </div>
                                           <div class="modal-footer">
                                               <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                              <button class="btn btn-success" type="button">Save changes</button>
+                                              <input class="btn btn-success" type="submit" value="Simpan"/>
                                           </div>
+										  </form>
                                       </div>
                                   </div>
                               </div>
@@ -507,6 +546,8 @@
                                       </div>
                                   </div>
                               </div>
+
+							  
 
 
 <script type="text/javascript" charset="utf-8">
