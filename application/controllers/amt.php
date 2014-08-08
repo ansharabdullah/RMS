@@ -69,6 +69,14 @@ class amt extends CI_Controller {
         $this->load->view('amt/v_laporan');
         $this->load->view('layouts/footer');
     }
+    
+    public function grafik() {
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar');
+        $this->load->view('amt/v_grafik');
+        $this->load->view('layouts/footer');
+    }
 
     
 

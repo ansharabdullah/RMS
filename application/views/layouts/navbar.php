@@ -23,7 +23,7 @@
                             <li><a  href="<?php echo base_url()?>amt/kinerja_siod">Import SIOD</a></li>
                         </ul>
                     </li>
-                    <li><a  href="#">Grafik</a></li>
+                    <li><a  href="<?php echo base_url()?>amt/grafik">Grafik</a></li>
                     <li><a  href="<?php echo base_url()?>amt/presensi">Presensi</a></li>
                     <li><a  href="<?php echo base_url()?>amt/laporan">Laporan</a></li>
                     <li><a  href="#">Rencana</a></li>
@@ -36,7 +36,7 @@
                     <span>Mobil Tangki</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="#">Data MT</a></li>
+                    <li><a  href="<?php echo base_url()?>mt/data_mt">Data MT</a></li>
                     <li class="sub-menu">
                         <a  href="javascript:;">Kinerja</a>
                         <ul class="sub">
