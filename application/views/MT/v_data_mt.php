@@ -45,6 +45,7 @@
                                                               <option>16</option>
                                                               <option>24</option>
                                                               <option>32</option>
+                                                              <option>40</option>                                                              <option>32</option>
                                                           </select>
                                                          
                                                       </div>
@@ -56,7 +57,7 @@
                                                               <option>Premum</option>
                                                               <option>Pertamax</option>
                                                               <option>Solar</option>
-                                                              <option>Bio Solar</option>
+                                                              <option>Multi</option>
                                                           </select>
                                                          
                                                       </div>
@@ -144,7 +145,7 @@
                               </div>
                               <!-- modal -->
                   
-                                  <button type="button" class="btn btn-success"> Import SV <i class="icon-plus"></i></button>
+                                  <a href="<?php echo base_url() ?>index.php/mt/import_sv" rel="stylesheet" class="btn btn-success"> Import SV <i class="icon-plus"></i></a>
                               </div>
                           
                               
@@ -154,7 +155,7 @@
                               <thead>
                               <tr>
                                   <th style="display:none;"></th>
-                                  <th>No.</th>
+                                  <th >No.</th> 
                                   <th>Nopol</th>
                                   <th>Transpotir</th>
                                   <th>Kapasitas</th>
@@ -165,7 +166,7 @@
                               <tr class="">
                                   <th style="display:none;"></th>
                                   <td>1</td>
-                                  <td>D9808AD</td>
+                                  <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet">D9808AD</a></td>
                                   <td>PT Masoem</td>
                                   <td>16</td>
                                   <td class="center">Pertamax</td>
@@ -173,7 +174,7 @@
                               <tr class="">
                                   <th style="display:none;"></th>
                                   <td>2</td>
-                                  <td>D9880AD</td>
+                                  <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet">D9870AD</a></td>
                                   <td>PT Masoem</td>
                                   <td>8</td>
                                   <td class="center">Premium</td>
@@ -181,7 +182,7 @@
                               <tr class="">
                                   <th style="display:none;"></th>
                                   <td>3</td>
-                                  <td>D9880AF</td>
+                                  <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet">D9880AF</a></td>
                                   <td>PT Masoem</td>
                                   <td>8</td>
                                   <td class="center">Solar</td>

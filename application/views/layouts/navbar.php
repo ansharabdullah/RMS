@@ -36,7 +36,7 @@
                     <span>Mobil Tangki</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="<?php echo base_url()?>mt/data_mt">Data MT</a></li>
+                    <li><a  href="<?php echo base_url()?>index.php/mt/data_mt">Data MT</a></li>
                     <li class="sub-menu">
                         <a  href="javascript:;">Kinerja</a>
                         <ul class="sub">

@@ -121,9 +121,9 @@
                             <td>1</td>
                             <td>1</td>
                             <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>24/02/2014</td>
                             <td>Aspal</td>
-                            <td>129124KM</td>
+                            <td>129344KM</td>
                             <td>Original</td>
                         </tr>
                         <tr class="">
@@ -131,17 +131,17 @@
                             <td>2</td>
                            <td>2</td>
                             <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>25/02/2013</td>
                             <td>Aspal</td>
                             <td>129124KM</td>
-                            <td>Original</td>
+                            <td>Vulkanisir</td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>3</td>
                            <td>3</td>
                             <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>28/02/2013</td>
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Original</td>
@@ -151,7 +151,7 @@
                             <td>4</td>
                             <td>4</td>
                             <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>27/05/2015</td>
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Original</td>
@@ -161,7 +161,7 @@
                             <td>5</td>
                             <td>5</td>
                             <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>26/07/2014</td>
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Original</td>
@@ -171,14 +171,14 @@
                             <td>6</td>
                            <td>6</td>
                             <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>25/05/2014</td>
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Original</td>
                         </tr>
                     </tbody>
                 </table>
-
+<a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
             </div>
             </div>
 

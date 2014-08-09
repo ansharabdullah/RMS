@@ -47,7 +47,6 @@
                 <hr/>
                 <div id="filePreview">
                     <header class="panel-heading">
-                        Data File SIOD (<span id="tgl"></span>)
                     </header>
                     <div class="adv-table editable-table ">
                         <div class="clearfix">
@@ -199,8 +198,9 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
+                    <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan </button> 
+                <a href="<?php echo base_url() ?>index.php/mt/data_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
+                    
                 </div>
             </div>
         </section>

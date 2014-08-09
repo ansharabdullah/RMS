@@ -133,7 +133,7 @@
                         </tr>
                     </tbody>
                 </table>
-
+<a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
             </div>
             </div>
 
