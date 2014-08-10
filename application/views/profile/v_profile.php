@@ -5,7 +5,7 @@
     });
     
     function ShowProfile(){
-        $("#ShowProfile").slideDown("slow");
+        $("#ShowProfile").fadeIn("slow");
         $("#EditProfile").hide();
         $("#EditPass").hide();
         $("#btnProf").addClass("active");
@@ -15,7 +15,7 @@
     
     function EditProfile(){
         $("#ShowProfile").hide();
-        $("#EditProfile").slideDown("slow");
+        $("#EditProfile").fadeIn("slow");
         $("#EditPass").hide();
         $("#btnProf").removeClass("active");
         $("#btnEdit").addClass("active");
@@ -25,7 +25,7 @@
     function EditPass(){
         $("#ShowProfile").hide();
         $("#EditProfile").hide();
-        $("#EditPass").slideDown("slow");
+        $("#EditPass").fadeIn("slow");
         $("#btnProf").removeClass("active");
         $("#btnEdit").removeClass("active");
         $("#btnEditPass").addClass("active");
