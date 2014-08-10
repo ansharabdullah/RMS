@@ -8,25 +8,15 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
             <li class="sub-menu">
                 <a href="javascript:;" >
                     <i class="icon-user"></i>
                     <span>Awak Mobil Tangki</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="<?php echo base_url()?>amt/data_amt">Data AMT</a></li>
-                    <li class="sub-menu">
-                        <a  href="javascript:;">Kinerja</a>
-                        <ul class="sub">
-                            <li><a  href="<?php echo base_url()?>amt/kinerja">Input Manual</a></li>
-                            <li><a  href="<?php echo base_url()?>amt/kinerja_siod">Import SIOD</a></li>
-                        </ul>
-                    </li>
-                    <li><a  href="<?php echo base_url()?>amt/grafik">Grafik</a></li>
-                    <li><a  href="<?php echo base_url()?>amt/presensi">Presensi</a></li>
-                    <li><a  href="<?php echo base_url()?>amt/laporan">Laporan</a></li>
-                    <li><a  href="#">Rencana</a></li>
+                    <li><a  href="<?php echo base_url() ?>amt/data_amt">Data AMT</a></li>
+                    <li><a  href="<?php echo base_url() ?>amt/grafik">Grafik</a></li>
+                    <li><a  href="<?php echo base_url() ?>amt/presensi">Presensi</a></li>
                 </ul>
             </li>
 
@@ -36,20 +26,18 @@
                     <span>Mobil Tangki</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="<?php echo base_url()?>mt/data_mt">Data MT</a></li>
-                    <li class="sub-menu">
-                        <a  href="javascript:;">Kinerja</a>
-                        <ul class="sub">
-                            <li><a  href="<?php echo base_url()?>mt/kinerja_manual">Input Manual</a></li>
-                            <li><a  href="<?php echo base_url()?>mt/kinerja_siod">Import SIOD</a></li>
-                        </ul>
-                    </li>
-                    <li><a  href="#">Grafik</a></li>
-                    <li><a  href="#">Presensi</a></li>
-                    <li><a  href="<?php echo base_url()?>mt/laporan">Laporan</a></li>
-                    <li><a  href="<?php echo base_url()?>mt/pengingat">Reminder</a></li>
-                    <li><a  href="#">Rencana</a></li>
+                    <li><a  href="<?php echo base_url() ?>mt/data_mt">Data MT</a></li>
+                    <li><a  href="<?php echo base_url() ?>mt/grafik">Grafik</a></li>
+                    <li><a  href="<?php echo base_url() ?>mt/presensi">Presensi</a></li>
+                    <li><a  href="<?php echo base_url() ?>mt/reminder">Reminder</a></li>
+                    <li><a  href="<?php echo base_url() ?>mt/rencana">Rencana</a></li>
                 </ul>
+            </li>
+            <li>
+                <a  href="#">
+                    <i class="icon-briefcase"></i>
+                    <span>Input Kinerja</span>
+                </a>
             </li>
             <li>
                 <a href="#" >
@@ -57,10 +45,21 @@
                     <span>Penjadwalan</span>
                 </a>
             </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="icon-check"></i>
+                    <span>Berita Acara</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="<?php echo base_url() ?>mt/data_mt">KPI</a></li>
+                    <li><a  href="<?php echo base_url() ?>mt/data_mt">MS2 Compliance</a></li>
+                    <li><a  href="<?php echo base_url() ?>mt/data_mt">Tarif Interpolasi dan FRM</a></li>
+                </ul>
+            </li>
             <li>
                 <a href="#" >
-                    <i class="icon-check"></i>
-                    <span>BA dan KPI</span>
+                    <i class="icon-tasks"></i>
+                    <span>Laporan</span>
                 </a>
             </li>
             <li>
