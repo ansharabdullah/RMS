@@ -54,6 +54,11 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_ban_mt');
         $this->footer();
     }
+     public function oli_mt() {
+        $this->header();
+        $this->load->view('mt/v_oli_mt');
+        $this->footer();
+    }
 
     public function laporan() {
         $this->header();
