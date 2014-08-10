@@ -3,7 +3,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
             <li>
-                <a class="active" href="#<?php echo base_url() ?>">
+                <a class="active" href="<?php echo base_url() ?>">
                     <i class="icon-dashboard"></i>
                     <span>Dashboard</span>
                 </a>

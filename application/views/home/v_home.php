@@ -369,7 +369,7 @@
                         <p class="text-muted">
                             Kilo Liter Premium
                         </p>
-                        <div class="progress progress-striped progress-sm">
+                        <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
@@ -378,7 +378,7 @@
                         <p class="text-muted">
                             Kilo Liter Pertamax
                         </p>
-                        <div class="progress progress-striped progress-sm">
+                        <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
@@ -387,7 +387,7 @@
                         <p class="text-muted">
                             Kilo Liter Pertamax Plus
                         </p>
-                        <div class="progress progress-striped progress-sm">
+                        <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
@@ -396,7 +396,7 @@
                         <p class="text-muted">
                             Kilo Liter Pertamax Dex
                         </p>
-                        <div class="progress progress-striped progress-sm">
+                        <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
@@ -405,7 +405,7 @@
                         <p class="text-muted">
                             Kilo Liter Solar
                         </p>
-                        <div class="progress progress-striped progress-sm">
+                        <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
@@ -414,7 +414,7 @@
                         <p class="text-muted">
                             Kilo Liter Bio Solar
                         </p>
-                        <div class="progress progress-striped progress-sm">
+                        <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
@@ -423,7 +423,7 @@
                         <p class="text-muted">
                             Kilo Liter Own Use
                         </p>
-                        <div class="progress progress-striped progress-sm">
+                        <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
