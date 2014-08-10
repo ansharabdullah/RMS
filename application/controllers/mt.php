@@ -68,6 +68,12 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
+    public function oli_mt() {
+        $this->header();
+        $this->load->view('mt/v_oli_mt');
+        $this->footer();
+    }
+    
     private function header() {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');

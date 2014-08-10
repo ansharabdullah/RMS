@@ -31,6 +31,7 @@
             <div class="panel-body">
                 <a href="<?php echo base_url() ?>index.php/mt/apar_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
                 <a href="<?php echo base_url() ?>index.php/mt/ban_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-truck"></i> Ban</a>
+                <a href="<?php echo base_url() ?>index.php/mt/oli_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-truck"></i> Oli</a>
                 <button type="button" class="btn btn-warning" onclick="ShowEdit()"><i class="icon-pencil"></i> Edit</button>
                 <a class="btn btn-danger" data-toggle="modal" href="#myModal2"> Hapus </a>
 
