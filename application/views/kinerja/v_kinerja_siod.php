@@ -1,14 +1,21 @@
 <script type="text/javascript">
     $( document ).ready(function() {
-        $("#laporanPreview").hide();
+        $("#filePreview").hide();
+        $("#commentForm").submit(function(e){
+            var ext = $("#fileName").val().split('.').pop();
+            if(ext=="xls" || ext=="xlsx"){
+                $("#filePreview").hide();
+                $("#filePreview").slideDown("slow");
+                $("#tgl").html($("#tglForm").val());
+            }else if(ext==""){
+                
+            }else
+            {
+                alert("Tipe file yang diupload tidak sesuai (file excel)"+ext)   
+            }
+            e.preventDefault();
+        });
     });
-    
-    function previewLaporan()
-    {
-        $("#waktu").html($("#jenis").val());
-        $("#laporanPreview").hide();
-        $("#laporanPreview").show("slow");
-    }
     
     function importTable()
     {
@@ -21,27 +28,33 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Laporan Kinerja Mobil Tangki
+                Input Kinerja dari SIOD
+                <a style="float:right;" data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
             </header>
             <div class="panel-body" >
-                <form class="form-horizontal" action="#" role="form" id="formSiod">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Jangka Waktu</label>
+                        <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
-                            <select class="form-control m-bot15" onchange="previewLaporan()" id="jenis">
-                                <option value="Harian">Harian</option>
-                                <option value="10 Hari">10 Hari</option>
-                                <option value="Bulanan">Bulanan</option>
-                                <option value="Triwulan">Triwulan</option>
-                                <option value="Tahunan">Tahunan</option>
-                            </select>
+                            <input type="date" required="required" id="tanggalSIOD"" class="form-control"  placeholder="Tanggal" name="tanggalSIOD">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">File SIOD</label>
+                        <div class="col-lg-10">
+                            <input type="file"  id="fileSIOD" required="required" class="form-control"  placeholder="File SIOD" name="fileSIOD">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button type="submit" style="float: right;" class="btn btn-danger">Upload</button>
                         </div>
                     </div>
                 </form>
-                <!-- generate laporan-->
-                <div id="laporanPreview">
+                <hr/>
+                <div id="filePreview">
                     <header class="panel-heading">
-                        Laporan <b><span id="waktu">asa</span></b> Kinerja Mobil Tangki
+                        Data File SIOD (<span id="tgl"></span>)
                     </header>
                     <div class="adv-table editable-table ">
                         <div class="clearfix">
@@ -254,8 +267,7 @@
                         </table>
                     </div>
 
-                    <button style="margin-right:10px;float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
-                    <br/><br/><br/>
+                    <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
                 </div>
             </div>
         </section>

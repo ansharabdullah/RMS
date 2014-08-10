@@ -36,12 +36,13 @@
                         <thead>
                             <tr>
                                 <th style="display:none;"></th>
-                                <th width="30">No</th>
-                                <th width="200">NIP</th>
+                                <th>No</th>
+                                <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Jabatan</th>
-                                <th width="30">Klasifikasi</th>
-                                <th width="30">Status</th>
+                                <th>Klasifikasi</th>
+                                <th>Status</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -106,7 +107,6 @@
                                 <td>Kernet</td>
                                 <td>40</td>
                                 <td><span class="label label-success">Aktif.</span></td>
-
                             </tr>
                         </tbody>
                     </table>

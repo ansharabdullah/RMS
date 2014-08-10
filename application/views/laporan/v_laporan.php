@@ -1,20 +1,14 @@
 <script type="text/javascript">
     $( document ).ready(function() {
-        $("#filePreview").hide();
-        $("#formSiod").submit(function(e){
-            var ext = $("#fileName").val().split('.').pop();
-            if(ext=="xls" || ext=="xlsx"){
-                $("#filePreview").hide();
-                $("#filePreview").show("slow");
-                $("#tgl").html($("#tglForm").val());
-            }
-            else
-            {
-                alert("Tipe file yang diupload tidak sesuai (file excel)")   
-            }
-            e.preventDefault();
-        });
+        $("#laporanPreview").hide();
     });
+    
+    function previewLaporan()
+    {
+        $("#waktu").html($("#jenis").val());
+        $("#laporanPreview").hide();
+        $("#laporanPreview").slideDown("slow");
+    }
     
     function importTable()
     {
@@ -27,32 +21,27 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Input Kinerja Mobil Tangki dari SIOD
+                Laporan Kinerja Mobil Tangki
             </header>
             <div class="panel-body" >
                 <form class="form-horizontal" action="#" role="form" id="formSiod">
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Jangka Waktu</label>
                         <div class="col-lg-10">
-                            <input type="date" required="required" id="tglForm" class="form-control"  placeholder="Tanggal">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File SIOD</label>
-                        <div class="col-lg-10">
-                            <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
-                            <button type="submit" style="float: right;" class="btn btn-danger">Upload</button>
+                            <select class="form-control m-bot15" onchange="previewLaporan()" id="jenis">
+                                <option value="Harian">Harian</option>
+                                <option value="10 Hari">10 Hari</option>
+                                <option value="Bulanan">Bulanan</option>
+                                <option value="Triwulan">Triwulan</option>
+                                <option value="Tahunan">Tahunan</option>
+                            </select>
                         </div>
                     </div>
                 </form>
-                <hr/>
-                <div id="filePreview">
+                <!-- generate laporan-->
+                <div id="laporanPreview">
                     <header class="panel-heading">
-                        Data File SIOD (<span id="tgl"></span>)
+                        Laporan <b><span id="waktu">asa</span></b> Kinerja Mobil Tangki
                     </header>
                     <div class="adv-table editable-table ">
                         <div class="clearfix">
@@ -265,7 +254,8 @@
                         </table>
                     </div>
 
-                    <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
+                    <button style="margin-right:10px;float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
+                    <br/><br/><br/>
                 </div>
             </div>
         </section>
