@@ -367,7 +367,7 @@
                     </header>
                     <div class="panel-body">
                         <p class="text-muted">
-                            Kilo Liter Premium
+                            Kilo Liter Premium (70000/90000 Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
@@ -376,7 +376,7 @@
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Pertamax
+                            Kilo Liter Pertamax (95000/100000 Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
@@ -385,7 +385,7 @@
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Pertamax Plus
+                            Kilo Liter Pertamax Plus (75000/100000 Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
@@ -394,7 +394,7 @@
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Pertamax Dex
+                            Kilo Liter Pertamax Dex (80000/100000 Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
@@ -403,7 +403,7 @@
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Solar
+                            Kilo Liter Solar (70000/100000 Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
@@ -412,7 +412,7 @@
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Bio Solar
+                            Kilo Liter Bio Solar (90000/90000)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -421,7 +421,7 @@
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Own Use
+                            Kilo Liter Own Use (90000/100000)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
