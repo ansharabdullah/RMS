@@ -4,7 +4,9 @@
         $("#filePreview").hide();
         $("#formSiod").submit(function(e){
             var ext = $("#fileName").val().split('.').pop();
-            if(ext=="xls" || ext=="xlsx"){
+
+            if(ext=="csv"){
+
                 $("#filePreview").hide();
                 $("#filePreview").show("slow");
                 $("#tgl").html($("#tglForm").val());
@@ -28,12 +30,20 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
+<<<<<<< HEAD
                 Import SV dari SIOD
+=======
+                Import dari CSV
+>>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
             </header>
             <div class="panel-body" >
                 <form class="form-horizontal" action="#" role="form" id="formSiod">
                     <div class="form-group">
+<<<<<<< HEAD
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File SIOD</label>
+=======
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File CSV</label>
+>>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                         <div class="col-lg-10">
                             <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD">
                         </div>

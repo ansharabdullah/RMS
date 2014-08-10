@@ -9,17 +9,17 @@
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
-                        <div class="btn-group">
+                        
 
                             <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahManual">
                                 Tambah AMT <i class="icon-plus"></i>
                             </a>
 
-                            <a class="btn btn-success" data-toggle="modal" href="#ModalImportCSV">
+                            <a class="btn btn-success" href="<?php echo base_url() ?>amt/import_amt">
                                 Import CSV <i class="icon-plus"></i>
                             </a>
 
-                        </div>
+                        
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
                             </button>
@@ -49,7 +49,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>1</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190001</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190001</a></td>
                                 <td>Firman</td>
                                 <td>Supir</td>
                                 <td>8</td>
@@ -59,7 +59,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>2</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190002</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190002</a></td>
                                 <td>Fiqri</td>
                                 <td>Supir</td>
                                 <td>16</td>
@@ -69,7 +69,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>3</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190003</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190003</a></td>
                                 <td>Firdaus</td>
                                 <td>Kernet</td>
                                 <td>24</td>
@@ -79,7 +79,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>4</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190004</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190004</a></td>
                                 <td>Anshar</td>
                                 <td>Supir</td>
                                 <td>8</td>
@@ -89,7 +89,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>5</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190005</a></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190005</a></td>
                                 <td>Abdullah</td>
                                 <td>Kernet</td>
                                 <td>24</td>
@@ -100,7 +100,7 @@
 
                                 <td style="display:none;"></td>
                                 <td>6</td>
-                                <td><a href="#" style ="text-decoration: underline">3205190006</a></td>                                
+                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190006</a></td>                                
 
                                 <td>Chepy</td>
                                 <td>Kernet</td>
@@ -124,16 +124,17 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Tambah AMT</h4>
             </div>
-            <div class="modal-body">
+            <div class=" form">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <section class="panel">
+                    <div class="modal-body">
 
-                            <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <section class="panel">
 
-                                <div class=" form">
-                                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                                    <div class="panel-body">
+
 
                                         <div class="form-group ">
                                             <label for="nip" class="control-label col-lg-2">NIP</label>
@@ -240,7 +241,7 @@
                                             <label class="control-label col-md-3">Image Upload</label>
                                             <div class="col-md-9">
                                                 <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                    
+
                                                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                     <div>
                                                         <span class="btn btn-white btn-file">
@@ -259,42 +260,22 @@
                                                 </span>
                                             </div>
                                         </div>
-                                
 
 
+
+
+
+                                    </div>
+                                </section>
                             </div>
+                        </div>
 
                     </div>
-                    </section>
-                </div>
-            </div>
-
-        </div>
-        <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-            <input class="btn btn-success" type="submit" value="Simpan"/>
-        </div>
-        </form>
-    </div>
-</div>
-</div>
-
-
-<div class="modal fade" id="ModalImportCSV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Import CSV</h4>
-            </div>
-            <div class="modal-body">
-
-                Body goes here...
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                <button class="btn btn-success" type="button">Save changes</button>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
