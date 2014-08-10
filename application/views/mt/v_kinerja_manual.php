@@ -156,90 +156,93 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title">Atur Kinerja</h4>
                             </div>
-                            <div class="modal-body">
+                            <div class=" form">
+                                <form class="cmxform form-horizontal tasi-form" id="commentForm" role="form" method="get" action="">
 
-                                <form class="form-horizontal" role="form">
+                                    <div class="modal-body">
 
-                                    <div class="form-group">
-                                        <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                                        <div class="col-lg-10">
-                                            <input class="form-control" type="date" size="16" />
-                                            <span class="help-block">Pilih Tanggal</span>
+
+                                        <div class="form-group">
+                                            <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="date" size="16" />
+                                                <span class="help-block">Pilih Tanggal</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="km" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="km" placeholder="Kilometer (km)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kl" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="kl" placeholder="Kilometer (km)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="rit" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ou" class="col-lg-2 col-sm-2 control-label">Own Use</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="ou" placeholder="Own Use">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Premium</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="premium" placeholder="Premium">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="pertamax" placeholder="Kilometer (km)Pertamax">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pertamaxplus" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="pertamaxplus" placeholder="Pertamax Plus">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pertamaxdex" class="col-lg-2 col-sm-2 control-label">Pertamax Dex</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="pertamaxdex" placeholder="Pertamax Dex">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="solar" class="col-lg-2 col-sm-2 control-label">Solar</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="solar" placeholder="Solar">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="biosolar" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
+                                            <div class="col-lg-10">
+                                                <input type="number" class="form-control" id="biosolar" placeholder="Bio Solar">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
-                                        <div class="col-lg-10">
-                                            <input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="km" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="km" placeholder="Kilometer (km)">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="kl" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="kl" placeholder="Kilometer (km)">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="rit" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="ou" class="col-lg-2 col-sm-2 control-label">Own Use</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="ou" placeholder="Own Use">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="premium" class="col-lg-2 col-sm-2 control-label">Premium</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="premium" placeholder="Premium">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="pertamax" placeholder="Kilometer (km)Pertamax">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="pertamaxplus" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="pertamaxplus" placeholder="Pertamax Plus">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="pertamaxdex" class="col-lg-2 col-sm-2 control-label">Pertamax Dex</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="pertamaxdex" placeholder="Pertamax Dex">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="solar" class="col-lg-2 col-sm-2 control-label">Solar</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="solar" placeholder="Solar">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="biosolar" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="biosolar" placeholder="Bio Solar">
-                                        </div>
+                                    <div class="modal-footer">
+                                        <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
+                                        <button class="btn btn-success" type="submit" >Simpan</button>
+
                                     </div>
 
                                 </form>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
-                                <button class="btn btn-success" type="button" onclick="closeModal()">Simpan</button>
                             </div>
                         </div>
                     </div>

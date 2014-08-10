@@ -1,6 +1,7 @@
 <script>
     $(document).ready(function(){
         $("#tabel-ban").hide();
+        $("#tabel-surat").hide();
     });
 </script>
 <section id="main-content">
@@ -18,13 +19,14 @@
                         <ul class="dropdown-menu pull-right">
                             <li><a href="#" onclick="filter('apar');">Apar</a></li>
                             <li><a href="#" onclick="filter('ban');">Ban</a></li>
+                            <li><a href="#" onclick="filter('surat');">Surat Mobil Tangki</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <div class="space15">
                         <h3><i class="icon-fire-extinguisher"></i> Pengingat Apar</h3>
-                        
+
                     </div>
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
                         <thead>
@@ -77,9 +79,9 @@
             <div class="panel-body" >
                 <div class="adv-table editable-table " id="tabel-ban">
                     <div class="space15">
-                        
+
                         <h3><i class="icon-compass"></i> Pengingat Ban</h3>
-                        
+
                     </div>
                     <table class="table table-hover table-bordered" id="editable-sample2">
                         <thead>
@@ -121,6 +123,62 @@
                         </tbody>
                     </table>
                 </div>
+
+
+                <div class="adv-table editable-table " id="tabel-surat">
+                    <div class="space15">
+
+                        <h3><i class="icon-envelope"></i> Pengingat Surat Mobil Tangki</h3>
+
+                    </div>
+                    <table class="table table-hover table-bordered" id="editable-sample3">
+                        <thead>
+                            <tr>
+                                <th style="display: none;"></th>
+                                <th>No.</th>
+                                <th>Nopol</th>
+                                <th>Jadwal Tera</th>
+                                <th>Jadwal Stnk</th>
+                                <th>STNK 5 Tahun</th>
+                                <th>KIR LLD</th>
+                                <th>KIR Pertamina</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $data = array('D 6308 AD', 'D 1725 AF', 'D 2245 AF', 'D 6066 AF', 'D 3038 AD', 'D 8557 AD', 'D 1346 AD', 'D 7152 AF', 'D 9487 AD', 'D 8827 AF', 'D 8711 AD', 'D 8277 AF');
+                            $tgl1 = array('25 Agustus 2014', '27 Agustus 2014', '15 Desember 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
+                            $tgl2 = array('10 Agustus 2015', '16 Oktober 2014', '19 September 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
+                            $tgl3 = array('6 September 2014', '19 Februari 2015', '26 Agustus 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
+                            $tgl4 = array('30 Maret 2015', '23 Agustus 2014', '14 Oktober 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
+                            $tgl5 = array('5 Desember 2014', '6 November 2014', '22 Desember 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
+                            for ($i = 0; $i < 12; $i++) {
+                                if ($i < 3) {
+                                    $color = "orange";
+                                    $action = "editSurat()";
+                                } else {
+                                    $color = "transparent";
+                                    $action = "";
+                                }
+                                 ?>
+                                <tr onclick="<?php echo $action ?>" style="cursor: pointer">
+                                    <th style="display: none;"></th>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1 ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl1<?php echo $i ?>"><?php echo $tgl1[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl2<?php echo $i ?>"><?php echo $tgl2[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl3<?php echo $i ?>"><?php echo $tgl3[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl4<?php echo $i ?>"><?php echo $tgl4[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl5<?php echo $i ?>"><?php echo $tgl5[$i] ?></td>
+
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
         </section>
@@ -222,14 +280,13 @@
                             for ($i = 0; $i < 16; $i++) {
                                 $sisa = rand(0, 15);
                                 $color = "";
-                                if($sisa < 8)
-                                {
+                                if ($sisa < 8) {
                                     $color = "style='background-color: orange;'";
                                 }
                                 ?>
-                                <tr id="row-ban-<?php echo $i+1?>" <?php echo $color?>>
+                                <tr id="row-ban-<?php echo $i + 1 ?>" <?php echo $color ?>>
                                     <td><?php echo $i + 1 ?></td>
-                                    <td><span id="aturban<?php echo $i + 1 ?>"><?php echo $sisa?></span> hari</td>
+                                    <td><span id="aturban<?php echo $i + 1 ?>"><?php echo $sisa ?></span> hari</td>
                                     <td><button type="button" class="btn btn-success btn-sm" onclick="setBan('<?php echo $i + 1 ?>')">Atur</button></td>
                                 </tr>
                                 <?php
@@ -241,6 +298,72 @@
                 </div>
             </div>
         </div>
+
+        <!---MODAL SURAT--->
+        <div class="modal fade" id="modalSurat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Pengingat Surat Mobil Tangki</h4>
+                    </div>
+                    <div class=" form">
+                        <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" required="required" value="D 6308 AD" class="form-control" id="nopol" name="nopol" placeholder="Nopol">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tgl" class="col-lg-2 col-sm-2 control-label">Jadwal Tera</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" name="tanggal" id="tanggal" value="2014-08-19" required="required" type="date" size="16" />
+                                        <span class="help-block">Pilih Tanggal</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tgl" class="col-lg-2 col-sm-2 control-label">Jadwal Stnk</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" name="tanggal" id="tanggal" value="2014-08-19" required="required" type="date" size="16" />
+                                        <span class="help-block">Pilih Tanggal</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tgl" class="col-lg-2 col-sm-2 control-label">STNK 5 Tahun</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" name="tanggal" id="tanggal" value="2014-08-27" required="required" type="date" size="16" />
+                                        <span class="help-block">Pilih Tanggal</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tgl" class="col-lg-2 col-sm-2 control-label">KIR LLD</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" name="tanggal" id="tanggal" value="2014-09-12" required="required" type="date" size="16" />
+                                        <span class="help-block">Pilih Tanggal</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tgl" class="col-lg-2 col-sm-2 control-label">KIR Pertamina</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" name="tanggal" id="tanggal" value="2014-11-02" required="required" type="date" size="16" />
+                                        <span class="help-block">Pilih Tanggal</span>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
+                                    <button class="btn btn-success" name="submit"  type="submit" >Simpan</button>
+
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- page end-->
     </section>
 </section>
@@ -276,21 +399,26 @@
     
     function filter(jenis)
     {
+        $("#tabel-ban").hide();
+        $("#tabel-surat").hide();
+        $("#tabel-apar").hide();
         if(jenis == "apar")
         {
-            $("#tabel-ban").hide();
-            $("#tabel-apar").hide();
             $("#tabel-apar").slideDown("slow");
+        }
+        else if(jenis=="ban")
+        {
+            $("#tabel-ban").slideDown("slow");
         }
         else
         {
-            $("#tabel-apar").hide();
-            $("#tabel-ban").hide();
-            $("#tabel-ban").slideDown("slow");
+            $("#tabel-surat").slideDown("slow");
+                
         }
         $(".dataTables_filter input").val("");
         $('#editable-sample').dataTable().fnFilter( '' );
         $('#editable-sample2').dataTable().fnFilter( '' );
+        $('#editable-sample3').dataTable().fnFilter( '' );
     }
     
     $("#form-edit").submit(function(e){
@@ -361,6 +489,12 @@
     {
         $("#tgl-ban").val("");
         $("#form-edit-ban").hide();
+    }
+    
+    function editSurat()
+    {
+        $("#modalSurat").modal('show');
+        
     }
     
     
