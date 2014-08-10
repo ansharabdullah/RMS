@@ -34,7 +34,7 @@
                 </ul>
             </li>
             <li>
-                <a  href="#">
+                <a  href="<?php echo base_url() ?>kinerja">
                     <i class="icon-briefcase"></i>
                     <span>Input Kinerja</span>
                 </a>
@@ -57,7 +57,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#" >
+                <a href="<?php echo base_url() ?>laporan" >
                     <i class="icon-tasks"></i>
                     <span>Laporan</span>
                 </a>
