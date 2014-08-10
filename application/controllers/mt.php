@@ -6,10 +6,6 @@ if (!defined('BASEPATH'))
 class Mt extends CI_Controller {
 
     public function index() {
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar');
-        $this->load->view('layouts/footer');
     }
 
     public function kinerja_manual() {
@@ -26,31 +22,52 @@ class Mt extends CI_Controller {
     
     public function data_mt() {
 
-        $this->header();
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
         $this->load->view('mt/v_data_mt');
+        $this->footer();
+    }
+    
+    public function grafik(){
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 2;
+        $this->header($data);
+        $this->load->view('amt/v_grafik');
         $this->footer();
     }
 
     public function detail_mt() {
 
-         $this->header();
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+         $this->header($data);
         $this->load->view('mt/v_detail_mt');
         $this->footer();
     }
     
     public function import_sv() {
-        $this->header();
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
         $this->load->view('mt/v_import_sv');
         $this->footer();
     }
 
     public function apar_mt() {
-        $this->header();
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
         $this->load->view('mt/v_apar_mt');
         $this->footer();
     }
     public function ban_mt() {
-        $this->header();
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
         $this->load->view('mt/v_ban_mt');
         $this->footer();
     }
@@ -67,7 +84,9 @@ class Mt extends CI_Controller {
     }
     
     public function pengingat() {
-        $this->header();
+        $data['lv1'] = 3;
+        $data['lv2'] = 4;
+        $this->header($data);
         $this->load->view('mt/v_pengingat');
         $this->footer();
     }
@@ -80,10 +99,10 @@ class Mt extends CI_Controller {
         
     }
 
-    private function header() {
+    private function header($data) {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar');
+        $this->load->view('layouts/navbar', $data);
     }
 
     private function footer() {

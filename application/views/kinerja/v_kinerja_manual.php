@@ -1,4 +1,33 @@
 
+
+<script type="text/javascript">
+         
+    $( document ).ready(function() {
+        $("#filePreview").hide();
+        
+        $("#commentForm").submit(function(e){
+            var isvalidate=$("#commentForm").valid();
+            if(isvalidate)
+            {
+                alert("Berhasil disimpan! ");
+                $("#myModal").modal('toggle');
+            }
+            
+        });
+        
+    });
+    
+    
+    
+        
+    function importTable()
+    {
+        alert("Berhasil disimpan !");
+    }
+    
+</script>
+
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/css/datepicker.css" />
 <section id="main-content">
     <section class="wrapper">
@@ -243,14 +272,9 @@
 <!-- END JAVASCRIPTS -->
 <script>
     jQuery(document).ready(function() {
-        EditableTable.init();
-              
-        
+        EditableTable.init();       
     });
     
-    $("#commentForm").submit(function(e){
-        alert("Berhasil disimpan! ");
-        $("#myModal").modal('toggle');
-    });
+    
     
 </script>

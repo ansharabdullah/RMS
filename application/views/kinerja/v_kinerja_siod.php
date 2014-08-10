@@ -1,22 +1,31 @@
 <script type="text/javascript">
+         
     $( document ).ready(function() {
         $("#filePreview").hide();
-        $("#commentForm").submit(function(e){
-            var ext = $("#fileName").val().split('.').pop();
-            if(ext=="xls" || ext=="xlsx"){
-                $("#filePreview").hide();
-                $("#filePreview").slideDown("slow");
-                $("#tgl").html($("#tglForm").val());
-            }else if(ext==""){
-                
-            }else
+        
+        $("#signupForm").submit(function(e){
+            var isvalidate=$("#signupForm").valid();
+            if(isvalidate)
             {
-                alert("Tipe file yang diupload tidak sesuai (file excel)"+ext)   
+                var ext = $("#fileSIOD").val().split('.').pop();
+                if(ext=="xls" || ext=="xlsx"){
+                    $("#filePreview").hide();
+                    $("#filePreview").slideDown("slow");
+                    $("#tgl").html($("#tanggalSIOD").val());
+                }else if(ext==""){
+                
+                }else{
+                    alert("Tipe file yang diupload tidak sesuai (file excel)");
+                }
+                e.preventDefault();
             }
-            e.preventDefault();
         });
+        
     });
     
+    
+    
+        
     function importTable()
     {
         alert("Berhasil disimpan !");
@@ -32,11 +41,11 @@
                 <a style="float:right;" data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                <form class="cmxform form-horizontal tasi-form" id="signupForm" onsubmit="testing()">
                     <div class="form-group">
                         <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
-                            <input type="date" required="required" id="tanggalSIOD"" class="form-control"  placeholder="Tanggal" name="tanggalSIOD">
+                            <input type="date" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD">
                         </div>
                     </div>
                     <div class="form-group">
@@ -47,7 +56,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
-                            <button type="submit" style="float: right;" class="btn btn-danger">Upload</button>
+                            <input type="submit" style="float: right;" class="btn btn-danger" value="Upload">
                         </div>
                     </div>
                 </form>
@@ -278,12 +287,11 @@
 <!--script for this page only-->
 <script src="<?php echo base_url(); ?>assets/js/editable-table.js"></script>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- END JAVASCRIPTS -->
 <script>
+    
     jQuery(document).ready(function() {
         EditableTable.init();
-        
-    });
+    });    
     
 </script>
