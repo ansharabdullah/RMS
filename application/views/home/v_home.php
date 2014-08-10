@@ -2,8 +2,8 @@
 
     $(document).ready(function() {
         $("#amtWarning").hide();
-        $("#mtWarning").hide();
-        $("#warning").show();
+        $("#mtWarning").show();
+        $("#warning").hide();
         $("#warningActive").addClass('active');
         $("#amtActive").removeClass('active');
         $("#mtActive").removeClass('active');
@@ -328,10 +328,10 @@
                     </div>
                     <div class="panel-footer revenue-foot">
                         <ul>
-                            <li class="first" id="warningActive">
-                                <a href="javascript:;" onclick="warning()">
-                                    <i class="icon-bullseye"></i>
-                                    Peringatan
+                            <li class="first" id="mtActive">
+                                <a href="javascript:;" onclick="mtWarning()">
+                                    <i class=" icon-truck"></i>
+                                    MT
                                 </a>
                             </li>
                             <li id="amtActive">
@@ -340,10 +340,10 @@
                                     AMT
                                 </a>
                             </li>
-                            <li class="last" id="mtActive">
-                                <a href="javascript:;" onclick="mtWarning()">
-                                    <i class=" icon-truck"></i>
-                                    MT
+                            <li class="last" id="warningActive">
+                                <a href="javascript:;" onclick="warning()">
+                                    <i class="icon-bullseye"></i>
+                                    Peringatan
                                 </a>
                             </li>
                         </ul>

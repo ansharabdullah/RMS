@@ -14,9 +14,11 @@ class home extends CI_Controller {
     }
     
     public function home(){
+        $data['lv1'] = 1;
+        $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar');
+        $this->load->view('layouts/navbar',$data);
         $this->load->view('home/v_home');
         $this->load->view('layouts/footer');
     }
