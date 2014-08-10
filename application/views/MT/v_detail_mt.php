@@ -318,7 +318,7 @@
                         <tr>
                             <th style="display: none;">-</th>
                             <th>No.</th>
-                            <th>Nopol</th>
+                            <th>Tanggal</th>
                             <th>Kilometer (Km)</th>
                             <th>Kiloliter (Kl)</th>
                             <th>Ritase (Rit)</th>
@@ -335,11 +335,8 @@
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>1</td>
-<<<<<<< HEAD
-                            <td>D 6308 AD</td>
-=======
+
                             <td>23-08-2014</td>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                             <td><?php echo rand(300, 500) ?></td>
                             <td><?php echo rand(40, 150) ?></td>
                             <td><?php echo rand(2, 5) ?></td>
@@ -354,11 +351,8 @@
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>2</td>
-<<<<<<< HEAD
-                            <td>D 1725 AF</td>
-=======
+
                             <td>24-08-2014</td>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                             <td><?php echo rand(300, 500) ?></td>
                             <td><?php echo rand(40, 150) ?></td>
                             <td><?php echo rand(2, 5) ?></td>
@@ -375,11 +369,7 @@
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>3</td>
-<<<<<<< HEAD
-                            <td>D 2245 AF</td>
-=======
                             <td>25-08-2014</td>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                             <td><?php echo rand(300, 500) ?></td>
                             <td><?php echo rand(40, 150) ?></td>
                             <td><?php echo rand(2, 5) ?></td>
@@ -394,11 +384,7 @@
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>4</td>
-<<<<<<< HEAD
-                            <td>D 6066 AF</td>
-=======
                             <td>26-08-2014</td>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                             <td><?php echo rand(300, 500) ?></td>
                             <td><?php echo rand(40, 150) ?></td>
                             <td><?php echo rand(2, 5) ?></td>
@@ -413,11 +399,7 @@
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>5</td>
-<<<<<<< HEAD
-                            <td>D 3038 AD</td>
-=======
                             <td>27-08-2014</td>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                             <td><?php echo rand(300, 500) ?></td>
                             <td><?php echo rand(40, 150) ?></td>
                             <td><?php echo rand(2, 5) ?></td>
@@ -432,11 +414,7 @@
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>6</td>
-<<<<<<< HEAD
-                            <td>D 8557 AD</td>
-=======
                             <td>28-08-2014</td>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                             <td><?php echo rand(300, 500) ?></td>
                             <td><?php echo rand(40, 150) ?></td>
                             <td><?php echo rand(2, 5) ?></td>
@@ -451,11 +429,7 @@
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>7</td>
-<<<<<<< HEAD
-                            <td>D 1346 AD</td>
-=======
                             <td>29-08-2014</td>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                             <td><?php echo rand(300, 500) ?></td>
                             <td><?php echo rand(40, 150) ?></td>
                             <td><?php echo rand(2, 5) ?></td>
@@ -470,11 +444,7 @@
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>8</td>
-<<<<<<< HEAD
-                            <td>D 7152 AF</td>
-=======
                             <td>30-08-2014</td>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                             <td><?php echo rand(300, 500) ?></td>
                             <td><?php echo rand(40, 150) ?></td>
                             <td><?php echo rand(2, 5) ?></td>
@@ -486,7 +456,6 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                         </tr>
-<<<<<<< HEAD
                         <tr class="">
                             <th style="display: none;"></th>
                             <td>9</td>
@@ -502,55 +471,7 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                         </tr>
-                        <tr class="">
-                            <th style="display: none;"></th>
-                            <td>10</td>
-                            <td>D 8827 AF</td>
-                            <td><?php echo rand(300, 500) ?></td>
-                            <td><?php echo rand(40, 150) ?></td>
-                            <td><?php echo rand(2, 5) ?></td>
-                            <td><?php echo rand(40, 150) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                        </tr>
-                        <tr class="">
-                            <th style="display: none;"></th>
-                            <td>11</td>
-                            <td>D 8711 AD</td>
-                            <td><?php echo rand(300, 500) ?></td>
-                            <td><?php echo rand(40, 150) ?></td>
-                            <td><?php echo rand(2, 5) ?></td>
-                            <td><?php echo rand(40, 150) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                        </tr>
-                        <tr class="">
-                            <th style="display: none;"></th>
-                            <td>12</td>
-                            <td>D 8277 AF</td>
-                            <td><?php echo rand(300, 500) ?></td>
-                            <td><?php echo rand(40, 150) ?></td>
-                            <td><?php echo rand(2, 5) ?></td>
-                            <td><?php echo rand(40, 150) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-                            <td><?php echo rand(30, 70) ?></td>
-
-                        </tr>
-=======
                         
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
                     </tbody>
                 </table>
                 <a href="<?php echo base_url() ?>index.php/mt/data_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>

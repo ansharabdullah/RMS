@@ -33,29 +33,29 @@
                             <div class="modal-body">
                                 <!-- form tambah-->
                                 <form class="form-horizontal" role="form">
-                                   <div class="form-group">
-                                      <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Posisi Ban</label>
-                                      <div class="col-lg-10">
-                                          <select class="form-control m-bot15">
-                                              <option>1</option>
-                                              <option>2</option>
-                                              <option>3</option>
-                                              <option>4</option>
-                                              <option>5</option>
-                                               <option>6</option>
-                                              <option>7</option>
-                                              <option>8</option>
-                                              <option>9</option>
-                                              <option>10</option>
-                                               <option>11</option>
-                                              <option>12</option>
-                                              <option>13</option>
-                                              <option>14</option>
-                                              <option>15</option>
-                                              <option>16</option>
-                                          </select>
-                                      </div>
-                                  </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Posisi Ban</label>
+                                        <div class="col-lg-10">
+                                            <select class="form-control m-bot15">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                                <option>13</option>
+                                                <option>14</option>
+                                                <option>15</option>
+                                                <option>16</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tanggal Pasang</label>
                                         <div class="col-lg-10">
@@ -74,22 +74,22 @@
                                             <input type="keterangan" class="form-control" id="inputKompartemen4" placeholder="Merk Ban">
                                         </div>
                                     </div>
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">No Seri</label>
                                         <div class="col-lg-10">
                                             <input type="keterangan" class="form-control" id="inputKompartemen4" placeholder="No Seri">
                                         </div>
                                     </div>
-                                     <div class="form-group">
-                                      <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Ban</label>
-                                      <div class="col-lg-10">
-                                          <select class="form-control m-bot15">
-                                              <option>Original</option>
-                                              <option>Vulkanisir</option>
-                                              
-                                          </select>
-                                      </div>
-                                  </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Ban</label>
+                                        <div class="col-lg-10">
+                                            <select class="form-control m-bot15">
+                                                <option>Original</option>
+                                                <option>Vulkanisir</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
                                 </form> 
                             </div>
                             <div class="modal-footer">
@@ -130,7 +130,7 @@
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>2</td>
-                           <td>2</td>
+                            <td>2</td>
                             <td>23/02/2009</td>
                             <td>25/02/2013</td>
                             <td>Aspal</td>
@@ -140,7 +140,7 @@
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>3</td>
-                           <td>3</td>
+                            <td>3</td>
                             <td>23/02/2009</td>
                             <td>28/02/2013</td>
                             <td>Aspal</td>
@@ -170,7 +170,7 @@
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>6</td>
-                           <td>6</td>
+                            <td>6</td>
                             <td>23/02/2009</td>
                             <td>25/05/2014</td>
                             <td>Aspal</td>
@@ -179,7 +179,7 @@
                         </tr>
                     </tbody>
                 </table>
-<a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
+                <a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
             </div>
             </div>
 

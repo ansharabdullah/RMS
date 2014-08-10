@@ -144,12 +144,8 @@
                                   </div>
                               </div>
                               <!-- modal -->
-                  
-<<<<<<< HEAD
-                                  <a href="<?php echo base_url() ?>index.php/mt/import_sv" rel="stylesheet" class="btn btn-success"> Import SV <i class="icon-plus"></i></a>
-=======
                                   <a href="<?php echo base_url() ?>index.php/mt/import_sv" rel="stylesheet" class="btn btn-success"> Import CSV <i class="icon-plus"></i></a>
->>>>>>> b46c219795804fa16731e346530ac97281bf4b1b
+
                               </div>
                           
                               

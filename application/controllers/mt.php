@@ -54,6 +54,11 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_ban_mt');
         $this->footer();
     }
+     public function oli_mt() {
+        $this->header();
+        $this->load->view('mt/v_oli_mt');
+        $this->footer();
+    }
 
     public function laporan() {
         $this->header();
@@ -67,43 +72,6 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function data_mt() {
-
-        $this->header();
-        $this->load->view('mt/v_data_mt');
-        $this->footer();
-    }
-
-    public function detail_mt() {
-
-         $this->header();
-        $this->load->view('mt/v_detail_mt');
-        $this->footer();
-    }
-    
-    public function import_sv() {
-        $this->header();
-        $this->load->view('mt/v_import_sv');
-        $this->footer();
-    }
-
-    public function apar_mt() {
-        $this->header();
-        $this->load->view('mt/v_apar_mt');
-        $this->footer();
-    }
-    public function ban_mt() {
-        $this->header();
-        $this->load->view('mt/v_ban_mt');
-        $this->footer();
-    }
-
-    public function oli_mt() {
-        $this->header();
-        $this->load->view('mt/v_oli_mt');
-        $this->footer();
-    }
-    
     private function header() {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
