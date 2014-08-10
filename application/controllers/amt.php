@@ -77,6 +77,12 @@ class amt extends CI_Controller {
         $this->load->view('amt/v_grafik');
         $this->load->view('layouts/footer');
     }
+    
+    public function login(){
+        $this->load->view('layouts/header');
+        $this->load->view('login/v_login');
+        $this->load->view('layouts/footer');
+    }
 
     
 
