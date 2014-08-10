@@ -85,6 +85,14 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_pengingat');
         $this->footer();
     }
+    
+    public function rencana()
+    {
+        $this->header();
+        $this->load->view('mt/v_rencana');
+        $this->footer();
+        
+    }
 
     private function header($data) {
         $this->load->view('layouts/header');
