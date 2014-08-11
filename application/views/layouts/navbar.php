@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"  <?php if ($lv1 == 5) echo "class='active'" ?>>
+                <a href="<?php echo base_url() ?>jadwal"  <?php if ($lv1 == 5) echo "class='active'" ?>>
                     <i class="icon-calendar"></i>
                     <span>Penjadwalan</span>
                 </a>
