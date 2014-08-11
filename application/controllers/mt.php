@@ -38,9 +38,9 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function import_sv() {
+    public function import_csv() {
         $this->header();
-        $this->load->view('mt/v_import_sv');
+        $this->load->view('mt/v_import_csv');
         $this->footer();
     }
 
