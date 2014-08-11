@@ -4,7 +4,9 @@
         $("#filePreview").hide();
         $("#formSiod").submit(function(e){
             var ext = $("#fileName").val().split('.').pop();
+
             if(ext=="csv"){
+
                 $("#filePreview").hide();
                 $("#filePreview").show("slow");
                 $("#tgl").html($("#tglForm").val());
@@ -29,6 +31,7 @@
         <section class="panel">
             <header class="panel-heading">
                 Import dari CSV
+
             </header>
             <div class="panel-body" >
                 <form class="form-horizontal" action="#" role="form" id="formSiod">

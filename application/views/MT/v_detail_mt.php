@@ -27,8 +27,6 @@
                 <a href="<?php echo base_url() ?>index.php/mt/ban_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
                 <a href="<?php echo base_url() ?>index.php/mt/oli_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-beer"></i> Oli</a>
 
-                <button type="button" class="btn btn-warning" onclick="ShowEdit()"><i class="icon-pencil"></i> Edit</button>
-                <a class="btn btn-danger" data-toggle="modal" href="#myModal2"> <i class="icon-remove"></i> Hapus </a>
             </div>
         </section>
         <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -57,7 +55,12 @@
         <section class="panel">
             <div class="panel-body bio-graph-info" id="ShowProfile">
                 <header class="panel-heading">
-                    Detail MT  
+                   <div class="col-lg-10">Detail MT
+                       </div>
+                    <a class="btn btn-warning" onclick="ShowEdit()" "><i class="icon-pencil"></i> Edit</a>
+                   
+                    <a class="btn btn-danger" data-toggle="modal" href="#myModal2" > <i class="icon-remove"></i> Hapus </a>
+                    
                 </header>
                 <div class="panel-body">
                     <div class="row">
@@ -151,7 +154,7 @@
                                     </select>
                                 </div>
                             </div>
-                             <div class="bio-row">
+                            <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">No Mesin</label>
                                 <div class="col-lg-6">
                                     <input class=" form-control input-sm m-bot15" id="cmesin" name="nomesin" minlength="2" type="text" required />
@@ -214,7 +217,7 @@
                                     <input class=" form-control input-sm m-bot15" id="csim" name="so" minlength="2" type="date" required />
                                 </div>
                             </div>
-                           <div class="bio-row">
+                            <div class="bio-row">
                                 <label for="ctempatlahir" class="control-label col-lg-4">KIR Pertamina</label>
                                 <div class="col-lg-6">
                                     <input class=" form-control input-sm m-bot15" id="ckir" name="kir" minlength="2" type="date" required />
@@ -240,8 +243,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="ShowProfil" class="btn btn-default" type="button">Close</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                        <div class="modal-footer">
+                            <input type="reset" class="btn btn-default" onclick="ShowProfile()"value="Batal" />
+                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                        </div>
                     </div>
                 </form>
 
