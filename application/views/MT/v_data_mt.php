@@ -138,7 +138,7 @@
                 </div>
 
                 <!-- modal -->
-                <a href="<?php echo base_url() ?>/mt/import_csv" rel="stylesheet" class="btn btn-success"> Import CSV <i class="icon-plus"></i></a>
+                <a href="<?php echo base_url() ?>mt/import_csv" rel="stylesheet" class="btn btn-success"> Import CSV <i class="icon-plus"></i></a>
 
             </div>
 
