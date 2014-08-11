@@ -91,7 +91,7 @@
                                 <th>Nopol</th>
                                 <th>Transportir</th>
                                 <th>Produk</th>
-                                <th>Ban</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
