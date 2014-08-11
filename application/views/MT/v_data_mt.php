@@ -128,7 +128,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                                         <input class="btn btn-success" type="submit" value="Simpan"/>
                                     </div>
                                 </form>  
@@ -138,7 +138,7 @@
                 </div>
 
                 <!-- modal -->
-                <a href="<?php echo base_url() ?>index.php/mt/import_sv" rel="stylesheet" class="btn btn-success"> Import CSV <i class="icon-plus"></i></a>
+                <a href="<?php echo base_url() ?>/mt/import_csv" rel="stylesheet" class="btn btn-success"> Import CSV <i class="icon-plus"></i></a>
 
             </div>
 

@@ -28,5 +28,15 @@ class ba extends CI_Controller {
         $this->load->view('ba/v_import_ms2');
         $this->load->view('layouts/footer');
     }
+    
+    public function frm() {
+       $data['lv1'] = 6;
+        $data['lv2'] = 3;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('ba/v_frm');
+        $this->load->view('layouts/footer');
+    }
 
 }
