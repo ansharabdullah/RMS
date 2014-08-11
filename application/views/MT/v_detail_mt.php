@@ -21,13 +21,7 @@
 
 <section id="main-content">
     <section class="wrapper">
-
-
         <section class="panel">
-            <header class="panel-heading summary-head">
-                <h4>Detail Mobil Tangki</h4>
-
-            </header>
             <div class="panel-body">
                 <a href="<?php echo base_url() ?>index.php/mt/apar_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
                 <a href="<?php echo base_url() ?>index.php/mt/ban_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
@@ -35,219 +29,222 @@
 
                 <button type="button" class="btn btn-warning" onclick="ShowEdit()"><i class="icon-pencil"></i> Edit</button>
                 <a class="btn btn-danger" data-toggle="modal" href="#myModal2"> <i class="icon-remove"></i> Hapus </a>
+            </div>
+        </section>
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
+                    </div>
+                    <div class="modal-body">
 
-                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        Apakah anda yakin akan menghapus Data Mobil Tangki?
 
-                            </div>
-                            <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
+                        <button class="btn btn-warning" type="button"> Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
 
-                                Apakah anda yakin akan menghapus Data Mobil Tangki?
+        <!-- page start-->
 
-                            </div>
-                            <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                                <button class="btn btn-warning" type="button"> Yes</button>
-                            </div>
+        <section class="panel">
+            <div class="panel-body bio-graph-info" id="ShowProfile">
+                <header class="panel-heading">
+                    Detail MT  
+                </header>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="panel-body">
+
+                            <aside class="profile-nav col-lg-12">
+                                <div class="row">
+                                    <div class="bio-row">
+                                        <p><span>Nopol </span>: D9808AD</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Nomor Rangka </span>: 912814KM</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Kapasitas </span>: 16</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Nomor Mesin </span>: KAIDU129314</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Produk </span>: Pertamax</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Jenis Kendaraan </span>: Hino 3.2</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Transportir </span>: PT Masoem</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Jenis Tangki</span>: Steel</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Tera </span>: 23-08-2014</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>STNK Per Tahun </span>: 23-08-2014</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>STNK 5 Tahun </span>: 23-08-2019</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>KIR LLD </span>: 23-08-2014</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>KIR Pertamina</span>: 23-08-2014</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Status</span>: Pinjam</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>GPS </span>: OK</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Rasio </span>: 12</p>
+                                    </div>
+
+                                </div>
+                            </aside>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- page start-->
-            <div class="row">
-                <div class="panel-body">
-                    <div class="panel-body bio-graph-info" id="ShowProfile">
-                        <aside class="profile-nav col-lg-12">
-                            <div class="row">
-                                <div class="bio-row">
-                                    <p><span>Nopol </span>: D9808AD</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Nomor Rangka </span>: 912814KM</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Kapasitas </span>: 16</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Nomor Mesin </span>: KAIDU129314</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Produk </span>: Pertamax</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Jenis Kendaraan </span>: Hino 3.2</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Transportir </span>: PT Masoem</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Jenis Tangki</span>: Steel</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Tera </span>: 23-08-2014</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>STNK Per Tahun </span>: 23-08-2014</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>STNK 5 Tahun </span>: 23-08-2019</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>KIR LLD </span>: 23-08-2014</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>KIR Pertamina</span>: 23-08-2014</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Status</span>: Pinjam</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>GPS </span>: OK</p>
-                                </div>
-                                <div class="bio-row">
-                                    <p><span>Rasio </span>: 12</p>
-                                </div>
-
-                            </div>
-                        </aside>
-                    </div>
-                </div>
-            </div>
-
             <div class="panel-body bio-graph-info" id="ShowEdit">
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                    <header class="panel-heading">
+                        Edit MT  
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Nopol</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="cnip" name="nopol" minlength="2" type="text" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nama" class="control-label col-lg-4">No Rangka</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="cama" name="norangka" minlength="2" type="text" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="cjabatan" class="control-label col-lg-4">Kapasitas</label>
+                                <div class="col-lg-6">
+                                    <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan">
+                                        <option>8</option>
+                                        <option>16</option>
+                                        <option>24</option>
+                                        <option>32</option>
+                                        <option>40</option>
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="bio-row">
+                                <label for="nama" class="control-label col-lg-4">No Mesin</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="cmesin" name="nomesin" minlength="2" type="text" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="cklas" class="control-label col-lg-4">Produk</label>
+                                <div class="col-lg-6">
+                                    <select class="form-control input-sm m-bot15" id="cklas" name="produk">
+                                        <option>Premium</option>
+                                        <option>Pertamax</option>
+                                        <option>Solar</option>
+                                        <option>Multi</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="cjk" name="jk" minlength="2" type="text" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="calamat" class="control-label col-lg-4">Transportir</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="calamat" name="transportir" minlength="2" type="text" required />
+                                </div>
+                            </div> 
+                            <div class="bio-row">
+                                <label for="ctglmasuk" class="control-label col-lg-4">Rasio</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="crasio" name="rasio" type="text" size="16" type="text" required/>
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="cjenistangki" class="control-label col-lg-4">Jenis Tangki</label>
+                                <div class="col-lg-6">
+                                    <select class="form-control input-sm m-bot15" id="cjenistangki" name="jenistangki">
+                                        <option>Alumunium Aweco</option>
+                                        <option>Carbon Steel</option>
+                                        <option>Steel</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="ctelp" class="control-label col-lg-4">Tera</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="date" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="cktp" class="control-label col-lg-4">STNK Per Tahun</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="cktp" name="sv" minlength="2" type="date" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="csim" class="control-label col-lg-4">STNK 5 Tahun</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="csim" name="so" minlength="2" type="date" required />
+                                </div>
+                            </div>
+                           <div class="bio-row">
+                                <label for="ctempatlahir" class="control-label col-lg-4">KIR Pertamina</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ckir" name="kir" minlength="2" type="date" required />
+                                </div>
+                            </div>
 
-                    <h1>Edit Data MT</h1>
-
-                    <div class="row">
-                        <div class="bio-row">
-                            <label for="nip" class="control-label col-lg-4">Nopol</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="cnip" name="nopol" minlength="2" type="text" required />
+                            <div class="bio-row">
+                                <label for="ctempatlahir" class="control-label col-lg-4">KIR LLD</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="clld" name="lld" minlength="2" type="date" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="ctransportir" class="control-label col-lg-4">Status</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="cstatus" name="status" minlength="2" type="text" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="ctglmasuk" class="control-label col-lg-4">GPS</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="gps" type="text" type="text" required/>
+                                </div>
                             </div>
                         </div>
-                        <div class="bio-row">
-                            <label for="nama" class="control-label col-lg-4">No Rangka</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="cama" name="norangka" minlength="2" type="text" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="cjabatan" class="control-label col-lg-4">Kapasitas</label>
-                            <div class="col-lg-6">
-                                <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan">
-                                    <option>8</option>
-                                    <option>16</option>
-                                    <option>24</option>
-                                    <option>32</option>
-                                    <option>40</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="nama" class="control-label col-lg-4">No Mesin</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="cama" name="nomesin" minlength="2" type="text" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="cklas" class="control-label col-lg-4">Produk</label>
-                            <div class="col-lg-6">
-                                <select class="form-control input-sm m-bot15" id="cklas" name="produk">
-                                    <option>Premium</option>
-                                    <option>Pertamax</option>
-                                    <option>Solar</option>
-                                    <option>Multi</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="cama" name="nomesin" minlength="2" type="JK" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="calamat" class="control-label col-lg-4">Transportir</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="calamat" name="transportir" minlength="2" type="text" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="cstatus" class="control-label col-lg-4">Jenis Tangki</label>
-                            <div class="col-lg-6">
-                                <select class="form-control input-sm m-bot15" id="cstatus" name="JK">
-                                    <option>Alumunium Aweco</option>
-                                    <option>Carbon Steel</option>
-                                    <option>Steel</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="ctelp" class="control-label col-lg-4">Tera</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="date" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="cktp" class="control-label col-lg-4">STNK Per Tahun</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="cktp" name="sv" minlength="2" type="date" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="csim" class="control-label col-lg-4">STNK 5 Tahun</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="csim" name="so" minlength="2" type="date" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="csim" class="control-label col-lg-4">KIR Pertamina</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="csim" name="so" minlength="2" type="date" required />
-                            </div>
-                        </div>
-
-                        <div class="bio-row">
-                            <label for="ctempatlahir" class="control-label col-lg-4">KIR LLD</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="kategori" minlength="2" type="date" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="ctransportir" class="control-label col-lg-4">Status</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="ctransportir" name="status" minlength="2" type="text" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                            <label for="ctglmasuk" class="control-label col-lg-4">GPS</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="gps" type="text" size="16" type="text" value="" required/>
-                            </div>
-                        </div>
-
-                        <div class="bio-row">
-                            <label for="calamat" class="control-label col-lg-4">Rasio</label>
-                            <div class="col-lg-6">
-                                <input class=" form-control input-sm m-bot15" id="calamat" name="rasio" minlength="2" type="text" required />
-                            </div>
-                        </div>
-                        <div class="bio-row">
-                        </div>
-                        <div class="bio-row">
-                            <div class="col-lg-10">
-                                <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
-                            </div>
-                        </div>
+                        <button id="ShowProfil" class="btn btn-default" type="button">Close</button>
+                        <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>
-            </div>
+
         </section>
         <section class="panel">
             <div class="row">
@@ -524,7 +521,7 @@
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                            <button class="btn btn-warning" type="button"> Yes</button>
+                            <button class="btn btn-danger" type="button"> Yes</button>
                         </div>
                     </div>
                 </div>

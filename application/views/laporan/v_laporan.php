@@ -1,7 +1,29 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#laporanPreview").hide();
+        $("#jangka").hide();
+        $("#tanggal").hide();
+        $("#formLaporan").submit(function(e){
+            previewLaporan();
+            e.preventDefault();
+        });
     });
+    
+    
+    function showOption(){
+        var jenis = $("#kategori").val();
+        $("#jangka").hide();
+        $("#tanggal").hide();
+        if(jenis=="berita")
+        { 
+            $("#tanggal").show();
+        }
+        else
+        {
+            $("#jangka").show();
+            $("#tanggal").show();   
+        }
+    }
     
     function previewLaporan()
     {
@@ -21,14 +43,25 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Laporan Kinerja Mobil Tangki
+                Laporan
             </header>
             <div class="panel-body" >
-                <form class="form-horizontal" action="#" role="form" id="formSiod">
+                <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="formLaporan">
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Jangka Waktu</label>
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Jenis laporan</label>
                         <div class="col-lg-10">
-                            <select class="form-control m-bot15" onchange="previewLaporan()" id="jenis">
+                            <select class="form-control m-bot15" id="kategori" onchange="showOption()">
+                                <option value="amt">Awak Mobil Tangki (AMT)</option>
+                                <option value="mt">Mobil Tangki (MT)</option>
+                                <option value="berita">Berita Acara</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="jangka">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Jangka Waktu</label>
+
+                        <div class="col-lg-10">
+                            <select class="form-control m-bot15"  id="jenis">
                                 <option value="Harian">Harian</option>
                                 <option value="10 Hari">10 Hari</option>
                                 <option value="Bulanan">Bulanan</option>
@@ -36,6 +69,20 @@
                                 <option value="Tahunan">Tahunan</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="form-group" id="tanggal">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+
+                        <div class="col-lg-10">
+                            <input type="date" required="required" id="tglLaporan"  class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <input type="submit" style="float: right;" class="btn btn-danger" value="Submit">
+                        </div>
+
                     </div>
                 </form>
                 <!-- generate laporan-->
