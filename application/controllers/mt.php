@@ -80,7 +80,7 @@ class Mt extends CI_Controller {
         
         $data['lv1'] = 3;
         $data['lv2'] = 5;
-        $this->header();
+        $this->header($data);
         $this->load->view('mt/v_rencana');
         $this->footer();
         
