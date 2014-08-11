@@ -6,6 +6,9 @@
     <section class="wrapper">
         <!-- page start-->
         <section class="panel">
+            <header class="panel-heading">
+                <h3>Ban MT</h3>   
+            </header>
             <div class="panel-body">
                 <div class="bio-desk">
                     <p>Nopol : D8900AD</p>
@@ -13,11 +16,6 @@
                     <p>Produk : Pertamax</p>
                 </div>
             </div>
-        </section>
-        <section class="panel">
-            <header class="panel-heading">
-                Ban MT   
-            </header>
             <div class="panel-body">
                 <a class="btn btn-info" data-toggle="modal" href="#myModal">
                     Ban MT <i class="icon-plus"></i>
@@ -53,31 +51,33 @@
                                                 <option>14</option>
                                                 <option>15</option>
                                                 <option>16</option>
+                                                <option>17</option>
+                                                <option>18</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tanggal Pasang</label>
                                         <div class="col-lg-10">
-                                            <input type="date" class="form-control" id="nomesin" placeholder="Catridge">
+                                            <input class=" form-control input-sm m-bot15" id="tglpasang" name="tglpasang" minlength="2" type="date" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Tanggal Ganti</label>
                                         <div class="col-lg-10">
-                                            <input type="date" class="form-control" id="inputKompartemen4" placeholder="C02">
+                                            <input class=" form-control input-sm m-bot15" id="tglganti" name="tglganti" minlength="2" type="date" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Merk Ban</label>
                                         <div class="col-lg-10">
-                                            <input type="keterangan" class="form-control" id="inputKompartemen4" placeholder="Merk Ban">
+                                            <input class=" form-control input-sm m-bot15" id="merk" name="merk" minlength="2" type="text" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">No Seri</label>
                                         <div class="col-lg-10">
-                                            <input type="keterangan" class="form-control" id="inputKompartemen4" placeholder="No Seri">
+                                            <input class=" form-control input-sm m-bot15" id="seri" name="seri" minlength="2" type="text" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -90,13 +90,13 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                                    </div>
                                 </form> 
                             </div>
-                            <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                <button class="btn btn-success" type="button">Save</button>
 
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -114,6 +114,7 @@
                             <th>Merk Ban</th>
                             <th>No Seri</th>
                             <th>Jenis Ban</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,6 +127,8 @@
                             <td>Aspal</td>
                             <td>129344KM</td>
                             <td>Original</td>
+                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -136,6 +139,8 @@
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Vulkanisir</td>
+                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -146,6 +151,8 @@
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Original</td>
+                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -156,6 +163,8 @@
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Original</td>
+                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -166,6 +175,8 @@
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Original</td>
+                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -176,13 +187,113 @@
                             <td>Aspal</td>
                             <td>129124KM</td>
                             <td>Original</td>
+                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
                 <a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
             </div>
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Form Tambah Ban</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!-- form tambah-->
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Posisi Ban</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control m-bot15">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tanggal Pasang</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control input-sm m-bot15" id="tglpasang" name="tglpasang" minlength="2" type="date" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="norangka" class="col-lg-2 col-sm-2 control-label">Tanggal Ganti</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control input-sm m-bot15" id="tglganti" name="tglganti" minlength="2" type="date" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="norangka" class="col-lg-2 col-sm-2 control-label">Merk Ban</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control input-sm m-bot15" id="merk" name="merk" minlength="2" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="norangka" class="col-lg-2 col-sm-2 control-label">No Seri</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control input-sm m-bot15" id="seri" name="seri" minlength="2" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Ban</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control m-bot15">
+                                            <option>Original</option>
+                                            <option>Vulkanisir</option>
 
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                                </div>
+                            </form> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+            <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+
+                            Apakah anda yakin ?
+
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
+                            <button class="btn btn-danger" type="button"> Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- page end-->
