@@ -43,22 +43,6 @@ class amt extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function kinerja(){
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar');
-        $this->load->view('amt/v_kinerja_manual');
-        $this->load->view('layouts/footer');
-    }
-    
-    public function kinerja_siod(){
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar');
-        $this->load->view('amt/v_kinerja_siod');
-        $this->load->view('layouts/footer');
-    }
-    
     public function presensi() {
         $data['lv1'] = 2;
         $data['lv2'] = 3;
@@ -70,14 +54,6 @@ class amt extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function laporan() {
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar');
-        $this->load->view('amt/v_laporan');
-        $this->load->view('layouts/footer');
-    }
-    
     public function grafik(){ 
         $data['lv1'] = 2;
         $data['lv2'] = 2;
@@ -88,17 +64,4 @@ class amt extends CI_Controller {
         $this->load->view('layouts/footer');
     }
     
-    public function login(){
-        $this->load->view('layouts/header');
-        $this->load->view('login/v_login');
-    }
-
-    
-
-        
-    
-    
-    
-    
-
 }

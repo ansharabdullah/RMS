@@ -10,9 +10,11 @@ class laporan extends CI_Controller {
     }
 
     public function index() {
+        $data['lv1'] = 7;
+        $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar');
+        $this->load->view('layouts/navbar',$data);
         $this->load->view('laporan/v_laporan');
         $this->load->view('layouts/footer');
     }

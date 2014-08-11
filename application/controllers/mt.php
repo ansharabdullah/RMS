@@ -8,18 +8,6 @@ class Mt extends CI_Controller {
     public function index() {
     }
 
-    public function kinerja_manual() {
-        $this->header();
-        $this->load->view('mt/v_kinerja_manual');
-        $this->footer();
-    }
-
-    public function kinerja_siod() {
-        $this->header();
-        $this->load->view('mt/v_kinerja_siod');
-        $this->footer();
-    }
-    
     public function data_mt() {
 
         $data['lv1'] = 3;
@@ -72,17 +60,13 @@ class Mt extends CI_Controller {
         $this->footer();
     }
      public function oli_mt() {
-        $this->header();
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
         $this->load->view('mt/v_oli_mt');
         $this->footer();
     }
 
-    public function laporan() {
-        $this->header();
-        $this->load->view('mt/v_laporan');
-        $this->footer();
-    }
-    
     public function pengingat() {
         $data['lv1'] = 3;
         $data['lv2'] = 4;
@@ -93,6 +77,9 @@ class Mt extends CI_Controller {
     
     public function rencana()
     {
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 5;
         $this->header();
         $this->load->view('mt/v_rencana');
         $this->footer();
