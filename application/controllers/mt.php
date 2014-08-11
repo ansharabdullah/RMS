@@ -67,7 +67,7 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function pengingat() {
+    public function reminder() {
         $data['lv1'] = 3;
         $data['lv2'] = 4;
         $this->header($data);
