@@ -35,12 +35,12 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function import_sv() {
+    public function import_csv() {
         
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
-        $this->load->view('mt/v_import_sv');
+        $this->load->view('mt/v_import_csv');
         $this->footer();
     }
 
