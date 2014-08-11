@@ -36,12 +36,13 @@
                         <thead>
                             <tr>
                                 <th style="display:none;"></th>
-                                <th width="30">No</th>
-                                <th width="200">NIP</th>
+                                <th>No</th>
+                                <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Jabatan</th>
-                                <th width="30">Klasifikasi</th>
-                                <th width="30">Status</th>
+                                <th>Klasifikasi</th>
+                                <th>Status</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -106,7 +107,6 @@
                                 <td>Kernet</td>
                                 <td>40</td>
                                 <td><span class="label label-success">Aktif.</span></td>
-
                             </tr>
                         </tbody>
                     </table>
@@ -193,7 +193,7 @@
                                             <label for="ctgllahir" class="control-label col-lg-2">Tanggal Lahir</label>
                                             <div class="col-lg-4">
                                                 <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tgllahir" size="16" type="date" value="" required/>
-                                                <span class="help-block">Select date</span>
+                                                <span class="help-block">Pilih tanggal</span>
                                             </div>
                                         </div>
 
@@ -226,7 +226,7 @@
                                             <label for="ctglmasuk" class="control-label col-lg-2">Tanggal Masuk</label>
                                             <div class="col-lg-4">
                                                 <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tglmasuk" type="date" size="16" type="text" value="" required/>
-                                                <span class="help-block">Select date</span>
+                                                <span class="help-block">Pilih tanggal</span>
                                             </div>
                                         </div>
 

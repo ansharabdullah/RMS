@@ -527,7 +527,7 @@
             </div>
             <div class="modal-body">
 
-                Yakin hapus data?
+                Apakah Anda yakin?
 
             </div>
             <div class="modal-footer">

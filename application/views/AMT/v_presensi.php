@@ -1,12 +1,14 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#filePreview").hide();
-        $("#formSiod").submit(function(e){
-            
-            $("#filePreview").hide();
-            $("#filePreview").slideDown("slow");
-            $("#tgl").html($("#tglForm").val());
-            
+        $("#commentForm").submit(function(e){
+            var isvalidate=$("#commentForm").valid();
+            if(isvalidate)
+            {    
+                $("#filePreview").hide();
+                $("#filePreview").slideDown("slow");
+                $("#tgl").html($("#tglForm").val());
+            }
             e.preventDefault();
         });
     });
@@ -20,11 +22,12 @@
     <section class="wrapper">
         <section class="panel">
             <div class="panel-body" >
-                <form class="form-horizontal" action="#" role="form" id="formSiod">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
                             <input type="date" required="required" id="tglForm" class="form-control"  placeholder="Tanggal">
+                            <span class="help-block">Pilih tanggal</span>
                         </div>
                     </div>
 
@@ -85,7 +88,7 @@
                                     <td><span class="label label-success">Hadir</span></td>
                                     <td></td>
                                     <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-primary btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                                 <tr class="">
@@ -98,7 +101,7 @@
                                     <td><span class="label label-success">Hadir</span></td>
                                     <td></td>
                                     <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-primary btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                                 <tr class="">
@@ -111,7 +114,7 @@
                                     <td><span class="label label-warning">Absen</span></td>
                                     <td>Sakit</td>
                                     <td>Menderita Gangguan Jiwa</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-primary btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                                 <tr class="">
@@ -124,7 +127,7 @@
                                     <td><span class="label label-warning">Absen</span></td>
                                     <td>Sakit</td>
                                     <td>Menderita Kanker</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-primary btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                                 <tr class="">
@@ -137,7 +140,7 @@
                                     <td><span class="label label-warning">Absen</span></td>
                                     <td>Bolos</td>
                                     <td>Tidak ada keterangan</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-primary btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                                 <tr class="">
@@ -151,7 +154,7 @@
                                     <td><span class="label label-success">Hadir</span></td>
                                     <td></td>
                                     <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-primary btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>

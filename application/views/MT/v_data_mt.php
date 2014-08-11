@@ -140,6 +140,7 @@
                 <!-- modal -->
                 <a href="<?php echo base_url() ?>index.php/mt/import_csv" rel="stylesheet" class="btn btn-success"> Import CSV <i class="icon-plus"></i></a>
             </div>
+
             <div class="space15"></div>
             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                 <thead>

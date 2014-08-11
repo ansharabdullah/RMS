@@ -1,4 +1,33 @@
 
+
+<script type="text/javascript">
+         
+    $( document ).ready(function() {
+        $("#filePreview").hide();
+        
+        $("#commentForm").submit(function(e){
+            var isvalidate=$("#commentForm").valid();
+            if(isvalidate)
+            {
+                alert("Berhasil disimpan! ");
+                $("#myModal").modal('toggle');
+            }
+            
+        });
+        
+    });
+    
+    
+    
+        
+    function importTable()
+    {
+        alert("Berhasil disimpan !");
+    }
+    
+</script>
+
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/css/datepicker.css" />
 <section id="main-content">
     <section class="wrapper">
@@ -33,7 +62,7 @@
                                 <td>PT MA'SOEM</td>
                                 <td>8</td>
                                 <td class="center">Bio Solar</td>
-                                <td> <a data-toggle="modal" href="#myModal"><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -42,8 +71,7 @@
                                 <td>PT WANDISIRI</td>
                                 <td>8</td>
                                 <td class="center">Solar</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -52,8 +80,7 @@
                                 <td>PT PUSPITA CIPATA</td>
                                 <td>24</td>
                                 <td class="center">Pertamax</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -62,8 +89,7 @@
                                 <td>PT PATRA NIAGA</td>
                                 <td>16</td>
                                 <td class="center">Premium</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -72,8 +98,7 @@
                                 <td>PT INCOT</td>
                                 <td>32</td>
                                 <td class="center">Premium</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -82,8 +107,7 @@
                                 <td>PT JUJUR PARAMARTA</td>
                                 <td>8</td>
                                 <td class="center">Pertamax Dex</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -92,8 +116,7 @@
                                 <td>PT MA'SOEM</td>
                                 <td>24</td>
                                 <td class="center">Pertamax Plus</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -102,8 +125,7 @@
                                 <td>PT PATRA NIAGA</td>
                                 <td>16</td>
                                 <td class="center">Bio Solar</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -112,8 +134,7 @@
                                 <td>PT TIARA</td>
                                 <td>24</td>
                                 <td class="center">Solar</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -122,8 +143,7 @@
                                 <td>PT PATRA NIAGA</td>
                                 <td>32</td>
                                 <td class="center">Premium</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -132,8 +152,7 @@
                                 <td>PT PUSPITA CIPATA</td>
                                 <td>16</td>
                                 <td class="center">Pertamax</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -142,8 +161,7 @@
                                 <td>PT NAGAMAS JAYA</td>
                                 <td>8</td>
                                 <td class="center">Premium</td>
-                                <td><a data-toggle="modal" href="#myModal"><button type="button" class="btn btn-success btn-sm">Atur Kinerja</button></a></td>
-
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -156,91 +174,88 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title">Atur Kinerja</h4>
                             </div>
-                            <div class="modal-body">
-
-                                <form class="form-horizontal" role="form">
-
+                            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                                <div class="modal-body">
                                     <div class="form-group">
                                         <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                                        <div class="col-lg-10">
-                                            <input class="form-control" type="date" size="16" />
+                                        <div class="col-lg-4">
+                                            <input class="form-control" type="date" size="16" name="tgl" required/>
                                             <span class="help-block">Pilih Tanggal</span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+
                                         <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
-                                        <div class="col-lg-10">
-                                            <input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol">
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="km" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="km" placeholder="Kilometer (km)">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="km" placeholder="Kilometer (km)" name="km" required>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+
                                         <label for="kl" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="kl" placeholder="Kilometer (km)">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="kl" placeholder="Kiloliter (kl)" name="kl" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="rit" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)" name="rit" required>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+
                                         <label for="ou" class="col-lg-2 col-sm-2 control-label">Own Use</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="ou" placeholder="Own Use">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="ou" placeholder="Own Use"  name="ou" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="premium" class="col-lg-2 col-sm-2 control-label">Premium</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="premium" placeholder="Premium">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="premium" placeholder="Premium" name="premium" required>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+
                                         <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="pertamax" placeholder="Kilometer (km)Pertamax">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="pertamax" placeholder="Pertamax"  name="pertamax" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="pertamaxplus" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="pertamaxplus" placeholder="Pertamax Plus">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="pertamaxplus" placeholder="Pertamax Plus"  name="pertamaxplus" required>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+
                                         <label for="pertamaxdex" class="col-lg-2 col-sm-2 control-label">Pertamax Dex</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="pertamaxdex" placeholder="Pertamax Dex">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="pertamaxdex" placeholder="Pertamax Dex" name="pertamaxdex" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="solar" class="col-lg-2 col-sm-2 control-label">Solar</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="solar" placeholder="Solar">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="solar" placeholder="Solar"  name="solar" required>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+
                                         <label for="biosolar" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
-                                        <div class="col-lg-10">
-                                            <input type="number" class="form-control" id="biosolar" placeholder="Bio Solar">
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="biosolar" placeholder="Bio Solar"  name="biosolar" required>
                                         </div>
                                     </div>
 
-                                </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                    <button class="btn btn-success" type="submit">Save changes</button>
+                                </div>
+                            </form>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                <button class="btn btn-success" type="button" onclick="closeModal()">Save changes</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -257,14 +272,9 @@
 <!-- END JAVASCRIPTS -->
 <script>
     jQuery(document).ready(function() {
-        EditableTable.init();
-        
+        EditableTable.init();       
     });
     
-    function closeModal()
-    {
-        alert("Berhasil disimpan! ");
-        $("#myModal").modal('toggle');
-    }
+    
     
 </script>
