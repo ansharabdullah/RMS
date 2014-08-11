@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"  <?php if ($lv1 == 5) echo "class='active'" ?>>
+                <a href="<?php echo base_url() ?>jadwal"  <?php if ($lv1 == 5) echo "class='active'" ?>>
                     <i class="icon-calendar"></i>
                     <span>Penjadwalan</span>
                 </a>
@@ -51,9 +51,9 @@
                     <span>Berita Acara</span>
                 </a>
                 <ul class="sub">
-                    <li <?php if ($lv2 == 1 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/data_mt" >KPI</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/data_mt" >MS2 Compliance</a></li>
-                    <li <?php if ($lv2 == 3 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/data_mt" >Tarif Interpolasi dan FRM</a></li>
+                    <li <?php if ($lv2 == 1 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>" >KPI</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>ba/ms2" >MS2 Compliance</a></li>
+                    <li <?php if ($lv2 == 3 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>ba/frm" >Tarif Interpolasi dan FRM</a></li>
                 </ul>
             </li>
             <li>
@@ -63,7 +63,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"  <?php if ($lv1 == 8) echo "class='active'" ?>>
+                <a href="<?php echo base_url() ?>pengaturan"  <?php if ($lv1 == 8) echo "class='active'" ?>>
                     <i class="icon-group"></i>
                     <span>Pengaturan User</span>
                 </a>
