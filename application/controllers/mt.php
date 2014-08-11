@@ -67,7 +67,15 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function pengingat() {
+    public function presensi() {
+        $data['lv1'] = 3;
+        $data['lv2'] = 3;
+        $this->header($data);
+        $this->load->view('mt/v_presensi');
+        $this->footer();
+    }
+    
+    public function reminder() {
         $data['lv1'] = 3;
         $data['lv2'] = 4;
         $this->header($data);
@@ -80,7 +88,7 @@ class Mt extends CI_Controller {
         
         $data['lv1'] = 3;
         $data['lv2'] = 5;
-        $this->header();
+        $this->header($data);
         $this->load->view('mt/v_rencana');
         $this->footer();
         

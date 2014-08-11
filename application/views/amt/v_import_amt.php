@@ -1,15 +1,19 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#filePreview").hide();
-        $("#formSiod").submit(function(e){
-            var ext = $("#fileName").val().split('.').pop();
-            if(ext=="csv"){
-                $("#filePreview").hide();
-                $("#filePreview").slideDown("slow");
-            }
-            else
+        $("#commentForm").submit(function(e){
+            var isvalidate=$("#commentForm").valid();
+            if(isvalidate)
             {
-                alert("Tipe file yang diupload tidak sesuai (csv)")   
+                var ext = $("#fileName").val().split('.').pop();
+                if(ext=="csv"){
+                    $("#filePreview").hide();
+                    $("#filePreview").slideDown("slow");
+                }
+                else
+                {
+                    alert("Tipe file yang diupload tidak sesuai (csv)")   
+                }                
             }
             e.preventDefault();
         });
@@ -21,6 +25,7 @@
     }
     
 </script>
+
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
@@ -29,8 +34,8 @@
                 Import Data AMT Dari CSV
             </header>
             <div class="panel-body" >
-                <form class="form-horizontal" action="#" role="form" id="formSiod">
-                    
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File CSV</label>
                         <div class="col-lg-10">
@@ -43,11 +48,19 @@
                         </div>
                     </div>
                 </form>
-                <hr/>
-                <div id="filePreview">
-                    <header class="panel-heading">
-                        Data dari CSV
-                    </header>
+
+            </div>
+        </section>
+
+
+        <div id="filePreview">
+            <section class="panel">
+
+
+                <header class="panel-heading">
+                    Data dari CSV
+                </header>
+                <div class="panel-body" >
                     <div class="adv-table editable-table ">
                         <div class="clearfix">
 
@@ -87,8 +100,8 @@
                                     <td>08567543212</td>
                                     <td>Masoem</td>
                                 </tr>
-                                
-                                
+
+
                                 <tr class="">
                                     <th style="display: none;"></th>
                                     <td>2</td>
@@ -104,15 +117,15 @@
                                     <td>08567543212</td>
                                     <td>Masoem</td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
 
                     <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
         <!-- page end-->
     </section>
 </section>
