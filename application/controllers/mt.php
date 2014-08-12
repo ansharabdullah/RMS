@@ -17,12 +17,28 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function grafik(){
+    public function grafik_mt(){
         
         $data['lv1'] = 3;
         $data['lv2'] = 2;
         $this->header($data);
-        $this->load->view('amt/v_grafik');
+        $this->load->view('mt/v_grafik_mt');
+        $this->footer();
+    }
+    public function grafik_bulan_mt(){
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 2;
+        $this->header($data);
+        $this->load->view('mt/v_grafik_bulan_mt');
+        $this->footer();
+    }
+    public function grafik_hari_mt(){
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 2;
+        $this->header($data);
+        $this->load->view('mt/v_grafik_hari_mt');
         $this->footer();
     }
 
@@ -35,8 +51,17 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
+    public function tambah_mt() {
+
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+         $this->header($data);
+        $this->load->view('mt/v_tambah_mt');
+        $this->footer();
+    }
+    
     public function import_csv() {
-        
+
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
@@ -60,13 +85,20 @@ class Mt extends CI_Controller {
         $this->footer();
     }
      public function oli_mt() {
-        $data['lv1'] = 3;
+         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
         $this->load->view('mt/v_oli_mt');
         $this->footer();
     }
-
+    public function surat_mt() {
+         $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
+        $this->load->view('mt/v_surat_mt');
+        $this->footer();
+    }
+   
     public function presensi() {
         $data['lv1'] = 3;
         $data['lv2'] = 3;

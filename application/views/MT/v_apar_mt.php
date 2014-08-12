@@ -8,7 +8,7 @@
 
         <section class="panel">
             <header class="panel-heading">
-                APAR MT   
+               <i class="icon-fire-extinguisher"></i> APAR MT   
             </header>
             <div class="panel-body">
                 <div class="bio-desk">

@@ -23,6 +23,7 @@
     <section class="wrapper">
         <section class="panel">
             <div class="panel-body">
+                <a href="<?php echo base_url() ?>index.php/mt/surat_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-envelope"></i> Surat</a>
                 <a href="<?php echo base_url() ?>index.php/mt/apar_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
                 <a href="<?php echo base_url() ?>index.php/mt/ban_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
                 <a href="<?php echo base_url() ?>index.php/mt/oli_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-beer"></i> Oli</a>
@@ -38,7 +39,7 @@
                     </div>
                     <div class="modal-body">
 
-                        Apakah anda yakin akan menghapus Data Mobil Tangki?
+                        Apakah anda yakin ?
 
                     </div>
                     <div class="modal-footer">
@@ -55,17 +56,16 @@
         <section class="panel">
             <div class="panel-body bio-graph-info" id="ShowProfile">
                 <header class="panel-heading">
-                   <div class="col-lg-10">Detail MT
-                       </div>
-                    <a class="btn btn-warning" onclick="ShowEdit()" "><i class="icon-pencil"></i> Edit</a>
-                   
+                    <div class="col-lg-10">Detail MT
+                    </div>
+                    <a class="btn btn-warning" onclick="ShowEdit()" ><i class="icon-pencil"></i> Edit</a>
+
                     <a class="btn btn-danger" data-toggle="modal" href="#myModal2" > <i class="icon-remove"></i> Hapus </a>
-                    
+
                 </header>
                 <div class="panel-body">
                     <div class="row">
                         <div class="panel-body">
-
                             <aside class="profile-nav col-lg-12">
                                 <div class="row">
                                     <div class="bio-row">
@@ -93,19 +93,7 @@
                                         <p><span>Jenis Tangki</span>: Steel</p>
                                     </div>
                                     <div class="bio-row">
-                                        <p><span>Tera </span>: 23-08-2014</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>STNK Per Tahun </span>: 23-08-2014</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>STNK 5 Tahun </span>: 23-08-2019</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>KIR LLD </span>: 23-08-2014</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>KIR Pertamina</span>: 23-08-2014</p>
+                                        <p><span>Kompartemen</span>: </p>
                                     </div>
                                     <div class="bio-row">
                                         <p><span>Status</span>: Pinjam</p>
@@ -114,9 +102,107 @@
                                         <p><span>GPS </span>: OK</p>
                                     </div>
                                     <div class="bio-row">
+                                        <p><span>Sensor Overfill </span>: OK</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Volume 1 </span>: OK</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Standar Volume </span>: OK</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Kategori </span>: 1</p>
+                                    </div>
+                                    <div class="bio-row">
                                         <p><span>Rasio </span>: 12</p>
                                     </div>
-
+                                    <div class="bio-row">
+                                        <p><span>Jumlah Segel </span>: 8</p>
+                                    </div>
+                                </div>
+                                </aside>
+                            </div>
+                        <div class="panel-body">
+                            <aside class="profile-nav col-lg-12">
+                                <header class="panel-heading">
+                                  Ruang Kosong Tangki (t1)
+                                    
+                                </header>&nbsp
+                                <div class="row">
+                                    <div class="bio-row">
+                                        <p><span>Komp 1</span>: 12</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 2</span>: 13</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 3</span>: 14</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 4</span>: 15</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 5</span>: 16</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 6</span>: 17</p>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                        <div class="panel-body">
+                            <aside class="profile-nav col-lg-12">
+                                <header class="panel-heading">
+                                 Ruang Kosong Tangki (t2)
+                                    
+                                </header>&nbsp
+                                <div class="row">
+                                    <div class="bio-row">
+                                        <p><span>Komp 1</span>: 19</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 2</span>: 20</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 3</span>: 21</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 4</span>: 22</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 5</span>: 23</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 6</span>: 24</p>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                        <div class="panel-body">
+                            <aside class="profile-nav col-lg-12">
+                                <header class="panel-heading">
+                                 Kepekaan
+                                    
+                                </header>&nbsp
+                                <div class="row">
+                                    <div class="bio-row">
+                                        <p><span>Komp 1</span>: 25</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 2</span>: 26</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 3</span>: 27</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 4</span>: 28</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 5</span>: 29</p>
+                                    </div>
+                                    <div class="bio-row">
+                                        <p><span>Komp 6</span>: 30</p>
+                                    </div>
                                 </div>
                             </aside>
                         </div>
@@ -126,7 +212,7 @@
             <div class="panel-body bio-graph-info" id="ShowEdit">
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <header class="panel-heading">
-                        Edit MT  
+                        Tambah MT  
                     </header>
                     <div class="panel-body">
                         <div class="row">
@@ -200,53 +286,213 @@
                                 </div>
                             </div>
                             <div class="bio-row">
+                                <label for="kompartemen" class="control-label col-lg-4">Kompartemen</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="kompartemen" name="kompartemen" type="text" size="16" type="text" required/>
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="kompartemen" class="control-label col-lg-4">Model Kendaraan</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="mk" name="mk" type="text" size="16" type="text" required/>
+                                </div>
+                            </div>
+
+                            <div class="bio-row">
                                 <label for="ctelp" class="control-label col-lg-4">Tera</label>
                                 <div class="col-lg-6">
                                     <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="date" required />
                                 </div>
                             </div>
+                            
                             <div class="bio-row">
-                                <label for="cktp" class="control-label col-lg-4">STNK Per Tahun</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cktp" name="sv" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
-                                <label for="csim" class="control-label col-lg-4">STNK 5 Tahun</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="csim" name="so" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
-                                <label for="ctempatlahir" class="control-label col-lg-4">KIR Pertamina</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ckir" name="kir" minlength="2" type="date" required />
-                                </div>
-                            </div>
-
-                            <div class="bio-row">
-                                <label for="ctempatlahir" class="control-label col-lg-4">KIR LLD</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="clld" name="lld" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
-                                <label for="ctransportir" class="control-label col-lg-4">Status</label>
+                                <label for="status" class="control-label col-lg-4">Status</label>
                                 <div class="col-lg-6">
                                     <input class=" form-control input-sm m-bot15" id="cstatus" name="status" minlength="2" type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
-                                <label for="ctglmasuk" class="control-label col-lg-4">GPS</label>
+                                <label for="gps" class="control-label col-lg-4">GPS</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="gps" type="text" type="text" required/>
+                                    <select class="form-control input-sm m-bot15" id="gps" name="gps">
+                                        <option>OK</option>
+                                        <option>NO</option>
+                                    </select></div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="gps" class="control-label col-lg-4">Sensor Overfill</label>
+                                <div class="col-lg-6">
+                                    <select class="form-control input-sm m-bot15" id="sensor" name="sensor">
+                                        <option>OK</option>
+                                        <option>NO</option>
+                                    </select></div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="gps" class="control-label col-lg-4">Standar Volume</label>
+                                <div class="col-lg-6">
+                                    <select class="form-control input-sm m-bot15" id="sensor" name="sensor">
+                                        <option>OK</option>
+                                        <option>NO</option>
+                                    </select></div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="gps" class="control-label col-lg-4">Volume 1</label>
+                                <div class="col-lg-6">
+                                    <select class="form-control input-sm m-bot15" id="sensor" name="sensor">
+                                        <option>OK</option>
+                                        <option>NO</option>
+                                    </select></div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="gps" class="control-label col-lg-4">Jumlah Segel</label>
+                                <div class="col-lg-6">
+                                    <select class="form-control input-sm m-bot15" id="segel" name="segel">
+                                        <option>4</option>
+                                        <option>6</option>                                        
+                                        <option>8</option>
+                                        <option>10</option>
+                                        <option>12</option> 
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <header class="panel-heading">
+                        Ruang Kosong Tangki (t1)  
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp1</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="komp1" name="komp1" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp2</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="komp2" name="komp2" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp3</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="komp3" name="komp3" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp4</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="komp4" name="komp4" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp5</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="komp5" name="komp5" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp6</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="komp6" name="komp6" minlength="2" type="number" required />
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <input type="reset" class="btn btn-default" onclick="ShowProfile()"value="Batal" />
-                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                    </div>
+                    <header class="panel-heading">
+                        Ruang Kosong Tangki (t2)  
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 1</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="k1" name="k1" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 2</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="k2" name="k2" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 3</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="k3" name="k3" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 4</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="k4" name="k4" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 5</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="k5" name="k5" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 6</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="k6" name="k6" minlength="2" type="number" required />
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <header class="panel-heading">
+                        Kepekaan  
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 1</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ke1" name="ke1" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 2</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ke2" name="ke2" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 3</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ke3" name="ke3" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 4</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ke4" name="ke4" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 5</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ke5" name="ke5" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                            <div class="bio-row">
+                                <label for="nip" class="control-label col-lg-4">Komp 6</label>
+                                <div class="col-lg-6">
+                                    <input class=" form-control input-sm m-bot15" id="ke6" name="ke6" minlength="2" type="number" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-default" onclick="ShowProfile()"value="Batal" />
+                        <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>
 
@@ -521,7 +767,7 @@
                         </div>
                         <div class="modal-body">
 
-                            Apakah anda yakin akan menghapus Data kinerja Mobil Tangki?
+                            Apakah anda yakin ?
 
                         </div>
                         <div class="modal-footer">
@@ -531,97 +777,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal -->
-            <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Atur Kinerja</h4>
-                        </div>
-                        <div class="modal-body">
-
-                            <form class="form-horizontal" role="form">
-
-                                <div class="form-group">
-                                    <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control" type="date" size="16" />
-                                        <span class="help-block">Pilih Tanggal</span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="km" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="km" placeholder="Kilometer (km)">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="kl" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="kl" placeholder="Kilometer (km)">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="rit" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ou" class="col-lg-2 col-sm-2 control-label">Own Use</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="ou" placeholder="Own Use">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="premium" class="col-lg-2 col-sm-2 control-label">Premium</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="premium" placeholder="Premium">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="pertamax" placeholder="Pertamax">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pertamaxplus" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="pertamaxplus" placeholder="Pertamax Plus">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pertamaxdex" class="col-lg-2 col-sm-2 control-label">Pertamax Dex</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="pertamaxdex" placeholder="Pertamax Dex">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="solar" class="col-lg-2 col-sm-2 control-label">Solar</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="solar" placeholder="Solar">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="biosolar" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="biosolar" placeholder="Bio Solar">
-                                    </div>
-                                </div>
-
-                            </form>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                            <button class="btn btn-success" type="button" onclick="closeModal()">Simpan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- modal -->
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -633,82 +788,157 @@
                         <div class="modal-body">
 
                             <form class="form-horizontal" role="form">
-
-                                <div class="form-group">
-                                    <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control" type="date" size="16" />
+                                <div class="form-group ">
+                                    <label for="nip" class="control-label col-lg-2">Tanggal</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal" minlength="2" type="date" required />
                                         <span class="help-block">Pilih Tanggal</span>
                                     </div>
+                                    <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="km" name="km" minlength="2" type="number" required />
+                                    </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <label for="km" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="km" placeholder="Kilometer (km)">
+                                <div class="form-group ">
+                                    <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="kl" minlength="2" type="number" required />
+                                    </div>
+                                    <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="rit" name="rit" minlength="2" type="number" required />
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="kl" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="kl" placeholder="Kilometer (km)">
+                                <div class="form-group ">
+                                    <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="ou" minlength="2" type="number" required />
+                                    </div>
+                                    <label for="p" class="control-label col-lg-2">Premium (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="p" name="p" minlength="2" type="number" required />
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="rit" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)">
+                                <div class="form-group ">
+                                    <label for="per" class="control-label col-lg-2">Pertamax (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="per" name="per" minlength="2" type="number" required />
+                                    </div>
+                                    <label for="pp" class="control-label col-lg-2">Pertamax Plus (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="pp" name="pp" minlength="2" type="number" required />
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="ou" class="col-lg-2 col-sm-2 control-label">Own Use</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="ou" placeholder="Own Use">
+                                <div class="form-group ">
+                                    <label for="perdex" class="control-label col-lg-2">Pertamax Dex (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="perdex" name="perdex" minlength="2" type="number" required />
+                                    </div>
+                                    <label for="solar" class="control-label col-lg-2">Solar (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="solar" name="solar" minlength="2" type="number" required />
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="premium" class="col-lg-2 col-sm-2 control-label">Premium</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="premium" placeholder="Premium">
+                                <div class="form-group ">
+                                    <label for="bio" class="control-label col-lg-2">Bio Solar (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="bio" name="bio" minlength="2" type="number" required />
                                     </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="pertamax" placeholder="Pertamax">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pertamaxplus" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="pertamaxplus" placeholder="Pertamax Plus">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pertamaxdex" class="col-lg-2 col-sm-2 control-label">Pertamax Dex</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="pertamaxdex" placeholder="Pertamax Dex">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="solar" class="col-lg-2 col-sm-2 control-label">Solar</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="solar" placeholder="Solar">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="biosolar" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
-                                    <div class="col-lg-10">
-                                        <input type="number" class="form-control" id="biosolar" placeholder="Bio Solar">
-                                    </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                    <input class="btn btn-success" type="submit" value="Simpan"/>
                                 </div>
 
                             </form>
 
                         </div>
-                        <div class="modal-footer">
-                            <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                            <button class="btn btn-success" type="button" onclick="closeModal()">Simpan</button>
+
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+            <!-- Modal -->
+            <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Atur Kinerja</h4>
                         </div>
+                        <div class="modal-body">
+
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group ">
+                                    <label for="nip" class="control-label col-lg-2">Tanggal</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal" minlength="2" type="date" required />
+                                        <span class="help-block">Pilih Tanggal</span>
+                                    </div>
+                                    <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="km" name="km" minlength="2" type="number" required />
+                                    </div>
+
+                                </div>
+                                <div class="form-group ">
+                                    <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="kl" minlength="2" type="number" required />
+                                    </div>
+                                    <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="rit" name="rit" minlength="2" type="number" required />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="ou" minlength="2" type="number" required />
+                                    </div>
+                                    <label for="p" class="control-label col-lg-2">Premium (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="p" name="p" minlength="2" type="number" required />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="per" class="control-label col-lg-2">Pertamax (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="per" name="per" minlength="2" type="number" required />
+                                    </div>
+                                    <label for="pp" class="control-label col-lg-2">Pertamax Plus (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="pp" name="pp" minlength="2" type="number" required />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="perdex" class="control-label col-lg-2">Pertamax Dex (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="perdex" name="perdex" minlength="2" type="number" required />
+                                    </div>
+                                    <label for="solar" class="control-label col-lg-2">Solar (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="solar" name="solar" minlength="2" type="number" required />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="bio" class="control-label col-lg-2">Bio Solar (kl)</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="bio" name="bio" minlength="2" type="number" required />
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                                </div>
+
+                            </form>
+
+                        </div>
+
                     </div>
                 </div>
             </div>

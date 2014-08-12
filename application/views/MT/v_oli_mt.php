@@ -8,7 +8,7 @@
         
         <section class="panel">
             <header class="panel-heading">
-                <h3>Oli MT   </h3>
+                <i class="icon-beer"></i> Oli MT
             </header>
             <div class="panel-body">
                 <div class="bio-desk">
@@ -27,7 +27,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Form Oli Ban</h4>
+                                <h4 class="modal-title">Form Oli</h4>
                             </div>
                             <div class="modal-body">
                                 <!-- form tambah-->

@@ -41,8 +41,11 @@
                                 <th>Nama</th>
                                 <th>Jabatan</th>
                                 <th>Klasifikasi</th>
+                                <th>Tanggal Masuk</th>
+                                <th>Transportir Asal</th>
+                                <th>Alamat</th>
+                                <th>No Telp</th>
                                 <th>Status</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +57,10 @@
                                 <td>Firman</td>
                                 <td>Supir</td>
                                 <td>8</td>
+                                <td>20 Mei 2010</td>
+                                <td>PT. Patra Niaga</td>
+                                <td>Jl. Cilawu, Garut</td>
+                                <td>085222198675</td>
                                 <td><span class="label label-success">Aktif.</span></td>
                             </tr>
 
@@ -64,6 +71,10 @@
                                 <td>Fiqri</td>
                                 <td>Supir</td>
                                 <td>16</td>
+                                <td>12 Agustus 2012</td>
+                                <td>PT. Incot</td>
+                                <td>Jl. Saturnus Selatan Bandung</td>
+                                <td>0852220183675</td>
                                 <td><span class="label label-success">Aktif.</span></td>
                             </tr>
 
@@ -74,6 +85,10 @@
                                 <td>Firdaus</td>
                                 <td>Kernet</td>
                                 <td>24</td>
+                                <td>13 Januari 2011</td>
+                                <td>PT. Ma'soem</td>
+                                <td>Jl. Gegerkalong Girang, Bandung</td>
+                                <td>085773029675</td>
                                 <td><span class="label label-default">Tidak Aktif</span></td>
                             </tr>
 
@@ -84,6 +99,10 @@
                                 <td>Anshar</td>
                                 <td>Supir</td>
                                 <td>8</td>
+                                <td>10 Oktober 2010</td>
+                                <td>PT. Patra Niaga</td>
+                                <td>Jl. Buah Batu, Bandung</td>
+                                <td>085728339125</td>
                                 <td><span class="label label-warning">Peringatan</span></td>
                             </tr>
 
@@ -94,6 +113,10 @@
                                 <td>Abdullah</td>
                                 <td>Kernet</td>
                                 <td>24</td>
+                                <td>14 Februari 2010</td>
+                                <td>PT. Incot</td>
+                                <td>Jl. Soekarno Hatta, Garut</td>
+                                <td>085977543175</td>
                                 <td><span class="label label-warning">Peringatan</span></td>
                             </tr>
 
@@ -106,6 +129,10 @@
                                 <td>Chepy</td>
                                 <td>Kernet</td>
                                 <td>40</td>
+                                <td>30 September 2013</td>
+                                <td>PT. Ma'soem</td>
+                                <td>Jl. Mekarwangi, Bandung</td>
+                                <td>085200986675</td>
                                 <td><span class="label label-success">Aktif.</span></td>
                             </tr>
                         </tbody>
