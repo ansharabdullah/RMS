@@ -45,16 +45,11 @@
                     <span>Penjadwalan</span>
                 </a>
             </li>
-            <li class="sub-menu">
-                <a href="javascript:;"  <?php if ($lv1 == 6) echo "class='active'" ?>>
+            <li>
+                <a href="<?php echo base_url() ?>ba/berita_acara"  <?php if ($lv1 == 6) echo "class='active'" ?>>
                     <i class="icon-check"></i>
                     <span>Berita Acara</span>
                 </a>
-                <ul class="sub">
-                    <li <?php if ($lv2 == 1 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>" >KPI</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>ba/ms2" >MS2 Compliance</a></li>
-                    <li <?php if ($lv2 == 3 && $lv1 == 6) echo "class='active'" ?>><a  href="<?php echo base_url() ?>ba/frm" >Tarif Interpolasi dan FRM</a></li>
-                </ul>
             </li>
             <li>
                 <a href="<?php echo base_url() ?>laporan"  <?php if ($lv1 == 7) echo "class='active'" ?>>
