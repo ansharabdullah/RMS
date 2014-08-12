@@ -7,7 +7,7 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                <h3>Ban MT</h3>   
+                <i class="icon-circle"></i> Ban MT
             </header>
             <div class="panel-body">
                 <div class="bio-desk">

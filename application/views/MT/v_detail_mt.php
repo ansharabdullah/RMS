@@ -23,6 +23,7 @@
     <section class="wrapper">
         <section class="panel">
             <div class="panel-body">
+                <a href="<?php echo base_url() ?>index.php/mt/surat_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-envelope"></i> Surat</a>
                 <a href="<?php echo base_url() ?>index.php/mt/apar_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
                 <a href="<?php echo base_url() ?>index.php/mt/ban_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
                 <a href="<?php echo base_url() ?>index.php/mt/oli_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-beer"></i> Oli</a>
@@ -93,21 +94,6 @@
                                     </div>
                                     <div class="bio-row">
                                         <p><span>Kompartemen</span>: </p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Tera </span>: 23-08-2014</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>STNK Per Tahun </span>: 23-08-2014</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>STNK 5 Tahun </span>: 23-08-2019</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>KIR LLD </span>: 23-08-2014</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>KIR Pertamina</span>: 23-08-2014</p>
                                     </div>
                                     <div class="bio-row">
                                         <p><span>Status</span>: Pinjam</p>
@@ -318,31 +304,7 @@
                                     <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="date" required />
                                 </div>
                             </div>
-                            <div class="bio-row">
-                                <label for="cktp" class="control-label col-lg-4">STNK Per Tahun</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cktp" name="sv" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
-                                <label for="csim" class="control-label col-lg-4">STNK 5 Tahun</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="csim" name="so" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
-                                <label for="ctempatlahir" class="control-label col-lg-4">KIR Pertamina</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ckir" name="kir" minlength="2" type="date" required />
-                                </div>
-                            </div>
-
-                            <div class="bio-row">
-                                <label for="kirlld" class="control-label col-lg-4">KIR LLD</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="clld" name="lld" minlength="2" type="date" required />
-                                </div>
-                            </div>
+                            
                             <div class="bio-row">
                                 <label for="status" class="control-label col-lg-4">Status</label>
                                 <div class="col-lg-6">

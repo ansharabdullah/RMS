@@ -91,6 +91,13 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_oli_mt');
         $this->footer();
     }
+    public function surat_mt() {
+         $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
+        $this->load->view('mt/v_surat_mt');
+        $this->footer();
+    }
    
     public function presensi() {
         $data['lv1'] = 3;

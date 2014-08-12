@@ -89,37 +89,6 @@
                             </div>
 
                             <div class="bio-row">
-                                <label for="ctelp" class="control-label col-lg-4">Tera</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
-                                <label for="cktp" class="control-label col-lg-4">STNK Per Tahun</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cktp" name="sv" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
-                                <label for="csim" class="control-label col-lg-4">STNK 5 Tahun</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="csim" name="so" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
-                                <label for="ctempatlahir" class="control-label col-lg-4">KIR Pertamina</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ckir" name="kir" minlength="2" type="date" required />
-                                </div>
-                            </div>
-
-                            <div class="bio-row">
-                                <label for="kirlld" class="control-label col-lg-4">KIR LLD</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="clld" name="lld" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            <div class="bio-row">
                                 <label for="status" class="control-label col-lg-4">Status</label>
                                 <div class="col-lg-6">
                                     <input class=" form-control input-sm m-bot15" id="cstatus" name="status" minlength="2" type="text" required />
