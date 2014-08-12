@@ -17,12 +17,28 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function grafik(){
+    public function grafik_mt(){
         
         $data['lv1'] = 3;
         $data['lv2'] = 2;
         $this->header($data);
-        $this->load->view('amt/v_grafik');
+        $this->load->view('mt/v_grafik_mt');
+        $this->footer();
+    }
+    public function grafik_bulan_mt(){
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 2;
+        $this->header($data);
+        $this->load->view('mt/v_grafik_bulan_mt');
+        $this->footer();
+    }
+    public function grafik_hari_mt(){
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 2;
+        $this->header($data);
+        $this->load->view('mt/v_grafik_hari_mt');
         $this->footer();
     }
 
