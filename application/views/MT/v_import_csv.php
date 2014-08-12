@@ -1,19 +1,19 @@
-
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#filePreview").hide();
-        $("#formSiod").submit(function(e){
-            var ext = $("#fileName").val().split('.').pop();
-
-            if(ext=="csv"){
-
-                $("#filePreview").hide();
-                $("#filePreview").show("slow");
-                $("#tgl").html($("#tglForm").val());
-            }
-            else
+        $("#commentForm").submit(function(e){
+            var isvalidate=$("#commentForm").valid();
+            if(isvalidate)
             {
-                alert("Tipe file yang diupload tidak sesuai (file excel)")   
+                var ext = $("#fileName").val().split('.').pop();
+                if(ext=="csv"){
+                    $("#filePreview").hide();
+                    $("#filePreview").slideDown("slow");
+                }
+                else
+                {
+                    alert("Tipe file yang diupload tidak sesuai (csv)")   
+                }                
             }
             e.preventDefault();
         });
@@ -24,17 +24,25 @@
         alert("Berhasil disimpan !");
     }
     
+    function downloadCsv()
+    {
+        alert("Csv berhasil di download");
+    }
+    
 </script>
+
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Import dari CSV
-
+                Import Data MT Dari CSV
+                <button type="button" style="float: right;" class="btn btn-success" onclick="downloadCsv()">Download Format CSV <i class="icon-download-alt"></i></button>
+                <br/> <br/>
             </header>
             <div class="panel-body" >
-                <form class="form-horizontal" action="#" role="form" id="formSiod">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File CSV</label>
                         <div class="col-lg-10">
@@ -47,7 +55,7 @@
                         </div>
                     </div>
                 </form>
-                <hr/>
+
                 <div id="filePreview">
                     <header class="panel-heading">
                     </header>
@@ -69,7 +77,7 @@
                                     <th>Jenis Kendaraan</th>
                                     <th>Nomor Rangka</th>
                                     <th>Nomor Mesin</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,9 +92,9 @@
                                     <td>Hino SG260J 32.0</td>
                                     <td>192417</td>
                                     <td>1294147</td>
-                                    
-                                    
-                                    
+
+
+
                                 </tr>
                                 <tr class="">
                                     <th style="display: none;"></th>
@@ -129,7 +137,7 @@
                                     <th style="display: none;"></th>
                                     <td>5</td>
                                     <td>D 3038 AD</td>
-                                   <td>PT Patra</td>
+                                    <td>PT Patra</td>
                                     <td>16</td>
                                     <td>Premium</td>
                                     <td>1</td>
@@ -141,7 +149,7 @@
                                     <th style="display: none;"></th>
                                     <td>6</td>
                                     <td>D 8557 AD</td>
-                                   <td>PT Tiara</td>
+                                    <td>PT Tiara</td>
                                     <td>24</td>
                                     <td>Solar</td>
                                     <td>1</td>
@@ -189,7 +197,7 @@
                                     <th style="display: none;"></th>
                                     <td>10</td>
                                     <td>D 8827 AF</td>
-                                  <td>PT Masoem</td>
+                                    <td>PT Masoem</td>
                                     <td>8</td>
                                     <td>Bio Solar</td>
                                     <td>1</td>
@@ -197,13 +205,13 @@
                                     <td>POI192417</td>
                                     <td>LKI1294147</td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
                     <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan </button> 
-                <a href="<?php echo base_url() ?>index.php/mt/data_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
-                    
+                    <a href="<?php echo base_url() ?>index.php/mt/data_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
+
                 </div>
             </div>
         </section>
