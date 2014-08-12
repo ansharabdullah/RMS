@@ -24,6 +24,11 @@
         alert("Berhasil disimpan !");
     }
     
+    function downloadCsv()
+    {
+       alert("Csv berhasil di download");
+    }
+    
 </script>
 
 <section id="main-content">
@@ -32,6 +37,8 @@
         <section class="panel">
             <header class="panel-heading">
                 Import Data AMT Dari CSV
+                <button type="button" style="float: right;" class="btn btn-success" onclick="downloadCsv()">Download Format CSV <i class="icon-download-alt"></i></button>
+                <br/> <br/>
             </header>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">

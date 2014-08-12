@@ -64,4 +64,25 @@ class amt extends CI_Controller {
         $this->load->view('layouts/footer');
     }
     
+    public function grafik_bulan(){ 
+        $data['lv1'] = 2;
+        $data['lv2'] = 2;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar',$data);
+        $this->load->view('amt/v_grafik_bulan');
+        $this->load->view('layouts/footer');
+    }
+    
+    public function grafik_hari(){ 
+        $data['lv1'] = 2;
+        $data['lv2'] = 2;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar',$data);
+        $this->load->view('amt/v_grafik_hari');
+        $this->load->view('layouts/footer');
+    }
+    
+    
 }
