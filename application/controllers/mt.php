@@ -35,11 +35,17 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
+    public function tambah_mt() {
+
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+         $this->header($data);
+        $this->load->view('mt/v_tambah_mt');
+        $this->footer();
+    }
+    
     public function import_csv() {
 
-        $this->header();
-
-        
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
