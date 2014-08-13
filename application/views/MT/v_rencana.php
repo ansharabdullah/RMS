@@ -1,20 +1,145 @@
-
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $("#tabelJadwal").hide();
+        $("#tambahJadwal").hide();
+        $("#filePreview").hide();
+        $("#formUpload").submit(function(e){
+            var ext = $("#fileName").val().split('.').pop();
+            if(ext=="xls" || ext=="xlsx"){
+                $("#filePreview").hide();
+                $("#filePreview").slideDown("slow");
+            }
+            else
+            {
+                alert("Tipe file yang diupload tidak sesuai (file excel)")   
+            }
+            e.preventDefault();
+        });
+    });
+    
+    
+    function showJadwal()
+    {
+        $("#tglJadwal").html($("#tanggalJadwal").val());
+        $("#tabelJadwal").hide();
+        $("#tabelJadwal").slideDown("slow");
+        
+    }
+    
+    function showTambahJadwal()
+    {
+        $("#tambahJadwal").hide();
+        $("#tambahJadwal").slideDown("slow");
+    }
+    
+    function importExcel()
+    {
+        alert("Excel Berhasil di import !");
+    }
+    
+    function downloadCsv()
+    {
+        alert("Csv berhasil di download");
+    }
+    
+</script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/css/datepicker.css" />
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
         <section class="panel">
+
             <header class="panel-heading">
                 Input Perencanaan Mobil Tangki
+                <a style="float:right;" data-placement="left" class="btn btn-success tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                <br/> <br/>
+                <a class="btn btn-success" onclick="showTambahJadwal()">
+                    Import Excel <i class="icon-plus"></i>
+                </a>
             </header>
+            <div class="panel-body" >
+                <div class="clearfix" id="tambahJadwal">
+
+                    <form class="cmxform form-horizontal tasi-form" id="formUpload">
+                        <div class="form-group">
+                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                            <div class="col-lg-10">
+                                <input type="date" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">File Jadwal</label>
+                            <div class="col-lg-10">
+                                <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD" name="fileSIOD">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <input type="submit" style="float: right;" class="btn btn-danger" value="Upload">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="adv-table editable-table " id="filePreview">
+                    <div class="clearfix">
+                    </div>
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample2">
+                        <thead>
+                            <tr>
+                                <th style="display: none;"></th>
+                                <th>No.</th>
+                                <th>Tanggal</th>
+                                <th style="white-space: nowrap">Own Use</th>
+                                <th>Premium</th>
+                                <th>Pertamax</th>
+                                <th style="white-space: nowrap">Pertamax Plus</th>
+                                <th style="white-space: nowrap">Pertamax Dex</th>
+                                <th>Solar</th>
+                                <th style="white-space: nowrap">Bio Solar</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            for ($i = 0; $i < 12; $i++) {
+//                                $date = date_create("2014-08-" . ($i + 1));
+//                                $newDate = date_format($date, "d F Y");
+//                                setlocale(LC_ALL, 'IND');
+//                                $tgl = strftime("%d %B %Y", strtotime($newDate));
+                                $tgl = ($i + 1) . " <span class='bulan'>Agustus</span> 2014";
+                                ?>
+                                <tr class="">
+                                    <th style="display: none;"></th>
+                                    <td><?php echo $i + 1; ?></td>
+                                    <td style="white-space: nowrap"><?php echo $tgl; ?></td>
+                                    <td><?php echo rand(7, 10) ?> kl</td>
+                                    <td><?php echo rand(2000, 3000) ?> kl</td>
+                                    <td><?php echo rand(2000, 3000) ?> kl</td>
+                                    <td><?php echo rand(2000, 3000) ?> kl</td>
+                                    <td><?php echo rand(2000, 3000) ?> kl</td>
+                                    <td><?php echo rand(2000, 3000) ?> kl</td>
+                                    <td><?php echo rand(2000, 3000) ?> kl</td>
+                                   
+                                </tr>
+                                <?php
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                    <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
+                </div>
+            </div>
+        </section>
+        <section class="panel">
             <div class="panel-body">
+
                 <div class="clearfix">
 
                     <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                         Tambah Perencanaan <i class="icon-plus"></i>
                     </a>
-                    <a class="btn btn-success"> Import Excel <i class="icon-plus"></i></a>
-            
 
                     <div class="btn-group pull-right">
                         <button class="btn dropdown-toggle" data-toggle="dropdown">Bulan <i class="icon-angle-down"></i>
@@ -50,7 +175,7 @@
                                 <th style="white-space: nowrap">Pertamax Dex</th>
                                 <th>Solar</th>
                                 <th style="white-space: nowrap">Bio Solar</th>
-                                <th>Aksi</th> 
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,8 +198,7 @@
                                     <td><?php echo rand(2000, 3000) ?> kl</td>
                                     <td><?php echo rand(2000, 3000) ?> kl</td>
                                     <td><?php echo rand(2000, 3000) ?> kl</td>
-                                    <td>
-                                        <div  style="width: 50px;"> <a data-toggle="modal" href="#myModal3"><button type="button" class="btn btn-warning btn-sm  btn-xs tooltips" data-original-title="Edit Perencanaan" data-placement="left" style="float:left"><i class="icon-pencil"></i></button> </a>
+                                    <td><div  style="width: 50px;"> <a data-toggle="modal" href="#myModal3"><button type="button" class="btn btn-warning btn-sm  btn-xs tooltips" data-original-title="Edit Perencanaan" data-placement="left" style="float:left"><i class="icon-pencil"></i></button> </a>
                                             <a data-toggle="modal" href="#myModal2"><button type="button" class="btn btn-danger btn-sm  btn-xs tooltips" data-original-title="Hapus Perencanaan" data-placement="left" style="float:right"><i class="icon-remove"></i></button></a></div>
                                     </td>
                                 </tr>
