@@ -36,25 +36,25 @@
                                     <div class="form-group">
                                         <label for="inputJK" class="col-lg-2 col-sm-2 control-label">Store Pressure</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="sp" name="sp" minlength="2" type="date" required />
+                                            <input class=" form-control input-sm m-bot15" id="sp" name="sp"  type="date" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Catridge</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="cat" name="cat" minlength="2" type="date" required />
+                                            <input class=" form-control input-sm m-bot15" id="cat" name="cat"  type="date" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">C02</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="co" name="co" minlength="2" type="date" required />
+                                            <input class=" form-control input-sm m-bot15" id="co" name="co"  type="date" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="norangka" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
+                                        <label for="norangka" class="col-lg-2 col-sm-2 control-label">Status</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan" minlength="2" type="date" required />
+                                            <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan"  type="text" required />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -78,7 +78,7 @@
                             <th>Store Pressure</th>
                             <th>Catridge</th>
                             <th>C02</th>
-                            <th>Keterangan</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -89,7 +89,7 @@
                             <td>23/02/2014</td>
                             <td>23/08/2014</td>
                             <td>23/02/2014</td>
-                            <td></td>
+                            <td><span class="label label-success">Aktif.</span></td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
@@ -99,7 +99,7 @@
                             <td>22/02/2013</td>
                             <td>22/02/2013</td>
                             <td>22/02/2013</td>
-                            <td></td>
+                           <td><span class="label label-default">Tidak Aktif</span></td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
@@ -109,7 +109,7 @@
                             <td>21/02/2012</td>
                             <td>21/02/2012</td>
                             <td>21/02/2012</td>
-                            <td></td>
+                            <td><span class="label label-default">Tidak Aktif</span></td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
@@ -119,7 +119,7 @@
                             <td>20/02/2011</td>
                             <td>20/02/2011</td>
                             <td>20/02/2011</td>
-                            <td></td>
+                            <td><span class="label label-default">Tidak Aktif</span></td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
@@ -129,7 +129,7 @@
                             <td>19/02/2010</td>
                             <td>19/02/2010</td>
                             <td>19/02/2010</td>
-                            <td></td>
+                           <td><span class="label label-default">Tidak Aktif</span></td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
@@ -139,7 +139,7 @@
                             <td>23/02/2009</td>
                             <td>23/02/2009</td>
                             <td>23/02/2009</td>
-                            <td></td>
+                            <td><span class="label label-default">Tidak Aktif</span></td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
@@ -160,25 +160,25 @@
                                 <div class="form-group">
                                     <label for="inputJK" class="col-lg-2 col-sm-2 control-label">Store Pressure</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="sp" name="sp" minlength="2" type="date" required />
+                                        <input class=" form-control input-sm m-bot15" id="sp" name="sp"  type="date" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Catridge</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="cat" name="cat" minlength="2" type="date" required />
+                                        <input class=" form-control input-sm m-bot15" id="cat" name="cat"  type="date" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="norangka" class="col-lg-2 col-sm-2 control-label">C02</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="co" name="co" minlength="2" type="date" required />
+                                        <input class=" form-control input-sm m-bot15" id="co" name="co"  type="date" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="norangka" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan" minlength="2" type="date" required />
+                                        <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan"  type="date" required />
                                     </div>
                                 </div>
                                 <div class="modal-footer">

@@ -5,7 +5,7 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        
+
         <section class="panel">
             <header class="panel-heading">
                 <i class="icon-beer"></i> Oli MT
@@ -35,25 +35,25 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="kmawal" name="kmawal" minlength="2" type="text" required />
+                                            <input class=" form-control input-sm m-bot15" id="kmawal" name="kmawal"  type="text" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="kmakhir" class="col-lg-2 col-sm-2 control-label">KM Akhir</label>
+                                        <label for="kmakhir" class="col-lg-2 col-sm-2 control-label">Tanggal Ganti Oli</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="kmakhir" name="kmakhir" minlength="2" type="text" required />
+                                            <input class=" form-control input-sm m-bot15" id="kmakhir" name="kmakhir"  type="date" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume" minlength="2" type="text" required />
+                                            <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume"  type="text" required />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="Keterangan" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
+                                        <label for="Keterangan" class="col-lg-2 col-sm-2 control-label">Merk Oli</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan" minlength="2" type="text" required />
+                                            <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan"  type="text" required />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -75,9 +75,9 @@
                             <th style="display:none;"></th>
                             <th>No.</th>
                             <th>KM Awal (KM)</th>
-                            <th>KM Akhir (KM)</th>
-                            <th>Total Volume</th>
-                            <th>Keterangan</th>
+                            <th>Tanggal Ganti Oli</th>
+                            <th>Merk Oli</th>
+                            <th>Total Volume (Liter)</th>
                             <th>Aksi</th>
 
                         </tr>
@@ -86,66 +86,66 @@
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>1</td>
-                            <td>1200</td>
-                            <td>1700</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
+                            <td>12200</td>
+                            <td>23-08-2014</td>
+                            <td>Federal</td>
+                            <td>3</td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>2</td>
-                            <td>1700</td>
-                            <td>2200</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
+                            <td>10200</td>
+                            <td>23-08-2013</td>
+                            <td>Federal</td>
+                            <td>3</td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>3</td>
-                            <td>2200</td>
-                            <td>2700</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
+                           <td>9200</td>
+                            <td>23-08-2012</td>
+                            <td>Federal</td>
+                            <td>3</td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>4</td>
-                            <td>2700</td>
-                            <td>3200</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
+                            <td>7200</td>
+                            <td>13-08-2012</td>
+                            <td>Federal</td>
+                            <td>3</td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>5</td>
-                            <td>3200</td>
-                            <td>3700</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
+                            <td>6200</td>
+                            <td>12-08-2011</td>
+                            <td>Federal</td>
+                            <td>3</td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>6</td>
-                            <td>3700</td>
-                            <td>4200</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
+                           <td>5200</td>
+                            <td>13-08-2010</td>
+                            <td>Federal</td>
+                            <td>3</td>
                             <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
-               </div>
+            </div>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -161,25 +161,25 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="kmawal" name="kmawal" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="kmawal" name="kmawal"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="kmakhir" class="col-lg-2 col-sm-2 control-label">KM Akhir</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="kmakhir" name="kmakhir" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="kmakhir" name="kmakhir"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Keterangan" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="modal-footer">

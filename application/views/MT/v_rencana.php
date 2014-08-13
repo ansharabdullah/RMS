@@ -13,6 +13,8 @@
                     <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                         Tambah Perencanaan <i class="icon-plus"></i>
                     </a>
+                    <a class="btn btn-success"> Import Excel <i class="icon-plus"></i></a>
+            
 
                     <div class="btn-group pull-right">
                         <button class="btn dropdown-toggle" data-toggle="dropdown">Bulan <i class="icon-angle-down"></i>
@@ -72,8 +74,8 @@
                                     <td><?php echo rand(2000, 3000) ?> kl</td>
                                     <td><?php echo rand(2000, 3000) ?> kl</td>
                                     <td>
-                                        <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal3"><button type="button" class="btn btn-warning btn-sm tooltips" data-original-title="Edit Perencanaan" data-placement="left" style="float:left"><i class="icon-pencil"></i></button> </a>
-                                            <a data-toggle="modal" href="#myModal2"><button type="button" class="btn btn-danger btn-sm tooltips" data-original-title="Hapus Perencanaan" data-placement="left" style="float:right"><i class="icon-remove"></i></button></a></div>
+                                        <div  style="width: 50px;"> <a data-toggle="modal" href="#myModal3"><button type="button" class="btn btn-warning btn-sm  btn-xs tooltips" data-original-title="Edit Perencanaan" data-placement="left" style="float:left"><i class="icon-pencil"></i></button> </a>
+                                            <a data-toggle="modal" href="#myModal2"><button type="button" class="btn btn-danger btn-sm  btn-xs tooltips" data-original-title="Hapus Perencanaan" data-placement="left" style="float:right"><i class="icon-remove"></i></button></a></div>
                                     </td>
                                 </tr>
                                 <?php
