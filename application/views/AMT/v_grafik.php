@@ -37,7 +37,7 @@
                 series: {
                     events: {
                         click: function(event) {
-                            window.location = "<?php echo base_url()?>amt/grafik_bulan";
+                            window.location = "<?php echo base_url() ?>amt/grafik_bulan";
                         }
                     }
                 }
@@ -69,13 +69,21 @@
 
 <section id="main-content">
     <section class="wrapper">
+
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <div class="panel-body">
                         <div id="grafik"></div>
-                        <div class="adv-table editable-table " style="margin-top: 50px;">
+                    </div>
+                </section>
+                <section class="panel">
+                    <div class="panel-body">
+                        <header class="panel-heading">
+                            Tabel Kinerja Awak Mobil Tangki Tahun 2014
+                        </header>
+                        <div class="adv-table editable-table " >
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>

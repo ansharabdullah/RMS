@@ -53,7 +53,7 @@
                     <div class="adv-table editable-table " style="overflow-y: scroll">
 
                         <div class="space15"></div>
-                        <table class="table table-striped table-hover" id="editable-sample">
+                        <table class="table table-bordered table-hover" id="editable-sample">
                             <thead>
                                 <tr>
                                     <th style="display:none;"></th>

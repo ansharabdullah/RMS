@@ -10,7 +10,7 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Bulan Januari 2014 (Premium)',
+                text: 'Bulan Januari 2014 (Kiloliter)',
                 x: -20
             },
             xAxis: {
@@ -36,13 +36,13 @@
                 series: {
                     events: {
                         click: function(event) {
-                            window.location = "<?php echo base_url()?>mt/grafik_hari_mt";
+                            window.location = "<?php echo base_url() ?>mt/grafik_hari_mt";
                         }
                     }
                 }
             },
             series: [{
-                    name: 'Premium',
+                    name: 'Kiloliter',
                     data: [7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6,7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6,7.0, 6.9, 7.5, 4.5, 6.2, 8.5]
                 }]
         });
@@ -58,14 +58,22 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <div class="panel-body">
-                        <div id="grafik"></div>
-                        <div class="adv-table editable-table " style="margin-top: 50px;">
+                        <div id="grafik"></div> 
+                    </div>
+                </section>
+                <section class="panel">
+                    <div class="panel-body">
+                        <header class="panel-heading">
+                            Tabel Kinerja Mobil Tangki Bulan Januari 2014
+                        </header>
+                        <div class="adv-table editable-table ">
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
                                         <th style="display:none;"></th>
+                                        <th>No </th>
                                         <th>Tanggal</th>
-                                        <th>Premium</th>
+                                        <th>Kiloliter</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,6 +83,7 @@
                                         ?>
                                         <tr class="">
                                             <td style="display:none;"></td>
+                                            <td><?php echo ($i + 1) ?></td>
                                             <td><?php echo ($i + 1) ?></td>
                                             <td><?php echo $premium[$i] ?></td>
                                         </tr>
