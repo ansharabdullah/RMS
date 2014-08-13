@@ -5,7 +5,7 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        
+
         <section class="panel">
             <header class="panel-heading">
                 <i class="icon-envelope"></i> Surat MT
@@ -80,10 +80,11 @@
                         <tr>
                             <th style="display:none;"></th>
                             <th>No.</th>
-                            <th>KM Awal (KM)</th>
-                            <th>KM Akhir (KM)</th>
-                            <th>Total Volume</th>
-                            <th>kirlld</th>
+                            <th>Tera</th>
+                            <th>STNK Per Tahun</th>
+                            <th>STNK 5 Tahun</th>
+                            <th>KIR LLD</th>
+                            <th>KIR Pertamina</th>
                             <th>Aksi</th>
 
                         </tr>
@@ -92,66 +93,71 @@
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>1</td>
-                            <td>1200</td>
-                            <td>1700</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>23-08-2014</td>
+                            <td>23-08-2014</td>
+                            <td>23-08-2014</td>
+                            <td>23-08-2014</td>
+                            <td>23-08-2014</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>2</td>
-                            <td>1700</td>
-                            <td>2200</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>23-01-2014</td>
+                            <td>23-01-2014</td>
+                            <td>23-08-2014</td>
+                            <td>23-01-2014</td>
+                            <td>23-01-2014</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>3</td>
-                            <td>2200</td>
-                            <td>2700</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>23-08-2013</td>
+                            <td>23-01-2013</td>
+                            <td>23-08-2014</td>
+                            <td>23-01-2013</td>
+                            <td>23-01-2013</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>4</td>
-                            <td>2700</td>
-                            <td>3200</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>23-01-2012</td>
+                            <td>23-01-2012</td>
+                            <td>23-08-2014</td>
+                            <td>23-01-2012</td>
+                            <td>23-01-2012</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>5</td>
-                            <td>3200</td>
-                            <td>3700</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>23-01-2011</td>
+                            <td>23-01-2011</td>
+                            <td>23-08-2014</td>
+                            <td>23-01-2011</td>
+                            <td>23-01-2011</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>6</td>
-                            <td>3700</td>
-                            <td>4200</td>
-                            <td>500</td>
-                            <td>Ganti Oli</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>23-01-2010</td>
+                            <td>23-01-2010</td>
+                            <td>23-08-2019</td>
+                            <td>23-01-2010</td>
+                            <td>23-01-2010</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
-                <a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
             </div>
             </div>
             <!-- Modal -->
@@ -160,33 +166,39 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Form Oli Ban</h4>
+                            <h4 class="modal-title">Form Edit Surat</h4>
                         </div>
                         <div class="modal-body">
                             <!-- form tambah-->
                             <form class="form-horizontal" role="form">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label col-lg-2" for="tera">KM Awal</label>
+                                    <label class="col-sm-2 control-label col-lg-2" for="tera">Tera</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="tera" name="tera" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="tera" name="tera" minlength="2" type="date" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="stnk" class="col-lg-2 col-sm-2 control-label">KM Akhir</label>
+                                    <label for="stnk" class="col-lg-2 col-sm-2 control-label">STNK Per Tahun</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="stnk" name="stnk" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="stnk" name="stnk" minlength="2" type="date" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
+                                    <label for="stnk5" class="col-lg-2 col-sm-2 control-label">STNK 5 Tahun</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="stnk5" name="stnk5" minlength="2" type="date" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="kirlld" class="col-lg-2 col-sm-2 control-label">kirlld</label>
+                                    <label for="kirlld" class="col-lg-2 col-sm-2 control-label">KIR LLD</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="kirlld" name="kirlld" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="kirlld" name="kirlld" minlength="2" type="date" required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kirp" class="col-lg-2 col-sm-2 control-label">KIR Pertamina</label>
+                                    <div class="col-lg-10">
+                                        <input class=" form-control input-sm m-bot15" id="kirp" name="kirp" minlength="2" type="date" required />
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -205,7 +217,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
+<h4 class="modal-title">Form Hapus Surat</h4>
                         </div>
                         <div class="modal-body">
 

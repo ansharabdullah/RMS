@@ -210,8 +210,7 @@
                         </table>
                     </div>
                     <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan </button> 
-                    <a href="<?php echo base_url() ?>index.php/mt/data_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
-
+                    
                 </div>
             </div>
         </section>
