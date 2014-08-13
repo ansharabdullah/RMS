@@ -9,11 +9,11 @@
                 Data MT   
             </header>
             <div class="panel-body">
-                <a href="<?php echo base_url() ?>index.php/mt/tambah_mt" rel="stylesheet" class="btn btn-info">
+                <a href="<?php echo base_url() ?>mt/tambah_mt" rel="stylesheet" class="btn btn-info">
                     Tambah MT <i class="icon-plus"></i>
                 </a>
 
-                <a href="<?php echo base_url() ?>index.php/mt/import_csv" rel="stylesheet" class="btn btn-success"> Import CSV <i class="icon-plus"></i></a>
+                <a href="<?php echo base_url() ?>mt/import_csv" rel="stylesheet" class="btn btn-success"> Import Excel <i class="icon-plus"></i></a>
             </div>
 
             <div class="space15"></div>
@@ -35,7 +35,7 @@
                     <tr class="">
                         <th style="display:none;"></th>
                         <td>1</td>
-                        <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left"> D9808AD</a></td>
+                        <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left"> D9808AD</a></td>
                         <td>PT Masoem</td>
                         <td>16</td>
                         <td class="center">Pertamax</td>
@@ -45,7 +45,7 @@
                     <tr class="">
                         <th style="display:none;"></th>
                         <td>2</td>
-                        <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9870AD</a></td>
+                        <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9870AD</a></td>
                         <td>PT Masoem</td>
                         <td>8</td>
                         <td class="center">Premium</td>
@@ -55,7 +55,7 @@
                     <tr class="">
                         <th style="display:none;"></th>
                         <td>3</td>
-                        <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9880AF</a></td>
+                        <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9880AF</a></td>
                         <td>PT Masoem</td>
                         <td>8</td>
                         <td class="center">Solar</td>
@@ -66,7 +66,7 @@
                     <tr class="">
                         <th style="display:none;"></th>
                         <td>4</td>
-                        <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9800AD</td>
+                        <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9800AD</td>
                         <td>PT Incot</td>
                         <td>8</td>
                         <td class="center">Premium</td>
@@ -77,7 +77,7 @@
                     <tr class="">
                         <th style="display:none;"></th>
                         <td>5</td>
-                        <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9000AU</td>
+                        <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9000AU</td>
                         <td>PT Patra</td>
                         <td>8</td>
                         <td class="center">Premium</td>
@@ -88,7 +88,7 @@
                     <tr class="">
                         <th style="display:none;"></th>
                         <td>6</td>
-                        <td><a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9800AF</td>
+                        <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9800AF</td>
                         <td>PT Patra</td>
                         <td>8</td>
                         <td class="center">Bio Solar</td>

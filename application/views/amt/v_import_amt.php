@@ -6,7 +6,7 @@
             if(isvalidate)
             {
                 var ext = $("#fileName").val().split('.').pop();
-                if(ext=="csv"){
+                if(ext=="xls" || ext=="xlsx"){
                     $("#filePreview").hide();
                     $("#filePreview").slideDown("slow");
                 }
@@ -26,7 +26,7 @@
     
     function downloadCsv()
     {
-       alert("Csv berhasil di download");
+        alert("Excel berhasil di download");
     }
     
 </script>
@@ -37,15 +37,14 @@
         <section class="panel">
             <header class="panel-heading">
                 Import Data AMT Dari CSV
-                <button type="button" style="float: right;" class="btn btn-success" onclick="downloadCsv()">Download Format CSV <i class="icon-download-alt"></i></button>
-                <br/> <br/>
+                <button type="button" style="float: right;" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" data-placement="left" onclick="downloadCsv()"><i class="icon-download-alt"></i></button>
             </header>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
 
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File CSV</label>
-                        <div class="col-lg-10">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File Excel</label>
+                        <div class="col-lg-10">CSV
                             <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD">
                         </div>
                     </div>
@@ -62,17 +61,11 @@
 
         <div id="filePreview">
             <section class="panel">
-
-
                 <header class="panel-heading">
                     Data dari CSV
                 </header>
-                <div class="panel-body" >
-                    <div class="adv-table editable-table ">
-                        <div class="clearfix">
-
-                        </div>
-                        <div class="space15"></div>
+                <div class="panel-body">
+                    <div class="adv-table editable-table "  style="overflow: scroll;">
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
                                 <tr>

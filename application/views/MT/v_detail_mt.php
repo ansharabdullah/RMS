@@ -18,15 +18,96 @@
         $("#btnEdit").addClass("active");
     }
 </script>
+<script type="text/javascript">
+    $(function () {
+        $('#grafik').highcharts({
+            title: {
+                text: 'Grafik Kinerja Awak Mobil Tangki Juli',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'PT. Pertamina Patra Niaga',
+                x: -20
+            },
+            xAxis: {
+                title: {
+                    text: 'Tanggal'
+                },
+                categories: ['1', '2', '3', '4', '5', '6',
+                    '7', '8', '9', '10', '11', '12',
+                    '13', '14', '15', '16', '17', '18', '19', '20',
+                    '21', '22', '23', '24', '25', '26', '27', '28',
+                    '29', '30', '31', '16']
+            },
+            yAxis: {
+                title: {
+                    text: 'Kinerja'
+                },
+                plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            legend: {
+                borderWidth: 1
+            },
+            series: [{
+                    type: 'spline',
+                    name: 'KM',
+                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 13.5, 10.2, 6.5, 5.3, 8.3, 13.9, 9.6,5,7,3,4,2,1,3,4,6,7,8,9,2,3,5,6,8,6,5]
+                }, {
+                    type: 'spline',
+                    name: 'KL',
+                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5,3,4,5,6,7,5,2,5,8,9,6,5,4,5,5,6,7,9,13]
+                }, {
+                    type: 'spline',
+                    name: 'Rit',
+                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,3,5,6,8,3,1,8,5,3,4,8,7,3,4,2,1,9,4,5]
+                }, {
+                    type: 'spline',
+                    name: 'Own Use',
+                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5,3,4,5,6,7,5,2,5,8,9,6,5,4,5,5,6,7,9,13]
+                }, {
+                    type: 'spline',
+                    name: 'Premium',
+                    data: [-0.11, 0.9, 3.9, 9.4, 12.5, 15.0, 13.6, 15.9, 11.3, 10.0, 2.4, 3.0,7,8,9,11,7,3,6,5,3,9,2,7,3,4,1,5,6,2,3]
+                }, {
+                    type: 'spline',
+                    name: 'Pertamax',
+                    data: [0.2, 0.1, 3.7, 6.3, 15.0, 5.0, 21.8, 20.1, 25.1, 12.1, 9.6, 2.9,3,5,5,8,8,8,8,9,8,12,13,14,12,16,17,10,7,9,10]
+                }, {
+                    type: 'spline',
+                    name: 'pertamax Plus',
+                    data: [0.9, 0.2, 3.7, 11.9, 10.0, 19.0, 20.8, 21.1, 10.1, 4.1, 8.2, 3.5,1,4,4,5,7,6,8,4,3,9,6.1,5.1,4.1,5.1,5.1,6,5,9,13]
+                }, {
+                    type: 'spline',
+                    name: 'Pertamax Dex',
+                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,3,5,6,8,3,1,8,5,3,4,8,7,3,4,2,1,9,4,5]
+                }, {
+                    type: 'spline',
+                    name: 'Solar',
+                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5,3,4,5,6,7,5,2,5,8,9,6,5,4,5,5,6,7,9,13]
+                }, {
+                    type: 'spline',
+                    name: 'Bio Solar',
+                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,3,5,6,8,3,1,8,5,3,4,8,7,3,4,2,1,9,4,5]
+                }]
+        });
+    });
+</script>
 
 <section id="main-content">
     <section class="wrapper">
         <section class="panel">
             <div class="panel-body">
-                <a href="<?php echo base_url() ?>index.php/mt/surat_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-envelope"></i> Surat</a>
-                <a href="<?php echo base_url() ?>index.php/mt/apar_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
-                <a href="<?php echo base_url() ?>index.php/mt/ban_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
-                <a href="<?php echo base_url() ?>index.php/mt/oli_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-beer"></i> Oli</a>
+                <a href="<?php echo base_url() ?>mt/surat_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-envelope"></i> Surat</a>
+                <a href="<?php echo base_url() ?>mt/apar_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
+                <a href="<?php echo base_url() ?>mt/ban_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
+                <a href="<?php echo base_url() ?>mt/oli_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-beer"></i> Oli</a>
 
             </div>
         </section>
@@ -35,7 +116,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
+                        <h4 class="modal-title">Form Hapus Mobil Tangki</h4>
                     </div>
                     <div class="modal-body">
 
@@ -44,7 +125,7 @@
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                        <button class="btn btn-warning" type="button"> Yes</button>
+                        <button class="btn btn-danger" type="button"> Yes</button>
                     </div>
                 </div>
             </div>
@@ -120,13 +201,13 @@
                                         <p><span>Jumlah Segel </span>: 8</p>
                                     </div>
                                 </div>
-                                </aside>
-                            </div>
+                            </aside>
+                        </div>
                         <div class="panel-body">
                             <aside class="profile-nav col-lg-12">
                                 <header class="panel-heading">
-                                  Ruang Kosong Tangki (t1)
-                                    
+                                    Ruang Kosong Tangki (t1)
+
                                 </header>&nbsp
                                 <div class="row">
                                     <div class="bio-row">
@@ -153,8 +234,8 @@
                         <div class="panel-body">
                             <aside class="profile-nav col-lg-12">
                                 <header class="panel-heading">
-                                 Ruang Kosong Tangki (t2)
-                                    
+                                    Ruang Kosong Tangki (t2)
+
                                 </header>&nbsp
                                 <div class="row">
                                     <div class="bio-row">
@@ -181,8 +262,8 @@
                         <div class="panel-body">
                             <aside class="profile-nav col-lg-12">
                                 <header class="panel-heading">
-                                 Kepekaan
-                                    
+                                    Kepekaan
+
                                 </header>&nbsp
                                 <div class="row">
                                     <div class="bio-row">
@@ -212,20 +293,20 @@
             <div class="panel-body bio-graph-info" id="ShowEdit">
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <header class="panel-heading">
-                        Tambah MT  
+                        Edit MT  
                     </header>
                     <div class="panel-body">
                         <div class="row">
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Nopol</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cnip" name="nopol" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cnip" name="nopol"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">No Rangka</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cama" name="norangka" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cama" name="norangka"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -243,7 +324,7 @@
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">No Mesin</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cmesin" name="nomesin" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cmesin" name="nomesin"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -260,13 +341,13 @@
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cjk" name="jk" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cjk" name="jk"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="calamat" class="control-label col-lg-4">Transportir</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="calamat" name="transportir" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="calamat" name="transportir"  type="text" required />
                                 </div>
                             </div> 
                             <div class="bio-row">
@@ -299,16 +380,9 @@
                             </div>
 
                             <div class="bio-row">
-                                <label for="ctelp" class="control-label col-lg-4">Tera</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="date" required />
-                                </div>
-                            </div>
-                            
-                            <div class="bio-row">
                                 <label for="status" class="control-label col-lg-4">Status</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cstatus" name="status" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cstatus" name="status"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -368,37 +442,37 @@
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp1</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp1" name="komp1" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp1" name="komp1"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp2</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp2" name="komp2" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp2" name="komp2"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp3</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp3" name="komp3" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp3" name="komp3"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp4</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp4" name="komp4" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp4" name="komp4"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp5</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp5" name="komp5" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp5" name="komp5"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp6</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp6" name="komp6" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp6" name="komp6"  type="number"  />
                                 </div>
                             </div>
                         </div>
@@ -411,37 +485,37 @@
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 1</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k1" name="k1" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k1" name="k1"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 2</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k2" name="k2" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k2" name="k2"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 3</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k3" name="k3" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k3" name="k3"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 4</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k4" name="k4" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k4" name="k4"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 5</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k5" name="k5" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k5" name="k5"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 6</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k6" name="k6" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k6" name="k6"  type="number"  />
                                 </div>
                             </div>
                         </div>
@@ -454,37 +528,37 @@
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 1</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke1" name="ke1" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke1" name="ke1"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 2</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke2" name="ke2" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke2" name="ke2"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 3</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke3" name="ke3" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke3" name="ke3"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 4</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke4" name="ke4" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke4" name="ke4"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 5</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke5" name="ke5" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke5" name="ke5"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 6</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke6" name="ke6" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke6" name="ke6"  type="number"  />
                                 </div>
                             </div>
                         </div>
@@ -497,75 +571,15 @@
                 </form>
 
         </section>
+
         <section class="panel">
-            <div class="row">
+            <div class="panel-body">
                 <div class="col-lg-12">
-                    <div class="panel">
-                        <div class="panel-body">
-
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#grafik').highcharts({
-                                        title: {
-                                            text: 'Grafik Kinerja MT',
-                                            x: 20 //center
-                                        },
-                                        subtitle: {
-                                            text: 'Tahun 2014',
-                                            x: 20
-                                        },
-                                        xAxis: {
-                                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                                        },
-                                        yAxis: {
-                                            title: {
-                                                text: 'Persentase Kinerja'
-                                            },
-                                            plotLines: [{
-                                                    value: 0,
-                                                    width: 1,
-                                                    color: '#808080'
-                                                }]
-                                        },
-                                        tooltip: {
-                                            valueSuffix: ''
-                                        },
-                                        legend: {
-                                            layout: 'vertical',
-                                            align: 'right',
-                                            verticalAlign: 'middle',
-                                            borderWidth: 0
-                                        },
-                                        series: [{
-                                                name: 'KiloMeter',
-                                                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                                            }, {
-                                                name: 'KiloLiter',
-                                                data: [2, 8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                                            }, {
-                                                name: 'Ritase',
-                                                data: [9, 6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                                            }, {
-                                                name: 'Own Use',
-                                                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                                            }]
-                                    });
-                                });
-                            </script>
-
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div id="grafik"></div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
+                    <div id="grafik"></div>
                 </div>
+            </div>
         </section>
+
         <section class="panel">
             <header class="panel-heading">
                 Tabel Kinerja MT  
@@ -611,8 +625,8 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
 
                         </tr>
                         <tr class="">
@@ -630,8 +644,8 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
 
                         </tr>
                         <tr class="">
@@ -648,8 +662,8 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display: none;"></th>
@@ -665,8 +679,8 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display: none;"></th>
@@ -682,8 +696,8 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display: none;"></th>
@@ -699,8 +713,8 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display: none;"></th>
@@ -716,8 +730,8 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display: none;"></th>
@@ -733,8 +747,8 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display: none;"></th>
@@ -750,13 +764,12 @@
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
                             <td><?php echo rand(30, 70) ?></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
 
                     </tbody>
                 </table>
-                <a href="<?php echo base_url() ?>index.php/mt/data_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
             </div>
             <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -791,59 +804,59 @@
                                 <div class="form-group ">
                                     <label for="nip" class="control-label col-lg-2">Tanggal</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal" minlength="2" type="date" required />
+                                        <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal"  type="date" required />
                                         <span class="help-block">Pilih Tanggal</span>
                                     </div>
                                     <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="km" name="km" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
                                     </div>
 
                                 </div>
                                 <div class="form-group ">
                                     <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="kl" name="kl" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="kl"  type="number" required />
                                     </div>
                                     <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="rit" name="rit" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="rit" name="rit"  type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="kl" name="ou" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="ou"  type="number" required />
                                     </div>
                                     <label for="p" class="control-label col-lg-2">Premium (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="p" name="p" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="p" name="p"  type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="per" class="control-label col-lg-2">Pertamax (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="per" name="per" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="per" name="per"  type="number" required />
                                     </div>
                                     <label for="pp" class="control-label col-lg-2">Pertamax Plus (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="pp" name="pp" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="pp" name="pp"  type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="perdex" class="control-label col-lg-2">Pertamax Dex (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="perdex" name="perdex" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="perdex" name="perdex"  type="number" required />
                                     </div>
                                     <label for="solar" class="control-label col-lg-2">Solar (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="solar" name="solar" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="solar" name="solar"  type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="bio" class="control-label col-lg-2">Bio Solar (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="bio" name="bio" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="bio" name="bio"  type="number" required />
                                     </div>
 
                                 </div>
@@ -874,59 +887,59 @@
                                 <div class="form-group ">
                                     <label for="nip" class="control-label col-lg-2">Tanggal</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal" minlength="2" type="date" required />
+                                        <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal"  type="date" required />
                                         <span class="help-block">Pilih Tanggal</span>
                                     </div>
                                     <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="km" name="km" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
                                     </div>
 
                                 </div>
                                 <div class="form-group ">
                                     <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="kl" name="kl" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="kl"  type="number" required />
                                     </div>
                                     <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="rit" name="rit" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="rit" name="rit"  type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="kl" name="ou" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="ou"  type="number" required />
                                     </div>
                                     <label for="p" class="control-label col-lg-2">Premium (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="p" name="p" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="p" name="p"  type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="per" class="control-label col-lg-2">Pertamax (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="per" name="per" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="per" name="per"  type="number" required />
                                     </div>
                                     <label for="pp" class="control-label col-lg-2">Pertamax Plus (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="pp" name="pp" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="pp" name="pp"  type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="perdex" class="control-label col-lg-2">Pertamax Dex (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="perdex" name="perdex" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="perdex" name="perdex"  type="number" required />
                                     </div>
                                     <label for="solar" class="control-label col-lg-2">Solar (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="solar" name="solar" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="solar" name="solar"  type="number" required />
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="bio" class="control-label col-lg-2">Bio Solar (kl)</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="bio" name="bio" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="bio" name="bio"  type="number" required />
                                     </div>
 
                                 </div>

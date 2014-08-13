@@ -57,15 +57,19 @@
                 borderWidth: 1
             },
             series: [{
+                    type: 'spline',
                     name: 'KM',
                     data: [7.0, 6.9, 9.5, 14.5, 18.2, 13.5, 10.2, 6.5, 5.3, 8.3, 13.9, 9.6,5,7,3,4,2,1,3,4,6,7,8,9,2,3,5,6,8,6,5]
                 }, {
+                    type: 'spline',
                     name: 'KL',
                     data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5,3,4,5,6,7,5,2,5,8,9,6,5,4,5,5,6,7,9,13]
                 }, {
+                    type: 'spline',
                     name: 'Rit',
                     data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,3,5,6,8,3,1,8,5,3,4,8,7,3,4,2,1,9,4,5]
                 }, {
+                    type: 'spline',
                     name: 'SPBU',
                     data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8,12,14,15,16,13,14,15,11,6,7,9,8,5,4,2,4,7,15,17]
                 }]
@@ -243,7 +247,7 @@
                                     <label for="ctgllahir" class="control-label col-lg-4">Tanggal Lahir</label>
                                     <div class="col-lg-6">
                                         <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tgllahir" size="16" type="date" value="" required/>
-                                        <span class="help-block">Select date</span>
+                                        <span class="help-block">Pilih tanggal</span>
                                     </div>
                                 </div>
 
@@ -257,7 +261,7 @@
                                     <label for="ctglmasuk" class="control-label col-lg-4">Tanggal Masuk</label>
                                     <div class="col-lg-6">
                                         <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tglmasuk" type="date" size="16" type="text" value="" required/>
-                                        <span class="help-block">Select date</span>
+                                        <span class="help-block">Pilih tanggal</span>
                                     </div>
                                 </div>
 
@@ -269,7 +273,7 @@
                                 </div>
 
                                 <div class="bio-row">
-                                    <label class="control-label col-md-4">Image Upload</label>
+                                    <label class="control-label col-md-4">Unggah Foto</label>
                                     <div class="col-md-6">
                                         <div class="fileupload fileupload-new" data-provides="fileupload">
 
@@ -360,6 +364,7 @@
                                 <th>Rit</th>
                                 <th>SPBU</th>
                                 <th>Kehadiran</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -367,68 +372,80 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>1</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">07/08/2014</a></td>
+                                <td>07/08/2014</td>
                                 <td>30</td>
                                 <td>10</td>
                                 <td>8</td>
                                 <td>24</td>
                                 <td><span class="label label-success">Hadir</span></td>
+                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                               
                             </tr>
 
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>2</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">08/08/2014</a></td>
+                                <td>08/08/2014</td>
                                 <td>20</td>
                                 <td>10</td>
                                 <td>3</td>
                                 <td>4</td>
                                 <td><span class="label label-success">Hadir</span></td>
+                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                               
                             </tr>
 
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>3</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">09/08/2014</a></td>
+                                <td>09/08/2014</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td><span class="label label-warning">Absen</span></td>
+                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                               
                             </tr>
 
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>4</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">10/08/2014</a></td>
+                                <td>10/08/2014</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td><span class="label label-warning">Absen</span></td>
+                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                               
                             </tr>
 
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>5</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">11/08/2014</a></td>
+                                <td>11/08/2014</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
                                 <td><span class="label label-warning">Absen</span></td>
+                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                               
                             </tr>
 
                             <tr class="">
 
                                 <td style="display:none;"></td>
                                 <td>6</td>
-                                <td><a data-toggle="modal" href="#ModalTambahKinerja" style ="text-decoration: underline">12/08/2014</a></td>                                
+                                <td>12/08/2014</td>                                
                                 <td>55</td>
                                 <td>32</td>
                                 <td>2</td>
                                 <td>1</td>
                                 <td><span class="label label-success">Hadir</span></td>
+                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                               
 
                             </tr>
                         </tbody>
@@ -497,7 +514,7 @@
                                 <div class="form-group ">
                                     <label for="calasan" class="control-label col-lg-4">Alasan</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="calasan" name="alasan" minlength="2" type="text" required />
+                                        <textarea class=" form-control input-sm m-bot15" id="calasan" name="alasan" minlength="2" type="text" required ></textarea>
                                     </div>
 
 

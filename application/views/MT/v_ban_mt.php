@@ -90,6 +90,16 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Cadangan Ban</label>
+                                        <div class="col-lg-10">
+                                            <select class="form-control m-bot15">
+                                                <option>1</option>
+                                                <option>2</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
                                         <input class="btn btn-success" type="submit" value="Simpan"/>
@@ -114,6 +124,7 @@
                             <th>Merk Ban</th>
                             <th>No Seri</th>
                             <th>Jenis Ban</th>
+                            <th>Cadangan Ban</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -124,11 +135,12 @@
                             <td>1</td>
                             <td>23/02/2009</td>
                             <td>24/02/2014</td>
-                            <td>Aspal</td>
+                            <td>Continental</td>
                             <td>129344KM</td>
                             <td>Original</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>1</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -136,11 +148,12 @@
                             <td>2</td>
                             <td>23/02/2009</td>
                             <td>25/02/2013</td>
-                            <td>Aspal</td>
+                            <td>Continental</td>
                             <td>129124KM</td>
                             <td>Vulkanisir</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>1</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -148,11 +161,12 @@
                             <td>3</td>
                             <td>23/02/2009</td>
                             <td>28/02/2013</td>
-                            <td>Aspal</td>
+                            <td>Continental</td>
                             <td>129124KM</td>
                             <td>Original</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>1</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -160,11 +174,12 @@
                             <td>4</td>
                             <td>23/02/2009</td>
                             <td>27/05/2015</td>
-                            <td>Aspal</td>
+                            <td>Bridgestone</td>
                             <td>129124KM</td>
                             <td>Original</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>2</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -172,11 +187,12 @@
                             <td>5</td>
                             <td>23/02/2009</td>
                             <td>26/07/2014</td>
-                            <td>Aspal</td>
+                            <td>Bridgestone</td>
                             <td>129124KM</td>
                             <td>Original</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>2</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -184,15 +200,15 @@
                             <td>6</td>
                             <td>23/02/2009</td>
                             <td>25/05/2014</td>
-                            <td>Aspal</td>
+                            <td>Continental</td>
                             <td>129124KM</td>
                             <td>Original</td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td>1</td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
-                <a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
             </div>
             </div>
             <!-- Modal -->
@@ -201,7 +217,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Form Tambah Ban</h4>
+                            <h4 class="modal-title">Form Edit Ban</h4>
                         </div>
                         <div class="modal-body">
                             <!-- form tambah-->
@@ -280,7 +296,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
+                            <h4 class="modal-title">Hapus Ban</h4>
                         </div>
                         <div class="modal-body">
 

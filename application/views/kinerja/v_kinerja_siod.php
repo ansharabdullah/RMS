@@ -33,6 +33,11 @@
     {
         alert("Berhasil disimpan !");
     }
+       
+    function downloadCsv()
+    {
+        alert("Excel berhasil di download");
+    }
     
 </script>
 <section id="main-content">
@@ -41,7 +46,10 @@
         <section class="panel">
             <header class="panel-heading">
                 Input Kinerja dari SIOD
-                <a style="float:right;" data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
+                <div style="float:right;">
+                    <a  data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
+                    <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                </div>
             </header>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" id="signupForm" onsubmit="testing()">
@@ -283,7 +291,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="filePreview1">
                 <header class="panel-heading">
                     Kinerja AMT (<span id="tgl1"></span>)
@@ -505,8 +513,8 @@
 
             </div>
         </section>
-        
-        
+
+
         <!-- page end-->
     </section>
 </section>

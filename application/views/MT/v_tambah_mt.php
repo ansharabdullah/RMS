@@ -15,13 +15,13 @@
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Nopol</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cnip" name="nopol" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cnip" name="nopol"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">No Rangka</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cama" name="norangka" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cama" name="norangka"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -39,7 +39,7 @@
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">No Mesin</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cmesin" name="nomesin" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cmesin" name="nomesin"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -56,13 +56,13 @@
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cjk" name="jk" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cjk" name="jk"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="calamat" class="control-label col-lg-4">Transportir</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="calamat" name="transportir" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="calamat" name="transportir"  type="text" required />
                                 </div>
                             </div> 
                             <div class="bio-row">
@@ -91,7 +91,7 @@
                             <div class="bio-row">
                                 <label for="status" class="control-label col-lg-4">Status</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cstatus" name="status" minlength="2" type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cstatus" name="status"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -159,37 +159,37 @@
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp1</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp1" name="komp1" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp1" name="komp1"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp2</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp2" name="komp2" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp2" name="komp2"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp3</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp3" name="komp3" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp3" name="komp3"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp4</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp4" name="komp4" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp4" name="komp4"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp5</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp5" name="komp5" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp5" name="komp5"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp6</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="komp6" name="komp6" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="komp6" name="komp6"  type="number"  />
                                 </div>
                             </div>
                         </div>
@@ -202,37 +202,37 @@
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 1</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k1" name="k1" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k1" name="k1"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 2</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k2" name="k2" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k2" name="k2"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 3</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k3" name="k3" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k3" name="k3"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 4</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k4" name="k4" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k4" name="k4"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 5</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k5" name="k5" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k5" name="k5"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 6</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="k6" name="k6" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="k6" name="k6"  type="number"  />
                                 </div>
                             </div>
                         </div>
@@ -245,43 +245,43 @@
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 1</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke1" name="ke1" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke1" name="ke1"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 2</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke2" name="ke2" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke2" name="ke2"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 3</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke3" name="ke3" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke3" name="ke3"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 4</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke4" name="ke4" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke4" name="ke4"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 5</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke5" name="ke5" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke5" name="ke5"  type="number"  />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Komp 6</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="ke6" name="ke6" minlength="2" type="number" required />
+                                    <input class=" form-control input-sm m-bot15" id="ke6" name="ke6"  type="number"  />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="<?php echo base_url() ?>index.php/mt/data_mt" rel="stylesheet" class="btn btn-default"> Batal</a>
+                        <a href="<?php echo base_url() ?>mt/data_mt" rel="stylesheet" class="btn btn-default"> Batal</a>
                         <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>

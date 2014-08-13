@@ -50,7 +50,14 @@
                 <section class="panel">
                     <div class="panel-body">
                         <div id="grafik"></div>
-                        <div class="adv-table editable-table " style="margin-top: 50px;">
+                    </div>
+                </section>
+                <section class="panel">
+                    <div class="panel-body">
+                        <header class="panel-heading">
+                            Tabel Kinerja Awak Mobil Tangki Tanggal 10 Januari 2014
+                        </header>
+                        <div class="adv-table editable-table ">
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>

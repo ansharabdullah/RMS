@@ -89,9 +89,9 @@
                     pointInterval: 24 * 3600 * 1000,
                     pointStart: Date.UTC(2014, 0, 01),
                     data: [<?php
-for ($i = 0; $i < 396; $i++) {
-    echo rand(0, 10);
-    if ($i != 1096)
+for ($i = 0; $i < 12; $i++) {
+    echo rand(90, 100);
+    if ($i != 11)
         echo ",";
 }
 ?>]
@@ -101,9 +101,9 @@ for ($i = 0; $i < 396; $i++) {
                     pointInterval: 24 * 3600 * 1000,
                     pointStart: Date.UTC(2014, 0, 01),
                     data: [<?php
-for ($i = 0; $i < 396; $i++) {
-    echo rand(0, 10);
-    if ($i != 1096)
+for ($i = 0; $i < 12; $i++) {
+    echo rand(90, 100);
+    if ($i != 11)
         echo ",";
 }
 ?>]
@@ -164,9 +164,9 @@ for ($i = 0; $i < 396; $i++) {
                     pointInterval: 24 * 3600 * 1000,
                     pointStart: Date.UTC(2014, 0, 01),
                     data: [<?php
-for ($i = 0; $i < 396; $i++) {
-    echo rand(0, 10);
-    if ($i != 1096)
+for ($i = 0; $i < 12; $i++) {
+    echo rand(90, 100);
+    if ($i != 11)
         echo ",";
 }
 ?>]
@@ -176,9 +176,9 @@ for ($i = 0; $i < 396; $i++) {
                     pointInterval: 24 * 3600 * 1000,
                     pointStart: Date.UTC(2014, 0, 01),
                     data: [<?php
-for ($i = 0; $i < 396; $i++) {
-    echo rand(0, 10);
-    if ($i != 1096)
+for ($i = 0; $i < 12; $i++) {
+    echo rand(90, 100);
+    if ($i != 11)
         echo ",";
 }
 ?>]

@@ -1,29 +1,58 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#laporanPreview").hide();
-        $("#jangka").hide();
-        $("#tanggal").hide();
-        $("#formLaporan").submit(function(e){
-            previewLaporan();
+        hideAll();
+        $("#tanggal").show();
+        
+        
+        $("#commentForm").submit(function(e){
+            if($("#commentForm").valid())
+            {
+                previewLaporan();
+            }
             e.preventDefault();
         });
     });
     
     
-    function showOption(){
-        var jenis = $("#kategori").val();
-        $("#jangka").hide();
+    function hideAll()
+    {
+        
         $("#tanggal").hide();
-        if(jenis=="berita")
-        { 
+        $("#tglLaporan").val("");
+        $("#bulan").hide();
+        $("#bulanLaporan").val("");
+        $("#tahun").hide();
+        $("#tahunLaporan").val("");
+        $("#tglAwal").val("");
+        $("#tglAkhir").val("");
+        $("#range-tanggal").hide();
+    }
+    
+    function changeWaktu()
+    {
+        hideAll();
+        if($("#jenis").val() == "Harian" || $("#jenis").val() == "10 Hari" )
+        {
+                
             $("#tanggal").show();
+        }
+        else if($("#jenis").val() == "Bulanan" || $("#jenis").val() == "Triwulan")
+        {
+            $("#bulan").show();
+        }
+        else if($("#jenis").val() == "Tahunan" )
+        {
+                
+            $("#tahun").show();
         }
         else
         {
-            $("#jangka").show();
-            $("#tanggal").show();   
+            $("#range-tanggal").show();
+                    
         }
     }
+    
     
     function previewLaporan()
     {
@@ -43,39 +72,63 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Laporan
+                Laporan Crew Awak Mobil Tangki dan Mobil Tangki
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="formLaporan">
-                    <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Jenis laporan</label>
-                        <div class="col-lg-10">
-                            <select class="form-control m-bot15" id="kategori" onchange="showOption()">
-                                <option value="amt">Awak Mobil Tangki (AMT)</option>
-                                <option value="mt">Mobil Tangki (MT)</option>
-                                <option value="berita">Berita Acara</option>
-                            </select>
-                        </div>
-                    </div>
+                <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm">
+
                     <div class="form-group" id="jangka">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Jangka Waktu</label>
 
                         <div class="col-lg-10">
-                            <select class="form-control m-bot15"  id="jenis">
+                            <select class="form-control m-bot15"  id="jenis" onchange="changeWaktu()">
                                 <option value="Harian">Harian</option>
                                 <option value="10 Hari">10 Hari</option>
                                 <option value="Bulanan">Bulanan</option>
                                 <option value="Triwulan">Triwulan</option>
                                 <option value="Tahunan">Tahunan</option>
+                                <option value="Rentang">Rentang</option>
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group" id="tanggal">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-
                         <div class="col-lg-10">
-                            <input type="date" required="required" id="tglLaporan"  class="form-control"/>
+                            <input type="date" name="tanggal" required="required" id="tglLaporan"  class="form-control"/>
                         </div>
+                    </div>
+
+
+                    <div class="form-group" id="bulan">
+                        <label for="bulanLaporan" class="col-lg-2 col-sm-2 control-label">Bulan</label>
+                        <div class="col-lg-10">
+                            <input type="month" name="bulan" required="required" id="bulanLaporan"  class="form-control"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" id="tahun">
+                        <label class="col-lg-2 col-sm-2 control-label">Tahun</label>
+                        <div class="col-lg-10">
+                            <input type="text" name="tahun" data-mask="9999" required="required" id="tahunLaporan"  class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div id="range-tanggal">
+                        <div class="form-group" id="tanggalAwal">
+                            <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal Awal</label>
+                            <div class="col-lg-10">
+                                <input type="date" name="tanggal-awal" required="required" id="tglAwal"  class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group" id="tanggalAkhir">
+                            <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal Akhir</label>
+                            <div class="col-lg-10">
+                                <input type="date" name="tanggal-akhir" required="required" id="tglAkhir"  class="form-control"/>
+                            </div>
+                        </div>
+                        <br/><br/>
                     </div>
 
                     <div class="form-group">
@@ -311,8 +364,8 @@
 </section>
 
 <!--script for this page only-->
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/editable-table.js"></script>
-
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- END JAVASCRIPTS -->
 <script>
