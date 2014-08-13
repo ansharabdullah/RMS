@@ -38,116 +38,150 @@
 
     $(function() {
         $('#grafik').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
             title: {
-                text: 'Grafik Awak Mobil Tangki',
-                x: -20 //center
+                text: 'Grafik AMT'
             },
             subtitle: {
-                text: 'Tahun 2014',
-                x: -20
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' :
+                        'Sorot Grafik Untuk Zoom In'
             },
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                type: 'datetime',
+                minRange: 14 * 24 * 3600000 // fourteen days
             },
             yAxis: {
                 title: {
                     text: 'Jumlah'
-                },
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-            },
-            tooltip: {
-                valueSuffix: ''
+                }
             },
             legend: {
-                borderWidth: 1
+                enabled: false
             },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+            legend : {enabled: true},
             series: [{
-                    name: 'KM',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                }, {
+                    type: 'spline',
                     name: 'KL',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+                    pointInterval: 24 * 3600 * 1000,
+                    pointStart: Date.UTC(2014, 0, 01),
+                    data: [<?php
+for ($i = 0; $i < 12; $i++) {
+    echo rand(90, 100);
+    if ($i != 11)
+        echo ",";
+}
+?>]
                 }, {
-                    name: 'RIT',
-                    data: [1, 0.8, 2, 11.3, 3, 12, 26, 24.1, 22, 10, 8, 2]
-                }, {
-                    name: 'SPBU',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                }, {
-                    name: 'Jml Hadir',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                }, {
-                    name: 'Jml Tidak Hadir',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                    type: 'spline',
+                    name: 'KM',
+                    pointInterval: 24 * 3600 * 1000,
+                    pointStart: Date.UTC(2014, 0, 01),
+                    data: [<?php
+for ($i = 0; $i < 12; $i++) {
+    echo rand(90, 100);
+    if ($i != 11)
+        echo ",";
+}
+?>]
                 }]
         });
     });
 
     $(function() {
         $('#grafik1').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
             title: {
-                text: 'Grafik Mobil Tangki',
-                x: -20 //center
+                text: 'Grafik AMT'
             },
             subtitle: {
-                text: '2014',
-                x: -20
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' :
+                        'Sorot Grafik Untuk Zoom In'
             },
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                type: 'datetime',
+                minRange: 14 * 24 * 3600000 // fourteen days
             },
             yAxis: {
                 title: {
                     text: 'Jumlah'
-                },
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-            },
-            tooltip: {
-                valueSuffix: '°C'
+                }
             },
             legend: {
-                borderWidth: 1
+                enabled: false
             },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+            legend : {enabled: true},
             series: [{
-                    name: 'KM',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                }, {
+                    type: 'spline',
                     name: 'KL',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+                    pointInterval: 24 * 3600 * 1000,
+                    pointStart: Date.UTC(2014, 0, 01),
+                    data: [<?php
+for ($i = 0; $i < 12; $i++) {
+    echo rand(90, 100);
+    if ($i != 11)
+        echo ",";
+}
+?>]
                 }, {
-                    name: 'RIT',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                }, {
-                    name: 'Own Use',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }, {
-                    name: 'Premium',
-                    data: [3.9, 4.2, 5.7, 8.5, 12.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }, {
-                    name: 'Pertamax',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 09.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }, {
-                    name: 'Pertamax Plus',
-                    data: [3.9, 4.2, 5.7, 12.0, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }, {
-                    name: 'Pertamax Dex',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 20, 14.2, 10.3, 6.6, 4.8]
-                }, {
-                    name: 'Solar',
-                    data: [3.9, 4.2, 5.7, 8.5, 13, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }, {
-                    name: 'Bio Solar',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 14, 16.6, 14.2, 10.3, 6.6, 4.8]
+                    type: 'spline',
+                    name: 'KM',
+                    pointInterval: 24 * 3600 * 1000,
+                    pointStart: Date.UTC(2014, 0, 01),
+                    data: [<?php
+for ($i = 0; $i < 12; $i++) {
+    echo rand(90, 100);
+    if ($i != 11)
+        echo ",";
+}
+?>]
                 }]
         });
     });
@@ -412,7 +446,7 @@
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Bio Solar (90000/90000)
+                            Kilo Liter Bio Solar (90000/90000 Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -421,7 +455,7 @@
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Own Use (90000/100000)
+                            Kilo Liter Own Use (90000/100000 Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
                             <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">

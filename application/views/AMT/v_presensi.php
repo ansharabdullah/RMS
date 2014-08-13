@@ -14,6 +14,7 @@
     });
     
     
+    
 </script>
 
 
@@ -21,6 +22,9 @@
 <section id="main-content">
     <section class="wrapper">
         <section class="panel">
+            <header class="panel-heading">
+                Presensi Awak Mobil Tangki
+            </header>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <div class="form-group">
@@ -181,7 +185,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Peringatan</h4>
+                <h4 class="modal-title">Presensi Crew Awak Mobil Tangki</h4>
             </div>
             <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
 
@@ -217,7 +221,7 @@
                                 <div class="form-group ">
                                     <label for="calasan" class="control-label col-lg-4">Alasan</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="calasan" name="alasan" minlength="2" type="text" required />
+                                        <textarea class=" form-control input-sm m-bot15" id="calasan" name="alasan" minlength="2" type="text" required ></textarea>
                                     </div>
 
 

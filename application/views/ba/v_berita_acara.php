@@ -20,10 +20,15 @@
     <section class="wrapper">
         <section class="panel">
             <div class="panel-heading">
-                MS2 Complience
+                Berita Acara
             </div>
             <div class="panel-body" >
-                <a type="submit" style="float: right;" class="btn btn-success" href="<?php echo base_url()?>ba/import_ms2">Import MS2</a>
+                <div class="col-lg-12">
+                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_internal">KPI Internal</a>
+                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_operasional">KPI Operasional</a>
+                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/import_ms2">MS2 Complience</a>
+                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/frm">Interpolasi</a>
+                </div>
             </div>
             <div class="panel-body" >
                 <form class="form-horizontal" action="#" role="form" id="formSiod">
@@ -53,7 +58,7 @@
                     <div class="adv-table editable-table " style="overflow-y: scroll">
 
                         <div class="space15"></div>
-                        <table class="table table-bordered table-hover" id="editable-sample">
+                        <table class="table table-striped table-hover" id="editable-sample">
                             <thead>
                                 <tr>
                                     <th style="display:none;"></th>
