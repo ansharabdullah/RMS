@@ -6,7 +6,7 @@
             if(isvalidate)
             {
                 var ext = $("#fileName").val().split('.').pop();
-                if(ext=="csv"){
+                if(ext=="xls" || ext=="xlsx"){
                     $("#filePreview").hide();
                     $("#filePreview").slideDown("slow");
                 }
@@ -26,7 +26,7 @@
     
     function downloadCsv()
     {
-        alert("Csv berhasil di download");
+        alert("Excel berhasil di download");
     }
     
 </script>
@@ -43,8 +43,8 @@
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
 
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File CSV</label>
-                        <div class="col-lg-10">
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File Excel</label>
+                        <div class="col-lg-10">CSV
                             <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD">
                         </div>
                     </div>

@@ -9,7 +9,7 @@
             }
             else
             {
-                alert("Tipe file yang diupload tidak sesuai (csv)")   
+                alert("Tipe file yang diupload tidak sesuai (excel)")   
             }
             e.preventDefault();
         });
@@ -29,7 +29,7 @@
         
         <section class="panel">
             <header class="panel-heading">
-                Import Data MS2 Dari CSV
+                Import Data MS2 Dari Excel
                 <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" >
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File CSV</label>
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File Excel</label>
                         <div class="col-lg-10">
                             <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD">
                         </div>

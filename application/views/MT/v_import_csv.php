@@ -6,13 +6,13 @@
             if(isvalidate)
             {
                 var ext = $("#fileName").val().split('.').pop();
-                if(ext=="csv"){
+                if(ext=="xls" || ext=="xlsx"){
                     $("#filePreview").hide();
                     $("#filePreview").slideDown("slow");
                 }
                 else
                 {
-                    alert("Tipe file yang diupload tidak sesuai (csv)")   
+                    alert("Tipe file yang diupload tidak sesuai (excel)")   
                 }                
             }
             e.preventDefault();
@@ -26,7 +26,7 @@
     
     function downloadCsv()
     {
-        alert("Csv berhasil di download");
+        alert("Excel berhasil di download");
     }
     
 </script>
@@ -36,15 +36,15 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Import Data MT Dari CSV
-                <button type="button" style="float: right;" class="btn btn-success" onclick="downloadCsv()">Download Format CSV <i class="icon-download-alt"></i></button>
+                Import Data MT Dari Excel
+                <button type="button" style="float: right;" class="btn btn-success" onclick="downloadCsv()">Download Format Excel <i class="icon-download-alt"></i></button>
                 <br/> <br/>
             </header>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
 
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File CSV</label>
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File Excel</label>
                         <div class="col-lg-10">
                             <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD">
                         </div>
