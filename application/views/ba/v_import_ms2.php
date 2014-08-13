@@ -3,7 +3,7 @@
         $("#filePreview").hide();
         $("#formSiod").submit(function(e){
             var ext = $("#fileName").val().split('.').pop();
-            if(ext=="csv"){
+            if(ext=="xls"||ext=="xlsx"){
                 $("#filePreview").hide();
                 $("#filePreview").slideDown("slow");
             }
@@ -24,9 +24,13 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        
+        
+        
         <section class="panel">
             <header class="panel-heading">
                 Import Data MS2 Dari CSV
+                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" >
                 <form class="form-horizontal" action="#" role="form" id="formSiod">

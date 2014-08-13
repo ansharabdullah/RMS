@@ -24,14 +24,15 @@
             </div>
             <div class="panel-body" >
                 <div class="col-lg-12">
-                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_internal">KPI Internal</a>
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_operasional">KPI Operasional</a>
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/import_ms2">MS2 Complience</a>
-                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/frm">Interpolasi</a>
+                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/frm">Tarif Interpolasi dan FRM</a>
+                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_internal">KPI Internal</a>
+                    
                 </div>
             </div>
             <div class="panel-body" >
-                <form class="form-horizontal" action="#" role="form" id="formSiod">
+                <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">

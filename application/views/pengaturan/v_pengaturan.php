@@ -76,7 +76,10 @@
                                 <td>Firman</td>
                                 <td>Site Supervisor</td>
                                 <td>SS</td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                 
                             </tr>
 
@@ -87,7 +90,10 @@
                                 <td>Firman</td>
                                 <td>Staf OAM</td>
                                 <td>Staf OAM</td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                 
                             </tr>
                             <tr class="">
@@ -97,7 +103,10 @@
                                 <td>Firman</td>
                                 <td>Site Supervisor</td>
                                 <td>SS</td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                 
                             </tr>
                             <tr class="">
@@ -107,7 +116,10 @@
                                 <td>Fiqri</td>
                                 <td>Pengawas Operasi</td>
                                 <td>PO</td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                 
                             </tr>
                         </tbody>
