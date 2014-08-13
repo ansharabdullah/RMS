@@ -33,7 +33,7 @@
                 borderWidth: 1
             },
             series: [{
-                    name: 'Premium',
+                    name: 'Kiloliter',
                     data: [7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5]
                 }]
         });
@@ -49,8 +49,14 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <div class="panel-body">
-                        <div id="grafik"></div>
-                        <div class="adv-table editable-table " style="margin-top: 50px;">
+                        <div id="grafik"></div> </div>
+                </section>
+                <section class="panel">
+                    <div class="panel-body">
+                        <header class="panel-heading">
+                            Tabel Kinerja Awak Mobil Tangki 10 Januari Tahun 2014
+                        </header>
+                        <div class="adv-table editable-table " >
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
@@ -62,21 +68,21 @@
                                         <th>Kapasitas</th>
                                         <th>Nomor Mesin</th>
                                         <th>Nomor Rangka</th>
-                                        <th>Jumlah Angkut Premium</th>
-                                       
+                                        <th>Jumlah Kiloliter</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $premium = array(7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6, 7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6, 7.0, 6.9, 7.5, 4.5, 6.2, 8.5);
-                                    $nopol = array("D9870AF","D9004AD","D9870AD","D9576AF","D9000AU","D9750AD","D9100AF","D9055AF");
+                                    $nopol = array("D9870AF", "D9004AD", "D9870AD", "D9576AF", "D9000AU", "D9750AD", "D9100AF", "D9055AF");
                                     $transportir = array("Masoem", "Masoem", "Masoem", "Patra", "Patra", "Patra", "Patra", "Patra");
                                     $produk = array("Premium", "Premium", "Premium", "Pertamax", "Pertamax", "Solar", "Solar", "Pertamax");
-                                    $kapasitas = array(8,16,8,24,16,8,8,16);
-                                    $no_mesin = array("LN098242OP","LN098242GT","L098242MKN","LN098242MKN","LN098242MKN","LN098242MKN","LN098242MKN","LN098242MKN","LN098242MKN");
-                                    $no_rangka = array("LN098242MKN","PLN098242MKN","LN098242MKN","LN098242MKN","LN098242MKN","LN098242MKN","LN098242MKN","LN098242MKN");
-                                   
-                                    $alamat = array("Jl. Saturnus Selatan Bandung","Jl. Cilawu, Garut","Jl. Gegerkalong Girang, Bandung","Jl. Buah Batu, Bandung","Jl. Soekarno Hatta, Garut","Jl. Saturnus Selatan Bandung","Jl. Cilawu, Garut","Jl. Gegerkalong Girang, Bandung");
+                                    $kapasitas = array(8, 16, 8, 24, 16, 8, 8, 16);
+                                    $no_mesin = array("LN098242OP", "LN098242GT", "L098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN");
+                                    $no_rangka = array("LN098242MKN", "PLN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN");
+
+                                    $alamat = array("Jl. Saturnus Selatan Bandung", "Jl. Cilawu, Garut", "Jl. Gegerkalong Girang, Bandung", "Jl. Buah Batu, Bandung", "Jl. Soekarno Hatta, Garut", "Jl. Saturnus Selatan Bandung", "Jl. Cilawu, Garut", "Jl. Gegerkalong Girang, Bandung");
                                     for ($i = 0; $i < 8; $i++) {
                                         ?>
                                         <tr class="">
@@ -113,9 +119,8 @@
     });
 		  	
 </script><?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+                                    /*
+                                     * To change this template, choose Tools | Templates
+                                     * and open the template in the editor.
+                                     */
+                                    ?>

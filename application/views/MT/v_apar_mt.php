@@ -86,52 +86,52 @@
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>1</td>
-                            <td>23/02/2009</td>
-                            <td>23/08/2009</td>
-                            <td>23/02/2009</td>
+                            <td>23/02/2014</td>
+                            <td>23/08/2014</td>
+                            <td>23/02/2014</td>
                             <td></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>2</td>
-                            <td>23/02/2009</td>
-                            <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>22/02/2013</td>
+                            <td>22/02/2013</td>
+                            <td>22/02/2013</td>
                             <td></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>3</td>
-                            <td>23/02/2009</td>
-                            <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>21/02/2012</td>
+                            <td>21/02/2012</td>
+                            <td>21/02/2012</td>
                             <td></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>4</td>
-                            <td>23/02/2009</td>
-                            <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>20/02/2011</td>
+                            <td>20/02/2011</td>
+                            <td>20/02/2011</td>
                             <td></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
                             <td>5</td>
-                            <td>23/02/2009</td>
-                            <td>23/02/2009</td>
-                            <td>23/02/2009</td>
+                            <td>19/02/2010</td>
+                            <td>19/02/2010</td>
+                            <td>19/02/2010</td>
                             <td></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -140,13 +140,12 @@
                             <td>23/02/2009</td>
                             <td>23/02/2009</td>
                             <td></td>
-                            <td><a class="btn btn-warning tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                            <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
-                <a href="<?php echo base_url() ?>index.php/mt/detail_mt" rel="stylesheet" class="btn btn-warning" style="float:left;"><i class=" icon-circle-arrow-lef"></i> Kembali</a>
-            </div>
+                </div>
             <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

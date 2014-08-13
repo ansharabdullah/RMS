@@ -50,7 +50,7 @@
                     data: [0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
                 }, {
                     name: 'RIT',
-                    data: [1, 0.8, 2, 11.3, 7, 12, 26, 24.1, 22, 10, 8, 2]
+                    data: [1, 8, 2, 11, 7, 12, 26, 24., 22, 10, 8, 2]
                 }, {
                     name: 'Premium',
                     data: [0.1, 0.5, 2.5, 6.4, 10.5, 12.0, 18.6, 17.2, 14.3, 11.0, 3.9, 2.0]
@@ -84,7 +84,15 @@
                 <section class="panel">
                     <div class="panel-body">
                         <div id="grafik"></div>
-                        <div class="adv-table editable-table " style="margin-top: 50px;">
+                        
+                    </div>
+                </section>
+                <section class="panel">
+                    <div class="panel-body">
+                        <header class="panel-heading">
+                            Tabel Kinerja Awak Mobil Tangki Tahun 2014
+                        </header>
+                        <div class="adv-table editable-table ">
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
@@ -154,4 +162,3 @@
     });
 		  	
 </script>
-
