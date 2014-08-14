@@ -36,7 +36,7 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Import Data AMT Dari CSV
+                Import Data AMT Dari Excel
                 <button type="button" style="float: right;" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" data-placement="left" onclick="downloadCsv()"><i class="icon-download-alt"></i></button>
             </header>
             <div class="panel-body" >
@@ -44,7 +44,7 @@
 
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">File Excel</label>
-                        <div class="col-lg-10">CSV
+                        <div class="col-lg-10">
                             <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD">
                         </div>
                     </div>
@@ -62,7 +62,7 @@
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
-                    Data dari CSV
+                    Data dari Excel
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table "  style="overflow: scroll;">

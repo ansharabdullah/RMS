@@ -41,7 +41,7 @@ class ba extends CI_Controller {
 
     public function berita_acara(){
        $data['lv1'] = 6;
-        $data['lv2'] = 3;
+        $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
@@ -49,4 +49,27 @@ class ba extends CI_Controller {
         $this->load->view('layouts/footer');
         
     }
+    
+    public function kpi_operasional(){
+       $data['lv1'] = 6;
+        $data['lv2'] = 1;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('ba/v_kpi_operasional');
+        $this->load->view('layouts/footer');
+        
+    }
+    public function kpi_internal(){
+       $data['lv1'] = 6;
+        $data['lv2'] = 1;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('ba/v_kpi_internal');
+        $this->load->view('layouts/footer');
+        
+    }
+    
+    
 }

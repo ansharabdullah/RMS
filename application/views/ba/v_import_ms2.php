@@ -24,9 +24,9 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        
-        
-        
+
+
+
         <section class="panel">
             <header class="panel-heading">
                 Import Data MS2 Dari Excel
@@ -52,138 +52,134 @@
                         </div>
                     </div>
                 </form>
-                <hr/>
-                <div id="filePreview">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            Tabel MS2 Complience (<span id="tgl"></span>)
-                        </header>
-                        <div class="panel-body">
-                            <div class="adv-table editable-table" style="overflow-y: scroll">
-
-                                <div class="space15"></div>
-                                <table class="table table-bordered table-hover" id="editable-sample">   
-                                    <thead>
-                                        <tr>
-                                            <th style="display:none;"></th>
-                                            <th rowspan="2">No</th>
-                                            <th rowspan="2">Tanggal</th>
-                                            <th colspan="3">Sesuai Dengan MS2</th>
-                                            <th colspan="3">Cepat (Sebelum MS2)</th>
-                                            <th colspan="3">Lebih Cepat (Sebelum Shift 1)</th>
-                                            <th colspan="3">Lambat (Setelah MS2)</th>
-                                            <th colspan="3">Tidak Terkirim Sesuai Jadwal MS2</th>
-                                            <th colspan="3">Total LO</th>
-                                        </tr>
-                                        <tr>
-                                            <th>Premium</th>
-                                            <th>Solar</th>
-                                            <th>Pertamax</th>
-                                            <th>Premium</th>
-                                            <th>Solar</th>
-                                            <th>Pertamax</th>
-                                            <th>Premium</th>
-                                            <th>Solar</th>
-                                            <th>Pertamax</th>
-                                            <th>Premium</th>
-                                            <th>Solar</th>
-                                            <th>Pertamax</th>
-                                            <th>Premium</th>
-                                            <th>Solar</th>
-                                            <th>Pertamax</th>
-                                            <th>Premium</th>
-                                            <th>Solar</th>
-                                            <th>Pertamax</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr class="">
-                                            <td style="display:none;"></td>
-                                            <td>1</td>
-                                            <td>1 Agustus 2014</td>
-                                            <td>46%</td>
-                                            <td>45%</td>    
-                                            <td>20%</td>
-                                            <td>33%</td>
-                                            <td>23%</td>
-                                            <td>28%</td>
-                                            <td>20%</td>
-                                            <td>23%</td>
-                                            <td>29%</td>
-                                            <td>21%</td>
-                                            <td>33%</td>
-                                            <td>40%</td>
-                                            <td>0%</td>
-                                            <td>1%</td>
-                                            <td>8%</td>
-                                            <td>100%</td>
-                                            <td>102%</td>
-                                            <td>96%</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td style="display:none;"></td>
-                                            <td>2</td>
-                                            <td>2 Agustus 2014</td>
-                                            <td>46%</td>
-                                            <td>45%</td>    
-                                            <td>20%</td>
-                                            <td>33%</td>
-                                            <td>23%</td>
-                                            <td>28%</td>
-                                            <td>20%</td>
-                                            <td>23%</td>
-                                            <td>29%</td>
-                                            <td>21%</td>
-                                            <td>33%</td>
-                                            <td>40%</td>
-                                            <td>0%</td>
-                                            <td>1%</td>
-                                            <td>8%</td>
-                                            <td>100%</td>
-                                            <td>102%</td>
-                                            <td>96%</td>
-                                        </tr>
-                                        <tr class="">
-                                            <td style="display:none;"></td>
-                                            <td>3</td>
-                                            <td>3 Agustus 2014</td>
-                                            <td>46%</td>
-                                            <td>45%</td>    
-                                            <td>20%</td>
-                                            <td>33%</td>
-                                            <td>23%</td>
-                                            <td>28%</td>
-                                            <td>20%</td>
-                                            <td>23%</td>
-                                            <td>29%</td>
-                                            <td>21%</td>
-                                            <td>33%</td>
-                                            <td>40%</td>
-                                            <td>0%</td>
-                                            <td>1%</td>
-                                            <td>8%</td>
-                                            <td>100%</td>
-                                            <td>102%</td>
-                                            <td>96%</td>
-                                        </tr>
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </section>
-
-
-
-
-                    <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
-                </div>
             </div>
         </section>
-        <!-- page end-->
+        <section class="panel" id="filePreview">
+            <header class="panel-heading">
+                Tabel MS2 Complience (<span id="tgl"></span>)
+            </header>
+            <div class="panel-body">
+                <div class="adv-table editable-table" style="overflow-y: scroll">
+
+                    <div class="space15"></div>
+                    <table class="table table-bordered table-hover" id="editable-sample">   
+                        <thead>
+                            <tr>
+                                <th style="display:none;"></th>
+                                <th rowspan="2">No</th>
+                                <th rowspan="2">Tanggal</th>
+                                <th colspan="3">Sesuai Dengan MS2</th>
+                                <th colspan="3">Cepat (Sebelum MS2)</th>
+                                <th colspan="3">Lebih Cepat (Sebelum Shift 1)</th>
+                                <th colspan="3">Lambat (Setelah MS2)</th>
+                                <th colspan="3">Tidak Terkirim Sesuai Jadwal MS2</th>
+                                <th colspan="3">Total LO</th>
+                            </tr>
+                            <tr>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="">
+                                <td style="display:none;"></td>
+                                <td>1</td>
+                                <td>1 Agustus 2014</td>
+                                <td>46%</td>
+                                <td>45%</td>    
+                                <td>20%</td>
+                                <td>33%</td>
+                                <td>23%</td>
+                                <td>28%</td>
+                                <td>20%</td>
+                                <td>23%</td>
+                                <td>29%</td>
+                                <td>21%</td>
+                                <td>33%</td>
+                                <td>40%</td>
+                                <td>0%</td>
+                                <td>1%</td>
+                                <td>8%</td>
+                                <td>100%</td>
+                                <td>102%</td>
+                                <td>96%</td>
+                            </tr>
+                            <tr class="">
+                                <td style="display:none;"></td>
+                                <td>2</td>
+                                <td>2 Agustus 2014</td>
+                                <td>46%</td>
+                                <td>45%</td>    
+                                <td>20%</td>
+                                <td>33%</td>
+                                <td>23%</td>
+                                <td>28%</td>
+                                <td>20%</td>
+                                <td>23%</td>
+                                <td>29%</td>
+                                <td>21%</td>
+                                <td>33%</td>
+                                <td>40%</td>
+                                <td>0%</td>
+                                <td>1%</td>
+                                <td>8%</td>
+                                <td>100%</td>
+                                <td>102%</td>
+                                <td>96%</td>
+                            </tr>
+                            <tr class="">
+                                <td style="display:none;"></td>
+                                <td>3</td>
+                                <td>3 Agustus 2014</td>
+                                <td>46%</td>
+                                <td>45%</td>    
+                                <td>20%</td>
+                                <td>33%</td>
+                                <td>23%</td>
+                                <td>28%</td>
+                                <td>20%</td>
+                                <td>23%</td>
+                                <td>29%</td>
+                                <td>21%</td>
+                                <td>33%</td>
+                                <td>40%</td>
+                                <td>0%</td>
+                                <td>1%</td>
+                                <td>8%</td>
+                                <td>100%</td>
+                                <td>102%</td>
+                                <td>96%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </br>
+                <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
+
+            </div>
+        </section>
+
+
     </section>
+    <!-- page end-->
+</section>
 </section>
 
 <!--script for this page only-->

@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#filePreview").hide();
-        $("#formSiod").submit(function(e) {
+        $("#commentForm").submit(function(e) {
 
             $("#filePreview").hide();
             $("#filePreview").slideDown("slow");
@@ -23,14 +23,14 @@
                 MS2 Complience
             </div>
             <div class="panel-body" >
-                <a type="submit" style="float: right;" class="btn btn-success" href="<?php echo base_url()?>ba/import_ms2">Import MS2</a>
+                <a type="submit" style="float: right;" class="btn btn-success" href="<?php echo base_url() ?>ba/import_ms2">Import MS2</a>
             </div>
             <div class="panel-body" >
-                <form class="form-horizontal" action="#" role="form" id="formSiod">
+                <form class="form-horizontal" action="#" role="form" id="commentForm">
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                        <label for="inputBulan" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                         <div class="col-lg-10">
-                            <input type="month" required="required" id="tglForm" class="form-control"  placeholder="Tanggal">
+                            <input type="month" required="required" id="blnms2" class="form-control"  placeholder="Tanggal">
                         </div>
                     </div>
 
@@ -44,141 +44,139 @@
         </section>
 
 
-        <div id="filePreview">
-            <section class="panel">
-                <header class="panel-heading">
-                    Tabel MS2 Complience (<span id="tgl"></span>)
-                </header>
-                <div class="panel-body">
-                    <div class="adv-table editable-table " style="overflow-y: scroll">
+        <section class="panel" id="filePreview">
+            <header class="panel-heading">
+                Tabel MS2 Complience (<span id="tgl"></span>)
+            </header>
+            <div class="panel-body">
+                <div class="adv-table editable-table " style="overflow-y: scroll">
 
-                        <div class="space15"></div>
-                        <table class="table table-bordered table-hover" id="editable-sample">
-                            <thead>
-                                <tr>
-                                    <th style="display:none;"></th>
-                                    <th rowspan="2">No</th>
-                                    <th rowspan="2">Tanggal</th>
-                                    <th colspan="3">Sesuai Dengan MS2</th>
-                                    <th colspan="3">Cepat (Sebelum MS2)</th>
-                                    <th colspan="3">Lebih Cepat (Sebelum Shift 1)</th>
-                                    <th colspan="3">Lambat (Setelah MS2)</th>
-                                    <th colspan="3">Tidak Terkirim Sesuai Jadwal MS2</th>
-                                    <th colspan="3">Total LO</th>
-                                    <th rowspan="2" width="150px">Aksi</th>
-                                </tr>
-                                <tr>
-                                    <th>Premium</th>
-                                    <th>Solar</th>
-                                    <th>Pertamax</th>
-                                    <th>Premium</th>
-                                    <th>Solar</th>
-                                    <th>Pertamax</th>
-                                    <th>Premium</th>
-                                    <th>Solar</th>
-                                    <th>Pertamax</th>
-                                    <th>Premium</th>
-                                    <th>Solar</th>
-                                    <th>Pertamax</th>
-                                    <th>Premium</th>
-                                    <th>Solar</th>
-                                    <th>Pertamax</th>
-                                    <th>Premium</th>
-                                    <th>Solar</th>
-                                    <th>Pertamax</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div class="space15"></div>
+                    <table class="table table-bordered table-hover" id="editable-sample">
+                        <thead>
+                            <tr>
+                                <th style="display:none;"></th>
+                                <th rowspan="2">No</th>
+                                <th rowspan="2">Tanggal</th>
+                                <th colspan="3">Sesuai Dengan MS2</th>
+                                <th colspan="3">Cepat (Sebelum MS2)</th>
+                                <th colspan="3">Lebih Cepat (Sebelum Shift 1)</th>
+                                <th colspan="3">Lambat (Setelah MS2)</th>
+                                <th colspan="3">Tidak Terkirim Sesuai Jadwal MS2</th>
+                                <th colspan="3">Total LO</th>
+                                <th rowspan="2" width="150px">Aksi</th>
+                            </tr>
+                            <tr>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                                <th>Premium</th>
+                                <th>Solar</th>
+                                <th>Pertamax</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>1</td>
-                                    <td>1 Agustus 2014</td>
-                                    <td>46%</td>
-                                    <td>45%</td>    
-                                    <td>20%</td>
-                                    <td>33%</td>
-                                    <td>23%</td>
-                                    <td>28%</td>
-                                    <td>20%</td>
-                                    <td>23%</td>
-                                    <td>29%</td>
-                                    <td>21%</td>
-                                    <td>33%</td>
-                                    <td>40%</td>
-                                    <td>0%</td>
-                                    <td>1%</td>
-                                    <td>8%</td>
-                                    <td>100%</td>
-                                    <td>102%</td>
-                                    <td>96%</td>
-                                    <td>
-                                        <a data-placement="top" data-toggle="modal" href="#ModalMs2" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                        <a data-placement="top" data-toggle="modal" href="#ModalHapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>2</td>
-                                    <td>2 Agustus 2014</td>
-                                    <td>46%</td>
-                                    <td>45%</td>    
-                                    <td>20%</td>
-                                    <td>33%</td>
-                                    <td>23%</td>
-                                    <td>28%</td>
-                                    <td>20%</td>
-                                    <td>23%</td>
-                                    <td>29%</td>
-                                    <td>21%</td>
-                                    <td>33%</td>
-                                    <td>40%</td>
-                                    <td>0%</td>
-                                    <td>1%</td>
-                                    <td>8%</td>
-                                    <td>100%</td>
-                                    <td>102%</td>
-                                    <td>96%</td>
-                                    <td>
-                                        <a data-placement="top" data-toggle="modal" href="#ModalMs2" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                        <a data-placement="top" data-toggle="modal" href="#ModalHapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>3</td>
-                                    <td>3 Agustus 2014</td>
-                                    <td>46%</td>
-                                    <td>45%</td>    
-                                    <td>20%</td>
-                                    <td>33%</td>
-                                    <td>23%</td>
-                                    <td>28%</td>
-                                    <td>20%</td>
-                                    <td>23%</td>
-                                    <td>29%</td>
-                                    <td>21%</td>
-                                    <td>33%</td>
-                                    <td>40%</td>
-                                    <td>0%</td>
-                                    <td>1%</td>
-                                    <td>8%</td>
-                                    <td>100%</td>
-                                    <td>102%</td>
-                                    <td>96%</td>
-                                    <td>
-                                        <a data-placement="top" data-toggle="modal" href="#ModalMs2" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                        <a data-placement="top" data-toggle="modal" href="#ModalHapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
-                                    </td>
-                                </tr>
+                            <tr class="">
+                                <td style="display:none;"></td>
+                                <td>1</td>
+                                <td>1 Agustus 2014</td>
+                                <td>46%</td>
+                                <td>45%</td>    
+                                <td>20%</td>
+                                <td>33%</td>
+                                <td>23%</td>
+                                <td>28%</td>
+                                <td>20%</td>
+                                <td>23%</td>
+                                <td>29%</td>
+                                <td>21%</td>
+                                <td>33%</td>
+                                <td>40%</td>
+                                <td>0%</td>
+                                <td>1%</td>
+                                <td>8%</td>
+                                <td>100%</td>
+                                <td>102%</td>
+                                <td>96%</td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalMs2" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalHapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="">
+                                <td style="display:none;"></td>
+                                <td>2</td>
+                                <td>2 Agustus 2014</td>
+                                <td>46%</td>
+                                <td>45%</td>    
+                                <td>20%</td>
+                                <td>33%</td>
+                                <td>23%</td>
+                                <td>28%</td>
+                                <td>20%</td>
+                                <td>23%</td>
+                                <td>29%</td>
+                                <td>21%</td>
+                                <td>33%</td>
+                                <td>40%</td>
+                                <td>0%</td>
+                                <td>1%</td>
+                                <td>8%</td>
+                                <td>100%</td>
+                                <td>102%</td>
+                                <td>96%</td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalMs2" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalHapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="">
+                                <td style="display:none;"></td>
+                                <td>3</td>
+                                <td>3 Agustus 2014</td>
+                                <td>46%</td>
+                                <td>45%</td>    
+                                <td>20%</td>
+                                <td>33%</td>
+                                <td>23%</td>
+                                <td>28%</td>
+                                <td>20%</td>
+                                <td>23%</td>
+                                <td>29%</td>
+                                <td>21%</td>
+                                <td>33%</td>
+                                <td>40%</td>
+                                <td>0%</td>
+                                <td>1%</td>
+                                <td>8%</td>
+                                <td>100%</td>
+                                <td>102%</td>
+                                <td>96%</td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalMs2" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalHapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
+                            </tr>
 
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
 
 
 
@@ -269,21 +267,6 @@
                                         <input class=" form-control input-sm m-bot15" id="pertamax5" name="pertamax5" size="16" type="number" value="" placeholder="Pertamax"required/>
                                     </div>
                                 </div>
-
-
-                                <div class="form-group "> 
-                                    <p>Total LO</p>
-                                    <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="premium6" name="premium6" size="16" type="number" value="" placeholder="Premium"required/>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="solar6" name="solar6" size="16" type="number" value="" placeholder="Solar"required/>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="pertamax6" name="pertamax6" size="16" type="number" value="" placeholder="Pertamax"required/>
-                                    </div>
-                                </div>
-
 
                             </div>
                         </section>

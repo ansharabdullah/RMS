@@ -13,9 +13,6 @@
 
 
 </script>
-
-
-
 <section id="main-content">
     <section class="wrapper">
         <section class="panel">
@@ -23,12 +20,11 @@
                 Berita Acara
             </div>
             <div class="panel-body" >
-                <div class="col-lg-12">
-                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_operasional">KPI Operasional</a>
+                <div class="col-lg-12">                    
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/import_ms2">MS2 Complience</a>
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/frm">Tarif Interpolasi dan FRM</a>
+                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_operasional">KPI Operasional</a>                    
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_internal">KPI Internal</a>
-                    
                 </div>
             </div>
             <div class="panel-body" >
@@ -41,15 +37,16 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
-                            <button type="submit" style="float: right;" class="btn btn-warning">Cek</button>
+                        <div class="col-lg-offset-2 col-lg-12" >
+                            <div class="col-lg-4" style="float:right;">
+                                <button type="submit"  class="btn btn-success">Generate</button>
+                                <button type="submit"  class="btn btn-warning">Cek</button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
         </section>
-
-
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
@@ -95,7 +92,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td>1</td>
@@ -177,21 +173,12 @@
                                         <a data-placement="top" data-toggle="modal" href="#ModalHapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                     </td>
                                 </tr>
-
-
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
         </div>
-
-
-
-
-
-
-
     </section>
 </section>
 <!--main content end-->

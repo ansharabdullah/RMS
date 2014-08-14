@@ -52,7 +52,7 @@
                         </a>
 
 
-                        
+
                     </div>
                     <div class="space15"></div>
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -62,6 +62,7 @@
                                 <th>No</th>
                                 <th>Email</th>
                                 <th>Nama</th>
+                                <th>NIP</th>
                                 <th>Jabatan</th>
                                 <th>Hak Akses</th>
                                 <th>Aksi</th>
@@ -74,13 +75,14 @@
                                 <td>1</td>
                                 <td>firman.fiqri@gmail.com</td>
                                 <td>Firman</td>
+                                <td> 09128417</td>
                                 <td>Site Supervisor</td>
                                 <td>SS</td>
                                 <td>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#Modaledit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#Modaldelete" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                                
+
                             </tr>
 
                             <tr class="">
@@ -88,39 +90,42 @@
                                 <td>2</td>
                                 <td>firman.fiqri@gmail.com</td>
                                 <td>Firman</td>
+                                <td> 09125341</td>
                                 <td>Staf OAM</td>
                                 <td>Staf OAM</td>
                                 <td>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#Modaledit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#Modaldelete" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                                
+
                             </tr>
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>3</td>
                                 <td>firman.fiqri@gmail.com</td>
                                 <td>Firman</td>
+                                <td> 09101249</td>
                                 <td>Site Supervisor</td>
                                 <td>SS</td>
                                 <td>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#Modaledit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#Modaldelete" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                                
+
                             </tr>
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td>4</td>
                                 <td>firman.fiqri@gmail.com</td>
                                 <td>Fiqri</td>
+                                <td> 091280123</td>
                                 <td>Pengawas Operasi</td>
                                 <td>PO</td>
                                 <td>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahUser" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#Modaledit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#Modaldelete" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                                
+
                             </tr>
                         </tbody>
                     </table>
@@ -130,6 +135,100 @@
         <!-- page end-->
     </section>
 </section>
+
+<!-- modal -->
+<div class="modal fade" id="Modaldelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Form Hapus User</h4>
+            </div>
+            <div class="modal-body">
+
+                Apakah anda yakin ?
+
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
+                <button class="btn btn-danger" type="button"> Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit User</h4>
+            </div>
+            <div class=" form">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <section class="panel">
+
+                                    <div class="panel-body">
+
+
+                                        <div class="form-group ">
+                                            <label for="cnama" class="control-label col-lg-2">Email</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="cemail" name="email" minlength="2" type="text" required />
+                                            </div>
+
+                                            <label for="cjabatan" class="control-label col-lg-2">Nama</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="cnama" name="nama" minlength="2" type="text" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="cnip" class="control-label col-lg-2">NIP</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="cnip" name="nip" minlength="2" type="text" required />
+                                            </div>
+                                            <label for="cklas" class="control-label col-lg-2">Klasifikasi</label>
+                                            <div class="col-lg-4">
+                                                <select class="form-control input-sm m-bot15" id="cklas" name="klas">
+                                                    <option>OAM</option>
+                                                    <option>Staf OAM</option>
+                                                    <option>Site Supervisor</option>
+                                                    <option>Pengawas Operasi</option>
+                                                    <option>Supporting</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="ctempatlahir" class="control-label col-lg-2">Hak Akses</label>
+                                            <div class="col-lg-4">
+                                                <select class="form-control input-sm m-bot15" id="ha" name="ha">
+                                                    <option>OAM</option>
+                                                    <option>Staf OAM</option>
+                                                    <option>SS</option>
+                                                    <option>PO</option>
+                                                    <option>Supporting</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                </section>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="ModalTambahUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -153,28 +252,34 @@
                                         <div class="form-group ">
                                             <label for="cnama" class="control-label col-lg-2">Email</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="cnama" name="nama" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="cemail" name="email" minlength="2" type="text" required />
                                             </div>
 
                                             <label for="cjabatan" class="control-label col-lg-2">Nama</label>
                                             <div class="col-lg-4">
-                                                <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan">
-                                                    <option>Supir</option>
-                                                    <option>Kernet</option>
-                                                </select>
+                                                <input class=" form-control input-sm m-bot15" id="cnama" name="nama" minlength="2" type="text" required />
                                             </div>
                                         </div>
-
-
                                         <div class="form-group ">
-                                            <label for="ctempatlahir" class="control-label col-lg-2">Tempat Lahir</label>
+                                            <label for="cnip" class="control-label col-lg-2">NIP</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempatlahir" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="cnip" name="nip" minlength="2" type="text" required />
                                             </div>
-                                            
                                             <label for="cklas" class="control-label col-lg-2">Klasifikasi</label>
                                             <div class="col-lg-4">
                                                 <select class="form-control input-sm m-bot15" id="cklas" name="klas">
+                                                    <option>OAM</option>
+                                                    <option>Staf OAM</option>
+                                                    <option>Site Supervisor</option>
+                                                    <option>Pengawas Operasi</option>
+                                                    <option>Supporting</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="ctempatlahir" class="control-label col-lg-2">Hak Akses</label>
+                                            <div class="col-lg-4">
+                                                <select class="form-control input-sm m-bot15" id="ha" name="ha">
                                                     <option>OAM</option>
                                                     <option>Staf OAM</option>
                                                     <option>SS</option>
@@ -182,20 +287,14 @@
                                                     <option>Supporting</option>
                                                 </select>
                                             </div>
-
                                         </div>
-
-                                        
-
-                                       
-                                    </div>
                                 </section>
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                         <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>

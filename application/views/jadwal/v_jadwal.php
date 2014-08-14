@@ -4,7 +4,7 @@
         $("#tabelJadwal").hide();
         $("#tambahJadwal").hide();
         $("#filePreview").hide();
-        $("#formUpload").submit(function(e){
+        $("#commentForm").submit(function(e){
             var ext = $("#fileName").val().split('.').pop();
             if(ext=="xls" || ext=="xlsx"){
                 $("#filePreview").hide();
@@ -57,14 +57,14 @@
                 </a>
                 <a style="float:right;" data-placement="left" class="btn btn-success tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
             </header>
-            <div class="panel-body" >
-                <div class="clearfix" id="tambahJadwal">
+            <div class="panel-body" id="tambahJadwal">
+                <div class="clearfix" >
 
-                    <form class="cmxform form-horizontal tasi-form" id="formUpload">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm">
                         <div class="form-group">
-                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                             <div class="col-lg-10">
-                                <input type="date" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD">
+                                <input type="month" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD">
                             </div>
                         </div>
                         <div class="form-group">
@@ -142,7 +142,6 @@
                         </div>
                     </form>
                 </div>
-
                 <div id="tabelJadwal" style="margin-top: 50px;">
                     <header class="panel-heading">
                         Jadwal (<span id="tglJadwal"></span>)

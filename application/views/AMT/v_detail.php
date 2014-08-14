@@ -378,7 +378,10 @@
                                 <td>8</td>
                                 <td>24</td>
                                 <td><span class="label label-success">Hadir</span></td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                
                             </tr>
 
@@ -391,7 +394,10 @@
                                 <td>3</td>
                                 <td>4</td>
                                 <td><span class="label label-success">Hadir</span></td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                
                             </tr>
 
@@ -404,7 +410,10 @@
                                 <td>0</td>
                                 <td>0</td>
                                 <td><span class="label label-warning">Absen</span></td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                
                             </tr>
 
@@ -417,7 +426,10 @@
                                 <td>0</td>
                                 <td>0</td>
                                 <td><span class="label label-warning">Absen</span></td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                
                             </tr>
 
@@ -430,7 +442,10 @@
                                 <td>0</td>
                                 <td>0</td>
                                 <td><span class="label label-warning">Absen</span></td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                
                             </tr>
 
@@ -444,7 +459,10 @@
                                 <td>2</td>
                                 <td>1</td>
                                 <td><span class="label label-success">Hadir</span></td>
-                                <td><a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                <td>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                </td>
                                
 
                             </tr>
