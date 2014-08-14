@@ -221,7 +221,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                         <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>
@@ -294,7 +294,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                         <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>
