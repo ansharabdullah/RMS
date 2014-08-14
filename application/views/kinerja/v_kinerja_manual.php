@@ -88,6 +88,8 @@
                                 <th>Transportir</th>
                                 <th>Kapasitas</th>
                                 <th>Produk</th>
+                                <th>kategori</th>
+                                <th>Status</th>
                                 <th>Kinerja</th>
                             </tr>
                         </thead>
@@ -99,7 +101,10 @@
                                 <td>PT MA'SOEM</td>
                                 <td>8</td>
                                 <td class="center">Bio Solar</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -108,7 +113,9 @@
                                 <td>PT WANDISIRI</td>
                                 <td>8</td>
                                 <td class="center">Solar</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -117,7 +124,9 @@
                                 <td>PT PUSPITA CIPATA</td>
                                 <td>24</td>
                                 <td class="center">Pertamax</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -126,7 +135,9 @@
                                 <td>PT PATRA NIAGA</td>
                                 <td>16</td>
                                 <td class="center">Premium</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>2</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -135,7 +146,9 @@
                                 <td>PT INCOT</td>
                                 <td>32</td>
                                 <td class="center">Premium</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>2</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -144,7 +157,9 @@
                                 <td>PT JUJUR PARAMARTA</td>
                                 <td>8</td>
                                 <td class="center">Pertamax Dex</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -153,7 +168,9 @@
                                 <td>PT MA'SOEM</td>
                                 <td>24</td>
                                 <td class="center">Pertamax Plus</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -162,7 +179,9 @@
                                 <td>PT PATRA NIAGA</td>
                                 <td>16</td>
                                 <td class="center">Bio Solar</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -171,7 +190,9 @@
                                 <td>PT TIARA</td>
                                 <td>24</td>
                                 <td class="center">Solar</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -180,7 +201,9 @@
                                 <td>PT PATRA NIAGA</td>
                                 <td>32</td>
                                 <td class="center">Premium</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>2</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -189,7 +212,9 @@
                                 <td>PT PUSPITA CIPATA</td>
                                 <td>16</td>
                                 <td class="center">Pertamax</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -198,7 +223,9 @@
                                 <td>PT NAGAMAS JAYA</td>
                                 <td>8</td>
                                 <td class="center">Premium</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td>1</td>
+                                <td>Sewa</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -217,6 +244,7 @@
                                 <th>Nama</th>
                                 <th>Jabatan</th>
                                 <th>Klasifikasi</th>
+                                <th>Transportir Asal</th>
                                 <th>Kinerja</th>
                             </tr>
                         </thead>
@@ -227,8 +255,9 @@
                                 <td>94112</td>
                                 <td>Asep</td>
                                 <td>Supir</td>
+                                <td>PT. Masoem</td>
                                 <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -236,8 +265,9 @@
                                 <td>1294</td>
                                 <td>Waringin</td>
                                 <td>Supir</td>
+                                <td>PT. Masoem</td>
                                 <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -245,8 +275,9 @@
                                 <td>1209312</td>
                                 <td>Cipata</td>
                                 <td>Supir</td>
+                                <td>PT. Masoem</td>
                                 <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -254,8 +285,9 @@
                                 <td>123145</td>
                                 <td>Niaga</td>
                                 <td>Kernet</td>
+                                <td>PT. Patra</td>
                                 <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -263,8 +295,9 @@
                                 <td>1241258</td>
                                 <td>Incot</td>
                                 <td>Kernet</td>
+                                <td>PT. Patra</td>
                                 <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -272,8 +305,9 @@
                                 <td>92340</td>
                                 <td>Rasya</td>
                                 <td>Supir</td>
+                                <td>PT. Patra</td>
                                 <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -281,8 +315,9 @@
                                 <td>92124</td>
                                 <td>Rama</td>
                                 <td>Supir</td>
+                                <td>PT. Tiara</td>
                                 <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -290,8 +325,9 @@
                                 <td>127152</td>
                                 <td>Akun</td>
                                 <td>Supir</td>
+                                <td>PT. Tiara</td>
                                 <td class="center">16</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -299,8 +335,9 @@
                                 <td>123846</td>
                                 <td>Firman</td>
                                 <td>Supir</td>
+                                <td>PT. Tiara</td>
                                 <td class="center">32</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -308,8 +345,9 @@
                                 <td>1239174</td>
                                 <td>Aga</td>
                                 <td>Kernet</td>
+                                <td>PT. Tiara</td>
                                 <td class="center">32</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -317,8 +355,9 @@
                                 <td>928374</td>
                                 <td>Maskum</td>
                                 <td>Kernet</td>
+                                <td>PT. Tiara</td>
                                 <td class="center">16</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -326,15 +365,16 @@
                                 <td>1845142</td>
                                 <td>Supir</td>
                                 <td>Supir</td>
+                                <td>PT. Tiara</td>
                                 <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="mtModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -426,6 +466,58 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="amtModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Atur Kinerja</h4>
+                            </div>
+                            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                                        <div class="col-lg-4">
+                                            <input class="form-control" type="date" size="16" name="tgl" required/>
+                                            <span class="help-block">Pilih Tanggal</span>
+                                        </div>
+
+                                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">SPBU</label>
+                                        <div class="col-lg-4">
+                                            <input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="km" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="km" placeholder="Kilometer (km)" name="km" required>
+                                        </div>
+
+                                        <label for="kl" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="kl" placeholder="Kiloliter (kl)" name="kl" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="rit" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
+                                        <div class="col-lg-4">
+                                            <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)" name="rit" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                                    <button class="btn btn-success" type="submit">Save changes</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
             </div>
         </section>
         <!-- page end-->
