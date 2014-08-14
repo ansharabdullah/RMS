@@ -104,7 +104,7 @@
                                 <td>1</td>
                                 <td>Sewa</td>
 
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -115,7 +115,7 @@
                                 <td class="center">Solar</td>
                                 <td>1</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -126,7 +126,7 @@
                                 <td class="center">Pertamax</td>
                                 <td>1</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -137,7 +137,7 @@
                                 <td class="center">Premium</td>
                                 <td>2</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -148,7 +148,7 @@
                                 <td class="center">Premium</td>
                                 <td>2</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -159,7 +159,7 @@
                                 <td class="center">Pertamax Dex</td>
                                 <td>1</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -170,7 +170,7 @@
                                 <td class="center">Pertamax Plus</td>
                                 <td>1</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -181,7 +181,7 @@
                                 <td class="center">Bio Solar</td>
                                 <td>1</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -192,7 +192,7 @@
                                 <td class="center">Solar</td>
                                 <td>1</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -203,7 +203,7 @@
                                 <td class="center">Premium</td>
                                 <td>2</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -214,7 +214,7 @@
                                 <td class="center">Pertamax</td>
                                 <td>1</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -225,7 +225,7 @@
                                 <td class="center">Premium</td>
                                 <td>1</td>
                                 <td>Sewa</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -257,7 +257,7 @@
                                 <td>Supir</td>
                                 <td>PT. Masoem</td>
                                 <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -267,7 +267,7 @@
                                 <td>Supir</td>
                                 <td>PT. Masoem</td>
                                 <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -277,7 +277,7 @@
                                 <td>Supir</td>
                                 <td>PT. Masoem</td>
                                 <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -287,7 +287,7 @@
                                 <td>Kernet</td>
                                 <td>PT. Patra</td>
                                 <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -297,7 +297,7 @@
                                 <td>Kernet</td>
                                 <td>PT. Patra</td>
                                 <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -307,7 +307,7 @@
                                 <td>Supir</td>
                                 <td>PT. Patra</td>
                                 <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -317,7 +317,7 @@
                                 <td>Supir</td>
                                 <td>PT. Tiara</td>
                                 <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -327,7 +327,7 @@
                                 <td>Supir</td>
                                 <td>PT. Tiara</td>
                                 <td class="center">16</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -337,7 +337,7 @@
                                 <td>Supir</td>
                                 <td>PT. Tiara</td>
                                 <td class="center">32</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -347,7 +347,7 @@
                                 <td>Kernet</td>
                                 <td>PT. Tiara</td>
                                 <td class="center">32</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -357,7 +357,7 @@
                                 <td>Kernet</td>
                                 <td>PT. Tiara</td>
                                 <td class="center">16</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -367,7 +367,7 @@
                                 <td>Supir</td>
                                 <td>PT. Tiara</td>
                                 <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -458,8 +458,8 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                    <button class="btn btn-success" type="submit">Save changes</button>
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                    <button class="btn btn-success" type="submit">Simpan</button>
                                 </div>
                             </form>
 
@@ -509,8 +509,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                                    <button class="btn btn-success" type="submit">Save changes</button>
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                    <button class="btn btn-success" type="submit">Simpan</button>
                                 </div>
                             </form>
 
