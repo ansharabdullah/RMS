@@ -54,7 +54,7 @@
                                     <div class="form-group">
                                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Status</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan"  type="text" required />
+                                            <input class=" form-control input-sm m-bot15" id="status" name="status"  type="text" required />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -176,9 +176,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="norangka" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
+                                    <label for="norangka" class="col-lg-2 col-sm-2 control-label">Status</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan"  type="date" required />
+                                        <input class=" form-control input-sm m-bot15" id="status" name="status"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="modal-footer">

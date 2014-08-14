@@ -153,41 +153,35 @@
                                         <div class="form-group ">
                                             <label for="cnama" class="control-label col-lg-2">Email</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="cnama" name="nama" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="cemail" name="email" minlength="2" type="text" required />
                                             </div>
 
                                             <label for="cjabatan" class="control-label col-lg-2">Nama</label>
-                                            <div class="col-lg-4">
-                                                <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan">
-                                                    <option>Supir</option>
-                                                    <option>Kernet</option>
-                                                </select>
+                                               <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="cnama" name="nama" minlength="2" type="text" required />
                                             </div>
                                         </div>
-
-
                                         <div class="form-group ">
-                                            <label for="ctempatlahir" class="control-label col-lg-2">Tempat Lahir</label>
-                                            <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempatlahir" minlength="2" type="text" required />
-                                            </div>
-                                            
                                             <label for="cklas" class="control-label col-lg-2">Klasifikasi</label>
                                             <div class="col-lg-4">
                                                 <select class="form-control input-sm m-bot15" id="cklas" name="klas">
+                                                    <option>OAM</option>
+                                                    <option>Staf OAM</option>
+                                                    <option>Site Supervisor</option>
+                                                    <option>Pengawas Operasi</option>
+                                                    <option>Supporting</option>
+                                                </select>
+                                            </div>
+                                             <label for="ctempatlahir" class="control-label col-lg-2">Hak Akses</label>
+                                              <div class="col-lg-4">
+                                             <select class="form-control input-sm m-bot15" id="ha" name="ha">
                                                     <option>OAM</option>
                                                     <option>Staf OAM</option>
                                                     <option>SS</option>
                                                     <option>PO</option>
                                                     <option>Supporting</option>
                                                 </select>
-                                            </div>
-
                                         </div>
-
-                                        
-
-                                       
                                     </div>
                                 </section>
                             </div>

@@ -55,7 +55,7 @@
                 <a class="btn btn-primary" onclick="showTambahJadwal()">
                     Tambah Jadwal <i class="icon-plus"></i>
                 </a>
-                <a style="float:right;" data-placement="left" class="btn btn-success tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" >
                 <div class="clearfix" id="tambahJadwal">

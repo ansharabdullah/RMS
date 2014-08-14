@@ -274,9 +274,12 @@
                                                 </div>
                                                 <span class="label label-danger">NOTE!</span>
                                                 <span>
-                                                    Attached image thumbnail is
-                                                    supported in Latest Firefox, Chrome, Opera,
-                                                    Safari and Internet Explorer 10 only
+                                                    Gambar yang dilampirkan 
+                                                    hanya dapat dilihat dalam  
+                                                    firefox, Chrome, Opera, 
+                                                    Safari terbaru dan Internet Explorer 10
+                                                    
+                                                    
                                                 </span>
                                             </div>
                                         </div>

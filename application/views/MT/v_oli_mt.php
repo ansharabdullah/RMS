@@ -44,16 +44,17 @@
                                             <input class=" form-control input-sm m-bot15" id="kmakhir" name="kmakhir"  type="date" required />
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
-                                        <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume"  type="text" required />
-                                        </div>
-                                    </div>
+                                   
                                     <div class="form-group">
                                         <label for="Keterangan" class="col-lg-2 col-sm-2 control-label">Merk Oli</label>
                                         <div class="col-lg-10">
-                                            <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan"  type="text" required />
+                                            <input class=" form-control input-sm m-bot15" id="merk" name="merk"  type="text" required />
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
+                                        <div class="col-lg-10">
+                                            <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume"  type="text" required />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -171,15 +172,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
+                                    <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Merk Oli</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="merk" name="merk"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Keterangan" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
+                                    <label for="tv" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="tv" name="tv"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="modal-footer">

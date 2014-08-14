@@ -53,10 +53,11 @@
                     </div>
                 </section>
                 <section class="panel">
-                    <div class="panel-body">
-                        <header class="panel-heading">
+                    <header class="panel-heading">
                             Tabel Kinerja Awak Mobil Tangki Tanggal 10 Januari 2014
                         </header>
+                    <div class="panel-body">
+                       
                         <div class="adv-table editable-table ">
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
