@@ -16,7 +16,7 @@
                             </a>
 
                             <a class="btn btn-success" href="<?php echo base_url() ?>amt/import_amt">
-                                Import CSV <i class="icon-plus"></i>
+                                Import Excel <i class="icon-plus"></i>
                             </a>
 
                         

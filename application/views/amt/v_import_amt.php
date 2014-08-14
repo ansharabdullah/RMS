@@ -6,7 +6,7 @@
             if(isvalidate)
             {
                 var ext = $("#fileName").val().split('.').pop();
-                if(ext=="csv"){
+                if(ext=="xls"||ext=="xlsx"){
                     $("#filePreview").hide();
                     $("#filePreview").slideDown("slow");
                 }
@@ -36,7 +36,7 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Import Data AMT Dari CSV
+                Import Data AMT Dari Excel
                 <button type="button" style="float: right;" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" data-placement="left" onclick="downloadCsv()"><i class="icon-download-alt"></i></button>
             </header>
             <div class="panel-body" >
@@ -62,7 +62,7 @@
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
-                    Data dari CSV
+                    Data dari Excel
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table "  style="overflow: scroll;">

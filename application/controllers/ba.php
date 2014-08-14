@@ -49,4 +49,15 @@ class ba extends CI_Controller {
         $this->load->view('layouts/footer');
         
     }
+    
+    public function oam(){
+       $data['lv1'] = 6;
+        $data['lv2'] = 3;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('oam_home/v_home');
+        $this->load->view('layouts/footer');
+        
+    }
 }

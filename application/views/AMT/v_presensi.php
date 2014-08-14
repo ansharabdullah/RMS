@@ -200,7 +200,7 @@
                                     <label for="ctglberlaku" class="control-label col-lg-4">Tanggal Berlaku</label>
                                     <div class="col-lg-8">
                                         <input class=" form-control input-sm m-bot15" id="ctglberlaku" name="tglbelaku" size="16" type="date" value="" required/>
-                                        <span class="help-block">Select date</span>
+                                        <span class="help-block">Pilih tanggal</span>
                                     </div>
                                 </div>
                                 <div class="form-group ">

@@ -6,10 +6,10 @@ if (!defined('BASEPATH'))
 class login extends CI_Controller {
 
     public function index() {
-        $this->login();
+        $this->logina();
     }
 
-    public function login() {
+    public function logina() {
         $this->load->view('layouts/header');
         $this->load->view('login/v_login');
     }

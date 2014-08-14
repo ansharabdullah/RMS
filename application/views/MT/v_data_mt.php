@@ -13,7 +13,7 @@
                     Tambah MT <i class="icon-plus"></i>
                 </a>
 
-                <a href="<?php echo base_url() ?>mt/import_csv" rel="stylesheet" class="btn btn-success"> Import CSV <i class="icon-plus"></i></a>
+                <a href="<?php echo base_url() ?>mt/import_csv" rel="stylesheet" class="btn btn-success"> Import Excel <i class="icon-plus"></i></a>
             </div>
 
             <div class="space15"></div>
