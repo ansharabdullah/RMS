@@ -47,20 +47,25 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        
+        
         <section class="panel">
 
             <header class="panel-heading">
-                Input Perencanaan Mobil Tangki
                 <a style="float:right;" data-placement="left" class="btn btn-success tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
-                <br/> <br/>
+                
                 <a class="btn btn-success" onclick="showTambahJadwal()">
                     Import Excel <i class="icon-plus"></i>
                 </a>
+                Input Perencanaan Mobil Tangki
             </header>
-            <div class="panel-body" >
-                <div class="clearfix" id="tambahJadwal">
+            <div class="panel-body" id="tambahJadwal">
+                
+                <div class="clearfix" >
 
                     <form class="cmxform form-horizontal tasi-form" id="formUpload">
+                        
+                        
                         <div class="form-group">
                             <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                             <div class="col-lg-10">

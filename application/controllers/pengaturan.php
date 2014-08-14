@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class pengaturan extends CI_Controller {
 
     public function index() {
-        $data['lv1'] = 8;
+        $data['lv1'] = 9;
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');

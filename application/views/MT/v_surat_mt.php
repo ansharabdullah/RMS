@@ -127,13 +127,14 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Form Surat</h4>
-            </div>
-            <div class="modal-body">
-                <!-- form tambah-->
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Form Surat</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form tambah-->
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="tera">Tera</label>
                         <div class="col-lg-10">
@@ -164,12 +165,13 @@
                             <input class=" form-control input-sm m-bot15" id="kirp" name="kirp" minlength="2" type="date" required />
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
-                    </div>
-                </form> 
-            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                </div>
+            </form> 
 
         </div>
     </div>
@@ -178,13 +180,14 @@
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Form Edit Surat</h4>
-            </div>
-            <div class="modal-body">
-                <!-- form tambah-->
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Form Edit Surat</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- form tambah-->
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="tera">Tera</label>
                         <div class="col-lg-10">
@@ -215,12 +218,13 @@
                             <input class=" form-control input-sm m-bot15" id="kirp" name="kirp" minlength="2" type="date" required />
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
-                    </div>
-                </form> 
-            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                </div>
+            </form> 
 
         </div>
     </div>
