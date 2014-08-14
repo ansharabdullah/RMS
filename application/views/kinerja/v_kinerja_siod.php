@@ -36,7 +36,7 @@
        
     function downloadCsv()
     {
-        alert("Csv berhasil di download");
+        alert("Excel berhasil di download");
     }
     
 </script>
