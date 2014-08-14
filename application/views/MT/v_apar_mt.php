@@ -22,7 +22,7 @@
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
-                        <a class="btn btn-info" data-toggle="modal" href="#ModalTambahApar">
+                        <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahApar">
                             Tambah APAR <i class="icon-plus"></i>
                         </a>
                     </div>

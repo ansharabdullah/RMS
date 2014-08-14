@@ -9,7 +9,7 @@
                 Data MT   
             </header>
             <div class="panel-body">
-                <a href="<?php echo base_url() ?>mt/tambah_mt" rel="stylesheet" class="btn btn-info">
+                <a href="<?php echo base_url() ?>mt/tambah_mt" rel="stylesheet" class="btn btn-primary">
                     Tambah MT <i class="icon-plus"></i>
                 </a>
 

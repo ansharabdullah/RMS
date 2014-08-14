@@ -135,7 +135,7 @@
         <!-- page start-->
 
         <section class="panel">
-            <div class="panel-body bio-graph-info" id="ShowProfile">
+            <div class="panel-body bio-graph-primary" id="ShowProfile">
                 <header class="panel-heading">
                     <div class="col-lg-10">Detail MT
                     </div>
@@ -290,7 +290,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-body bio-graph-info" id="ShowEdit">
+            <div class="panel-body bio-graph-primary" id="ShowEdit">
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <header class="panel-heading">
                         Edit MT  
@@ -587,7 +587,7 @@
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
-                        <a class="btn btn-info" data-toggle="modal" href="#myModal">
+                        <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Kinerja <i class="icon-plus"></i>
                         </a>
                     </div>
