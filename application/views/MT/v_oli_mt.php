@@ -35,10 +35,10 @@
                             <tr>
                                 <th style="display:none;"></th>
                                 <th>No.</th>
-                                <th>KM Awal (KM)</th>
-                                <th>KM Akhir (KM)</th>
-                                <th>Total Volume</th>
-                                <th>Keterangan</th>
+                                <th>KM Awal (Km)</th>
+                                <th>Tanggal Ganti</th>
+                                <th>Merk Oli</th>
+                                <th>Total Volume (Liter)</th>
                                 <th>Aksi</th>
 
                             </tr>
@@ -48,9 +48,9 @@
                                 <th style="display:none;"></th>
                                 <td>1</td>
                                 <td>1200</td>
-                                <td>1700</td>
-                                <td>500</td>
-                                <td>Ganti Oli</td>
+                                <td>23-08-2014</td>
+                                <td>Federal</td>
+                                <td>3</td>
                                 <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
                                 </td>
@@ -58,10 +58,10 @@
                             <tr class="">
                                 <th style="display:none;"></th>
                                 <td>2</td>
-                                <td>1700</td>
-                                <td>2200</td>
-                                <td>500</td>
-                                <td>Ganti Oli</td>
+                                <td>1000</td>
+                                <td>23-03-2014</td>
+                                <td>Federal</td>
+                                <td>3</td>
                                 <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
                                 </td>
@@ -69,10 +69,10 @@
                             <tr class="">
                                 <th style="display:none;"></th>
                                 <td>3</td>
-                                <td>2200</td>
-                                <td>2700</td>
-                                <td>500</td>
-                                <td>Ganti Oli</td>
+                                <td>800</td>
+                                <td>23-08-2013</td>
+                                <td>Federal</td>
+                                <td>3</td>
                                 <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
                                 </td>
@@ -80,10 +80,10 @@
                             <tr class="">
                                 <th style="display:none;"></th>
                                 <td>4</td>
-                                <td>2700</td>
-                                <td>3200</td>
-                                <td>500</td>
-                                <td>Ganti Oli</td>
+                                <td>600</td>
+                                <td>23-02-2013</td>
+                                <td>Top One</td>
+                                <td>3</td>
                                 <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
                                 </td>
@@ -91,10 +91,10 @@
                             <tr class="">
                                 <th style="display:none;"></th>
                                 <td>5</td>
-                                <td>3200</td>
-                                <td>3700</td>
-                                <td>500</td>
-                                <td>Ganti Oli</td>
+                                <td>600</td>
+                                <td>23-08-2012</td>
+                                <td>Top One</td>
+                                <td>3</td>
                                 <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
                                 </td>
@@ -102,10 +102,10 @@
                             <tr class="">
                                 <th style="display:none;"></th>
                                 <td>6</td>
-                                <td>3700</td>
-                                <td>4200</td>
-                                <td>500</td>
-                                <td>Ganti Oli</td>
+                                <td>400</td>
+                                <td>23-02-2012</td>
+                                <td>Federal</td>
+                                <td>3</td>
                                 <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
                                 </td>
@@ -140,21 +140,20 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="kmakhir" class="col-lg-2 col-sm-2 control-label">KM Akhir</label>
+                        <label for="tglganti" class="col-lg-2 col-sm-2 control-label">Tanggal Ganti</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kmakhir" name="kmakhir" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="tglganti" name="tglganti" minlength="2" type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="merkoli" class="col-lg-2 col-sm-2 control-label">Merk Oli</label>
+                        <div class="col-lg-10">
+                            <input class=" form-control input-sm m-bot15" id="merkoli" name="merkoli" minlength="2" type="text" required />
+                        </div>
+                    </div> <div class="form-group">
                         <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume" minlength="2" type="text" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Keterangan" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan" minlength="2" type="text" required />
                         </div>
                     </div>
                 </div>
@@ -190,21 +189,21 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="kmakhir" class="col-lg-2 col-sm-2 control-label">KM Akhir</label>
+                        <label for="tglganti" class="col-lg-2 col-sm-2 control-label">Tanggal Ganti</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kmakhir" name="kmakhir" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="tglganti" name="tglganti" minlength="2" type="date" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="merkoli" class="col-lg-2 col-sm-2 control-label">Merk Oli</label>
+                        <div class="col-lg-10">
+                            <input class=" form-control input-sm m-bot15" id="merkoli" name="merkoli" minlength="2" type="text" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume" minlength="2" type="text" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Keterangan" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="keterangan" name="keterangan" minlength="2" type="text" required />
                         </div>
                     </div>
                 </div>
