@@ -1,4 +1,31 @@
-
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $("#ShowMobil").show();
+        $("#ShowAwak").hide();
+        $("#mt").show();
+        $("#amt").hide();
+    });
+    
+    function changeJenis()
+    {
+        if($("#kinerja").val() == "Mobil Tangki" )
+        {
+            $("#ShowMobil").show();
+            $("#ShowAwak").hide();
+            $("#mt").show();
+            $("#amt").hide();
+        }
+        else if($("#kinerja").val() == "Awak Mobil Tangki" )
+        {
+            $("#ShowAwak").show();
+            $("#ShowMobil").hide();
+            $("#amt").show();
+            $("#mt").hide();
+        }
+    }
+    
+    
+</script>
 
 <script type="text/javascript">
          
@@ -17,9 +44,6 @@
         
     });
     
-    
-    
-        
     function importTable()
     {
         alert("Berhasil disimpan !");
@@ -33,13 +57,26 @@
     <section class="wrapper">
         <!-- page start-->
         <section class="panel">
-            <header class="panel-heading">
+            <header class="panel-heading" id="mt">
                 Input Kinerja Mobil Tangki
             </header>
+            <header class="panel-heading" id="amt">
+                Input Kinerja Awak Mobil Tangki
+            </header>
             <div class="panel-body">
-                <div class="adv-table editable-table ">
+                <form class="cmxform form-horizontal tasi-form" id="form">
+                    <div class="form-group">
+                        <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Jenis Kinerja</label>
+                        <div class="col-lg-2">
+                            <select class="form-control input-sm m-bot15" id="kinerja" onchange="changeJenis()">
+                                <option value="Mobil Tangki"> Mobil Tangki</option>
+                                <option value="Awak Mobil Tangki"> Awak Mobil Tangki</option>
+                            </select> 
+                        </div>
+                    </div>
+                </form>
+                <div class="adv-table editable-table" id="ShowMobil">
                     <div class="clearfix">
-
                     </div>
                     <div class="space15"></div>
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -166,6 +203,136 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="adv-table editable-table" id="ShowAwak">
+                    <div class="clearfix">
+                    </div>
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample2">
+                        <thead>
+                            <tr>
+                                <th style="display: none;"></th>
+                                <th>No.</th>
+                                <th>NIP</th>
+                                <th>Nama</th>
+                                <th>Jabatan</th>
+                                <th>Klasifikasi</th>
+                                <th>Kinerja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>1</td>
+                                <td>94112</td>
+                                <td>Asep</td>
+                                <td>Supir</td>
+                                <td class="center">8</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>2</td>
+                                <td>1294</td>
+                                <td>Waringin</td>
+                                <td>Supir</td>
+                                <td class="center">8</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>3</td>
+                                <td>1209312</td>
+                                <td>Cipata</td>
+                                <td>Supir</td>
+                                <td class="center">24</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>4</td>
+                                <td>123145</td>
+                                <td>Niaga</td>
+                                <td>Kernet</td>
+                                <td class="center">24</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>5</td>
+                                <td>1241258</td>
+                                <td>Incot</td>
+                                <td>Kernet</td>
+                                <td class="center">24</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>6</td>
+                                <td>92340</td>
+                                <td>Rasya</td>
+                                <td>Supir</td>
+                                <td class="center">8</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>7</td>
+                                <td>92124</td>
+                                <td>Rama</td>
+                                <td>Supir</td>
+                                <td class="center">24</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>8</td>
+                                <td>127152</td>
+                                <td>Akun</td>
+                                <td>Supir</td>
+                                <td class="center">16</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>9</td>
+                                <td>123846</td>
+                                <td>Firman</td>
+                                <td>Supir</td>
+                                <td class="center">32</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>10</td>
+                                <td>1239174</td>
+                                <td>Aga</td>
+                                <td>Kernet</td>
+                                <td class="center">32</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>11</td>
+                                <td>928374</td>
+                                <td>Maskum</td>
+                                <td>Kernet</td>
+                                <td class="center">16</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>12</td>
+                                <td>1845142</td>
+                                <td>Supir</td>
+                                <td>Supir</td>
+                                <td class="center">8</td>
+                                <td><a data-toggle="modal" data-placement="left" href="#myModal" class="btn btn-success btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
