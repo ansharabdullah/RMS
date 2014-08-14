@@ -196,8 +196,6 @@
                                     <td><?php echo rand(30, 70) ?></td>
                                     <td><?php echo rand(30, 70) ?></td>
                                     <td><?php echo rand(30, 70) ?></td>
-
-
                                 </tr>
                                 <tr class="">
                                     <th style="display: none;"></th>

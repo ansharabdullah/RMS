@@ -142,7 +142,6 @@
                         </div>
                     </form>
                 </div>
-
                 <div id="tabelJadwal" style="margin-top: 50px;">
                     <header class="panel-heading">
                         Jadwal (<span id="tglJadwal"></span>)
