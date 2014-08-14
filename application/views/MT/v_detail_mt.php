@@ -778,7 +778,7 @@
 
         </section>
 
-        
+
         <!-- page end-->
     </section>
 </section>
@@ -793,7 +793,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
+                <h4 class="modal-title">Hapus Kinerja</h4>
             </div>
             <div class="modal-body">
 
@@ -807,23 +807,25 @@
         </div>
     </div>
 </div>
-<!-- Modal -->
+
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Atur Kinerja</h4>
-            </div>
-            <div class="modal-body">
+        <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
 
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Atur Kinerja</h4>
+                </div>
+                <div class="modal-body">
                     <div class="form-group ">
                         <label for="nip" class="control-label col-lg-2">Tanggal</label>
                         <div class="col-lg-4">
                             <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal"  type="date" required />
                             <span class="help-block">Pilih Tanggal</span>
                         </div>
+
                         <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
                         <div class="col-lg-4">
                             <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
@@ -877,30 +879,29 @@
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
-                    </div>
 
-                </form>
-
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                </div>
             </div>
-
-        </div>
+        </form>
     </div>
 </div>
-<!-- modal -->
-<!-- Modal -->
+
+
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Atur Kinerja</h4>
-            </div>
-            <div class="modal-body">
+        <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="get" action="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Atur Kinerja</h4>
+                </div>
 
-                <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="get" action="">
+                <div class="modal-body">
+
                     <div class="form-group ">
                         <label for="nip" class="control-label col-lg-2">Tanggal</label>
                         <div class="col-lg-4">
@@ -960,16 +961,14 @@
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
-                    </div>
+                </div>
 
-                </form>
-
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                </div>
             </div>
-
-        </div>
+        </form>
     </div>
 </div>
 <!-- modal -->

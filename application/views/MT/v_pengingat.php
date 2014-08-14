@@ -115,7 +115,7 @@
                                     <td style="background-color: <?php echo $color ?>;"><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $transportir[$i] ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $produk[$i] ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan"><button type="button" class="btn btn-success btn-sm" onClick="cekBan()">Cek Ban</button></a></td>
+                                    <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan" class="btn btn-success btn-sx" onClick="cekBan()">Cek Ban</a></td>
                                 </tr>
                                 <?php
                             }
@@ -280,7 +280,7 @@
                 </form>
                 <br/><br/>
                 
-                <table class="table table-hover table-bordered" >
+                <table class="table table-bordered" >
                     <tr>
                         <th>Ban</th>
                         <th>Sisa Waktu</th>
@@ -297,7 +297,7 @@
                         <tr id="row-ban-<?php echo $i + 1 ?>" <?php echo $color ?>>
                             <td><?php echo $i + 1 ?></td>
                             <td><span id="aturban<?php echo $i + 1 ?>"><?php echo $sisa ?></span> hari</td>
-                            <td><button type="button" class="btn btn-success btn-sm" onclick="setBan('<?php echo $i + 1 ?>')">Atur</button></td>
+                            <td><button type="button" class="btn btn-success btn-sx" onclick="setBan('<?php echo $i + 1 ?>')">Atur</button></td>
                         </tr>
                         <?php
                     }
