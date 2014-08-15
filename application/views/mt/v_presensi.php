@@ -69,13 +69,13 @@
                                 <tr>
                                     <th style="display:none;"></th>
                                     <th>No</th>
-                                    <th>NIP</th>
-                                    <th>Nama</th>
-                                    <th>Jabatan</th>
-                                    <th>Klasifikasi</th>
+                                    <th>Nopol</th>
+                                    <th>Kapasitas</th>
+                                    <th>Transportir</th>
+                                    <th>Produk</th>
+                                    <th>Kategori</th>
                                     <th>Kehadiran</th>
                                     <th>Keterangan</th>
-                                    <th>Alasan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -84,12 +84,12 @@
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td>1</td>
-                                    <td>5209527</td>
-                                    <td>Dadan</td>
-                                    <td>Supir</td>
+                                    <td>D9809AD</td>
                                     <td>24</td>
+                                    <td>PT Incot</td>
+                                    <td>Premium</td>
+                                    <td>1</td>
                                     <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
                                     <td></td>
                                     <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
@@ -97,12 +97,12 @@
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td>2</td>
-                                    <td>287250</td>
-                                    <td>Anshar</td>
-                                    <td>Supir</td>
-                                    <td>24</td>
+                                    <td>D9709AF</td>
+                                    <td>16</td>
+                                    <td>PT Incot</td>
+                                    <td>Premium</td>
+                                    <td>1</td>
                                     <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
                                     <td></td>
                                     <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
@@ -110,52 +110,50 @@
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td>3</td>
-                                    <td>245828</td>
-                                    <td>Renisa</td>
-                                    <td>Supir</td>
-                                    <td>16</td>
+                                    <td>D9119AD</td>
+                                    <td>24</td>
+                                    <td>PT Masoem</td>
+                                    <td>Pertamax</td>
+                                    <td>2</td>
                                     <td><span class="label label-warning">Absen</span></td>
-                                    <td>Sakit</td>
-                                    <td>Menderita Gangguan Jiwa</td>
+                                    <td>Update Tera</td>
                                     <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td>4</td>
-                                    <td>096704</td>
-                                    <td>Cahyadi</td>
-                                    <td>Kernet</td>
-                                    <td>16</td>
+                                    <td>D9823AU</td>
+                                    <td>8</td>
+                                    <td>PT Masoem</td>
+                                    <td>Solar</td>
+                                    <td>1</td>
                                     <td><span class="label label-warning">Absen</span></td>
-                                    <td>Sakit</td>
-                                    <td>Menderita Kanker</td>
+                                    <td>Ganti Oli</td>
                                     <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td>5</td>
-                                    <td>2350874</td>
-                                    <td>Chepy</td>
-                                    <td>Kernet</td>
-                                    <td>8</td>
+                                    <td>D9009AD</td>
+                                    <td>24</td>
+                                    <td>PT Patra</td>
+                                    <td>Pertamax</td>
+                                    <td>2</td>
                                     <td><span class="label label-warning">Absen</span></td>
-                                    <td>Bolos</td>
-                                    <td>Tidak ada keterangan</td>
+                                    <td>Update STNK</td>
                                     <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
-
                                 <tr class="">
-
                                     <td style="display:none;"></td>
                                     <td>6</td>
-                                    <td>4956296</td>                                
-                                    <td>Firman</td>
-                                    <td>Supir</td>
-                                    <td>32</td>
+                                    <td>D9811AU</td>
+                                    <td>24</td>
+                                    <td>PT Patra</td>
+                                    <td>Slar</td>
+                                    <td>3</td>
                                     <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
                                     <td></td>
                                     <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
@@ -196,10 +194,10 @@
                             <div class="panel-body">
 
                                 <div class="form-group ">                                            
-                                    <label for="ctglberlaku" class="control-label col-lg-4">Tanggal Berlaku</label>
+                                    <label for="ctglberlaku" class="control-label col-lg-4">Tanggal</label>
                                     <div class="col-lg-8">
                                         <input class=" form-control input-sm m-bot15" id="ctglberlaku" name="tglbelaku" size="16" type="date" value="" required/>
-                                        <span class="help-block">Select date</span>
+                                        <span class="help-block">Pilih Tanggal</span>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -207,30 +205,20 @@
                                     <div class="col-lg-8">
                                         <select class="form-control input-sm m-bot15" id="cjenis" name="jenis">
                                             <option>Hadir</option>
-                                            <option>Sakit</option>
-                                            <option>Ijin</option>
-                                            <option>Alfa</option>
+                                            <option>Absen</option>
+                                            <option>Libur</option>
                                         </select>
                                     </div>
-
-
                                 </div>
-
-
                                 <div class="form-group ">
                                     <label for="calasan" class="control-label col-lg-4">Alasan</label>
                                     <div class="col-lg-8">
                                         <input class=" form-control input-sm m-bot15" id="calasan" name="alasan" minlength="2" type="text" required />
                                     </div>
-
-
                                 </div>
-
-
                             </div>
                         </section>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>

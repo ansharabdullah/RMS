@@ -22,7 +22,7 @@
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
-                        <a class="btn btn-info" data-toggle="modal" href="#ModalTambahApar">
+                        <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahApar">
                             Tambah APAR <i class="icon-plus"></i>
                         </a>
                     </div>
@@ -221,7 +221,7 @@
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Status</label>
                         <div class="col-lg-10">
-                             <select class="form-control input-sm m-bot15" id="status" name="status">
+                            <select class="form-control input-sm m-bot15" id="status" name="status">
                                 <option>Aktif</option>
                                 <option>Tidak Aktif</option>
                             </select>

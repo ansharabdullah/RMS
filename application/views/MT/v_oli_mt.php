@@ -26,7 +26,7 @@
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
-                        <a class="btn btn-info" data-toggle="modal" href="#myModal">
+                        <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Oli MT <i class="icon-plus"></i>
                         </a>
                     </div>

@@ -135,7 +135,7 @@
         <!-- page start-->
 
         <section class="panel">
-            <div class="panel-body bio-graph-info" id="ShowProfile">
+            <div class="panel-body bio-graph-primary" id="ShowProfile">
                 <header class="panel-heading">
                     <div class="col-lg-10">Detail MT
                     </div>
@@ -177,7 +177,7 @@
                                         <p><span>Kompartemen</span>: </p>
                                     </div>
                                     <div class="bio-row">
-                                        <p><span>Status</span>: Pinjam</p>
+                                        <p><span>Status</span>: Sewa</p>
                                     </div>
                                     <div class="bio-row">
                                         <p><span>GPS </span>: OK</p>
@@ -195,7 +195,7 @@
                                         <p><span>Kategori </span>: 1</p>
                                     </div>
                                     <div class="bio-row">
-                                        <p><span>Rasio </span>: 12</p>
+                                        <p><span>Rasio </span>: 346.5</p>
                                     </div>
                                     <div class="bio-row">
                                         <p><span>Jumlah Segel </span>: 8</p>
@@ -290,7 +290,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-body bio-graph-info" id="ShowEdit">
+            <div class="panel-body bio-graph-primary" id="ShowEdit">
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <header class="panel-heading">
                         Edit MT  
@@ -300,19 +300,19 @@
                             <div class="bio-row">
                                 <label for="nip" class="control-label col-lg-4">Nopol</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cnip" name="nopol"  type="text" required />
+                                    <input class=" form-control input-sm m-bot15" value="D9808AD" id="cnip" name="nopol"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">No Rangka</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cama" name="norangka"  type="text" required />
+                                    <input class=" form-control input-sm m-bot15" value="912814KM" id="cama" name="norangka"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="cjabatan" class="control-label col-lg-4">Kapasitas</label>
                                 <div class="col-lg-6">
-                                    <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan">
+                                    <select class="form-control input-sm m-bot15" value="16" id="cjabatan" name="jabatan">
                                         <option>8</option>
                                         <option>16</option>
                                         <option>24</option>
@@ -324,13 +324,13 @@
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">No Mesin</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cmesin" name="nomesin"  type="text" required />
+                                    <input class=" form-control input-sm m-bot15" value="KAIDU129314" id="cmesin" name="nomesin"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="cklas" class="control-label col-lg-4">Produk</label>
                                 <div class="col-lg-6">
-                                    <select class="form-control input-sm m-bot15" id="cklas" name="produk">
+                                    <select class="form-control input-sm m-bot15" value="Pertamax" id="cklas" name="produk">
                                         <option>Premium</option>
                                         <option>Pertamax</option>
                                         <option>Solar</option>
@@ -341,19 +341,19 @@
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cjk" name="jk"  type="text" required />
+                                    <input class=" form-control input-sm m-bot15" value="Hino 3.2" id="cjk" name="jk"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="calamat" class="control-label col-lg-4">Transportir</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="calamat" name="transportir"  type="text" required />
+                                    <input class=" form-control input-sm m-bot15" value="PT Masoem" id="calamat" name="transportir"  type="text" required />
                                 </div>
                             </div> 
                             <div class="bio-row">
                                 <label for="ctglmasuk" class="control-label col-lg-4">Rasio</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="crasio" name="rasio" type="text" size="16" type="text" required/>
+                                    <input class=" form-control input-sm m-bot15" value="346.5" id="crasio" name="rasio" type="text" size="16" type="text" required/>
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -372,17 +372,11 @@
                                     <input class=" form-control input-sm m-bot15" id="kompartemen" name="kompartemen" type="text" size="16" type="text" required/>
                                 </div>
                             </div>
-                            <div class="bio-row">
-                                <label for="kompartemen" class="control-label col-lg-4">Model Kendaraan</label>
-                                <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="mk" name="mk" type="text" size="16" type="text" required/>
-                                </div>
-                            </div>
-
+                            
                             <div class="bio-row">
                                 <label for="status" class="control-label col-lg-4">Status</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cstatus" name="status"  type="text" required />
+                                    <input class=" form-control input-sm m-bot15" value="Sewa" id="cstatus" name="status"  type="text" required />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -587,7 +581,7 @@
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
-                        <a class="btn btn-info" data-toggle="modal" href="#myModal">
+                        <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Kinerja <i class="icon-plus"></i>
                         </a>
                     </div>

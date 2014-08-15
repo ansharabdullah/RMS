@@ -36,9 +36,9 @@
                                 <th style="display: none;"></th>
                                 <th>No.</th>
                                 <th>Nopol</th>
-                                <th>Apar 1</th>
-                                <th>Apar 2</th>
-                                <th>Apar 3</th>
+                                <th>Store Pressure</th>
+                                <th>Catridge</th>
+                                <th>C02</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -178,13 +178,8 @@
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-
         </section>
-
-
         <!-- page end-->
     </section>
 </section>
