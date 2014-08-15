@@ -45,45 +45,40 @@
                 </form>
             </div>
         </section>
-        
+
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
                     Tabel Tarif Interpolasi dan FRM (<span id="tgl"></span>)
+                    <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalTambah" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit</a>
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">
 
                         <div class="space15"></div>
-                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="display:none;"></th>
                                     <th>No</th>
                                     <th>Tanggal</th>
                                     <th>Harga FRM</th>
                                     <th>Tarif Interpolasi (Rp./Ltr)</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <tr class="">
-                                    <td style="display:none;"></td>
                                     <td>1</td>
                                     <td>1 - 14 Agustus 2014</td>
                                     <td>30</td>
                                     <td>32</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                                 <tr class="">
-                                    <td style="display:none;"></td>
                                     <td>2</td>
                                     <td>15 - 31 Agustus 2014</td>
                                     <td>31</td>
                                     <td>33</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                 </tr>
 
                             </tbody>
@@ -95,60 +90,6 @@
     </section>
 </section>
 <!--main content end-->
-
-
-
-
-<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Edit</h4>
-            </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
-
-                <div class="modal-body">
-
-                    <div class="col-lg-12">
-                        <section class="panel">
-
-                            <div class="panel-body">
-
-                                <div class="form-group ">
-                                    <label for="cfrm" class="control-label col-lg-4">Harga FRM</label>
-                                    <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cfrm" name="frm" minlength="2" type="text" required />
-                                    </div>
-
-
-                                </div>
-
-
-                                <div class="form-group ">
-                                    <label for="cinterpolasi" class="control-label col-lg-4">Tarif Interpolasi (Rp./Ltr)</label>
-                                    <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cinterpolasi" name="interpolasi" minlength="2" type="text" required />
-                                    </div>
-
-
-                                </div>
-
-
-                            </div>
-                        </section>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 
 
 <div class="modal fade" id="ModalTambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

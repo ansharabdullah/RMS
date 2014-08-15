@@ -20,12 +20,11 @@
                 Berita Acara
             </div>
             <div class="panel-body" >
-                <div class="col-lg-12">
-                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_operasional">KPI Operasional</a>
+                <div class="col-lg-12">                    
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/import_ms2">MS2 Complience</a>
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/frm">Tarif Interpolasi dan FRM</a>
+                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_operasional">KPI Operasional</a>                    
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>ba/kpi_internal">KPI Internal</a>
-
                 </div>
             </div>
             <div class="panel-body" >
