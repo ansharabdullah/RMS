@@ -178,13 +178,8 @@
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-
         </section>
-
-
         <!-- page end-->
     </section>
 </section>

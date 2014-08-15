@@ -23,10 +23,8 @@
         <section class="panel">
             <header class="panel-heading">
                 KPI Operasional Depot
-            </header>
-            <div class ="panel-body">
-                <a style="float:right;" data-placement="left" href="#ModalTambah" data-toggle="modal" class="btn btn-primary tooltips" data-original-title="Tambah"> Tambah Data <i class="icon-plus"></i></a>
-            </div>
+                <a style="float:right;" data-placement="left" href="#ModalTambah" data-toggle="modal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah"> Tambah Data <i class="icon-plus"></i></a>
+             </header>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <div class="form-group">

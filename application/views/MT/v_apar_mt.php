@@ -221,7 +221,7 @@
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Status</label>
                         <div class="col-lg-10">
-                             <select class="form-control input-sm m-bot15" id="status" name="status">
+                            <select class="form-control input-sm m-bot15" id="status" name="status">
                                 <option>Aktif</option>
                                 <option>Tidak Aktif</option>
                             </select>
