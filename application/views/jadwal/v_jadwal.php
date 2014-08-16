@@ -5,12 +5,12 @@
         $("#tambahJadwal").hide();
         $("#LihatJadwal").hide();
         $("#tabelLihat").hide();
-        $("#tabelTambahJadwal").hide();
+        $("#tabelTambahJadwal1").hide();
         $("#commentForm").submit(function(e){
             var ext = $("#fileName").val().split('.').pop();
             if(ext=="xls" || ext=="xlsx"){
-                $("#tabelTambahJadwal").hide();
-                $("#tabelTambahJadwal").slideDown("slow");
+                $("#tabelTambahJadwal1").hide();
+                $("#tabelTambahJadwal1").slideDown("slow");
             }
             else
             {
@@ -26,14 +26,15 @@
         $("#LihatJadwal").slideDown("slow");
         $("#tambahJadwal").hide();
         $("#tabelJadwal").hide();
-        $("#tabelTambahJadwal").hide();
+         $("#tabelTambahJadwal1").hide();
     }
     
     function showJadwal()
     {
         $("#tglJadwal").html($("#tanggalJadwal").val());
         $("#tabelJadwal").hide();
-        $("#tabelJadwal").slideDown("slow");
+        $("#tabelTambahJadwal1").hide();
+        $("#tabelJadwal").show();
     }
     
     function showTambahJadwal()
@@ -42,6 +43,8 @@
         $("#tambahJadwal").slideDown("slow");
         $("#LihatJadwal").hide();
         $("#tabelLihat").hide();
+        $("#tabelTambahJadwal1").hide();
+         $("#tabelJadwal").hide();
     }
     
         
@@ -104,7 +107,7 @@
         </section>
         <section class="panel">
 
-            <div class="adv-table editable-table " id="tabelTambahJadwal">
+            <div class="adv-table editable-table " id="tabelTambahJadwal1">
                 <div class="clearfix">
                     <header class="panel-heading">
                         Tambah Jadwal
@@ -166,6 +169,7 @@
                                 <input type="date" required="required" id="tanggalJadwal" class="form-control"  placeholder="Tanggal" name="tanggalSIOD" onchange="showJadwal()">
                             </div>
                         </div>
+                       
                     </form>
                 </div>
             </div>
