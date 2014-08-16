@@ -37,7 +37,7 @@
             <li>
                 <a  href="<?php echo base_url() ?>kinerja"  <?php if ($lv1 == 4) echo "class='active'" ?>>
                     <i class="icon-briefcase"></i>
-                    <span>Input Kinerja</span>
+                    <span>Kinerja</span>
                 </a>
             </li>
             <li>
