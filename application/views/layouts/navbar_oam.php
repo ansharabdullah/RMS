@@ -44,7 +44,7 @@
             </li>
             <?php $level++; ?>
             <li class="sub-menu">
-                <a  href="javascript:;" <?php if ($lv1 == $level) echo "class='active'" ?>>
+                <a href="<?php echo base_url() ?>pengaturan_oam"  <?php if ($lv1 == 9) echo "class='active'" ?>>
                     <i class="icon-user"></i><span>Pengaturan user</span>
                 </a>
             </li>
