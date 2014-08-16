@@ -111,7 +111,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li id="btnProf" class="active"><a href="javascript:ShowProfile();"> <i class="icon-user" ></i> Profile</a></li>
                         <li id="btnEdit"><a href="javascript:EditProfile();" > <i class="icon-edit"></i> Edit profile</a></li>
-                    
+
                     </ul>
 
                 </section>
@@ -380,9 +380,9 @@
                                 <td><span class="label label-success">Hadir</span></td>
                                 <td>
                                     <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#HapusKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                               
+
                             </tr>
 
                             <tr class="">
@@ -396,9 +396,9 @@
                                 <td><span class="label label-success">Hadir</span></td>
                                 <td>
                                     <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#HapusKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                               
+
                             </tr>
 
                             <tr class="">
@@ -412,9 +412,9 @@
                                 <td><span class="label label-warning">Absen</span></td>
                                 <td>
                                     <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#HapusKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                               
+
                             </tr>
 
                             <tr class="">
@@ -428,9 +428,9 @@
                                 <td><span class="label label-warning">Absen</span></td>
                                 <td>
                                     <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#HapusKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                               
+
                             </tr>
 
                             <tr class="">
@@ -444,11 +444,9 @@
                                 <td><span class="label label-warning">Absen</span></td>
                                 <td>
                                     <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#HapusKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                               
                             </tr>
-
                             <tr class="">
 
                                 <td style="display:none;"></td>
@@ -461,19 +459,14 @@
                                 <td><span class="label label-success">Hadir</span></td>
                                 <td>
                                     <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                    <a data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                    <a data-placement="top" data-toggle="modal" href="#HapusKinerja" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                 </td>
-                               
-
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
-
-
-
     </section>
 </section>
 <!--main content end-->
@@ -545,7 +538,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                     <input class="btn btn-success" type="submit" value="Simpan"/>
                 </div>
             </form>
@@ -566,7 +559,7 @@
 
             </div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                 <button class="btn btn-success" type="button">OK</button>
             </div>
         </div>
@@ -625,20 +618,47 @@
                                         <input class=" form-control input-sm m-bot15" id="cspbu" name="spbu" minlength="2" type="text" required />
                                     </div>
                                 </div>
+                                <div class="form-group ">
+                                    <label for="chadir" class="control-label col-lg-2">Kehadiran</label>
+                                    <div class="col-lg-4">
+                                        <select class="form-control input-sm m-bot15" id="kehadiran" name="kehadiran">
+                                            <option>Hadir</option>
+                                            <option>Absen</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                     <input class="btn btn-success" type="submit" value="Simpan"/>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<div class="modal fade" id="HapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Form Hapus Kinerja</h4>
+            </div>
+            <div class="modal-body">
 
+                Apakah anda yakin ?
+
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
+                <button class="btn btn-danger" type="button"> Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--script for this page only-->

@@ -46,8 +46,8 @@
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' :
-                        'Sorot Grafik Untuk Zoom In'
+                        'Klik dan tarik di area plot untuk memperbesar gambar' :
+                        'Sorot Grafik Untuk Memperbesar'
             },
             xAxis: {
                 type: 'datetime',
@@ -117,12 +117,12 @@ for ($i = 0; $i < 12; $i++) {
                 zoomType: 'x'
             },
             title: {
-                text: 'Grafik AMT'
+                text: 'Grafik MT'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
-                        'Click and drag in the plot area to zoom in' :
-                        'Sorot Grafik Untuk Zoom In'
+                        'Klik dan tarik di area plot untuk memperbesar gambar': 
+                        'Sorot Grafik Untuk Memperbesar'
             },
             xAxis: {
                 type: 'datetime',
@@ -288,11 +288,11 @@ for ($i = 0; $i < 12; $i++) {
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Pegawai1 Hari ini Hidak masuk</td>
+                                        <td>Pegawai1 Hari ini tidak masuk</td>
                                     </tr>
                                     <tr>
-                                        <td>3</td>
-                                        <td>Pegawai2 Hari ini Hidak masuk</td>
+                                        <td>4</td>
+                                        <td>Pegawai2 Hari ini tidak masuk</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -319,11 +319,11 @@ for ($i = 0; $i < 12; $i++) {
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Pegawai1 Hari ini Hidak masuk</td>
+                                        <td>Pegawai1 Hari ini tidak masuk</td>
                                     </tr>
                                     <tr>
-                                        <td>3</td>
-                                        <td>Pegawai2 Hari ini Hidak masuk</td>
+                                        <td>4</td>
+                                        <td>Pegawai2 Hari ini tidak masuk</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -342,19 +342,19 @@ for ($i = 0; $i < 12; $i++) {
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Data AMT hari ini belum diinput</td>
+                                        <td>Data MT hari ini belum diinput</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Data AMT tgl 07-08-2014 belum diupload</td>
+                                        <td>Data MT tgl 07-08-2014 belum diupload</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Pegawai1 Hari ini Hidak masuk</td>
+                                        <td>Mobil harus segera ganti oli</td>
                                     </tr>
                                     <tr>
-                                        <td>3</td>
-                                        <td>Pegawai2 Hari ini Hidak masuk</td>
+                                        <td>4</td>
+                                        <td>Mobil Nopol D9009AD Hari ini tidak masuk</td>
                                     </tr>
                                 </tbody>
                             </table>
