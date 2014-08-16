@@ -10,7 +10,7 @@ class pengaturan_oam extends CI_Controller {
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar',$data);
+        $this->load->view('layouts/navbar_oam',$data);
         $this->load->view('oam/v_pengaturan');
         $this->load->view('layouts/footer');
         

@@ -155,7 +155,7 @@
 
         <section class="panel" id="laporanPreview">
             <header class="panel-heading">
-                Laporan <b><span id="waktu">asa</span></b> Kinerja Mobil Tangki
+                Laporan <b><span id="waktu"></span></b> Kinerja Mobil Tangki
             </header>
             <div class="panel-body" >
                 <div class="adv-table editable-table ">
