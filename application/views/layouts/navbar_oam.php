@@ -38,7 +38,7 @@
             </li>
             <?php $level++; ?>
             <li class="sub-menu">
-                <a  href="javascript:;" <?php if ($lv1 == $level) echo "class='active'" ?>>
+                <a  href="<?php echo base_url() ?>presentasi" <?php if ($lv1 == $level) echo "class='active'" ?>>
                     <i class="icon-bar-chart"></i><span>Grafik</span>
                 </a>
             </li>
