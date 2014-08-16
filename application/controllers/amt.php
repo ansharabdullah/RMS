@@ -53,6 +53,17 @@ class amt extends CI_Controller {
         $this->load->view('amt/v_presensi');
         $this->load->view('layouts/footer');
     }
+    
+    public function koefisien() {
+        $data['lv1'] = 2;
+        $data['lv2'] = 4;
+        
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar',$data);
+        $this->load->view('amt/v_koefisien');
+        $this->load->view('layouts/footer');
+    }
 
     public function grafik(){ 
         $data['lv1'] = 2;
