@@ -76,6 +76,8 @@
                     Lihat Jadwal <i class="icon-check"></i>
                 </a>
             </header>
+        </section>
+        <section class="panel">
             <div class="panel-body" id="tambahJadwal">
                 <div class="clearfix" >
 
@@ -99,49 +101,54 @@
                         </div>
                     </form>
                 </div>
+        </section>
+        <section class="panel">
 
-                <div class="adv-table editable-table " id="tabelTambahJadwal">
-                    <div class="clearfix">
+            <div class="adv-table editable-table " id="tabelTambahJadwal">
+                <div class="clearfix">
+                    <header class="panel-heading">
+                        Tambah Jadwal
 
-                    </div>
-                    <div class="space15"></div>
-                    <table class="table table-striped table-hover table-bordered" id="editable-sample2">
-                        <thead>
-                            <tr>
-                                <th style="display: none;">-</th>
-                                <th>No.</th>
-                                <th>Nama Pekerja</th>
-                                <th>Jabatan</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $nama = array('Faizal', 'Fadhil', 'Ferdi', 'Gumara', 'Arman', 'Dadang', 'Rasim', 'Enjang', 'Agus', 'Asep', 'Anshar', 'Chepy', 'Firman');
-                            $jabatan = array('Sopir', 'Kernet');
-                            for ($i = 0; $i < 12; $i++) {
-                                $status = rand(0, 2);
-                                if ($status > 0) {
-                                    $hadir = "<button type='button' class='btn btn-success btn-sm'>hadir</button>";
-                                } else {
-                                    $hadir = "<button type='button' class='btn btn-warning btn-sm'>tidak hadir</button>";
-                                }
-                                ?>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td><?php echo ($i + 1) ?></td>
-                                    <td><?php echo $nama[$i] ?></td>
-                                    <td><?php echo $jabatan[rand(0, 1)] ?></td>
-                                    <td><?php echo $hadir ?></td>
-                                </tr>
-
-                                <?php
+                    </header>
+                </div>
+                <div class="space15"></div>
+                <table class="table table-striped table-hover table-bordered" id="editable-sample2">
+                    <thead>
+                        <tr>
+                            <th style="display: none;">-</th>
+                            <th>No.</th>
+                            <th>Nama Pekerja</th>
+                            <th>Jabatan</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $nama = array('Faizal', 'Fadhil', 'Ferdi', 'Gumara', 'Arman', 'Dadang', 'Rasim', 'Enjang', 'Agus', 'Asep', 'Anshar', 'Chepy', 'Firman');
+                        $jabatan = array('Sopir', 'Kernet');
+                        for ($i = 0; $i < 12; $i++) {
+                            $status = rand(0, 2);
+                            if ($status > 0) {
+                                $hadir = "<button type='button' class='btn btn-success btn-sm'>hadir</button>";
+                            } else {
+                                $hadir = "<button type='button' class='btn btn-warning btn-sm'>tidak hadir</button>";
                             }
                             ?>
-                        </tbody>
-                    </table>
-                    <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
-                </div>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td><?php echo ($i + 1) ?></td>
+                                <td><?php echo $nama[$i] ?></td>
+                                <td><?php echo $jabatan[rand(0, 1)] ?></td>
+                                <td><?php echo $hadir ?></td>
+                            </tr>
+
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
+            </div>
 
             </div>
 
@@ -161,103 +168,105 @@
                         </div>
                     </form>
                 </div>
-                <div id="tabelJadwal" style="margin-top: 50px;">
-                    <header class="panel-heading">
-                        Jadwal (<span id="tglJadwal"></span>)
-                    </header>
-                    <div class="panel-body" >
-                        <div class="adv-table editable-table ">
-                            <div class="clearfix">
-
-                            </div>
-                            <div class="space15"></div>
-                            <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                                <thead>
-                                    <tr>
-                                        <th style="display: none;">-</th>
-                                        <th>No.</th>
-                                        <th>Nama Pekerja</th>
-                                        <th>Jabatan</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $nama = array('Agus', 'Asep', 'Anshar', 'Chepy', 'Firman', 'Faizal', 'Fadhil', 'Ferdi', 'Gumara', 'Arman', 'Dadang', 'Rasim', 'Enjang');
-                                    $jabatan = array('Sopir', 'Kernet');
-                                    for ($i = 0; $i < 12; $i++) {
-                                        $status = rand(0, 2);
-                                        if ($status > 0) {
-                                            $hadir = "<button type='button' class='btn btn-success btn-sm'>masuk</button>";
-                                        } else {
-                                            $hadir = "<button type='button' class='btn btn-warning btn-sm'>libur</button>";
-                                        }
-                                        ?>
-                                        <tr class="">
-                                            <th style="display: none;"></th>
-                                            <td><?php echo ($i + 1) ?></td>
-                                            <td><?php echo $nama[$i] ?></td>
-                                            <td><?php echo $jabatan[rand(0, 1)] ?></td>
-                                            <td><?php echo $hadir ?></td>
-                                            <td>
-                                                <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal"><span  class="btn btn-warning btn-sm tooltips" data-original-title="Ganti Status" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
-
-                                            </td>
-                                        </tr>
-
-                                        <?php
+            </div>
+        </section>
+        <section class="panel">
+            <div class="panel-body" id="tabelJadwal" >
+                <header class="panel-heading">
+                    Jadwal (<span id="tglJadwal"></span>)
+                </header>
+                <div class="panel-body" >
+                    <div class="adv-table editable-table ">
+                        <div class="clearfix">
+                        </div>
+                        <div class="space15"></div>
+                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                            <thead>
+                                <tr>
+                                    <th style="display: none;">-</th>
+                                    <th>No.</th>
+                                    <th>Nama Pekerja</th>
+                                    <th>Jabatan</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $nama = array('Agus', 'Asep', 'Anshar', 'Chepy', 'Firman', 'Faizal', 'Fadhil', 'Ferdi', 'Gumara', 'Arman', 'Dadang', 'Rasim', 'Enjang');
+                                $jabatan = array('Sopir', 'Kernet');
+                                for ($i = 0; $i < 12; $i++) {
+                                    $status = rand(0, 2);
+                                    if ($status > 0) {
+                                        $hadir = "<button type='button' class='btn btn-success btn-sm'>masuk</button>";
+                                    } else {
+                                        $hadir = "<button type='button' class='btn btn-warning btn-sm'>libur</button>";
                                     }
                                     ?>
-                                </tbody>
-                            </table>
+                                    <tr class="">
+                                        <th style="display: none;"></th>
+                                        <td><?php echo ($i + 1) ?></td>
+                                        <td><?php echo $nama[$i] ?></td>
+                                        <td><?php echo $jabatan[rand(0, 1)] ?></td>
+                                        <td><?php echo $hadir ?></td>
+                                        <td>
+                                            <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal"><span  class="btn btn-warning btn-sm tooltips" data-original-title="Ganti Status" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
+
+                                        </td>
+                                    </tr>
+
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Tambah Perencanaan Mobil Tangki</h4>
+                        </div>
+                        <div class=" form">
+                            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="ou" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" value="11-08-2014" readonly="readonly" name="own-use" required="required" class="form-control" id="ou" placeholder="Own Use"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="premium" class="col-lg-2 col-sm-2 control-label">Nama pegawai</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" readonly="readonly" value="Agus" name="premium" required="required" class="form-control"  placeholder="Premium"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Status</label>
+                                        <div class="col-lg-10" >
+                                            <select class="form-control m-bot15">
+                                                <option value="hadir">Hadir</option>
+                                                <option value="libur">Libur</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
+                                    <button class="btn btn-success" name="submit"  type="submit" onclick="saveJadwal()">Simpan</button>
+
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Tambah Perencanaan Mobil Tangki</h4>
-                            </div>
-                            <div class=" form">
-                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
-
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="ou" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" value="11-08-2014" readonly="readonly" name="own-use" required="required" class="form-control" id="ou" placeholder="Own Use"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Nama pegawai</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" readonly="readonly" value="Agus" name="premium" required="required" class="form-control"  placeholder="Premium"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Status</label>
-                                            <div class="col-lg-10" >
-                                                <select class="form-control m-bot15">
-                                                    <option value="hadir">Hadir</option>
-                                                    <option value="libur">Libur</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
-                                        <button class="btn btn-success" name="submit"  type="submit" onclick="saveJadwal()">Simpan</button>
-
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
 
             </div>
         </section>
