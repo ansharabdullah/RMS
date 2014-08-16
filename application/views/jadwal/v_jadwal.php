@@ -3,12 +3,14 @@
     $( document ).ready(function() {
         $("#tabelJadwal").hide();
         $("#tambahJadwal").hide();
-        $("#filePreview").hide();
+        $("#LihatJadwal").hide();
+        $("#tabelLihat").hide();
+        $("#tabelTambahJadwal").hide();
         $("#commentForm").submit(function(e){
             var ext = $("#fileName").val().split('.').pop();
             if(ext=="xls" || ext=="xlsx"){
-                $("#filePreview").hide();
-                $("#filePreview").slideDown("slow");
+                $("#tabelTambahJadwal").hide();
+                $("#tabelTambahJadwal").slideDown("slow");
             }
             else
             {
@@ -19,18 +21,27 @@
     });
     
     
+    function showLihat(){
+        $("#tabelLihat").show();
+        $("#LihatJadwal").slideDown("slow");
+        $("#tambahJadwal").hide();
+        $("#tabelJadwal").hide();
+        $("#tabelTambahJadwal").hide();
+    }
+    
     function showJadwal()
     {
         $("#tglJadwal").html($("#tanggalJadwal").val());
         $("#tabelJadwal").hide();
         $("#tabelJadwal").slideDown("slow");
-        
     }
     
     function showTambahJadwal()
     {
         $("#tambahJadwal").hide();
         $("#tambahJadwal").slideDown("slow");
+        $("#LihatJadwal").hide();
+        $("#tabelLihat").hide();
     }
     
         
@@ -52,10 +63,18 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
+                Penjadwalan 
+                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+
+            </header>
+            <header class="panel-heading">
+
                 <a class="btn btn-primary" onclick="showTambahJadwal()">
                     Tambah Jadwal <i class="icon-plus"></i>
                 </a>
-                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                <a class="btn btn-warning" onclick="showLihat()">
+                    Lihat Jadwal <i class="icon-check"></i>
+                </a>
             </header>
             <div class="panel-body" id="tambahJadwal">
                 <div class="clearfix" >
@@ -81,7 +100,7 @@
                     </form>
                 </div>
 
-                <div class="adv-table editable-table " id="filePreview">
+                <div class="adv-table editable-table " id="tabelTambahJadwal">
                     <div class="clearfix">
 
                     </div>
@@ -128,7 +147,7 @@
 
         </section>
         <section class="panel">
-            <div class="panel-body" >
+            <div class="panel-body" id="LihatJadwal">
                 <header class="panel-heading">
                     Lihat Jadwal
                 </header>
