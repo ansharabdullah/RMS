@@ -31,11 +31,7 @@
                             <th>Jenis Tangki</th>
                             <th>Status</th>
                             <th>GPS</th>
-                            <th>Sensor Overfill</th>
-                            <th>Standar Volume</th>
-                            <th>Volume 1</th>
-                            <th>Kategori</th>
-                            <th>Jumlah Segel</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -51,11 +47,7 @@
                             <td>Alumunium Aweco</td>
                             <td>Sewa</td>
                             <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>1</td>
-                            <td>4</td>
+
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -69,11 +61,7 @@
                             <td>Alumunium Aweco</td>
                             <td>Sewa</td>
                             <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>1</td>
-                            <td>6</td>
+
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -87,11 +75,7 @@
                             <td>Carbon Steel</td>
                             <td>Sewa</td>
                             <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>1</td>
-                            <td>8</td>
+
 
                         </tr>
                         <tr class="">
@@ -106,11 +90,7 @@
                             <td>Carbon Steel</td>
                             <td>Sewa</td>
                             <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>1</td>
-                            <td>8</td>
+
                         </tr>
                         <tr class="">
                             <th style="display:none;"></th>
@@ -121,14 +101,10 @@
                             <td class="center">Premium</td>
                             <td>OAT124147KL</td>
                             <td>QW0342349HG</td>
-                             <td>Steel</td>
+                            <td>Steel</td>
                             <td>Sewa</td>
-                             <td>OK</td>
                             <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>2</td>
-                            <td>12</td>
+
 
                         </tr>
                         <tr class="">
@@ -140,14 +116,10 @@
                             <td class="center">Bio Solar</td>
                             <td>KHT12SDALO </td>
                             <td>PUI0349124JG</td>
-                             <td>Alumunium Aweco</td>
+                            <td>Alumunium Aweco</td>
                             <td>Sewa</td>
-                             <td>OK</td>
                             <td>OK</td>
-                            <td>OK</td>
-                            <td>OK</td>
-                            <td>2</td>
-                            <td>10</td>
+
                         </tr>
                     </tbody>
                 </table>

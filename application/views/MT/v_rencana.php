@@ -297,12 +297,12 @@
                             </div>
                             <div class="modal-body">
 
-                                Anda yakin menghapus perencanaan 19 Agustus 2014?
+                                Anda yakin?
 
                             </div>
                             <div class="modal-footer">
                                 <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
-                                <button class="btn btn-warning" type="button">Hapus</button>
+                                <button class="btn btn-danger" type="button">Hapus</button>
                             </div>
                         </div>
                     </div>

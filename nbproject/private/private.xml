@@ -3,19 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/laporan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/kinerja.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_ms2.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/login.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/home/v_home.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/ba.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_import_ms2.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/layouts/navbar.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/amt/v_presensi.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/user.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/home.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/amt/v_import_amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/ba.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/amt/v_detail.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_frm.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_berita_acara.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
         </group>
     </open-files>
 </project-private>
