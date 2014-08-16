@@ -17,6 +17,19 @@
                 alert("Tipe file yang diupload tidak sesuai (file excel)")   
             }
             e.preventDefault();
+         
+        });
+        $("#signupForm").submit(function(e){
+            var isvalidate=$("#signupForm").valid();
+            if(isvalidate)
+            {    
+                $("#tglJadwal").html($("#tanggalJadwal").val());
+                $("#tabelJadwal").hide();
+                $("#tabelTambahJadwal1").hide();
+                $("#tabelJadwal").fadeIn("slow");
+                $("#tgl").html($("#tglForm").val());
+            }
+            e.preventDefault();
         });
     });
     
@@ -26,15 +39,7 @@
         $("#LihatJadwal").slideDown("slow");
         $("#tambahJadwal").hide();
         $("#tabelJadwal").hide();
-         $("#tabelTambahJadwal1").hide();
-    }
-    
-    function showJadwal()
-    {
-        $("#tglJadwal").html($("#tanggalJadwal").val());
-        $("#tabelJadwal").hide();
         $("#tabelTambahJadwal1").hide();
-        $("#tabelJadwal").show();
     }
     
     function showTambahJadwal()
@@ -44,7 +49,7 @@
         $("#LihatJadwal").hide();
         $("#tabelLihat").hide();
         $("#tabelTambahJadwal1").hide();
-         $("#tabelJadwal").hide();
+        $("#tabelJadwal").hide();
     }
     
         
@@ -162,14 +167,18 @@
                     Lihat Jadwal
                 </header>
                 <div class="clearfix">
-                    <form class="cmxform form-horizontal tasi-form">
+                    <form class="cmxform form-horizontal tasi-form" id ="signupForm">
                         <div class="form-group" style="margin-top: 20px;">
                             <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                             <div class="col-lg-10">
-                                <input type="date" required="required" id="tanggalJadwal" class="form-control"  placeholder="Tanggal" name="tanggalSIOD" onchange="showJadwal()">
+                                <input type="date" required="required" id="tanggalJadwal" class="form-control"  placeholder="Tanggal" name="tanggalSIOD">
                             </div>
                         </div>
-                       
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <input type="submit" style="float: right;" class="btn btn-warning" value="Cek">
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

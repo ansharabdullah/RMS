@@ -161,7 +161,6 @@
             </div>
         </section>
 
-
         <section class="panel" id="previewcekkpi">
             <header class="panel-heading">
                 KPI Internal Tahun <span id="tgl"></span>
