@@ -211,9 +211,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label for="calasan" class="control-label col-lg-4">Alasan</label>
+                                    <label for="cKeterangan" class="control-label col-lg-4">Keterangan</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="calasan" name="alasan" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="cKeterangan" name="Keterangan" minlength="2" type="text" required />
                                     </div>
                                 </div>
                             </div>

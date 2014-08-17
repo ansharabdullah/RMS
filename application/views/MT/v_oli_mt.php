@@ -133,7 +133,7 @@
                     <!-- form tambah-->
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal</label>
+                        <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal (km)</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="kmawal" name="kmawal" minlength="2" type="text" required />
                         </div>
@@ -151,7 +151,7 @@
                             <input class=" form-control input-sm m-bot15" id="merkoli" name="merkoli" minlength="2" type="text" required />
                         </div>
                     </div> <div class="form-group">
-                        <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
+                        <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume (Liter)</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume" minlength="2" type="text" required />
                         </div>
@@ -183,7 +183,7 @@
                     <!-- form tambah-->
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal</label>
+                        <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal (km)</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="kmawal" name="kmawal" minlength="2" type="text" required />
                         </div>
@@ -201,7 +201,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
+                        <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume (Liter)</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="totalvolume" name="totalvolume" minlength="2" type="text" required />
                         </div>

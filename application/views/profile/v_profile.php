@@ -44,8 +44,10 @@
                         <a href="#">
                             <img src="<?php echo base_url() ?>assets/img/profile-avatar.jpg" alt="">
                         </a>
-                        <h1>Jonathan Smith</h1>
-                        <p>jsmith@flatlab.com</p>
+                        <br>
+                        <br><br></br><br>
+                        <h1>Triyanto</h1>
+                        <p>triyanto@flatlab.com</p>
                     </div>
 
                     <ul class="nav nav-pills nav-stacked">
@@ -67,14 +69,12 @@
                                 <p><span>NIP </span>: 085247395</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Nama </span>: Jonathan Smith</p>
+                                <p><span>Nama </span>: Triyanto</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Jabatan </span>: Supir</p>
+                                <p><span>Jabatan </span>: OAM</p>
                             </div>
-                            <div class="bio-row">
-                                <p><span>Klasifikasi</span>: 32</p>
-                            </div>
+                           
                             <div class="bio-row">
                                 <p><span>Status </span>: Aktif</p>
                             </div>
@@ -84,10 +84,7 @@
                             <div class="bio-row">
                                 <p><span>No. KTP </span>: 0986386746</p>
                             </div>
-                            <div class="bio-row">
-                                <p><span>No. SIM </span>: 34569676853</p>
-                            </div>
-
+                           
                             <div class="bio-row">
                                 <p><span>Tempat Lahir </span>: Garut</p>
                             </div>
@@ -95,9 +92,6 @@
                                 <p><span>Tanggal Lahir </span>: 30-Sept-1993</p>
                             </div>
 
-                            <div class="bio-row">
-                                <p><span>Transportir Asal </span>: PT. Incot</p>
-                            </div>
                             <div class="bio-row">
                                 <p><span>Tanggal Masuk </span>: 30-Sept-1993</p>
                             </div>
@@ -131,23 +125,13 @@
                                     <label for="cjabatan" class="control-label col-lg-4">Jabatan</label>
                                     <div class="col-lg-6">
                                         <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan" >
-                                            <option selected>Supir</option>
-                                            <option>Kernet</option>
+                                            <option selected>OAM</option>
+                                            <option>Staf OAM</option>
+                                             <option>SS</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="bio-row">
-                                    <label for="cklas" class="control-label col-lg-4">Klasifikasi</label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="cklas" name="klas">
-                                            <option>8</option>
-                                            <option>16</option>
-                                            <option>24</option>
-                                            <option selected>32</option>
-                                            <option>40</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                                 <div class="bio-row">
                                     <label for="cstatus" class="control-label col-lg-4">Status</label>
                                     <div class="col-lg-6">
@@ -191,12 +175,6 @@
                                     </div>
                                 </div>
 
-                                <div class="bio-row">
-                                    <label for="ctransportir" class="control-label col-lg-4">Transportir Asal</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir" minlength="2" type="text" required />
-                                    </div>
-                                </div>
                                 <div class="bio-row">
                                     <label for="ctglmasuk" class="control-label col-lg-4">Tanggal Masuk</label>
                                     <div class="col-lg-6">
@@ -327,8 +305,6 @@
                                 <th style="display:none;"></th>
                                 <th>No</th>
                                 <th>Waktu</th>
-                                <th>User</th>
-                                <th>Hak Akses</th>
                                 <th>Aksi</th>
                                 <th>Kata Kunci</th>
                             </tr>
@@ -339,8 +315,6 @@
                                 <td style="display:none;"></td>
                                 <td>1</td>
                                 <td>07/08/2014</td>
-                                <td>ansharabdullah</td>
-                                <td>Pengawas Operasi</td>
                                 <td>Import kinerja awak mobil tangki untuk tanggal 3 Jan 2014</td>
                                 <td><span class="label label-success">Tambah</span></td>
                             </tr>
@@ -349,8 +323,6 @@
                                 <td style="display:none;"></td>
                                 <td>2</td>
                                 <td>08/08/2014</td>
-                                <td>renisas</td>
-                                <td>Pengawas Operasi</td>
                                 <td>Hapus data AMT NIP 234567897 Nama Jaja</td>
                                 <td><span class="label label-danger">Hapus</span></td>
                             </tr>
@@ -359,8 +331,6 @@
                                 <td style="display:none;"></td>
                                 <td>3</td>
                                 <td>09/08/2014</td>
-                                <td>cepi</td>
-                                <td>Supporting</td>
                                 <td>Edit data AMT NIP 345678 Nama Dadan</td>
                                 <td><span class="label label-warning">Edit</span></td>
                             </tr>
@@ -369,8 +339,6 @@
                                 <td style="display:none;"></td>
                                 <td>4</td>
                                 <td>10/08/2014</td>
-                                <td>cahyadi</td>
-                                <td>Site Supervisor</td>
                                 <td>Hapus kinerja AMT nip 7192497 nama Juju Tanggal 30/09/2012</td>
                                 <td><span class="label label-danger">Hapus</span></td>
                             </tr>
@@ -379,8 +347,6 @@
                                 <td style="display:none;"></td>
                                 <td>5</td>
                                 <td>11/08/2014</td>
-                                <td>dodi</td>
-                                <td>Staf OAM</td>
                                 <td>Insert MS2 Compliance</td>
                                 <td><span class="label label-success">Tambah</span></td>
                             </tr>
@@ -389,9 +355,7 @@
 
                                 <td style="display:none;"></td>
                                 <td>6</td>
-                                <td>12/08/2014</td>                                
-                                <td>yana</td>
-                                <td>OAM</td>
+                                <td>12/08/2014</td>   
                                 <td>Input Rencana</td>
                                 <td><span class="label label-success">Tambah</span></td>
                             </tr>

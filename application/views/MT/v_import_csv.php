@@ -6,11 +6,8 @@
             if(isvalidate)
             {
                 var ext = $("#fileName").val().split('.').pop();
-<<<<<<< HEAD
                 if(ext=="xls"||ext=="xlsx"){
-=======
-                if(ext=="xls" || ext=="xlsx"){
->>>>>>> cc6b7489f914833b4441c012e94a0ffc63f7e5c9
+
                     $("#filePreview").hide();
                     $("#filePreview").slideDown("slow");
                 }
@@ -41,13 +38,9 @@
         <section class="panel">
             <header class="panel-heading">
                 Import Data MT Dari Excel
-<<<<<<< HEAD
+
                 <button type="button" style="float: right;" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" data-placement="left" onclick="downloadCsv()"><i class="icon-download-alt"></i></button>
-            
-=======
-                <button type="button" style="float: right;" class="btn btn-success" onclick="downloadCsv()">Download Format Excel <i class="icon-download-alt"></i></button>
-                <br/> <br/>
->>>>>>> cc6b7489f914833b4441c012e94a0ffc63f7e5c9
+
             </header>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">

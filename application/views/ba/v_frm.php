@@ -50,7 +50,7 @@
             <section class="panel">
                 <header class="panel-heading">
                     Tabel Tarif Interpolasi dan FRM (<span id="tgl"></span>)
-                    <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalTambah" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit</a>
+                    <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit</a>
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">
@@ -113,11 +113,67 @@
                                     <div class="col-lg-10">
                                         <input type="month" required="required" id="bln" class="form-control"  placeholder="bulan">
                                     </div>
-
-
                                 </div>
+                                <div class="form-group ">
+                                    <label for="cfrm" class="control-label col-lg-12">Harga FRM</label></br>
+                                    <label for="cfrm1" class="control-label col-lg-2">1-14</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="cfrm1" name="frm1" minlength="2" type="text" required />
+                                    </div>
 
+                                    <label for="cfrm2" class="control-label col-lg-2">15-akhir</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="cfrm2" name="frm2" minlength="2" type="text" required />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="cinterpolasi" class="control-label col-lg-12">Tarif Interpolasi (Rp./Ltr)</label></br>
+                                    <label for="cinterpolasi1" class="control-label col-lg-2">1-14</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="cinterpolasi1" name="interpolasi1" minlength="2" type="text" required />
+                                    </div>
 
+                                    <label for="cinterpolasi" class="control-label col-lg-2">15-akhir</label>
+                                    <div class="col-lg-4">
+                                        <input class=" form-control input-sm m-bot15" id="cinterpolasi2" name="interpolasi2" minlength="2" type="text" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit Data</h4>
+            </div>
+            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="get" action="">
+
+                <div class="modal-body">
+
+                    <div class="col-lg-12">
+                        <section class="panel">
+
+                            <div class="panel-body">
+
+                                <div class="form-group ">
+                                    <label for="cbulan" class="control-label col-lg-2">Bulan</label>
+                                    <div class="col-lg-10">
+                                        <input type="month" required="required" id="bln" class="form-control"  placeholder="bulan">
+                                    </div>
+                                </div>
                                 <div class="form-group ">
                                     <label for="cfrm" class="control-label col-lg-12">Harga FRM</label></br>
                                     <label for="cfrm1" class="control-label col-lg-2">1-14</label>
@@ -152,14 +208,13 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                     <input class="btn btn-success" type="submit" value="Simpan"/>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 <!--script for this page only-->
 <script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
 

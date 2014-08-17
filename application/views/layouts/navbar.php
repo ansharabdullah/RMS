@@ -17,6 +17,7 @@
                     <li <?php if ($lv2 == 1 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/data_amt"  >Data AMT</a></li>
                     <li <?php if ($lv2 == 2 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/grafik">Grafik</a></li>
                     <li <?php if ($lv2 == 3 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/presensi" >Presensi</a></li>
+                    <li <?php if ($lv2 == 4 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/koefisien" >Koefisien</a></li>
                 </ul>
             </li>
 
@@ -36,7 +37,7 @@
             <li>
                 <a  href="<?php echo base_url() ?>kinerja"  <?php if ($lv1 == 4) echo "class='active'" ?>>
                     <i class="icon-briefcase"></i>
-                    <span>Input Kinerja</span>
+                    <span>Kinerja</span>
                 </a>
             </li>
             <li>

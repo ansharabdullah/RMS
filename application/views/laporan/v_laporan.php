@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#laporanPreview").hide();
+        $("#laporanPreview2").hide();
         hideAll();
         $("#tanggal").show();
         
@@ -9,6 +10,7 @@
             if($("#commentForm").valid())
             {
                 previewLaporan();
+                previewAwak();
             }
             e.preventDefault();
         });
@@ -59,6 +61,12 @@
         $("#waktu").html($("#jenis").val());
         $("#laporanPreview").hide();
         $("#laporanPreview").slideDown("slow");
+        
+    }
+    
+    function previewAwak(){
+         $("#laporanPreview2").hide();
+        $("#laporanPreview2").slideDown("slow");
     }
     
     function importTable()
@@ -147,7 +155,7 @@
 
         <section class="panel" id="laporanPreview">
             <header class="panel-heading">
-                Laporan <b><span id="waktu">asa</span></b> Kinerja Mobil Tangki
+                Laporan <b><span id="waktu"></span></b> Kinerja Mobil Tangki
             </header>
             <div class="panel-body" >
                 <div class="adv-table editable-table ">
@@ -358,11 +366,152 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+        </section>
+        <section class="panel" id="laporanPreview2">
+            <header class="panel-heading">
+                Laporan <b><span id="waktu"></span></b> Kinerja Awak Mobil Tangki
+            </header>
+            <div class="panel-body" >
+                <div class="adv-table editable-table ">
+                    <div class="clearfix">
+
+                    </div>
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample2">
+                        <thead>
+                            <tr>
+                                <th style="display: none;">-</th>
+                                <th>No.</th>
+                                <th>Nama</th>
+                                <th>Kilometer (Km)</th>
+                                <th>Kiloliter (Kl)</th>
+                                <th>Ritase (Rit)</th>
+                                <th>SPBU</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>1</td>
+                                <td>Asep</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
+                                
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>2</td>
+                                <td>Endra</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+                               
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>3</td>
+                                <td>Firman</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>4</td>
+                                <td>Fiqri</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>5</td>
+                                <td>Firdaus</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>6</td>
+                                <td>Anshar</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>7</td>
+                                <td>Abdullah</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>8</td>
+                                <td>Dika</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>9</td>
+                                <td>Damara</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>10</td>
+                                <td>Marata</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>11</td>
+                                <td>Udin</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+                            </tr>
+                            <tr class="">
+                                <th style="display: none;"></th>
+                                <td>12</td>
+                                <td>Usuf</td>
+                                <td><?php echo rand(300, 500) ?></td>
+                                <td><?php echo rand(40, 150) ?></td>
+                                <td><?php echo rand(2, 5) ?></td>
+                                 <td><?php echo rand(0, 20) ?></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <button style="margin-right:10px;float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
             </div>
 
-        </section>
+        </section>  
         <!-- page end-->
     </section>
 </section>
