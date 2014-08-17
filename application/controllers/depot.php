@@ -51,5 +51,27 @@ class Depot extends CI_Controller {
         $this->load->view('oam/v_depot_amt_harian');
         $this->load->view('layouts/footer');
     }
+    
+    public function mt_depot($depot) {
+        $data['lv1'] = $depot;
+        $data['lv2'] = 1;
+        
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar_oam', $data);
+        $this->load->view('oam/v_depot_mt');
+        $this->load->view('layouts/footer');
+    }
+    
+    public function mt_depot_harian($depot) {
+        $data['lv1'] = $depot;
+        $data['lv2'] = 1;
+        
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar_oam', $data);
+        $this->load->view('oam/v_depot_mt_harian');
+        $this->load->view('layouts/footer');
+    }
 
 }
