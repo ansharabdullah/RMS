@@ -105,19 +105,19 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Rencana Volume vs realisasi  Depot 1'
+                text: 'Rencana pengiriman vs realisasi (MS2 Compliance) Depot 1'
             },
             subtitle: {
                 text: 'Tahun 2014'
             },
             plotOptions: {
                 series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/grafik_hari/2";
+                        events: {
+                            click: function(event) {
+                                window.location = "<?php echo base_url() ?>depot/grafik_hari/1";
+                            }
                         }
                     }
-                }
             },
             xAxis: [{
                     categories: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus']
@@ -139,28 +139,24 @@
             tooltip: {
                 shared: true
             },
-            
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                x: -10,
+                verticalAlign: 'top',
+                y: 50,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
             series: [{
-                    name: 'Pencapaian PREMIUM',
+                    name: 'Realisasi',
                     type: 'column',
                     data: [92,99,101,98,95,92,89,90]
 
                 }, {
-                    name: 'Pencapaian BIOSOLAR',
-                    type: 'column',
-                    data: [98,95,92,89,90,92,99,101]
-
-                },{
-                    name: 'Pencapaian PERTAMAX',
-                    type: 'column',
-                    data: [95,92,89,90,92,99,101,98]
-
-                }, {
-                    name: 'Pencapaian SOLAR',
-                    type: 'column',
-                    data: [101,98,95,92,92,99,89,90]
-
-                
+                    name: 'Target',
+                    type: 'line',
+                    data: [91,98,95,96,97,95,85,89]
                 }]
         });
     });
@@ -168,75 +164,5 @@
 </script>
 
 
-<div id="grafik2"></div>
-<br>
-<br>
-<br>
-<div class="row">
-    <div class="col-lg-12">
-            <center>
-                <table class="table table-striped table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="display: none;"></th>
-                            <th rowspan="2">No</th>
-                            <th rowspan="2">Bulan</th>
-                            <th colspan="2">Premium</th>
-                            <th colspan="2">Bio Solar</th>
-                            <th colspan="2">Pertamax</th>
-                            <th colspan="2">Solar</th>
-                        </tr>
-                        <tr>
-                            <th>Rencana</th>
-                            <th>Realisasi</th>
-                            <th>Rencana</th>
-                            <th>Realisasi</th>
-                            <th>Rencana</th>
-                            <th>Realisasi</th>
-                            <th>Rencana</th>
-                            <th>Realisasi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Januari</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8899281</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Februari</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8899281</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Maret</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8099281</td>
-                            <td>8899281</td>
-                            <td>8899281</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </center>
-    </div>
-</div>
+                        <div id="grafik2"></div>
 
