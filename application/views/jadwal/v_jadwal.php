@@ -85,8 +85,13 @@
                 </a>
             </header>
         </section>
-        <section class="panel">
-            <div class="panel-body" id="tambahJadwal">
+        <section class="panel" id="tambahJadwal">
+            <header class="panel-heading">
+                Tambah Jadwal
+
+            </header>
+            <div class="panel-body" >
+
                 <div class="clearfix" >
 
                     <form class="cmxform form-horizontal tasi-form" id="commentForm">
@@ -110,62 +115,60 @@
                     </form>
                 </div>
         </section>
-        <section class="panel">
+        <section class="panel"id="tabelTambahJadwal1">
+            <header class="panel-heading">
+                Tabel Data Jadwal
+            </header>
+            <div class="panel-body" >
+                <div class="adv-table editable-table ">
+                    <div class="clearfix">
+                    </div>
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample2">
+                        <thead>
+                            <tr>
+                                <th style="display: none;">-</th>
+                                <th>No.</th>
+                                <th>Nama Pekerja</th>
+                                <th>Jabatan</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $nama = array('Faizal', 'Fadhil', 'Ferdi', 'Gumara', 'Arman', 'Dadang', 'Rasim', 'Enjang', 'Agus', 'Asep', 'Anshar', 'Chepy', 'Firman');
+                            $jabatan = array('Sopir', 'Kernet');
+                            for ($i = 0; $i < 12; $i++) {
+                                $status = rand(0, 2);
+                                if ($status > 0) {
+                                    $hadir = "<button type='button' class='btn btn-success btn-sm'>hadir</button>";
+                                } else {
+                                    $hadir = "<button type='button' class='btn btn-warning btn-sm'>tidak hadir</button>";
+                                }
+                                ?>
+                                <tr class="">
+                                    <th style="display: none;"></th>
+                                    <td><?php echo ($i + 1) ?></td>
+                                    <td><?php echo $nama[$i] ?></td>
+                                    <td><?php echo $jabatan[rand(0, 1)] ?></td>
+                                    <td><?php echo $hadir ?></td>
+                                </tr>
 
-            <div class="adv-table editable-table " id="tabelTambahJadwal1">
-                <div class="clearfix">
-                    <header class="panel-heading">
-                        Tambah Jadwal
-
-                    </header>
-                </div>
-                <div class="space15"></div>
-                <table class="table table-striped table-hover table-bordered" id="editable-sample2">
-                    <thead>
-                        <tr>
-                            <th style="display: none;">-</th>
-                            <th>No.</th>
-                            <th>Nama Pekerja</th>
-                            <th>Jabatan</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $nama = array('Faizal', 'Fadhil', 'Ferdi', 'Gumara', 'Arman', 'Dadang', 'Rasim', 'Enjang', 'Agus', 'Asep', 'Anshar', 'Chepy', 'Firman');
-                        $jabatan = array('Sopir', 'Kernet');
-                        for ($i = 0; $i < 12; $i++) {
-                            $status = rand(0, 2);
-                            if ($status > 0) {
-                                $hadir = "<button type='button' class='btn btn-success btn-sm'>hadir</button>";
-                            } else {
-                                $hadir = "<button type='button' class='btn btn-warning btn-sm'>tidak hadir</button>";
+                                <?php
                             }
                             ?>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td><?php echo ($i + 1) ?></td>
-                                <td><?php echo $nama[$i] ?></td>
-                                <td><?php echo $jabatan[rand(0, 1)] ?></td>
-                                <td><?php echo $hadir ?></td>
-                            </tr>
-
-                            <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
-                <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
+                        </tbody>
+                    </table>
+                    <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan</button>
+                </div>
             </div>
-
             </div>
-
         </section>
-        <section class="panel">
-            <div class="panel-body" id="LihatJadwal">
-                <header class="panel-heading">
-                    Lihat Jadwal
-                </header>
+        <section class="panel" id="LihatJadwal">
+            <header class="panel-heading">
+                Lihat Jadwal
+            </header>
+            <div class="panel-body" >
                 <div class="clearfix">
                     <form class="cmxform form-horizontal tasi-form" id ="signupForm">
                         <div class="form-group" style="margin-top: 20px;">
@@ -183,11 +186,11 @@
                 </div>
             </div>
         </section>
-        <section class="panel">
-            <div class="panel-body" id="tabelJadwal" >
-                <header class="panel-heading">
-                    Jadwal (<span id="tglJadwal"></span>)
-                </header>
+        <section class="panel" id="tabelJadwal">
+            <header class="panel-heading">
+                Jadwal (<span id="tglJadwal"></span>)
+            </header>
+            <div class="panel-body"  >
                 <div class="panel-body" >
                     <div class="adv-table editable-table ">
                         <div class="clearfix">

@@ -19,6 +19,9 @@
         </section>
 
         <section class="panel">
+            <header class="panel-heading">
+                Tabel Data APAR  
+            </header>
             <div class="panel-body">
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
