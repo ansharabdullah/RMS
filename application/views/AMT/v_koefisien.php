@@ -1,15 +1,15 @@
 <script type="text/javascript">
     $( document ).ready(function() {
-        $("#tambahJadwal").hide();
-        $("#filePreview").hide();
-        $("#filePreview1").hide();
+        $("#tambahkoefisien").hide();
+        $("#PreviewTambahKoefisien").hide();
+        $("#PreviewCekKoefisien").hide();
         
         $("#commentForm").submit(function(e){
             var isvalidate=$("#commentForm").valid();
             if(isvalidate)
             {    
-                $("#filePreview").hide();
-                $("#filePreview").slideDown("slow");
+                $("#PreviewTambahKoefisien").hide();
+                $("#PreviewTambahKoefisien").fadeIn("slow");
             }
             e.preventDefault();
         });
@@ -18,8 +18,8 @@
             var isvalidate=$("#signupForm").valid();
             if(isvalidate)
             {    
-                $("#filePreview1").hide();
-                $("#filePreview1").slideDown("slow");
+                $("#PreviewCekKoefisien").hide();
+                $("#PreviewCekKoefisien").slideDown("slow");
                 $("#tgl").html($("#tglForm").val());
             }
             e.preventDefault();
@@ -36,10 +36,22 @@
     }
     
     
-    function showTambahJadwal()
+    function showTambahKoefisien()
     {
-        $("#tambahJadwal").hide();
-        $("#tambahJadwal").slideDown("slow");
+        $("#cekkoefisien").hide();
+        $("#tambahkoefisien").hide();
+        $("#tambahkoefisien").fadeIn("slow");
+        $("#PreviewCekKoefisien").hide();
+        $("#PreviewTambahKoefisien").hide();
+    }
+    
+    function showCekKoefisien()
+    {
+        $("#tambahkoefisien").hide();
+        $("#cekkoefisien").hide();
+        $("#cekkoefisien").fadeIn("slow");
+        $("#PreviewCekKoefisien").hide();
+        $("#PreviewTambahKoefisien").hide();
     }
     
 </script>
@@ -51,10 +63,24 @@
 
         <section class="panel">
             <header class="panel-heading">
-                <a class="btn btn-primary" onclick="showTambahJadwal()">
+                Koefisien Performansi Awak Mobil Tangki
+            </header>
+            <div class="panel-body">
+                <a class="btn btn-primary" onclick="showTambahKoefisien()">
                     Tambah Koefisien <i class="icon-plus"></i>
                 </a>
-                <a style="float:right;" data-placement="left" class="btn btn-success tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+
+                <a class="btn btn-warning" onclick="showCekKoefisien()">
+                    Lihat Koefisien <i class="icon-check"></i>
+                </a>
+            </div>
+        </section>
+
+
+        <section class="panel" id="tambahkoefisien">
+            <header class="panel-heading">
+                Tambah Koefisien Performansi
+                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" id="tambahJadwal">
                 <div class="clearfix" >
@@ -82,7 +108,7 @@
             </div>
         </section>
 
-        <section class="panel" id="filePreview">
+        <section class="panel" id="PreviewTambahKoefisien">
             <header class="panel-heading">
                 Data Koefisien Performansi
             </header>
@@ -110,7 +136,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                
+
                             </tr>
 
                             <tr class="">
@@ -120,7 +146,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                </tr>
+                            </tr>
                             <tr class="">
                                 <td>3</td>
                                 <td>Supir 24 KL</td>
@@ -128,7 +154,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                </tr>
+                            </tr>
                             <tr class="">
                                 <td>4</td>
                                 <td>Supir 32 KL</td>
@@ -136,7 +162,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                 </tr>
+                            </tr>
 
                             <tr class="">
                                 <td>5</td>
@@ -145,7 +171,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                     </tr>
+                            </tr>
 
                             <tr class="">
                                 <td>6</td>
@@ -154,7 +180,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                </tr>
+                            </tr>
 
                             <tr class="">
                                 <td>7</td>
@@ -163,7 +189,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                </tr>
+                            </tr>
                             <tr class="">
                                 <td>8</td>
                                 <td>Kernet 24 KL</td>
@@ -171,7 +197,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                </tr>
+                            </tr>
                             <tr class="">
                                 <td>9</td>
                                 <td>Kernet 32 KL</td>
@@ -179,7 +205,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                </tr>
+                            </tr>
 
                             <tr class="">
                                 <td>10</td>
@@ -188,7 +214,7 @@
                                 <td>59.9079634056085</td>
                                 <td>56.6036240949695</td>
                                 <td>41.7288794993981</td>
-                                </tr>
+                            </tr>
 
                         </tbody>
                     </table>
@@ -197,9 +223,9 @@
             </div>            
         </section>
 
-        <section class="panel">
+        <section class="panel" id="cekkoefisien">
             <header class="panel-heading">
-                Preview Koefisien Performansi
+                Cek Koefisien Performansi
             </header>
 
             <div class="panel-body" >
@@ -221,7 +247,7 @@
         </section>
 
 
-        <section class="panel" id="filePreview1">
+        <section class="panel" id="PreviewCekKoefisien">
             <header class="panel-heading">
                 Tabel Koefisien Performansi Tahun <span id="tgl"></span>
             </header>

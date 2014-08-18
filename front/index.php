@@ -249,7 +249,7 @@
                     <h1> <b>RMS (Report Management System)</b> <br/>PT.PERTAMINA PATRA NIAGA</h1>
                     <br/><br/>
                     <center>
-                        <div style="text-align: justify;width: 1000px;">
+                        <div style="text-align: justify;width: 80%;">
 
                             <p>Selamat datang di RMS (Report Management System) merupakan sistem pengelolaan kinerja crew awak mobil tangki dan mobil tangki untuk depot-depot 
                                 PT  Pertamina Patra Niaga wilayah Jawa Bagian Tengah dan DIY  berbasis website dimana pada akhirnya
