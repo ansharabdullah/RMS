@@ -120,7 +120,7 @@ class Depot extends CI_Controller {
     
     public function mt_depot($depot) {
         $data['lv1'] = $depot;
-        $data['lv2'] = 1;
+        $data['lv2'] = 2;
         
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
@@ -131,7 +131,7 @@ class Depot extends CI_Controller {
     
     public function mt_depot_harian($depot) {
         $data['lv1'] = $depot;
-        $data['lv2'] = 1;
+        $data['lv2'] = 2;
         
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');

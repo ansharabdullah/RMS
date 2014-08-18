@@ -48,86 +48,21 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <?php $i=1;
+                            foreach($amt as $row){ ?>
                             <tr class="">
                                 <td style="display:none;"></td>
-                                <td>1</td>
-                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190001</a></td>
-                                <td>Firman</td>
-                                <td>Supir</td>
-                                <td>8</td>
-                                <td>20 Mei 2010</td>
-                                <td>PT. Patra Niaga</td>
-                                <td>085222198675</td>
-                                <td><span class="label label-success">Aktif.</span></td>
+                                <td><?php echo $i;?></td>
+                                <td><a href="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI;?>" style ="text-decoration: underline"><?php echo $row->NIP;?></a></td>
+                                <td><?php echo $row->NAMA_PEGAWAI;?></td>
+                                <td><?php echo $row->JABATAN;?></td>
+                                <td><?php echo $row->KLASIFIKASI;?></td>
+                                <td><?php echo $row->TANGGAL_MASUK;?></td>
+                                <td><?php echo $row->TRANSPORTIR_ASAL;?></td>
+                                <td><?php echo $row->NO_TELEPON;?></td>
+                                <td><span class="label label-success"><?php echo $row->STATUS;?>.</span></td>
                             </tr>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>2</td>
-                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190002</a></td>
-                                <td>Fiqri</td>
-                                <td>Supir</td>
-                                <td>16</td>
-                                <td>12 Agustus 2012</td>
-                                <td>PT. Incot</td>
-                                <td>0852220183675</td>
-                                <td><span class="label label-success">Aktif.</span></td>
-                            </tr>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>3</td>
-                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190003</a></td>
-                                <td>Firdaus</td>
-                                <td>Kernet</td>
-                                <td>24</td>
-                                <td>13 Januari 2011</td>
-                                <td>PT. Ma'soem</td>
-                                <td>085773029675</td>
-                                <td><span class="label label-default">Tidak Aktif</span></td>
-                            </tr>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>4</td>
-                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190004</a></td>
-                                <td>Anshar</td>
-                                <td>Supir</td>
-                                <td>8</td>
-                                <td>10 Oktober 2010</td>
-                                <td>PT. Patra Niaga</td>
-                                <td>085728339125</td>
-                                <td><span class="label label-warning">Peringatan</span></td>
-                            </tr>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>5</td>
-                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190005</a></td>
-                                <td>Abdullah</td>
-                                <td>Kernet</td>
-                                <td>24</td>
-                                <td>14 Februari 2010</td>
-                                <td>PT. Incot</td>
-                                <td>085977543175</td>
-                                <td><span class="label label-warning">Peringatan</span></td>
-                            </tr>
-
-                            <tr class="">
-
-                                <td style="display:none;"></td>
-                                <td>6</td>
-                                <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">3205190006</a></td>                                
-
-                                <td>Chepy</td>
-                                <td>Kernet</td>
-                                <td>40</td>
-                                <td>30 September 2013</td>
-                                <td>PT. Ma'soem</td>
-                                <td>085200986675</td>
-                                <td><span class="label label-success">Aktif.</span></td>
-                            </tr>
+                            <?php $i++;} ?>
                         </tbody>
                     </table>
                 </div>

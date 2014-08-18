@@ -51,7 +51,6 @@
     
 </script>
 
-
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/css/datepicker.css" />
 <section id="main-content">
     <section class="wrapper">
@@ -66,7 +65,7 @@
             <div class="panel-body">
                 <form class="cmxform form-horizontal tasi-form" id="form">
                     <div class="form-group">
-                        <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Jenis Kinerja</label>
+                        <label for="jenisk" class="col-lg-2 col-sm-2 control-label">Jenis Kinerja</label>
                         <div class="col-lg-2">
                             <select class="form-control input-sm m-bot15" id="kinerja" onchange="changeJenis()">
                                 <option value="Mobil Tangki"> Mobil Tangki</option>

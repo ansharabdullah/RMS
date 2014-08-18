@@ -134,9 +134,8 @@
 
         <!-- page start-->
 
-        <section class="panel">
-            <div class="panel-body bio-graph-primary" id="ShowProfile">
-                <header class="panel-heading">
+        <section class="panel" id="ShowProfile">
+            <header class="panel-heading">
                     <div class="col-lg-10">Detail MT
                     </div>
                     <a class="btn btn-warning" onclick="ShowEdit()" ><i class="icon-pencil"></i> Edit</a>
@@ -144,6 +143,7 @@
                     <a class="btn btn-danger" data-toggle="modal" href="#myModal2" > <i class="icon-remove"></i> Hapus </a>
 
                 </header>
+            <div class="panel-body bio-graph-primary" >
                 <div class="panel-body">
                     <div class="row">
                         <div class="panel-body">
@@ -290,11 +290,13 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-body bio-graph-primary" id="ShowEdit">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
-                    <header class="panel-heading">
+            </section>
+        <section class="panel" id="ShowEdit">
+             <header class="panel-heading">
                         Edit MT  
                     </header>
+            <div class="panel-body bio-graph-primary" >
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
                     <div class="panel-body">
                         <div class="row">
                             <div class="bio-row">
