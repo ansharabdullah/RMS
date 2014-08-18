@@ -31,15 +31,15 @@ class kinerja extends CI_Controller {
 
     public function baca() {
         //Belum Validasi Tanggal
-        
+
         $tanggalSIOD = $this->input->post('tanggalSIOD');
-        $fileSIOD = $_FILES['fileSIOD'];       
-        
+        $fileSIOD = $_FILES['fileSIOD'];
+
         //echo date("d-m-Y", strtotime($tanggalSIOD));
 
-        $file_target = 'C:/xampp/htdocs/RMS/assets/file/'.$_FILES['fileSIOD']['name'];
+        $file_target = dirname(dirname(__DIR__)).'\assets\file\\'.$_FILES['fileSIOD']['name'];
         move_uploaded_file($_FILES['fileSIOD']['tmp_name'], $file_target);
-                
+
         $this->load->library('PHPExcel/Classes/PHPExcel');
 
         $inputFileName = $file_target;
@@ -214,7 +214,7 @@ class kinerja extends CI_Controller {
                 echo '<hr />';
             }
         }
-        
+
         unlink($file_target);
     }
 
