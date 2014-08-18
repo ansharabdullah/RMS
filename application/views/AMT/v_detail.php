@@ -80,7 +80,7 @@
 <section id="main-content">
     <section class="wrapper">
 
-
+<?php foreach ($amt as $row){?>
         <section class="panel">
             <header class="panel-heading">
                 Detail Awak Mobil Tangki
@@ -104,8 +104,8 @@
                         <a href="#">
                             <img src="<?php echo base_url() ?>assets/img/profile-avatar.jpg" alt="">
                         </a>
-                        <h1>Jonathan Smith</h1>
-                        <p>jsmith@flatlab.com</p>
+                        <h1><?php echo $row->NAMA_PEGAWAI;?></h1>
+                        <p></p>
                     </div>
 
                     <ul class="nav nav-pills nav-stacked">
@@ -124,87 +124,88 @@
                         <h1>Profile Awak Mobil Tangki</h1>
                         <div class="row">
                             <div class="bio-row">
-                                <p><span>NIP </span>: 085247395</p>
+                                <p><span>NIP </span>:<?php echo $row->NIP ?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Nama </span>: Jonathan Smith</p>
+                                <p><span>Nama </span>: <?php echo $row->NAMA_PEGAWAI ?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Jabatan </span>: Supir</p>
+                                <p><span>Jabatan </span>: <?php echo $row->JABATAN ?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Klasifikasi</span>: 32</p>
+                                <p><span>Klasifikasi</span>: <?php echo $row->KLASIFIKASI ?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Status </span>: Aktif</p>
+                                <p><span>Status </span>: <?php echo $row->STATUS ?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>No. Telp </span>: 085222198675</p>
+                                <p><span>No. Telp </span>: <?php echo $row->NO_TELEPON ?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>No. KTP </span>: 0986386746</p>
+                                <p><span>No. KTP </span>: <?php echo $row->NO_KTP ?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>No. SIM </span>: 34569676853</p>
-                            </div>
-
-                            <div class="bio-row">
-                                <p><span>Tempat Lahir </span>: Garut</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Tanggal Lahir </span>: 30-Sept-1993</p>
+                                <p><span>No. SIM </span>: <?php echo $row->NO_SIM ?></p>
                             </div>
 
                             <div class="bio-row">
-                                <p><span>Transportir Asal </span>: PT. Incot</p>
+                                <p><span>Tempat Lahir </span>: <?php echo $row->TEMPAT_LAHIR ?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Tanggal Masuk </span>: 30-Sept-1993</p>
+                                <p><span>Tanggal Lahir </span>: <?php echo $row->TANGGAL_LAHIR ?></p>
                             </div>
 
                             <div class="bio-row">
-                                <p><span>Alamat </span>: Jl. Margonda Selatan No. 76B Bandung</p>
+                                <p><span>Transportir Asal </span>: <?php echo $row->TRANSPORTIR_ASAL ?></p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Tanggal Masuk </span>: <?php echo $row->TANGGAL_MASUK ?></p>
+                            </div>
+
+                            <div class="bio-row">
+                                <p><span>Alamat </span>: <?php echo $row->ALAMAT ?></p>
                             </div>
                         </div>
                     </div>
 
 
                     <div class="panel-body bio-graph-info" id="EditProfile">
-                        <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
-
+                        <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url()?>amt/edit_pegawai/<?php echo $row->ID_PEGAWAI ?>">
+                            <input type="hidden" name="id" value="<?php echo $row->ID_PEGAWAI?>">
                             <h1>Edit Profile Awak Mobil Tangki</h1>
 
                             <div class="row">
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">NIP</label><input type="checkbox"> On Call
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="cnip" name="nip" minlength="2" type="text" value="085247395" required />
+                                        <input class=" form-control input-sm m-bot15" id="cnip" name="nip" minlength="2" type="text" value="<?php echo $row->NIP ?>" required/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">Nama</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="cama" name="nama" minlength="2" type="text" value="Jonathan Smith" required />
+                                        <input class=" form-control input-sm m-bot15" id="cama" name="nama_pegawai" minlength="2" type="text" value="<?php echo $row->NAMA_PEGAWAI ?>" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="cjabatan" class="control-label col-lg-4">Jabatan</label>
                                     <div class="col-lg-6">
                                         <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan" >
-                                            <option selected>Supir</option>
-                                            <option>Kernet</option>
+                                            <option <?php if($row->JABATAN == "SUPIR")echo "selected"?> value="SUPIR">SUPIR</option>
+                                            <option <?php if($row->JABATAN == "KERNET")echo "selected"?> value="KERNET">KERNET</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="cklas" class="control-label col-lg-4">Klasifikasi</label>
                                     <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="cklas" name="klas">
-                                            <option>8</option>
-                                            <option>16</option>
-                                            <option>24</option>
-                                            <option selected>32</option>
-                                            <option>40</option>
+                                        <select class="form-control input-sm m-bot15" id="cklas" name="klasifikasi">
+                                            <option <?php if($row->KLASIFIKASI == 8)echo "selected"?> value="8">8</option>
+                                            <option <?php if($row->KLASIFIKASI == 16)echo "selected"?> value="16">16</option>
+                                            <option <?php if($row->KLASIFIKASI == 24)echo "selected"?> value="24">24</option>
+                                            <option <?php if($row->KLASIFIKASI == 32)echo "selected"?> value="32">32</option>
+                                            <option <?php if($row->KLASIFIKASI == 40)echo "selected"?> value="40">40</option>
+                                            <option <?php if($row->KLASIFIKASI == "" || $row->KLASIFIKASI=="-")echo "selected"?> value="">-</option>
                                         </select>
                                     </div>
                                 </div>
@@ -212,63 +213,63 @@
                                     <label for="cstatus" class="control-label col-lg-4">Status</label>
                                     <div class="col-lg-6">
                                         <select class="form-control input-sm m-bot15" id="cstatus" name="status">
-                                            <option>Aktif</option>
-                                            <option>Tidak Aktif</option>
-                                            <option>Peringatan</option>
+                                            <option <?php if($row->STATUS == "AKTIF")echo "selected"?> value="AKTIF">Aktif</option>
+                                            <option <?php if($row->STATUS == "TIDAK AKTIF")echo "selected"?> value="TIDAK AKTIF">Tidak Aktif</option>
+                                            <option <?php if($row->STATUS == "PERINGATAN")echo "selected"?> value="PERINGATAN">Peringatan</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="ctelp" class="control-label col-lg-4">No. Telp</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="ctelp" name="no_telepon" minlength="2" type="text" value="<?php echo $row->NO_TELEPON ?>"/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="cktp" class="control-label col-lg-4">No. KTP</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="cktp" name="ktp" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="cktp" name="no_ktp" minlength="2" type="text" value="<?php echo $row->NO_KTP ?>"/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="csim" class="control-label col-lg-4">No. SIM</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="csim" name="sim" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="csim" name="no_sim" minlength="2" type="text" value="<?php echo $row->NO_SIM ?>"/>
                                     </div>
                                 </div>
 
                                 <div class="bio-row">
                                     <label for="ctempatlahir" class="control-label col-lg-4">Tempat Lahir</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempatlahir" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempat_lahir" minlength="2" type="text" value="<?php echo $row->TEMPAT_LAHIR ?>" />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="ctgllahir" class="control-label col-lg-4">Tanggal Lahir</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tgllahir" size="16" type="date" value="" required/>
+                                        <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tanggal_lahir" size="16" type="date" value="<?php echo $row->TANGGAL_LAHIR ?>"/>
                                         <span class="help-block">Pilih tanggal</span>
                                     </div>
                                 </div>
 
                                 <div class="bio-row">
-                                    <label for="ctransportir" class="control-label col-lg-4">Transportir Asal</label>
+                                    <label for="transportir_asal" class="control-label col-lg-4">Transportir Asal</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir" minlength="2" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir" minlength="2" type="text" value="<?php echo $row->TRANSPORTIR_ASAL ?>"/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
-                                    <label for="ctglmasuk" class="control-label col-lg-4">Tanggal Masuk</label>
+                                    <label for="tanggal_masuk" class="control-label col-lg-4">Tanggal Masuk</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tglmasuk" type="date" size="16" type="text" value="" required/>
+                                        <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tglmasuk" type="date" size="16" type="text" value="<?php echo $row->TANGGAL_MASUK ?>"/>
                                         <span class="help-block">Pilih tanggal</span>
                                     </div>
                                 </div>
 
                                 <div class="bio-row">
-                                    <label for="calamat" class="control-label col-lg-4">Alamat</label>
+                                    <label for="alamat" class="control-label col-lg-4">Alamat</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="calamat" name="alamat" minlength="2" type="text" required />
+                                        <textarea class=" form-control input-sm m-bot15" id="calamat" name="alamat" rows="5" /><?php echo $row->ALAMAT ?></textarea>
                                     </div>
                                 </div>
 
@@ -660,7 +661,7 @@
     </div>
 </div>
 
-
+<?php } ?>
 <!--script for this page only-->
 <script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
 

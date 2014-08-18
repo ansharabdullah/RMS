@@ -16,7 +16,7 @@ class presentasi extends CI_Controller {
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar_oam',$data);
         $next = anchor("presentasi/slide/".($index - 1),"<button class='btn btn-danger'><i class='icon-long-arrow-left'></i> kembali</button>");
-        $before = anchor("presentasi/slide/".($index + 1),"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-left'></i></button>");
+        $before = anchor("presentasi/slide/".($index + 1),"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-right'></i></button>");
         $slide['paging'] = " <section class='panel'>
             <div class='panel-body'>".$before." ".$next."
             </div>

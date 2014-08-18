@@ -21,7 +21,7 @@
                 }
             },
             xAxis: [{
-                    categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', ]
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -79,7 +79,7 @@
                 }
             },
             xAxis: [{
-                    categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', ]
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -122,7 +122,7 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
+                text: 'Grafik Kinerja Jumlah Premium Depot 1'
             },
             subtitle: {
                 text: 'Tahun 2014'
@@ -137,7 +137,7 @@
                 }
             },
             xAxis: [{
-                    categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', ]
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -180,7 +180,7 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
+                text: 'Grafik Kinerja Jumlah Pertamax Depot 1'
             },
             subtitle: {
                 text: 'Tahun 2014'
@@ -195,7 +195,7 @@
                 }
             },
             xAxis: [{
-                    categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', ]
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -238,7 +238,7 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
+                text: 'Grafik Kinerja Jumlah Pertamax Plus Depot 1'
             },
             subtitle: {
                 text: 'Tahun 2014'
@@ -253,7 +253,7 @@
                 }
             },
             xAxis: [{
-                    categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', ]
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -296,7 +296,7 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
+                text: 'Grafik Kinerja Jumlah Pertamax Dex Depot 1'
             },
             subtitle: {
                 text: 'Tahun 2014'
@@ -311,7 +311,7 @@
                 }
             },
             xAxis: [{
-                    categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', ]
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -354,7 +354,7 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
+                text: 'Grafik Kinerja Jumlah Solar Depot 1'
             },
             subtitle: {
                 text: 'Tahun 2014'
@@ -369,7 +369,7 @@
                 }
             },
             xAxis: [{
-                    categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', ]
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -412,7 +412,7 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
+                text: 'Grafik Kinerja Jumlah Bio Solar Depot 1'
             },
             subtitle: {
                 text: 'Tahun 2014'
@@ -427,7 +427,7 @@
                 }
             },
             xAxis: [{
-                    categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', ]
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {

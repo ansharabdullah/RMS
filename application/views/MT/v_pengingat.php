@@ -43,34 +43,28 @@
                         </thead>
                         <tbody>
                             <?php
-                            $data = array('D 6308 AD', 'D 1725 AF', 'D 2245 AF', 'D 6066 AF', 'D 3038 AD', 'D 8557 AD', 'D 1346 AD', 'D 7152 AF', 'D 9487 AD', 'D 8827 AF', 'D 8711 AD', 'D 8277 AF');
-                            $apar1 = array(6, 12, 11, 3);
-                            $apar2 = array(22, 9, 10, 15);
-                            $apar3 = array(15, 1, 6, 18);
-                            for ($i = 0; $i < 12; $i++) {
-                                if ($i >= 4) {
-                                    ?>
-                                    <tr>
-                                        <th style="display: none;"></th>
-                                        <td><?php echo $i + 1; ?></td>
-                                        <td><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
-                                        <td><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar1-" . $i; ?>','1')")><div id="<?php echo 'apar1-' . $i; ?>"><?php echo rand(8, 20); ?> hari</div></a></td>
-                                        <td><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar2-" . $i; ?>','2')")><div id="<?php echo 'apar2-' . $i; ?>"><?php echo rand(10, 25); ?> hari</div></a></td>
-                                        <td><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar3-" . $i; ?>','3')")><div id="<?php echo 'apar3-' . $i; ?>"><?php echo rand(12, 30); ?> hari</div></a></td>
-                                        </tr>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <tr>
-                                        <th style="display: none;"></th>
-                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
-                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
-                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar1-" . $i; ?>','1','<?php echo $i ?>')")><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $apar1[$i]; ?> hari</div></a></td>
-                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar2-" . $i; ?>','2','<?php echo $i ?>')")><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $apar2[$i]; ?> hari</div></a></td>
-                                        <td style="background-color: orange;" class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $data[$i] ?>', '<?php echo "apar3-" . $i; ?>','3','<?php echo $i ?>')")><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $apar3[$i]; ?> hari</div></a></td>
-                                        </tr>
-                                    <?php
+//                            $data = array('D 6308 AD', 'D 1725 AF', 'D 2245 AF', 'D 6066 AF', 'D 3038 AD', 'D 8557 AD', 'D 1346 AD', 'D 7152 AF', 'D 9487 AD', 'D 8827 AF', 'D 8711 AD', 'D 8277 AF');
+//                            $apar1 = array(6, 12, 11, 3);
+//                            $apar2 = array(22, 9, 10, 15);
+//                            $apar3 = array(15, 1, 6, 18);
+                            $i = 0;
+                            foreach ($apar as $row) {
+                                $color = "";
+                                if($row->store_pressure <= 7 || $row->catridge <=7 || $row->co2 <=7)
+                                {
+                                    $color = "style='background-color: orange;'";
                                 }
+                                    ?>
+                                    <tr>
+                                        <th style="display: none;"></th>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $row->NOPOL ?>', '<?php echo "apar1-" . $i; ?>','Store Pressure','<?php echo $i ?>')")><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->store_pressure; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $row->NOPOL ?>', '<?php echo "apar2-" . $i; ?>','Catridge','<?php echo $i ?>')")><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->catridge;?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $row->NOPOL ?>', '<?php echo "apar3-" . $i; ?>','CO2','<?php echo $i ?>')")><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->co2 ; ?> hari</div></a></td>
+                                        </tr>
+                                    <?php
+                                $i++;
                             }
                             ?>
                         </tbody>
@@ -405,7 +399,7 @@
             highlight = ".peringatan" + row;
             $("#tgl").val("");
             $("#nopol").val(np);
-            $("#apar").val("Apar " + jenis);
+            $("#apar").val(jenis);
         }
     
         function filter(jenis)
