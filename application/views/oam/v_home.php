@@ -1598,10 +1598,18 @@
             tooltip: {
                 valueSuffix: ' millions'
             },
+           
             plotOptions: {
                 bar: {
                     dataLabels: {
                         enabled: true
+                    }
+                }, 
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>amt/oam_bulanan/";
+                        }
                     }
                 }
             },
@@ -1666,12 +1674,19 @@
                 }
             },
             tooltip: {
-                valueSuffix: ' millions'
+                valueSuffix: ''
             },
             plotOptions: {
                 bar: {
                     dataLabels: {
                         enabled: true
+                    }
+                }, 
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>mt/oam_bulanan/";
+                        }
                     }
                 }
             },

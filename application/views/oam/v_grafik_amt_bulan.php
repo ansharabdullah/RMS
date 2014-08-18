@@ -3,18 +3,19 @@
     $(function() {
         $('#grafik').highcharts({
             chart: {
-                type: 'column'
+                type: 'spline'
             },
             title: {
-                text: 'Grafik Awak Mobil Tangki',
+                text: 'Grafik Awak Mobil Tangki Depot 1',
                 x: -20 //center
             },
             subtitle: {
-                text: 'Bulan Januari 2014 (Kilometer)',
+                text: 'Tahun 2014',
                 x: -20
             },
             xAxis: {
-                categories: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             },
             yAxis: {
                 title: {
@@ -36,14 +37,29 @@
                 series: {
                     events: {
                         click: function(event) {
-                            window.location = "<?php echo base_url()?>amt/grafik_hari";
+                            window.location = "<?php echo base_url() ?>amt/oam_harian";
                         }
                     }
                 }
             },
             series: [{
                     name: 'KM',
-                    data: [7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6,7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6,7.0, 6.9, 7.5, 4.5, 6.2, 8.5]
+                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                }, {
+                    name: 'KL',
+                    data: [0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+                }, {
+                    name: 'RIT',
+                    data: [1, 0.8, 2, 11.3, 7, 12, 26, 24.1, 22, 10, 8, 2]
+                }, {
+                    name: 'SPBU',
+                    data: [0.1, 0.5, 2.5, 6.4, 10.5, 12.0, 18.6, 17.2, 14.3, 11.0, 3.9, 2.0]
+                }, {
+                    name: 'Jml Hadir',
+                    data: [0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+                }, {
+                    name: 'Jml Tidak Hadir',
+                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
                 }]
         });
     });
@@ -53,40 +69,89 @@
 
 <section id="main-content">
     <section class="wrapper">
+
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
+                    <header class="panel-heading">
+                        Grafik Bulanan Depot 1
+                    </header>
+                    <div class="panel-body" >
+                        <?php
+                        $attr = array("class" => "cmxform form-horizontal tasi-form");
+                        echo form_open("", $attr);
+                        ?>
+
+                        <div class="form-group">
+                            <div class="col-lg-2">
+                                <select class="form-control m-bot2"  id="depot" name="depot">
+
+                                    <option value="">Depot 1</option>
+                                    <option value="">Depot 2</option>
+                                    <option value="">Depot 3</option>
+                                    <option value="">Depot 4</option>
+                                    <option value="">Depot 5</option>
+
+                                </select>
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="text" name="tahun" data-mask="9999" name="tahun" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                            </div>
+
+                            <div class=" col-lg-2">
+                                <input type="submit" class="btn btn-danger" value="Submit">
+                            </div>
+
+                        </div>
+                        </form>
+                    </div>
                     <div class="panel-body">
-                        <div id="grafik"></div> 
+                        <div id="grafik"></div>
                     </div>
                 </section>
                 <section class="panel">
                     <header class="panel-heading">
-                            Tabel Kinerja Awak Mobil Tangki Bulan Januari
-                        </header>
+                        Tabel Kinerja Awak Mobil Tangki Tahun 2014
+                    </header>
                     <div class="panel-body">
-                        
+
                         <div class="adv-table editable-table " >
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
                                         <th style="display:none;"></th>
-                                        <th> No </th>
-                                        <th>Tanggal</th>
+                                        <th>No</th>
+                                        <th>Bulan</th>
                                         <th>Kilometer (KM)</th>
+                                        <th>Kiloliter (KL)</th>
+                                        <th>Ritase (Rit)</th>
+                                        <th>SPBU</th>
+                                        <th>Jumlah Hadir</th>
+                                        <th>Jumlah Tidak Hadir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $km = array(7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6, 7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6, 7.0, 6.9, 7.5, 4.5, 6.2, 8.5);
-                                    for ($i = 0; $i < 30; $i++) {
+                                    $bulan = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+                                    $km = array(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6);
+                                    $kl = array(0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5);
+                                    $rit = array(1, 0.8, 2, 11.3, 7, 12, 26, 24.1, 22, 10, 8, 2);
+                                    $spbu = array(0.1, 0.5, 2.5, 6.4, 10.5, 12.0, 18.6, 17.2, 14.3, 11.0, 3.9, 2.0);
+                                    $hadir = array(0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0);
+                                    $tidakHadir = array(3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8);
+                                    for ($i = 0; $i < 12; $i++) {
                                         ?>
                                         <tr class="">
                                             <td style="display:none;"></td>
                                             <td><?php echo ($i + 1) ?></td>
-                                            <td><?php echo ($i + 1) ?></td>
+                                            <td><?php echo $bulan[$i] ?></td>
                                             <td><?php echo $km[$i] ?></td>
+                                            <td><?php echo $kl[$i] ?></td>
+                                            <td><?php echo $rit[$i] ?></td>
+                                            <td><?php echo $spbu[$i] ?></td>
+                                            <td><?php echo $hadir[$i] ?></td>
+                                            <td><?php echo $tidakHadir[$i] ?></td>
                                         </tr>
                                         <?php
                                     }
