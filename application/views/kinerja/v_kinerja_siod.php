@@ -10,17 +10,17 @@
             {
                 var ext = $("#fileSIOD").val().split('.').pop();
                 if(ext=="xls" || ext=="xlsx"){
-                    $("#filePreview").hide();
-                    $("#filePreview").slideDown("slow");
-                    $("#filePreview1").slideDown("slow");
-                    $("#tgl").html($("#tanggalSIOD").val());
-                    $("#tgl1").html($("#tanggalSIOD").val());
+                    //$("#filePreview").hide();
+                    //$("#filePreview").slideDown("slow");
+                    //$("#filePreview1").slideDown("slow");
+                    //$("#tgl").html($("#tanggalSIOD").val());
+                    //$("#tgl1").html($("#tanggalSIOD").val());
                 }else if(ext==""){
-                
+                    e.preventDefault();
                 }else{
                     alert("Tipe file yang diupload tidak sesuai (file excel)");
-                }
-                e.preventDefault();
+                    e.preventDefault();
+                }                
             }
         });
         
@@ -52,27 +52,28 @@
                 </div>
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" onsubmit="testing()">
+                <form class="cmxform form-horizontal tasi-form" id="signupForm" action="<?php echo base_url() ?>kinerja/baca" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                        <div class="col-lg-10">
+                        <div class="col-lg-10 col-sm-6">
                             <input type="date" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">File SIOD</label>
-                        <div class="col-lg-10">
+                        <div class="col-lg-10 col-sm-6">
                             <input type="file"  id="fileSIOD" required="required" class="form-control"  placeholder="File SIOD" name="fileSIOD">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
+                        <div class="col-lg-offset-2 col-lg-10 col-sm-6">
                             <input type="submit" style="float: right;" class="btn btn-danger" value="Upload">
                         </div>
                     </div>
                 </form>
-
+            </div>
         </section>
+
         <section class="panel">
             <div id="filePreview">
                 <header class="panel-heading">

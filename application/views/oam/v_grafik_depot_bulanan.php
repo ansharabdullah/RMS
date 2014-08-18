@@ -105,19 +105,10 @@
                 zoomType: 'xy'
             },
             title: {
-                text: 'Rencana pengiriman vs realisasi (MS2 Compliance) Depot 1'
+                text: '<?php echo $title?> Depot 1'
             },
             subtitle: {
                 text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                        events: {
-                            click: function(event) {
-                                window.location = "<?php echo base_url() ?>depot/grafik_hari";
-                            }
-                        }
-                    }
             },
             xAxis: [{
                     categories: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus']
@@ -151,6 +142,7 @@
             series: [{
                     name: 'Realisasi',
                     type: 'column',
+                    color:'<?php echo $color?>',
                     data: [92,99,101,98,95,92,89,90]
 
                 }, {

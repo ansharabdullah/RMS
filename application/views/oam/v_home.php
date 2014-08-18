@@ -1,6 +1,26 @@
-
-
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        //        $("#amtMtBody").hide();
+        $("#ms2VolumeBody").hide();
+        $("#rencanaBody").hide();
+        $("#indikatorKpiBody").hide();
+    });
+    function showPanel(index)
+    {
+        if(index == 1){
+            $("#amtMtBody").toggle("fast");
+        }
+        else if(index == 2){
+            $("#ms2VolumeBody").toggle("fast");
+        }
+        else if(index == 3){
+            $("#rencanaBody").toggle("fast");
+        }
+        else if(index == 4){
+            $("#indikatorKpiBody").toggle("fast");
+        }
+    }
+</script>
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
@@ -58,310 +78,429 @@
                 </section>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <section class="panel">
+                    <a style="cursor: pointer" onclick="showPanel(1)"><div class="revenue-head" style="background-color:teal;">
+                            <span style="background-color:teal;">
+                                <i class="icon-exclamation-sign"></i>
+                            </span>
+                            <h3>Grafik AMT & MT Perdepot</h3>
+                            <span class="rev-combo pull-right" style="background-color:teal;">
+                                Agustus 2014
+                            </span>
+                        </div></a>
+                    <div class="panel-body" id="amtMtBody">
+                        <section class="panel" >
+                            <div class="btn-group pull-right">
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">Filter AMT<i class="icon-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-left">
+                                    <li><a style="cursor: pointer" onclick="changeAmtTitle('KM')">KM</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeAmtTitle('KL')">KL</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeAmtTitle('Ritase')">Ritase</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeAmtTitle('SPBU')">SPBU</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeAmtTitle('Jumlah Hadir')">Jumlah Hadir</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeAmtTitle('Jumlah Tidak Hadir')">Jumlah Tidak Hadir</a></li>
+                                </ul>
+                            </div>
+                            <center>
+                                <div id="grafikAmt" style="width: 1000px"></div>
+                            </center>
+                            <div class="btn-group pull-right">
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-left">
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('KM')">KM</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('KL')">KL</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('Ritase')">Ritase</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('Premium')">Premium</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('Pertamax')">Pertamax</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('Pertamax Plus')">Pertamax Plus</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('Pertamax Dex')">Pertamax Dex</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('Solar')">Solar</a></li>
+                                    <li><a style="cursor: pointer" onclick="changeMtTitle('Bio Solar')">Bio Solar</a></li>
+                                </ul>
+                            </div>
+                            <center>
+                                <div id="grafikMt" style="width: 1000px"></div>
+                            </center>
+                        </section>
+                    </div>
+                </section>
+
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-12">
+
                 <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikPengiriman"></div>
+                    <a style="cursor: pointer" onclick="showPanel(3)"><div class="revenue-head" style="background-color:#d9534f;">
+                            <span style="background-color:#d9534f;">
+                                <i class="icon-exclamation-sign"></i>
+                            </span>
+                            <h3>Realisasi dari Rencana</h3>
+                            <span class="rev-combo pull-right" style="background-color:#d9534f;">
+                                Agustus 2014
+                            </span>
+                        </div></a>
+                    <div class="panel-body" id="rencanaBody">
+                        <section class="panel" >
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <section class="panel">
+                                        <header class="panel-heading">
+                                            Realisasi dari Rencana Tahun Ini
+                                        </header>
+                                        <div class="panel-body">
+                                            <p class="text-muted">
+                                                Kilo Liter Premium (70000/90000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax (95000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax Plus (75000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax Dex (80000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Solar (70000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Bio Solar (90000/90000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Own Use (90000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-4">
+                                    <section class="panel">
+                                        <header class="panel-heading">
+                                            Realisasi dari Rencana Bulan Ini
+                                        </header>
+                                        <div class="panel-body">
+                                            <p class="text-muted">
+                                                Kilo Liter Premium (70000/90000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax (95000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax Plus (75000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax Dex (80000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Solar (70000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Bio Solar (90000/90000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Own Use (90000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-4">
+                                    <section class="panel">
+                                        <header class="panel-heading">
+                                            Realisasi dari Rencana Hari Ini
+                                        </header>
+                                        <div class="panel-body">
+                                            <p class="text-muted">
+                                                Kilo Liter Premium (70000/90000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax (95000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax Plus (75000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Pertamax Dex (80000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Solar (70000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Bio Solar (90000/90000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-muted">
+                                                Kilo Liter Own Use (90000/100000 Kl)
+                                            </p>
+                                            <div class="progress progress-striped progress-sm active">
+                                                <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+                                                    <span class="sr-only">45% Complete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+
+                        </section>
                     </div>
                 </section>
-            </div>
 
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
+
                 <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikVolume"></div>
+                    <a style="cursor: pointer" onclick="showPanel(2)"><div class="revenue-head" style="background-color:steelblue;">
+                            <span style="background-color:steelblue;">
+                                <i class="icon-exclamation-sign"></i>
+                            </span>
+                            <h3>Grafik KPI MS2 & Volume Perdepot</h3>
+                            <span class="rev-combo pull-right" style="background-color:steelblue;">
+                                Agustus 2014
+                            </span>
+                        </div></a>
+                    <div class="panel-body" id="ms2VolumeBody">
+                        <section class="panel" >
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikPengiriman" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-5">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikVolume" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </section>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-12">
+
                 <section class="panel">
-                    <header class="panel-heading">
-                        Realisasi dari Rencana Tahun Ini
-                    </header>
-                    <div class="panel-body">
-                        <p class="text-muted">
-                            Kilo Liter Premium (70000/90000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
+                    <a style="cursor: pointer" onclick="showPanel(4)"><div class="revenue-head" style="background-color:darkorange;">
+                            <span style="background-color:darkorange;">
+                                <i class="icon-exclamation-sign"></i>
+                            </span>
+                            <h3>Grafik Indikator KPI Perdepot</h3>
+                            <span class="rev-combo pull-right" style="background-color:darkorange;">
+                                Agustus 2014
+                            </span>
+                        </div></a>
+                    <div class="panel-body" id="indikatorKpiBody">
+                        <section class="panel" >
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikTagihan" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
 
-                        <p class="text-muted">
-                            Kilo Liter Pertamax (95000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
-                                <span class="sr-only">45% Complete</span>
+                                <div class="col-lg-5">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikCustomer" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikKeluhan" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-5">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikPenyelesaian" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikPelatihan" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-5">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikIncidents" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikPenyelesaianIncidents" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-lg-5">
+                                    <section class="panel">
+                                        <div class="panel-body">
+                                            <div id="grafikAccident" style="width: 500px"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
 
-                        <p class="text-muted">
-                            Kilo Liter Pertamax Plus (75000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Pertamax Dex (80000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Solar (70000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Bio Solar (90000/90000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Own Use (90000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
                     </div>
+
                 </section>
-            </div>
-            <div class="col-lg-4">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Realisasi dari Rencana Bulan Ini
-                    </header>
-                    <div class="panel-body">
-                        <p class="text-muted">
-                            Kilo Liter Premium (70000/90000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
 
-                        <p class="text-muted">
-                            Kilo Liter Pertamax (95000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Pertamax Plus (75000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Pertamax Dex (80000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Solar (70000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Bio Solar (90000/90000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Own Use (90000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-                    </div>
                 </section>
-            </div>
-            <div class="col-lg-4">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Realisasi dari Rencana Hari Ini
-                    </header>
-                    <div class="panel-body">
-                        <p class="text-muted">
-                            Kilo Liter Premium (70000/90000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
 
-                        <p class="text-muted">
-                            Kilo Liter Pertamax (95000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Pertamax Plus (75000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Pertamax Dex (80000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Solar (70000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Bio Solar (90000/90000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-
-                        <p class="text-muted">
-                            Kilo Liter Own Use (90000/100000 Kl)
-                        </p>
-                        <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                                <span class="sr-only">45% Complete</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikTagihan"></div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-6">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikCustomer"></div>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikKeluhan"></div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-6">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikPenyelesaian"></div>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikPelatihan"></div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-6">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikIncidents"></div>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikPenyelesaianIncidents"></div>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-6">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafikAccident"></div>
-                    </div>
-                </section>
-            </div>
-        </div>
         </div>
     </section>
 </section>
 <script src="<?php echo base_url() ?>assets/js/grouped-categories.js"></script>
 <script type="text/javascript">
+    var amt;
+    var mt;
     $(function() {
         $('#grafikPengiriman').highcharts({
             chart: {
@@ -454,7 +593,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -479,7 +618,7 @@
             },
             
             plotOptions: {
-               column: {
+                column: {
                     groupPadding:.05
                 }  ,
                 series: {
@@ -562,7 +701,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -587,6 +726,13 @@
             plotOptions: {
                 column: {
                     groupPadding:.05
+                }  ,
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/3";
+                        }
+                    }
                 }
             },
             xAxis: [{
@@ -661,7 +807,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -686,6 +832,13 @@
             plotOptions: {
                 column: {
                     groupPadding:.05
+                }  ,
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/4";
+                        }
+                    }
                 }
             },
             xAxis: [{
@@ -760,7 +913,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -785,6 +938,13 @@
             plotOptions: {
                 column: {
                     groupPadding:.05
+                }  ,
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/5";
+                        }
+                    }
                 }
             },
             xAxis: [{
@@ -859,7 +1019,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -884,6 +1044,13 @@
             plotOptions: {
                 column: {
                     groupPadding:.05
+                }  ,
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/6";
+                        }
+                    }
                 }
             },
             xAxis: [{
@@ -958,7 +1125,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -983,6 +1150,13 @@
             plotOptions: {
                 column: {
                     groupPadding:.05
+                }  ,
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/7";
+                        }
+                    }
                 }
             },
             xAxis: [{
@@ -1057,7 +1231,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -1082,6 +1256,13 @@
             plotOptions: {
                 column: {
                     groupPadding:.05
+                }  ,
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/8";
+                        }
+                    }
                 }
             },
             xAxis: [{
@@ -1156,7 +1337,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -1183,6 +1364,13 @@
             plotOptions: {
                 column: {
                     groupPadding:.05
+                }  ,
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/9";
+                        }
+                    }
                 }
             },
             xAxis: [{
@@ -1257,7 +1445,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -1283,6 +1471,13 @@
             plotOptions: {
                 column: {
                     groupPadding:.05
+                }  ,
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/10";
+                        }
+                    }
                 }
             },
             xAxis: [{
@@ -1357,7 +1552,7 @@
 
                 }
                 ,{
-                    type: 'spline',
+                    type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
@@ -1371,4 +1566,172 @@
                 }]
         });
     });
+     
+    $(function () {
+        amt = new Highcharts.Chart({ 
+            chart: {
+                type: 'bar',
+                renderTo: 'grafikAmt'
+            },
+            title: {
+                text: 'Grafik AMT Indikator KM'
+            },
+            subtitle: {
+                text: 'Source: Wikipedia.org'
+            },
+            xAxis: {
+                categories: ['2014'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions'
+            },
+           
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }, 
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>amt/oam_bulanan/";
+                        }
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Depot 1',
+                    data: [107]
+                }, {
+                    name: 'Depot 2',
+                    data: [133]
+                }, {
+                    name: 'Depot 3',
+                    data: [97]
+                }, {
+                    name: 'Depot 4',
+                    data: [97]
+                }, {
+                    name: 'Depot 5',
+                    data: [97]
+                }]
+        });
+    });
+    $(function () {
+        mt = new Highcharts.Chart({ 
+            chart: {
+                type: 'bar',
+                renderTo: 'grafikMt'
+            },
+            title: {
+                text: 'Grafik MT Indikator KM'
+            },
+            subtitle: {
+                text: 'Source: Wikipedia.org'
+            },
+            xAxis: {
+                categories: ['2014'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }, 
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>mt/oam_bulanan/";
+                        }
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Depot 1',
+                    data: [107]
+                }, {
+                    name: 'Depot 2',
+                    data: [133]
+                }, {
+                    name: 'Depot 3',
+                    data: [97]
+                }, {
+                    name: 'Depot 4',
+                    data: [97]
+                }, {
+                    name: 'Depot 5',
+                    data: [97]
+                }]
+        });
+    });
+    function changeAmtTitle(title)
+    {
+        amt.setTitle({text: "Grafik AMT Indikator " + title});       
+        $("#grafikAmt").hide();
+        $("#grafikAmt").slideDown("slow");
+    }
+    function changeMtTitle(title)
+    {
+        mt.setTitle({text: "Grafik MT Indikator " + title});       
+        $("#grafikMt").hide();
+        $("#grafikMt").slideDown("slow");
+    }
 </script>
