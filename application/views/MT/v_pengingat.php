@@ -1,7 +1,29 @@
 <script>
+        var apar = new Array();
     $(document).ready(function(){
         $("#tabel-ban").hide();
         $("#tabel-surat").hide();
+        
+        //masukin array apar ke javascript
+        var ap;
+        <?php
+             foreach($apar as $a)
+             {
+                 ?>
+                 ap = new Array();
+                 ap['id'] = "<?php echo $a->ID_APAR?>";
+                 ap['nopol'] = "<?php echo $a->NOPOL?>";
+                 ap['tgl_store'] = "<?php echo $a->tgl_store?>";
+                 ap['tgl_catridge'] = "<?php echo $a->tgl_catridge?>";
+                 ap['tgl_co2'] = "<?php echo $a->tgl_co2?>";
+                 ap['store_pressure'] = "<?php echo $a->store_pressure?>";
+                 ap['catridge'] = "<?php echo $a->catridge?>";
+                 ap['co2'] = "<?php echo $a->co2?>";
+                 apar.push(ap);
+                 <?php
+             }
+                        ?>
+        
     });
 </script>
 
@@ -59,9 +81,9 @@
                                         <th style="display: none;"></th>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $row->NOPOL ?>', '<?php echo "apar1-" . $i; ?>','Store Pressure','<?php echo $i ?>')")><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->store_pressure; ?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $row->NOPOL ?>', '<?php echo "apar2-" . $i; ?>','Catridge','<?php echo $i ?>')")><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->catridge;?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $row->NOPOL ?>', '<?php echo "apar3-" . $i; ?>','CO2','<?php echo $i ?>')")><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->co2 ; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $i ?>')")><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->store_pressure; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $i ?>')")><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->catridge;?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $i ?>')")><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->co2 ; ?> hari</div></a></td>
                                         </tr>
                                     <?php
                                 $i++;
@@ -187,7 +209,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Edit Apar</h4>
             </div>
-            <form class="form-horizontal" role="form" id="form-edit" >
+            <form class="form-horizontal" role="form" id="form-edit" action="" method="POST">
                 <div class="modal-body">
 
 
@@ -198,15 +220,50 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">Jenis Apar</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control"  id="apar" readonly="readonly" name="nopol" placeholder="Jenis Apar">
+                        <label class="col-lg-3 col-sm-2 control-label">STORE PRESSURE</label><hr/>
+                    </div>
+                    <div class="form-group">
+                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control"  id="hari_store" readonly="readonly" name="sisa" placeholder="Jenis Apar">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" type="date" value="" id="tgl" size="16" required="required"/>
+                        <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="date" value="" id="tgl_store" size="16"  name="tgl_store" required="required"/>
+                            <span class="help-block">Pilih Tanggal</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <label class="col-lg-3 col-sm-2 control-label">CATRIDGE</label><hr/>
+                    </div>
+                    <div class="form-group">
+                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control"  id="hari_catridge" readonly="readonly" name="sisa" placeholder="Jenis Apar">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="date" value="" id="tgl_catridge" size="16"  name="tgl_catridge" required="required"/>
+                            <span class="help-block">Pilih Tanggal</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <label class="col-lg-3 col-sm-2 control-label">CO2</label><hr/>
+                    </div>
+                    <div class="form-group">
+                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control"  id="hari_co2" readonly="readonly" name="sisa" placeholder="Jenis Apar">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="date" value="" id="tgl_co2" size="16"  name="tgl_co2" required="required"/>
                             <span class="help-block">Pilih Tanggal</span>
                         </div>
                     </div>
@@ -214,7 +271,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
-                    <button class="btn btn-success" type="submit" onclick="editApar()">Simpan</button>
+                    <button class="btn btn-success" type="submit">Simpan</button>
 
                 </div>
             </form>
@@ -387,19 +444,29 @@
     </script>
     <script type="text/javascript">
         var nopol;
-        var apar;
+       // var apar;
         var jenis;
         var highlight;
         var index;
         var indexBan;
-        function setDetail(np,apr,jenis,row){
-            nopol = np;
-            apar = apr;
-            index = row;
-            highlight = ".peringatan" + row;
+        function setDetail(index){
+//            nopol = np;
+//            apar = apr;
+//            index = row;
+//            highlight = ".peringatan" + row;
+            var action = "<?php echo base_url()?>mt/edit_reminder_apar/"+apar[index]['id'];
             $("#tgl").val("");
-            $("#nopol").val(np);
-            $("#apar").val(jenis);
+            $("#nopol").val(apar[index]['nopol']);
+            $("#tgl_store").val(apar[index]['tgl_store']);
+            $("#hari_store").val(apar[index]['store_pressure'] + " hari");
+            $("#tgl_catridge").val(apar[index]['tgl_catridge']);
+            $("#hari_catridge").val(apar[index]['catridge'] + " hari");
+            $("#tgl_co2").val(apar[index]['tgl_co2']);
+            $("#hari_co2").val(apar[index]['co2'] + " hari");
+            $("#form-edit").attr("action",action ); 
+//            $("#apar").val(jenis);
+//            $("#hari").val(hari+" hari");
+           
         }
     
         function filter(jenis)
@@ -426,38 +493,38 @@
             $('#editable-sample3').dataTable().fnFilter( '' );
         }
     
-        $("#form-edit").submit(function(e){
-       
-            var date1 = new Date($("#tgl").val());
-            var date2 = new Date();
-            var diffDays = date2.getDate() - date1.getDate(); 
-            if(diffDays > 0)
-            {
-                alert("Tanggal harus lebih dari sekarang");   
-            }
-            else
-            {
-                diffDays = diffDays*(-1);
-                apar = "#"+apar;
-                $(apar).text(diffDays + " hari");
-                var apar1 = "#apar1-"+index;
-                var apar2 = "#apar2-"+index;
-                var apar3 = "#apar3-"+index;
-                var val1 =  $(apar1).text();
-                var val2 =  $(apar2).text();
-                var val3 =  $(apar3).text();
-                val1 = val1.substr(0, val1.length - 5);
-                val2 = val2.substr(0, val2.length - 5);
-                val2 = val3.substr(0, val3.length - 5);
-                if(parseInt(val1) > 7 && parseInt(val2) > 7 && parseInt(val3) > 7)
-                {
-                    $(highlight).css({'background-color': 'transparent'});    
-                }
-                $("#myModal").modal('toggle');
-            }
-            e.preventDefault();
-     
-        });
+//        $("#form-edit").submit(function(e){
+//       
+//            var date1 = new Date($("#tgl").val());
+//            var date2 = new Date();
+//            var diffDays = date2.getDate() - date1.getDate(); 
+//            if(diffDays > 0)
+//            {
+//                alert("Tanggal harus lebih dari sekarang");   
+//            }
+//            else
+//            {
+//                diffDays = diffDays*(-1);
+//                apar = "#"+apar;
+//                $(apar).text(diffDays + " hari");
+//                var apar1 = "#apar1-"+index;
+//                var apar2 = "#apar2-"+index;
+//                var apar3 = "#apar3-"+index;
+//                var val1 =  $(apar1).text();
+//                var val2 =  $(apar2).text();
+//                var val3 =  $(apar3).text();
+//                val1 = val1.substr(0, val1.length - 5);
+//                val2 = val2.substr(0, val2.length - 5);
+//                val2 = val3.substr(0, val3.length - 5);
+//                if(parseInt(val1) > 7 && parseInt(val2) > 7 && parseInt(val3) > 7)
+//                {
+//                    $(highlight).css({'background-color': 'transparent'});    
+//                }
+//                $("#myModal").modal('toggle');
+//            }
+//            e.preventDefault();
+//     
+//        });
     
         $("#form-edit-ban").submit(function(e){
             var date1 = new Date($("#tgl-ban").val());

@@ -200,6 +200,25 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_pengingat', $data2);
         $this->footer();
     }
+    
+    public function edit_reminder_apar($id)
+    {
+        $store = $_POST['tgl_store'];
+        $catridge = $_POST['tgl_catridge'];
+        $co2 = $_POST['tgl_co2'];
+        
+        $data = array(
+            "STORE_PRESSURE"=>$store,
+            "CATRIDGE"=>$catridge,
+            "CO2"=>$co2
+        );
+        
+        $this->m_apar->editReminderApar($id,$data);
+        //redirect('mt/reminder');
+          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
+            echo 'window.location.href="' . base_url() . 'mt/reminder";';
+            echo '</script>';
+    }
 
     public function rencana() {
 
@@ -209,6 +228,7 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_rencana');
         $this->footer();
     }
+    
 
     private function header($data) {
         $this->load->view('layouts/header');
