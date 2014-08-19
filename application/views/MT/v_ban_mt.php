@@ -2,6 +2,7 @@
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
+<?php foreach ($mt as $row){?>
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -10,9 +11,11 @@
 
             <div class="panel-body">
                 <div class="bio-desk">
-                    <p>Nopol : D8900AD</p>
-                    <p>Kapasitas : 16</p>
-                    <p>Produk : Pertamax</p>
+                    
+                    <p>Nopol : <?php echo $row->nopol?></p>
+                    <p>Kapasitas : <?php echo $row->kapasitas ?></p>
+                    <p>Produk : <?php echo $row->produk ?></p>
+                    
                 </div>
             </div>
         </section>
@@ -30,6 +33,7 @@
                             Tambah Ban MT <i class="icon-plus"></i>
                         </a>
                     </div>
+                    <div class="space15"></div>
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
                         <thead>
                             <tr>
@@ -41,89 +45,30 @@
                                 <th>Merk Ban</th>
                                 <th>No Seri</th>
                                 <th>Jenis Ban</th>
-                                <th>Cadangan Ban</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="">
-                                <th style="display:none;"></th>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>23/02/2009</td>
-                                <td>24/02/2014</td>
-                                <td>Continental</td>
-                                <td>129344KM</td>
-                                <td>Original</td>
-                                <td>1</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                <?php $i = 1;
+                                foreach ($mt as $row) { ?>
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i; ?></td>
+                                    <td><?php echo $row->POSISI_BAN; ?></td>
+                                    <td><?php echo $row->TANGGAL_PASANG; ?></td>
+                                    <td><?php echo $row->TANGGAL_GANTI_BAN; ?></td>
+                                    <td><?php echo $row->MERK_BAN; ?></td>
+                                    <td><?php echo $row->NO_SERI_BAN; ?></td>
+                                   <td><?php echo $row->JENIS_BAN; ?></td>
+                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>23/02/2009</td>
-                                <td>25/02/2013</td>
-                                <td>Continental</td>
-                                <td>129124KM</td>
-                                <td>Vulkanisir</td>
-                                <td>1</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>3</td>
-                                <td>3</td>
-                                <td>23/02/2009</td>
-                                <td>28/02/2013</td>
-                                <td>Continental</td>
-                                <td>129124KM</td>
-                                <td>Original</td>
-                                <td>1</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>4</td>
-                                <td>4</td>
-                                <td>23/02/2009</td>
-                                <td>27/05/2015</td>
-                                <td>Bridgestone</td>
-                                <td>129124KM</td>
-                                <td>Original</td>
-                                <td>2</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>5</td>
-                                <td>5</td>
-                                <td>23/02/2009</td>
-                                <td>26/07/2014</td>
-                                <td>Bridgestone</td>
-                                <td>129124KM</td>
-                                <td>Original</td>
-                                <td>2</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>6</td>
-                                <td>6</td>
-                                <td>23/02/2009</td>
-                                <td>25/05/2014</td>
-                                <td>Continental</td>
-                                <td>129124KM</td>
-                                <td>Original</td>
-                                <td>1</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
+                            
+                                </tr>
+                                <?php $i++;
+                            } ?>
+                           
+                               
+                                </tr>
                         </tbody>
                     </table>
                 </div>
@@ -314,6 +259,7 @@
         </div>
     </div>
 </div>
+<?php } ?>
 
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>

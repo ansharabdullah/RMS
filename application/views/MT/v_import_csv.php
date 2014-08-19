@@ -57,10 +57,13 @@
                         </div>
                     </div>
                 </form>
+            </div>
 
-                <div id="filePreview">
-                    <header class="panel-heading">
-                    </header>
+            <div id="filePreview">
+                <header class="panel-heading">
+                   Tabel Data Mobil Tangki
+                </header>
+                <div class="panel-body" >
                     <div class="adv-table editable-table ">
                         <div class="clearfix">
 
@@ -212,7 +215,7 @@
                         </table>
                     </div>
                     <button style="float: right;" onclick="importTable()" type="button" class="btn btn-success">Simpan </button> 
-                    
+
                 </div>
             </div>
         </section>
