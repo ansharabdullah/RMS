@@ -6,6 +6,9 @@
         <group>
             <file>file:/C:/xampp/htdocs/RMS/application/controllers/amt.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/amt/v_data_amt.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_pengaturan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/pengaturan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/pengaturan/v_pengaturan.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/amt/v_detail.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
         </group>

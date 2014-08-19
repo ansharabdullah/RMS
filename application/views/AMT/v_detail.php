@@ -17,9 +17,6 @@
         $("#btnEdit").addClass("active");
     }
     
-    
-    
-    
     $(function () {
         $('#grafik').highcharts({
             title: {
@@ -88,7 +85,7 @@
             <div class="panel-body">
                 <a class="btn btn-warning" data-toggle="modal" href="#ModalPeringatan"><i class="icon-warning-sign"></i> Peringatan</a>
 
-                <a class="btn btn-danger" data-toggle="modal" href="#ModalHapus"><i class="icon-eraser"></i> Hapus</a>
+                <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_PEGAWAI ?>');"><i class="icon-eraser"></i> Hapus</a>
 
 
             </div>
@@ -170,7 +167,7 @@
 
 
                     <div class="panel-body bio-graph-info" id="EditProfile">
-                        <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url()?>amt/edit_pegawai/<?php echo $row->ID_PEGAWAI ?>">
+                        <form enctype="multipart/form-data" class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url()?>amt/edit_pegawai/<?php echo $row->ID_PEGAWAI ?>" >
                             <input type="hidden" name="id" value="<?php echo $row->ID_PEGAWAI?>">
                             <h1>Edit Profile Awak Mobil Tangki</h1>
 
@@ -283,7 +280,7 @@
                                                 <span class="btn btn-white btn-file">
                                                     <span class="fileupload-new"><i class="icon-paper-clip"></i> Select image</span>
                                                     <span class="fileupload-exists"><i class="icon-undo"></i> Change</span>
-                                                    <input type="file" class="default"/>
+                                                    <input type="file" class="default" name="userfile"/>
                                                 </span>
                                                 <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="icon-trash"></i> Remove</a>
                                             </div>
@@ -547,7 +544,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -561,7 +558,7 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                <button class="btn btn-success" type="button">OK</button>
+                 <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
             </div>
         </div>
     </div>
@@ -676,6 +673,20 @@
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
     
-   
-		  
+       var globalId;
+    $('#modalHapus').on('show', function() {
+
+    });
+
+    function hapus(id) {
+        globalId = id;
+        $('#modalHapus').data('id', id).modal('show');
+    }
+
+    function ok()
+    {
+        var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId;
+        window.location.href = url;
+    }
+
 </script>
