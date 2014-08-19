@@ -60,7 +60,7 @@ class amt extends CI_Controller {
         $this->m_amt->editPegawai($data, $id);
 
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . base_url() . '"amt/detail_pegawai/"' . $id_pegawai . '"';
+        echo 'window.location.href="' . base_url() . '"amt/detail/"' . $id_pegawai . '"';
         echo '</script>';
     }
 

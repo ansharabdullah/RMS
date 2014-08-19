@@ -11,9 +11,11 @@
 
             <div class="panel-body">
                 <div class="bio-desk">
+                    
                     <p>Nopol : <?php echo $row->nopol?></p>
                     <p>Kapasitas : <?php echo $row->kapasitas ?></p>
                     <p>Produk : <?php echo $row->produk ?></p>
+                    
                 </div>
             </div>
         </section>
@@ -31,6 +33,7 @@
                             Tambah Ban MT <i class="icon-plus"></i>
                         </a>
                     </div>
+                    <div class="space15"></div>
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
                         <thead>
                             <tr>

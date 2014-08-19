@@ -105,10 +105,10 @@
 <?php foreach ($mt as $row) { ?>
             <section class="panel">
                 <div class="panel-body">
-                    <a href="<?php echo base_url() ?>mt/surat_mt" rel="stylesheet" class="btn btn-primary"><i class="icon-envelope"></i> Surat</a>
+                    <a href="<?php echo base_url() ?>mt/surat_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"><i class="icon-envelope"></i> Surat</a>
                     <a href="<?php echo base_url() ?>mt/apar_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
-                    <a href="<?php echo base_url() ?>mt/ban_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
-                    <a href="<?php echo base_url() ?>mt/oli_mt" rel="stylesheet" class="btn btn-primary"> <i class=" icon-beer"></i> Oli</a>
+                    <a href="<?php echo base_url() ?>mt/ban_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
+                    <a href="<?php echo base_url() ?>mt/oli_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"> <i class=" icon-beer"></i> Oli</a>
 
                 </div>
             </section>
@@ -278,25 +278,26 @@
                     Edit MT  
                 </header>
                 <div class="panel-body bio-graph-primary" >
-                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="<?php echo base_url() ?>mt/edit_mobil/<?php echo $row->ID_MOBIL ?>">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/edit_mobil/<?php echo $row->ID_MOBIL ?>">
                         <div class="panel-body">
+                            <input type="hidden" name="id" value="<?php echo $row->ID_MOBIL?>">
                             <div class="row">
                                 <div class="bio-row">
                                     <label for="nopol" class="control-label col-lg-4">Nopol</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NOPOL ?>" id="cnip" name="nopol"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NOPOL ?>" id="nop" name="nopol"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">No Rangka</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NO_RANGKA ?>" id="cama" name="norangka"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NO_RANGKA ?>" id="cama" name="no_rangka"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
-                                    <label for="cjabatan" class="control-label col-lg-4">Kapasitas</label>
+                                    <label for="ckap" class="control-label col-lg-4">Kapasitas</label>
                                     <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" value="16" id="cjabatan" name="jabatan">
+                                        <select class="form-control input-sm m-bot15" id="ckap" name="kapasitas">
                                             <option <?php if($row->KAPASITAS == "8")echo "selected"?> value="8">8</option>
                                             <option <?php if($row->KAPASITAS == "16")echo "selected"?> value="16">16</option>
                                             <option <?php if($row->KAPASITAS == "24")echo "selected"?> value="24">24</option>
@@ -309,13 +310,13 @@
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">No Mesin</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NO_MESIN ?>" id="cmesin" name="nomesin"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NO_MESIN ?>" id="cmesin" name="no_mesin"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
-                                    <label for="cklas" class="control-label col-lg-4">Produk</label>
+                                    <label for="cpro" class="control-label col-lg-4">Produk</label>
                                     <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" value="Pertamax" id="cklas" name="produk">
+                                        <select class="form-control input-sm m-bot15" id="cpro" name="produk">
                                             
                                             <option <?php if($row->PRODUK == "Premium")echo "selected"?> value="Premium">Premium</option>
                                             <option <?php if($row->PRODUK == "Pertamax")echo "selected"?> value="Pertamax">Pertamax</option>
@@ -330,7 +331,7 @@
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->JENIS_KENDARAAN ?>" id="cjk" name="jk"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->JENIS_KENDARAAN ?>" id="cjk" name="jenis_kendaraan"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -342,18 +343,18 @@
                                 <div class="bio-row">
                                     <label for="ctglmasuk" class="control-label col-lg-4">Rasio</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RASIO ?>" id="crasio" name="rasio" type="text" size="16" type="text" required/>
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RASIO ?>" id="crasio" name="rasio" type="text" required/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="cjenistangki" class="control-label col-lg-4">Jenis Tangki</label>
                                     <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="cjenistangki" name="jenistangki">
+                                        <select class="form-control input-sm m-bot15" id="cjenistangki" name="jenis_tangki">
                                             <option <?php if($row->JENIS_TANGKI == "Alumunium Aweco")echo "selected"?> value="Alumunium Aweco">Alumunium Aweco</option>
                                             <option <?php if($row->JENIS_TANGKI == "Carbon Steel")echo "selected"?> value="Carbon Steel">Carbon Steel</option>
                                             <option <?php if($row->JENIS_TANGKI == "Steel")echo "selected"?> value="Steel">Steel</option>
                                         </select>
-                                    </div>git sh
+                                    </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="kompartemen" class="control-label col-lg-4">Kompartemen</label>
@@ -365,9 +366,9 @@
                                 <div class="bio-row">
                                     <label for="status" class="control-label col-lg-4">Status</label>
                                     <div class="col-lg-6">
-                                    <select class="form-control input-sm m-bot15" id="cstatus" name="cstatus">
-                                       <option <?php if($row->STATUS_MOBIL == "SEWA")echo "selected"?> value="SEWA">SEWA</option>
-                                            <option <?php if($row->STATUS_MOBIL == "HAK MILIK")echo "selected"?> value="HAK MILIK">HAK MILIK</option>
+                                    <select class="form-control input-sm m-bot15" id="cstatus" name="status_mobil">
+                                       <option <?php if($row->STATUS_MOBIL == "SEWA")echo "selected"?> value="SEWA">Sewa</option>
+                                            <option <?php if($row->STATUS_MOBIL == "HAK MILIK")echo "selected"?> value="HAK MILIK">Hak Milik</option>
                                           
                                     </select>
                                 </div>
@@ -382,33 +383,33 @@
                                         </select></div>
                                 </div>
                                 <div class="bio-row">
-                                    <label for="gps" class="control-label col-lg-4">Sensor Overfill</label>
+                                    <label for="sensor" class="control-label col-lg-4">Sensor Overfill</label>
                                     <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="sensor" name="sensor">
-                                           <option <?php if($row->SENSOR_OVERFILL == "OK")echo "selected"?> value="OK">OK</option>
-                                            <option <?php if($row->SENSOR_OVERFILL == "NO")echo "selected"?> value="NO">NO</option>
+                                        <select class="form-control input-sm m-bot15" id="sensor" name="sensor_overfill">
+                                           <option <?php if($row->SENSOR_OVERFILL == "0")echo "selected"?> value="0">OK</option>
+                                            <option <?php if($row->SENSOR_OVERFILL == "1")echo "selected"?> value="1">NO</option>
                                         </select></div>
                                 </div>
                                 <div class="bio-row">
-                                    <label for="gps" class="control-label col-lg-4">Standar Volume</label>
+                                    <label for="standar_volume" class="control-label col-lg-4">Standar Volume</label>
                                     <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="sensor" name="sensor">
+                                        <select class="form-control input-sm m-bot15" id="standar_volume" name="standar_volume">
                                              <option <?php if($row->STANDAR_VOLUME == "OK")echo "selected"?> value="OK">OK</option>
-                                            <option <?php if($row->SENSOR_OVERFILL == "NO")echo "selected"?> value="NO">NO</option>
+                                            <option <?php if($row->STANDAR_VOLUME == "NO")echo "selected"?> value="NO">NO</option>
                                         </select></div>
                                 </div>
                                 <div class="bio-row">
-                                    <label for="gps" class="control-label col-lg-4">Volume 1</label>
+                                    <label for="volume" class="control-label col-lg-4">Volume 1</label>
                                     <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="sensor" name="sensor">
+                                        <select class="form-control input-sm m-bot15" id="volume" name="volume_1">
                                              <option <?php if($row->VOLUME_1 == "OK")echo "selected"?> value="OK">OK</option>
                                             <option <?php if($row->VOLUME_1 == "NO")echo "selected"?> value="NO">NO</option>
                                         </select></div>
                                 </div>
                                 <div class="bio-row">
-                                    <label for="gps" class="control-label col-lg-4">Jumlah Segel</label>
+                                    <label for="segel" class="control-label col-lg-4">Jumlah Segel</label>
                                     <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="segel" name="segel">
+                                        <select class="form-control input-sm m-bot15" id="segel" name="jumlah_segel">
                                            <option <?php if($row->JUMLAH_SEGEL == "4")echo "selected"?> value="4">4</option>
                                             <option <?php if($row->JUMLAH_SEGEL == "6")echo "selected"?> value="6">6</option>
                                             <option <?php if($row->JUMLAH_SEGEL == "8")echo "selected"?> value="8">8</option>
@@ -430,37 +431,37 @@
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp1</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP1 ?>" id="komp1" name="komp1"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP1 ?>" id="komp1" name="rk1_komp1"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp2</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP2 ?>" id="komp2" name="komp2"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP2 ?>" id="komp2" name="rk1_komp2"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp3</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP3 ?>" id="komp3" name="komp3"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP3 ?>" id="komp3" name="rk1_komp3"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp4</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP4 ?>" id="komp4" name="komp4"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP4 ?>" id="komp4" name="rk1_komp4"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp5</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP5 ?>" id="komp5" name="komp5"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP5 ?>" id="komp5" name="rk1_komp5"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp6</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP6 ?>" id="komp6" name="komp6"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK1_KOMP6 ?>" id="komp6" name="rk1_komp6"  type="number"  />
                                     </div>
                                 </div>
                             </div>
@@ -473,37 +474,37 @@
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 1</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP1 ?>" id="k1" name="k1"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP1 ?>" id="k1" name="rk2_komp1"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 2</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP2 ?>" id="k2" name="k2"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP2 ?>" id="k2" name="krk2_komp2"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 3</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP3 ?>" id="k3" name="k3"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP3 ?>" id="k3" name="rk2_komp3"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 4</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP4 ?>" id="k4" name="k4"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP4 ?>" id="k4" name="rk2_komp4"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 5</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP5 ?>" id="k5" name="k5"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP5 ?>" id="k5" name="rk2_komp5"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 6</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP6 ?>" id="k6" name="k6"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RK2_KOMP6 ?>" id="k6" name="rk2_komp6"  type="number"  />
                                     </div>
                                 </div>
                             </div>
@@ -516,37 +517,37 @@
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 1</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP1 ?>" id="ke1" name="ke1"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP1 ?>" id="ke1" name="k_komp1"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 2</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP2 ?>" id="ke2" name="ke2"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP2 ?>" id="ke2" name="k_komp2"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 3</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP3 ?>" id="ke3" name="ke3"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP3 ?>" id="ke3" name="k_komp3"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 4</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP4 ?>" id="ke4" name="ke4"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP4 ?>" id="ke4" name="k_komp4"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 5</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP5 ?>" id="ke5" name="ke5"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP5 ?>" id="ke5" name="k_komp5"  type="number"  />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nip" class="control-label col-lg-4">Komp 6</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP6 ?>" id="ke6" name="ke6"  type="number"  />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->K_KOMP6 ?>" id="ke6" name="k_komp6"  type="number"  />
                                     </div>
                                 </div>
                             </div>
