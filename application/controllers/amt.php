@@ -25,7 +25,8 @@ class amt extends CI_Controller {
         $this->load->view('amt/v_data_amt', $data1);
         $this->load->view('layouts/footer');
     }
-
+    
+    
     public function detail($id_pegawai) {
         $data['lv1'] = 2;
         $data['lv2'] = 1;

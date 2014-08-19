@@ -2,6 +2,7 @@
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
+<?php foreach ($mt as $row){?>
         <!-- page start-->
 
         <section class="panel">
@@ -11,9 +12,9 @@
 
             <div class="panel-body">
                 <div class="bio-desk">
-                    <p>Nopol : D8900AD</p>
-                    <p>Kapasitas : 16</p>
-                    <p>Produk : Pertamax</p>
+                     <p>Nopol : <?php echo $row->nopol?></p>
+                    <p>Kapasitas : <?php echo $row->kapasitas ?></p>
+                    <p>Produk : <?php echo $row->produk ?></p>
                 </div>
             </div>
         </section>
@@ -45,71 +46,23 @@
                         </thead>
                         <tbody>
                             <tr class="">
-                                <th style="display:none;"></th>
-                                <td>1</td>
-                                <td>1200</td>
-                                <td>23-08-2014</td>
-                                <td>Federal</td>
-                                <td>3</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                               <?php $i = 1;
+                                foreach ($mt as $row) { ?>
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i; ?></td>
+                                        <td><?php echo $row->KM_AWAL; ?></td>
+                                    <td><?php echo $row->TANGGAL_GANTI_OLI; ?></td>
+                                    <td><?php echo $row->MERK_OLI; ?></td>
+                                    <td><?php echo $row->TOTAL_VOLUME; ?></td>
+                                   
+                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
                                 </td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>2</td>
-                                <td>1000</td>
-                                <td>23-03-2014</td>
-                                <td>Federal</td>
-                                <td>3</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>3</td>
-                                <td>800</td>
-                                <td>23-08-2013</td>
-                                <td>Federal</td>
-                                <td>3</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>4</td>
-                                <td>600</td>
-                                <td>23-02-2013</td>
-                                <td>Top One</td>
-                                <td>3</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>5</td>
-                                <td>600</td>
-                                <td>23-08-2012</td>
-                                <td>Top One</td>
-                                <td>3</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>6</td>
-                                <td>400</td>
-                                <td>23-02-2012</td>
-                                <td>Federal</td>
-                                <td>3</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus oli" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a>
-                                </td>
-                            </tr>
+
+                                </tr>
+                                <?php $i++;
+                            } ?>
+                             
                         </tbody>
                     </table>
                 </div>                
@@ -236,6 +189,7 @@
         </div>
     </div>
 </div>
+<?php } ?>
 
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>

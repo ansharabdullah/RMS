@@ -5,11 +5,11 @@
         <!-- page start-->
 
         <section class="panel">
+            <header class="panel-heading">
+                        Form Tambah MT  
+                    </header>
             <div class="panel-body bio-graph-info" id="Tambah">
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
-                    <header class="panel-heading">
-                        Tambah MT  
-                    </header>
                     <div class="panel-body">
                         <div class="row">
                             <div class="bio-row">
@@ -48,15 +48,18 @@
                                     <select class="form-control input-sm m-bot15" id="cklas" name="produk">
                                         <option>Premium</option>
                                         <option>Pertamax</option>
+                                        <option>Pertamax Dex</option>
+                                        <option>Pertamax Plus</option>
                                         <option>Solar</option>
-                                        <option>Multi</option>
+                                        <option>Bio Solar</option>
+                                        
                                     </select>
                                 </div>
                             </div>
                             <div class="bio-row">
                                 <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cjk" name="jk"  type="text" required />
+                                    <input class=" form-control input-sm m-bot15" id="cjk" name="jk"  type="text" />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -68,7 +71,7 @@
                             <div class="bio-row">
                                 <label for="ctglmasuk" class="control-label col-lg-4">Rasio</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="crasio" name="rasio" type="text" size="16" type="text" required/>
+                                    <input class=" form-control input-sm m-bot15" id="crasio" name="rasio" type="text" type="text" />
                                 </div>
                             </div>
                             <div class="bio-row">
@@ -84,14 +87,17 @@
                             <div class="bio-row">
                                 <label for="kompartemen" class="control-label col-lg-4">Kompartemen</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="kompartemen" name="kompartemen" type="text" size="16" type="text" required/>
+                                    <input class=" form-control input-sm m-bot15" id="kompartemen" name="kompartemen" type="text" size="16" type="text" />
                                 </div>
                             </div>
 
                             <div class="bio-row">
                                 <label for="status" class="control-label col-lg-4">Status</label>
                                 <div class="col-lg-6">
-                                    <input class=" form-control input-sm m-bot15" id="cstatus" name="status"  type="text" required />
+                                    <select class="form-control input-sm m-bot15" id="cstatus" name="cstatus">
+                                        <option>Sewa</option>
+                                        <option>Hak Milik</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="bio-row">

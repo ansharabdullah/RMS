@@ -14,115 +14,51 @@
                 </a>
 
                 <a href="<?php echo base_url() ?>mt/import_csv" rel="stylesheet" class="btn btn-success"> Import Excel <i class="icon-plus"></i></a>
-            </div>
-            <div class="adv-table editable-table " style="overflow-y: scroll">
-                <div class="space15"></div>
-                <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                    <thead>
-                        <tr>
-                            <th style="display:none;"></th>
-                            <th >No.</th> 
-                            <th>Nopol</th>
-                            <th>Transpotir</th>
-                            <th>Kapasitas</th>
-                            <th>Produk</th>
-                            <th>No Mesin</th>
-                            <th>No Rangka</th>
-                            <th>Jenis Tangki</th>
-                            <th>Status</th>
-                            <th>GPS</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="">
-                            <th style="display:none;"></th>
-                            <td>1</td>
-                            <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left"> D9808AD</a></td>
-                            <td>PT Masoem</td>
-                            <td>16</td>
-                            <td class="center">Pertamax</td>
-                            <td>KHT124147KL</td>
-                            <td>LKI0342349HG</td>
-                            <td>Alumunium Aweco</td>
-                            <td>Sewa</td>
-                            <td>OK</td>
+                <div class="adv-table editable-table " >
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                        <thead>
+                            <tr>
+                                <th style="display:none;"></th>
+                                <th >No.</th> 
+                                <th>Nopol</th>
+                                <th>Transpotir</th>
+                                <th>Kapasitas</th>
+                                <th>Produk</th>
+                                <th>No Mesin</th>
+                                <th>No Rangka</th>
+                                <th>Jenis Tangki</th>
+                                <th>Status</th>
+                                <th>GPS</th>
 
-                        </tr>
-                        <tr class="">
-                            <th style="display:none;"></th>
-                            <td>2</td>
-                            <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9870AD</a></td>
-                            <td>PT Masoem</td>
-                            <td>16</td>
-                            <td class="center">Premium</td>
-                            <td>UIB12417AOB</td>
-                            <td>LKI0342349HG</td>
-                            <td>Alumunium Aweco</td>
-                            <td>Sewa</td>
-                            <td>OK</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <?php $i = 1;
+                                foreach ($mt as $row) { ?>
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i; ?></td>
+                                    <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
 
-                        </tr>
-                        <tr class="">
-                            <th style="display:none;"></th>
-                            <td>3</td>
-                            <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9880AF</a></td>
-                            <td>PT Masoem</td>
-                            <td>24</td>
-                            <td class="center">Solar</td>
-                            <td>LWQ8213124YT</td>
-                            <td>MIT9831247GTR</td>
-                            <td>Carbon Steel</td>
-                            <td>Sewa</td>
-                            <td>OK</td>
+                                    <td><?php echo $row->TRANSPORTIR; ?></td>
+                                    <td><?php echo $row->KAPASITAS; ?></td>
+                                    <td><?php echo $row->PRODUK; ?></td>
+                                    <td><?php echo $row->NO_MESIN; ?></td>
+                                    <td><?php echo $row->NO_RANGKA; ?></td>
+                                    <td><?php echo $row->JENIS_TANGKI; ?></td>
+                                    <td><?php echo $row->STATUS_MOBIL; ?></td>
+                                    <td><?php echo $row->GPS; ?></td>
 
 
-                        </tr>
-                        <tr class="">
-                            <th style="display:none;"></th>
-                            <td>4</td>
-                            <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9800AD</td>
-                            <td>PT Incot</td>
-                            <td>8</td>
-                            <td class="center">Premium</td>
-                            <td>GTR21247PO</td>
-                            <td>NBC0342349ERT</td>
-                            <td>Carbon Steel</td>
-                            <td>Sewa</td>
-                            <td>OK</td>
+                                </tr>
+                                <?php $i++;
+                            } ?>
 
-                        </tr>
-                        <tr class="">
-                            <th style="display:none;"></th>
-                            <td>5</td>
-                            <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9000AU</td>
-                            <td>PT Patra</td>
-                            <td>24</td>
-                            <td class="center">Premium</td>
-                            <td>OAT124147KL</td>
-                            <td>QW0342349HG</td>
-                            <td>Steel</td>
-                            <td>Sewa</td>
-                            <td>OK</td>
-
-
-                        </tr>
-                        <tr class="">
-                            <th style="display:none;"></th>
-                            <td>6</td>
-                            <td><a href="<?php echo base_url() ?>mt/detail_mt" rel="stylesheet" style ="text-decoration: underline" class ="tooltips" data-original-title="Detail MT" data-replacement="left">D9800AF</td>
-                            <td>PT Patra</td>
-                            <td>16</td>
-                            <td class="center">Bio Solar</td>
-                            <td>KHT12SDALO </td>
-                            <td>PUI0349124JG</td>
-                            <td>Alumunium Aweco</td>
-                            <td>Sewa</td>
-                            <td>OK</td>
-
-                        </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 

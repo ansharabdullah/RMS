@@ -53,8 +53,7 @@
                             <tr class="">
                                 <td style="display:none;"></td>
                                 <td><?php echo $i;?></td>
-                                <td><a href="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI;?>" style ="text-decoration: underline"><?php echo $row->NIP;?></a></td>
-                                <td><?php echo $row->NAMA_PEGAWAI;?></td>
+                               <td><?php echo $row->NAMA_PEGAWAI;?></td>
                                 <td><?php echo $row->JABATAN;?></td>
                                 <td><?php echo $row->KLASIFIKASI;?></td>
                                 <td><?php echo $row->TANGGAL_MASUK;?></td>
