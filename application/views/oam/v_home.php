@@ -378,28 +378,40 @@
                             <span style="background-color:steelblue;">
                                 <i class="icon-exclamation-sign"></i>
                             </span>
-                            <h3>Grafik KPI MS2 & Volume Perdepot</h3>
+                            <h3>Grafik Indikator KPI</h3>
                             <span class="rev-combo pull-right" style="background-color:steelblue;">
                                 Agustus 2014
                             </span>
                         </div></a>
-                    <div class="panel-body" id="ms2VolumeBody">
+                    <div id="ms2VolumeBody">
+<!--                        <section class="panel" >
+                            <div class="panel-body">
+                                <div class="btn-group pull-right">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Filter INDIKATOR<i class="icon-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-left">
+                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('KM')">KM</a></li>
+                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('KL')">KL</a></li>
+                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Ritase')">Ritase</a></li>
+                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('SPBU')">SPBU</a></li>
+                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Jumlah Hadir')">Jumlah Hadir</a></li>
+                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Jumlah Tidak Hadir')">Jumlah Tidak Hadir</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>-->
                         <section class="panel" >
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <section class="panel">
-                                        <div class="panel-body">
-                                            <div id="grafikPengiriman" style="width: 500px"></div>
-                                        </div>
-                                    </section>
-                                </div>
-                                <div class="col-lg-5">
-                                    <section class="panel">
-                                        <div class="panel-body">
-                                            <div id="grafikVolume" style="width: 500px"></div>
-                                        </div>
-                                    </section>
-                                </div>
+                            <div class="panel-body">
+                                <div id="grafikPengiriman" style="width:80% "></div>
+                                <div id="grafikVolume"  style="width:80% "></div>
+                                <!--                                <div id="grafikTagihan" style="width: 80%"></div>
+                                                                <div id="grafikCustomer" style="width: 80%"></div>
+                                                                <div id="grafikKeluhan" style="width: 80%"></div>
+                                                                <div id="grafikPenyelesaian" style="width: 80%"></div>
+                                                                <div id="grafikPelatihan" style="width: 80%"></div>
+                                                                <div id="grafikIncidents" style="width: 80%"></div>
+                                                                <div id="grafikPenyelesaianIncidents" style="width: 80%"></div>
+                                                                <div id="grafikAccident" style="width: 80%"></div>-->
                             </div>
                         </section>
                     </div>
@@ -573,14 +585,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [92]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [95]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [101]
                 }, {
                     type: 'column',
@@ -589,10 +604,9 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [99]
-
-                }
-                ,{
+                },{
                     type: 'line',
                     name: 'Target',
                     yAxis: 0,
@@ -681,14 +695,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [92]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [95]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [101]
                 }, {
                     type: 'column',
@@ -697,6 +714,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [99]
 
                 }
@@ -787,14 +805,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [92]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [95]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [101]
                 }, {
                     type: 'column',
@@ -803,6 +824,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [99]
 
                 }
@@ -893,14 +915,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [4.2]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [3.7]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [4.1]
                 }, {
                     type: 'column',
@@ -909,6 +934,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [4.3]
 
                 }
@@ -999,14 +1025,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [4]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [2]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [6]
                 }, {
                     type: 'column',
@@ -1015,6 +1044,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [4]
 
                 }
@@ -1105,14 +1135,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [92]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [95]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [101]
                 }, {
                     type: 'column',
@@ -1121,6 +1154,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [99]
 
                 }
@@ -1211,14 +1245,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [4]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [7]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [6]
                 }, {
                     type: 'column',
@@ -1227,6 +1264,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [5]
 
                 }
@@ -1317,14 +1355,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [1]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [2]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [2]
                 }, {
                     type: 'column',
@@ -1333,6 +1374,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [1]
 
                 }
@@ -1425,14 +1467,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [8]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [7]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [7]
                 }, {
                     type: 'column',
@@ -1441,6 +1486,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [9]
 
                 }
@@ -1532,14 +1578,17 @@
             series: [{
                     type: 'column',
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [1]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [2]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [2]
                 }, {
                     type: 'column',
@@ -1548,6 +1597,7 @@
                 }, {
                     type: 'column',
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [1]
 
                 }
@@ -1629,18 +1679,22 @@
             },
             series: [{
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [107]
                 }, {
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [133]
                 }, {
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [97]
                 }, {
                     name: 'Depot 4',
                     data: [97]
                 }, {
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [97]
                 }]
         });
@@ -1706,18 +1760,22 @@
             },
             series: [{
                     name: 'Depot 1',
+                    color:'#FF002B',
                     data: [107]
                 }, {
                     name: 'Depot 2',
+                    color:'#2C88D4',
                     data: [133]
                 }, {
                     name: 'Depot 3',
+                    color:'#23C906',
                     data: [97]
                 }, {
                     name: 'Depot 4',
                     data: [97]
                 }, {
                     name: 'Depot 5',
+                    color:'#F5A905',
                     data: [97]
                 }]
         });
