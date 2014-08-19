@@ -8,6 +8,7 @@ class amt extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model("m_amt");
+        $this->load->helper("form");
     }
 
     public function index() {
@@ -123,6 +124,31 @@ class amt extends CI_Controller {
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_grafik_hari');
         $this->load->view('layouts/footer');
+    }
+    
+    //OAM
+    public function oam_bulanan()
+    {
+        $data['lv1'] = 1;
+        $data['lv2'] = 1;
+         $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar_oam', $data);
+        $this->load->view('oam/v_grafik_amt_bulan');
+        $this->load->view('layouts/footer');
+        
+    }
+    
+    public function oam_harian()
+    {
+        $data['lv1'] = 1;
+        $data['lv2'] = 1;
+         $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar_oam', $data);
+        $this->load->view('oam/v_grafik_amt_hari');
+        $this->load->view('layouts/footer');
+        
     }
 
 }

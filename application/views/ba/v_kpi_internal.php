@@ -85,13 +85,13 @@
                     <form class="cmxform form-horizontal tasi-form" id="commentForm">
                         <div class="form-group">
                             <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tahun</label>
-                            <div class="col-lg-10">
+                            <div class="col-lg-10 col-sm-6">
                                 <input type="number" min="2000" maxlength="4" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tahun" name="tanggalSIOD">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">Jenis Data</label>
-                            <div class="col-lg-10">
+                            <div class="col-lg-10 col-sm-6">
                                 <select class="form-control input-sm m-bot15" id="jenis" name="jenis">
                                     <option>Total</option>
                                     <option>Triwulan 1</option>
@@ -104,7 +104,7 @@
 
                         <div class="form-group">
                             <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">File Jadwal</label>
-                            <div class="col-lg-10">
+                            <div class="col-lg-10 col-sm-6">
                                 <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD" name="fileSIOD">
                             </div>
                         </div>
@@ -136,13 +136,13 @@
                 <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tahun</label>
-                        <div class="col-lg-10">
+                        <div class="col-lg-10 col-sm-6">
                             <input type="number" required="required" id="tglForm" class="form-control" maxlength="4" min="2010" placeholder="Tahun">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">Jenis Data</label>
-                        <div class="col-lg-10">
+                        <div class="col-lg-10 col-sm-6">
                             <select class="form-control input-sm m-bot15" id="jeniss" name="jeniss">
                                 <option>Total</option>
                                 <option>Triwulan 1</option>

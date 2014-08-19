@@ -7,11 +7,15 @@ class Mt extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+
         $this->load->model("m_mt");
+        $this->load->model("m_apar");
     }
 
     public function index() {
         $this->data_mt();
+
+        
     }
 
     public function data_mt() {
@@ -26,7 +30,9 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
+
     public function detail_mt($id_mobil) {
+
 
         $data['lv1'] = 3;
         $data['lv2'] = 1;
@@ -35,6 +41,7 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_detail_mt', $data1);
         $this->footer();
     }
+
 
     public function edit_mobil($id_mobil) {
 
@@ -82,16 +89,8 @@ class Mt extends CI_Controller {
         echo '</script>';
     }
 
-    public function tambah_mt() {
-
-        $data['lv1'] = 3;
-        $data['lv2'] = 1;
-        $this->header($data);
-        $this->load->view('mt/v_tambah_mt');
-        $this->footer();
-    }
-    
     public function grafik_mt() {
+
 
         $data['lv1'] = 3;
         $data['lv2'] = 2;
@@ -103,6 +102,7 @@ class Mt extends CI_Controller {
     public function grafik_bulan_mt() {
 
         $data['lv1'] = 3;
+
         $data['lv2'] = 2;
         $this->header($data);
         $this->load->view('mt/v_grafik_bulan_mt');
@@ -117,7 +117,16 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_grafik_hari_mt');
         $this->footer();
     }
-    
+
+    public function tambah_mt() {
+
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
+        $this->load->view('mt/v_tambah_mt');
+        $this->footer();
+    }
+
     public function import_csv() {
 
         $data['lv1'] = 3;
@@ -142,6 +151,7 @@ class Mt extends CI_Controller {
 
     public function ban_mt() {
 
+
         $id_mobil = 1;
         $data1['mt'] = $this->m_mt->selectBanMT($id_mobil);
         
@@ -153,6 +163,7 @@ class Mt extends CI_Controller {
     }
 
     public function oli_mt() {
+
         
          $id_mobil = 1;
         $data1['mt'] = $this->m_mt->selectOli($id_mobil);
@@ -183,8 +194,10 @@ class Mt extends CI_Controller {
     public function reminder() {
         $data['lv1'] = 3;
         $data['lv2'] = 4;
+        //data reminder
+        $data2['apar'] = $this->m_apar->getAparReminder()->result();
         $this->header($data);
-        $this->load->view('mt/v_pengingat');
+        $this->load->view('mt/v_pengingat', $data2);
         $this->footer();
     }
 
@@ -205,6 +218,27 @@ class Mt extends CI_Controller {
 
     private function footer() {
 
+        $this->load->view('layouts/footer');
+    }
+
+    //OAM
+    public function oam_bulanan() {
+        $data['lv1'] = 1;
+        $data['lv2'] = 1;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar_oam', $data);
+        $this->load->view('oam/v_grafik_mt_bulan');
+        $this->load->view('layouts/footer');
+    }
+
+    public function oam_harian() {
+        $data['lv1'] = 1;
+        $data['lv2'] = 1;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar_oam', $data);
+        $this->load->view('oam/v_grafik_mt_hari');
         $this->load->view('layouts/footer');
     }
 

@@ -114,7 +114,7 @@
                 series: {
                     events: {
                         click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/grafik_hari";
+                            window.location = "<?php echo base_url() ?>depot/grafik_hari/2";
                         }
                     }
                 }
@@ -173,20 +173,18 @@
 <br>
 <br>
 <div class="row">
-    
-        <div class="adv-table editable-table ">
+    <div class="col-lg-12">
             <center>
-                <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
                             <th style="display: none;"></th>
-                                <th rowspan="2">No</th>
-                                <th rowspan="2">Bulan</th>
-                                <th colspan="2">Premium</th>
-                                <th colspan="2">Bio Solar</th>
-                                <th colspan="2">Pertamax</th>
-                                <th colspan="2">Solar</th>
-                                <th rowspan="2">Pencapaian</th>
+                            <th rowspan="2">No</th>
+                            <th rowspan="2">Bulan</th>
+                            <th colspan="2">Premium</th>
+                            <th colspan="2">Bio Solar</th>
+                            <th colspan="2">Pertamax</th>
+                            <th colspan="2">Solar</th>
                         </tr>
                         <tr>
                             <th>Rencana</th>
@@ -197,13 +195,48 @@
                             <th>Realisasi</th>
                             <th>Rencana</th>
                             <th>Realisasi</th>
-                            </tr>
+                        </tr>
                     </thead>
                     <tbody>
-                        
+                        <tr>
+                            <td>1</td>
+                            <td>Januari</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8899281</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Februari</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8899281</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Maret</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8099281</td>
+                            <td>8899281</td>
+                            <td>8899281</td>
+                        </tr>
                     </tbody>
                 </table>
             </center>
-        </div>
     </div>
+</div>
 
