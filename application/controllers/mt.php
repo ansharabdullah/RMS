@@ -83,8 +83,9 @@ class Mt extends CI_Controller {
         );
         $this->m_mt->editMT($data, $id);
         
+         $link = base_url()."mt/detail_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . base_url() . '"mt/detail_mt/"' . $id_mobil . '"';
+        echo 'window.location.href="' . $link . '"';
         echo '</script>';
         
     }
@@ -219,6 +220,26 @@ class Mt extends CI_Controller {
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
             echo '</script>';
     }
+    
+    public function edit_apar($id)
+    {
+        $store = $_POST['tgl_store'];
+        $catridge = $_POST['tgl_catridge'];
+        $co2 = $_POST['tgl_co2'];
+        
+        $data = array(
+            "STORE_PRESSURE"=>$store,
+            "CATRIDGE"=>$catridge,
+            "CO2"=>$co2
+        );
+        
+        $this->m_apar->editApar($id,$data);
+        //redirect('mt/reminder');
+          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
+            echo 'window.location.href="' . base_url() . 'mt/apar_mt";';
+            echo '</script>';
+    }
+    
 
     public function rencana() {
 

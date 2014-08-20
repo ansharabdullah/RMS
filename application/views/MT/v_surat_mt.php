@@ -4,7 +4,7 @@
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
-        
+     <?php foreach ($mt as $row){?>   
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -12,11 +12,11 @@
             </header>
             <div class="panel-body">
                 <div class="bio-desk">
-                    <?php foreach ($mt as $row){?>
+                    
                     <p>Nopol : <?php echo $row->nopol?></p>
                     <p>Kapasitas : <?php echo $row->kapasitas ?></p>
                     <p>Produk : <?php echo $row->produk ?></p>
-                    <?php } ?>
+                    
                 </div>
             </div>
         </section>
@@ -175,7 +175,7 @@
         </div>
     </div>
 </div>
-
+<?php } ?>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>
 

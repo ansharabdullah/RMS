@@ -27,6 +27,12 @@ class m_mt extends CI_Model {
         $data = $this->db->query("select T.store_pressure, T.catridge,T.co2,T.keterangan_apar,T.status_apar,M.nopol,M.kapasitas,M.produk from apar T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil");
         return $data->result();
     }
+    public function editApar($id,$data)
+    {
+        $this->db->where('ID_APAR', $id);
+        $this->db->update('apar', $data); 
+        
+    }
     
     public function selectBanMT($id_mobil){
         $data = $this->db->query("select T.MERK_BAN, T.NO_SERI_BAN,T.JENIS_BAN,T.POSISI_BAN,T.TANGGAL_PASANG,T.TANGGAL_GANTI_BAN,M.nopol,M.kapasitas,M.produk from ban T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil");
