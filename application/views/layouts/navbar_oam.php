@@ -32,7 +32,7 @@
                     <i class="icon-check"></i><span>KPI OAM</span>
                 </a>
                 <ul class="sub">
-                    <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/data_amt"  >Operasional</a></li>
+                    <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>kpi/operasional"  >Operasional</a></li>
                     <li <?php if ($lv2 == 2 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/grafik">Internal</a></li>
                 </ul>
             </li>

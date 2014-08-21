@@ -56,7 +56,7 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                KPI OPERASIONAL
+                KPI INTERNAL
             </header>
             <div class="panel-body">
                 <div class="row">
