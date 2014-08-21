@@ -1,15 +1,16 @@
 <body class="login-body">
 
     <div class="container">
-        <form class="form-signin" action="#" method="POST">
-            <h2 class="form-signin-heading">Log In</h2>
+        <form class="form-signin" action="<?php echo base_url()?>login/validate_login/" method="POST">
+            <h2 class="form-signin-heading">OSCRMS LOG IN</h2>
             <div class="login-wrap">
-                <input type="email" class="form-control" placeholder="E-Mail" autofocus>
-                <input type="password" class="form-control" placeholder="Password">
-                <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+                <input type="email" class="form-control" placeholder="E-Mail" name="email" autofocus>
+                <br />
+                <input type="password" class="form-control" name="password" placeholder="Password">
+                <button class="btn btn-lg btn-login btn-block" type="submit">Masuk</button>
 
                 <a data-toggle="modal" href="#myModal">
-                    Tentang RMS
+                    Tentang OSCRMS
                 </a>
             </div>
         </form>
@@ -22,13 +23,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Tentang RMS</h4>
+                    <h4 class="modal-title">Tentang OSCRMS</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
 
                         <div class="col-lg-4">
-                            asdsadsadasdsadsadsadsa
+                           logo
                         </div>
 
                         <div class="col-lg-8" align="justify">
