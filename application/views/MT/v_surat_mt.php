@@ -4,6 +4,7 @@
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
+     <?php foreach ($mt as $row){?>   
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -11,9 +12,11 @@
             </header>
             <div class="panel-body">
                 <div class="bio-desk">
-                    <p>Nopol : D8900AD</p>
-                    <p>Kapasitas : 16</p>
-                    <p>Produk : Pertamax</p>
+                    
+                    <p>Nopol : <?php echo $row->nopol?></p>
+                    <p>Kapasitas : <?php echo $row->kapasitas ?></p>
+                    <p>Produk : <?php echo $row->produk ?></p>
+                    
                 </div>
             </div>
         </section>
@@ -37,82 +40,31 @@
                             <tr>
                                 <th style="display:none;"></th>
                                 <th>No.</th>
-                                <th>Tera</th>
-                                <th>STNK Per Tahun</th>
-                                <th>STNK 5 Tahun</th>
-                                <th>KIR LLD</th>
-                                <th>KIR Pertamina</th>
+                                <th>Jenis Surat</th>
+                                <th>Tanggal Berakhir Surat</th>
+                                <th>keterangan</th>
                                 <th>Aksi</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>1</td>
-                                <td>23-08-2014</td>
-                                <td>23-08-2014</td>
-                                <td>23-08-2014</td>
-                                <td>23-08-2014</td>
-                                <td>23-08-2014</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                            <?php $i = 1;
+                                foreach ($mt as $row) { ?>
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i; ?></td>
+                                    <td><?php echo $row->jenis_surat; ?></td>
+                                    <td><?php echo $row->tanggal_akhir_surat; ?></td>
+                                  
+                                   <td><?php echo $row->keterangan_surat; ?></td>
+                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>2</td>
-                                <td>23-01-2014</td>
-                                <td>23-01-2014</td>
-                                <td>23-08-2014</td>
-                                <td>23-01-2014</td>
-                                <td>23-01-2014</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>3</td>
-                                <td>23-08-2013</td>
-                                <td>23-01-2013</td>
-                                <td>23-08-2014</td>
-                                <td>23-01-2013</td>
-                                <td>23-01-2013</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>4</td>
-                                <td>23-01-2012</td>
-                                <td>23-01-2012</td>
-                                <td>23-08-2014</td>
-                                <td>23-01-2012</td>
-                                <td>23-01-2012</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>5</td>
-                                <td>23-01-2011</td>
-                                <td>23-01-2011</td>
-                                <td>23-08-2014</td>
-                                <td>23-01-2011</td>
-                                <td>23-01-2011</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display:none;"></th>
-                                <td>6</td>
-                                <td>23-01-2010</td>
-                                <td>23-01-2010</td>
-                                <td>23-08-2019</td>
-                                <td>23-01-2010</td>
-                                <td>23-01-2010</td>
-                                <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus surat" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                            </tr>
+                           
+                                </tr>
+                                <?php $i++;
+                            } ?>
+                            
+                            
+                                
                         </tbody>
                     </table>
                 </div>
@@ -138,31 +90,18 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="tera">Tera</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="tera" name="tera" minlength="2" type="date" required />
-                        </div>
+                            <select class="form-control m-bot15">
+                                <option>STNK Per Tahun</option>
+                                <option>Pajak</option>
+                                <option>Keur</option>
+                                <option>Tera</option>
+                                
+                            </select></div>
                     </div>
                     <div class="form-group">
-                        <label for="stnk" class="col-lg-2 col-sm-2 control-label">STNK Per Tahun</label>
+                        <label for="stnk" class="col-lg-2 col-sm-2 control-label">Tanggal Berakhir Surat</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="stnk" name="stnk" minlength="2" type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="stnk5" class="col-lg-2 col-sm-2 control-label">STNK 5 Tahun</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="stnk5" name="stnk5" minlength="2" type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="kirlld" class="col-lg-2 col-sm-2 control-label">KIR LLD</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kirlld" name="kirlld" minlength="2" type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="kirp" class="col-lg-2 col-sm-2 control-label">KIR Pertamina</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kirp" name="kirp" minlength="2" type="date" required />
                         </div>
                     </div>
 
@@ -188,34 +127,21 @@
                 <div class="modal-body">
                     <!-- form tambah-->
 
-                    <div class="form-group">
+                   <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="tera">Tera</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="tera" name="tera" minlength="2" type="date" required />
-                        </div>
+                            <select class="form-control m-bot15">
+                                <option>STNK Per Tahun</option>
+                                <option>Pajak</option>
+                                <option>Keur</option>
+                                <option>Tera</option>
+                                
+                            </select></div>
                     </div>
                     <div class="form-group">
-                        <label for="stnk" class="col-lg-2 col-sm-2 control-label">STNK Per Tahun</label>
+                        <label for="stnk" class="col-lg-2 col-sm-2 control-label">Tanggal Berakhir Surat</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="stnk" name="stnk" minlength="2" type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="stnk5" class="col-lg-2 col-sm-2 control-label">STNK 5 Tahun</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="stnk5" name="stnk5" minlength="2" type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="kirlld" class="col-lg-2 col-sm-2 control-label">KIR LLD</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kirlld" name="kirlld" minlength="2" type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="kirp" class="col-lg-2 col-sm-2 control-label">KIR Pertamina</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kirp" name="kirp" minlength="2" type="date" required />
                         </div>
                     </div>
 
@@ -249,7 +175,7 @@
         </div>
     </div>
 </div>
-
+<?php } ?>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>
 

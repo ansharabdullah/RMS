@@ -15,7 +15,6 @@ class Mt extends CI_Controller {
     public function index() {
         $this->data_mt();
 
-        
     }
 
     public function data_mt() {
@@ -83,10 +82,12 @@ class Mt extends CI_Controller {
             'k_komp6' => $this->input->post('k1_komp6', true),
         );
         $this->m_mt->editMT($data, $id);
-
+        
+         $link = base_url()."mt/detail_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . base_url() . '"mt/detail_mt/"' . $id_mobil . '"';
+        echo 'window.location.href="' . $link . '"';
         echo '</script>';
+        
     }
 
     public function grafik_mt() {
@@ -136,9 +137,9 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function apar_mt() {
+    public function apar_mt($id_mobil) {
         
-        $id_mobil = 1;
+        
         $data1['mt'] = $this->m_mt->selectApar($id_mobil);
         
         $data['lv1'] = 3;
@@ -149,10 +150,9 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function ban_mt() {
+    public function ban_mt($id_mobil) {
 
-
-        $id_mobil = 1;
+        
         $data1['mt'] = $this->m_mt->selectBanMT($id_mobil);
         
         $data['lv1'] = 3;
@@ -162,10 +162,9 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function oli_mt() {
+    public function oli_mt($id_mobil) {
 
         
-         $id_mobil = 1;
         $data1['mt'] = $this->m_mt->selectOli($id_mobil);
         
         $data['lv1'] = 3;
@@ -175,11 +174,13 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function surat_mt() {
+    public function surat_mt($id_mobil) {
+        
+        $data1['mt'] = $this->m_mt->selectSurat($id_mobil);
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
-        $this->load->view('mt/v_surat_mt');
+        $this->load->view('mt/v_surat_mt',$data1);
         $this->footer();
     }
 
@@ -219,6 +220,26 @@ class Mt extends CI_Controller {
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
             echo '</script>';
     }
+    
+    public function edit_apar($id)
+    {
+        $store = $_POST['tgl_store'];
+        $catridge = $_POST['tgl_catridge'];
+        $co2 = $_POST['tgl_co2'];
+        
+        $data = array(
+            "STORE_PRESSURE"=>$store,
+            "CATRIDGE"=>$catridge,
+            "CO2"=>$co2
+        );
+        
+        $this->m_apar->editApar($id,$data);
+        //redirect('mt/reminder');
+          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
+            echo 'window.location.href="' . base_url() . 'mt/apar_mt";';
+            echo '</script>';
+    }
+    
 
     public function rencana() {
 

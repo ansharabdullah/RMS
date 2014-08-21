@@ -81,7 +81,7 @@
                 <h4 class="modal-title">Tambah AMT</h4>
             </div>
             <div class=" form">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url()?>amt/tambah_pegawai/">
 
                     <div class="modal-body">
 
@@ -104,16 +104,16 @@
                                         </div>
 
                                         <div class="form-group ">
-                                            <label for="cnama" class="control-label col-lg-2">Nama</label>
+                                            <label for="nama_pegawai" class="control-label col-lg-2">Nama</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="cnama" name="nama" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="cnama" name="nama_pegawai" minlength="2" type="text" required />
                                             </div>
 
-                                            <label for="cjabatan" class="control-label col-lg-2">Jabatan</label>
+                                            <label for="jabatan" class="control-label col-lg-2">Jabatan</label>
                                             <div class="col-lg-4">
                                                 <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan">
-                                                    <option>Supir</option>
-                                                    <option>Kernet</option>
+                                                    <option value="SUPIR">Supir</option>
+                                                    <option value="KERNET">Kernet</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -122,20 +122,20 @@
                                         <div class="form-group ">
                                             <label for="cklas" class="control-label col-lg-2">Klasifikasi</label>
                                             <div class="col-lg-4">
-                                                <select class="form-control input-sm m-bot15" id="cklas" name="klas">
-                                                    <option>8</option>
-                                                    <option>16</option>
-                                                    <option>24</option>
-                                                    <option>32</option>
-                                                    <option>40</option>
+                                                <select class="form-control input-sm m-bot15" id="cklas" name="klasifikasi">
+                                                    <option value="8">8</option>
+                                                    <option value="16">16</option>
+                                                    <option value="24">24</option>
+                                                    <option value="32">32</option>
+                                                    <option value="40">40</option>
                                                 </select>
                                             </div>
 
                                             <label for="cstatus" class="control-label col-lg-2">Status</label>
                                             <div class="col-lg-4">
                                                 <select class="form-control input-sm m-bot15" id="cstatus" name="status">
-                                                    <option>Aktif</option>
-                                                    <option>Tidak Aktif</option>
+                                                    <option value="AKTIF">Aktif</option>
+                                                    <option value="TIDAK AKTIF">Tidak Aktif</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -143,12 +143,12 @@
                                         <div class="form-group ">
                                             <label for="ctempatlahir" class="control-label col-lg-2">Tempat Lahir</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempatlahir" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempat_lahir" minlength="2" type="text"/>
                                             </div>
 
                                             <label for="ctgllahir" class="control-label col-lg-2">Tanggal Lahir</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tgllahir" size="16" type="date" value="" required/>
+                                                <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tanggal_lahir" size="16" type="date" value=""/>
                                                 <span class="help-block">Pilih tanggal</span>
                                             </div>
                                         </div>
@@ -156,24 +156,24 @@
                                         <div class="form-group ">
                                             <label for="cktp" class="control-label col-lg-2">No. KTP</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="cktp" name="ktp" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="cktp" minlength="2" type="text" name="no_ktp" />
                                             </div>
 
                                             <label for="csim" class="control-label col-lg-2">No. SIM</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="csim" name="sim" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="csim" name="no_sim" minlength="2" type="text" />
                                             </div>
                                         </div>
 
                                         <div class="form-group ">
                                             <label for="ctelp" class="control-label col-lg-2">No. Telp</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="ctelp" name="no_telepon" minlength="2" type="text" />
                                             </div>
 
                                             <label for="ctransportir" class="control-label col-lg-2">Transportir Asal</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir" minlength="2" type="text" required />
+                                                <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir_asal" minlength="2" type="text" />
                                             </div>
                                         </div>
 
@@ -181,7 +181,7 @@
 
                                             <label for="ctglmasuk" class="control-label col-lg-2">Tanggal Masuk</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tglmasuk" type="date" size="16" type="text" value="" required/>
+                                                <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tanggal_masuk" type="date" size="16" type="text" value="" />
                                                 <span class="help-block">Pilih tanggal</span>
                                             </div>
                                         </div>
@@ -189,7 +189,7 @@
                                         <div class="form-group ">
                                             <label for="calamat" class="control-label col-lg-2">Alamat</label>
                                             <div class="col-lg-10">
-                                                <textarea class=" form-control input-sm m-bot15" id="calamat" name="alamat" minlength="2" type="text" required ></textarea>
+                                                <textarea class=" form-control input-sm m-bot15" id="calamat" name="alamat" minlength="2" type="text" ></textarea>
                                             </div>
 
                                         </div>
@@ -203,7 +203,7 @@
                                                         <span class="btn btn-white btn-file">
                                                             <span class="fileupload-new"><i class="icon-paper-clip"></i> Select image</span>
                                                             <span class="fileupload-exists"><i class="icon-undo"></i> Change</span>
-                                                            <input type="file" class="default"/>
+                                                            <input type="file" class="default" name="photo"/>
                                                         </span>
                                                         <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="icon-trash"></i> Remove</a>
                                                     </div>
@@ -212,7 +212,7 @@
                                                 <span>
                                                     Gambar yang dilampirkan 
                                                     hanya dapat dilihat dalam  
-                                                    firefox, Chrome, Opera, 
+                                                    Firefox, Chrome, Opera, 
                                                     Safari terbaru dan Internet Explorer 10
                                                     
                                                     
