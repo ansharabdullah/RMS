@@ -211,11 +211,9 @@
                             <span class="username"><?php echo $this->session->userdata('nama_pegawai')?></span>
                             <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu extended logout">
+                        <ul class="dropdown-menu extended">
                             <div class="log-arrow-up"></div>
-                            <li><a href="<?php echo base_url() ?>user/"><i class=" icon-suitcase"></i>Profile</a></li>
-                            <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
-                            <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
+                            <li><a href="<?php echo base_url() ?>user/"><i class=" icon-suitcase"></i> Profile</a></li>
                             <li><a href="<?php echo base_url() ?>login/logout"><i class="icon-key"></i> Log Out</a></li>
                         </ul>
                     </li>
