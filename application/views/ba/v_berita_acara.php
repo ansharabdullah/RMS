@@ -30,9 +30,9 @@
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm">
                     <div class="form-group">
-                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                        <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                         <div class="col-lg-10">
-                            <input type="month" required="required" id="tglForm" class="form-control"  placeholder="Tanggal">
+                            <input type="month" required="required" id="tglForm" class="form-control"  placeholder="Tanggal"/>
                         </div>
                     </div>
 

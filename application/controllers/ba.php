@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class ba extends CI_Controller {
 
     public function index() {
-        $this->ms2();
+        $this->berita_acara();
     }
 
     public function ms2() {
