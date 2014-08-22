@@ -27,7 +27,7 @@
 
 
             <div class="panel-body">
-                <div class="adv-table editable-table ">
+                <div class="adv-table editable-table " style="overflow-y: scroll">
                     <div class="clearfix">
                         <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Ban MT <i class="icon-plus"></i>

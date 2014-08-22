@@ -10,13 +10,14 @@
         $("#btnProf").addClass("active");
         $("#btnEdit").removeClass("active");
     }
-    
     function ShowEdit(){
         $("#ShowProfile").hide();
         $("#ShowEdit").show();
         $("#btnProf").removeClass("active");
         $("#btnEdit").addClass("active");
     }
+    
+   
 </script>
 <script type="text/javascript">
     $(function () {
@@ -102,7 +103,8 @@
 
 <section id="main-content">
     <section class="wrapper">
-<?php foreach ($mt as $row) { ?>
+            <?php foreach ($mt as $row) { ?>
+
             <section class="panel">
                 <div class="panel-body">
                     <a href="<?php echo base_url() ?>mt/surat_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"><i class="icon-envelope"></i> Surat</a>
@@ -120,9 +122,9 @@
                 <header class="panel-heading">
                     <div class="col-lg-10">Detail MT
                     </div>
-                    <a class="btn btn-warning" onclick="ShowEdit()" ><i class="icon-pencil"></i> Edit</a>
+                    <a class="btn btn-warning" onclick="ShowEdit()" ><i class="icon-pencil"></i> Edit</a> 
 
-                    <a class="btn btn-danger" data-toggle="modal" href="#myModal2" > <i class="icon-remove"></i> Hapus </a>
+                    <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_MOBIL ?>');"><i class="icon-eraser"></i> Hapus</a>
 
                 </header>
                 <div class="panel-body bio-graph-primary" >
@@ -162,16 +164,21 @@
                                             <p><span>Status</span>: <?php echo $row->STATUS_MOBIL; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>GPS </span>: <?php echo $row->GPS; ?></p>
+                                            <p><span>GPS </span>: <?php if($row->GPS == "1")echo 'Ok'?>
+                                                <?php if($row->GPS == "0")echo 'No'?>
+                                            </p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Sensor Overfill </span>: <?php echo $row->SENSOR_OVERFILL; ?></p>
+                                            <p><span>Sensor Overfill </span>: <?php if($row->SENSOR_OVERFILL == "1")echo 'Ok'?>
+                                                <?php if($row->SENSOR_OVERFILL == "0")echo 'No'?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Volume 1 </span>: <?php echo $row->VOLUME_1; ?></p>
+                                            <p><span>Volume 1 </span>: <?php if($row->VOLUME_1 == "1")echo 'Ok'?>
+                                                <?php if($row->VOLUME_1 == "0")echo 'No'?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Standar Volume </span>: <?php echo $row->STANDAR_VOLUME; ?></p>
+                                            <p><span>Standar Volume </span>: <?php if($row->STANDAR_VOLUME == "1")echo 'Ok'?>
+                                                <?php if($row->STANDAR_VOLUME == "0")echo 'No'?></p>
                                         </div>
                                         <div class="bio-row">
                                             <p><span>Kategori </span>: <?php echo $row->KATEGORI_MOBIL; ?></p>
@@ -367,8 +374,8 @@
                                     <label for="status" class="control-label col-lg-4">Status</label>
                                     <div class="col-lg-6">
                                     <select class="form-control input-sm m-bot15" id="cstatus" name="status_mobil">
-                                       <option <?php if($row->STATUS_MOBIL == "SEWA")echo "selected"?> value="SEWA">Sewa</option>
-                                            <option <?php if($row->STATUS_MOBIL == "HAK MILIK")echo "selected"?> value="HAK MILIK">Hak Milik</option>
+                                       <option <?php if($row->STATUS_MOBIL == "Sewa")echo "selected"?> value="Sewa">Sewa</option>
+                                            <option <?php if($row->STATUS_MOBIL == "Hak Milik")echo "selected"?> value="Hak Milik">Hak Milik</option>
                                           
                                     </select>
                                 </div>
@@ -377,8 +384,8 @@
                                     <label for="gps" class="control-label col-lg-4">GPS</label>
                                     <div class="col-lg-6">
                                         <select class="form-control input-sm m-bot15" id="gps" name="gps">
-                                            <option <?php if($row->GPS == "OK")echo "selected"?> value="OK">OK</option>
-                                            <option <?php if($row->GPS == "NO")echo "selected"?> value="NO">NO</option>
+                                            <option <?php if($row->GPS == "1")echo "selected"?> value="1">OK</option>
+                                            <option <?php if($row->GPS == "0")echo "selected"?> value="0">NO</option>
                                             
                                         </select></div>
                                 </div>
@@ -560,6 +567,7 @@
                     </form>
 
             </section>
+                
 
             <section class="panel">
                 <div class="panel-body">
@@ -777,7 +785,7 @@
 
 
 
-    <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -791,7 +799,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                    <button class="btn btn-danger" type="button"> Yes</button>
+                    <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
                 </div>
             </div>
         </div>
@@ -981,11 +989,10 @@
             </div>
         </div>
     </div>
-
-
-
-
 <?php } ?>
+
+
+
     <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>
 
@@ -997,4 +1004,28 @@
     jQuery(document).ready(function() {
         EditableTable.init();
     });
+    
+    function FilterData(par) {
+        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+    }
+    
+        var globalId;
+    $('#ModalHapus').on('show', function() {
+
+    });
+
+    function hapus(id) {
+        globalId = id;
+        $('#ModalHapus').data('id', id).modal('show');
+ 
+    }
+
+    function ok()
+    {
+        var url = "<?php echo base_url(); ?>" + "mt/delete_mobil/" + globalId;
+        window.location.href = url;
+    }
+    
+     
 </script>

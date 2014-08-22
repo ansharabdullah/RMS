@@ -27,7 +27,7 @@
             </header>
 
             <div class="panel-body">
-                <div class="adv-table editable-table ">
+                <div class="adv-table editable-table" style="overflow-y: scroll ">
                     <div class="clearfix">
                         <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Surat MT <i class="icon-plus"></i>
