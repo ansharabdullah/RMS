@@ -28,6 +28,55 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_data_mt', $data1);
         $this->footer();
     }
+    
+    public function tambah_mobil() {
+
+        $id_depot = 1;
+
+        $data = array(
+            'id_depot' => $id_depot,
+            'nopol' => $this->input->post('nopol', true),
+            'kapasitas' => $this->input->post('kapasitas', true),
+            'produk' => $this->input->post('produk', true),
+            'transportir' => $this->input->post('transportir', true),
+            'status_mobil' => $this->input->post('status_mobil', true),
+            'no_mesin' => $this->input->post('no_mesin', true),
+            'no_rangka' => $this->input->post('no_rangka', true),
+            'jenis_kendaraan' => $this->input->post('jenis_kendaraan', true),
+            'rasio' => $this->input->post('rasio', true),
+            'jenis_tangki' => $this->input->post('jenis_tangki', true),
+            'gps' => $this->input->post('gps', true),
+            'sensor_overfill' => $this->input->post('sensor_overfill', true),
+            'standar_volume' => $this->input->post('standar_volume', true),
+            'volume_1' => $this->input->post('volume_1', true),
+            'kategori_mobil' => $this->input->post('kategori_mobil', true),
+            'jumlah_segel' => $this->input->post('jumlah_segel', true),
+            'rk1_komp1' => $this->input->post('rk1_komp1', true),
+            'rk1_komp2' => $this->input->post('rk1_komp2', true),
+            'rk1_komp3' => $this->input->post('rk1_komp3', true),
+            'rk1_komp4' => $this->input->post('rk1_komp4', true),
+            'rk1_komp5' => $this->input->post('rk1_komp5', true),
+            'rk1_komp6' => $this->input->post('rk1_komp6', true),
+            'rk2_komp1' => $this->input->post('rk2_komp1', true),
+            'rk2_komp2' => $this->input->post('rk2_komp2', true),
+            'rk2_komp3' => $this->input->post('rk2_komp3', true),
+            'rk2_komp4' => $this->input->post('rk2_komp4', true),
+            'rk2_komp5' => $this->input->post('rk2_komp5', true),
+            'rk2_komp6' => $this->input->post('rk2_komp6', true),
+             'k_komp1' => $this->input->post('k1_komp1', true),
+            'k_komp2' => $this->input->post('k1_komp2', true),
+            'k_komp3' => $this->input->post('k1_komp3', true),
+            'k_komp4' => $this->input->post('k1_komp4', true),
+            'k_komp5' => $this->input->post('k1_komp5', true),
+            'k_komp6' => $this->input->post('k1_komp6', true),
+        );
+
+        $this->m_mt->insertMobil($data);
+        $link = base_url() . "mt/data_mt/";
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
 
 
     public function detail_mt($id_mobil) {
@@ -111,7 +160,7 @@ class Mt extends CI_Controller {
     public function apar_mt($id_mobil) {
         
         
-        $data1['mt'] = $this->m_mt->selectApar($id_mobil);
+        $data1['apar'] = $this->m_mt->selectApar($id_mobil);
         
         $data['lv1'] = 3;
         $data['lv2'] = 1;
@@ -199,17 +248,6 @@ class Mt extends CI_Controller {
         $data2['apar'] = $this->m_apar->getAparReminder()->result();
         $this->header($data);
         $this->load->view('mt/v_pengingat', $data2);
-        $this->footer();
-    }
-    
-    public function tampil_apar($id_mobil) {
-        $data['lv1'] = 3;
-        $data['lv2'] = 1;
-        
-        $data2['apar'] = $this->m_mt->getApar($id_mobil)->result();
-        $data2['id_mobil']=$id_mobil;
-        $this->header($data);
-        $this->load->view('mt/v_apar_mt', $data2);
         $this->footer();
     }
     

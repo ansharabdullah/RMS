@@ -108,7 +108,7 @@
             <section class="panel">
                 <div class="panel-body">
                     <a href="<?php echo base_url() ?>mt/surat_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"><i class="icon-envelope"></i> Surat</a>
-                    <a href="<?php echo base_url() ?>mt/tampil_apar/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
+                    <a href="<?php echo base_url() ?>mt/apar_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"><i class="icon-fire-extinguisher"></i> APAR</a>
                     <a href="<?php echo base_url() ?>mt/ban_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"> <i class=" icon-circle"></i> Ban</a>
                     <a href="<?php echo base_url() ?>mt/oli_mt/<?php echo $row->ID_MOBIL; ?>" rel="stylesheet" class="btn btn-primary"> <i class=" icon-beer"></i> Oli</a>
 

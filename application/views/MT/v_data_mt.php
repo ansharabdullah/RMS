@@ -73,7 +73,7 @@
                 <h4 class="modal-title">Tambah MT</h4>
             </div>
             <div class=" form">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/tambah_pegawai/">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url()?>mt/tambah_mobil/">
 
                     <div class="modal-body">
 

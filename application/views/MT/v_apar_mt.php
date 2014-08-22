@@ -45,7 +45,7 @@ foreach ($apar as $a) {
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
-
+<?php foreach ($apar as $row){?>
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -54,12 +54,10 @@ foreach ($apar as $a) {
             <div class="panel-body">
                 <div class="bio-desk">
                    
-                       
-                        <p>Nopol : <span id="nopol"></span></p>
-                        <p>Kapasitas : <span id="kapasitas"></p>
-                        <p>Produk : <span id="produk"></p>
-
-                  
+                    <p>Nopol : <?php echo $row->NOPOL?></p>
+                    <p>Kapasitas : <?php echo $row->KAPASITAS ?></p>
+                    <p>Produk : <?php echo $row->PRODUK ?></p>
+                    
                 </div>
             </div>
         </section>
@@ -100,7 +98,8 @@ foreach ($apar as $a) {
                                     <td><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->CATRIDGE; ?></td>
                                     <td><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->CO2; ?></td>
                                     <td><div id="<?php echo 'keterangan-' . $i; ?>"><?php echo $row->KETERANGAN_APAR; ?></td>
-                                    <td><div id="<?php echo 'status-' . $i; ?>"><?php echo $row->STATUS_APAR; ?></td>
+                                    <td><div id="<?php echo 'status-' . $i; ?>"><?php if($row->STATUS_APAR == "1")echo 'Aktif'?>
+                                                <?php if($row->STATUS_APAR == "0")echo 'Tidak Aktif'?></td>
                                                                                     
                                     <td>
                                         <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left"  data-toggle="modal"  href="#ModalEditApar" ><i class="icon-pencil"></i></a>
@@ -117,7 +116,6 @@ foreach ($apar as $a) {
                     </table>
                 </div>
             </div>
-
 
         </section>
 
@@ -159,9 +157,9 @@ foreach ($apar as $a) {
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Status</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="status" name="status">
-                                <option>Aktif</option>
-                                <option>Tidak Aktif</option>
+                            <select class="form-control input-sm m-bot15" id="status" name="status_ apar">
+                                <option <?php if($row->STATUS_APAR == "1")echo "selected"?> value="1">Aktif</option>
+                                        <option <?php if($row->STATUS_APAR == "0")echo "selected"?> value="0">Tidak Aktif</option>
                             </select>
                         </div>
                     </div>
@@ -259,7 +257,7 @@ foreach ($apar as $a) {
         </div>
     </div>
 </div>
-
+<?php } ?>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>
 
