@@ -32,7 +32,7 @@ class home extends CI_Controller {
     }
 
     public function home_oam() {
-        if (($this->session->userdata('isLoggedIn')) && (($this->session->userdata('id_role') == 1) || ($this->session->userdata('id_role') == 2) )) {
+        //if (($this->session->userdata('isLoggedIn')) && (($this->session->userdata('id_role') == 1) || ($this->session->userdata('id_role') == 2) )) {
             $data['lv1'] = 1;
             $data['lv2'] = 1;
             $this->load->view('layouts/header');
@@ -40,7 +40,7 @@ class home extends CI_Controller {
             $this->load->view('layouts/navbar_oam', $data);
             $this->load->view('oam/v_home');
             $this->load->view('layouts/footer');
-        }
+        //}
     }
 
 }

@@ -35,6 +35,7 @@ class login extends CI_Controller {
                 'isLoggedIn' => true,
                 'nama_pegawai' => $data[0]->NAMA_PEGAWAI,
                 'photo' => $data[0]->PHOTO,
+                'id_depot' => $data[0]->ID_DEPOT,
                 'ip' => $_SERVER['REMOTE_ADDR']
             );
             $this->session->set_userdata($session_user);

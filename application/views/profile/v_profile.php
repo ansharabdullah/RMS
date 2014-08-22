@@ -1,10 +1,10 @@
 <script type="text/javascript">
-    $( document ).ready(function() {
+    $(document).ready(function() {
         $("#EditProfile").hide();
         $("#EditPass").hide();
     });
-    
-    function ShowProfile(){
+
+    function ShowProfile() {
         $("#ShowProfile").fadeIn("slow");
         $("#EditProfile").hide();
         $("#EditPass").hide();
@@ -12,8 +12,8 @@
         $("#btnEdit").removeClass("active");
         $("#btnEditPass").removeClass("active");
     }
-    
-    function EditProfile(){
+
+    function EditProfile() {
         $("#ShowProfile").hide();
         $("#EditProfile").fadeIn("slow");
         $("#EditPass").hide();
@@ -21,8 +21,8 @@
         $("#btnEdit").addClass("active");
         $("#btnEditPass").removeClass("active");
     }
-    
-    function EditPass(){
+
+    function EditPass() {
         $("#ShowProfile").hide();
         $("#EditProfile").hide();
         $("#EditPass").fadeIn("slow");
@@ -30,7 +30,7 @@
         $("#btnEdit").removeClass("active");
         $("#btnEditPass").addClass("active");
     }
-    
+
 </script>
 
 <section id="main-content">
@@ -39,241 +39,244 @@
         <!-- page start-->
         <div class="row">
             <aside class="profile-nav col-lg-3 alt green-border">
-                <section class="panel">
-                    <div class="user-heading alt green-bg">
-                        <a href="#">
-                            <img src="<?php echo base_url() ?>assets/img/profile-avatar.jpg" alt="">
-                        </a>
-                        <br>
-                        <br><br></br><br>
-                        <h1>Triyanto</h1>
-                        <p>triyanto@flatlab.com</p>
-                    </div>
+                <?php foreach ($pegawai as $row) { ?>
+                    <section class="panel">
+                        <div class="user-heading alt green-bg">
+                            <a href="#">
+                                <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO ?>" alt="">
+                            </a>
+                            <br>
+                            <br><br></br><br>
+                            <h1><?php echo $row->NAMA_PEGAWAI ?></h1>
+                            <p><?php echo $row->EMAIL ?></p>
+                        </div>
 
-                    <ul class="nav nav-pills nav-stacked">
-                        <li id="btnProf" class="active"><a href="javascript:ShowProfile();"> <i class="icon-user" ></i> Profile</a></li>
-                        <li id="btnEdit"><a href="javascript:EditProfile();" > <i class="icon-edit"></i> Edit Profile</a></li>
-                        <li id="btnEditPass"><a href="javascript:EditPass();" > <i class="icon-edit-sign"></i> Edit Password</a></li>
-                    </ul>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li id="btnProf" class="active"><a href="javascript:ShowProfile();"> <i class="icon-user" ></i> Profile</a></li>
+                            <li id="btnEdit"><a href="javascript:EditProfile();" > <i class="icon-edit"></i> Edit Profile</a></li>
+                            <li id="btnEditPass"><a href="javascript:EditPass();" > <i class="icon-edit-sign"></i> Edit Password</a></li>
+                        </ul>
 
-                </section>
-            </aside>
-            <aside class="profile-info col-lg-9">
+                    </section>
+                </aside>
+                <aside class="profile-info col-lg-9">
 
-                <section class="panel">
+                    <section class="panel">
 
-                    <div class="panel-body bio-graph-info" id="ShowProfile">
-                        <h1>Profile Pengguna</h1>
-                        <div class="row">
-                            <div class="bio-row">
-                                <p><span>NIP </span>: 085247395</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Nama </span>: Triyanto</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Jabatan </span>: OAM</p>
-                            </div>
-                           
-                            <div class="bio-row">
-                                <p><span>Status </span>: Aktif</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>No. Telp </span>: 085222198675</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>No. KTP </span>: 0986386746</p>
-                            </div>
-                           
-                            <div class="bio-row">
-                                <p><span>Tempat Lahir </span>: Garut</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Tanggal Lahir </span>: 30-Sept-1993</p>
-                            </div>
+                        <div class="panel-body bio-graph-info" id="ShowProfile">
+                            <h1>Profile Pengguna</h1>
+                            <div class="row">
+                                <div class="bio-row">
+                                    <p><span>NIP </span>: <?php echo $row->NIP ?></p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>Nama </span>: <?php echo $row->NAMA_PEGAWAI ?></p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>Jabatan </span>: <?php echo $row->JABATAN ?></p>
+                                </div>
 
-                            <div class="bio-row">
-                                <p><span>Tanggal Masuk </span>: 30-Sept-1993</p>
-                            </div>
+                                <div class="bio-row">
+                                    <p><span>Status </span>: <?php echo $row->STATUS ?></p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>No. Telp </span>: <?php echo $row->NO_TELEPON ?></p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>No. KTP </span>: <?php echo $row->NO_KTP ?></p>
+                                </div>
 
-                            <div class="bio-row">
-                                <p><span>Alamat </span>: Jl. Margonda Selatan No. 76B Bandung</p>
+                                <div class="bio-row">
+                                    <p><span>Tempat Lahir </span>: <?php echo $row->TEMPAT_LAHIR ?></p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>Tanggal Lahir </span>: <?php echo $row->TANGGAL_LAHIR ?></p>
+                                </div>
+
+                                <div class="bio-row">
+                                    <p><span>Tanggal Masuk </span>: <?php echo $row->TANGGAL_MASUK ?></p>
+                                </div>
+
+                                <div class="bio-row">
+                                    <p><span>Alamat </span>: <?php echo $row->ALAMAT ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="panel-body bio-graph-info" id="EditProfile">
-                        <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                        <div class="panel-body bio-graph-info" id="EditProfile">
+                            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>user/edit_pegawai/">
 
-                            <h1>Edit Profile Pengguna</h1>
+                                <h1>Edit Profile Pengguna</h1>
 
-                            <div class="row">
-                                <div class="bio-row">
-                                    <label for="nip" class="control-label col-lg-4">NIP</label><input type="checkbox"> On Call
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="cnip" name="nip" minlength="2" type="text" value="085247395" required />
-                                    </div>
-                                </div>
-                                <div class="bio-row">
-                                    <label for="nama" class="control-label col-lg-4">Nama</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="cama" name="nama" minlength="2" type="text" value="Jonathan Smith" required />
-                                    </div>
-                                </div>
-                                <div class="bio-row">
-                                    <label for="cjabatan" class="control-label col-lg-4">Jabatan</label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan" >
-                                            <option selected>OAM</option>
-                                            <option>Staf OAM</option>
-                                             <option>SS</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="bio-row">
-                                    <label for="cstatus" class="control-label col-lg-4">Status</label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control input-sm m-bot15" id="cstatus" name="status">
-                                            <option>Aktif</option>
-                                            <option>Tidak Aktif</option>
-                                            <option>Peringatan</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="bio-row">
-                                    <label for="ctelp" class="control-label col-lg-4">No. Telp</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctelp" name="telp" minlength="2" type="text" required />
-                                    </div>
-                                </div>
-                                <div class="bio-row">
-                                    <label for="cktp" class="control-label col-lg-4">No. KTP</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="cktp" name="ktp" minlength="2" type="text" required />
-                                    </div>
-                                </div>
-                                <div class="bio-row">
-                                    <label for="csim" class="control-label col-lg-4">No. SIM</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="csim" name="sim" minlength="2" type="text" required />
-                                    </div>
-                                </div>
-
-                                <div class="bio-row">
-                                    <label for="ctempatlahir" class="control-label col-lg-4">Tempat Lahir</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempatlahir" minlength="2" type="text" required />
-                                    </div>
-                                </div>
-                                <div class="bio-row">
-                                    <label for="ctgllahir" class="control-label col-lg-4">Tanggal Lahir</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tgllahir" size="16" type="date" value="" required/>
-                                        <span class="help-block">Select date</span>
-                                    </div>
-                                </div>
-
-                                <div class="bio-row">
-                                    <label for="ctglmasuk" class="control-label col-lg-4">Tanggal Masuk</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tglmasuk" type="date" size="16" type="text" value="" required/>
-                                        <span class="help-block">Select date</span>
-                                    </div>
-                                </div>
-
-                                <div class="bio-row">
-                                    <label for="calamat" class="control-label col-lg-4">Alamat</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="calamat" name="alamat" minlength="2" type="text" required />
-                                    </div>
-                                </div>
-
-                                <div class="bio-row">
-                                    <label class="control-label col-md-4">Image Upload</label>
-                                    <div class="col-md-6">
-                                        <div class="fileupload fileupload-new" data-provides="fileupload">
-
-                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                            <div>
-                                                <span class="btn btn-white btn-file">
-                                                    <span class="fileupload-new"><i class="icon-paper-clip"></i> Select image</span>
-                                                    <span class="fileupload-exists"><i class="icon-undo"></i> Change</span>
-                                                    <input type="file" class="default"/>
-                                                </span>
-                                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="icon-trash"></i> Remove</a>
-                                            </div>
+                                <div class="row">
+                                    <input name="id_pegawai" type="hidden" value="<?php echo $this->session->userdata('id_pegawai') ?>"/>
+                                    <div class="bio-row">
+                                        <label for="nip" class="control-label col-lg-4">NIP</label><input type="checkbox"> On Call
+                                        <div class="col-lg-6">
+                                            <input class=" form-control input-sm m-bot15" id="cnip" name="nip" minlength="2" type="text" value="<?php echo $row->NIP ?>" required />
                                         </div>
-                                        <span class="label label-danger">NOTE!</span>
-                                        <span>
-                                            Attached image thumbnail is
-                                            supported in Latest Firefox, Chrome, Opera,
-                                            Safari and Internet Explorer 10 only
-                                        </span>
                                     </div>
-                                </div>
-
-                                <div class="bio-row">
-
-
-                                </div>
-                                <div class="bio-row">
-                                    <div class="col-lg-10">
-                                        <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
+                                    <div class="bio-row">
+                                        <label for="nama" class="control-label col-lg-4">Nama</label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control input-sm m-bot15" id="cama" name="nama_pegawai" minlength="2" type="text" value="<?php echo $row->NAMA_PEGAWAI ?>" required />
+                                        </div>
                                     </div>
-
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-
-
-
-                    <div class="panel-body bio-graph-info" id="EditPass">
-                        <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
-
-                            <h1>Edit Password</h1>
-
-                            <div class="row">
-                                <div class="bio-row">
-
-                                    <label for="passwordlama" class="control-label col-lg-4">Password Lama</label>
-                                    <div class="col-lg-8">
-                                        <input class=" form-control " id="cpasswodlama" name="passwordlama" minlength="2" type="password" value="" required />
-                                    </div>
-                                </div>
-                                <div class="row"></div>                                
-                                <div class="bio-row">
-                                    <label for="passwordbaru" class="control-label col-lg-4">Password Baru</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control " id="password" name="password" type="password" />
-                                    </div>
-                                </div>
-                                <div class="row"></div>    
-                                <div class="bio-row">
-                                    <label for="confirm_password" class="control-label col-lg-4">Confirm Password</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control " id="confirm_password" name="confirm_password" type="password" />
-                                    </div>
-                                </div>
-                                <div class="row"></div>   
-                                <div class="bio-row">
-                                    <div class="col-lg-12">
-                                        <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
+                                    <div class="bio-row">
+                                        <label for="cjabatan" class="control-label col-lg-4">Jabatan</label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan" >
+                                                <option value="OAM" <?php if ($row->ID_ROLE == 1) echo"selected"; ?>>OAM</option>
+                                                <option value="STAF OAM" <?php if ($row->ID_ROLE == 2) echo"selected"; ?>>Staf OAM</option>
+                                                <option value="SITE SUPPERVISSOR" <?php if ($row->ID_ROLE == 3) echo"selected"; ?>>Site Suppervisor</option>
+                                                <option value="PENGAWAS OPERASI" <?php if ($row->ID_ROLE == 4) echo"selected"; ?>>Pengawas Operasi</option>
+                                                <option value="SUPPORTING" <?php if ($row->ID_ROLE == 5) echo"selected"; ?>>Supporting</option>
+                                            </select>
+                                        </div>
                                     </div>
 
+                                    <div class="bio-row">
+                                        <label for="cstatus" class="control-label col-lg-4">Status</label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control input-sm m-bot15" id="cstatus" name="status">
+                                                <option value="AKTIF" <?php if ($row->STATUS == "AKTIF") echo"selected"; ?>>Aktif</option>
+                                                <option value="TIDAK AKTIF" <?php if ($row->STATUS == "TIDAK AKTIF") echo"selected"; ?>>Tidak Aktif</option>
+                                                <option value="PERINGATAN" <?php if ($row->STATUS == "PERINGATAN") echo"selected"; ?>>Peringatan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="bio-row">
+                                        <label for="ctelp" class="control-label col-lg-4">No. Telp</label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control input-sm m-bot15" id="ctelp" name="no_telepon" minlength="2" type="text" value="<?php echo $row->NO_TELEPON ?>" required />
+                                        </div>
+                                    </div>
+                                    <div class="bio-row">
+                                        <label for="cktp" class="control-label col-lg-4">No. KTP</label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control input-sm m-bot15" id="cktp" name="no_ktp" minlength="2" type="text" value="<?php echo $row->NO_KTP ?>" required />
+                                        </div>
+                                    </div>
+                                    <div class="bio-row">
+                                        <label for="csim" class="control-label col-lg-4">No. SIM</label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control input-sm m-bot15" id="csim" name="no_sim" minlength="2" type="text" value="<?php echo $row->NO_SIM ?>" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="bio-row">
+                                        <label for="ctempatlahir" class="control-label col-lg-4">Tempat Lahir</label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempat_lahir" minlength="2" type="text" value="<?php echo $row->TEMPAT_LAHIR ?>" required />
+                                        </div>
+                                    </div>
+                                    <div class="bio-row">
+                                        <label for="ctgllahir" class="control-label col-lg-4">Tanggal Lahir</label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tanggal_lahir" size="16" type="date" value="<?php echo $row->TANGGAL_LAHIR ?>" required/>
+                                            <span class="help-block">Select date</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bio-row">
+                                        <label for="ctglmasuk" class="control-label col-lg-4">Tanggal Masuk</label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tanggal_masuk" type="date" size="16" type="text" value="<?php echo $row->TANGGAL_MASUK ?>" required/>
+                                            <span class="help-block">Select date</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bio-row">
+                                        <label for="calamat" class="control-label col-lg-4">Alamat</label>
+                                        <div class="col-lg-6">
+                                            <textarea class=" form-control input-sm m-bot15" id="calamat" name="alamat" rows="5" /><?php echo $row->ALAMAT ?></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="bio-row">
+                                        <label class="control-label col-md-4">Image Upload</label>
+                                        <div class="col-md-6">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+
+                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                <div>
+                                                    <span class="btn btn-white btn-file">
+                                                        <span class="fileupload-new"><i class="icon-paper-clip"></i> Select image</span>
+                                                        <span class="fileupload-exists"><i class="icon-undo"></i> Change</span>
+                                                        <input type="file" class="default" name="photo"/>
+                                                    </span>
+                                                    <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="icon-trash"></i> Remove</a>
+                                                </div>
+                                            </div>
+                                            <span class="label label-danger">NOTE!</span>
+                                            <span>
+                                                Attached image thumbnail is
+                                                supported in Latest Firefox, Chrome, Opera,
+                                                Safari and Internet Explorer 10 only
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bio-row">
+
+
+                                    </div>
+                                    <div class="bio-row">
+                                        <div class="col-lg-10">
+                                            <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
+                                        </div>
+
+                                    </div>
+
                                 </div>
-
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
 
 
 
-                </section>
+                        <div class="panel-body bio-graph-info" id="EditPass">
+                            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>user/ubah_password/">
 
+                                <h1>Edit Password</h1>
+
+                                <div class="row">
+                                    <div class="bio-row">
+
+                                        <label for="passwordlama" class="control-label col-lg-4">Password Lama</label>
+                                        <div class="col-lg-8">
+                                            <input class=" form-control " id="cpasswodlama" name="password_lama" minlength="2" type="password" value="" required />
+                                        </div>
+                                    </div>
+                                    <div class="row"></div>
+
+                                    <input name="id_pegawai" type="hidden" value="<?php echo $this->session->userdata('id_pegawai') ?>"/>
+                                    <div class="bio-row">
+                                        <label for="password_baru" class="control-label col-lg-4">Password Baru</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control " id="password" name="password_baru" type="password" />
+                                        </div>
+                                    </div>
+                                    <div class="row"></div>    
+                                    <div class="bio-row">
+                                        <label for="confirm_password" class="control-label col-lg-4">Confirm Password</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control " id="confirm_password" name="password_konfirm" type="password" />
+                                        </div>
+                                    </div>
+                                    <div class="row"></div>   
+                                    <div class="bio-row">
+                                        <div class="col-lg-12">
+                                            <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                <?php } ?>
             </aside>
         </div>
 
@@ -281,7 +284,7 @@
 
         <section class="panel">
             <header class="panel-heading">
-                Tabel Kinerja
+                Tabel Log Sitem
             </header>
             <div class="panel-body">
                 <div class="adv-table editable-table ">
@@ -310,55 +313,21 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>1</td>
-                                <td>07/08/2014</td>
-                                <td>Import kinerja awak mobil tangki untuk tanggal 3 Jan 2014</td>
-                                <td><span class="label label-success">Tambah</span></td>
-                            </tr>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>2</td>
-                                <td>08/08/2014</td>
-                                <td>Hapus data AMT NIP 234567897 Nama Jaja</td>
-                                <td><span class="label label-danger">Hapus</span></td>
-                            </tr>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>3</td>
-                                <td>09/08/2014</td>
-                                <td>Edit data AMT NIP 345678 Nama Dadan</td>
-                                <td><span class="label label-warning">Edit</span></td>
-                            </tr>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>4</td>
-                                <td>10/08/2014</td>
-                                <td>Hapus kinerja AMT nip 7192497 nama Juju Tanggal 30/09/2012</td>
-                                <td><span class="label label-danger">Hapus</span></td>
-                            </tr>
-
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td>5</td>
-                                <td>11/08/2014</td>
-                                <td>Insert MS2 Compliance</td>
-                                <td><span class="label label-success">Tambah</span></td>
-                            </tr>
-
-                            <tr class="">
-
-                                <td style="display:none;"></td>
-                                <td>6</td>
-                                <td>12/08/2014</td>   
-                                <td>Input Rencana</td>
-                                <td><span class="label label-success">Tambah</span></td>
-                            </tr>
+                            <?php
+                            $i = 1;
+                            foreach ($log as $row) {
+                                ?>
+                                <tr class="">
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i; ?></td>
+                                    <td><?php echo $row->TANGGAL_LOG ?></td>
+                                    <td><?php echo $row->KETERANGAN ?></td>
+                                    <td><span class="label label-success"><?php echo $row->KEYWORD ?></span></td>
+                                </tr>
+                                <?php
+                                $i++;
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -381,12 +350,12 @@
     jQuery(document).ready(function() {
         EditableTable.init();
     });
-		  	
+
     function FilterData(par) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
-    
-   
-		  
+
+
+
 </script>
