@@ -61,8 +61,12 @@ class kinerja extends CI_Controller {
 
             $worksheetData = $objReader->listWorksheetInfo($inputFileName);
 
-            $worksheetRead = array_column($worksheetData, 'worksheetName');
-
+            //$worksheetRead = array_column($worksheetData, 'worksheetName');
+            
+            foreach($worksheetData as $row){
+                $worksheetRead[]=$row['worksheetName'];
+            }
+            
             $objReader->setLoadSheetsOnly($worksheetRead);
 
             $objPHPExcel = $objReader->load($inputFileName);
