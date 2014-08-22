@@ -2,7 +2,7 @@
 <!--footer start-->
 <footer class="site-footer">
     <div class="text-center">
-        2014 &copy; PT. Pertamina Patra Niaga Jawa Bagian Tengah dan DIY
+        2014 &copy; Triyanto, R.R.B. Abimanyu
         <a href="#" class="go-top">
             <i class="icon-angle-up"></i>
         </a>
