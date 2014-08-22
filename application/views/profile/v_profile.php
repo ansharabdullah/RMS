@@ -43,7 +43,7 @@
                     <section class="panel">
                         <div class="user-heading alt green-bg">
                             <a href="#">
-                                <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO ?>" alt="">
+                                <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO; ?>" alt="<?php echo $row->NAMA_PEGAWAI?>">
                             </a>
                             <br>
                             <br><br></br><br>
@@ -105,7 +105,7 @@
 
 
                         <div class="panel-body bio-graph-info" id="EditProfile">
-                            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>user/edit_pegawai/">
+                            <form enctype="multipart/form-data" class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>user/edit_pegawai/">
 
                                 <h1>Edit Profile Pengguna</h1>
 
@@ -204,7 +204,7 @@
                                                     <span class="btn btn-white btn-file">
                                                         <span class="fileupload-new"><i class="icon-paper-clip"></i> Select image</span>
                                                         <span class="fileupload-exists"><i class="icon-undo"></i> Change</span>
-                                                        <input type="file" class="default" name="photo"/>
+                                                        <input type="file" class="default" name="userfile"/>
                                                     </span>
                                                     <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="icon-trash"></i> Remove</a>
                                                 </div>
