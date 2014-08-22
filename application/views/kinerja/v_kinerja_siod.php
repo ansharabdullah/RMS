@@ -1,39 +1,39 @@
 <script type="text/javascript">
-         
-    $( document ).ready(function() {
-        
-        $("#signupForm").submit(function(e){
-            var isvalidate=$("#signupForm").valid();
-            if(isvalidate)
+
+    $(document).ready(function() {
+
+        $("#signupForm").submit(function(e) {
+            var isvalidate = $("#signupForm").valid();
+            if (isvalidate)
             {
                 var ext = $("#fileSIOD").val().split('.').pop();
-                if(ext=="xls" || ext=="xlsx"){
+                if (ext == "xls" || ext == "xlsx") {
                     //$("#filePreview").hide();
                     //$("#filePreview").slideDown("slow");
                     //$("#filePreview1").slideDown("slow");
                     //$("#tgl").html($("#tanggalSIOD").val());
                     //$("#tgl1").html($("#tanggalSIOD").val());
-                }else if(ext==""){
+                } else if (ext == "") {
                     e.preventDefault();
-                }else{
+                } else {
                     alert("Tipe file yang diupload tidak sesuai (file excel)");
                     e.preventDefault();
-                }                
+                }
             }
         });
-        
+
     });
-       
+
     function importTable()
     {
         alert("Berhasil disimpan !");
     }
-       
+
     function downloadCsv()
     {
         alert("Excel berhasil di download");
     }
-    
+
 </script>
 <section id="main-content">
     <section class="wrapper">
@@ -68,16 +68,19 @@
                 </form>
             </div>
         </section>
-        <?php if ($submit == true) { ?>
+        <?php
+        if ($submit == true) {
+            $status_simpan = true;
+            ?>
 
-            <?php if ($data_kinerja['ERROR'] == true) { ?>
+    <?php if ($data_kinerja['ERROR'] == true) { ?>
                 <div class="alert alert-block alert-danger fade in">
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
                     <strong>Peringatan!</strong> Gagal membaca file SIOD, silahkan coba lagi.
                 </div>
-                <?php if ($data_kinerja['TANGGAL']['error'] == true) { ?>
+        <?php if ($data_kinerja['TANGGAL']['error'] == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
@@ -85,7 +88,7 @@
                         <strong>Tanggal error!</strong> Tanggal di file SIOD tidak sesuai dengan tanggal pilihan.
                     </div>
                 <?php } ?>
-                <?php if ($data_kinerja['SPBU']['error'] == true) { ?>
+        <?php if ($data_kinerja['SPBU']['error'] == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
@@ -93,7 +96,7 @@
                         <strong>SPBU error!</strong> Gagal membaca sheet <strong>Produk SPBU</strong>.
                     </div>
                 <?php } ?>
-                <?php if ($data_kinerja['MT']['error'] == true) { ?>
+        <?php if ($data_kinerja['MT']['error'] == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
@@ -101,7 +104,7 @@
                         <strong>MT error!</strong> Gagal membaca sheet <strong>Detail MT Report</strong>.
                     </div>
                 <?php } ?>
-                <?php if ($data_kinerja['SUPIR']['error'] == true) { ?>
+        <?php if ($data_kinerja['SUPIR']['error'] == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
@@ -109,7 +112,7 @@
                         <strong>Supir error!</strong> Gagal membaca sheet <strong>Detail Crew Supir</strong>.
                     </div>
                 <?php } ?>
-                <?php if ($data_kinerja['KERNET']['error'] == true) { ?>
+        <?php if ($data_kinerja['KERNET']['error'] == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
@@ -117,7 +120,7 @@
                         <strong>Kernet error!</strong> Gagal membaca sheet <strong>Detail Crew Kernet</strong>.
                     </div>
                 <?php } ?>
-            <?php } else { ?>
+    <?php } else { ?>
                 <div class="alert alert-success fade in">
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
@@ -184,14 +187,17 @@
                                             <td><?php echo $data_kinerja['MT']['pertamina_dex'][$no - 1]; ?></td>
                                             <td><?php echo $data_kinerja['MT']['solar'][$no - 1]; ?></td>
                                             <td>
-                                                <?php if ($data_kinerja['MT']['id'][$no - 1] == -1) { ?>
+                                                <?php
+                                                if ($data_kinerja['MT']['id'][$no - 1] == -1) {
+                                                    $status_simpan = false;
+                                                    ?>
                                                     <span class="label label-warning">ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
-                                                <?php } ?>
+            <?php } ?>
                                             </td>
                                         </tr>
-                                    <?php } ?>
+        <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -244,11 +250,14 @@
                                             <td><?php echo $data_kinerja['SUPIR']['jumlah_spbu'][$no - 1]; ?></td>
                                             <td><?php echo $data_kinerja['SUPIR']['pendapatan'][$no - 1]; ?></td>
                                             <td>
-                                                <?php if ($data_kinerja['SUPIR']['id'][$no - 1] == -1) { ?>
+                                                <?php
+                                                if ($data_kinerja['SUPIR']['id'][$no - 1] == -1) {
+                                                    $status_simpan = false;
+                                                    ?>
                                                     <span class="label label-warning">ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
-                                                <?php } ?>
+            <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -272,14 +281,17 @@
                                             <td><?php echo $data_kinerja['KERNET']['jumlah_spbu'][$noo - 1]; ?></td>
                                             <td><?php echo $data_kinerja['KERNET']['pendapatan'][$noo - 1]; ?></td>
                                             <td>
-                                                <?php if ($data_kinerja['KERNET']['id'][$noo - 1] == -1) { ?>
+                                                <?php
+                                                if ($data_kinerja['KERNET']['id'][$noo - 1] == -1) {
+                                                    $status_simpan = false;
+                                                    ?>
                                                     <span class="label label-warning">ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
-                                                <?php } ?>
+            <?php } ?>
                                             </td>
                                         </tr>
-                                    <?php } ?>
+        <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -293,7 +305,16 @@
 
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10 col-sm-6">
-                                    <input type="submit" style="float: right;" class="btn btn-danger" value="Simpan" name="submit">
+                                    <?php if ($status_simpan == true) { ?>
+                                        <input type="submit" style="float: right;" class="btn btn-danger" value="Simpan" name="submit">
+        <?php } else { ?>
+                                        <div class="alert alert-block alert-danger fade in">
+                                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                                <i class="icon-remove"></i>
+                                            </button>
+                                            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                                        </div>
+        <?php } ?>
                                 </div>
                             </div>
                         </form>
@@ -301,10 +322,10 @@
                 </section>
 
 
-            <?php } ?>
+    <?php } ?>
 
 
-        <?php } ?>
+<?php } ?>
 
         <!-- page end-->
     </section>
@@ -315,9 +336,9 @@
 
 <!-- END JAVASCRIPTS -->
 <script>
-    
-    jQuery(document).ready(function() {
-        EditableTable.init();
-    });    
-    
+
+                        jQuery(document).ready(function() {
+                            EditableTable.init();
+                        });
+
 </script>

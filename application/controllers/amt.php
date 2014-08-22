@@ -70,7 +70,7 @@ class amt extends CI_Controller {
             'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
             'transportir_asal' => $this->input->post('transportir_asal', true),
             'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
-            'photo' => $this->input->post('photo', true),
+            'photo' => $this->input->post('photo', true)
         );
 
         $this->m_amt->editPegawai($data, $id);

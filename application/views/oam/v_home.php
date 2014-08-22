@@ -8,16 +8,16 @@
     function showPanel(index)
     {
         if(index == 1){
-            $("#amtMtBody").toggle("fast");
+            $("#amtMtBody").toggle("slow");
         }
         else if(index == 2){
-            $("#ms2VolumeBody").toggle("fast");
+            $("#ms2VolumeBody").toggle("slow");
         }
         else if(index == 3){
-            $("#rencanaBody").toggle("fast");
+            $("#rencanaBody").toggle("slow");
         }
         else if(index == 4){
-            $("#indikatorKpiBody").toggle("fast");
+            $("#indikatorKpiBody").toggle("slow");
         }
     }
 </script>
