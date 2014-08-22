@@ -99,8 +99,8 @@ class amt extends CI_Controller {
         }
         
         $data = array(
-            'nip' => $this->input->post('nip', true),
             'depot' => $depot,
+            'nip' => $this->input->post('nip', true),
             'nama_pegawai' => $this->input->post('nama_pegawai', true),
             'jabatan' => $this->input->post('jabatan', true),
             'klasifikasi' => $this->input->post('klasifikasi', true),

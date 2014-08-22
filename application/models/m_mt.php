@@ -2,14 +2,17 @@
 
 class m_mt extends CI_Model {
 
-
+    public function insertMobil($data) {
+        $this->db->insert('mobil', $data);
+    }
+    
     public function editMT($data, $id) {
         $this->db->where('id_mobil', $id);
         $this->db->update('mobil', $data);
     }
 
-    public function deleteMT($data, $id_mobil) {
-        $this->db->where('id_mobil', $id_mobil);
+    public function deleteMT($id) {
+        $this->db->where('id_mobil', $id);
         $this->db->delete('mobil');
     }
     
@@ -18,20 +21,27 @@ class m_mt extends CI_Model {
         return $data->result();
     }
     
+    public function getApar($id_mobil)
+    {
+        $query = $this->db->query("select a.ID_APAR,m.NOPOL,m.KAPASITAS,m.PRODUK,a.STORE_PRESSURE,a.CATRIDGE,a.CO2,a.KETERANGAN_APAR,a.STATUS_APAR
+                          from apar a, mobil m, depot d 
+                          where m.ID_MOBIL = a.ID_MOBIL 
+                          and m.ID_MOBIL = 1
+                          and m.ID_DEPOT = d.ID_DEPOT 
+                          and d.ID_DEPOT = 1 ");
+        return $query;
+    }
+    
+     public function editApar($data,$id)
+    {
+        $this->db->where('id_apar', $id);
+        $this->db->update('apar', $data); 
+        
+    }
+    
     public function detailMT($id_mobil){
         $data = $this->db->query("select * from mobil where (kapasitas='8' or kapasitas='16' or kapasitas='24' or kapasitas='32') and id_mobil=$id_mobil");
         return $data->result();
-    }
-    
-    public function selectApar($id_mobil){
-        $data = $this->db->query("select T.store_pressure, T.catridge,T.co2,T.keterangan_apar,T.status_apar,M.nopol,M.kapasitas,M.produk from apar T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil");
-        return $data->result();
-    }
-    public function editApar($id,$data)
-    {
-        $this->db->where('ID_APAR', $id);
-        $this->db->update('apar', $data); 
-        
     }
     
     public function selectBanMT($id_mobil){

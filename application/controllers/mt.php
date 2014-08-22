@@ -89,45 +89,16 @@ class Mt extends CI_Controller {
         echo '</script>';
         
     }
-
-    public function grafik_mt() {
-
-
-        $data['lv1'] = 3;
-        $data['lv2'] = 2;
-        $this->header($data);
-        $this->load->view('mt/v_grafik_mt');
-        $this->footer();
+    
+    public function delete_mobil($id_mobil){
+        $this->m_mt->deleteMT($id_mobil);
+        
+        $link = base_url()."mt/data_mt/";
+        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
-
-    public function grafik_bulan_mt() {
-
-        $data['lv1'] = 3;
-
-        $data['lv2'] = 2;
-        $this->header($data);
-        $this->load->view('mt/v_grafik_bulan_mt');
-        $this->footer();
-    }
-
-    public function grafik_hari_mt() {
-
-        $data['lv1'] = 3;
-        $data['lv2'] = 2;
-        $this->header($data);
-        $this->load->view('mt/v_grafik_hari_mt');
-        $this->footer();
-    }
-
-    public function tambah_mt() {
-
-        $data['lv1'] = 3;
-        $data['lv2'] = 1;
-        $this->header($data);
-        $this->load->view('mt/v_tambah_mt');
-        $this->footer();
-    }
-
+    
     public function import_csv() {
 
         $data['lv1'] = 3;
@@ -183,6 +154,35 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_surat_mt',$data1);
         $this->footer();
     }
+    public function grafik_mt() {
+
+
+        $data['lv1'] = 3;
+        $data['lv2'] = 2;
+        $this->header($data);
+        $this->load->view('mt/v_grafik_mt');
+        $this->footer();
+    }
+
+    public function grafik_bulan_mt() {
+
+        $data['lv1'] = 3;
+
+        $data['lv2'] = 2;
+        $this->header($data);
+        $this->load->view('mt/v_grafik_bulan_mt');
+        $this->footer();
+    }
+
+    public function grafik_hari_mt() {
+
+        $data['lv1'] = 3;
+        $data['lv2'] = 2;
+        $this->header($data);
+        $this->load->view('mt/v_grafik_hari_mt');
+        $this->footer();
+    }
+
 
     public function presensi() {
         $data['lv1'] = 3;
@@ -200,6 +200,37 @@ class Mt extends CI_Controller {
         $this->header($data);
         $this->load->view('mt/v_pengingat', $data2);
         $this->footer();
+    }
+    
+    public function tampil_apar($id_mobil) {
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        
+        $data2['apar'] = $this->m_mt->getApar($id_mobil)->result();
+        $data2['id_mobil']=$id_mobil;
+        $this->header($data);
+        $this->load->view('mt/v_apar_mt', $data2);
+        $this->footer();
+    }
+    
+     public function editapar($id)
+    {
+         $id = $this->input->post('id', true);
+        $id_mobil=1;
+        $data = array(
+            'STORE_PRESSURE' => $this->input->post('STORE_PRESSURE', true),
+            'CATRIDGE' => $this->input->post('CATRIDGE', true),
+            'CO2' => $this->input->post('CO2', true),
+            'KETERANGAN_APAR' => $this->input->post('KETERANGAN_APAR', true),
+            'STATUS_APAR' => $this->input->post('STATUS_APAR', true),
+        );
+        
+        $this->m_mt->editApar($data,$id);
+        
+           $link = base_url()."mt/tampil_apar/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
     
     public function edit_reminder_apar($id)
@@ -221,26 +252,8 @@ class Mt extends CI_Controller {
             echo '</script>';
     }
     
-    public function edit_apar($id)
-    {
-        $store = $_POST['tgl_store'];
-        $catridge = $_POST['tgl_catridge'];
-        $co2 = $_POST['tgl_co2'];
-        
-        $data = array(
-            "STORE_PRESSURE"=>$store,
-            "CATRIDGE"=>$catridge,
-            "CO2"=>$co2
-        );
-        
-        $this->m_apar->editApar($id,$data);
-        //redirect('mt/reminder');
-          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
-            echo 'window.location.href="' . base_url() . 'mt/apar_mt";';
-            echo '</script>';
-    }
-    
 
+    
     public function rencana() {
 
         $data['lv1'] = 3;

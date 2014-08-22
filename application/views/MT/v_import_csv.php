@@ -20,15 +20,18 @@
         });
     });
     
+    function downloadCsv()
+    {
+        alert("Excel berhasil di download");
+        
+    }
+    
     function importTable()
     {
         alert("Berhasil disimpan !");
     }
     
-    function downloadCsv()
-    {
-        alert("Excel berhasil di download");
-    }
+    
     
 </script>
 
