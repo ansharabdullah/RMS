@@ -34,7 +34,7 @@ class kinerja extends CI_Controller {
             redirect('kinerja');
         } else {
             $this->load->model('m_kinerja');
-            
+
             $data_kinerja['SPBU']['error'] = true;
             $data_kinerja['MT']['error'] = true;
             $data_kinerja['SUPIR']['error'] = true;
@@ -111,8 +111,8 @@ class kinerja extends CI_Controller {
                             ->getNumberFormat()
                             ->setFormatCode('dd-mm-yyyy');
 
-                    $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), 1,2);
-                    
+                    $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), 1, 2);
+
                     $row_baca = 14;
                     while ($sheetData->getCell('B' . $row_baca)->getFormattedValue() != NULL) {
                         if ($data_kinerja['SUPIR']['error'] == true && $tanggalSIOD == $sheetData->getCell('B' . $row_baca)->getFormattedValue()) {
@@ -129,7 +129,7 @@ class kinerja extends CI_Controller {
                             $data_kinerja['SUPIR']['total_km'][] = $sheetData->getCell('H' . $row_baca)->getFormattedValue();
                             $data_kinerja['SUPIR']['total_kl'][] = $sheetData->getCell('I' . $row_baca)->getFormattedValue();
                             $data_kinerja['SUPIR']['ritase'][] = $sheetData->getCell('J' . $row_baca)->getFormattedValue();
-                            $data_kinerja['SUPIR']['jumlah_spbu'][] = ($sheetData->getCell('L' . $row_baca)->getValue()-($koefisien['km']*$sheetData->getCell('H' . $row_baca)->getValue())-($koefisien['kl']*$sheetData->getCell('I' . $row_baca)->getValue())-($koefisien['rit']*$sheetData->getCell('J' . $row_baca)->getValue()))/$koefisien['spbu']; //hasil hitung koefisien
+                            $data_kinerja['SUPIR']['jumlah_spbu'][] = ($sheetData->getCell('L' . $row_baca)->getValue() - ($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) - ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) - ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue())) / $koefisien['spbu']; //hasil hitung koefisien
                             $data_kinerja['SUPIR']['pendapatan'][] = $sheetData->getCell('L' . $row_baca)->getFormattedValue();
                         }
                         $row_baca++;
@@ -143,9 +143,9 @@ class kinerja extends CI_Controller {
                     $sheetData->getStyle('B14:B1000')
                             ->getNumberFormat()
                             ->setFormatCode('dd-mm-yyyy');
-                    
-                    $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), 1,2);
-                    
+
+                    $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), 1, 2);
+
                     $row_baca = 14;
                     while ($sheetData->getCell('B' . $row_baca)->getFormattedValue() != NULL) {
                         if ($data_kinerja['KERNET']['error'] == true && $tanggalSIOD == $sheetData->getCell('B' . $row_baca)->getFormattedValue()) {
@@ -162,7 +162,7 @@ class kinerja extends CI_Controller {
                             $data_kinerja['KERNET']['total_km'][] = $sheetData->getCell('H' . $row_baca)->getFormattedValue();
                             $data_kinerja['KERNET']['total_kl'][] = $sheetData->getCell('I' . $row_baca)->getFormattedValue();
                             $data_kinerja['KERNET']['ritase'][] = $sheetData->getCell('J' . $row_baca)->getFormattedValue();
-                            $data_kinerja['KERNET']['jumlah_spbu'][] = ($sheetData->getCell('L' . $row_baca)->getValue()-($koefisien['km']*$sheetData->getCell('H' . $row_baca)->getValue())-($koefisien['kl']*$sheetData->getCell('I' . $row_baca)->getValue())-($koefisien['rit']*$sheetData->getCell('J' . $row_baca)->getValue()))/$koefisien['spbu']; //hasil hitung koefisien
+                            $data_kinerja['KERNET']['jumlah_spbu'][] = ($sheetData->getCell('L' . $row_baca)->getValue() - ($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) - ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) - ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue())) / $koefisien['spbu']; //hasil hitung koefisien
                             $data_kinerja['KERNET']['pendapatan'][] = $sheetData->getCell('L' . $row_baca)->getFormattedValue();
                         }
                         $row_baca++;
