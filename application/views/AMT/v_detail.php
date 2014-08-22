@@ -99,7 +99,7 @@
                 <section class="panel">
                     <div class="user-heading round">
                         <a href="#">
-                            <img src="<?php echo base_url() ?>assets/img/profile-avatar.jpg" alt="">
+                            <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO; ?>" alt="<?php echo $row->NAMA_PEGAWAI?>">
                         </a>
                         <h1><?php echo $row->NAMA_PEGAWAI;?></h1>
                         <p></p>

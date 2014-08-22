@@ -61,21 +61,53 @@ class user extends CI_Controller {
     }
 
     public function edit_pegawai() {
+        $config['upload_path'] = './assets/img/photo/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '200';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $nip = $this->input->post('nip', true);
+        $config['file_name'] = $nip;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('userfile')) {
+            $upload = $this->upload->data();
+            $ext = $upload['file_ext'];
+            $photo = $nip . $ext;
+        }
+
         $id_pegawai = $this->input->post('id_pegawai', true);
-        $data = array(
-            'nip' => $this->input->post('nip', true),
-            'nama_pegawai' => $this->input->post('nama_pegawai', true),
-            'jabatan' => $this->input->post('jabatan', true),
-            'status' => $this->input->post('status', true),
-            'no_telepon' => $this->input->post('no_telepon', true),
-            'no_ktp' => $this->input->post('no_ktp', true),
-            'no_sim' => $this->input->post('no_sim', true),
-            'alamat' => $this->input->post('alamat', true),
-            'tempat_lahir' => $this->input->post('tempat_lahir', true),
-            'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
-            'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
-            'photo' => $this->input->post('photo', true)
-        );
+        if (isset($photo)) {
+            $data = array(
+                'nip' => $this->input->post('nip', true),
+                'nama_pegawai' => $this->input->post('nama_pegawai', true),
+                'jabatan' => $this->input->post('jabatan', true),
+                'status' => $this->input->post('status', true),
+                'no_telepon' => $this->input->post('no_telepon', true),
+                'no_ktp' => $this->input->post('no_ktp', true),
+                'no_sim' => $this->input->post('no_sim', true),
+                'alamat' => $this->input->post('alamat', true),
+                'tempat_lahir' => $this->input->post('tempat_lahir', true),
+                'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
+                'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
+                'photo' => $photo
+            );
+        } else {
+            $data = array(
+                'nip' => $this->input->post('nip', true),
+                'nama_pegawai' => $this->input->post('nama_pegawai', true),
+                'jabatan' => $this->input->post('jabatan', true),
+                'status' => $this->input->post('status', true),
+                'no_telepon' => $this->input->post('no_telepon', true),
+                'no_ktp' => $this->input->post('no_ktp', true),
+                'no_sim' => $this->input->post('no_sim', true),
+                'alamat' => $this->input->post('alamat', true),
+                'tempat_lahir' => $this->input->post('tempat_lahir', true),
+                'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
+                'tanggal_masuk' => $this->input->post('tanggal_masuk', true)
+            );
+        }
 
         $this->m_amt->editPegawai($data, $id_pegawai);
         $link = base_url() . "user";
