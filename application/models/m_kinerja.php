@@ -48,8 +48,8 @@ class m_kinerja extends CI_Model {
 
         return $hasil;
     }
-    
-    public function cekStatusLogHarian($depot,$tanggal){
+
+    public function cekStatusLogHarian($depot, $tanggal) {
         $query = $this->db->query("select * from log_harian l where DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y') = '$tanggal' and l.ID_DEPOT = '$depot'");
 
         $hasil = 0;
@@ -59,8 +59,8 @@ class m_kinerja extends CI_Model {
         }
         return $hasil;
     }
-    
-    public function getIdLogHarian($depot,$tanggal){
+
+    public function getIdLogHarian($depot, $tanggal) {
         $query = $this->db->query("select * from log_harian l where DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y') = '$tanggal' and l.ID_DEPOT = '$depot'");
 
         $hasil = -1;
@@ -71,9 +71,30 @@ class m_kinerja extends CI_Model {
         return $hasil;
     }
 
+    public function insert_siod($depot, $data_kinerja) {
+        //insert kinerja MT
+        $no = 1;
+        for ($no = 1; $no <= $data_kinerja['MT']['jumlah']; $no++) {
+            //$query = $this->db->query("insert into kinerja_mt(ID_MOBIL,ID_LOG_HARIAN,RITASE_MT,TOTAL_KM_MT,TOTAL_KL_MT,OWN_USE,PREMIUM,PERTAMAX,PERTAMAX_PLUS,PERTAMINA_DEX,SOLAR,BIO_SOLAR) values(" . $data_kinerja['MT']['id'][$no - 1] . "," . $data_kinerja['ID_LOG_HARIAN'] . "," . $data_kinerja['MT']['ritase'][$no - 1] . "," . $data_kinerja['MT']['total_km'][$no - 1] . "," . $data_kinerja['MT']['total_kl'][$no - 1] . "," . $data_kinerja['MT']['ownuse'][$no - 1] . "," . $data_kinerja['MT']['premium'][$no - 1] . "," . $data_kinerja['MT']['pertamax'][$no - 1] . "," . $data_kinerja['MT']['pertamax_plus'][$no - 1] . "," . $data_kinerja['MT']['pertamina_dex'][$no - 1] . "," . $data_kinerja['MT']['solar'][$no - 1] . "," . $data_kinerja['MT']['bio_solar'][$no - 1] . ")");
+        }
 
-    public function insert_kinerja($depot,$tanggal,$data){
+        //insert kinerja supir
+        $no = 1;
+        for ($no = 1; $no <= $data_kinerja['SUPIR']['jumlah']; $no++) {
+            //$query = $this->db->query("insert into kinerja_amt(ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,SPBU,PENDAPATAN)values(".$data_kinerja['ID_LOG_HARIAN'].",".$data_kinerja['SUPIR']['id'][$no - 1].",'".$data_kinerja['SUPIR']['status_tugas'][$no - 1]."',".$data_kinerja['SUPIR']['total_km'][$no - 1].",".$data_kinerja['SUPIR']['total_kl'][$no - 1].",".$data_kinerja['SUPIR']['ritase'][$no - 1].",".$data_kinerja['SUPIR']['jumlah_spbu'][$no - 1].",".$data_kinerja['SUPIR']['pendapatan'][$no - 1].")");
+        }
+
+        //insert kinerja KERNET
+        $no = 1;
+        for ($no = 1; $no <= $data_kinerja['KERNET']['jumlah']; $no++) {
+            //$query = $this->db->query("insert into kinerja_amt(ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,SPBU,PENDAPATAN)values(" . $data_kinerja['ID_LOG_HARIAN'] . "," . $data_kinerja['KERNET']['id'][$no - 1] . ",'" . $data_kinerja['KERNET']['status_tugas'][$no - 1] . "'," . $data_kinerja['KERNET']['total_km'][$no - 1] . "," . $data_kinerja['KERNET']['total_kl'][$no - 1] . "," . $data_kinerja['KERNET']['ritase'][$no - 1] . "," . $data_kinerja['KERNET']['jumlah_spbu'][$no - 1] . "," . $data_kinerja['KERNET']['pendapatan'][$no - 1] . ")");
+        }
         
+        //update log harian
+        $query = $this->db->query("update log_harian l set l.STATUS_INPUT_KINERJA = 1, l.JUMLAH_ALOKASI_SPBU = '".$data_kinerja['SPBU']['jumlah']."' where l.ID_LOG_HARIAN = '".$data_kinerja['ID_LOG_HARIAN']."'");
+        
+
+        //var_dump($data_kinerja);
     }
 
 }
