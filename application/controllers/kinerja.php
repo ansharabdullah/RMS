@@ -10,22 +10,16 @@ class kinerja extends CI_Controller {
     }
 
     public function index() {
-        $data['lv1'] = 4;
-        $data['lv2'] = 1;
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('kinerja/v_kinerja_siod', array('submit' => false,'simpan'=>false));
-        $this->load->view('layouts/footer');
+        $this->siod();
     }
 
-    public function manual() {
+    public function siod() {
         $data['lv1'] = 4;
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('kinerja/v_kinerja_manual');
+        $this->load->view('kinerja/v_kinerja_siod', array('submit' => false, 'simpan' => false));
         $this->load->view('layouts/footer');
     }
 
@@ -34,7 +28,7 @@ class kinerja extends CI_Controller {
             redirect('kinerja');
         } else {
             $depot = 1;
-            
+
             $this->load->model('m_kinerja');
 
             $data_kinerja['SPBU']['error'] = true;
@@ -48,10 +42,10 @@ class kinerja extends CI_Controller {
 
             $data_kinerja['TANGGAL']['tanggal'] = $tanggalSIOD;
 
-            $data_kinerja['ID_LOG_HARIAN'] = $this->m_kinerja->getIdLogHarian($depot,$tanggalSIOD);
-            $data_kinerja['STATUS_INPUT_HARIAN'] = $this->m_kinerja->cekStatusLogHarian($depot,$tanggalSIOD);
-            
-            
+            $data_kinerja['ID_LOG_HARIAN'] = $this->m_kinerja->getIdLogHarian($depot, $tanggalSIOD);
+            $data_kinerja['STATUS_INPUT_HARIAN'] = $this->m_kinerja->cekStatusLogHarian($depot, $tanggalSIOD);
+
+
             $fileSIOD = $_FILES['fileSIOD'];
 
             $dir = './assets/file/';
@@ -229,7 +223,7 @@ class kinerja extends CI_Controller {
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu');
             $this->load->view('layouts/navbar', $data);
-            $this->load->view('kinerja/v_kinerja_siod', array('data_kinerja' => $data_kinerja, 'submit' => true,'simpan'=>false));
+            $this->load->view('kinerja/v_kinerja_siod', array('data_kinerja' => $data_kinerja, 'submit' => true, 'simpan' => false));
             $this->load->view('layouts/footer');
         }
     }
@@ -240,19 +234,58 @@ class kinerja extends CI_Controller {
         } else {
             $depot = 1;
             $data_kinerja = unserialize($this->input->post('data_kinerja'));
-            
+
             $this->load->model('m_kinerja');
-            $this->m_kinerja->insert_siod($depot,$data_kinerja);
-            
+            $this->m_kinerja->insert_siod($depot, $data_kinerja);
+
             $data['lv1'] = 4;
             $data['lv2'] = 1;
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu');
             $this->load->view('layouts/navbar', $data);
-            $this->load->view('kinerja/v_kinerja_siod', array('submit' => false,'simpan'=>true));
+            $this->load->view('kinerja/v_kinerja_siod', array('submit' => false, 'simpan' => true));
             $this->load->view('layouts/footer');
         }
     }
 
+    public function hapus() {
+        $klik_hapus = false;
+        $status_hapus = false;
+        if ($this->input->post('submit')) {
+            $klik_hapus = true;
+            $tanggal_hapus = date("d-m-Y", strtotime($this->input->post('tanggal_hapus')));
+            $depot = 1;
+
+            $this->load->model('m_kinerja');
+
+            $cek = $this->m_kinerja->cekStatusLogHarian($depot, $tanggal_hapus);
+
+            if ($cek == 0) {
+                $status_hapus = false;
+            } else {
+                $id = $this->m_kinerja->getIdLogHarian($depot, $tanggal_hapus);
+                $this->m_kinerja->hapus_kinerja_siod($id);
+                $status_hapus = true;
+            }
+        }
+
+        $data['lv1'] = 4;
+        $data['lv2'] = 1;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('kinerja/v_hapus_kinerja_siod',array('klik_hapus' => $klik_hapus,'status_hapus'=>$status_hapus));
+        $this->load->view('layouts/footer');
+    }
+
+    public function manual() {
+        $data['lv1'] = 4;
+        $data['lv2'] = 1;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('kinerja/v_kinerja_manual');
+        $this->load->view('layouts/footer');
+    }
 
 }

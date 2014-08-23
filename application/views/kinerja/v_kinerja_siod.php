@@ -24,15 +24,6 @@
 
     });
 
-    function importTable()
-    {
-        alert("Berhasil disimpan !");
-    }
-
-    function downloadCsv()
-    {
-        alert("Excel berhasil di download");
-    }
 
 </script>
 <section id="main-content">
@@ -43,7 +34,7 @@
                 Input Kinerja dari SIOD
                 <div style="float:right;">
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
-                    <a  data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Kinerja SIOD"><i class="icon-minus"></i></a>
+                    <a  data-placement="left" href="<?php echo base_url() ?>kinerja/hapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Kinerja SIOD"><i class="icon-minus"></i></a>
                     
                     <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>assets/file/format/format_oscrms_siod.xlsx"><i class="icon-download-alt"></i></a>
                 </div>
@@ -53,7 +44,7 @@
                     <div class="form-group">
                         <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10 col-sm-6">
-                            <input type="date" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD" value="2014-05-02">
+                            <input type="date" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD" value="">
                         </div>
                     </div>
                     <div class="form-group">
