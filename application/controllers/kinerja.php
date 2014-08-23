@@ -15,7 +15,7 @@ class kinerja extends CI_Controller {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('kinerja/v_kinerja_siod', array('submit' => false));
+        $this->load->view('kinerja/v_kinerja_siod', array('submit' => false,'simpan'=>false));
         $this->load->view('layouts/footer');
     }
 
@@ -33,6 +33,8 @@ class kinerja extends CI_Controller {
         if (!$this->input->post('submit')) {
             redirect('kinerja');
         } else {
+            $depot = 1;
+            
             $this->load->model('m_kinerja');
 
             $data_kinerja['SPBU']['error'] = true;
@@ -46,8 +48,18 @@ class kinerja extends CI_Controller {
 
             $data_kinerja['TANGGAL']['tanggal'] = $tanggalSIOD;
 
+            $data_kinerja['ID_LOG_HARIAN'] = $this->m_kinerja->getIdLogHarian($depot,$tanggalSIOD);
+            $data_kinerja['STATUS_INPUT_HARIAN'] = $this->m_kinerja->cekStatusLogHarian($depot,$tanggalSIOD);
+            
+            
             $fileSIOD = $_FILES['fileSIOD'];
-            $file_target = dirname(dirname(__DIR__)) . '\assets\file\\' . $_FILES['fileSIOD']['name'];
+
+            $dir = './assets/file/';
+            if (!file_exists($dir)) {
+                mkdir($dir);
+            }
+
+            $file_target = $dir . $_FILES['fileSIOD']['name'];
             move_uploaded_file($_FILES['fileSIOD']['tmp_name'], $file_target);
 
             $this->load->library('PHPExcel/Classes/PHPExcel');
@@ -62,11 +74,11 @@ class kinerja extends CI_Controller {
             $worksheetData = $objReader->listWorksheetInfo($inputFileName);
 
             //$worksheetRead = array_column($worksheetData, 'worksheetName');
-            
-            foreach($worksheetData as $row){
-                $worksheetRead[]=$row['worksheetName'];
+
+            foreach ($worksheetData as $row) {
+                $worksheetRead[] = $row['worksheetName'];
             }
-            
+
             $objReader->setLoadSheetsOnly($worksheetRead);
 
             $objPHPExcel = $objReader->load($inputFileName);
@@ -93,16 +105,16 @@ class kinerja extends CI_Controller {
                         if ($data_kinerja['MT']['error'] == false) {
                             $data_kinerja['MT']['id'][] = $this->m_kinerja->getIdMobil($sheetData->getCell('C' . $row_baca)->getFormattedValue(), 1); // cek di data base
                             $data_kinerja['MT']['nopol'][] = $sheetData->getCell('C' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['ritase'][] = $sheetData->getCell('E' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['total_km'][] = $sheetData->getCell('F' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['total_kl'][] = $sheetData->getCell('G' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['ownuse'][] = $sheetData->getCell('I' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['premium'][] = $sheetData->getCell('M' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['pertamax'][] = $sheetData->getCell('R' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['pertamax_plus'][] = $sheetData->getCell('S' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['bio_solar'][] = $sheetData->getCell('U' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['pertamina_dex'][] = $sheetData->getCell('X' . $row_baca)->getFormattedValue();
-                            $data_kinerja['MT']['solar'][] = $sheetData->getCell('AE' . $row_baca)->getFormattedValue();
+                            $data_kinerja['MT']['ritase'][] = $sheetData->getCell('E' . $row_baca)->getValue();
+                            $data_kinerja['MT']['total_km'][] = $sheetData->getCell('F' . $row_baca)->getValue();
+                            $data_kinerja['MT']['total_kl'][] = $sheetData->getCell('G' . $row_baca)->getValue();
+                            $data_kinerja['MT']['ownuse'][] = $sheetData->getCell('I' . $row_baca)->getValue();
+                            $data_kinerja['MT']['premium'][] = $sheetData->getCell('M' . $row_baca)->getValue();
+                            $data_kinerja['MT']['pertamax'][] = $sheetData->getCell('R' . $row_baca)->getValue();
+                            $data_kinerja['MT']['pertamax_plus'][] = $sheetData->getCell('S' . $row_baca)->getValue();
+                            $data_kinerja['MT']['bio_solar'][] = $sheetData->getCell('U' . $row_baca)->getValue();
+                            $data_kinerja['MT']['pertamina_dex'][] = $sheetData->getCell('X' . $row_baca)->getValue();
+                            $data_kinerja['MT']['solar'][] = $sheetData->getCell('AE' . $row_baca)->getValue();
                         }
                         $row_baca++;
                     }
@@ -115,7 +127,7 @@ class kinerja extends CI_Controller {
                             ->getNumberFormat()
                             ->setFormatCode('dd-mm-yyyy');
 
-                    $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), 1, 2);
+                    $data_kinerja['SUPIR']['koefisien_error'] = false;
 
                     $row_baca = 14;
                     while ($sheetData->getCell('B' . $row_baca)->getFormattedValue() != NULL) {
@@ -130,11 +142,16 @@ class kinerja extends CI_Controller {
                             $data_kinerja['SUPIR']['jabatan'][] = $sheetData->getCell('E' . $row_baca)->getFormattedValue();
                             $data_kinerja['SUPIR']['status_tugas'][] = $sheetData->getCell('F' . $row_baca)->getFormattedValue();
                             $data_kinerja['SUPIR']['klasifikasi'][] = $sheetData->getCell('G' . $row_baca)->getFormattedValue();
-                            $data_kinerja['SUPIR']['total_km'][] = $sheetData->getCell('H' . $row_baca)->getFormattedValue();
-                            $data_kinerja['SUPIR']['total_kl'][] = $sheetData->getCell('I' . $row_baca)->getFormattedValue();
-                            $data_kinerja['SUPIR']['ritase'][] = $sheetData->getCell('J' . $row_baca)->getFormattedValue();
-                            $data_kinerja['SUPIR']['jumlah_spbu'][] = ($sheetData->getCell('L' . $row_baca)->getValue() - ($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) - ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) - ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue())) / $koefisien['spbu']; //hasil hitung koefisien
-                            $data_kinerja['SUPIR']['pendapatan'][] = $sheetData->getCell('L' . $row_baca)->getFormattedValue();
+                            $data_kinerja['SUPIR']['total_km'][] = $sheetData->getCell('H' . $row_baca)->getValue();
+                            $data_kinerja['SUPIR']['total_kl'][] = $sheetData->getCell('I' . $row_baca)->getValue();
+                            $data_kinerja['SUPIR']['ritase'][] = $sheetData->getCell('J' . $row_baca)->getValue();
+                            $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), 1, $sheetData->getCell('F' . $row_baca)->getFormattedValue() . ' ' . $sheetData->getCell('G' . $row_baca)->getFormattedValue());
+                            if ($koefisien['error'] == true) {
+                                $data_kinerja['SUPIR']['koefisien_error'] = true;
+                            }
+
+                            $data_kinerja['SUPIR']['jumlah_spbu'][] = floor(($sheetData->getCell('L' . $row_baca)->getValue() - ($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) - ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) - ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue())) / $koefisien['spbu']); //hasil hitung koefisien
+                            $data_kinerja['SUPIR']['pendapatan'][] = $sheetData->getCell('L' . $row_baca)->getValue();
                         }
                         $row_baca++;
                     }
@@ -148,7 +165,7 @@ class kinerja extends CI_Controller {
                             ->getNumberFormat()
                             ->setFormatCode('dd-mm-yyyy');
 
-                    $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), 1, 2);
+                    $data_kinerja['KERNET']['koefisien_error'] = false;
 
                     $row_baca = 14;
                     while ($sheetData->getCell('B' . $row_baca)->getFormattedValue() != NULL) {
@@ -163,11 +180,17 @@ class kinerja extends CI_Controller {
                             $data_kinerja['KERNET']['jabatan'][] = $sheetData->getCell('E' . $row_baca)->getFormattedValue();
                             $data_kinerja['KERNET']['status_tugas'][] = $sheetData->getCell('F' . $row_baca)->getFormattedValue();
                             $data_kinerja['KERNET']['klasifikasi'][] = $sheetData->getCell('G' . $row_baca)->getFormattedValue();
-                            $data_kinerja['KERNET']['total_km'][] = $sheetData->getCell('H' . $row_baca)->getFormattedValue();
-                            $data_kinerja['KERNET']['total_kl'][] = $sheetData->getCell('I' . $row_baca)->getFormattedValue();
-                            $data_kinerja['KERNET']['ritase'][] = $sheetData->getCell('J' . $row_baca)->getFormattedValue();
-                            $data_kinerja['KERNET']['jumlah_spbu'][] = ($sheetData->getCell('L' . $row_baca)->getValue() - ($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) - ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) - ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue())) / $koefisien['spbu']; //hasil hitung koefisien
-                            $data_kinerja['KERNET']['pendapatan'][] = $sheetData->getCell('L' . $row_baca)->getFormattedValue();
+                            $data_kinerja['KERNET']['total_km'][] = $sheetData->getCell('H' . $row_baca)->getValue();
+                            $data_kinerja['KERNET']['total_kl'][] = $sheetData->getCell('I' . $row_baca)->getValue();
+                            $data_kinerja['KERNET']['ritase'][] = $sheetData->getCell('J' . $row_baca)->getValue();
+
+                            $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), 1, $sheetData->getCell('F' . $row_baca)->getFormattedValue() . ' ' . $sheetData->getCell('G' . $row_baca)->getFormattedValue());
+                            if ($koefisien['error'] == true) {
+                                $data_kinerja['KERNET']['koefisien_error'] = true;
+                            }
+
+                            $data_kinerja['KERNET']['jumlah_spbu'][] = floor(($sheetData->getCell('L' . $row_baca)->getValue() - ($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) - ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) - ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue())) / $koefisien['spbu']); //hasil hitung koefisien
+                            $data_kinerja['KERNET']['pendapatan'][] = $sheetData->getCell('L' . $row_baca)->getValue();
                         }
                         $row_baca++;
                     }
@@ -196,18 +219,19 @@ class kinerja extends CI_Controller {
             }
             //setting error
             $data_kinerja['ERROR'] = true;
-            if ($data_kinerja['SPBU']['error'] == false && $data_kinerja['MT']['error'] == false && $data_kinerja['SUPIR']['error'] == false && $data_kinerja['KERNET']['error'] == false && $data_kinerja['TANGGAL']['error'] == false) {
+            if ($data_kinerja['STATUS_INPUT_HARIAN'] == 0 && $data_kinerja['ID_LOG_HARIAN'] > 0 && $data_kinerja['SPBU']['error'] == false && $data_kinerja['MT']['error'] == false && $data_kinerja['SUPIR']['error'] == false && $data_kinerja['SUPIR']['koefisien_error'] == false && $data_kinerja['KERNET']['error'] == false && $data_kinerja['KERNET']['koefisien_error'] == false && $data_kinerja['TANGGAL']['error'] == false) {
                 $data_kinerja['ERROR'] = false;
             }
             unlink($file_target);
+
+            $data['lv1'] = 4;
+            $data['lv2'] = 1;
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/menu');
+            $this->load->view('layouts/navbar', $data);
+            $this->load->view('kinerja/v_kinerja_siod', array('data_kinerja' => $data_kinerja, 'submit' => true,'simpan'=>false));
+            $this->load->view('layouts/footer');
         }
-        $data['lv1'] = 4;
-        $data['lv2'] = 1;
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('kinerja/v_kinerja_siod', array('data_kinerja' => $data_kinerja, 'submit' => true));
-        $this->load->view('layouts/footer');
     }
 
     public function simpan() {
@@ -215,14 +239,20 @@ class kinerja extends CI_Controller {
             redirect('kinerja');
         } else {
             $data_kinerja = unserialize($this->input->post('data_kinerja'));
+            //echo "proses simpan ke db";
+            
+            //$this->load->model('m_kinerja');
+            
+//var_dump($data_kinerja);
             $data['lv1'] = 4;
             $data['lv2'] = 1;
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu');
             $this->load->view('layouts/navbar', $data);
-            $this->load->view('kinerja/v_kinerja_siod', array('data_kinerja' => $data_kinerja, 'submit' => true));
+            $this->load->view('kinerja/v_kinerja_siod', array('data_kinerja' => $data_kinerja, 'submit' => false,'simpan'=>true));
             $this->load->view('layouts/footer');
         }
     }
+
 
 }
