@@ -96,7 +96,7 @@
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
                         </button>
-                        <strong>Log harian error!</strong> Kinerja tanggal yang dipilih telah diinput, proses input SIOD hana bisa dilakukan satu kali.
+                        <strong>Log harian error!</strong> Kinerja tanggal yang dipilih telah diinput, proses input SIOD hanya bisa dilakukan satu kali.
                     </div>
                 <?php } ?>
 

@@ -244,13 +244,13 @@ class kinerja extends CI_Controller {
             $this->load->model('m_kinerja');
             $this->m_kinerja->insert_siod($depot,$data_kinerja);
             
-            /*$data['lv1'] = 4;
+            $data['lv1'] = 4;
             $data['lv2'] = 1;
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu');
             $this->load->view('layouts/navbar', $data);
-            $this->load->view('kinerja/v_kinerja_siod', array('data_kinerja' => $data_kinerja, 'submit' => false,'simpan'=>true));
-            $this->load->view('layouts/footer');*/
+            $this->load->view('kinerja/v_kinerja_siod', array('submit' => false,'simpan'=>true));
+            $this->load->view('layouts/footer');
         }
     }
 
