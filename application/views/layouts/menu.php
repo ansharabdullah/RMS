@@ -207,7 +207,7 @@
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="<?php echo base_url() ?>/assets/img/photo/<?php echo $this->session->userdata('photo')?>">
+                            <img height="30"  width="30" alt="" src="<?php echo base_url() ?>/assets/img/photo/<?php echo $this->session->userdata('photo')?>">
                             <span class="username"><?php echo $this->session->userdata('nama_pegawai')?></span>
                             <b class="caret"></b>
                         </a>
