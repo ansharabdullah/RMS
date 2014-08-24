@@ -8,6 +8,7 @@ class amt extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model("m_amt");
+        $this->load->model("m_log_sistem");
         $this->load->helper(array('form', 'url'));
     }
 
@@ -18,7 +19,7 @@ class amt extends CI_Controller {
     public function data_amt() {
         $data['lv1'] = 2;
         $data['lv2'] = 1;
-        $depot = 1;
+        $depot = $this->session->userdata('id_depot');
         $data1['amt'] = $this->m_amt->selectAMT($depot);
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
@@ -95,6 +96,12 @@ class amt extends CI_Controller {
         }
 
         $this->m_amt->editPegawai($data, $id);
+        $datalog = array(
+            'keterangan' => 'Edit Pegawai, NIP : ' . $this->input->post('nip', true),
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'EDIT'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         $link = base_url() . "amt/detail/" . $id_pegawai;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
@@ -138,13 +145,25 @@ class amt extends CI_Controller {
         );
 
         $this->m_amt->insertPegawai($data);
+        $datalog = array(
+            'keterangan' => 'Tambah Pegawai, NIP : ' . $this->input->post('nip', true),
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         $link = base_url() . "amt/data_amt/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
 
-    public function delete_pegawai($id_pegawai) {
+    public function delete_pegawai($id_pegawai, $nip) {
+        $datalog = array(
+            'keterangan' => 'HAPUS Pegawai, NIP : ' . $this->input->post('nip', true),
+            'id_pegawai' => $nip,
+            'keyword' => 'HAPUS'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         $this->m_amt->deletePegawai($id_pegawai);
 
         $link = base_url() . "amt/data_amt/";
@@ -156,11 +175,99 @@ class amt extends CI_Controller {
     public function import_amt() {
         $data['lv1'] = 2;
         $data['lv2'] = 1;
+        $data2['amt'] = 0;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('amt/v_import_amt');
+        $this->load->view('amt/v_import_amt', $data2);
         $this->load->view('layouts/footer');
+    }
+
+    public function import_xls() {
+
+        $fileAMT = $_FILES['fileAMT'];
+        $dir = './assets/file/';
+        if (!file_exists($dir)) {
+            mkdir($dir);
+        }
+
+        $file_target = $dir . $_FILES['fileAMT']['name'];
+        move_uploaded_file($_FILES['fileAMT']['tmp_name'], $file_target);
+
+        $this->load->library('PHPExcel/Classes/PHPExcel');
+
+        $inputFileName = $file_target;
+        $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+
+        $worksheetData = $objReader->listWorksheetInfo($inputFileName);
+
+        foreach ($worksheetData as $row) {
+            $worksheetRead[] = $row['worksheetName'];
+        }
+
+        $objReader->setLoadSheetsOnly($worksheetRead);
+
+        $objPHPExcel = $objReader->load($inputFileName);
+
+        $loadedSheetNames = $objPHPExcel->getSheetNames();
+        $data2 = array();
+        foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
+            if ($loadedSheetName == 'AMT') {
+                //echo $sheetIndex, ' -> ', $loadedSheetName, '<br />';
+                $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
+                $sheetData = $objPHPExcel->getActiveSheet();
+                $i = 0;
+                $status = 0;
+                while ($status == 0) {
+                    $no = $i + 3;
+                    $data2['amt'][$i] = array(
+                        'nip' => $sheetData->getCell('B' . $no)->getFormattedValue(),
+                        'id_depot' => $this->session->userdata('id_depot'),
+                        'no_pekerja' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                        'no_ktp' => $sheetData->getCell('D' . $no)->getFormattedValue(),
+                        'no_sim' => $sheetData->getCell('E' . $no)->getFormattedValue(),
+                        'nama_pegawai' => $sheetData->getCell('F' . $no)->getFormattedValue(),
+                        'tempat_lahir' => $sheetData->getCell('G' . $no)->getFormattedValue(),
+                        'tanggal_lahir' => $sheetData->getCell('H' . $no)->getFormattedValue(),
+                        'alamat' => $sheetData->getCell('I' . $no)->getFormattedValue(),
+                        'no_telepon' => $sheetData->getCell('J' . $no)->getFormattedValue(),
+                        'transportir_asal' => $sheetData->getCell('K' . $no)->getFormattedValue(),
+                        'tanggal_masuk' => $sheetData->getCell('L' . $no)->getFormattedValue(),
+                        'klasifikasi' => $sheetData->getCell('M' . $no)->getFormattedValue(),
+                        'jabatan' => strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()),
+                        'status' => 'AKTIF'
+                    );
+                    if ($i >= $sheetData->getHighestRow() - 3) {
+                        $status = 1;
+                    }
+                    if ($sheetData->getCell('B' . $no)->getFormattedValue() == '') {
+                        $status = 1;
+                    }
+                    $i++;
+                }
+                //echo $sheetData;
+            }
+        }
+
+        //print_r($data2);
+        $data['lv1'] = 2;
+        $data['lv2'] = 1;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('amt/v_import_amt', $data2);
+        $this->load->view('layouts/footer');
+    }
+
+    public function simpan_xls() {
+        $data_amt = unserialize($this->input->post('data_amt'));
+        $this->m_amt->importPegawai($data_amt);
+
+        $link = base_url() . "amt/";
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        //echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
 
     public function presensi() {

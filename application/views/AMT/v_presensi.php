@@ -51,7 +51,7 @@
                     Tabel Presensi (<span id="tgl"></span>)
                 </header>
                 <div class="panel-body">
-                    <div class="adv-table editable-table ">
+                    <div class="adv-table editable-table " style="overflow-x: scroll">
                         <div class="clearfix">
 
                             <div class="btn-group pull-right">

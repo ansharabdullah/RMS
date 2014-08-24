@@ -85,7 +85,7 @@
             <div class="panel-body">
                 <a class="btn btn-warning" data-toggle="modal" href="#ModalPeringatan"><i class="icon-warning-sign"></i> Peringatan</a>
 
-                <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_PEGAWAI ?>');"><i class="icon-eraser"></i> Hapus</a>
+                <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_PEGAWAI ?>','<?php echo $row->NIP ?>');"><i class="icon-eraser"></i> Hapus</a>
 
 
             </div>
@@ -351,7 +351,7 @@
                         </div>
                     </div>
                     <div class="space15"></div>
-                    <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample" style="overflow-x: scroll">
                         <thead>
                             <tr>
                                 <th style="display:none;"></th>
@@ -674,18 +674,21 @@
     }
     
        var globalId;
+       var globalId2;
     $('#modalHapus').on('show', function() {
 
     });
 
-    function hapus(id) {
+    function hapus(id,id2) {
         globalId = id;
+        globalId2 = id2;
+        alert(globalId2);
         $('#modalHapus').data('id', id).modal('show');
     }
 
     function ok()
     {
-        var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId;
+        var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId+"/"+globalId2;
         window.location.href = url;
     }
 

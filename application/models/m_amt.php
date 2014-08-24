@@ -10,8 +10,14 @@ class m_amt extends CI_Model {
         $this->db->insert('pegawai', $data);
     }
     
+    public function importPegawai($data){
+        for($i = 0; $i < sizeof($data); $i++){
+            $this->db->insert('pegawai', $data[$i]);
+        }
+    }
+    
     public function getMaxID(){
-        $depot = 1;
+        $depot = $this->session->userdata('id_depot');;
         $query = $this->db->query("select max(id_pegawai) max from pegawai where id_depot=$depot");
         return $query->result();
     }

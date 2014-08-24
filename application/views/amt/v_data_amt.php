@@ -7,7 +7,7 @@
                 Data Crew AMT
             </header>
             <div class="panel-body">
-                <div class="adv-table editable-table ">
+                <div class="adv-table editable-table " style="overflow-x: scroll">
                     <div class="clearfix">
                         
 
@@ -17,6 +17,10 @@
 
                             <a class="btn btn-success" href="<?php echo base_url() ?>amt/import_amt">
                                 Import Excel <i class="icon-plus"></i>
+                            </a>
+
+                            <a class="btn btn-success" href="<?php echo base_url() ?>downloads/format_amt.xlsx">
+                                Download Format <i class="icon-download-alt"></i>
                             </a>
 
                         
