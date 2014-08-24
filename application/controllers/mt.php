@@ -10,6 +10,7 @@ class Mt extends CI_Controller {
 
         $this->load->model("m_mt");
         $this->load->model("m_apar");
+        $this->load->helper(array('form', 'url'));
     }
 
     public function index() {
@@ -166,6 +167,8 @@ class Mt extends CI_Controller {
         
         
         $data1['apar'] = $this->m_mt->selectApar($id_mobil);
+       
+        
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
@@ -194,9 +197,9 @@ class Mt extends CI_Controller {
         echo '</script>';
     }
     
-    public function edit_apar($ID_APAR) {
+    public function edit_apar($id_apar) {
 
-        $id = $this->input->post('id_apar', true);
+        $id = $this->input->post('id', true);
         $id_mobil = 1;
         $data = array(
             
@@ -233,6 +236,8 @@ class Mt extends CI_Controller {
         
         $data1['mt'] = $this->m_mt->selectBanMT($id_mobil);
         
+       
+        
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
@@ -259,6 +264,29 @@ class Mt extends CI_Controller {
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
+    }
+    
+     public function edit_ban($id_ban) {
+
+        $id = $this->input->post('id', true);
+        $id_mobil = 1;
+        $data = array(
+            
+            'id_mobil' => $id_mobil,
+            'MERK_BAN' => $this->input->post('MERK_BAN', true),
+            'NO_SERI_BAN' => $this->input->post('NO_SERI_BAN', true),
+            'JENIS_BAN' => $this->input->post('JENIS_BAN', true),
+            'POSISI_BAN' => $this->input->post('POSISI_BAN', true),
+            'TANGGAL_PASANG' => $this->input->post('TANGGAL_PASANG', true),
+            'TANGGAL_GANTI_BAN' => $this->input->post('TANGGAL_GANTI_BAN', true),
+        );
+        $this->m_mt->editBan($data, $id);
+        
+         $link = base_url()."mt/ban_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+        
     }
     
      public function delete_ban($id_ban){
@@ -455,11 +483,16 @@ class Mt extends CI_Controller {
 
     
     public function rencana() {
-
+        
+        
+        $id_log_harian = 1;
+        $data['rencana'] = $this->m_mt->selectRencana($id_log_harian);
+        
+        
         $data['lv1'] = 3;
         $data['lv2'] = 5;
         $this->header($data);
-        $this->load->view('mt/v_rencana');
+        $this->load->view('mt/v_rencana',$data);
         $this->footer();
     }
     

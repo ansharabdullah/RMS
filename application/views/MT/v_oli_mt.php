@@ -47,7 +47,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="">
+                           
                                <?php $i = 1;
                                 foreach ($mt as $row) { ?>
                                     <td style="display:none;"></td>
@@ -60,7 +60,6 @@
                                     <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit oli" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Oli" href="javascript:hapus('<?php echo $row->ID_OLI ?>');"><i class="icon-remove"></i></a>
                                 </td>
-
                                 </tr>
                                 <?php $i++;
                             } ?>

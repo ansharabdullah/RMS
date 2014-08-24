@@ -185,32 +185,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            for ($i = 0; $i < 12; $i++) {
-//                                $date = date_create("2014-08-" . ($i + 1));
-//                                $newDate = date_format($date, "d F Y");
-//                                setlocale(LC_ALL, 'IND');
-//                                $tgl = strftime("%d %B %Y", strtotime($newDate));
-                                $tgl = ($i + 1) . " <span class='bulan'>Agustus</span> 2014";
-                                ?>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td><?php echo $i + 1; ?></td>
-                                    <td style="white-space: nowrap"><?php echo $tgl; ?></td>
-                                    <td><?php echo rand(7, 10) ?> kl</td>
-                                    <td><?php echo rand(2000, 3000) ?> kl</td>
-                                    <td><?php echo rand(2000, 3000) ?> kl</td>
-                                    <td><?php echo rand(2000, 3000) ?> kl</td>
-                                    <td><?php echo rand(2000, 3000) ?> kl</td>
-                                    <td><?php echo rand(2000, 3000) ?> kl</td>
-                                    <td><?php echo rand(2000, 3000) ?> kl</td>
-                                    <td><div  style="width: 50px;"> <a data-toggle="modal" href="#myModal3"><button type="button" class="btn btn-warning btn-sm  btn-xs tooltips" data-original-title="Edit Perencanaan" data-placement="left" style="float:left"><i class="icon-pencil"></i></button> </a>
-                                            <a data-toggle="modal" href="#myModal2"><button type="button" class="btn btn-danger btn-sm  btn-xs tooltips" data-original-title="Hapus Perencanaan" data-placement="left" style="float:right"><i class="icon-remove"></i></button></a></div>
+                            <tr class="">
+                            <?php 
+                            $i = 1;
+                                foreach ($rencana as $row) { ?>
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i; ?></td>
+                                     <td><?php echo $row->TANGGAL_LOG_HARIAN; ?></td>
+                                     <td><?php echo $row->R_OWNUSE; ?></td>
+                                    <td><?php echo $row->R_PREMIUM; ?></td>
+                                    <td><?php echo $row->R_PERTAMAX; ?></td>
+                                    <td><?php echo $row->R_PERTAMAXPLUS; ?></td>
+                                    <td><?php echo $row->R_PERTAMINADEX; ?></td>
+                                    <td><?php echo $row->R_SOLAR; ?></td>
+                                    <td><?php echo $row->R_BIOSOLAR; ?></td>
+
+                       
+                                    <td><a data-toggle="modal" href="#myModal3"><button type="button" class="btn btn-warning btn-sm  btn-xs tooltips" data-original-title="Edit Perencanaan" data-placement="left"><i class="icon-pencil"></i></button> </a>
+                                            <a data-toggle="modal" href="#myModal2"><button type="button" class="btn btn-danger btn-sm  btn-xs tooltips" data-original-title="Hapus Perencanaan" data-placement="left"><i class="icon-remove"></i></button></a></div>
                                     </td>
                                 </tr>
-                                <?php
-                            }
-                            ?>
+                               <?php $i++;
+                            } ?>
                         </tbody>
                     </table>
                 </div>

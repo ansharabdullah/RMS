@@ -61,9 +61,7 @@
                                 </tr>
                                 <?php $i++;
                             } ?>
-                            
-                            
-                                
+                               
                         </tbody>
                     </table>
                 </div>

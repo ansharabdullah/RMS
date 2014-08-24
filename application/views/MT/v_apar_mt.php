@@ -1,5 +1,4 @@
 
-
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
@@ -13,9 +12,11 @@
                 <div class="bio-desk">
                    
                     <p>Nopol : </p>
+                     
                     <p>Kapasitas : </p>
-                    <p>Produk : </p>
                     
+                    <p>Produk : </p>
+                     
                 </div>
             </div>
         </section>
@@ -46,7 +47,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="">
+                           
                                 <?php $i = 1;
                                 foreach ($apar as $row) { ?>
                                     <td style="display:none;"></td>
@@ -56,8 +57,8 @@
                                     <td><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->CATRIDGE; ?></td>
                                     <td><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->CO2; ?></td>
                                     <td><div id="<?php echo 'keterangan-' . $i; ?>"><?php echo $row->KETERANGAN_APAR; ?></td>
-                                    <td><div id="<?php echo 'status-' . $i; ?>"><?php if($row->STATUS_APAR == "1")echo 'Aktif'?>
-                                                <?php if($row->STATUS_APAR == "0")echo 'Tidak Aktif'?></td>
+                                    <td><div id="<?php echo 'status-' . $i; ?>"><?php if($row->STATUS_APAR == "0")echo 'Aktif'?>
+                                                <?php if($row->STATUS_APAR == "1")echo 'Tidak Aktif'?></td>
                                                                                     
                                     <td>
                                         <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left"  data-toggle="modal"  href="#ModalEditApar" ><i class="icon-pencil"></i></a>
@@ -117,8 +118,8 @@
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Status</label>
                         <div class="col-lg-10">
                             <select class="form-control input-sm m-bot15" id="status" name="STATUS_APAR">
-                                <option <?php if($row->STATUS_APAR == "1")echo "selected"?> value="1">Aktif</option>
-                                        <option <?php if($row->STATUS_APAR == "0")echo "selected"?> value="0">Tidak Aktif</option>
+                                <option <?php if($row->STATUS_APAR == "0")echo "selected"?> value="0">Aktif</option>
+                                        <option <?php if($row->STATUS_APAR == "1")echo "selected"?> value="1">Tidak Aktif</option>
                             </select>
                         </div>
                     </div>
@@ -147,34 +148,35 @@
                 <h4 class="modal-title">Form Edit APAR</h4>
             </div>
             
-            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="<?php echo base_url() ?>mt/edit_apar/<?php echo $row->ID_APAR?>" >
+            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="<?php echo base_url() ?>mt/edit_apar/ .<?php echo $row->ID_APAR?>" >
                 <div class="modal-body">
+                   
                     <!-- form edit-->
-                    <input type="text" name="id" value="<?php echo $row->ID_APAR?>">
+                    <input type="text" name="id" value=" <?php echo $row->ID_APAR?>">
                     <div class="form-group">
                         <label for="inputJK" class="col-lg-2 col-sm-2 control-label">Store Pressure</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" value="<?php echo $row->STORE_PRESSURE ?>" id="sr" name="store_pressure"  type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="sr" name="STORE_PRESSURE"  type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Catridge</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" value="<?php echo $row->CATRIDGE ?>" id="catridge" name="catridge"  type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="catridge" name="CATRIDGE"  type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="co2" class="col-lg-2 col-sm-2 control-label">C02</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" value="<?php echo $row->CO2 ?>" id="co2" name="CO2"  type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="co2" name="CO2"  type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="status" class="col-lg-2 col-sm-2 control-label">Status</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="status_apar" name="STATUS_APAR">
-                                <option <?php if ($row->STATUS_APAR == "1") echo "selected" ?> value="1">Aktif</option>
-                                <option <?php if ($row->STATUS_APAR == "0") echo "selected" ?> value="0">Tidak Aktif</option>
+                            <select class="form-control input-sm m-bot15" id="status_apar" name="">
+                                <option <?php if ($row->STATUS_APAR == "0") echo "selected" ?> value="0">Aktif</option>
+                                <option <?php if ($row->STATUS_APAR == "1") echo "selected" ?> value="1">Tidak Aktif</option>
 
                             </select>
                         </div>
@@ -182,7 +184,7 @@
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" value="<?php echo $row->KETERANGAN_APAR ?>" id="keterangan_apar" name="KETERANGAN_APAR" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="keterangan_apar" name="KETERANGAN_APAR" minlength="2" type="text" required />
                         </div>
                     </div>
                 </div>
