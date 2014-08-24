@@ -16,7 +16,9 @@ class Mt extends CI_Controller {
         $this->data_mt();
 
     }
-
+    
+//data MT
+    
     public function data_mt() {
 
         $depot = 1;
@@ -148,6 +150,7 @@ class Mt extends CI_Controller {
         echo '</script>';
     }
     
+//Import CSV
     public function import_csv() {
 
         $data['lv1'] = 3;
@@ -156,12 +159,13 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_import_csv');
         $this->footer();
     }
-
+    
+//APAR MT
+    
     public function apar_mt($id_mobil) {
         
         
         $data1['apar'] = $this->m_mt->selectApar($id_mobil);
-        
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
@@ -169,7 +173,61 @@ class Mt extends CI_Controller {
         
         $this->footer();
     }
+    
+    public function tambah_apar() {
 
+        $id_mobil = 1;
+
+        $data = array(
+            'id_mobil' => $id_mobil,
+            'STORE_PRESSURE' => $this->input->post('STORE_PRESSURE', true),
+            'CATRIDGE' => $this->input->post('CATRIDGE', true),
+            'CO2' => $this->input->post('CO2', true),
+            'KETERANGAN_APAR' => $this->input->post('KETERANGAN_APAR', true),
+            'STATUS_APAR' => $this->input->post('STATUS_APAR', true),
+        );
+
+        $this->m_mt->insertApar($data);
+        $link = base_url() . "mt/apar_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+    public function edit_apar($ID_APAR) {
+
+        $id = $this->input->post('id_apar', true);
+        $id_mobil = 1;
+        $data = array(
+            
+            'STORE_PRESSURE' => $this->input->post('store_pressure', true),
+            'CATRIDGE' => $this->input->post('catridge', true),
+            'CO2' => $this->input->post('CO2', true),
+            'KETERANGAN_APAR' => $this->input->post('KETERANGAN_APAR', true),
+            'STATUS_APAR' => $this->input->post('STATUS_APAR', true),
+        );
+        $this->m_mt->editApar($data, $id);
+        
+         $link = base_url()."mt/apar_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+        
+    }
+    
+    public function delete_apar($id_apar){
+        $this->m_mt->deleteApar($id_apar);
+        
+        $id_mobil = 1;
+        
+        $link = base_url()."mt/apar_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+
+//Ban MT    
+    
     public function ban_mt($id_mobil) {
 
         
@@ -181,6 +239,41 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_ban_mt',$data1);
         $this->footer();
     }
+    
+    public function tambah_ban() {
+
+        $id_mobil = 1;
+
+        $data = array(
+            'id_mobil' => $id_mobil,
+            'MERK_BAN' => $this->input->post('MERK_BAN', true),
+            'NO_SERI_BAN' => $this->input->post('NO_SERI_BAN', true),
+            'JENIS_BAN' => $this->input->post('JENIS_BAN', true),
+            'POSISI_BAN' => $this->input->post('POSISI_BAN', true),
+            'TANGGAL_PASANG' => $this->input->post('TANGGAL_PASANG', true),
+            'TANGGAL_GANTI_BAN' => $this->input->post('TANGGAL_GANTI_BAN', true),
+        );
+
+        $this->m_mt->insertBan($data);
+        $link = base_url() . "mt/ban_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+     public function delete_ban($id_ban){
+         
+        $this->m_mt->deleteBan($id_ban);
+        
+        $id_mobil = 1;
+        
+        $link = base_url()."mt/ban_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+     }
+     
+     //oli
 
     public function oli_mt($id_mobil) {
 
@@ -193,7 +286,41 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_oli_mt',$data1);
         $this->footer();
     }
+    
+    public function tambah_oli() {
 
+        $id_mobil = 1;
+
+        $data = array(
+            'id_mobil' => $id_mobil,
+            'MERK_OLI' => $this->input->post('MERK_OLI', true),
+            'TANGGAL_GANTI_OLI' => $this->input->post('TANGGAL_GANTI_OLI', true),
+            'KM_AWAL' => $this->input->post('KM_AWAL', true),
+            'TOTAL_VOLUME' => $this->input->post('TOTAL_VOLUME', true),
+            
+        );
+
+        $this->m_mt->insertOli($data);
+        $link = base_url() . "mt/oli_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+    public function delete_oli($id_oli){
+         
+        $this->m_mt->deleteOli($id_oli);
+        
+        $id_mobil = 1;
+        
+        $link = base_url()."mt/oli_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+     }
+
+    
+    //Data Surat
     public function surat_mt($id_mobil) {
         
         $data1['mt'] = $this->m_mt->selectSurat($id_mobil);
@@ -203,6 +330,41 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_surat_mt',$data1);
         $this->footer();
     }
+    
+    public function tambah_surat() {
+
+        $id_mobil = 1;
+
+        $data = array(
+            'id_mobil' => $id_mobil,
+            'ID_JENIS_SURAT' => $this->input->post('ID_JENIS_SURAT', true),
+            'TANGGAL_AKHIR_SURAT' => $this->input->post('TANGGAL_AKHIR_SURAT', true),
+            'KETERANGAN_SURAT' => $this->input->post('KETERANGAN_SURAT', true),
+            
+        );
+
+        $this->m_mt->insertSurat($data);
+        $link = base_url() . "mt/surat_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+      public function delete_surat($id_surat){
+         
+        $this->m_mt->deleteSurat($id_surat);
+        
+        $id_mobil = 1;
+        
+        $link = base_url()."mt/surat_mt/".$id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+     }
+     
+     //Data Grafik
+    
+    
     public function grafik_mt() {
 
 
@@ -253,7 +415,7 @@ class Mt extends CI_Controller {
     
      public function editapar($id)
     {
-         $id = $this->input->post('id', true);
+        $id = $this->input->post('id', true);
         $id_mobil=1;
         $data = array(
             'STORE_PRESSURE' => $this->input->post('STORE_PRESSURE', true),

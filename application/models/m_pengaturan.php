@@ -19,7 +19,7 @@ class m_pengaturan extends CI_Model {
     }
 
     public function selectAllUser() {
-        $query = $this->db->query('SELECT RA.EMAIL, RA.ID_ROLE, RA.PASSWORD, P.ID_PEGAWAI, RA.ID_ROLE_ASSIGNMENT, P.NAMA_PEGAWAI, P.NIP, P.JABATAN, R.NAMA_ROLE FROM PEGAWAI P, ROLE R, ROLE_ASSIGNMENT RA WHERE P.ID_PEGAWAI=RA.ID_PEGAWAI AND RA.ID_ROLE=R.ID_ROLE');
+        $query = $this->db->query('SELECT RA.EMAIL, RA.ID_ROLE, RA.PASSWORD, P.ID_PEGAWAI, RA.ID_ROLE_ASSIGNMENT, P.NAMA_PEGAWAI, P.NIP, P.JABATAN, R.NAMA_ROLE FROM pegawai P, role R, role_assignment RA WHERE P.ID_PEGAWAI=RA.ID_PEGAWAI AND RA.ID_ROLE=R.ID_ROLE');
         return $query->result();
     }
 
