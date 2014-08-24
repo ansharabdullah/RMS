@@ -24,15 +24,6 @@
 
     });
 
-    function importTable()
-    {
-        alert("Berhasil disimpan !");
-    }
-
-    function downloadCsv()
-    {
-        alert("Excel berhasil di download");
-    }
 
 </script>
 <section id="main-content">
@@ -43,7 +34,9 @@
                 Input Kinerja dari SIOD
                 <div style="float:right;">
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
-                    <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                    <a  data-placement="left" href="<?php echo base_url() ?>kinerja/hapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Kinerja SIOD"><i class="icon-minus"></i></a>
+                    
+                    <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>assets/file/format/format_oscrms_siod.xlsx"><i class="icon-download-alt"></i></a>
                 </div>
             </header>
             <div class="panel-body" >
@@ -51,7 +44,7 @@
                     <div class="form-group">
                         <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10 col-sm-6">
-                            <input type="date" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD" value="2014-05-02">
+                            <input type="date" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tanggal" name="tanggalSIOD" value="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -80,6 +73,24 @@
                     </button>
                     <strong>Peringatan!</strong> Gagal membaca file SIOD, silahkan coba lagi.
                 </div>
+                <?php if ($data_kinerja['ID_LOG_HARIAN'] < 0) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Log harian error!</strong> ID log harian tidak ditemukan.
+                    </div>
+                <?php } ?>
+
+                <?php if ($data_kinerja['STATUS_INPUT_HARIAN'] == 1) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Log harian error!</strong> Kinerja tanggal yang dipilih telah diinput, proses input SIOD hanya bisa dilakukan satu kali.
+                    </div>
+                <?php } ?>
+
                 <?php if ($data_kinerja['TANGGAL']['error'] == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
@@ -112,6 +123,22 @@
                         <strong>Supir error!</strong> Gagal membaca sheet <strong>Detail Crew Supir</strong>.
                     </div>
                 <?php } ?>
+                <?php if ($data_kinerja['SUPIR']['koefisien_error'] == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki tidak ditemukan.
+                    </div>
+                <?php } ?>
+                <?php if ($data_kinerja['KERNET']['koefisien_error'] == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki tidak ditemukan.
+                    </div>
+                <?php } ?>
                 <?php if ($data_kinerja['KERNET']['error'] == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
@@ -121,6 +148,7 @@
                     </div>
                 <?php } ?>
             <?php } else { ?>
+
                 <div class="alert alert-success fade in">
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
@@ -306,7 +334,7 @@
                             <div class="form-group">
                                 <div class="col-lg-12 col-sm-6">
                                     <?php if ($status_simpan == true) { ?>
-                                        <input type="submit" style="float: right;" class="btn btn-danger" value="Simpan" name="submit">
+                                        <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit">
                                     <?php } else { ?>
                                         <div class="alert alert-block alert-danger fade in">
                                             <strong>Error!</strong> Terdapat beberapa data yang salah, tidak dapat disimpan.
@@ -324,6 +352,16 @@
 
         <?php } ?>
 
+        <?php if ($simpan == true) { ?>
+            <div class="alert alert-success fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="icon-remove"></i>
+                </button>
+                <strong>Sukses!</strong> Berhasil simpan kinerja ke database.
+            </div>
+        <?php } ?>
+
+
         <!-- page end-->
     </section>
 </section>
@@ -334,8 +372,8 @@
 <!-- END JAVASCRIPTS -->
 <script>
 
-                        jQuery(document).ready(function() {
-                            EditableTable.init();
-                        });
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
 
 </script>
