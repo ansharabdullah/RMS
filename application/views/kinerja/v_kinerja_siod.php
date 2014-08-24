@@ -35,7 +35,7 @@
                 <div style="float:right;">
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/hapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Kinerja SIOD"><i class="icon-minus"></i></a>
-                    
+
                     <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>assets/file/format/format_oscrms_siod.xlsx"><i class="icon-download-alt"></i></a>
                 </div>
             </header>
@@ -216,10 +216,10 @@
                                             <td><?php echo $data_kinerja['MT']['solar'][$no - 1]; ?></td>
                                             <td>
                                                 <?php
-                                                if ($data_kinerja['MT']['id'][$no - 1] == -1) {
+                                                if ($data_kinerja['MT']['id'][$no - 1] == -1 || $data_kinerja['MT']['id_kinerja'][$no - 1] == 1) {
                                                     $status_simpan = false;
                                                     ?>
-                                                    <span class="label label-warning">ERROR</span>
+                                                    <span class="label label-warning tooltips" data-placement="left" data-original-title="Nopol tidak ditemukan atau kinerja telah diinput">ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
                                                 <?php } ?>
@@ -279,10 +279,10 @@
                                             <td><?php echo $data_kinerja['SUPIR']['pendapatan'][$no - 1]; ?></td>
                                             <td>
                                                 <?php
-                                                if ($data_kinerja['SUPIR']['id'][$no - 1] == -1) {
+                                                if ($data_kinerja['SUPIR']['id'][$no - 1] == -1 || $data_kinerja['SUPIR']['id_kinerja'][$no - 1] == 1) {
                                                     $status_simpan = false;
                                                     ?>
-                                                    <span class="label label-warning">ERROR</span>
+                                                    <span class="label label-warning tooltips" data-placement="left" data-original-title="NIP tidak ditemukan atau kinerja telah diinput">ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
                                                 <?php } ?>
@@ -310,10 +310,10 @@
                                             <td><?php echo $data_kinerja['KERNET']['pendapatan'][$noo - 1]; ?></td>
                                             <td>
                                                 <?php
-                                                if ($data_kinerja['KERNET']['id'][$noo - 1] == -1) {
+                                                if ($data_kinerja['KERNET']['id'][$noo - 1] == -1 || $data_kinerja['KERNET']['id_kinerja'][$no - 1] == 1) {
                                                     $status_simpan = false;
                                                     ?>
-                                                    <span class="label label-warning">ERROR</span>
+                                                    <span class="label label-warning tooltips" data-placement="left" data-original-title="NIP tidak ditemukan atau kinerja telah diinput">ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
                                                 <?php } ?>
