@@ -72,7 +72,7 @@
                             $i = 0;
                             foreach ($apar as $row) {
                                 $color = "";
-                                if ($row->STATUS_APAR== "1"){
+                                if ($row->STATUS_APAR== "0"){
                                     if($row->store_pressure <= 7 || $row->catridge <=7 || $row->co2 <=7)
                                     {
                                         $color = "style='background-color: orange;'";

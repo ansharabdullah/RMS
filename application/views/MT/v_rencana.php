@@ -115,7 +115,6 @@
 //                                $tgl = strftime("%d %B %Y", strtotime($newDate));
                                 $tgl = ($i + 1) . " <span class='bulan'>Agustus</span> 2014";
                                 ?>
-                                <tr class="">
                                     <th style="display: none;"></th>
                                     <td><?php echo $i + 1; ?></td>
                                     <td style="white-space: nowrap"><?php echo $tgl; ?></td>
@@ -185,7 +184,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="">
                             <?php 
                             $i = 1;
                                 foreach ($rencana as $row) { ?>
