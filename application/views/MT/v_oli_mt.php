@@ -87,7 +87,7 @@
                                 foreach ($oli as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                        <td><?php echo $row->KM_AWAL; ?></td>
+                                    <td><?php echo $row->KM_AWAL; ?></td>
                                     <td><?php echo $row->TANGGAL_GANTI_OLI; ?></td>
                                     <td><?php echo $row->MERK_OLI; ?></td>
                                     <td><?php echo $row->TOTAL_VOLUME; ?></td>
@@ -125,7 +125,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal (km)</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kmawal" name="KM_AWAL" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="kmawal" name="KM_AWAL" minlength="2" type="number" required />
                         </div>
 
                     </div>
@@ -143,7 +143,7 @@
                     </div> <div class="form-group">
                         <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume (Liter)</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="totalvolume" name="TOTAL_VOLUME" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="totalvolume" name="TOTAL_VOLUME" type="number" required />
                         </div>
                     </div>
                 </div>

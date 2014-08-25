@@ -158,9 +158,6 @@
                                             <p><span>Jenis Tangki</span>: <?php echo $row->JENIS_TANGKI; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Kompartemen</span>: <?php echo $row->KOMPARTEMEN; ?></p>
-                                        </div>
-                                        <div class="bio-row">
                                             <p><span>Status</span>: <?php echo $row->STATUS_MOBIL; ?></p>
                                         </div>
                                         <div class="bio-row">
@@ -350,7 +347,7 @@
                                 <div class="bio-row">
                                     <label for="ctglmasuk" class="control-label col-lg-4">Rasio</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RASIO ?>" id="crasio" name="rasio" type="text" required/>
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->RASIO ?>" id="crasio" name="rasio" type="number" required/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -363,13 +360,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="bio-row">
-                                    <label for="kompartemen" class="control-label col-lg-4">Kompartemen</label>
-                                    <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" id="kompartemen" value="<?php echo $row->KOMPARTEMEN ?>" name="kompartemen" type="text" size="16" type="text" required/>
-                                    </div>
-                                </div>
-
+                                
                                 <div class="bio-row">
                                     <label for="status" class="control-label col-lg-4">Status</label>
                                     <div class="col-lg-6">

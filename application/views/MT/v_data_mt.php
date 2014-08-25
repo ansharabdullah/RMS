@@ -139,7 +139,7 @@
                                 <div class="bio-row">
                                     <label for="ctglmasuk" class="control-label col-lg-4">Rasio</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="crasio" name="rasio" type="text" required/>
+                                        <input class=" form-control input-sm m-bot15" id="crasio" name="rasio" type="number" required/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -152,13 +152,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="bio-row">
-                                    <label for="kompartemen" class="control-label col-lg-4">Komp Mobil</label>
-                                    <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="kompartemen" name="kompartemen" type="text" size="16" type="text" required/>
-                                    </div>
-                                </div>
-
                                 <div class="bio-row">
                                     <label for="status" class="control-label col-lg-4">Status</label>
                                     <div class="col-lg-8">

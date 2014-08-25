@@ -70,7 +70,6 @@
                             <tr>
                                 <th style="display:none;"></th>
                                 <th>No.</th>
-                               
                                 <th>Store Pressure</th>
                                 <th>Catridge</th>
                                 <th>C02</th>
