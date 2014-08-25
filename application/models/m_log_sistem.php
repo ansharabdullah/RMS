@@ -12,7 +12,7 @@ class m_log_sistem extends CI_Model {
 
     public function getAllLog() {
         $id_depot = $this->session->userdata('id_depot');
-        $query = $this->db->query("SELECT * FROM PEGAWAI P, LOG_SISTEM LS WHERE P.ID_PEGAWAI=LS.ID_PEGAWAI AND P.ID_DEPOT=$id_depot");
+        $query = $this->db->query("SELECT * FROM pegawai P, log_sistem LS WHERE P.ID_PEGAWAI=LS.ID_PEGAWAI AND P.ID_DEPOT=$id_depot");
         return $query->result();
     }
 

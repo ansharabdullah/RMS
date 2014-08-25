@@ -42,6 +42,13 @@ class user extends CI_Controller {
                 );
                 $this->m_user->editPassword($data, $id_pegawai);
 
+                $datalog = array(
+                    'keterangan' => 'Edit Password',
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'EDIT'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+
                 $link = base_url() . "user";
                 echo '<script type="text/javascript">alert("Data berhasil diubah.");';
                 echo 'window.location.href="' . $link . '"';
@@ -110,6 +117,12 @@ class user extends CI_Controller {
         }
 
         $this->m_amt->editPegawai($data, $id_pegawai);
+        $datalog = array(
+            'keterangan' => 'Edit Data Pribadi',
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'EDIT'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         $link = base_url() . "user";
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';

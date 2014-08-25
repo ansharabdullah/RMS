@@ -1,21 +1,57 @@
 <script type="text/javascript">
-    $( document ).ready(function() {
+    var amt = new Array();
+    var mt = new Array();
+
+    $(document).ready(function() {
         $("#amt").show();
         $("#mt").hide();
-        
+
+        //masukin array apar ke javascript
+        var data;
+<?php foreach ($AMT as $a) { ?>
+            data = new Array();
+            data['id'] = "<?php echo $a->ID_PEGAWAI ?>";
+            data['nip'] = "<?php echo $a->NIP ?>";
+            data['no_pekerja'] = "<?php echo $a->NO_PEKERJA ?>";
+            data['nama_pegawai'] = "<?php echo $a->NAMA_PEGAWAI ?>";
+            data['jabatan'] = "<?php echo $a->JABATAN ?>";
+            data['transportir'] = "<?php echo $a->TRANSPORTIR_ASAL ?>";
+            data['klas'] = "<?php echo $a->KLASIFIKASI ?>";
+            amt.push(data);
+<?php } ?>
+<?php foreach ($MT as $a) { ?>
+            data = new Array();
+            data['id'] = "<?php echo $a->ID_MOBIL ?>";
+            data['nopol'] = "<?php echo $a->NOPOL ?>";
+            mt.push(data);
+<?php } ?>
+
     });
-       
-    function showKinerjaAMT(){
+
+    function showKinerjaAMT() {
         $("#amt").fadeIn("slow");
         $("#mt").hide();
-        
+
     }
-    
-    function showKinerjaMT(){
+
+    function showKinerjaMT() {
         $("#mt").fadeIn("slow");
-        $("#amt").hide();        
+        $("#amt").hide();
     }
-    
+
+    function setDetailPegawai(index) {
+        $("#id_pegawai").val(amt[index]['id']);
+        $("#nip_pegawai").val(amt[index]['nip']);
+        $("#nama_pegawai").val(amt[index]['nama_pegawai']);
+        $("#jabatan").val(amt[index]['jabatan']);
+        $("#klas_pegawai").val(amt[index]['klas']);
+    }
+
+    function setDetailMobil(index) {
+        $("#id_mobil").val(mt[index]['id']);
+        $("#nopol_mobil").val(mt[index]['nopol']);
+    }
+
 </script>
 
 
@@ -36,7 +72,68 @@
                 </a>
             </div>
         </section>
+        <?php if ($KLIK_SIMPAN == true) { ?>
+            <?php if ($KLIK_SIMPAN_PEGAWAI == true) { ?>
+                <?php if ($error_id_log_harian == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error!</strong> ID log harian tidak ditemukan.
+                    </div>
+                <?php } ?>
+                <?php if ($error_id_kinerja_amt == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error!</strong> Kinerja AMT untuk tanggal yang dipilih telah diinput, tidak dapat input dua kali.
+                    </div>
+                <?php } ?>
+                <?php if ($error_koefisien == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error!</strong> Koefisien performansi untuk tahun yang dipilih tidak ditemukan.
+                    </div>
+                <?php } ?>
 
+                <?php if ($error_id_log_harian == false && $error_id_kinerja_amt == false && $error_koefisien == false) { ?>
+                    <div class="alert alert-success fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Sukses!</strong> Berhasil input kinerja AMT.
+                    </div>
+                <?php } ?>
+            <?php } else if ($KLIK_SIMPAN_MOBIL == true) { ?>
+                <?php if ($error_id_log_harian == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error!</strong> ID log harian tidak ditemukan.
+                    </div>
+                <?php } ?>
+                <?php if ($error_id_kinerja_mt == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error!</strong> Kinerja MT untuk tanggal yang dipilih telah diinput, tidak dapat input dua kali.
+                    </div>
+                <?php } ?>
+                <?php if ($error_id_log_harian == false && $error_id_kinerja_mt == false) { ?>
+                    <div class="alert alert-success fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Sukses!</strong> Berhasil input kinerja MT.
+                    </div>
+                <?php } ?>
+            <?php } ?>
+        <?php } ?>
         <section class="panel" id="amt">
             <header class="panel-heading">
                 Input Kinerja Awak Mobil Tangki
@@ -52,132 +149,30 @@
                                 <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Jabatan</th>
-                                <th>Klasifikasi</th>
                                 <th>Transportir Asal</th>
+                                <th>Klasifikasi</th>
                                 <th>Kinerja</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>1</td>
-                                <td>94112</td>
-                                <td>Asep</td>
-                                <td>Supir</td>
-                                <td>PT. Masoem</td>
-                                <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>2</td>
-                                <td>1294</td>
-                                <td>Waringin</td>
-                                <td>Supir</td>
-                                <td>PT. Masoem</td>
-                                <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>3</td>
-                                <td>1209312</td>
-                                <td>Cipata</td>
-                                <td>Supir</td>
-                                <td>PT. Masoem</td>
-                                <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>4</td>
-                                <td>123145</td>
-                                <td>Niaga</td>
-                                <td>Kernet</td>
-                                <td>PT. Patra</td>
-                                <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>5</td>
-                                <td>1241258</td>
-                                <td>Incot</td>
-                                <td>Kernet</td>
-                                <td>PT. Patra</td>
-                                <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>6</td>
-                                <td>92340</td>
-                                <td>Rasya</td>
-                                <td>Supir</td>
-                                <td>PT. Patra</td>
-                                <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>7</td>
-                                <td>92124</td>
-                                <td>Rama</td>
-                                <td>Supir</td>
-                                <td>PT. Tiara</td>
-                                <td class="center">24</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>8</td>
-                                <td>127152</td>
-                                <td>Akun</td>
-                                <td>Supir</td>
-                                <td>PT. Tiara</td>
-                                <td class="center">16</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>9</td>
-                                <td>123846</td>
-                                <td>Firman</td>
-                                <td>Supir</td>
-                                <td>PT. Tiara</td>
-                                <td class="center">32</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>10</td>
-                                <td>1239174</td>
-                                <td>Aga</td>
-                                <td>Kernet</td>
-                                <td>PT. Tiara</td>
-                                <td class="center">32</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>11</td>
-                                <td>928374</td>
-                                <td>Maskum</td>
-                                <td>Kernet</td>
-                                <td>PT. Tiara</td>
-                                <td class="center">16</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
-                            <tr class="">
-                                <th style="display: none;"></th>
-                                <td>12</td>
-                                <td>1845142</td>
-                                <td>Supir</td>
-                                <td>Supir</td>
-                                <td>PT. Tiara</td>
-                                <td class="center">8</td>
-                                <td><a data-toggle="modal" data-placement="left" href="#amtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            foreach ($AMT as $row) {
+                                ?>
+                                <tr class="">
+                                    <th style="display: none;"></th>
+                                    <td><?php echo $no; ?></td>
+                                    <td><?php echo $row->NIP; ?></td>
+                                    <td><?php echo $row->NAMA_PEGAWAI; ?></td>
+                                    <td><?php echo $row->JABATAN; ?></td>
+                                    <td><?php echo $row->TRANSPORTIR_ASAL; ?></td>
+                                    <td><?php echo $row->KLASIFIKASI; ?></td>
+                                    <td><a data-toggle="modal" data-placement="left" href="#amtModal" onclick="setDetailPegawai('<?php echo ($no - 1) ?>')" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                </tr>
+                                <?php
+                                $no++;
+                            }
+                            ?>                            
                         </tbody>
                     </table>
                 </div>
@@ -208,139 +203,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>1</td>
-                                    <td>D 6308 AD</td>
-                                    <td>PT MA'SOEM</td>
-                                    <td>8</td>
-                                    <td class="center">Bio Solar</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
+                                <?php
+                                $no = 1;
+                                foreach ($MT as $row) {
+                                    ?>
+                                    <tr class="">
+                                        <th style="display: none;"></th>
+                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $row->NOPOL; ?></td>
+                                        <td><?php echo $row->TRANSPORTIR; ?></td>
+                                        <td><?php echo $row->KAPASITAS; ?></td>
+                                        <td><?php echo $row->PRODUK; ?></td>
+                                        <td><?php echo $row->KATEGORI_MOBIL; ?></td>
+                                        <td><?php echo $row->STATUS_MOBIL; ?></td>
 
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>2</td>
-                                    <td>D 1725 AF</td>
-                                    <td>PT WANDISIRI</td>
-                                    <td>8</td>
-                                    <td class="center">Solar</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>3</td>
-                                    <td>D 2245 AF</td>
-                                    <td>PT PUSPITA CIPATA</td>
-                                    <td>24</td>
-                                    <td class="center">Pertamax</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>4</td>
-                                    <td>D 6066 AF</td>
-                                    <td>PT PATRA NIAGA</td>
-                                    <td>16</td>
-                                    <td class="center">Premium</td>
-                                    <td>2</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>5</td>
-                                    <td>D 3038 AD</td>
-                                    <td>PT INCOT</td>
-                                    <td>32</td>
-                                    <td class="center">Premium</td>
-                                    <td>2</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>6</td>
-                                    <td>D 8557 AD</td>
-                                    <td>PT JUJUR PARAMARTA</td>
-                                    <td>8</td>
-                                    <td class="center">Pertamax Dex</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>7</td>
-                                    <td>D 1346 AD</td>
-                                    <td>PT MA'SOEM</td>
-                                    <td>24</td>
-                                    <td class="center">Pertamax Plus</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>8</td>
-                                    <td>D 7152 AF</td>
-                                    <td>PT PATRA NIAGA</td>
-                                    <td>16</td>
-                                    <td class="center">Bio Solar</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>9</td>
-                                    <td>D 9487 AD</td>
-                                    <td>PT TIARA</td>
-                                    <td>24</td>
-                                    <td class="center">Solar</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>10</td>
-                                    <td>D 8827 AF</td>
-                                    <td>PT PATRA NIAGA</td>
-                                    <td>32</td>
-                                    <td class="center">Premium</td>
-                                    <td>2</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>11</td>
-                                    <td>D 8711 AD</td>
-                                    <td>PT PUSPITA CIPATA</td>
-                                    <td>16</td>
-                                    <td class="center">Pertamax</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>12</td>
-                                    <td>D 8277 AF</td>
-                                    <td>PT NAGAMAS JAYA</td>
-                                    <td>8</td>
-                                    <td class="center">Premium</td>
-                                    <td>1</td>
-                                    <td>Sewa</td>
-                                    <td><a data-toggle="modal" data-placement="left" href="#mtModal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
-                                </tr>
+                                        <td><a data-toggle="modal" data-placement="left" href="#mtModal" onclick="setDetailMobil('<?php echo ($no - 1) ?>')" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Kinerja"><i class="icon-plus"></i></a></td>
+                                    </tr>
+                                    <?php
+                                    $no++;
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -362,85 +244,87 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Atur Kinerja Mobil Tangki</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>kinerja/simpan_manual">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                        <input type="hidden" class="form-control" id="id_mobil" name="id_mobil" required readonly>
+
+                        <label for="tgl_mobil" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-4">
-                            <input class="form-control" type="date" size="16" name="tgl" required/>
+                            <input class="form-control" type="date" size="16" name="tgl_mobil" required/>
                             <span class="help-block">Pilih Tanggal</span>
                         </div>
 
-                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
+                        <label for="nopol_mobil" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol" required>
+                            <input type="text" class="form-control" id="nopol_mobil" name="nopol_mobil" placeholder="Nopol" required readonly>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="km" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
+                        <label for="km_mobil" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="km" placeholder="Kilometer (km)" name="km" required>
+                            <input type="number" class="form-control" id="km_mobil" placeholder="Kilometer (km)" name="km_mobil" min="0" required>
                         </div>
 
-                        <label for="kl" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
+                        <label for="kl_mobil" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="kl" placeholder="Kiloliter (kl)" name="kl" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rit" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
-                        <div class="col-lg-4">
-                            <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)" name="rit" required>
-                        </div>
-
-                        <label for="ou" class="col-lg-2 col-sm-2 control-label">Own Use</label>
-                        <div class="col-lg-4">
-                            <input type="number" class="form-control" id="ou" placeholder="Own Use"  name="ou" required>
+                            <input type="number" class="form-control" id="kl_mobil" placeholder="Kiloliter (kl)" name="kl_mobil" min="0" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="premium" class="col-lg-2 col-sm-2 control-label">Premium</label>
+                        <label for="rit_mobil" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="premium" placeholder="Premium" name="premium" required>
+                            <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)" name="rit_mobil" min="0" required>
                         </div>
 
-                        <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
+                        <label for="ou_mobil" class="col-lg-2 col-sm-2 control-label">Own Use</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="pertamax" placeholder="Pertamax"  name="pertamax" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pertamaxplus" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
-                        <div class="col-lg-4">
-                            <input type="number" class="form-control" id="pertamaxplus" placeholder="Pertamax Plus"  name="pertamaxplus" required>
-                        </div>
-
-                        <label for="pertamaxdex" class="col-lg-2 col-sm-2 control-label">Pertamax Dex</label>
-                        <div class="col-lg-4">
-                            <input type="number" class="form-control" id="pertamaxdex" placeholder="Pertamax Dex" name="pertamaxdex" required>
+                            <input type="number" class="form-control" id="ou_mobil" placeholder="Own Use"  name="ou_mobil" min="0" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="solar" class="col-lg-2 col-sm-2 control-label">Solar</label>
+                        <label for="premium_mobil" class="col-lg-2 col-sm-2 control-label">Premium</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="solar" placeholder="Solar"  name="solar" required>
+                            <input type="number" class="form-control" id="premium_mobil" placeholder="Premium" name="premium_mobil" min="0" required>
                         </div>
 
-                        <label for="biosolar" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
+                        <label for="pertamax_mobil" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="biosolar" placeholder="Bio Solar"  name="biosolar" required>
+                            <input type="number" class="form-control" id="pertamax_mobil" placeholder="Pertamax"  name="pertamax_mobil" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pertamaxplus_mobil" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
+                        <div class="col-lg-4">
+                            <input type="number" class="form-control" id="pertamaxplus_mobil" placeholder="Pertamax Plus"  name="pertamaxplus_mobil" min="0" required>
+                        </div>
+
+                        <label for="pertaminadex_mobil" class="col-lg-2 col-sm-2 control-label">Pertamina Dex</label>
+                        <div class="col-lg-4">
+                            <input type="number" class="form-control" id="pertamaxdex_mobil" placeholder="Pertamina Dex" name="pertaminadex_mobil" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="solar_mobil" class="col-lg-2 col-sm-2 control-label">Solar</label>
+                        <div class="col-lg-4">
+                            <input type="number" class="form-control" id="solar_mobil" placeholder="Solar"  name="solar_mobil" min ="0" required>
+                        </div>
+
+                        <label for="biosolar_mobil" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
+                        <div class="col-lg-4">
+                            <input type="number" class="form-control" id="biosolar_mobil" placeholder="Bio Solar"  name="biosolar_mobil" min="0" required>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                    <button class="btn btn-success" type="submit">Simpan</button>
+                    <input class="btn btn-success" type="submit" name="submit_mobil" value="Simpan">
                 </div>
             </form>
 
@@ -455,8 +339,35 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Atur Kinerja Awak Mobil Tangki</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>kinerja/simpan_manual">
                 <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="id_pegawai" name="id_pegawai" required readonly>
+
+                        <label for="nip_pegawai" class="col-lg-2 col-sm-2 control-label">NIP</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" id="nip_pegawai" name="nip_pegawai" required readonly>
+                        </div>
+
+                        <label for="nama_pegawai" class="col-lg-2 col-sm-2 control-label">Nama</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" id="nama_pegawai" name="nama_pegawai" required readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jabatan" class="col-lg-2 col-sm-2 control-label">Jabatan</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" id="jabatan" name="jabatan" required readonly>
+                        </div>
+
+                        <label for="klas_pegawai" class="col-lg-2 col-sm-2 control-label">Klas</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" id="klas_pegawai" name="klas_pegawai" required readonly>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-4">
@@ -464,34 +375,42 @@
                             <span class="help-block">Pilih Tanggal</span>
                         </div>
 
-                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">SPBU</label>
+                        <label for="status_tugas" class="control-label col-lg-2">Status Tugas</label>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol" required>
+                            <select class="form-control input-sm m-bot15" id="status_tugas" name="status_tugas">
+                                <option value="SUPIR">SUPIR</option>
+                                <option value="KERNET">KERNET</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="km" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
+                        <label for="km_pegawai" class="col-lg-2 col-sm-2 control-label">Kilometer (km)</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="km" placeholder="Kilometer (km)" name="km" required>
+                            <input type="number" class="form-control" id="km_pegawai" placeholder="Kilometer (km)" name="km_pegawai" min="0" required>
                         </div>
 
-                        <label for="kl" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
+                        <label for="kl_pegawai" class="col-lg-2 col-sm-2 control-label">Kiloliter (kl)</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="kl" placeholder="Kiloliter (kl)" name="kl" required>
+                            <input type="number" class="form-control" id="kl_pegawai" placeholder="Kiloliter (kl)" name="kl_pegawai" min="0" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="rit" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
+                        <label for="rit_pegawai" class="col-lg-2 col-sm-2 control-label">Ritase (rit)</label>
                         <div class="col-lg-4">
-                            <input type="number" class="form-control" id="rit" placeholder="Ritase (rit)" name="rit" required>
+                            <input type="number" class="form-control" id="rit_pegawai" placeholder="Ritase (rit)" name="rit_pegawai" min="0" required>
+                        </div>
+
+                        <label for="spbu_pegawai" class="col-lg-2 col-sm-2 control-label">Jumlah SPBU</label>
+                        <div class="col-lg-4">
+                            <input type="number" class="form-control" id="spbu_pegawai" name="spbu_pegawai" placeholder="Jumlah SPBU" min="0" required>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                    <button class="btn btn-success" type="submit">Simpan</button>
+                    <input class="btn btn-success" type="submit" name="submit_pegawai" value="Simpan">
                 </div>
             </form>
 
@@ -507,10 +426,10 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- END JAVASCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
-        EditableTable.init();       
-    });
-    
-    
-    
+                                        jQuery(document).ready(function() {
+                                            EditableTable.init();
+                                        });
+
+
+
 </script>

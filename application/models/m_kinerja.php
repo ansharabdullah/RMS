@@ -105,6 +105,34 @@ class m_kinerja extends CI_Model {
         //update log harian
         $query = $this->db->query("update log_harian l set l.STATUS_INPUT_KINERJA = 0, l.JUMLAH_ALOKASI_SPBU = 0 where l.ID_LOG_HARIAN = '" . $id . "'");
     }
+    
+    public function getPegawai($depot) {
+        $query = $this->db->query("select ID_PEGAWAI, NIP, NO_PEKERJA, NAMA_PEGAWAI, JABATAN, TRANSPORTIR_ASAL, KLASIFIKASI from pegawai where ID_DEPOT = '$depot' and STATUS <> 'TIDAK AKTIF' and (JABATAN = 'KERNET' or JABATAN = 'SUPIR') order by NAMA_PEGAWAI ASC");
+        return $query->result();
+    }
+    
+    public function getMobil($depot) {
+        $query = $this->db->query("select ID_MOBIL,NOPOL,TRANSPORTIR,KAPASITAS,PRODUK,KATEGORI_MOBIL,STATUS_MOBIL from mobil where ID_DEPOT = '$depot' order by TRANSPORTIR ASC, NOPOL ASC");
+        return $query->result();
+    }
+    
+    public function getIdKinerjaAMT($id_log_harian, $id_pegawai) {
+        $query = $this->db->query("select * from kinerja_amt where ID_LOG_HARIAN = '$id_log_harian' and ID_PEGAWAI = '$id_pegawai'");
+        return $query->num_rows();
+    }
+    
+    public function insertManualKinerjaAMT($id_log_harian, $id_pegawai,$status_tugas,$km,$kl,$rit,$spbu,$pendapatan) {
+        $query = $this->db->query("insert into kinerja_amt(ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,SPBU,PENDAPATAN) values('$id_log_harian','$id_pegawai','$status_tugas','$km','$kl','$rit','$spbu','$pendapatan')");
+    }
+    
+    public function getIdKinerjaMT($id_log_harian, $id_mobil) {
+        $query = $this->db->query("select * from kinerja_mt where ID_LOG_HARIAN = '$id_log_harian' and ID_MOBIL = '$id_mobil'");
+        return $query->num_rows();
+    }
+    
+    public function insertManualKinerjaMT($id_log_harian, $id_mobil,$km,$kl,$rit,$ou,$premium,$pertamax,$pertamax_plus,$pertamina_dex,$solar,$bio_solar) {
+        $query = $this->db->query("insert into kinerja_mt(ID_LOG_HARIAN,ID_MOBIL,TOTAL_KM_MT,TOTAL_KL_MT,RITASE_MT,OWN_USE,PREMIUM,PERTAMAX,PERTAMAX_PLUS,PERTAMINA_DEX,SOLAR,BIO_SOLAR) values('$id_log_harian','$id_mobil','$km','$kl','$rit','$ou','$premium','$pertamax','$pertamax_plus','$pertamina_dex','$solar','$bio_solar')");
+    }
 
     /* DASHBOARD --- RENISA */
 

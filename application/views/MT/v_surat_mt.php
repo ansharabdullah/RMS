@@ -1,6 +1,24 @@
-
-<link rel="stylesheet" href="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.css" />
-
+<script>
+    var surat = new Array();
+    $(document).ready(function(){
+        var ap;
+        <?php
+             foreach($surat as $a)
+             {
+                 ?>
+                 ap = new Array();
+                 ap['id'] = "<?php echo $a->ID_SURAT?>";
+                 ap['ID_JENIS_SURAT'] = "<?php echo $a->ID_JENIS_SURAT?>";
+                 ap['TANGGAL_AKHIR_SURAT'] = "<?php echo $a->TANGGAL_AKHIR_SURAT?>";
+                 ap['KETERANGAN_SURAT'] = "<?php echo $a->KETERANGAN_SURAT?>";
+                 
+                 surat.push(ap);
+                 <?php
+             }
+                        ?>
+        
+    });
+</script>
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
@@ -11,11 +29,22 @@
             </header>
             <div class="panel-body">
                 <div class="bio-desk">
-                    
-                    <p>Nopol : </p>
-                    <p>Kapasitas :</p>
-                    <p>Produk : </p>
-                    
+                    <div class="bio-row" >
+                        <p><span>Nopol </span>: <?php echo $dataMobil->NOPOL; ?></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span></span></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>KAPASITAS </span>: <?php echo $dataMobil->KAPASITAS; ?></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span></span></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Kapasitas </span>: <?php echo $dataMobil->PRODUK; ?></p>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -48,22 +77,27 @@
                         </thead>
                         <tbody>
                             <?php $i = 1;
-                                foreach ($mt as $row) { ?>
+                            $j=0;
+                                foreach ($surat as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $row->ID_JENIS_SURAT; ?></td>
+                                    <td><?php if($row->ID_JENIS_SURAT == "1")echo 'STNK'?>
+                                        <?php if($row->ID_JENIS_SURAT == "2")echo 'Pajak'?>
+                                        <?php if($row->ID_JENIS_SURAT == "3")echo 'KEUR'?>
+                                        <?php if($row->ID_JENIS_SURAT == "4")echo 'TERA'?>
+                                    </td>
                                     <td><?php echo $row->TANGGAL_AKHIR_SURAT; ?></td>
                                    <td><?php echo $row->KETERANGAN_SURAT; ?></td>
                                    
-                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit surat" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Surat" href="javascript:hapus('<?php echo $row->ID_SURAT ?>');"><i class="icon-remove"></i></a>
+                                   <td><a class="btn btn-warning btn-xs tooltips" href="#ModalEditSurat"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
+                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Surat" href="javascript:hapus('<?php echo $row->ID_SURAT ?>');"><i class="icon-remove"></i></a>
                                        </td>
                                 </tr>
-                                <?php $i++;
+                                <?php 
+                                $i++;
+                                $j++;
                             } ?>
-                            
-                            
-                                
+                               
                         </tbody>
                     </table>
                 </div>
@@ -89,11 +123,11 @@
                     <div class="form-group">
                         <label for="stnk" class="col-lg-2 col-sm-2 control-label">Jenis Surat</label>
                         <div class="col-lg-10">
-                           <select class="form-control input-sm m-bot15" id="status" name="ID_JENIS_SURAT">
-                                <option <?php if($row->ID_JENIS_SURAT == "1")echo "selected"?> value="1">STNK</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "2")echo "selected"?> value="2">PAJAK</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "3")echo "selected"?> value="3">KEUR</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "4")echo "selected"?> value="4">TERA</option>
+                           <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
+                                <option value="1">STNK</option>
+                                <option value="2">PAJAK</option>
+                                <option value="3">KEUR</option>
+                                <option value="4">TERA</option>
                             </select>
                         </div>
                     </div>
@@ -121,10 +155,10 @@
     </div>
 </div>
 
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalEditSurat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="" >
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Form Edit Surat</h4>
@@ -135,18 +169,24 @@
                    <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="tera">Tera</label>
                         <div class="col-lg-10">
-                            <select class="form-control m-bot15">
-                                <option>STNK Per Tahun</option>
-                                <option>Pajak</option>
-                                <option>Keur</option>
-                                <option>Tera</option>
-                                
-                            </select></div>
+                            <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
+                                <option <?php if($row->ID_JENIS_SURAT == "1")echo "selected"?> value="1">STNK</option>
+                                <option <?php if($row->ID_JENIS_SURAT == "2")echo "selected"?> value="2">PAJAK</option>
+                                <option <?php if($row->ID_JENIS_SURAT == "3")echo "selected"?> value="3">KEUR</option>
+                                <option <?php if($row->ID_JENIS_SURAT == "4")echo "selected"?> value="4">TERA</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
+                   <div class="form-group">
                         <label for="stnk" class="col-lg-2 col-sm-2 control-label">Tanggal Berakhir Surat</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="stnk" name="stnk" minlength="2" type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="TANGGAL_AKHIR_SURAT" name="TANGGAL_AKHIR_SURAT" minlength="2" type="date" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stnk" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
+                        <div class="col-lg-10">
+                            <input class=" form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT" minlength="2" type="text" required />
                         </div>
                     </div>
 
@@ -215,5 +255,18 @@
         var url = "<?php echo base_url(); ?>" + "mt/delete_surat/" + globalId;
         window.location.href = url;
     }
+    
+     var index;
+        
+        function setDetail(index){
+            var action = "<?php echo base_url()?>mt/edit_surat/"+surat[index]['id'];
+           
+            
+            $("#ID_JENIS_SURAT").val(surat[index]['ID_JENIS_SURAT']);
+            $("#TANGGAL_AKHIR_SURAT").val(surat[index]['TANGGAL_AKHIR_SURAT']);
+            $("#KETERANGAN_SURAT").val(surat[index]['KETERANGAN_SURAT']);
+            $("#form-edit").attr("action",action ); 
+           
+        }
     
 </script>
