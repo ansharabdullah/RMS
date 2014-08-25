@@ -36,7 +36,7 @@
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/hapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Kinerja SIOD"><i class="icon-minus"></i></a>
 
-                    <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>assets/file/format/format_oscrms_siod.xlsx"><i class="icon-download-alt"></i></a>
+                    <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>downloads/format_oscrms_siod.xlsx"><i class="icon-download-alt"></i></a>
                 </div>
             </header>
             <div class="panel-body" >
