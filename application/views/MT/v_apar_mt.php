@@ -156,6 +156,7 @@
                             <select class="form-control input-sm m-bot15" id="status" name="STATUS_APAR">
                                 <option value="0">Aktif</option>
                                 <option value="1">Tidak Aktif</option>
+                               
                             </select>
                         </div>
                     </div>
@@ -298,7 +299,7 @@
             $("#CATRIDGE").val(apar[index]['CATRIDGE']);
             $("#CO2").val(apar[index]['CO2']);
             $("#KETERANGAN_APAR").val(apar[index]['KETERANGAN_APAR']);
-            $("#STATUS_APAR").val(apar[index]['STATUS_APARs']);
+            $("#STATUS_APAR").val(apar[index]['STATUS_APAR']);
             $("#form-edit").attr("action",action ); 
            
         }

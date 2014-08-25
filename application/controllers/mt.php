@@ -10,6 +10,7 @@ class Mt extends CI_Controller {
 
         $this->load->model("m_mt");
         $this->load->model("m_apar");
+        $this->load->model("m_log_sistem");
         $this->load->helper(array('form', 'url'));
     }
 
@@ -22,7 +23,8 @@ class Mt extends CI_Controller {
     
     public function data_mt() {
 
-        $depot = 1;
+        
+        $depot = $this->session->userdata('id_depot');
         $data1['mt'] = $this->m_mt->selectMT($depot);
 
         $data['lv1'] = 3;
