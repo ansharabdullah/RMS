@@ -201,12 +201,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label for="cjenis" class="control-label col-lg-4">Keterangan</label>
+                                    <label for="cjenis" class="control-label col-lg-4">Status Masuk</label>
                                     <div class="col-lg-8">
                                         <select class="form-control input-sm m-bot15" id="cjenis" name="jenis">
-                                            <option>Hadir</option>
-                                            <option>Absen</option>
-                                            <option>Libur</option>
+                                            <option>Hilang</option>
+                                            <option>Kecelakaan</option>
+                                            <option>Pemeliharaan</option>
+                                            <option>Rusak</option>
+                                            
                                         </select>
                                     </div>
                                 </div>

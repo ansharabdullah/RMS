@@ -1,4 +1,26 @@
-
+<script>
+    var apar = new Array();
+    $(document).ready(function(){
+        var ap;
+        <?php
+             foreach($apar as $a)
+             {
+                 ?>
+                 ap = new Array();
+                 ap['id'] = "<?php echo $a->ID_APAR?>";
+                 ap['STORE_PRESSURE'] = "<?php echo $a->STORE_PRESSURE?>";
+                 ap['CATRIDGE'] = "<?php echo $a->CATRIDGE?>";
+                 ap['CO2'] = "<?php echo $a->CO2?>";
+                 ap['KETERANGAN_APAR'] = "<?php echo $a->KETERANGAN_APAR?>";
+                 ap['STATUS_APAR'] = "<?php echo $a->STATUS_APAR?>";
+                 
+                 apar.push(ap);
+                 <?php
+             }
+                        ?>
+        
+    });
+</script>
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
@@ -10,15 +32,25 @@
             </header>
             <div class="panel-body">
                 <div class="bio-desk">
-                   
-                    <p>Nopol : </p>
-                     
-                    <p>Kapasitas : </p>
-                    
-                    <p>Produk : </p>
-                     
+                    <div class="bio-row" >
+                        <p><span>Nopol </span>: <?php echo $dataMobil->NOPOL; ?></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span></span></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>KAPASITAS </span>: <?php echo $dataMobil->KAPASITAS; ?></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span></span></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Kapasitas </span>: <?php echo $dataMobil->PRODUK; ?></p>
+                    </div>
+
                 </div>
             </div>
+            
         </section>
 
         <section class="panel">
@@ -38,6 +70,7 @@
                             <tr>
                                 <th style="display:none;"></th>
                                 <th>No.</th>
+                               
                                 <th>Store Pressure</th>
                                 <th>Catridge</th>
                                 <th>C02</th>
@@ -49,10 +82,11 @@
                         <tbody>
                            
                                 <?php $i = 1;
+                                $j=0;
+                                 
                                 foreach ($apar as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    
                                     <td><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->STORE_PRESSURE; ?></td>
                                     <td><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->CATRIDGE; ?></td>
                                     <td><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->CO2; ?></td>
@@ -61,13 +95,15 @@
                                                 <?php if($row->STATUS_APAR == "1")echo 'Tidak Aktif'?></td>
                                                                                     
                                     <td>
-                                        <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" data-replacement="left"  data-toggle="modal"  href="#ModalEditApar" ><i class="icon-pencil"></i></a>
+                                        
+                                        <a class="btn btn-warning btn-xs tooltips" href="#ModalEditApar"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" href="javascript:hapus('<?php echo $row->ID_APAR ?>');"><i class="icon-remove"></i></a>
                                        
                                     </td>
 
                                 </tr>
                                 <?php
+                                $j++;
                                 $i++;
                             }
                             ?>
@@ -118,8 +154,8 @@
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Status</label>
                         <div class="col-lg-10">
                             <select class="form-control input-sm m-bot15" id="status" name="STATUS_APAR">
-                                <option <?php if($row->STATUS_APAR == "0")echo "selected"?> value="0">Aktif</option>
-                                        <option <?php if($row->STATUS_APAR == "1")echo "selected"?> value="1">Tidak Aktif</option>
+                                <option value="0">Aktif</option>
+                                <option value="1">Tidak Aktif</option>
                             </select>
                         </div>
                     </div>
@@ -148,33 +184,32 @@
                 <h4 class="modal-title">Form Edit APAR</h4>
             </div>
             
-            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="<?php echo base_url() ?>mt/edit_apar/ .<?php echo $row->ID_APAR?>" >
+            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="" >
                 <div class="modal-body">
-                   
                     <!-- form edit-->
-                    <input type="text" name="id" value=" <?php echo $row->ID_APAR?>">
+                    
                     <div class="form-group">
                         <label for="inputJK" class="col-lg-2 col-sm-2 control-label">Store Pressure</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="sr" name="STORE_PRESSURE"  type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="STORE_PRESSURE" name="STORE_PRESSURE"  type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Catridge</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="catridge" name="CATRIDGE"  type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="CATRIDGE" name="CATRIDGE"  type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="co2" class="col-lg-2 col-sm-2 control-label">C02</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="co2" name="CO2"  type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="CO2" name="CO2"  type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="status" class="col-lg-2 col-sm-2 control-label">Status</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="status_apar" name="">
+                            <select class="form-control input-sm m-bot15" id="STATUS_APAR" name="STATUS_APAR">
                                 <option <?php if ($row->STATUS_APAR == "0") echo "selected" ?> value="0">Aktif</option>
                                 <option <?php if ($row->STATUS_APAR == "1") echo "selected" ?> value="1">Tidak Aktif</option>
 
@@ -184,15 +219,14 @@
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="keterangan_apar" name="KETERANGAN_APAR" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="KETERANGAN_APAR" name="KETERANGAN_APAR" minlength="2" type="text" required />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                   <button class="btn btn-success" type="submit">Simpan</button>
                 </div>
-            </form> 
         </div>
 
     </div>
@@ -252,5 +286,23 @@
         var url = "<?php echo base_url(); ?>" + "mt/delete_apar/" + globalId;
         window.location.href = url;
     }
+      
+      
+        var index;
+        
+        function setDetail(index){
+            var action = "<?php echo base_url()?>mt/edit_apar/"+apar[index]['id'];
+           
+            
+            $("#STORE_PRESSURE").val(apar[index]['STORE_PRESSURE']);
+            $("#CATRIDGE").val(apar[index]['CATRIDGE']);
+            $("#CO2").val(apar[index]['CO2']);
+            $("#KETERANGAN_APAR").val(apar[index]['KETERANGAN_APAR']);
+            $("#STATUS_APAR").val(apar[index]['STATUS_APARs']);
+            $("#form-edit").attr("action",action ); 
+           
+        }
     
+    
+   
 </script>

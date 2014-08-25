@@ -72,10 +72,11 @@
                             $i = 0;
                             foreach ($apar as $row) {
                                 $color = "";
-                                if($row->store_pressure <= 7 || $row->catridge <=7 || $row->co2 <=7)
-                                {
-                                    $color = "style='background-color: orange;'";
-                                }
+                                if ($row->STATUS_APAR== "1"){
+                                    if($row->store_pressure <= 7 || $row->catridge <=7 || $row->co2 <=7)
+                                    {
+                                        $color = "style='background-color: orange;'";
+                                    }
                                     ?>
                                     <tr>
                                         <th style="display: none;"></th>
@@ -87,6 +88,7 @@
                                         </tr>
                                     <?php
                                 $i++;
+                                }
                             }
                             ?>
                         </tbody>

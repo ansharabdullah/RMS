@@ -22,6 +22,11 @@ class m_mt extends CI_Model {
         return $data->result();
     }
     
+     public function selectMobil($id_mobil){
+        $data = $this->db->query("select NOPOL,KAPASITAS,PRODUK from mobil where id_mobil=$id_mobil ");
+        return $data->row();
+    }
+    
      public function detailMT($id_mobil){
         $data = $this->db->query("select * from mobil where (kapasitas='8' or kapasitas='16' or kapasitas='24' or kapasitas='32') and id_mobil=$id_mobil");
         return $data->result();
@@ -51,7 +56,7 @@ class m_mt extends CI_Model {
     
      public function editApar($data,$id)
     {
-        $this->db->where('id_apar', $id);
+        $this->db->where('ID_APAR', $id);
         $this->db->update('apar', $data); 
         
     }
@@ -74,8 +79,8 @@ class m_mt extends CI_Model {
     
      public function editBan($data,$id)
     {
-        $this->db->where('id_apar', $id);
-        $this->db->update('apar', $data); 
+        $this->db->where('ID_BAN', $id);
+        $this->db->update('ban', $data); 
         
     }
     
@@ -94,6 +99,13 @@ class m_mt extends CI_Model {
         $this->db->insert('oli', $data);
     }
     
+    public function editOli($data,$id)
+    {
+        $this->db->where('ID_OLI', $id);
+        $this->db->update('oli', $data); 
+        
+    }
+    
      public function deleteOli($id) {
         $this->db->where('id_oli', $id);
         $this->db->delete('oli');
@@ -107,6 +119,13 @@ class m_mt extends CI_Model {
     
     public function insertSurat($data) {
         $this->db->insert('surat', $data);
+    }
+    
+    public function editSurat($data,$id)
+    {
+        $this->db->where('ID_SURAT', $id);
+        $this->db->update('surat', $data); 
+        
     }
     
     public function deleteSurat($id) {

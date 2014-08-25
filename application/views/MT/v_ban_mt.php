@@ -1,3 +1,26 @@
+<script>
+    var ban = new Array();
+    $(document).ready(function(){
+        var ap;
+<?php
+foreach ($ban as $a) {
+    ?>
+                             ap = new Array();
+                             ap['id'] = "<?php echo $a->ID_BAN ?>";
+                             ap['MERK_BAN'] = "<?php echo $a->MERK_BAN ?>";
+                             ap['NO_SERI_BAN'] = "<?php echo $a->NO_SERI_BAN ?>";
+                             ap['JENIS_BAN'] = "<?php echo $a->JENIS_BAN ?>";
+                             ap['POSISI_BAN'] = "<?php echo $a->POSISI_BAN ?>";
+                             ap['TANGGAL_PASANG'] = "<?php echo $a->TANGGAL_PASANG ?>";
+                             ap['TANGGAL_GANTI_BAN'] = "<?php echo $a->TANGGAL_GANTI_BAN ?>";
+                     
+                             ban.push(ap);
+    <?php
+}
+?>
+        
+                            });
+</script>
 
 <!--main content start-->
 <section id="main-content">
@@ -11,13 +34,25 @@
 
             <div class="panel-body">
                 <div class="bio-desk">
-                    
-                    <p>Nopol : </p>
-                    <p>Kapasitas : </p>
-                    <p>Produk : </p>
-                    
+                    <div class="bio-row" >
+                        <p><span>Nopol </span>: <?php echo $dataMobil->NOPOL; ?></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span></span></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>KAPASITAS </span>: <?php echo $dataMobil->KAPASITAS; ?></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span></span></p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Kapasitas </span>: <?php echo $dataMobil->PRODUK; ?></p>
+                    </div>
+
                 </div>
             </div>
+            
         </section>
 
         <section class="panel">
@@ -29,6 +64,7 @@
             <div class="panel-body">
                 <div class="adv-table editable-table " style="overflow-y: scroll">
                     <div class="clearfix">
+
                         <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Ban MT <i class="icon-plus"></i>
                         </a>
@@ -49,29 +85,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-                                <?php $i = 1;
-                                foreach ($mt as $row) { ?>
-                                    <td style="display:none;"></td>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $row->POSISI_BAN; ?></td>
-                                    <td><?php echo $row->TANGGAL_PASANG; ?></td>
-                                    <td><?php echo $row->TANGGAL_GANTI_BAN; ?></td>
-                                    <td><?php echo $row->MERK_BAN; ?></td>
-                                    <td><?php echo $row->NO_SERI_BAN; ?></td>
-                                   <td><?php if($row->JENIS_BAN == "0")echo 'Original'?>
-                                       <?php if($row->JENIS_BAN == "1")echo 'Vulkanisir'?></td>
-                                   
-                                   
-                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" href="javascript:hapus('<?php echo $row->ID_BAN ?>');"><i class="icon-remove"></i></a>
-                                   </td>
-                                </tr>
-                                <?php $i++;
-                            } ?>
-                           
-                               
-                                </tr>
+
+                            <?php
+                            $i = 1;
+                            $j = 0;
+                            foreach ($ban as $row) {
+                                ?>
+                            <td style="display:none;"></td>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $row->POSISI_BAN; ?></td>
+                            <td><?php echo $row->TANGGAL_PASANG; ?></td>
+                            <td><?php echo $row->TANGGAL_GANTI_BAN; ?></td>
+                            <td><?php echo $row->MERK_BAN; ?></td>
+                            <td><?php echo $row->NO_SERI_BAN; ?></td>
+                            <td><?php echo $row->JENIS_BAN; ?></td>
+                            <td>
+                                <a class="btn btn-warning btn-xs tooltips" href="#ModalEditBan"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" href="javascript:hapus('<?php echo $row->ID_BAN ?>');"><i class="icon-remove"></i></a>
+                            </td>
+                            </tr>
+                            <?php
+                            $j++;
+                            $i++;
+                        }
+                        ?>
+
+
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -87,7 +127,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/tambah_ban/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/tambah_ban/">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Form Tambah Ban</h4>
@@ -97,25 +137,43 @@
                         <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Posisi Ban</label>
                         <div class="col-lg-10">
                             <select class="form-control input-sm m-bot15" id="status" name="POSISI_BAN">
-                                <option <?php if($row->POSISI_BAN == "1")echo "selected"?> value="1">1</option>
-                                <option <?php if($row->POSISI_BAN == "2")echo "selected"?> value="2">2</option>
-                                <option <?php if($row->POSISI_BAN == "3")echo "selected"?> value="3">3</option>
-                                <option <?php if($row->POSISI_BAN == "4")echo "selected"?> value="4">4</option>
-                                <option <?php if($row->POSISI_BAN == "5")echo "selected"?> value="5">5</option>
-                                <option <?php if($row->POSISI_BAN == "6")echo "selected"?> value="6">6</option>
-                                <option <?php if($row->POSISI_BAN == "7")echo "selected"?> value="7">7</option>
-                                <option <?php if($row->POSISI_BAN == "8")echo "selected"?> value="8">8</option>
-                                <option <?php if($row->POSISI_BAN == "9")echo "selected"?> value="9">9</option>
-                                <option <?php if($row->POSISI_BAN == "10")echo "selected"?> value="10">10</option>
-                                <option <?php if($row->POSISI_BAN == "11")echo "selected"?> value="11">11</option>
-                                <option <?php if($row->POSISI_BAN == "12")echo "selected"?> value="12">12</option>
-                                <option <?php if($row->POSISI_BAN == "13")echo "selected"?> value="13">13</option>
-                                <option <?php if($row->POSISI_BAN == "14")echo "selected"?> value="14">14</option>
-                                <option <?php if($row->POSISI_BAN == "15")echo "selected"?> value="15">15</option>
-                                <option <?php if($row->POSISI_BAN == "16")echo "selected"?> value="16">16</option>
-                                <option <?php if($row->POSISI_BAN == "17")echo "selected"?> value="17">17</option>
-                                <option <?php if($row->POSISI_BAN == "18")echo "selected"?> value="18">18</option>
-                                
+                                <option <?php if ($row->POSISI_BAN == "1")
+                            echo "selected" ?> value="1">1</option>
+                                <option <?php if ($row->POSISI_BAN == "2")
+                            echo "selected" ?> value="2">2</option>
+                                <option <?php if ($row->POSISI_BAN == "3")
+                            echo "selected" ?> value="3">3</option>
+                                <option <?php if ($row->POSISI_BAN == "4")
+                            echo "selected" ?> value="4">4</option>
+                                <option <?php if ($row->POSISI_BAN == "5")
+                            echo "selected" ?> value="5">5</option>
+                                <option <?php if ($row->POSISI_BAN == "6")
+                            echo "selected" ?> value="6">6</option>
+                                <option <?php if ($row->POSISI_BAN == "7")
+                            echo "selected" ?> value="7">7</option>
+                                <option <?php if ($row->POSISI_BAN == "8")
+                            echo "selected" ?> value="8">8</option>
+                                <option <?php if ($row->POSISI_BAN == "9")
+                            echo "selected" ?> value="9">9</option>
+                                <option <?php if ($row->POSISI_BAN == "10")
+                            echo "selected" ?> value="10">10</option>
+                                <option <?php if ($row->POSISI_BAN == "11")
+                            echo "selected" ?> value="11">11</option>
+                                <option <?php if ($row->POSISI_BAN == "12")
+                            echo "selected" ?> value="12">12</option>
+                                <option <?php if ($row->POSISI_BAN == "13")
+                            echo "selected" ?> value="13">13</option>
+                                <option <?php if ($row->POSISI_BAN == "14")
+                            echo "selected" ?> value="14">14</option>
+                                <option <?php if ($row->POSISI_BAN == "15")
+                            echo "selected" ?> value="15">15</option>
+                                <option <?php if ($row->POSISI_BAN == "16")
+                            echo "selected" ?> value="16">16</option>
+                                <option <?php if ($row->POSISI_BAN == "17")
+                            echo "selected" ?> value="17">17</option>
+                                <option <?php if ($row->POSISI_BAN == "18")
+                            echo "selected" ?> value="18">18</option>
+
                             </select>
                         </div>
                     </div>
@@ -146,11 +204,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Ban</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="status" name="JENIS_BAN">
-                                 <option <?php if($row->JENIS_BAN == "0")echo "selected"?> value="0">Original</option>
-                                 <option <?php if($row->JENIS_BAN == "1")echo "selected"?> value="1">Vulkanisir</option>
-                          
-                            </select>
+                            <input class=" form-control input-sm m-bot15" id="seri" name="JENIS_BAN" minlength="2" type="text" required />
+
                         </div>
                     </div>
                 </div>
@@ -165,10 +220,10 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalEditBan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/edit_mobil/<?php echo $row->ID_BAN ?>">
+            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="" >
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Form Edit Ban</h4>
@@ -178,61 +233,76 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Posisi Ban</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="status" name="">
-                                <option <?php if($row->POSISI_BAN == "1")echo "selected"?> value="1">1</option>
-                                <option <?php if($row->POSISI_BAN == "2")echo "selected"?> value="2">2</option>
-                                <option <?php if($row->POSISI_BAN == "3")echo "selected"?> value="3">3</option>
-                                <option <?php if($row->POSISI_BAN == "4")echo "selected"?> value="4">4</option>
-                                <option <?php if($row->POSISI_BAN == "5")echo "selected"?> value="5">5</option>
-                                <option <?php if($row->POSISI_BAN == "6")echo "selected"?> value="6">6</option>
-                                <option <?php if($row->POSISI_BAN == "7")echo "selected"?> value="7">7</option>
-                                <option <?php if($row->POSISI_BAN == "8")echo "selected"?> value="8">8</option>
-                                <option <?php if($row->POSISI_BAN == "9")echo "selected"?> value="9">9</option>
-                                <option <?php if($row->POSISI_BAN == "10")echo "selected"?> value="10">10</option>
-                                <option <?php if($row->POSISI_BAN == "11")echo "selected"?> value="11">11</option>
-                                <option <?php if($row->POSISI_BAN == "12")echo "selected"?> value="12">12</option>
-                                <option <?php if($row->POSISI_BAN == "13")echo "selected"?> value="13">13</option>
-                                <option <?php if($row->POSISI_BAN == "14")echo "selected"?> value="14">14</option>
-                                <option <?php if($row->POSISI_BAN == "15")echo "selected"?> value="15">15</option>
-                                <option <?php if($row->POSISI_BAN == "16")echo "selected"?> value="16">16</option>
-                                <option <?php if($row->POSISI_BAN == "17")echo "selected"?> value="17">17</option>
-                                <option <?php if($row->POSISI_BAN == "18")echo "selected"?> value="18">18</option>
-                                
+                            <select class="form-control input-sm m-bot15" id="POSISI_BAN" name="POSISI_BAN">
+                                <option <?php if ($row->POSISI_BAN == "1")
+                            echo "selected" ?> value="1">1</option>
+                                <option <?php if ($row->POSISI_BAN == "2")
+                            echo "selected" ?> value="2">2</option>
+                                <option <?php if ($row->POSISI_BAN == "3")
+                            echo "selected" ?> value="3">3</option>
+                                <option <?php if ($row->POSISI_BAN == "4")
+                            echo "selected" ?> value="4">4</option>
+                                <option <?php if ($row->POSISI_BAN == "5")
+                            echo "selected" ?> value="5">5</option>
+                                <option <?php if ($row->POSISI_BAN == "6")
+                            echo "selected" ?> value="6">6</option>
+                                <option <?php if ($row->POSISI_BAN == "7")
+                            echo "selected" ?> value="7">7</option>
+                                <option <?php if ($row->POSISI_BAN == "8")
+                            echo "selected" ?> value="8">8</option>
+                                <option <?php if ($row->POSISI_BAN == "9")
+                            echo "selected" ?> value="9">9</option>
+                                <option <?php if ($row->POSISI_BAN == "10")
+                            echo "selected" ?> value="10">10</option>
+                                <option <?php if ($row->POSISI_BAN == "11")
+                            echo "selected" ?> value="11">11</option>
+                                <option <?php if ($row->POSISI_BAN == "12")
+                            echo "selected" ?> value="12">12</option>
+                                <option <?php if ($row->POSISI_BAN == "13")
+                            echo "selected" ?> value="13">13</option>
+                                <option <?php if ($row->POSISI_BAN == "14")
+                            echo "selected" ?> value="14">14</option>
+                                <option <?php if ($row->POSISI_BAN == "15")
+                            echo "selected" ?> value="15">15</option>
+                                <option <?php if ($row->POSISI_BAN == "16")
+                            echo "selected" ?> value="16">16</option>
+                                <option <?php if ($row->POSISI_BAN == "17")
+                            echo "selected" ?> value="17">17</option>
+                                <option <?php if ($row->POSISI_BAN == "18")
+                            echo "selected" ?> value="18">18</option>
+
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                       <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tanggal Pasang</label>
+                        <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tanggal Pasang</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15"  id="tglpasang" name="TANGGAL_PASANG" minlength="2" type="date" required />
+                            <input class=" form-control input-sm m-bot15"  id="TANGGAL_PASANG" name="TANGGAL_PASANG" minlength="2" type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Tanggal Ganti</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="tglpasang" name="TANGGAL_GANTI_BAN" minlength="2" type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="TANGGAL_GANTI_BAN" name="TANGGAL_GANTI_BAN" minlength="2" type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Merk Ban</label>
                         <div class="col-lg-10">
-                           <input class=" form-control input-sm m-bot15" id="tglpasang" name="MERK_BAN" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="MERK_BAN" name="MERK_BAN" minlength="2" type="text" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">No Seri</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="tglpasang" name="NO_SERI_BAN" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="NO_SERI_BAN" name="NO_SERI_BAN" minlength="2" type="text" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Ban</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="status" name="">
-                                 <option <?php if($row->JENIS_BAN == "0")echo "selected"?> value="0">Original</option>
-                                 <option <?php if($row->JENIS_BAN == "1")echo "selected"?> value="1">Vulkanisir</option>
-                          
-                            </select>
+                            <input class=" form-control input-sm m-bot15" id="JENIS_BAN" name="JENIS_BAN" minlength="2" type="text" required />
+
                         </div>
                     </div>
                 </div>
@@ -277,12 +347,12 @@
         EditableTable.init();
     });
     
-     function FilterData(par) {
+    function FilterData(par) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
     
-        var globalId;
+    var globalId;
     $('#HapusBan').on('show', function() {
 
     });
@@ -298,4 +368,24 @@
         var url = "<?php echo base_url(); ?>" + "mt/delete_ban/" + globalId;
         window.location.href = url;
     }
+    
+      
+      
+    var index;
+        
+    function setDetail(index){
+        var action = "<?php echo base_url() ?>mt/edit_ban/"+ban[index]['id'];
+           
+            
+        $("#MERK_BAN").val(ban[index]['MERK_BAN']);
+        $("#NO_SERI_BAN").val(ban[index]['NO_SERI_BAN']);
+        $("#JENIS_BAN").val(ban[index]['JENIS_BAN']);
+        $("#POSISI_BAN").val(ban[index]['POSISI_BAN']);
+        $("#TANGGAL_PASANG").val(ban[index]['TANGGAL_PASANG']);
+        $("#TANGGAL_GANTI_BAN").val(ban[index]['TANGGAL_GANTI_BAN']);
+            
+        $("#form-edit").attr("action",action ); 
+           
+    }
+    
 </script>
