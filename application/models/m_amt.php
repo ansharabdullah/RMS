@@ -46,5 +46,9 @@ class m_amt extends CI_Model {
         $data = $this->db->query("select * from pegawai p, role_assignment r where p.id_pegawai=r.id_pegawai and (p.jabatan<>'SUPIR' or p.jabatan<>'KERNET') and p.id_pegawai=$id_pegawai");
         return $data->result();
     }
-
+    
+    public function cekNIP($nip){
+        $data = $this->db->query("select id_pegawai from pegawai where nip='$nip'");
+        return $data->result();
+    }
 }

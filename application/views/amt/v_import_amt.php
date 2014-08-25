@@ -87,10 +87,13 @@
                                         <th>No. SIM</th>
                                         <th>No. Telp</th>
                                         <th>Transportir Asal</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $e = 0;
+                                    $data= array();
                                     for ($i = 0; $i < sizeof($amt); $i++) {
                                         ?>
                                         <tr class="">
@@ -107,16 +110,44 @@
                                             <td><?php echo $amt[$i]['no_sim'] ?></td>
                                             <td><?php echo $amt[$i]['no_telepon'] ?></td>
                                             <td><?php echo $amt[$i]['transportir_asal'] ?></td>
+                                            <td><?php if($amt[$i]['error']){echo "<b>".$amt[$i]['status_error']."</b>";}else{echo $amt[$i]['status_error'];} ?></td>
                                         </tr>
                                         <?php
+                                        $e += $amt[$i]['error'];
+                                        $data[$i] = array(
+                                            'nip' => $amt[$i]['nip'],
+                                            'no_pekerja' => $amt[$i]['no_pekerja'],
+                                            'id_depot' => $amt[$i]['id_depot'],
+                                            'nama_pegawai' => $amt[$i]['nama_pegawai'],
+                                            'jabatan' => $amt[$i]['jabatan'],
+                                            'klasifikasi' => $amt[$i]['klasifikasi'],
+                                            'tempat_lahir' => $amt[$i]['tempat_lahir'],
+                                            'tanggal_lahir' => $amt[$i]['tanggal_lahir'],
+                                            'no_ktp' => $amt[$i]['no_ktp'],
+                                            'no_sim' => $amt[$i]['no_sim'],
+                                            'no_telepon' => $amt[$i]['no_telepon'],
+                                            'transportir_asal' => $amt[$i]['transportir_asal'],
+                                            'alamat' => $amt[$i]['alamat'],
+                                            'tanggal_masuk' => $amt[$i]['tanggal_masuk'],
+                                            'status' => 'AKTIF'
+                                        );
                                     }
                                     ?>
                                 </tbody>
                             </table>
                         </div>
+                        <?php ?>
                         <form method="POST" action="<?php echo base_url() ?>amt/simpan_xls/" enctype="multipart/form-data">
-                            <input type="hidden" required="required" id="data_amt" class="form-control" name="data_amt" value="<?php echo htmlentities(serialize($amt)); ?>">
-                            <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit">
+                            <?php if ($e != 0) { ?>
+                                <div class="col-lg-11">
+                                    <div class="alert alert-block alert-danger fade in">
+                                        <strong>Error!</strong> Anda harus memperbaiki file excell sesuai dengan format yang telah disediakan agar dapat menyimpan ke database.
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <input type="hidden" required="required" id="data_amt" class="form-control" name="data_amt" value="<?php echo htmlentities(serialize($data)); ?>">
+                            <?php } ?>
+                            <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit" <?php if ($e != 0) echo "disabled='true'" ?>> 
                         </form>
                     </div>
                 </section>

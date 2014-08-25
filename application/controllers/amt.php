@@ -9,6 +9,7 @@ class amt extends CI_Controller {
         parent::__construct();
         $this->load->model("m_amt");
         $this->load->model("m_log_sistem");
+        $this->load->model("m_peringatan");
         $this->load->helper(array('form', 'url'));
     }
 
@@ -32,6 +33,9 @@ class amt extends CI_Controller {
         $data['lv1'] = 2;
         $data['lv2'] = 1;
         $data1['amt'] = $this->m_amt->detailAMT($id_pegawai);
+        $data1['grafik']= 0;
+        $data1['kinerja']= 0;
+        $data1['peringatan'] = $this->m_peringatan->getPeringatan($id_pegawai);
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
@@ -110,7 +114,7 @@ class amt extends CI_Controller {
 
     public function tambah_pegawai() {
 
-        $depot = 1;
+        $depot = $this->session->userdata("id_depot");
 
         $config['upload_path'] = base_url() . 'assets/img/photo/';
         $config['allowed_types'] = 'gif|jpg|png';
@@ -217,10 +221,51 @@ class amt extends CI_Controller {
                 //echo $sheetIndex, ' -> ', $loadedSheetName, '<br />';
                 $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
                 $sheetData = $objPHPExcel->getActiveSheet();
+                $sheetData->getStyle('H3:H1000')
+                        ->getNumberFormat()
+                        ->setFormatCode('dd-mm-yyyy');
+                $sheetData->getStyle('L3:L1000')
+                        ->getNumberFormat()
+                        ->setFormatCode('dd-mm-yyyy');
                 $i = 0;
                 $status = 0;
                 while ($status == 0) {
                     $no = $i + 3;
+                    $nip = $this->m_amt->cekNIP($sheetData->getCell('B' . $no)->getFormattedValue());
+                    $error = "Error : ";
+                    
+                    if ($sheetData->getCell('B' . $no)->getFormattedValue() == "") {
+                        $error = $error . "NIP tidak boleh kosong";
+                        $e = 1;
+                    } else if (sizeof($nip) != 0) {
+                        $error = $error . "NIP telah ada";
+                        $e = 1;
+                    }
+
+                    if ($sheetData->getCell('M' . $no)->getFormattedValue() != 8 && $sheetData->getCell('M' . $no)->getFormattedValue() != 16 && $sheetData->getCell('M' . $no)->getFormattedValue() != 24 && $sheetData->getCell('M' . $no)->getFormattedValue() != 32 && $sheetData->getCell('M' . $no)->getFormattedValue() != 40) {
+                        $error = $error . ", Klasifikasi harus 8/16/24/32/40 ";
+                        $e = 1;
+                    }
+
+                    if (strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()) != "SUPIR" && strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()) != "KERNET") {
+                        $error = $error . ", Kabatan hanya SUPIR atau KERNET ";
+                        $e = 1;
+                    }
+                    
+                    if ($error == "Error : ") {
+                        $error = "Sukses";
+                        $e = 0;
+                    }
+                    
+                    if ($i >= $sheetData->getHighestRow() - 4) {
+                        $status = 1;
+                        break;
+                    }
+                    if ($sheetData->getCell('A' . $no)->getFormattedValue() == '') {
+                        $status = 1;
+                        break;
+                    }
+
                     $data2['amt'][$i] = array(
                         'nip' => $sheetData->getCell('B' . $no)->getFormattedValue(),
                         'id_depot' => $this->session->userdata('id_depot'),
@@ -236,21 +281,17 @@ class amt extends CI_Controller {
                         'tanggal_masuk' => $sheetData->getCell('L' . $no)->getFormattedValue(),
                         'klasifikasi' => $sheetData->getCell('M' . $no)->getFormattedValue(),
                         'jabatan' => strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()),
-                        'status' => 'AKTIF'
+                        'status' => 'AKTIF',
+                        'status_error' => $error,
+                        'error' => $e
                     );
-                    if ($i >= $sheetData->getHighestRow() - 3) {
-                        $status = 1;
-                    }
-                    if ($sheetData->getCell('B' . $no)->getFormattedValue() == '') {
-                        $status = 1;
-                    }
+                    
                     $i++;
                 }
                 //echo $sheetData;
             }
         }
-
-        //print_r($data2);
+        unlink($file_target);
         $data['lv1'] = 2;
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
@@ -266,7 +307,7 @@ class amt extends CI_Controller {
 
         $link = base_url() . "amt/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        //echo 'window.location.href="' . $link . '"';
+        echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
 
