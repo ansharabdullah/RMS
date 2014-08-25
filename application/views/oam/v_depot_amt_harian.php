@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Harian AMT Depot 1
+                        Grafik Harian AMT Depot <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
                         <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm">
@@ -41,7 +41,7 @@
                         <div id="filePreview">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    Tabel
+                                    Tabel Kinerja AMT <?php echo $nama_depot?>
                                 </header>
                                 <div class="panel-body">
                                     <div class="adv-table editable-table">
@@ -59,18 +59,18 @@
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $km = array(46, 45, 54, 45, 45, 48, 52, 53, 49, 46, 52, 50, 46, 47, 48, 49, 52, 51, 48, 47, 47, 48, 49, 53, 48, 47, 45, 46, 48, 49);
-                                                $kl = array(53, 49, 46, 52, 50, 46, 47, 48, 49, 52, 51, 48, 47, 47, 48, 49, 53, 48, 47, 45, 54, 47, 45, 48, 52, 53, 47, 48, 49, 52);
-                                                for ($i = 0; $i < 30; $i++) {
+                                                $i = 1;
+                                                foreach ($kinerja_amt as $ka) {
                                                     ?>
                                                     <tr class="">
                                                         <td style="display:none;"></td>
-                                                        <td><?php echo ($i + 1) ?></td>
-                                                        <td style="white-space: nowrap"><?php echo ($i + 1) ?> Januari 2014</td>
-                                                        <td><?php echo $kl[$i] ?> KL</td>
-                                                        <td><?php echo $km[$i] ?> KM</td>
+                                                        <td><?php echo $i ?></td>
+                                                        <td style="white-space: nowrap"><?php echo date_format(date_create($ka->TANGGAL_LOG_HARIAN),'d F Y');?></td>
+                                                        <td><?php echo $ka->total_kl ?> KL</td>
+                                                        <td><?php echo $ka->total_km ?> KM</td>
                                                     </tr>
                                                     <?php
+                                                    $i++;
                                                 }
                                                 ?>
 
@@ -99,10 +99,16 @@
                 text: 'Jumlah KM'
             },
             subtitle: {
-                text: 'Bulan Januari Tahun 2014'
+                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun?>'
             },
             xAxis: [{
-                    categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                    categories: [<?php
+                        for($i = 0;$i < sizeof($kinerja_amt);$i++)
+                        {
+                            ?>'<?php echo $kinerja_amt[$i]->tanggal;?>'<?php
+                            if($i < sizeof($kinerja_amt) - 1) echo ",";
+                        }
+                    ?>]
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -133,7 +139,13 @@
             series: [{
                     type: 'column',
                     name: 'Jumlah',
-                    data: [46, 45, 54, 45, 45, 48, 52, 53, 49, 46, 52, 50, 46, 47, 48, 49, 52, 51, 48, 47, 47, 48, 49, 53, 48, 47, 45, 46, 48, 49]
+                     data: [<?php
+                        for($i = 0;$i < sizeof($kinerja_amt);$i++)
+                        {
+                            echo $kinerja_amt[$i]->total_km;
+                            if($i < sizeof($kinerja_amt) - 1) echo ",";
+                        }
+                    ?>]
                 }]
         });
     });

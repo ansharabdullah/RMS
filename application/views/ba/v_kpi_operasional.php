@@ -1,13 +1,16 @@
 <script type="text/javascript">
     $( document ).ready(function() {
-        $("#filePreview").hide();
+      $("#filePreview").hide();
         $("#commentForm").submit(function(e){
             var isvalidate=$("#commentForm").valid();
             if(isvalidate)
             {    
                 $("#filePreview").hide();
                 $("#filePreview").slideDown("slow");
-                $("#tgl").html($("#tglForm").val());
+                var tanggal;
+                   // tanggal = formatDate('dd-mm-yyyy', $("#tglForm").val());
+                    tanggal = $("#tglForm").val();
+                $("#tgl").html(tanggal);
             }
             e.preventDefault();
         });
@@ -55,10 +58,18 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Parameter KPI</th>
-                                <th>Target</th>
-                                <th>Realisasi</th>
+                                <th rowspan="2">No</th>
+                                <th rowspan="2">Parameter KPI</th>
+                                <th rowspan="2">Target</th>
+                                <th rowspan="2">Bobot</th>
+                                <th colspan="5">Realisasi</th>
+                            </tr>
+                            <tr>
+                                <td>Realisasi</td>
+                                <td>Deviasi</td>
+                                <td>Performance Score</td>
+                                <td>Normal Score</td>
+                                <td>Weighted Score</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,61 +77,111 @@
                                 <td>1</td>
                                 <td>Rencana pengiriman vs realisasi (MS2 Compliance)*</td>
                                 <td>98</td>
+                                <td>30.0%</td>
                                 <td>X</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Rencana volume angkutan vs realisasi</td>
                                 <td>100</td>
+                                <td>25.0%</td>
                                 <td>X</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Laporan tagihan ongkos angkut (dokumen lengkap dan benar)</td>
                                 <td>5</td>
+                                <td>5.0%</td>
                                 <td>1</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Customer  Satisfaction (Lembaga Penyalur)</td>
                                 <td>3,8</td>
+                                <td>5.0%</td>
                                 <td>1,0</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Jumlah temuan, keluhan atau komplain terkait pengelolaan MT</td>
                                 <td>5</td>
+                                <td>5.0%</td>
                                 <td>2</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Tindak lanjut penyelesaian keluhan atau komplain yang diterima</td>
                                 <td>100</td>
+                                <td>5.0%</td>
                                 <td>30</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td>Jumlah pekerja pengelola MT  yang mengikuti pelatihan</td>
                                 <td>5</td>
+                                <td>5.0%</td>
                                 <td>4</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td>Number of Incidents</td>
                                 <td>0</td>
+                                <td>10.0%</td>
                                 <td>0</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>9</td>
                                 <td>Waktu penyelesaian Incidents</td>
                                 <td>7</td>
+                                <td>10.0%</td>
                                 <td>0</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                             <tr>
                                 <td>10</td>
                                 <td>Number of Accident</td>
                                 <td>0</td>
+                                <td></td>
                                 <td>0</td>
+                                <td>1,54</td>
+                                <td>101,57%</td>
+                                <td>101,57%</td>
+                                <td>30,47%</td>
                             </tr>
                         </tbody>
                     </table>

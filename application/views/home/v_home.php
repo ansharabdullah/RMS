@@ -36,6 +36,19 @@
         $("#mtActive").removeClass('active');
     }
 
+<?php
+$arrTotalKlAmt = "";
+$arrTotalKmAmt = "";
+for($i  = 0 ; $i < sizeof($kinerja_amt); $i++) {
+    $arrTotalKlAmt.= $kinerja_amt[$i]->total_kl;
+    $arrTotalKmAmt.= $kinerja_amt[$i]->total_km;
+    if($i < sizeof($kinerja_amt) - 1)
+    {
+         $arrTotalKlAmt.=",";
+         $arrTotalKmAmt.=",";
+    }
+}
+?>
     $(function() {
         $('#grafik').highcharts({
             chart: {
@@ -51,7 +64,7 @@
             },
             xAxis: {
                 type: 'datetime',
-                minRange: 14 * 24 * 3600000 // fourteen days
+                minRange: 10 * 24 * 3600000 // ten days
             },
             yAxis: {
                 title: {
@@ -83,34 +96,35 @@
                 }
             },
             legend : {enabled: true},
-            series: [{
+           series: [{
                     type: 'spline',
                     name: 'KL',
                     pointInterval: 24 * 3600 * 1000,
-                    pointStart: Date.UTC(2014, 0, 01),
-                    data: [<?php
-for ($i = 0; $i < 12; $i++) {
-    echo rand(90, 100);
-    if ($i != 11)
-        echo ",";
-}
-?>]
+                    pointStart: Date.UTC(2014, <?php echo date('n')?> - 1, <?php echo $kinerja_mt[0]->tanggal?>),
+                    data: [<?php echo $arrTotalKlAmt?>]
                 }, {
                     type: 'spline',
                     name: 'KM',
                     pointInterval: 24 * 3600 * 1000,
-                    pointStart: Date.UTC(2014, 0, 01),
-                    data: [<?php
-for ($i = 0; $i < 12; $i++) {
-    echo rand(90, 100);
-    if ($i != 11)
-        echo ",";
-}
-?>]
+                    pointStart: Date.UTC(2014,<?php echo date('n')?> - 1,<?php echo $kinerja_mt[0]->tanggal?>),
+                    data: [<?php echo $arrTotalKmAmt?>]
                 }]
         });
     });
 
+<?php
+$arrTotalKl = "";
+$arrTotalKm = "";
+for($i  = 0 ; $i < sizeof($kinerja_mt); $i++) {
+    $arrTotalKl.= $kinerja_mt[$i]->total_kl;
+    $arrTotalKm.= $kinerja_mt[$i]->total_km;
+    if($i < sizeof($kinerja_mt) - 1)
+    {
+         $arrTotalKl.=",";
+         $arrTotalKm.=",";
+    }
+}
+?>
     $(function() {
         $('#grafik1').highcharts({
             chart: {
@@ -126,7 +140,7 @@ for ($i = 0; $i < 12; $i++) {
             },
             xAxis: {
                 type: 'datetime',
-                minRange: 14 * 24 * 3600000 // fourteen days
+                minRange: 10 * 24 * 3600000 // ten days,
             },
             yAxis: {
                 title: {
@@ -162,26 +176,14 @@ for ($i = 0; $i < 12; $i++) {
                     type: 'spline',
                     name: 'KL',
                     pointInterval: 24 * 3600 * 1000,
-                    pointStart: Date.UTC(2014, 0, 01),
-                    data: [<?php
-for ($i = 0; $i < 12; $i++) {
-    echo rand(90, 100);
-    if ($i != 11)
-        echo ",";
-}
-?>]
+                    pointStart: Date.UTC(2014, <?php echo date('n')?> - 1, <?php echo $kinerja_mt[0]->tanggal?>),
+                    data: [<?php echo $arrTotalKl?>]
                 }, {
                     type: 'spline',
                     name: 'KM',
                     pointInterval: 24 * 3600 * 1000,
-                    pointStart: Date.UTC(2014, 0, 01),
-                    data: [<?php
-for ($i = 0; $i < 12; $i++) {
-    echo rand(90, 100);
-    if ($i != 11)
-        echo ",";
-}
-?>]
+                    pointStart: Date.UTC(2014,<?php echo date('n')?> - 1,<?php echo $kinerja_mt[0]->tanggal?>),
+                    data: [<?php echo $arrTotalKm?>]
                 }]
         });
     });
@@ -198,7 +200,7 @@ for ($i = 0; $i < 12; $i++) {
                     </div>
                     <div class="value">
                         <h1 class="count">
-                            47
+                            <?php echo $total_amt?>
                         </h1>
                         <p>Awak Mobil Tangki</p>
                     </div>
@@ -211,7 +213,7 @@ for ($i = 0; $i < 12; $i++) {
                     </div>
                     <div class="value">
                         <h1 class=" count2">
-                            80
+                            <?php echo $total_mt?>
                         </h1>
                         <p>Mobil Tangki</p>
                     </div>
@@ -224,9 +226,9 @@ for ($i = 0; $i < 12; $i++) {
                     </div>
                     <div class="value">
                         <h1 class=" count3">
-                            87%
+                            <?php echo ceil(($kinerja_bulan[0]->total_kl / $rencana_bulan[0]->total_kl) * 100)?>%
                         </h1>
-                        <p>Traget KL</p>
+                        <p>Realisasi KL</p>
                     </div>
                 </section>
             </div>
@@ -237,7 +239,7 @@ for ($i = 0; $i < 12; $i++) {
                     </div>
                     <div class="value">
                         <h1 class=" count4">
-                            123
+                            <?php echo $kinerja_bulan[0]->own_use?>
                         </h1>
                         <p>KL (Own Use)</p>
                     </div>
@@ -401,64 +403,64 @@ for ($i = 0; $i < 12; $i++) {
                     </header>
                     <div class="panel-body">
                         <p class="text-muted">
-                            Kilo Liter Premium (70000/90000 Kl)
+                            Kilo Liter Premium (<?php echo $kinerja_bulan[0]->premium?>/<?php echo $rencana_bulan[0]->r_premium?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
+                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->premium / $rencana_bulan[0]->r_premium) * 100)?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Pertamax (95000/100000 Kl)
+                            Kilo Liter Pertamax (<?php echo $kinerja_bulan[0]->pertamax?>/<?php echo $rencana_bulan[0]->r_pertamax?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->pertamax / $rencana_bulan[0]->r_pertamax) * 100)?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Pertamax Plus (75000/100000 Kl)
+                            Kilo Liter Pertamax Plus (<?php echo $kinerja_bulan[0]->pertamax_plus?>/<?php echo $rencana_bulan[0]->r_pertamax_plus?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->pertamax_plus / $rencana_bulan[0]->r_pertamax_plus) * 100)?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Pertamax Dex (80000/100000 Kl)
+                            Kilo Liter Pertamax Dex (<?php echo $kinerja_bulan[0]->pertamina_dex?>/<?php echo $rencana_bulan[0]->r_pertamina_dex?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                            <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->pertamina_dex / $rencana_bulan[0]->r_pertamina_dex) * 100)?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Solar (70000/100000 Kl)
+                            Kilo Liter Solar (<?php echo $kinerja_bulan[0]->solar?>/<?php echo $rencana_bulan[0]->r_solar?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->solar / $rencana_bulan[0]->r_solar) * 100)?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Bio Solar (90000/90000 Kl)
+                            Kilo Liter Bio Solar (<?php echo $kinerja_bulan[0]->bio_solar?>/<?php echo $rencana_bulan[0]->r_bio_solar?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->bio_solar / $rencana_bulan[0]->r_bio_solar) * 100)?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
 
                         <p class="text-muted">
-                            Kilo Liter Own Use (90000/100000 Kl)
+                            Kilo Liter Own Use (<?php echo $kinerja_bulan[0]->own_use?>/<?php echo $rencana_bulan[0]->r_own_use?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->own_use / $rencana_bulan[0]->r_own_use) * 100)?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>

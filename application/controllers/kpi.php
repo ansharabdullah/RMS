@@ -7,6 +7,7 @@ class kpi extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model("m_depot");
     }
 
     public function index() {
@@ -19,7 +20,7 @@ class kpi extends CI_Controller {
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar_oam', $data);
+        $this->navbar($data['lv1'],$data['lv2']);
         $this->load->view("oam/v_kpi_operasional");
         $this->load->view('layouts/footer');
     }
@@ -29,7 +30,7 @@ class kpi extends CI_Controller {
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar_oam', $data);
+        $this->navbar($data['lv1'],$data['lv2']);
         $this->load->view("oam/v_kpi_operasional_bulan");
         $this->load->view('layouts/footer');
     }
@@ -39,9 +40,20 @@ class kpi extends CI_Controller {
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar_oam', $data);
+        $this->navbar($data['lv1'],$data['lv2']);
         $this->load->view("oam/v_kpi_operasional_depot");
         $this->load->view('layouts/footer');
     }
+    
+    
+    
+    public function navbar($lv1,$lv2)
+    {
+        $data['lv1'] = $lv1;
+        $data['lv2'] = $lv2;
+        $data['depot'] = $this->m_depot->get_depot();
+        $this->load->view('layouts/navbar_oam', $data);
+    }
+
 
 }
