@@ -10,17 +10,17 @@
             </li>
             <?php
             $level = 2;
-            for ($i = 1; $i <= 5; $i++) {
+            for ($i = 0; $i < sizeof($depot); $i++) {
                 ?>
                 <li class="sub-menu">
                     <a  href="javascript:;" <?php if ($lv1 == $level) echo "class='active'" ?>>
                         <i class="icon-building"></i>
-                        <span>Depot <?php echo $i ?></span>
+                        <span>Depot <?php echo $depot[$i]->NAMA_DEPOT ?></span>
                     </a>
                     <ul class="sub">
-                        <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/amt_depot/<?php echo ($i + 1) ?>"  >AMT</a></li>
-                        <li <?php if ($lv2 == 2 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/mt_depot/<?php echo ($i + 1) ?>">MT</a></li>
-                        <li <?php if ($lv2 == 3 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/kpi_depot/<?php echo ($i + 1) ?>" >KPI</a></li>
+                        <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/amt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>">AMT</a></li>
+                        <li <?php if ($lv2 == 2 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/mt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>">MT</a></li>
+                        <li <?php if ($lv2 == 3 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/kpi_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>" >KPI</a></li>
                     </ul>
                 </li>
                 <?php

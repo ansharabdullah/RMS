@@ -5,12 +5,17 @@ if (!defined('BASEPATH'))
 
 class presentasi extends CI_Controller {
 
+    function __construct() {
+        parent::__construct();
+        $this->load->model("m_depot");
+    }
+
     public function index() {
         $data['lv1'] = 8;
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar_oam',$data);
+        $this->navbar($data['lv1'],$data['lv2']);
        $this->load->view("oam/presentasi/v_option");
         $this->load->view('layouts/footer');
     }
@@ -21,7 +26,7 @@ class presentasi extends CI_Controller {
         $data['lv2'] = 1;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar_oam',$data);
+        $this->navbar($data['lv1'],$data['lv2']);
         $next = anchor("presentasi/slide/".($index - 1),"<button class='btn btn-danger'><i class='icon-long-arrow-left'></i> kembali</button>");
         $before = anchor("presentasi/slide/".($index + 1),"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-right'></i></button>");
         $slide['paging'] = " <section class='panel'>
@@ -70,5 +75,14 @@ class presentasi extends CI_Controller {
         $this->load->view('layouts/footer');
         
     }
+    
+    public function navbar($lv1,$lv2)
+    {
+        $data['lv1'] = $lv1;
+        $data['lv2'] = $lv2;
+        $data['depot'] = $this->m_depot->get_depot();
+        $this->load->view('layouts/navbar_oam', $data);
+    }
+    
 
 }

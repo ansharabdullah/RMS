@@ -6,26 +6,26 @@ class m_rencana extends CI_Model {
 
     //realisasi rencana bulan ini
 
-    public function get_rencana_bulan($id_depot,$bulan) {
+    public function get_rencana_bulan($id_depot,$bulan,$tahun) {
         $query = $this->db->query("select sum(r.R_PREMIUM) as r_premium , sum(r.R_PERTAMAX) as r_pertamax , 
                                    sum(r.R_PERTAMAXPLUS) as r_pertamax_plus ,sum(r.R_BIOSOLAR) as r_bio_solar,
                                    sum(r.R_SOLAR) as r_solar, sum(r.R_PERTAMINADEX) as r_pertamina_dex,sum(r.R_OWN_USE) as r_own_use,
                                    (sum(r.R_PREMIUM) + sum(r.R_PERTAMAX) + sum(r.R_PERTAMAXPLUS) + sum(r.R_BIOSOLAR) +  sum(r.R_SOLAR) + sum(r.R_PERTAMINADEX) + sum(r.R_OWN_USE)) as total_kl
                                    from rencana r, log_harian lh 
                                    where  r.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
-                                   and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan
+                                   and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
                                    and lh.ID_DEPOT = $id_depot");
         return $query->result();
     }
     
-     public function get_rencana_bulan_oam($bulan) {
+     public function get_rencana_bulan_oam($bulan,$tahun) {
         $query = $this->db->query("select sum(r.R_PREMIUM) as r_premium , sum(r.R_PERTAMAX) as r_pertamax , 
                                    sum(r.R_PERTAMAXPLUS) as r_pertamax_plus ,sum(r.R_BIOSOLAR) as r_bio_solar,
                                    sum(r.R_SOLAR) as r_solar, sum(r.R_PERTAMINADEX) as r_pertamina_dex,sum(r.R_OWN_USE) as r_own_use,
                                    (sum(r.R_PREMIUM) + sum(r.R_PERTAMAX) + sum(r.R_PERTAMAXPLUS) + sum(r.R_BIOSOLAR) +  sum(r.R_SOLAR) + sum(r.R_PERTAMINADEX) + sum(r.R_OWN_USE)) as total_kl
                                    from rencana r, log_harian lh 
                                    where  r.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
-                                   and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan");
+                                   and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun ");
         return $query->result();
     }
     

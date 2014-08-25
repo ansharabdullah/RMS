@@ -101,8 +101,6 @@
                                     <li><a style="cursor: pointer" onclick="changeAmtTitle('KL')">KL</a></li>
                                     <li><a style="cursor: pointer" onclick="changeAmtTitle('Ritase')">Ritase</a></li>
                                     <li><a style="cursor: pointer" onclick="changeAmtTitle('SPBU')">SPBU</a></li>
-                                    <li><a style="cursor: pointer" onclick="changeAmtTitle('Jumlah Hadir')">Jumlah Hadir</a></li>
-                                    <li><a style="cursor: pointer" onclick="changeAmtTitle('Jumlah Tidak Hadir')">Jumlah Tidak Hadir</a></li>
                                 </ul>
                             </div>
                             <center>
@@ -1615,7 +1613,76 @@
                 }]
         });
     });
-     
+     /*---------GRAFIK AMT---------*/
+        
+    var arrKmAmt = new Array();
+    var arrKlAmt = new Array();
+    var arrRitaseAmt = new Array();
+    var arrSpbuAmt = new Array();
+    var arrColorAmt = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
+    <?php
+        for($i = 0 ; $i < sizeof($depot);$i++)
+        {
+            ?>
+            arrKmAmt.push({
+                name:'<?php echo $depot[$i]->NAMA_DEPOT?>',
+                color : arrColorAmt[<?php echo $i?>],
+                data:[
+                    <?php
+                        for($j = 0 ; $j < sizeof($kinerja_amt);$j++){
+                            if($kinerja_amt[$j]->ID_DEPOT == $depot[$i]->ID_DEPOT ){
+                                echo $kinerja_amt[$j]->total_km;
+                                if($j < sizeof($kinerja_amt) - 1) echo ",";
+                            }
+                        }
+                    ?>
+                ]
+            });
+            arrKlAmt.push({
+                name:'<?php echo $depot[$i]->NAMA_DEPOT?>',
+                color : arrColorAmt[<?php echo $i?>],
+                data:[
+                    <?php
+                        for($j = 0 ; $j < sizeof($kinerja_amt);$j++){
+                            if($kinerja_amt[$j]->ID_DEPOT == $depot[$i]->ID_DEPOT ){
+                                echo $kinerja_amt[$j]->total_kl;
+                                if($j < sizeof($kinerja_amt) - 1) echo ",";
+                            }
+                        }
+                    ?>
+                ]
+            });
+            arrRitaseAmt.push({
+                name:'<?php echo $depot[$i]->NAMA_DEPOT?>',
+                color : arrColorAmt[<?php echo $i?>],
+                data:[
+                    <?php
+                        for($j = 0 ; $j < sizeof($kinerja_amt);$j++) {
+                            if($kinerja_amt[$j]->ID_DEPOT == $depot[$i]->ID_DEPOT ) {
+                                echo $kinerja_amt[$j]->ritase;
+                                if($j < sizeof($kinerja_amt) - 1) echo ",";
+                            }
+                        }
+                    ?>
+                ]
+            });
+            arrSpbuAmt.push({
+                name:'<?php echo $depot[$i]->NAMA_DEPOT?>',
+                color : arrColorAmt[<?php echo $i?>],
+                data:[
+                    <?php
+                        for($j = 0 ; $j < sizeof($kinerja_amt);$j++) {
+                            if($kinerja_amt[$j]->ID_DEPOT == $depot[$i]->ID_DEPOT ) {
+                                echo $kinerja_amt[$j]->spbu;
+                                if($j < sizeof($kinerja_amt) - 1) echo ",";
+                            }
+                        }
+                    ?>
+                ]
+            });
+            <?php
+        }
+    ?>
     $(function () {
         amt = new Highcharts.Chart({ 
             chart: {
@@ -1676,26 +1743,7 @@
             credits: {
                 enabled: false
             },
-            series: [{
-                    name: 'Depot 1',
-                    color:'#FF002B',
-                    data: [107]
-                }, {
-                    name: 'Depot 2',
-                    color:'#2C88D4',
-                    data: [133]
-                }, {
-                    name: 'Depot 3',
-                    color:'#23C906',
-                    data: [97]
-                }, {
-                    name: 'Depot 4',
-                    data: [97]
-                }, {
-                    name: 'Depot 5',
-                    color:'#F5A905',
-                    data: [97]
-                }]
+            series: arrKmAmt
         });
     });
     
@@ -1909,7 +1957,23 @@
     });
     function changeAmtTitle(title)
     {
-        amt.setTitle({text: "Grafik AMT Indikator " + title});       
+        amt.setTitle({text: "Grafik AMT Indikator " + title});      
+        var series = amt.series.length; 
+        while(amt.series.length > 0)
+             amt.series[0].remove(true);
+        var i = 0;
+        for(i = 0 ; i < series ; i++)
+        {    
+            if(title == "KL"){
+                amt.addSeries(arrKlAmt[i]);
+            }else if(title == "KM"){
+                amt.addSeries(arrKmAmt[i]);
+            }else if (title == "Ritase"){
+                amt.addSeries(arrRitaseAmt[i]);
+            }else if(title == "SPBU"){
+                amt.addSeries(arrSpbuAmt[i]);
+            }
+        }
         $("#grafikAmt").hide();
         $("#grafikAmt").slideDown("slow");
     }

@@ -415,7 +415,7 @@ for($i  = 0 ; $i < sizeof($kinerja_mt); $i++) {
                             Kilo Liter Pertamax (<?php echo $kinerja_bulan[0]->pertamax?>/<?php echo $rencana_bulan[0]->r_pertamax?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->pertamax / $rencana_bulan[0]->r_pertamax) * 100)?>95%">
+                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->pertamax / $rencana_bulan[0]->r_pertamax) * 100)?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>

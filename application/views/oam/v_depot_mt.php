@@ -632,5 +632,71 @@
             </div>
 
         </div>
+        <div class ="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <div class="panel-body" >
+                        <div class="adv-table editable-table " style="overflow-x: scroll" >
+                            <div class="space15"></div>
+                            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;"></th>
+                                        <th >No.</th> 
+                                        <th>Nopol</th>
+                                        <th>Transpotir</th>
+                                        <th>Kapasitas</th>
+                                        <th>Produk</th>
+                                        <th>No Mesin</th>
+                                        <th>No Rangka</th>
+                                        <th>Jenis Tangki</th>
+                                        <th>Status</th>
+                                        <th>GPS</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="">
+                                        <?php $i = 1;
+                                        foreach ($mt as $row) { ?>
+                                            <td style="display:none;"></td>
+                                            <td><?php echo $i; ?></td>
+                                            <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
+
+                                            <td><?php echo $row->TRANSPORTIR; ?></td>
+                                            <td><?php echo $row->KAPASITAS; ?></td>
+                                            <td><?php echo $row->PRODUK; ?></td>
+                                            <td><?php echo $row->NO_MESIN; ?></td>
+                                            <td><?php echo $row->NO_RANGKA; ?></td>
+                                            <td><?php echo $row->JENIS_TANGKI; ?></td>
+                                            <td><?php echo $row->STATUS_MOBIL; ?></td>
+                                            <td><?php echo $row->GPS; ?></td>
+
+
+                                        </tr>
+                                        <?php $i++;
+                                    } ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </section>
 </section>
+
+
+<script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>
+
+<!--script for this page only-->
+<script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
