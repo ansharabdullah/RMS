@@ -7,7 +7,10 @@
             {    
                 $("#filePreview").hide();
                 $("#filePreview").slideDown("slow");
-                $("#tgl").html($("#tglForm").val());
+                var tanggal;
+                   // tanggal = formatDate('dd-mm-yyyy', $("#tglForm").val());
+                    tanggal = $("#tglForm").val();
+                $("#tgl").html(tanggal);
             }
             e.preventDefault();
         });

@@ -40,5 +40,27 @@ class m_amt extends CI_Model {
         $data = $this->db->query("select * from pegawai p, role_assignment r where p.id_pegawai=r.id_pegawai and (p.jabatan<>'SUPIR' or p.jabatan<>'KERNET') and p.id_pegawai=$id_pegawai");
         return $data->result();
     }
+    
+    
+    /*     * DASHBOARD --- Renisa* */
 
+    //oam
+    public function getAllAMt() {
+        $data = $this->db->query("select * from pegawai where (jabatan='SUPIR' or jabatan='KERNET')");
+        return $data;
+    }
+
+    public function getTotalAMt() {
+        return $this->getAllAMt()->num_rows();
+    }
+
+    //ss
+    public function getAllAMtByDepot($id_depot) {
+        $data = $this->db->query("select * from pegawai where (jabatan='SUPIR' or jabatan='KERNET') and ID_DEPOT=$id_depot");
+        return $data;
+    }
+
+    public function getTotalAMtByDepot($id_depot) {
+        return $this->getAllAMtByDepot($id_depot)->num_rows();
+    }
 }
