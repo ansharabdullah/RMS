@@ -133,6 +133,26 @@ class m_kinerja extends CI_Model {
     public function insertManualKinerjaMT($id_log_harian, $id_mobil,$km,$kl,$rit,$ou,$premium,$pertamax,$pertamax_plus,$pertamina_dex,$solar,$bio_solar) {
         $query = $this->db->query("insert into kinerja_mt(ID_LOG_HARIAN,ID_MOBIL,TOTAL_KM_MT,TOTAL_KL_MT,RITASE_MT,OWN_USE,PREMIUM,PERTAMAX,PERTAMAX_PLUS,PERTAMINA_DEX,SOLAR,BIO_SOLAR) values('$id_log_harian','$id_mobil','$km','$kl','$rit','$ou','$premium','$pertamax','$pertamax_plus','$pertamina_dex','$solar','$bio_solar')");
     }
+    
+    public function getAlokasiSPBU($id_log_harian){
+        $query = $this->db->query("select JUMLAH_ALOKASI_SPBU from log_harian where ID_LOG_HARIAN = '$id_log_harian'");
+        $hasil = -1;
+        if ($query->num_rows() == 1) {
+            $row = $query->row();
+            $hasil = $row->JUMLAH_ALOKASI_SPBU;
+        }
+        return $hasil;
+    }
+    
+    public function getKinerjaAMT($id_log_harian){
+        $query = $this->db->query("select p.NIP,p.NAMA_PEGAWAI,p.JABATAN,p.KLASIFIKASI,k.STATUS_TUGAS,k.TOTAL_KM,k.TOTAL_KL,k.RITASE_AMT,k.SPBU,k.PENDAPATAN from kinerja_amt k, pegawai p where k.ID_PEGAWAI = p.ID_PEGAWAI and k.ID_LOG_HARIAN = '$id_log_harian'");
+        return $query->result();
+    }
+    
+    public function getKinerjaMT($id_log_harian){
+        $query = $this->db->query("select m.NOPOL, m.TRANSPORTIR, m.KAPASITAS,k.RITASE_MT,k.TOTAL_KM_MT,k.TOTAL_KL_MT,k.OWN_USE,k.PREMIUM,k.PERTAMAX,k.PERTAMAX_PLUS,k.BIO_SOLAR,k.PERTAMINA_DEX,k.SOLAR  from kinerja_mt k,mobil m where k.ID_MOBIL = m.ID_MOBIL and ID_LOG_HARIAN = '$id_log_harian'");
+        return $query->result();
+    }
 
     /* DASHBOARD --- RENISA */
 

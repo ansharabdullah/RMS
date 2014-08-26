@@ -97,7 +97,7 @@ class kinerja extends CI_Controller {
                             $data_kinerja['TANGGAL']['error'] = false;
                         }
                         if ($data_kinerja['MT']['error'] == false) {
-                            $id=$this->m_kinerja->getIdMobil($sheetData->getCell('C' . $row_baca)->getFormattedValue(), $depot); // cek di data base
+                            $id = $this->m_kinerja->getIdMobil($sheetData->getCell('C' . $row_baca)->getFormattedValue(), $depot); // cek di data base
                             $data_kinerja['MT']['id'][] = $id;
                             $data_kinerja['MT']['id_kinerja'][] = $this->m_kinerja->getIdKinerjaMT($data_kinerja['ID_LOG_HARIAN'], $id);
                             $data_kinerja['MT']['nopol'][] = $sheetData->getCell('C' . $row_baca)->getFormattedValue();
@@ -256,24 +256,46 @@ class kinerja extends CI_Controller {
     }
 
     public function hapus() {
-        $klik_hapus = false;
-        $status_hapus = false;
-        if ($this->input->post('submit')) {
-            $klik_hapus = true;
-            $tanggal_hapus = date("d-m-Y", strtotime($this->input->post('tanggal_hapus')));
-            $depot = 1;
+        $depot = 1;
 
-            $this->load->model('m_kinerja');
+        $this->load->model('m_kinerja');
+
+        $data2['klik_hapus'] = false;
+        $data2['klik_cek'] = false;
+        $data2['status_hapus'] = false;
+
+        if ($this->input->post('submit')) {
+            $data2['klik_hapus'] = true;
+            $tanggal_hapus = date("d-m-Y", strtotime($this->input->post('tanggal_hapus')));
 
             $cek = $this->m_kinerja->cekStatusLogHarian($depot, $tanggal_hapus);
 
-            if ($cek == 0) {
-                $status_hapus = false;
-            } else {
+            if ($cek != 0) {
                 $id = $this->m_kinerja->getIdLogHarian($depot, $tanggal_hapus);
                 $this->m_kinerja->hapus_kinerja_siod($id);
-                $status_hapus = true;
+                $data2['status_hapus'] = true;
                 // insert log sistem
+            }
+        } else if ($this->input->post('cek')) {
+            $data2['klik_cek'] = true;
+            $data2['tanggal_cek'] = $this->input->post('tanggal_cek');
+            $data2['tanggal'] = date("d-m-Y", strtotime($data2['tanggal_cek']));
+
+            $id = $this->m_kinerja->getIdLogHarian($depot, $data2['tanggal']);
+            if ($id != -1) {//data ada
+                $cek = $this->m_kinerja->cekStatusLogHarian($depot, $data2['tanggal']);
+                if ($cek == 1) {
+                    $data2['status_hapus'] = true;
+                    //get jumlah spbu
+                    $data2 ['alokasi_spbu'] = $this->m_kinerja->getAlokasiSPBU($id);
+                    //get kinerja mt
+                    $data2 ['kinerja_mt'] = $this->m_kinerja->getKinerjaMT($id);
+                    ;
+                    //get kinerja amt
+                    $data2 ['kinerja_amt'] = $this->m_kinerja->getKinerjaAMT($id);
+                } else {
+                    $data2['status_hapus'] = false;
+                }
             }
         }
 
@@ -282,7 +304,7 @@ class kinerja extends CI_Controller {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('kinerja/v_hapus_kinerja_siod', array('klik_hapus' => $klik_hapus, 'status_hapus' => $status_hapus));
+        $this->load->view('kinerja/v_hapus_kinerja_siod', $data2);
         $this->load->view('layouts/footer');
     }
 
@@ -311,7 +333,7 @@ class kinerja extends CI_Controller {
             $data2['KLIK_SIMPAN'] = true;
             $data2['KLIK_SIMPAN_PEGAWAI'] = true;
             $data2['KLIK_SIMPAN_MOBIL'] = false;
-            
+
             $data2['error_id_log_harian'] = false;
             $data2['error_id_kinerja_amt'] = false;
             $data2['error_koefisien'] = false;
@@ -358,15 +380,14 @@ class kinerja extends CI_Controller {
             $this->load->view('layouts/navbar', $data);
             $this->load->view('kinerja/v_kinerja_manual', $data2);
             $this->load->view('layouts/footer');
-            
         } else if ($this->input->post('submit_mobil')) {
             $data2['KLIK_SIMPAN'] = true;
             $data2['KLIK_SIMPAN_PEGAWAI'] = false;
             $data2['KLIK_SIMPAN_MOBIL'] = true;
-            
+
             $data2['error_id_log_harian'] = false;
             $data2['error_id_kinerja_mt'] = false;
-            
+
             $id_mobil = $this->input->post('id_mobil');
             $tanggal = date("d-m-Y", strtotime($this->input->post('tgl_mobil')));
             $km_mobil = $this->input->post('km_mobil');
@@ -379,21 +400,21 @@ class kinerja extends CI_Controller {
             $pertaminadex_mobil = $this->input->post('pertaminadex_mobil');
             $solar_mobil = $this->input->post('solar_mobil');
             $biosolar_mobil = $this->input->post('biosolar_mobil');
-            
+
             //cek dulu id log harian
             $id_log_harian = $this->m_kinerja->getIdLogHarian($depot, $tanggal);
             if ($id_log_harian != -1) {
                 //cek kinerja mt jika sudah di input
                 $id_kinerja = $this->m_kinerja->getIdKinerjaMT($id_log_harian, $id_mobil);
                 if ($id_kinerja == 0) {
-                    $this->m_kinerja->insertManualKinerjaMT($id_log_harian, $id_mobil, $km_mobil,$kl_mobil,$rit_mobil,$ou_mobil,$premium_mobil,$pertamax_mobil,$pertamaxplus_mobil,$pertaminadex_mobil,$solar_mobil,$biosolar_mobil);
-                }else{
+                    $this->m_kinerja->insertManualKinerjaMT($id_log_harian, $id_mobil, $km_mobil, $kl_mobil, $rit_mobil, $ou_mobil, $premium_mobil, $pertamax_mobil, $pertamaxplus_mobil, $pertaminadex_mobil, $solar_mobil, $biosolar_mobil);
+                } else {
                     $data2['error_id_kinerja_mt'] = true;
                 }
-            }else{
+            } else {
                 $data2['error_id_log_harian'] = true;
             }
-            
+
             $data2['AMT'] = $this->m_kinerja->getPegawai($depot);
             $data2['MT'] = $this->m_kinerja->getMobil($depot);
             $data['lv1'] = 4;
