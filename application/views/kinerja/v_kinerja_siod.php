@@ -175,7 +175,7 @@
                     </header>
 
                     <div class="panel-body" >
-                        <div class="adv-table editable-table " style="overflow-y: scroll">
+                        <div class="adv-table editable-table " style="overflow-x: scroll">
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
@@ -240,7 +240,7 @@
                     </header>
 
                     <div class="panel-body" >
-                        <div class="adv-table editable-table " style="overflow-y: scroll">
+                        <div class="adv-table editable-table " style="overflow-x: scroll">
                             <table class="table table-striped table-hover table-bordered" id="editable-sample2">
                                 <thead>
                                     <tr>

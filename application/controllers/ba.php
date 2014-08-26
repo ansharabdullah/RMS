@@ -171,12 +171,89 @@ class ba extends CI_Controller {
     }
 
     public function import_ms2() {
+        $depot = 1;
+        $data2['klik_upload'] = false;
+        $data2['klik_simpan'] = false;
+        if ($this->input->post('upload')) {
+            $data2['klik_upload'] = true;
+            $data2['ms2']['error'] = true;
+
+            $blnms2 = $this->input->post('blnms2');
+            $bulan = date("d-m-Y", strtotime($blnms2));
+            $fileMS2 = $_FILES['fileMS2'];
+            $last_day = date('t', strtotime($bulan));
+echo "<script>alert('$last_day');</script>";    
+            $data2['ms2']['jumlah'] = $last_day;
+
+            $dir = './assets/file/';
+            if (!file_exists($dir)) {
+                mkdir($dir);
+            }
+
+            $file_target = $dir . $_FILES['fileMS2']['name'];
+            move_uploaded_file($_FILES['fileMS2']['tmp_name'], $file_target);
+
+            $this->load->library('PHPExcel/Classes/PHPExcel');
+
+            $inputFileName = $file_target;
+
+            $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+
+            $worksheetData = $objReader->listWorksheetInfo($inputFileName);
+
+            foreach ($worksheetData as $row) {
+                $worksheetRead[] = $row['worksheetName'];
+            }
+
+            $objReader->setLoadSheetsOnly($worksheetRead);
+
+            $objPHPExcel = $objReader->load($inputFileName);
+
+            $loadedSheetNames = $objPHPExcel->getSheetNames();
+
+            foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
+                if ($loadedSheetName == 'MS2 Compliance') {
+                    $data2['ms2']['error'] = false;
+                    $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
+                    $sheetData = $objPHPExcel->getActiveSheet();
+                    $row_baca = 4;
+                    $i = 0;
+                    for ($i = 0; $i < $last_day; $i++) {
+                        $data2['ms2']['tanggal'][] = '2014-05-01';
+                        $data2['ms2']['sesuai_premium'][] = $sheetData->getCell('B' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['sesuai_solar'][] = $sheetData->getCell('C' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['sesuai_pertamax'][] = $sheetData->getCell('D' . ($row_baca + $i))->getValue()*100;
+
+                        $data2['ms2']['cepat_premium'][] = $sheetData->getCell('E' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['cepat_solar'][] = $sheetData->getCell('F' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['cepat_pertamax'][] = $sheetData->getCell('G' . ($row_baca + $i))->getValue()*100;
+
+                        $data2['ms2']['cepat_shift1_premium'][] = $sheetData->getCell('H' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['cepat_shift1_solar'][] = $sheetData->getCell('I' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['cepat_shift1_pertamax'][] = $sheetData->getCell('J' . ($row_baca + $i))->getValue()*100;
+
+                        $data2['ms2']['lambat_premium'][] = $sheetData->getCell('K' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['lambat_solar'][] = $sheetData->getCell('L' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['lambat_pertamax'][] = $sheetData->getCell('M' . ($row_baca + $i))->getValue()*100;
+
+                        $data2['ms2']['tidak_terkirim_premium'][] = $sheetData->getCell('N' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['tidak_terkirim_solar'][] = $sheetData->getCell('O' . ($row_baca + $i))->getValue()*100;
+                        $data2['ms2']['tidak_terkirim_pertamax'][] = $sheetData->getCell('P' . ($row_baca + $i))->getValue()*100;
+                    }
+                }
+            }
+        } else if ($this->input->post('simpan')) {
+            $data2['klik_simpan'] = true;
+        }
+
+
         $data['lv1'] = 6;
         $data['lv2'] = 2;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('ba/v_import_ms2');
+        $this->load->view('ba/v_import_ms2', $data2);
         $this->load->view('layouts/footer');
     }
 
