@@ -36,10 +36,10 @@ class Mt extends CI_Controller {
     
     public function tambah_mobil() {
 
-        $id_depot = 1;
+        $depot = $this->session->userdata("id_depot");
 
         $data = array(
-            'id_depot' => $id_depot,
+            'depot' => $depot,
             'nopol' => $this->input->post('nopol', true),
             'kapasitas' => $this->input->post('kapasitas', true),
             'produk' => $this->input->post('produk', true),
@@ -164,7 +164,6 @@ class Mt extends CI_Controller {
     }
     
 //APAR MT
-    
     public function apar_mt($id_mobil) {
         
         
@@ -542,6 +541,29 @@ class Mt extends CI_Controller {
         $this->header($data);
         $this->load->view('mt/v_rencana',$data);
         $this->footer();
+    }
+    
+    public function tambah_rencana() {
+
+        $id_log_harian = 1;
+
+        $data = array(
+            'id_log_harian' => $id_log_harian,
+            'R_PREMIUM' => $this->input->post('R_PREMIUM', true),
+            'R_PERTAMAX' => $this->input->post('R_PERTAMAX', true),
+            'R_PERTAMAXPLUS' => $this->input->post('R_PERTAMAXPLUS', true),
+            'R_PERTAMINADEX' => $this->input->post('R_PERTAMINADEX', true),
+            'R_BIOSOLAR' => $this->input->post('R_BIOSOLAR', true),
+            'R_SOLAR' => $this->input->post('R_SOLAR', true),
+            'R_OWN_USE' => $this->input->post('R_OWN_USE', true),
+        );
+
+        $this->m_mt->insertRencana($data);
+        $link = base_url() . "mt/rencana/";
+        
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
     
 

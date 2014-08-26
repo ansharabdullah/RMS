@@ -125,7 +125,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal (km)</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kmawal" name="KM_AWAL" minlength="2" type="number" required />
+                            <input class=" form-control input-sm m-bot15" id="kmawal" placeholder="KM Awal" name="KM_AWAL" minlength="2" type="number" required />
                         </div>
 
                     </div>
@@ -138,12 +138,12 @@
                     <div class="form-group">
                         <label for="merkoli" class="col-lg-2 col-sm-2 control-label">Merk Oli</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="merkoli" name="MERK_OLI" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="merkoli" placeholder="Merk Oli" name="MERK_OLI" minlength="2" type="text" required />
                         </div>
                     </div> <div class="form-group">
                         <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume (Liter)</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="totalvolume" name="TOTAL_VOLUME" type="number" required />
+                            <input class=" form-control input-sm m-bot15" id="totalvolume" placeholder="Total Volume" name="TOTAL_VOLUME" type="number" required />
                         </div>
                     </div>
                 </div>

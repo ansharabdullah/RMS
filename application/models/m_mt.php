@@ -16,7 +16,12 @@ class m_mt extends CI_Model {
         $this->db->where('id_mobil', $id);
         $this->db->delete('mobil');
     }
-
+    
+    public function selectMobil(){
+        $data = $this->db->query("select * from mobil where (kapasitas='8' or kapasitas='16' or kapasitas='24' or kapasitas='32')");
+        return $data->row();
+    }
+    
     public function selectMT($depot) {
         $data = $this->db->query("select * from mobil where (kapasitas='8' or kapasitas='16' or kapasitas='24' or kapasitas='32') and id_depot=$depot");
         return $data->result();
@@ -66,6 +71,16 @@ class m_mt extends CI_Model {
     public function insertBan($data) {
         $this->db->insert('ban', $data);
     }
+    
+    public function selectRencana($id_log_harian){
+        $data = $this->db->query("select T.ID_RENCANA,L.ID_LOG_HARIAN, T.R_PREMIUM, T.R_PERTAMAX, T.R_PERTAMAXPLUS, T.R_PERTAMINADEX, T.R_SOLAR, T.R_BIOSOLAR, T.R_OWN_USE from rencana T, log_harian L where T.id_log_harian=L.id_log_harian and L.id_log_harian = $id_log_harian");
+        return $data->result();
+    }
+    
+    public function insertRencana($data) {
+        $this->db->insert('rencana', $data);
+    }
+    
 
     public function deleteBan($id) {
         $this->db->where('id_ban', $id);

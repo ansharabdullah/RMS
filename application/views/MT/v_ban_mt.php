@@ -192,19 +192,19 @@ foreach ($ban as $a) {
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Merk Ban</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="merk" name="MERK_BAN" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="merk" placeholder="Merk Ban" name="MERK_BAN" minlength="2" type="text" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">No Seri</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="seri" name="NO_SERI_BAN" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="seri" placeholder="No Seri" name="NO_SERI_BAN" minlength="2" type="text" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Ban</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="seri" name="JENIS_BAN" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="seri" placeholder="Jenis Ban" name="JENIS_BAN" minlength="2" type="text" required />
 
                         </div>
                     </div>

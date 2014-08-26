@@ -140,7 +140,7 @@
                     <div class="form-group">
                         <label for="stnk" class="col-lg-2 col-sm-2 control-label">KETERANGAN</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="stnk" name="KETERANGAN_SURAT" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="stnk" placeholder="Keterangan Surat" name="KETERANGAN_SURAT" minlength="2" type="text" required />
                         </div>
                     </div>
 

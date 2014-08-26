@@ -162,7 +162,7 @@
                     <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="keterangan" name="KETERANGAN_APAR" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" placeholder="Keterangan" id="keterangan" name="KETERANGAN_APAR" minlength="2" type="text" required />
                         </div>
                     </div>
                 </div>

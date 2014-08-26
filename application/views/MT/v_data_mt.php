@@ -1,4 +1,22 @@
-<link rel="stylesheet" href="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.css" />
+<script type="text/javascript">
+message = ("Sorry, you are not allowed to enter any spaces");
+function nospaces(which) {
+x = which.value
+if (navigator.appName == "Netscape" ) {
+if (e.which == 32) {
+alert (message);
+return false
+}
+}
+if (event.keyCode == 32) {
+alert (message);
+return false;
+
+}
+x = x.replace(/\s/g,""); // remove the unwanted space
+document.myform.textbox.value = x;
+}
+</script>
 
 <!--main content start-->
 <section id="main-content">
@@ -81,13 +99,13 @@
                                 <div class="bio-row">
                                     <label for="nopol" class="control-label col-lg-4">Nopol</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="nop" name="nopol"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" onkeydown="nospaces(this)" id="nop" name="nopol" placeholder="Nopol" type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">No Rangka</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cama" name="no_rangka"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="cama" name="no_rangka" placeholder="No rangka"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -106,7 +124,7 @@
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">No Mesin</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cmesin" name="no_mesin"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="cmesin" placeholder="No mesin" name="no_mesin"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -127,19 +145,19 @@
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cjk" name="jenis_kendaraan"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="cjk" placeholder="Jenis_Kendaraan" name="jenis_kendaraan"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="calamat" class="control-label col-lg-4">Transportir</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="calamat" name="transportir"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="calamat" placeholder="Transportir" name="transportir"  type="text" required />
                                     </div>
                                 </div> 
                                 <div class="bio-row">
                                     <label for="ctglmasuk" class="control-label col-lg-4">Rasio</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="crasio" name="rasio" type="number" required/>
+                                        <input class=" form-control input-sm m-bot15" id="crasio" placeholder="Rasio" name="rasio" type="number" required/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
