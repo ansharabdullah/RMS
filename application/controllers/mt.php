@@ -542,9 +542,7 @@ class Mt extends CI_Controller {
     public function rencana() {
         
         
-        $id_log_harian = 1;
-        $data['rencana'] = $this->m_mt->selectRencana($id_log_harian);
-        
+        $data['rencana'] = $this->m_mt->selectRencana();
         
         $data['lv1'] = 3;
         $data['lv2'] = 5;
@@ -552,8 +550,6 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_rencana',$data);
         $this->footer();
     }
-    
-    
     
 
     private function header($data) {

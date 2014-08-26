@@ -1,3 +1,20 @@
+<?php
+function DateToIndo($date) { 
+        $BulanIndo = array("Januari", "Februari", "Maret",
+                           "April", "Mei", "Juni",
+                           "Juli", "Agustus", "September",
+                           "Oktober", "November", "Desember");
+    
+        $tahun = substr($date, 0, 4); 
+        $bulan = substr($date, 5, 2); 
+        $tgl   = substr($date, 8, 2); 
+        
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+        return($result);
+}
+
+?>
+
 <script>
     var ban = new Array();
     $(document).ready(function(){
@@ -94,8 +111,8 @@ foreach ($ban as $a) {
                             <td style="display:none;"></td>
                             <td><?php echo $i; ?></td>
                             <td><?php echo $row->POSISI_BAN; ?></td>
-                            <td><?php echo $row->TANGGAL_PASANG; ?></td>
-                            <td><?php echo $row->TANGGAL_GANTI_BAN; ?></td>
+                            <td><?php echo(DateToIndo($row->TANGGAL_PASANG)); ?></td>
+                            <td><?php echo(DateToIndo($row->TANGGAL_GANTI_BAN)); ?></td>
                             <td><?php echo $row->MERK_BAN; ?></td>
                             <td><?php echo $row->NO_SERI_BAN; ?></td>
                             <td><?php echo $row->JENIS_BAN; ?></td>
