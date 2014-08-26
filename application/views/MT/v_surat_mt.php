@@ -146,7 +146,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                    <button data-dismiss="modal" class="btn btn-default" onclick="this.form.reset()">Batal</button>
                     <input class="btn btn-success" type="submit" value="Simpan"/>
                 </div>
             </form> 
