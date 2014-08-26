@@ -42,7 +42,7 @@
             <header class="panel-heading">
                 Import Data MT Dari Excel
 
-                <button type="button" style="float: right;" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" data-placement="left" onclick="downloadCsv()"><i class="icon-download-alt"></i></button>
+                <button type="button" style="float: right;" href="<?php echo base_url() ?>downloads/format_amt.xlsx" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" data-placement="left" onclick="downloadCsv()"><i class="icon-download-alt"></i></button>
 
             </header>
             <div class="panel-body" >

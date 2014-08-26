@@ -1,20 +1,31 @@
-<script type="text/javascript">
-message = ("Sorry, you are not allowed to enter any spaces");
-function nospaces(which) {
-x = which.value
-if (navigator.appName == "Netscape" ) {
-if (e.which == 32) {
-alert (message);
-return false
-}
-}
-if (event.keyCode == 32) {
-alert (message);
-return false;
+<script>
+$(document).ready(function() {
+   $("#error").hide();
+});
 
+function myFunction()
+{
+var x=document.getElementById("nopol");
+var i=0;
+var status=0;
+var nopolcek=new Array(<?php echo '"'.implode('", "',$nopolcek).'"'; ?>);
+var jumlahbaris=<?php echo $jumlahbaris; ?>;
+
+x.value=x.value.toUpperCase();
+x.value=x.value.split(' ').join('')
+
+for(i=0;i<jumlahbaris ; i++){
+if(nopolcek[i] == x.value){
+        status = 1;
+    }
 }
-x = x.replace(/\s/g,""); // remove the unwanted space
-document.myform.textbox.value = x;
+if(status == 1){
+    $("#error").show();
+}else{
+    $("#error").hide();    
+}
+
+
 }
 </script>
 
@@ -26,6 +37,7 @@ document.myform.textbox.value = x;
             <header class="panel-heading">
                 Data MT   
             </header>
+           
             <div class="panel-body">
                 <a href="#ModalManual" data-toggle="modal" class="btn btn-primary">
                     Tambah MT <i class="icon-plus"></i>
@@ -99,7 +111,8 @@ document.myform.textbox.value = x;
                                 <div class="bio-row">
                                     <label for="nopol" class="control-label col-lg-4">Nopol</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" onkeydown="nospaces(this)" id="nop" name="nopol" placeholder="Nopol" type="text" required />
+                                        <input class=" form-control input-sm m-bot15" onchange="myFunction()" id="nopol" name="nopol" placeholder="Nopol" type="text" required />
+                                        <div id="error" style="color:red; font-size:10px;">Nopol sudah ada!</div>
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -360,7 +373,7 @@ document.myform.textbox.value = x;
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                        <button data-dismiss="modal" class="btn btn-default" onclick="this.form.reset()" >Batal</button>
                         <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>

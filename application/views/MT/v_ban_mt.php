@@ -101,7 +101,7 @@ foreach ($ban as $a) {
                             <td><?php echo $row->JENIS_BAN; ?></td>
                             <td>
                                 <a class="btn btn-warning btn-xs tooltips" href="#ModalEditBan"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" href="javascript:hapus('<?php echo $row->ID_BAN ?>');"><i class="icon-remove"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" href="javascript:hapus('<?php echo $row->ID_BAN ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
                             </td>
                             </tr>
                             <?php
@@ -127,7 +127,7 @@ foreach ($ban as $a) {
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/tambah_ban/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/tambah_ban/<?php echo $id_mobil; ?>">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Form Tambah Ban</h4>
@@ -136,43 +136,26 @@ foreach ($ban as $a) {
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Posisi Ban</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="status" name="POSISI_BAN">
-                                <option <?php if ($row->POSISI_BAN == "1")
-                            echo "selected" ?> value="1">1</option>
-                                <option <?php if ($row->POSISI_BAN == "2")
-                            echo "selected" ?> value="2">2</option>
-                                <option <?php if ($row->POSISI_BAN == "3")
-                            echo "selected" ?> value="3">3</option>
-                                <option <?php if ($row->POSISI_BAN == "4")
-                            echo "selected" ?> value="4">4</option>
-                                <option <?php if ($row->POSISI_BAN == "5")
-                            echo "selected" ?> value="5">5</option>
-                                <option <?php if ($row->POSISI_BAN == "6")
-                            echo "selected" ?> value="6">6</option>
-                                <option <?php if ($row->POSISI_BAN == "7")
-                            echo "selected" ?> value="7">7</option>
-                                <option <?php if ($row->POSISI_BAN == "8")
-                            echo "selected" ?> value="8">8</option>
-                                <option <?php if ($row->POSISI_BAN == "9")
-                            echo "selected" ?> value="9">9</option>
-                                <option <?php if ($row->POSISI_BAN == "10")
-                            echo "selected" ?> value="10">10</option>
-                                <option <?php if ($row->POSISI_BAN == "11")
-                            echo "selected" ?> value="11">11</option>
-                                <option <?php if ($row->POSISI_BAN == "12")
-                            echo "selected" ?> value="12">12</option>
-                                <option <?php if ($row->POSISI_BAN == "13")
-                            echo "selected" ?> value="13">13</option>
-                                <option <?php if ($row->POSISI_BAN == "14")
-                            echo "selected" ?> value="14">14</option>
-                                <option <?php if ($row->POSISI_BAN == "15")
-                            echo "selected" ?> value="15">15</option>
-                                <option <?php if ($row->POSISI_BAN == "16")
-                            echo "selected" ?> value="16">16</option>
-                                <option <?php if ($row->POSISI_BAN == "17")
-                            echo "selected" ?> value="17">17</option>
-                                <option <?php if ($row->POSISI_BAN == "18")
-                            echo "selected" ?> value="18">18</option>
+                            <select class="form-control input-sm m-bot15" id="POSISI_BAN" name="POSISI_BAN">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                
 
                             </select>
                         </div>
@@ -353,19 +336,21 @@ foreach ($ban as $a) {
     }
     
     var globalId;
+    var globalIdMobil;
     $('#HapusBan').on('show', function() {
 
     });
 
-    function hapus(id) {
+    function hapus(id,id_mobil) {
         globalId = id;
+        globalIdMobil = id_mobil;
         $('#HapusBan').data('id', id).modal('show');
  
     }
 
     function ok()
     {
-        var url = "<?php echo base_url(); ?>" + "mt/delete_ban/" + globalId;
+        var url = "<?php echo base_url(); ?>" + "mt/delete_ban/" + globalId + "/" + globalIdMobil;
         window.location.href = url;
     }
     
@@ -374,7 +359,7 @@ foreach ($ban as $a) {
     var index;
         
     function setDetail(index){
-        var action = "<?php echo base_url() ?>mt/edit_ban/"+ban[index]['id'];
+        var action = "<?php echo base_url() ?>mt/edit_ban/"+ban[index]['id']+"/"+<?php echo $id_mobil?>;
            
             
         $("#MERK_BAN").val(ban[index]['MERK_BAN']);

@@ -19,23 +19,44 @@ class Mt extends CI_Controller {
 
     }
     
+    //Import Excel
+    
+    public function simpan_xls() {
+        $data_mt = unserialize($this->input->post('data_mt'));
+        $this->m_mt->importMobil($data_mt);
+
+        $link = base_url() . "mt/";
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
 //data MT
     
     public function data_mt() {
 
+        $data3 = $this->m_mt->Nopol();
+        $nopol =array();
+        $jumlahbaris=0;
+        foreach ($data3 as $row){
+            $nopol[]= $row->NOPOL;
+            $jumlahbaris++;
+        }
         
         $depot = $this->session->userdata('id_depot');
         $data1['mt'] = $this->m_mt->selectMT($depot);
 
+        $mt = $data1['mt']; 
+        
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
-        $this->load->view('mt/v_data_mt', $data1);
+        $this->load->view('mt/v_data_mt', array('mt' => $mt, 'nopolcek' => $nopol, 'jumlahbaris' => $jumlahbaris));
         $this->footer();
     }
     
     public function tambah_mobil() {
-
+        
+        
         $depot = $this->session->userdata("id_depot");
 
         $data = array(
@@ -98,6 +119,8 @@ class Mt extends CI_Controller {
 
     public function edit_mobil($id_mobil) {
 
+       
+        
         $id = $this->input->post('id', true);
         $data = array(
             'nopol' => $this->input->post('nopol', true),
@@ -166,7 +189,7 @@ class Mt extends CI_Controller {
 //APAR MT
     public function apar_mt($id_mobil) {
         
-        
+        $data1['id_mobil'] =  $id_mobil;
         $data1['apar'] = $this->m_mt->selectApar($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
         
@@ -178,9 +201,9 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_apar() {
+    public function tambah_apar($id_mobil) {
 
-        $id_mobil = 1;
+        //$id_mobil = 1;
 
         $data = array(
             'id_mobil' => $id_mobil,
@@ -199,7 +222,7 @@ class Mt extends CI_Controller {
         echo '</script>';
     }
     
-    public function edit_apar($id) {
+    public function edit_apar($id,$id_mobil) {
         
         $store = $_POST['STORE_PRESSURE'];
         $catridge = $_POST['CATRIDGE'];
@@ -214,8 +237,6 @@ class Mt extends CI_Controller {
             "KETERANGAN_APAR" =>$keterangan,
             "STATUS_APAR" =>$status,
         );
-        
-        $id_mobil=1;
        
         $this->m_mt->editApar($data,$id);
         
@@ -227,10 +248,9 @@ class Mt extends CI_Controller {
         
     }
     
-    public function delete_apar($id_apar){
+    public function delete_apar($id_apar,$id_mobil){
         $this->m_mt->deleteApar($id_apar);
         
-        $id_mobil = 1;
         
         $link = base_url()."mt/apar_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
@@ -241,8 +261,8 @@ class Mt extends CI_Controller {
 //Ban MT    
     
     public function ban_mt($id_mobil) {
-
         
+        $data1['id_mobil'] =  $id_mobil;
         $data1['ban'] = $this->m_mt->selectBanMT($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
        
@@ -254,10 +274,9 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_ban() {
+    public function tambah_ban($id_mobil) {
 
-        $id_mobil = 1;
-
+      
         $data = array(
             'id_mobil' => $id_mobil,
             'MERK_BAN' => $this->input->post('MERK_BAN', true),
@@ -275,7 +294,7 @@ class Mt extends CI_Controller {
         echo '</script>';
     }
     
-     public function edit_ban($id) {
+     public function edit_ban($id,$id_mobil) {
 
         $merk = $_POST['MERK_BAN'];
         $seri = $_POST['NO_SERI_BAN'];
@@ -293,7 +312,6 @@ class Mt extends CI_Controller {
             "TANGGAL_GANTI_BAN" =>$tgl_ganti,
             );
         
-        $id_mobil=1;
         $this->m_mt->editBan($data, $id);
         
          $link = base_url()."mt/ban_mt/".$id_mobil;
@@ -303,12 +321,10 @@ class Mt extends CI_Controller {
         
     }
     
-     public function delete_ban($id_ban){
+     public function delete_ban($id_ban,$id_mobil){
          
         $this->m_mt->deleteBan($id_ban);
-        
-        $id_mobil = 1;
-        
+       
         $link = base_url()."mt/ban_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
         echo 'window.location.href="' . $link . '"';
@@ -319,7 +335,7 @@ class Mt extends CI_Controller {
 
     public function oli_mt($id_mobil) {
 
-        
+        $data1['id_mobil'] =  $id_mobil;
         $data1['oli'] = $this->m_mt->selectOli($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
         
@@ -331,9 +347,7 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_oli() {
-
-        $id_mobil = 1;
+    public function tambah_oli($id_mobil) {
 
         $data = array(
             'id_mobil' => $id_mobil,
@@ -351,7 +365,7 @@ class Mt extends CI_Controller {
         echo '</script>';
     }
     
-    public function edit_oli($id) {
+    public function edit_oli($id,$id_mobil) {
 
         $km = $_POST['KM_AWAL'];
         $merk = $_POST['MERK_OLI'];
@@ -366,7 +380,6 @@ class Mt extends CI_Controller {
             "TOTAL_VOLUME" =>$total,
             );
         
-        $id_mobil=1;
         $this->m_mt->editOli($data, $id);
         
          $link = base_url()."mt/oli_mt/".$id_mobil;
@@ -376,11 +389,9 @@ class Mt extends CI_Controller {
         
     }
     
-    public function delete_oli($id_oli){
+    public function delete_oli($id_oli,$id_mobil){
          
         $this->m_mt->deleteOli($id_oli);
-        
-        $id_mobil = 1;
         
         $link = base_url()."mt/oli_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
@@ -392,6 +403,7 @@ class Mt extends CI_Controller {
     //Data Surat
     public function surat_mt($id_mobil) {
         
+        $data1['id_mobil'] =  $id_mobil;
         $data1['surat'] = $this->m_mt->selectSurat($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
         
@@ -402,9 +414,9 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_surat() {
+    public function tambah_surat($id_mobil) {
 
-        $id_mobil = 1;
+        
 
         $data = array(
             'id_mobil' => $id_mobil,
@@ -421,7 +433,7 @@ class Mt extends CI_Controller {
         echo '</script>';
     }
     
-    public function edit_surat($id) {
+    public function edit_surat($id,$id_mobil) {
 
         $surat = $_POST['ID_JENIS_SURAT'];
         $tgl = $_POST['TANGGAL_AKHIR_SURAT'];
@@ -434,7 +446,6 @@ class Mt extends CI_Controller {
             "KETERANGAN_SURAT" =>$keterangan,
             );
         
-        $id_mobil=1;
         $this->m_mt->editSurat($data, $id);
         
          $link = base_url()."mt/surat_mt/".$id_mobil;
@@ -444,11 +455,10 @@ class Mt extends CI_Controller {
         
     }
     
-      public function delete_surat($id_surat){
+      public function delete_surat($id_surat,$id_mobil){
          
         $this->m_mt->deleteSurat($id_surat);
         
-        $id_mobil = 1;
         
         $link = base_url()."mt/surat_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
@@ -543,28 +553,7 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_rencana() {
-
-        $id_log_harian = 1;
-
-        $data = array(
-            'id_log_harian' => $id_log_harian,
-            'R_PREMIUM' => $this->input->post('R_PREMIUM', true),
-            'R_PERTAMAX' => $this->input->post('R_PERTAMAX', true),
-            'R_PERTAMAXPLUS' => $this->input->post('R_PERTAMAXPLUS', true),
-            'R_PERTAMINADEX' => $this->input->post('R_PERTAMINADEX', true),
-            'R_BIOSOLAR' => $this->input->post('R_BIOSOLAR', true),
-            'R_SOLAR' => $this->input->post('R_SOLAR', true),
-            'R_OWN_USE' => $this->input->post('R_OWN_USE', true),
-        );
-
-        $this->m_mt->insertRencana($data);
-        $link = base_url() . "mt/rencana/";
-        
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
+    
     
 
     private function header($data) {

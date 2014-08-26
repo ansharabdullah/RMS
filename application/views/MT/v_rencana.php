@@ -109,10 +109,7 @@
                         <tbody>
                             <?php
                             for ($i = 0; $i < 12; $i++) {
-//                                $date = date_create("2014-08-" . ($i + 1));
-//                                $newDate = date_format($date, "d F Y");
-//                                setlocale(LC_ALL, 'IND');
-//                                $tgl = strftime("%d %B %Y", strtotime($newDate));
+//                               
                                 $tgl = ($i + 1) . " <span class='bulan'>Agustus</span> 2014";
                                 ?>
                                     <th style="display: none;"></th>
