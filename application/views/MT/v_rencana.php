@@ -109,10 +109,7 @@
                         <tbody>
                             <?php
                             for ($i = 0; $i < 12; $i++) {
-//                                $date = date_create("2014-08-" . ($i + 1));
-//                                $newDate = date_format($date, "d F Y");
-//                                setlocale(LC_ALL, 'IND');
-//                                $tgl = strftime("%d %B %Y", strtotime($newDate));
+//                               
                                 $tgl = ($i + 1) . " <span class='bulan'>Agustus</span> 2014";
                                 ?>
                                     <th style="display: none;"></th>
@@ -190,7 +187,7 @@
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
                                      <td><?php echo $row->TANGGAL_LOG_HARIAN; ?></td>
-                                     <td><?php echo $row->R_OWNUSE; ?></td>
+                                     <td><?php echo $row->R_OWN_USE; ?></td>
                                     <td><?php echo $row->R_PREMIUM; ?></td>
                                     <td><?php echo $row->R_PERTAMAX; ?></td>
                                     <td><?php echo $row->R_PERTAMAXPLUS; ?></td>
@@ -217,7 +214,7 @@
                                 <h4 class="modal-title">Tambah Perencanaan Mobil Tangki</h4>
                             </div>
                             <div class=" form">
-                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url()?>mt/tambah_rencana/">
 
                                     <div class="modal-body">
                                         <div class="form-group">
@@ -230,43 +227,43 @@
                                         <div class="form-group">
                                             <label for="ou" class="col-lg-2 col-sm-2 control-label">Own Use</label>
                                             <div class="col-lg-10">
-                                                <input type="number" name="own-use" required="required" class="form-control" id="ou" placeholder="Own Use">
+                                                <input type="number" name="R_OWN_USE" required="required" class="form-control" id="R_OWN_USE" placeholder="Own Use">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="premium" class="col-lg-2 col-sm-2 control-label">Premium</label>
                                             <div class="col-lg-10">
-                                                <input type="number"  name="premium" required="required" class="form-control" id="premium" placeholder="Premium">
+                                                <input type="number"  name="PREMIUM" required="required" class="form-control" id="R_PREMIUM" placeholder="Premium">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
                                             <div class="col-lg-10">
-                                                <input type="number" name="pertamax" required="required" class="form-control" id="pertamax" placeholder="Pertamax">
+                                                <input type="number" name="R_PERTAMAX" required="required" class="form-control" id="R_PERTAMAX" placeholder="Pertamax">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="pertamaxplus" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
                                             <div class="col-lg-10">
-                                                <input type="number" name="pertamax-plus" required="required" class="form-control" id="pertamaxplus" placeholder="Pertamax Plus">
+                                                <input type="number" name="R_PERTAMAXPLUS" required="required" class="form-control" id="R_PERTAMAXPLUS" placeholder="Pertamax Plus">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="pertamaxdex" class="col-lg-2 col-sm-2 control-label">Pertamax Dex</label>
                                             <div class="col-lg-10">
-                                                <input type="number" name="pertamax-dex"  required="required" class="form-control" id="pertamaxdex" placeholder="Pertamax Dex">
+                                                <input type="number" name="R_PERTAMINADEX"  required="required" class="form-control" id="R_PERTAMINADEX" placeholder="Pertamax Dex">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="solar" class="col-lg-2 col-sm-2 control-label">Solar</label>
                                             <div class="col-lg-10">
-                                                <input type="number" name="solar" required="required" class="form-control" id="solar" placeholder="Solar">
+                                                <input type="number" name="R_SOLAR" required="required" class="form-control" id="R_SOLAR" placeholder="Solar">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="biosolar" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
                                             <div class="col-lg-10">
-                                                <input type="number" name="bio-solar" required="required" class="form-control" id="biosolar" placeholder="Bio Solar">
+                                                <input type="number" name="R_BIOSOLAR" required="required" class="form-control" id="R_BIOSOLAR" placeholder="Bio Solar">
                                             </div>
                                         </div>
                                     </div>

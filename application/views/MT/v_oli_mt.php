@@ -93,7 +93,7 @@
                                     <td><?php echo $row->TOTAL_VOLUME; ?></td>
                                    <td>
                                     <a class="btn btn-warning btn-xs tooltips" href="#ModalEditOli"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Oli" href="javascript:hapus('<?php echo $row->ID_OLI ?>');"><i class="icon-remove"></i></a>
+                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Oli" href="javascript:hapus('<?php echo $row->ID_OLI ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
                                 </td>
                                 </tr>
                                 <?php $i++;
@@ -118,14 +118,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Form Tambah Oli</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/tambah_oli/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/tambah_oli/<?php echo $id_mobil; ?> ">
                 <div class="modal-body">
                     <!-- form tambah-->
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal (km)</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="kmawal" name="KM_AWAL" minlength="2" type="number" required />
+                            <input class=" form-control input-sm m-bot15" id="kmawal" placeholder="KM Awal" name="KM_AWAL" minlength="2" type="number" required />
                         </div>
 
                     </div>
@@ -138,18 +138,18 @@
                     <div class="form-group">
                         <label for="merkoli" class="col-lg-2 col-sm-2 control-label">Merk Oli</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="merkoli" name="MERK_OLI" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="merkoli" placeholder="Merk Oli" name="MERK_OLI" minlength="2" type="text" required />
                         </div>
                     </div> <div class="form-group">
                         <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume (Liter)</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="totalvolume" name="TOTAL_VOLUME" type="number" required />
+                            <input class=" form-control input-sm m-bot15" id="totalvolume" placeholder="Total Volume" name="TOTAL_VOLUME" type="number" required />
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                    <button data-dismiss="modal" class="btn btn-default" onclick="this.form.reset()">Batal</button>
                     <input class="btn btn-success" type="submit" value="Simpan"/>
                 </div>
             </form> 
@@ -246,26 +246,30 @@
     }
     
         var globalId;
+        var globalIdMobil;
+        
     $('#HapusOli').on('show', function() {
 
     });
-
-    function hapus(id) {
+    
+   
+    function hapus(id,id_mobil) {
         globalId = id;
+        globalIdMobil = id_mobil;
         $('#HapusOli').data('id', id).modal('show');
  
     }
 
     function ok()
     {
-        var url = "<?php echo base_url(); ?>" + "mt/delete_oli/" + globalId;
+        var url = "<?php echo base_url(); ?>" + "mt/delete_oli/" + globalId+ "/" + globalIdMobil;
         window.location.href = url;
     }
     
     var index;
         
         function setDetail(index){
-            var action = "<?php echo base_url()?>mt/edit_oli/"+oli[index]['id'];
+            var action = "<?php echo base_url()?>mt/edit_oli/"+oli[index]['id']+"/"+<?php echo $id_mobil?>;
            
             
             $("#KM_AWAL").val(oli[index]['KM_AWAL']);

@@ -90,7 +90,7 @@
                                    <td><?php echo $row->KETERANGAN_SURAT; ?></td>
                                    
                                    <td><a class="btn btn-warning btn-xs tooltips" href="#ModalEditSurat"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Surat" href="javascript:hapus('<?php echo $row->ID_SURAT ?>');"><i class="icon-remove"></i></a>
+                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Surat" href="javascript:hapus('<?php echo $row->ID_SURAT ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
                                        </td>
                                 </tr>
                                 <?php 
@@ -112,7 +112,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/tambah_surat/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/tambah_surat/<?php echo $id_mobil; ?>">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Form Surat</h4>
@@ -140,13 +140,13 @@
                     <div class="form-group">
                         <label for="stnk" class="col-lg-2 col-sm-2 control-label">KETERANGAN</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="stnk" name="KETERANGAN_SURAT" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="stnk" placeholder="Keterangan Surat" name="KETERANGAN_SURAT" minlength="2" type="text" required />
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                    <button data-dismiss="modal" class="btn btn-default" onclick="this.form.reset()">Batal</button>
                     <input class="btn btn-success" type="submit" value="Simpan"/>
                 </div>
             </form> 
@@ -240,26 +240,29 @@
     }
     
         var globalId;
+        var globalIdMobil;
+        
     $('#HapusSurat').on('show', function() {
 
     });
 
-    function hapus(id) {
+    function hapus(id,id_mobil) {
         globalId = id;
+         globalIdMobil = id_mobil;
         $('#HapusSurat').data('id', id).modal('show');
  
     }
 
     function ok()
     {
-        var url = "<?php echo base_url(); ?>" + "mt/delete_surat/" + globalId;
+        var url = "<?php echo base_url(); ?>" + "mt/delete_surat/" + globalId+ "/" + globalIdMobil;
         window.location.href = url;
     }
     
      var index;
         
         function setDetail(index){
-            var action = "<?php echo base_url()?>mt/edit_surat/"+surat[index]['id'];
+            var action = "<?php echo base_url()?>mt/edit_surat/"+surat[index]['id']+"/"+<?php echo $id_mobil?>;
            
             
             $("#ID_JENIS_SURAT").val(surat[index]['ID_JENIS_SURAT']);

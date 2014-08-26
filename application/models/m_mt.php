@@ -1,10 +1,25 @@
 <?php
 
 class m_mt extends CI_Model {
-
+    
+    
+    //Import Excel
+    
+    public function importMobil($data){
+        for($i = 0; $i < sizeof($data); $i++){
+            $this->db->insert('mobil', $data[$i]);
+        }
+    }
+    
     //Data Mobil Tangki
     public function insertMobil($data) {
         $this->db->insert('mobil', $data);
+    }
+    
+    public function Nopol ()
+    {
+        $data = $this->db->query("select NOPOL from mobil ");
+        return $data->result();
     }
 
     public function editMT($data, $id) {
@@ -16,7 +31,12 @@ class m_mt extends CI_Model {
         $this->db->where('id_mobil', $id);
         $this->db->delete('mobil');
     }
-
+    
+    public function selectMobil($id_mobil){
+        $data = $this->db->query("select NOPOL,KAPASITAS,PRODUK from mobil where id_mobil=$id_mobil");
+        return $data->row();
+    }
+    
     public function selectMT($depot) {
         $data = $this->db->query("select * from mobil where (kapasitas='8' or kapasitas='16' or kapasitas='24' or kapasitas='32') and id_depot=$depot");
         return $data->result();
@@ -66,6 +86,21 @@ class m_mt extends CI_Model {
     public function insertBan($data) {
         $this->db->insert('ban', $data);
     }
+    
+    public function editBan($data, $id) {
+        $this->db->where('id_ban', $id);
+        $this->db->update('ban', $data);
+    }
+    
+    public function selectRencana($id_log_harian){
+        $data = $this->db->query("select T.ID_RENCANA,L.ID_LOG_HARIAN,L.TANGGAL_LOG_HARIAN, T.R_PREMIUM, T.R_PERTAMAX, T.R_PERTAMAXPLUS, T.R_PERTAMINADEX, T.R_SOLAR, T.R_BIOSOLAR, T.R_OWN_USE from rencana T, log_harian L where T.id_log_harian=L.id_log_harian and L.id_log_harian = $id_log_harian");
+        return $data->result();
+    }
+    
+    public function insertRencana($data) {
+        $this->db->insert('rencana', $data);
+    }
+    
 
     public function deleteBan($id) {
         $this->db->where('id_ban', $id);
@@ -80,6 +115,11 @@ class m_mt extends CI_Model {
 
     public function insertOli($data) {
         $this->db->insert('oli', $data);
+    }
+    
+     public function editOli($data, $id) {
+        $this->db->where('id_oli', $id);
+        $this->db->update('oli', $data);
     }
 
     public function deleteOli($id) {
@@ -97,6 +137,11 @@ class m_mt extends CI_Model {
         $this->db->insert('surat', $data);
     }
 
+     public function editSurat($data, $id) {
+        $this->db->where('id_surat', $id);
+        $this->db->update('surat', $data);
+    }
+    
     public function deleteSurat($id) {
         $this->db->where('id_surat', $id);
         $this->db->delete('surat');

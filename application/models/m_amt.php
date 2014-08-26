@@ -47,6 +47,7 @@ class m_amt extends CI_Model {
         return $data->result();
     }
     
+
     public function cekNIP($nip){
         $data = $this->db->query("select id_pegawai from pegawai where nip='$nip'");
         return $data->result();
@@ -72,5 +73,6 @@ class m_amt extends CI_Model {
 
     public function getTotalAMtByDepot($id_depot) {
         return $this->getAllAMtByDepot($id_depot)->num_rows();
+
     }
 }

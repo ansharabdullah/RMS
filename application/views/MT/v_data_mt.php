@@ -1,4 +1,33 @@
-<link rel="stylesheet" href="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.css" />
+<script>
+$(document).ready(function() {
+   $("#error").hide();
+});
+
+function myFunction()
+{
+var x=document.getElementById("nopol");
+var i=0;
+var status=0;
+var nopolcek=new Array(<?php echo '"'.implode('", "',$nopolcek).'"'; ?>);
+var jumlahbaris=<?php echo $jumlahbaris; ?>;
+
+x.value=x.value.toUpperCase();
+x.value=x.value.split(' ').join('')
+
+for(i=0;i<jumlahbaris ; i++){
+if(nopolcek[i] == x.value){
+        status = 1;
+    }
+}
+if(status == 1){
+    $("#error").show();
+}else{
+    $("#error").hide();    
+}
+
+
+}
+</script>
 
 <!--main content start-->
 <section id="main-content">
@@ -8,6 +37,7 @@
             <header class="panel-heading">
                 Data MT   
             </header>
+           
             <div class="panel-body">
                 <a href="#ModalManual" data-toggle="modal" class="btn btn-primary">
                     Tambah MT <i class="icon-plus"></i>
@@ -81,13 +111,14 @@
                                 <div class="bio-row">
                                     <label for="nopol" class="control-label col-lg-4">Nopol</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="nop" name="nopol"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" onchange="myFunction()" id="nopol" name="nopol" placeholder="Nopol" type="text" required />
+                                        <div id="error" style="color:red; font-size:10px;">Nopol sudah ada!</div>
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">No Rangka</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cama" name="no_rangka"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="cama" name="no_rangka" placeholder="No rangka"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -106,7 +137,7 @@
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">No Mesin</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cmesin" name="no_mesin"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="cmesin" placeholder="No mesin" name="no_mesin"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -127,19 +158,19 @@
                                 <div class="bio-row">
                                     <label for="nama" class="control-label col-lg-4">Jenis Kendaraan</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cjk" name="jenis_kendaraan"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="cjk" placeholder="Jenis_Kendaraan" name="jenis_kendaraan"  type="text" required />
                                     </div>
                                 </div>
                                 <div class="bio-row">
                                     <label for="calamat" class="control-label col-lg-4">Transportir</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="calamat" name="transportir"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" id="calamat" placeholder="Transportir" name="transportir"  type="text" required />
                                     </div>
                                 </div> 
                                 <div class="bio-row">
                                     <label for="ctglmasuk" class="control-label col-lg-4">Rasio</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="crasio" name="rasio" type="number" required/>
+                                        <input class=" form-control input-sm m-bot15" id="crasio" placeholder="Rasio" name="rasio" type="number" required/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -342,7 +373,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                        <button data-dismiss="modal" class="btn btn-default" onclick="this.form.reset()" >Batal</button>
                         <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>

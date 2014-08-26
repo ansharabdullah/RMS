@@ -108,7 +108,7 @@
                         <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalHapusMs2" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus MS2"><i class="icon-remove"></i></a>
                     </header>
                     <div class="panel-body">
-                        <div class="adv-table editable-table " style="overflow-y: scroll">
+                        <div class="adv-table editable-table " style="overflow-x: scroll">
 
                             <div class="space15"></div>
                             <table class="table table-bordered table-hover" id="editable-sample">
