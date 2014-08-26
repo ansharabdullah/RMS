@@ -1,474 +1,9 @@
 <!DOCTYPE html>
-<script type="text/javascript">
-    $(function() {
-        $('#grafik2').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Kinerja Jumlah KL MT Depot 1'
-            },
-            subtitle: {
-                text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
-                        }
-                    }
-                }
-            },
-            xAxis: [{
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
-                }],
-            yAxis: [{// Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    },
-                    title: {
-                        text: 'Target',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                    name: 'KL',
-                    type: 'column',
-                    data: [92, 99, 101, 98, 95, 92, 89, 90, 85, 87, 88, 93]
-
-                }]
-        });
-    });
-
-    $(function() {
-        $('#grafik1').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
-            },
-            subtitle: {
-                text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
-                        }
-                    }
-                }
-            },
-            xAxis: [{
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
-                }],
-            yAxis: [{// Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    },
-                    title: {
-                        text: 'Target',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                    name: 'KM',
-                    type: 'column',
-                    data: [30, 31, 40, 50, 45, 43, 40, 42, 41, 43, 41, 42]
-
-                }]
-        });
-    });
-
-    $(function() {
-        $('#premium').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Kinerja Jumlah Premium Depot 1'
-            },
-            subtitle: {
-                text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
-                        }
-                    }
-                }
-            },
-            xAxis: [{
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
-                }],
-            yAxis: [{// Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    },
-                    title: {
-                        text: 'Target',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                    name: 'KM',
-                    type: 'column',
-                    data: [30, 31, 40, 50, 45, 43, 40, 42, 41, 43, 41, 42]
-
-                }]
-        });
-    });
-
-    $(function() {
-        $('#pertamax').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Kinerja Jumlah Pertamax Depot 1'
-            },
-            subtitle: {
-                text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
-                        }
-                    }
-                }
-            },
-            xAxis: [{
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
-                }],
-            yAxis: [{// Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    },
-                    title: {
-                        text: 'Target',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                    name: 'KM',
-                    type: 'column',
-                    data: [30, 31, 40, 50, 45, 43, 40, 42, 41, 43, 41, 42]
-
-                }]
-        });
-    });
-
-    $(function() {
-        $('#pertamaxPlus').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Kinerja Jumlah Pertamax Plus Depot 1'
-            },
-            subtitle: {
-                text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
-                        }
-                    }
-                }
-            },
-            xAxis: [{
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
-                }],
-            yAxis: [{// Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    },
-                    title: {
-                        text: 'Target',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                    name: 'KM',
-                    type: 'column',
-                    data: [30, 31, 40, 50, 45, 43, 40, 42, 41, 43, 41, 42]
-
-                }]
-        });
-    });
-
-    $(function() {
-        $('#pertaminaDex').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Kinerja Jumlah Pertamax Dex Depot 1'
-            },
-            subtitle: {
-                text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
-                        }
-                    }
-                }
-            },
-            xAxis: [{
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
-                }],
-            yAxis: [{// Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    },
-                    title: {
-                        text: 'Target',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                    name: 'KM',
-                    type: 'column',
-                    data: [30, 31, 40, 50, 45, 43, 40, 42, 41, 43, 41, 42]
-
-                }]
-        });
-    });
-
-    $(function() {
-        $('#solar').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Kinerja Jumlah Solar Depot 1'
-            },
-            subtitle: {
-                text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
-                        }
-                    }
-                }
-            },
-            xAxis: [{
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
-                }],
-            yAxis: [{// Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    },
-                    title: {
-                        text: 'Target',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                    name: 'KM',
-                    type: 'column',
-                    data: [30, 31, 40, 50, 45, 43, 40, 42, 41, 43, 41, 42]
-
-                }]
-        });
-    });
-
-    $(function() {
-        $('#biosolar').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Kinerja Jumlah Bio Solar Depot 1'
-            },
-            subtitle: {
-                text: 'Tahun 2014'
-            },
-            plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
-                        }
-                    }
-                }
-            },
-            xAxis: [{
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Des', ]
-                }],
-            yAxis: [{// Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    },
-                    title: {
-                        text: 'Target',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                    name: 'KM',
-                    type: 'column',
-                    data: [30, 31, 40, 50, 45, 43, 40, 42, 41, 43, 41, 42]
-
-                }]
-        });
-    });
-</script>
 
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        <div class="row state-overview">
+       <div class="row state-overview">
             <div class="col-lg-3 col-sm-6">
                 <section class="panel">
                     <div class="symbol terques">
@@ -476,7 +11,7 @@
                     </div>
                     <div class="value">
                         <h1 class="count">
-                            47
+                            <?php echo $total_amt ?>
                         </h1>
                         <p>Awak Mobil Tangki</p>
                     </div>
@@ -489,7 +24,7 @@
                     </div>
                     <div class="value">
                         <h1 class=" count2">
-                            80
+                            <?php echo $total_mt ?>
                         </h1>
                         <p>Mobil Tangki</p>
                     </div>
@@ -502,7 +37,7 @@
                     </div>
                     <div class="value">
                         <h1 class=" count3">
-                            87%
+                            <?php if($rencana_bulan[0]->total_kl > 0)echo ceil(($kinerja_bulan[0]->total_kl / $rencana_bulan[0]->total_kl) * 100) ?>%
                         </h1>
                         <p>Traget KL</p>
                     </div>
@@ -515,7 +50,7 @@
                     </div>
                     <div class="value">
                         <h1 class=" count4">
-                            123
+                            <?php echo $kinerja_bulan[0]->own_use ?>
                         </h1>
                         <p>KL (Own Use)</p>
                     </div>
@@ -523,114 +58,34 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-lg-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Grafik Bulanan Jumlah KL Depot 1
-                    </header>
-                    <div class="panel-body" >
-
-                        <div id="grafik2"></div>
-
-                    </div>
-                </section>
-            </div>
-
-            <div class="col-lg-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Grafik Bulanan Jumlah KM Depot 1
-                    </header>
-                    <div class="panel-body" >
-
-                        <div id="grafik1"></div>
-
-                    </div>
-                </section>
-            </div>
-        </div>
 
         <div class="row">
-
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik KL Premium
+                        Grafik Bulanan MT Depot <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
-
-                        <div id="premium"></div>
+                        <div class="btn-group pull-right">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-left">
+                                <li><a style="cursor: pointer" onclick="filterMt('KM')">KM</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('KL')">KL</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Own Use')">Own Use</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Plus')">Pertamax Plus</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Dex')">Pertamax Dex</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
+                            </ul>
+                        </div>
+                        <div id="grafik"></div>
 
                     </div>
                 </section>
             </div>
-
-            <div class="col-lg-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Grafik KL Pertamina Dex
-                    </header>
-                    <div class="panel-body" >
-
-                        <div id="pertaminaDex"></div>
-
-                    </div>
-                </section>
-            </div>
-
-            <div class="col-lg-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Grafik KL Pertamax
-                    </header>
-                    <div class="panel-body" >
-
-                        <div id="pertamax"></div>
-
-                    </div>
-                </section>
-            </div>
-
-            <div class="col-lg-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Grafik KL Pertamax Plus
-                    </header>
-                    <div class="panel-body" >
-
-                        <div id="pertamaxPlus"></div>
-
-                    </div>
-                </section>
-            </div>
-
-            <div class="col-lg-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Grafik KL Bio Solar
-                    </header>
-                    <div class="panel-body" >
-
-                        <div id="biosolar"></div>
-
-                    </div>
-                </section>
-            </div>
-
-            <div class="col-lg-6">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Grafik KL Solar
-                    </header>
-                    <div class="panel-body" >
-
-                        <div id="solar"></div>
-
-                    </div>
-                </section>
-            </div>
-
         </div>
         <div class ="row">
             <div class="col-lg-12">
@@ -694,6 +149,122 @@
 <!--script for this page only-->
 <script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
 
+<script type="text/javascript">
+    
+    var mt;
+    var kl_mt = new Array();
+    var km_mt = new Array();
+    var total_km_mt = new Array();
+    var premium = new Array();
+    var pertamax = new Array();
+    var pertamax_plus = new Array();
+    var pertamina_dex = new Array();
+    var solar = new Array();
+    var bio_solar = new Array();
+    var own_use_mt = new Array();
+    var bulan = new Array();
+    
+    <?php
+        foreach($kinerja_mt as $km){
+            ?>
+              kl_mt.push(<?php echo $km->total_kl ?>);
+                km_mt.push(<?php echo $km->total_km ?>);
+                total_km_mt.push(<?php echo $km->total_km ?>);
+                premium.push(<?php echo $km->premium ?>);
+                pertamax.push(<?php echo $km->pertamax ?>);
+                pertamax_plus.push(<?php echo $km->pertamax_plus ?>);
+                pertamina_dex.push(<?php echo $km->pertamina_dex ?>);
+                solar.push(<?php echo $km->solar ?>);
+                bio_solar.push(<?php echo $km->bio_solar ?>);
+                own_use_mt.push(<?php echo $km->own_use ?>);
+                 bulan.push("<?php echo $km->bulan?>");
+            <?php
+        }
+    ?>
+    $(function() {
+        mt = new Highcharts.Chart({ 
+            chart: {
+                zoomType: 'x',
+                renderTo: 'grafik'
+            },
+            title: {
+                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
+            },
+            subtitle: {
+                text: 'Tahun <?php echo date('Y')?>'
+            },
+            plotOptions: {
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
+                        }
+                    }
+                }
+            },
+            xAxis: [{
+                    categories: bulan
+                }],
+            yAxis: [{// Primary yAxis
+                    labels: {
+                        format: '',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Target',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+                }],
+            tooltip: {
+                shared: true
+            },
+            series: [{
+                    name: 'KM',
+                    type: 'column',
+                    data: km_mt
+
+                }]
+        });
+    });
+    
+    function filterMt(title)
+    {
+        mt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' MT Depot <?php echo $nama_depot?>'});  
+        mt.legend.allItems[0].update({name:title});
+        if(title == "KM"){
+             mt.series[0].setData(total_km_mt);
+        }
+        else if(title == "KL"){
+            mt.series[0].setData(kl_mt);
+            
+        }else if(title == "Own Use"){
+            mt.series[0].setData(own_use_mt);
+                
+        }else if(title == "Premium"){
+            mt.series[0].setData(premium);
+            
+        }else if(title == "Pertamax"){
+            mt.series[0].setData(pertamax);
+            
+        }else if(title == "Pertamax Plus") {
+            mt.series[0].setData(pertamax_plus);
+            
+        }else if(title == "Pertamax Dex") {
+            mt.series[0].setData(pertamina_dex);
+            
+        }else if(title == "Solar"){
+            mt.series[0].setData(solar);
+            
+        }else if(title == "Bio Solar"){
+            mt.series[0].setData(bio_solar);
+        } 
+        
+    }
+</script>
 <!-- END JAVASCRIPTS -->
 <script>
     jQuery(document).ready(function() {

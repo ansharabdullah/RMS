@@ -153,6 +153,10 @@
                                             Realisasi dari Rencana Tahun Ini
                                         </header>
                                         <div class="panel-body">
+                                            <?php
+                                                if($kinerja_bulan[0]->premium != NULL && $rencana_bulan[0]->r_premium != NULL ){
+                                            ?>
+                                            
                                             <p class="text-muted">
                                                 Kilo Liter Premium (<?php echo $kinerja_tahun[0]->premium ?>/<?php echo $rencana_tahun[0]->r_premium ?> Kl)
                                             </p>
@@ -215,6 +219,15 @@
                                                     <span class="sr-only">45% Complete</span>
                                                 </div>
                                             </div>
+                                            
+                                            <?php
+                                                }
+                                                else
+                                                {
+                                                    echo "BELUM TERSEDIA";
+                                                    
+                                                }
+                                            ?>
                                         </div>
                                     </section>
                                 </div>
@@ -224,6 +237,9 @@
                                             Realisasi dari Rencana Bulan Ini
                                         </header>
                                         <div class="panel-body">
+                                            <?php
+                                                if($kinerja_bulan[0]->premium != NULL && $rencana_bulan[0]->r_premium != NULL ){
+                                            ?>
                                             <p class="text-muted">
                                                 Kilo Liter Premium (<?php echo $kinerja_bulan[0]->premium ?>/<?php echo $rencana_bulan[0]->r_premium ?> Kl)
                                             </p>
@@ -286,6 +302,15 @@
                                                     <span class="sr-only">45% Complete</span>
                                                 </div>
                                             </div>
+                                            
+                                            <?php
+                                                }
+                                                else
+                                                {
+                                                    echo "BELUM TERSEDIA";
+                                                    
+                                                }
+                                            ?>
                                         </div>
                                     </section>
                                 </div>
@@ -295,6 +320,9 @@
                                             Realisasi dari Rencana Hari Ini
                                         </header>
                                         <div class="panel-body">
+                                            <?php
+                                                if($kinerja_hari[0]->premium != NULL && $rencana_hari[0]->premium != NULL ){
+                                            ?>
                                             <p class="text-muted">
                                                 Kilo Liter Premium (<?php echo $kinerja_hari[0]->premium ?>/<?php echo $rencana_hari[0]->r_premium ?> Kl)
                                             </p>
@@ -357,6 +385,14 @@
                                                     <span class="sr-only">45% Complete</span>
                                                 </div>
                                             </div>
+                                            <?php
+                                                }
+                                                else
+                                                {
+                                                    echo "BELUM TERSEDIA";
+                                                    
+                                                }
+                                            ?>
                                         </div>
                                     </section>
                                 </div>
@@ -1686,7 +1722,7 @@
     $(function () {
         amt = new Highcharts.Chart({ 
             chart: {
-                type: 'bar',
+                type: 'column',
                 renderTo: 'grafikAmt'
             },
             title: {
@@ -1896,7 +1932,7 @@
     $(function () {
         mt = new Highcharts.Chart({ 
             chart: {
-                type: 'bar',
+                type: 'column',
                 renderTo: 'grafikMt'
             },
             title: {

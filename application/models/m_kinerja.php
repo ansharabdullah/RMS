@@ -182,13 +182,43 @@ class m_kinerja extends CI_Model {
 
     //grafik mt
     public function get_kinerja_mt_hari($id_depot, $bulan,$tahun) {
-        $query = $this->db->query("select sum(total_km_mt) as total_km, sum(total_kl_mt) as total_kl , 
+        $query = $this->db->query("select sum(total_km_mt) as total_km, sum(total_kl_mt) as total_kl ,
+                                    sum(km.PREMIUM) as premium , sum(km.PERTAMAX) as pertamax, 
+                                    sum(km.PERTAMAX_PLUS) as pertamax_plus,sum(km.PERTAMINA_DEX) as pertamina_dex , 
+                                    sum(km.OWN_USE) as own_use,sum(km.solar) as solar, sum(km.bio_solar) as bio_solar, 
                                     lh.TANGGAL_LOG_HARIAN, DAY(lh.TANGGAL_LOG_HARIAN) as tanggal 
                                     from kinerja_mt km, log_harian lh 
                                     where  km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and 
                                     lh.id_depot = $id_depot and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
                                     and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
                                     group by lh.TANGGAL_LOG_HARIAN order by tanggal asc");
+        return $query->result();
+    }
+    
+     public function get_kinerja_mt($id_depot) {
+        $query = $this->db->query("select sum(total_km_mt) as total_km, sum(total_kl_mt) as total_kl ,
+                                    sum(km.PREMIUM) as premium , sum(km.PERTAMAX) as pertamax, 
+                                    sum(km.PERTAMAX_PLUS) as pertamax_plus,sum(km.PERTAMINA_DEX) as pertamina_dex , 
+                                    sum(km.OWN_USE) as own_use,sum(km.solar) as solar, sum(km.bio_solar) as bio_solar, 
+                                    lh.TANGGAL_LOG_HARIAN
+                                    from kinerja_mt km, log_harian lh 
+                                    where  km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and 
+                                    lh.id_depot = $id_depot
+                                    group by lh.TANGGAL_LOG_HARIAN order by lh.TANGGAL_LOG_HARIAN asc");
+        return $query->result();
+    }
+    
+    public function get_kinerja_mt_bulan($id_depot,$tahun) {
+        $query = $this->db->query("select sum(total_km_mt) as total_km, sum(total_kl_mt) as total_kl ,
+                                    sum(km.PREMIUM) as premium , sum(km.PERTAMAX) as pertamax, 
+                                    sum(km.PERTAMAX_PLUS) as pertamax_plus,sum(km.PERTAMINA_DEX) as pertamina_dex , 
+                                    sum(km.OWN_USE) as own_use,sum(km.solar) as solar, sum(km.bio_solar) as bio_solar, 
+                                    lh.TANGGAL_LOG_HARIAN , MONTHNAME(STR_TO_DATE(MONTH(lh.TANGGAL_LOG_HARIAN),'%m')) as bulan,
+                                    MONTH(lh.TANGGAL_LOG_HARIAN) as no_bulan 
+                                    from kinerja_mt km, log_harian lh 
+                                    where  km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and 
+                                    lh.id_depot = $id_depot and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
+                                    group by MONTH(lh.TANGGAL_LOG_HARIAN) order by no_bulan asc");
         return $query->result();
     }
     
@@ -205,26 +235,53 @@ class m_kinerja extends CI_Model {
     }
     
 
+    //total kinerja amt dalam sebulan
+     public function get_kinerja_amt_by_bulan($id_depot,$bulan,$tahun) {
+        $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl , 
+                                    sum(ka.RITASE_AMT) as ritase , sum(ka.SPBU) as spbu
+                                    from kinerja_amt ka, log_harian lh 
+                                    where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
+                                    ka.STATUS_TUGAS = 'SUPIR' and
+                                    lh.id_depot = $id_depot and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
+                                    and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun");
+        return $query->result();
+    }
+    
     //grafik amt
     public function get_kinerja_amt_hari($id_depot, $bulan,$tahun) {
         $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl , 
                                     lh.TANGGAL_LOG_HARIAN, DAY(lh.TANGGAL_LOG_HARIAN) as tanggal  
                                     from kinerja_amt ka, log_harian lh 
                                     where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
+                                    ka.STATUS_TUGAS = 'SUPIR' and
                                     lh.id_depot = $id_depot and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
                                     and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun 
                                     group by lh.TANGGAL_LOG_HARIAN order by tanggal asc");
         return $query->result();
     }
     
-      public function get_kinerja_amt_bulan($id_depot, $tahun) {
+     public function get_kinerja_amt($id_depot) {
         $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl , 
+                                    sum(ka.RITASE_AMT) as ritase , sum(ka.SPBU) as spbu,
+                                    lh.TANGGAL_LOG_HARIAN  
+                                    from kinerja_amt ka, log_harian lh 
+                                    where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
+                                    ka.STATUS_TUGAS = 'SUPIR' and
+                                    lh.id_depot = $id_depot
+                                    group by lh.TANGGAL_LOG_HARIAN order by lh.TANGGAL_LOG_HARIAN asc");
+        return $query->result();
+    }
+    
+      public function get_kinerja_amt_bulan($id_depot, $tahun) {
+        $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl ,  
+                                    sum(ka.RITASE_AMT) as ritase , sum(ka.SPBU) as spbu,
                                     lh.TANGGAL_LOG_HARIAN, MONTHNAME(STR_TO_DATE(MONTH(lh.TANGGAL_LOG_HARIAN),'%m')) as bulan,
                                     MONTH(lh.TANGGAL_LOG_HARIAN) as no_bulan 
                                     from kinerja_amt ka, log_harian lh 
                                     where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
+                                    ka.STATUS_TUGAS = 'SUPIR' and
                                     lh.id_depot = $id_depot and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun 
-                                    group by MONTH(lh.TANGGAL_LOG_HARIAN) order by bulan asc");
+                                    group by MONTH(lh.TANGGAL_LOG_HARIAN) order by no_bulan asc");
         return $query->result();
     }
     
