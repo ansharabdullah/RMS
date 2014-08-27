@@ -165,18 +165,18 @@ function DateToIndo($date) {
                         </button>
                         <ul class="dropdown-menu pull-right">
                             <li><a href="javascript:FilterData('');" onclick="changeMonth('Januari')">Semua</a></li>
-                            <li><a href="javascript:FilterData('Januari.');" onclick="changeMonth('Januari')">Januari</a></li>
-                            <li><a href="javascript:FilterData('Februari.');" onclick="changeMonth('Februari')">Februari</a></li>
-                            <li><a href="javascript:FilterData('Maret.');" onclick="changeMonth('Maret')">Maret</a></li>
-                            <li><a href="javascript:FilterData('April.');" onclick="changeMonth('April')">April</a></li>
-                            <li><a href="javascript:FilterData('Mei.');" onclick="changeMonth('Mei')">Mei</a></li>
-                            <li><a href="javascript:FilterData('Juni.');" onclick="changeMonth('Juni')">Juni</a></li>
-                            <li><a href="javascript:FilterData('Juli.');" onclick="changeMonth('Juli')">Juli</a></li>
-                            <li><a href="javascript:FilterData('Agustus.');" onclick="changeMonth('Agustus')">Agustus</a></li>
-                            <li><a href="javascript:FilterData('September.');" onclick="changeMonth('September')">September</a></li>
-                            <li><a href="javascript:FilterData('Oktober.');" onclick="changeMonth('Oktober')">Oktober</a></li>
-                            <li><a href="javascript:FilterData('November.');" onclick="changeMonth('November')">November</a></li>
-                            <li><a href="javascript:FilterData('Desember.');" onclick="changeMonth('Desember')">Desember</a></li>
+                            <li><a href="javascript:FilterData('Januari');" onclick="changeMonth('Januari')">Januari</a></li>
+                            <li><a href="javascript:FilterData('Februari');" onclick="changeMonth('Februari')">Februari</a></li>
+                            <li><a href="javascript:FilterData('Maret');" onclick="changeMonth('Maret')">Maret</a></li>
+                            <li><a href="javascript:FilterData('April');" onclick="changeMonth('April')">April</a></li>
+                            <li><a href="javascript:FilterData('Mei');" onclick="changeMonth('Mei')">Mei</a></li>
+                            <li><a href="javascript:FilterData('Juni');" onclick="changeMonth('Juni')">Juni</a></li>
+                            <li><a href="javascript:FilterData('Juli');" onclick="changeMonth('Juli')">Juli</a></li>
+                            <li><a href="javascript:FilterData('Agustus');" onclick="changeMonth('Agustus')">Agustus</a></li>
+                            <li><a href="javascript:FilterData('September');" onclick="changeMonth('September')">September</a></li>
+                            <li><a href="javascript:FilterData('Oktober');" onclick="changeMonth('Oktober')">Oktober</a></li>
+                            <li><a href="javascript:FilterData('November');" onclick="changeMonth('November')">November</a></li>
+                            <li><a href="javascript:FilterData('Desember');" onclick="changeMonth('Desember')">Desember</a></li>
                         </ul>
                     </div>
                 </div>
