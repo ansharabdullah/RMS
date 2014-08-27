@@ -29,5 +29,40 @@ class m_log_harian extends CI_Model {
                                     group by lh.ID_DEPOT,lh.TANGGAL_LOG_HARIAN order by d.ID_DEPOT,tanggal asc");
         return $query->result();
     }
+    
+    
+    //box peringatan di SS
+    public function generate_peringatan_bulanan($id_depot,$bulan,$tahun)
+    {
+        /*
+         * Input kinerja mt dan amt(perhari)
+         * input ms2 (perbulan)
+         * input interpolasi tgl 1
+         * interpolasi tgl 15
+         * kpi operasional (perbulan)
+         * kpi internal (perbulan)
+         * Penjadwalan (sebulaneun)
+         * generate ba (akhir bulan)
+         */
+        
+        $data = array();
+        
+        //cek kinerja mt
+        
+        //cek kinerja amt
+        
+        //cek ms2
+        
+        //cek interpolasi
+        
+        //cek operasional
+        
+        //cek internal
+        
+        //cek penjadwalan
+        
+        //cek generate ba
+        
+    }
 }
 ?>

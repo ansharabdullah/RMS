@@ -13,12 +13,11 @@
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">MT
                     <i class="icon-tasks"></i>
-                    <span class="badge bg-success">6</span>
                 </a>
                 <ul class="dropdown-menu extended tasks-bar">
                     <div class="notify-arrow notify-arrow-green"></div>
                     <li>
-                        <p class="green">Progess Bar MT</p>
+                        <p class="green">Kinerja MT</p>
                     </li>
                     <?php if(isset($kinerja_bulan)){?>
                     <li>
@@ -120,68 +119,43 @@
             <li id="header_inbox_bar" class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">AMT
                     <i class="icon-envelope-alt"></i>
-                    <span class="badge bg-important">5</span>
                 </a>
                 <ul class="dropdown-menu extended tasks-bar">
                     <div class="notify-arrow notify-arrow-red"></div>
                     <li>
-                        <p class="red">Progress Bar AMT</p>
+                        <p class="red">Kinerja AMT</p>
                     </li>
-                    <li>
-                        <a href="#">
-                            <div class="task-info">
-                                <div class="desc">Kilo Meter</div>
-                                <div class="percent">40%</div>
-                            </div>
-                            <div class="progress progress-striped progress-sm active">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                    <span class="sr-only">40% Complete (success)</span>
+                    
+                    <?php if(isset($kinerja_amt_bulan)){?>
+                        <li>
+                            <a>
+                                <div class="task-info">
+                                    <div class="desc">Kilo Meter (<?php echo $kinerja_amt_bulan[0]->total_km?> KM)</div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="task-info">
-                                <div class="desc">Kilo Liter</div>
-                                <div class="percent">60%</div>
-                            </div>
-                            <div class="progress progress-striped progress-sm active">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                    <span class="sr-only">60% Complete (warning)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <div class="task-info">
+                                    <div class="desc">Kilo Liter (<?php echo $kinerja_amt_bulan[0]->total_kl?> KL)</div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="task-info">
-                                <div class="desc">Ritase</div>
-                                <div class="percent">87%</div>
-                            </div>
-                            <div class="progress progress-striped progress-sm active">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 87%">
-                                    <span class="sr-only">87% Complete</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <div class="task-info">
+                                    <div class="desc">Ritase (<?php echo $kinerja_amt_bulan[0]->ritase?> Rit)</div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="task-info">
-                                <div class="desc">Kehadiran</div>
-                                <div class="percent">33%</div>
-                            </div>
-                            <div class="progress progress-striped progress-sm active">
-                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
-                                    <span class="sr-only">33% Complete (danger)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <div class="task-info">
+                                    <div class="desc">SPBU (<?php echo $kinerja_amt_bulan[0]->spbu?>)</div>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">Lihat Semua Progress</a>
-                    </li>
+                            </a>
+                        </li>
+                       <?php } ?>
                 </ul>
             </li>
             <!-- inbox dropdown end -->
@@ -212,7 +186,12 @@
                         }
                     }
                     ?>
+                            
                     </div>
+                    
+                    <li>
+                        <a href="<?php echo base_url()?>notifikasi/"><b>Lihat Semua Peringatan </b></a>
+                    </li>
                 </ul>
             </li>
             <!-- notification dropdown end -->

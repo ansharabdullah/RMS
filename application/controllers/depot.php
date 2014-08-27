@@ -128,8 +128,15 @@ class Depot extends CI_Controller {
     public function mt_depot($depot,$nama) {
         $data['lv1'] = $depot;
         $data['lv2'] = 2;
-
+        
+        $data2['kinerja_mt'] = $this->m_kinerja->get_kinerja_mt_bulan($depot, date("Y"));
         $data2['mt'] = $this->m_mt->selectMT($depot);
+        $data2['id_depot'] = $depot;    
+        $data2['total_mt'] = $this->m_mt->getTotalMtByDepot($depot);
+        $data2['total_amt'] = $this->m_amt->getTotalAMtByDepot($depot);
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $data2['rencana_bulan'] = $this->m_rencana->get_rencana_bulan($depot, date("n"), date("Y"));
+        $data2['kinerja_bulan'] = $this->m_kinerja->get_kinerja_bulan($depot, date("n"), date("Y"));
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->navbar($data['lv1'], $data['lv2']);

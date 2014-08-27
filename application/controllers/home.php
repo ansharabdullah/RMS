@@ -33,8 +33,8 @@ class home extends CI_Controller {
             $data2['total_amt'] = $this->m_amt->getTotalAMtByDepot($this->session->userdata('id_depot'));
             $data2['rencana_bulan'] = $this->m_rencana->get_rencana_bulan($this->session->userdata('id_depot'), date("n"),date("Y"));
             $data2['kinerja_bulan'] = $this->m_kinerja->get_kinerja_bulan($this->session->userdata('id_depot'), date("n"),date("Y"));
-            $data2['kinerja_mt'] = $this->m_kinerja->get_kinerja_mt_hari($this->session->userdata('id_depot'), date("n"),date("Y"));
-            $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_hari($this->session->userdata('id_depot'), date("n"),date("Y"));
+            $data2['kinerja_mt'] = $this->m_kinerja->get_kinerja_mt($this->session->userdata('id_depot'));
+            $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt($this->session->userdata('id_depot'));
             $logHarian = $this->m_log_harian->get_log_peringatan($this->session->userdata('id_depot'));
             $totalNotif = 0;
             $arrNotif = array();
@@ -45,7 +45,7 @@ class home extends CI_Controller {
                 if ($logHarian[$i]->jadwal == 0) {
                     $totalNotif++;
                     array_push($arrNotif, "<a href='#'>
-                                            <span class='label label-warning'><i class='icon-calendar'></i></span>
+                                            <span class='label label-success'><i class='icon-calendar'></i></span>
                                            Data Penjadwalan belum ada.
                                             </a>");
                 }
@@ -103,6 +103,7 @@ class home extends CI_Controller {
             $data3['notifikasi'] = $arrNotif;
             $data3['rencana_bulan'] = $data2['rencana_bulan'];
             $data3['kinerja_bulan'] = $data2['kinerja_bulan'];
+            $data3['kinerja_amt_bulan'] = $this->m_kinerja->get_kinerja_amt_by_bulan($this->session->userdata('id_depot'), date("n"),date("Y"));
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu', $data3);
             $this->load->view('layouts/navbar', $data);
@@ -121,6 +122,7 @@ class home extends CI_Controller {
         $data2['kinerja_bulan'] = $this->m_kinerja->get_kinerja_bulan_oam(date("n"),date("Y"));
         $data2['kinerja_tahun'] = $this->m_kinerja->get_kinerja_tahun_oam(date("Y"));
         $data2['kinerja_hari'] = $this->m_kinerja->get_kinerja_hari_oam(date("Y-m-d"));
+        
         $data2['kinerja_mt'] = $this->m_kinerja->get_kinerja_mt_tahun_oam();
         $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_tahun_oam();
         $data2['depot'] = $this->m_depot->get_depot();
@@ -140,7 +142,7 @@ class home extends CI_Controller {
             if ($logHarian[$i]->jadwal == 0) {
                 $totalNotif++;
                 array_push($arrNotif, "<a href='#'>
-                                        <span class='label label-warning'><i class='icon-calendar'></i></span>
+                                        <span class='label label-success'><i class='icon-calendar'></i></span>
                                        Data Penjadwalan belum ada.
                                         </a>");
             }
