@@ -24,7 +24,7 @@
                                        
                                     </select>
                                 </div>
-                                <div class="col-lg-6">
+<!--                                <div class="col-lg-6">
                                     <select class="form-control m-bot2"  id="jenis" name="indikator">
 
                                         <option value="1">Rencana pengiriman vs realisasi (MS2 Compliance)</option>
@@ -38,7 +38,7 @@
                                         <option value="9">Waktu penyelesaian Incidents</option>
                                         <option value="10">Number of Accident</option>
                                     </select>
-                                </div>
+                                </div>-->
                                 <div class="col-lg-2">
                                     <input type="text" name="tahun" data-mask="9999" name="tahun" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
                                 </div>

@@ -1,11 +1,11 @@
 
                     </div>
                 </section>
-                <section class="panel">
+<!--                <section class="panel">
                     <div class="panel-body">
                         <div id="grafik"></div>
                     </div>
-                </section>
+                </section>-->
                 <section class="panel">
                     <div class="panel-body">
                         <header class="panel-heading">

@@ -56,43 +56,43 @@
                     }]
             },
             series: [{
-                    type: 'spline',
+                    type: 'column',
                     name: 'Rencana pengiriman vs realisasi (MS2 Compliance',
                     data: [92,99,101,98,95,92,89,90]
                 }, {
-                    type: 'spline',
+                    type: 'column',
                     name: 'Rencana volume angkutan vs realisasi',
                     data: [98,89,92,97,100,98,99,96]
                 }, {
-                    type: 'spline',
+                    type: 'column',
                     name: 'Laporan tagihan ongkos angkut ',
                     data: [92,98,94,98,98,95,92,94]
                 }, {
-                    type: 'spline',
+                    type: 'column',
                     name: 'Customer  Satisfaction (Lembaga Penyalur)',
                     data: [98,98,95,92,94,89,92,95]
                 }, {
-                    type: 'spline',
+                    type: 'column',
                     name: 'Jumlah temuan, keluhan atau komplain terkait pengelolaan MT',
                     data: [95,92,94,89,92,95,92,99]
                 },{
-                    type: 'spline',
+                    type: 'column',
                     name: 'Tindak lanjut penyelesaian keluhan atau komplain yang diterima',
                     data: [94,89,92,95,97,98,94,98]
                 }, {
-                    type: 'spline',
+                    type: 'column',
                     name: 'Jumlah pekerja pengelola MT  yang mengikuti pelatihan',
                     data: [94,98,98,95,92,96,94,97]
                 }, {
-                    type: 'spline',
+                    type: 'column',
                     name: 'Number of Incidents',
                     data: [93,89,94,96,92,98,99,94]
                 }, {
-                    type: 'spline',
+                    type: 'column',
                     name: 'Waktu penyelesaian Incidents',
                     data: [93,92,96,99,91,96,98,94]
                 }, {
-                    type: 'spline',
+                    type: 'column',
                     name: ' Number of Accident',
                     data: [94,89,92,95,92,99,92,98]
                 

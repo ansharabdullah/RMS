@@ -2,8 +2,8 @@
 
     $(document).ready(function() {
         $("#amtWarning").hide();
-        $("#mtWarning").show();
-        $("#warning").hide();
+        $("#mtWarning").hide();
+        $("#warning").show();
         $("#warningActive").addClass('active');
         $("#amtActive").removeClass('active');
         $("#mtActive").removeClass('active');
@@ -126,35 +126,29 @@
                             Agustus 2014
                         </span>
                     </div>
-                    <div class="panel-body">
-                        <section class="panel" id="warning">
+                    <div class="panel-body" style="height: 350px; overflow-y:scroll">
+                        <section class="panel" id="warning" >
                             <header class="panel-heading">
                                 Peringatan
                             </header>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Tanggal</th>
                                         <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Data AMT hari ini belum diinput</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Data AMT tgl 07-08-2014 belum diupload</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Pegawai1 Hari ini tidak masuk</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Pegawai2 Hari ini tidak masuk</td>
-                                    </tr>
+                                    <?php
+                                        for($i = 0 ; $i < sizeof($peringatan);$i++){
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $peringatan[$i]['tanggal']?></td>
+                                                    <td><?php echo $peringatan[$i]['keterangan']?></td>
+                                                </tr>
+                                            <?php
+                                        }
+                                    ?>
                                 </tbody>
                             </table>
                         </section>

@@ -1,9 +1,9 @@
 <script type="text/javascript">
     $(document).ready(function(){
         //        $("#amtMtBody").hide();
-        $("#ms2VolumeBody").hide();
-        $("#rencanaBody").hide();
-        $("#indikatorKpiBody").hide();
+//        $("#ms2VolumeBody").hide();
+//        $("#rencanaBody").hide();
+//        $("#indikatorKpiBody").hide();
     });
     function showPanel(index)
     {
@@ -412,7 +412,7 @@
                             <span style="background-color:steelblue;">
                                 <i class="icon-exclamation-sign"></i>
                             </span>
-                            <h3>Grafik Indikator KPI</h3>
+                            <h3>Grafik KPI</h3>
                             <span class="rev-combo pull-right" style="background-color:steelblue;">
                                 Agustus 2014
                             </span>
@@ -436,23 +436,16 @@
                         </section>-->
                         <section class="panel" >
                             <div class="panel-body">
-                                <div id="grafikPengiriman" style="width:80% "></div>
-                                <div id="grafikVolume"  style="width:80% "></div>
-                                <!--                                <div id="grafikTagihan" style="width: 80%"></div>
-                                                                <div id="grafikCustomer" style="width: 80%"></div>
-                                                                <div id="grafikKeluhan" style="width: 80%"></div>
-                                                                <div id="grafikPenyelesaian" style="width: 80%"></div>
-                                                                <div id="grafikPelatihan" style="width: 80%"></div>
-                                                                <div id="grafikIncidents" style="width: 80%"></div>
-                                                                <div id="grafikPenyelesaianIncidents" style="width: 80%"></div>
-                                                                <div id="grafikAccident" style="width: 80%"></div>-->
+                                <div id="grafikKpi"></div>
+<!--                                <div id="grafikVolume"  style="width:80% "></div>-->
+                                <!--                            -->
                             </div>
                         </section>
                     </div>
                 </section>
             </div>
         </div>
-        <div class="row">
+<!--        <div class="row">
             <div class="col-lg-12">
 
                 <section class="panel">
@@ -536,6 +529,8 @@
                     </div>
 
                 </section>
+                                </div>
+                            </div>-->
 
                 </section>
 
@@ -547,12 +542,12 @@
 <script type="text/javascript">
     var amt;
     $(function() {
-        $('#grafikPengiriman').highcharts({
+        $('#grafikKpi').highcharts({
             chart: {
                 zoomType:'y'
             },
             title: {
-                text: 'Rencana pengiriman vs realisasi (MS2 Compliance)'
+                text: 'Nilai KPI Depot Pertahun'
             },
             plotOptions: {
                 column: {
@@ -561,7 +556,7 @@
                 series: {
                     events: {
                         click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/1";
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/";
                         }
                     }
                 }
@@ -586,7 +581,7 @@
                         }
                     },
                     title: {
-                        text: 'Realisasi',
+                        text: 'Nilai KPI (%)',
                         style: {
                             color: '#89A54E'
                         }
@@ -598,9 +593,9 @@
                 formatter: function () {
                     var s;
                     if (this.series.name) { // the pie chart
-                        s = '' + this.series.name + ': ' + this.y;
+                        s = 'KPI ' + this.series.name + ': ' + this.y + '%';
                     } else {
-                        s = '' + this.x + ': ' + this.y;
+                        s = '' + this.x + ': ' + this.y+ '%';
                     }
                     return s;
                 }
@@ -619,32 +614,32 @@
                     type: 'column',
                     name: 'Depot 1',
                     color:'#FF002B',
-                    data: [92]
+                    data: [99]
                 }, {
                     type: 'column',
                     name: 'Depot 2',
                     color:'#2C88D4',
-                    data: [95]
+                    data: [110]
                 }, {
                     type: 'column',
                     name: 'Depot 3',
                     color:'#23C906',
-                    data: [101]
+                    data: [106]
                 }, {
                     type: 'column',
                     name: 'Depot 4',
-                    data: [89]
+                    data: [92]
                 }, {
                     type: 'column',
                     name: 'Depot 5',
                     color:'#F5A905',
-                    data: [99]
+                    data: [98]
                 },{
                     type: 'line',
                     name: 'Target',
                     yAxis: 0,
                     xAxis:1,
-                    data: [94,92,94,99,100],
+                    data: [100,100,100,100,100],
                     color: '#CD0000',
                     marker: {
                         lineWidth: 1,
@@ -1656,7 +1651,15 @@
     var arrRitaseAmt = new Array();
     var arrSpbuAmt = new Array();
     var arrColorAmt = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
+    var arrTahun = new Array('2014');
     <?php
+        $tahun = "";
+        for($j = 0 ; $j < sizeof($kinerja_amt);$j++){
+                if($kinerja_amt[$j]->tahun != $tahun ){
+                    $tahun = $kinerja_amt[$j]->tahun;
+                    ?>arrTahun.push('<?php echo $tahun?>');<?php
+                }
+        }
         for($i = 0 ; $i < sizeof($depot);$i++)
         {
             ?>
@@ -1732,7 +1735,7 @@
                 text: ''
             },
             xAxis: {
-                categories: ['2014'],
+                categories:arrTahun,
                 title: {
                     text: null
                 }
@@ -1796,7 +1799,17 @@
     var arrBioSolar = new Array();
     var arrPertamaxDex = new Array();
     var arrColor = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
-    <?php
+    var tahun = new Array();
+    
+    
+    <?php   
+        $tahun = "";
+        for($j = 0 ; $j < sizeof($kinerja_mt);$j++){
+                if($kinerja_mt[$j]->tahun != $tahun ){
+                    $tahun = $kinerja_mt[$j]->tahun;
+                    ?>tahun.push('<?php echo $tahun?>');<?php
+                }
+        }
         for($i = 0 ; $i < sizeof($depot);$i++)
         {
             ?>
@@ -1942,7 +1955,7 @@
                 text: ''
             },
             xAxis: {
-                categories: ['2013','2014'],
+                categories: tahun,
                 title: {
                     text: null
                 }
