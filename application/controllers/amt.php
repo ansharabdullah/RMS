@@ -33,8 +33,8 @@ class amt extends CI_Controller {
         $data['lv1'] = 2;
         $data['lv2'] = 1;
         $data1['amt'] = $this->m_amt->detailAMT($id_pegawai);
-        $data1['grafik']= 0;
-        $data1['kinerja']= 0;
+        $data1['grafik'] = 0;
+        $data1['kinerja'] = 0;
         $data1['peringatan'] = $this->m_peringatan->getPeringatan($id_pegawai);
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
@@ -180,6 +180,7 @@ class amt extends CI_Controller {
         $data['lv1'] = 2;
         $data['lv2'] = 1;
         $data2['amt'] = 0;
+        $data2['error'] = "0";
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
@@ -218,7 +219,6 @@ class amt extends CI_Controller {
         $data2 = array();
         foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
             if ($loadedSheetName == 'AMT') {
-                //echo $sheetIndex, ' -> ', $loadedSheetName, '<br />';
                 $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
                 $sheetData = $objPHPExcel->getActiveSheet();
                 $sheetData->getStyle('H3:H1000')
@@ -233,7 +233,11 @@ class amt extends CI_Controller {
                     $no = $i + 3;
                     $nip = $this->m_amt->cekNIP($sheetData->getCell('B' . $no)->getFormattedValue());
                     $error = "Error : ";
-                    
+                    if (!$sheetData->getCell('B3')->getFormattedValue() && !$sheetData->getCell('C3')->getFormattedValue() && !$sheetData->getCell('D3')->getFormattedValue() && !$sheetData->getCell('E3')->getFormattedValue() && !$sheetData->getCell('F3')->getFormattedValue() && !$sheetData->getCell('G3')->getFormattedValue() && !$sheetData->getCell('H3')->getFormattedValue() && !$sheetData->getCell('I3')->getFormattedValue() && !$sheetData->getCell('J3')->getFormattedValue() && !$sheetData->getCell('K3')->getFormattedValue() && !$sheetData->getCell('L3')->getFormattedValue() && !$sheetData->getCell('M3')->getFormattedValue() && !$sheetData->getCell('N3')->getFormattedValue()) {
+                        $status = 1;
+                        $data['amt']=0;
+                        break;
+                    }
                     if ($sheetData->getCell('B' . $no)->getFormattedValue() == "") {
                         $error = $error . "NIP tidak boleh kosong";
                         $e = 1;
@@ -251,21 +255,16 @@ class amt extends CI_Controller {
                         $error = $error . ", Kabatan hanya SUPIR atau KERNET ";
                         $e = 1;
                     }
-                    
+
                     if ($error == "Error : ") {
                         $error = "Sukses";
                         $e = 0;
                     }
-                    
-                    if ($i >= $sheetData->getHighestRow() - 4) {
-                        $status = 1;
-                        break;
-                    }
-                    if ($sheetData->getCell('A' . $no)->getFormattedValue() == '') {
-                        $status = 1;
-                        break;
-                    }
 
+                    if ($i >= $sheetData->getHighestRow() - 3) {
+                        $status = 1;
+                        break;
+                    }
                     $data2['amt'][$i] = array(
                         'nip' => $sheetData->getCell('B' . $no)->getFormattedValue(),
                         'id_depot' => $this->session->userdata('id_depot'),
@@ -285,11 +284,13 @@ class amt extends CI_Controller {
                         'status_error' => $error,
                         'error' => $e
                     );
-                    
                     $i++;
+                    if (!$sheetData->getCell('B' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('C' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('D' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('E' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('F' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('G' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('H' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('I' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('J' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('K' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('L' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('M' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('N' . ($no + 1))->getFormattedValue()) {
+                        $status = 1;
+                    }
                 }
-                //echo $sheetData;
             }
+            $data['error'] = 0;
         }
         unlink($file_target);
         $data['lv1'] = 2;

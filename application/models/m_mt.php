@@ -181,6 +181,13 @@ class m_mt extends CI_Model {
     public function getTotalMt() {
         return $this->getAllMt()->num_rows();
     }
+    
+    //penjadwalan
+    public function cekNopol($nopol){
+        $this->db->where('nopol',$nopol);
+        $data = $this->db->get('mobil');
+        return $data->result();
+    }
 
     //ss
     public function getAllMtByDepot($id_depot) {

@@ -49,7 +49,7 @@ class m_amt extends CI_Model {
     
 
     public function cekNIP($nip){
-        $data = $this->db->query("select id_pegawai from pegawai where nip='$nip'");
+        $data = $this->db->query("select * from pegawai where nip='$nip'");
         return $data->result();
     }
     
