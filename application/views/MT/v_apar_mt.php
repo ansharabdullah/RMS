@@ -1,3 +1,20 @@
+<?php
+function DateToIndo($date) { 
+        $BulanIndo = array("Januari", "Februari", "Maret",
+                           "April", "Mei", "Juni",
+                           "Juli", "Agustus", "September",
+                           "Oktober", "November", "Desember");
+    
+        $tahun = substr($date, 0, 4); 
+        $bulan = substr($date, 5, 2); 
+        $tgl   = substr($date, 8, 2); 
+        
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+        return($result);
+}
+
+?>
+
 <script>
     var apar = new Array();
     $(document).ready(function(){
@@ -86,10 +103,11 @@
                                 foreach ($apar as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->STORE_PRESSURE; ?></td>
-                                    <td><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->CATRIDGE; ?></td>
-                                    <td><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->CO2; ?></td>
-                                    <td><div id="<?php echo 'keterangan-' . $i; ?>"><?php echo $row->KETERANGAN_APAR; ?></td>
+                                    <td><?php echo(DateToIndo($row->STORE_PRESSURE)); ?></td>
+                                    <td><?php echo(DateToIndo($row->CATRIDGE)); ?></td>
+                                    <td><?php echo(DateToIndo($row->CO2)); ?></td>
+                                    <td><div id="<?php echo 'keterangan-' . $i; ?>">
+                                    <?php echo $row->KETERANGAN_APAR; ?></td>
                                     <td><div id="<?php echo 'status-' . $i; ?>"><?php if($row->STATUS_APAR == "0")echo 'Aktif'?>
                                                 <?php if($row->STATUS_APAR == "1")echo 'Tidak Aktif'?></td>
                                                                                     

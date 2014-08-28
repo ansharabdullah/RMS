@@ -1,3 +1,20 @@
+<?php
+function DateToIndo($date) { 
+        $BulanIndo = array("Januari", "Februari", "Maret",
+                           "April", "Mei", "Juni",
+                           "Juli", "Agustus", "September",
+                           "Oktober", "November", "Desember");
+    
+        $tahun = substr($date, 0, 4); 
+        $bulan = substr($date, 5, 2); 
+        $tgl   = substr($date, 8, 2); 
+        
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+        return($result);
+}
+
+?>
+
 <script>
     var surat = new Array();
     $(document).ready(function(){
@@ -86,7 +103,7 @@
                                         <?php if($row->ID_JENIS_SURAT == "3")echo 'KEUR'?>
                                         <?php if($row->ID_JENIS_SURAT == "4")echo 'TERA'?>
                                     </td>
-                                    <td><?php echo $row->TANGGAL_AKHIR_SURAT; ?></td>
+                                    <td><?php echo(DateToIndo($row->TANGGAL_AKHIR_SURAT)); ?></td>
                                    <td><?php echo $row->KETERANGAN_SURAT; ?></td>
                                    
                                    <td><a class="btn btn-warning btn-xs tooltips" href="#ModalEditSurat"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>

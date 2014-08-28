@@ -1,3 +1,20 @@
+<?php
+function DateToIndo($date) { 
+        $BulanIndo = array("Januari", "Februari", "Maret",
+                           "April", "Mei", "Juni",
+                           "Juli", "Agustus", "September",
+                           "Oktober", "November", "Desember");
+    
+        $tahun = substr($date, 0, 4); 
+        $bulan = substr($date, 5, 2); 
+        $tgl   = substr($date, 8, 2); 
+        
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+        return($result);
+}
+
+?>
+
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#tabelJadwal").hide();
@@ -147,18 +164,19 @@
                         <button class="btn dropdown-toggle" data-toggle="dropdown">Bulan <i class="icon-angle-down"></i>
                         </button>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="#" onclick="changeMonth('Januari')">Januari</a></li>
-                            <li><a href="#" onclick="changeMonth('Februari')">Februari</a></li>
-                            <li><a href="#" onclick="changeMonth('Maret')">Maret</a></li>
-                            <li><a href="#" onclick="changeMonth('April')">April</a></li>
-                            <li><a href="#" onclick="changeMonth('Mei')">Mei</a></li>
-                            <li><a href="#" onclick="changeMonth('Juni')">Juni</a></li>
-                            <li><a href="#" onclick="changeMonth('Juli')">Juli</a></li>
-                            <li><a href="#" onclick="changeMonth('Agustus')">Agustus</a></li>
-                            <li><a href="#" onclick="changeMonth('September')">September</a></li>
-                            <li><a href="#" onclick="changeMonth('Oktober')">Oktober</a></li>
-                            <li><a href="#" onclick="changeMonth('November')">November</a></li>
-                            <li><a href="#" onclick="changeMonth('Desember')">Desember</a></li>
+                            <li><a href="javascript:FilterData('');" onclick="changeMonth('Januari')">Semua</a></li>
+                            <li><a href="javascript:FilterData('Januari');" onclick="changeMonth('Januari')">Januari</a></li>
+                            <li><a href="javascript:FilterData('Februari');" onclick="changeMonth('Februari')">Februari</a></li>
+                            <li><a href="javascript:FilterData('Maret');" onclick="changeMonth('Maret')">Maret</a></li>
+                            <li><a href="javascript:FilterData('April');" onclick="changeMonth('April')">April</a></li>
+                            <li><a href="javascript:FilterData('Mei');" onclick="changeMonth('Mei')">Mei</a></li>
+                            <li><a href="javascript:FilterData('Juni');" onclick="changeMonth('Juni')">Juni</a></li>
+                            <li><a href="javascript:FilterData('Juli');" onclick="changeMonth('Juli')">Juli</a></li>
+                            <li><a href="javascript:FilterData('Agustus');" onclick="changeMonth('Agustus')">Agustus</a></li>
+                            <li><a href="javascript:FilterData('September');" onclick="changeMonth('September')">September</a></li>
+                            <li><a href="javascript:FilterData('Oktober');" onclick="changeMonth('Oktober')">Oktober</a></li>
+                            <li><a href="javascript:FilterData('November');" onclick="changeMonth('November')">November</a></li>
+                            <li><a href="javascript:FilterData('Desember');" onclick="changeMonth('Desember')">Desember</a></li>
                         </ul>
                     </div>
                 </div>
@@ -186,7 +204,10 @@
                                 foreach ($rencana as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                     <td><?php echo $row->TANGGAL_LOG_HARIAN; ?></td>
+                                    <td> <?php echo(DateToIndo($row->TANGGAL_LOG_HARIAN)); 
+                                    ?>
+                                    </td>
+                                     
                                      <td><?php echo $row->R_OWN_USE; ?></td>
                                     <td><?php echo $row->R_PREMIUM; ?></td>
                                     <td><?php echo $row->R_PERTAMAX; ?></td>
@@ -390,6 +411,11 @@
         EditableTable.init();
         
     });
+    
+    function FilterData(par) {
+        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+    }
     
     function changeMonth(bulan)
     {

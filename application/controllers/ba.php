@@ -171,6 +171,7 @@ class ba extends CI_Controller {
     }
 
     public function import_ms2() {
+        $this->load->model('m_ba');
         $depot = 1;
         $data2['klik_upload'] = false;
         $data2['klik_simpan'] = false;
@@ -180,74 +181,106 @@ class ba extends CI_Controller {
 
             $blnms2 = $this->input->post('blnms2');
             $bulan = date("d-m-Y", strtotime($blnms2));
-            $fileMS2 = $_FILES['fileMS2'];
-            $last_day = date('t', strtotime($bulan));
-echo "<script>alert('$last_day');</script>";    
-            $data2['ms2']['jumlah'] = $last_day;
+            $data2['cek_ada'] = $this->m_ba->cekMS2($depot, date("Y", strtotime($blnms2)), date("m", strtotime($blnms2)));
+            if ($data2['cek_ada'] == 0) {
+                if (date("m", strtotime($blnms2)) == 1) {
+                    $data2['nama_bulan'] = 'Januari ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 2) {
+                    $data2['nama_bulan'] = 'Februari ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 3) {
+                    $data2['nama_bulan'] = 'Maret ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 4) {
+                    $data2['nama_bulan'] = 'April ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 5) {
+                    $data2['nama_bulan'] = 'Mei ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 6) {
+                    $data2['nama_bulan'] = 'Juni ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 7) {
+                    $data2['nama_bulan'] = 'Juli ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 8) {
+                    $data2['nama_bulan'] = 'Agustus ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 9) {
+                    $data2['nama_bulan'] = 'September ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 10) {
+                    $data2['nama_bulan'] = 'Oktober ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 11) {
+                    $data2['nama_bulan'] = 'November ' . date("Y", strtotime($blnms2));
+                } else if (date("m", strtotime($blnms2)) == 12) {
+                    $data2['nama_bulan'] = 'Desember ' . date("Y", strtotime($blnms2));
+                }
 
-            $dir = './assets/file/';
-            if (!file_exists($dir)) {
-                mkdir($dir);
-            }
+                $fileMS2 = $_FILES['fileMS2'];
+                $last_day = date('t', strtotime($bulan));
 
-            $file_target = $dir . $_FILES['fileMS2']['name'];
-            move_uploaded_file($_FILES['fileMS2']['tmp_name'], $file_target);
+                $data2['ms2']['jumlah'] = $last_day;
 
-            $this->load->library('PHPExcel/Classes/PHPExcel');
+                $dir = './assets/file/';
+                if (!file_exists($dir)) {
+                    mkdir($dir);
+                }
 
-            $inputFileName = $file_target;
+                $file_target = $dir . $_FILES['fileMS2']['name'];
+                move_uploaded_file($_FILES['fileMS2']['tmp_name'], $file_target);
 
-            $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+                $this->load->library('PHPExcel/Classes/PHPExcel');
 
-            $worksheetData = $objReader->listWorksheetInfo($inputFileName);
+                $inputFileName = $file_target;
 
-            foreach ($worksheetData as $row) {
-                $worksheetRead[] = $row['worksheetName'];
-            }
+                $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+                $objReader = PHPExcel_IOFactory::createReader($inputFileType);
 
-            $objReader->setLoadSheetsOnly($worksheetRead);
+                $worksheetData = $objReader->listWorksheetInfo($inputFileName);
 
-            $objPHPExcel = $objReader->load($inputFileName);
+                foreach ($worksheetData as $row) {
+                    $worksheetRead[] = $row['worksheetName'];
+                }
 
-            $loadedSheetNames = $objPHPExcel->getSheetNames();
+                $objReader->setLoadSheetsOnly($worksheetRead);
 
-            foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
-                if ($loadedSheetName == 'MS2 Compliance') {
-                    $data2['ms2']['error'] = false;
-                    $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
-                    $sheetData = $objPHPExcel->getActiveSheet();
-                    $row_baca = 4;
-                    $i = 0;
-                    for ($i = 0; $i < $last_day; $i++) {
-                        $data2['ms2']['tanggal'][] = '2014-05-01';
-                        $data2['ms2']['sesuai_premium'][] = $sheetData->getCell('B' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['sesuai_solar'][] = $sheetData->getCell('C' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['sesuai_pertamax'][] = $sheetData->getCell('D' . ($row_baca + $i))->getValue()*100;
+                $objPHPExcel = $objReader->load($inputFileName);
 
-                        $data2['ms2']['cepat_premium'][] = $sheetData->getCell('E' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['cepat_solar'][] = $sheetData->getCell('F' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['cepat_pertamax'][] = $sheetData->getCell('G' . ($row_baca + $i))->getValue()*100;
+                $loadedSheetNames = $objPHPExcel->getSheetNames();
 
-                        $data2['ms2']['cepat_shift1_premium'][] = $sheetData->getCell('H' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['cepat_shift1_solar'][] = $sheetData->getCell('I' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['cepat_shift1_pertamax'][] = $sheetData->getCell('J' . ($row_baca + $i))->getValue()*100;
+                foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
+                    if ($loadedSheetName == 'MS2 Compliance') {
+                        $data2['ms2']['error'] = false;
+                        $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
+                        $sheetData = $objPHPExcel->getActiveSheet();
+                        $row_baca = 4;
+                        $i = 0;
+                        for ($i = 0; $i < $last_day; $i++) {
+                            
+                            $data2['ms2']['id_log_harian'][] = $this->m_ba->getIdLogHarian($depot, date("Y", strtotime($blnms2)), date("m", strtotime($blnms2)), ($i+1));
+                            $data2['ms2']['tanggal'][] = date("Y-m", strtotime($blnms2)) . '-' . ($i + 1);
+                                                        
+                            $data2['ms2']['sesuai_premium'][] = is_numeric($sheetData->getCell('B' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('B' . ($row_baca + $i))->getValue() * 100) : -1;
+                            $data2['ms2']['sesuai_solar'][] = (is_numeric($sheetData->getCell('C' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('C' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['sesuai_pertamax'][] = (is_numeric($sheetData->getCell('D' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('D' . ($row_baca + $i))->getValue() * 100) : -1);
 
-                        $data2['ms2']['lambat_premium'][] = $sheetData->getCell('K' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['lambat_solar'][] = $sheetData->getCell('L' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['lambat_pertamax'][] = $sheetData->getCell('M' . ($row_baca + $i))->getValue()*100;
+                            $data2['ms2']['cepat_premium'][] = (is_numeric($sheetData->getCell('E' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('E' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['cepat_solar'][] = (is_numeric($sheetData->getCell('F' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('F' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['cepat_pertamax'][] = (is_numeric($sheetData->getCell('G' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('G' . ($row_baca + $i))->getValue() * 100) : -1);
 
-                        $data2['ms2']['tidak_terkirim_premium'][] = $sheetData->getCell('N' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['tidak_terkirim_solar'][] = $sheetData->getCell('O' . ($row_baca + $i))->getValue()*100;
-                        $data2['ms2']['tidak_terkirim_pertamax'][] = $sheetData->getCell('P' . ($row_baca + $i))->getValue()*100;
+                            $data2['ms2']['cepat_shift1_premium'][] = (is_numeric($sheetData->getCell('H' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('H' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['cepat_shift1_solar'][] = (is_numeric($sheetData->getCell('I' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('I' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['cepat_shift1_pertamax'][] = (is_numeric($sheetData->getCell('J' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('J' . ($row_baca + $i))->getValue() * 100) : -1);
+
+                            $data2['ms2']['lambat_premium'][] = (is_numeric($sheetData->getCell('K' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('K' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['lambat_solar'][] = (is_numeric($sheetData->getCell('L' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('L' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['lambat_pertamax'][] = (is_numeric($sheetData->getCell('M' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('M' . ($row_baca + $i))->getValue() * 100) : -1);
+
+                            $data2['ms2']['tidak_terkirim_premium'][] = (is_numeric($sheetData->getCell('N' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('N' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['tidak_terkirim_solar'][] = (is_numeric($sheetData->getCell('O' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('O' . ($row_baca + $i))->getValue() * 100) : -1);
+                            $data2['ms2']['tidak_terkirim_pertamax'][] = (is_numeric($sheetData->getCell('P' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('P' . ($row_baca + $i))->getValue() * 100) : -1);
+                        }
                     }
                 }
             }
         } else if ($this->input->post('simpan')) {
             $data2['klik_simpan'] = true;
+            $ms2 = unserialize($this->input->post('data_ms2'));
+            $this->m_ba->simpanMS2($ms2);
         }
-
-
         $data['lv1'] = 6;
         $data['lv2'] = 2;
         $this->load->view('layouts/header');
@@ -258,6 +291,23 @@ echo "<script>alert('$last_day');</script>";
     }
 
     public function frm() {
+        $depot = 1;
+        
+        $data2['klik_cek']=false;
+        $data2['klik_tambah']=false;
+        $data2['klik_hapus']=false;
+        $data2['klik_edit']=false;
+        
+        if ($this->input->post('cek')) {
+            
+        }else if ($this->input->post('tambah')) {
+            
+        }else if ($this->input->post('hapus')) {
+            
+        }else if ($this->input->post('edit')) {
+            
+        }
+        
         $data['lv1'] = 6;
         $data['lv2'] = 3;
         $this->load->view('layouts/header');
@@ -295,6 +345,14 @@ echo "<script>alert('$last_day');</script>";
         $this->load->view('layouts/navbar', $data);
         $this->load->view('ba/v_kpi_internal');
         $this->load->view('layouts/footer');
+    }
+
+    public function cek() {
+        if (is_numeric('0')) {
+            echo "angka";
+        } else {
+            echo "bukan angka";
+        }
     }
 
 }

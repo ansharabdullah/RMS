@@ -1,3 +1,19 @@
+<?php
+function DateToIndo($date) { 
+        $BulanIndo = array("Januari", "Februari", "Maret",
+                           "April", "Mei", "Juni",
+                           "Juli", "Agustus", "September",
+                           "Oktober", "November", "Desember");
+    
+        $tahun = substr($date, 0, 4); 
+        $bulan = substr($date, 5, 2); 
+        $tgl   = substr($date, 8, 2); 
+        
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+        return($result);
+}
+
+?>
 <script>
     var oli = new Array();
     $(document).ready(function(){
@@ -88,7 +104,7 @@
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $row->KM_AWAL; ?></td>
-                                    <td><?php echo $row->TANGGAL_GANTI_OLI; ?></td>
+                                    <td><?php echo(DateToIndo($row->TANGGAL_GANTI_OLI)); ?></td>
                                     <td><?php echo $row->MERK_OLI; ?></td>
                                     <td><?php echo $row->TOTAL_VOLUME; ?></td>
                                    <td>

@@ -92,10 +92,6 @@ class m_mt extends CI_Model {
         $this->db->update('ban', $data);
     }
     
-    public function selectRencana($id_log_harian){
-        $data = $this->db->query("select T.ID_RENCANA,L.ID_LOG_HARIAN,L.TANGGAL_LOG_HARIAN, T.R_PREMIUM, T.R_PERTAMAX, T.R_PERTAMAXPLUS, T.R_PERTAMINADEX, T.R_SOLAR, T.R_BIOSOLAR, T.R_OWN_USE from rencana T, log_harian L where T.id_log_harian=L.id_log_harian and L.id_log_harian = $id_log_harian");
-        return $data->result();
-    }
     
     public function insertRencana($data) {
         $this->db->insert('rencana', $data);
@@ -146,7 +142,12 @@ class m_mt extends CI_Model {
         $this->db->where('id_surat', $id);
         $this->db->delete('surat');
     }
-
+    
+    public function selectRencana(){
+        $data = $this->db->query("select T.ID_RENCANA,L.ID_LOG_HARIAN,L.TANGGAL_LOG_HARIAN, T.R_PREMIUM, T.R_PERTAMAX, T.R_PERTAMAXPLUS, T.R_PERTAMINADEX, T.R_SOLAR, T.R_BIOSOLAR, T.R_OWN_USE from rencana T, log_harian L ");
+        return $data->result();
+    }
+    
     /*     * DASHBOARD --- Renisa* */
 
     //oam
