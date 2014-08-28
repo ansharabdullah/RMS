@@ -291,10 +291,22 @@ class ba extends CI_Controller {
     }
 
     public function frm() {
+        $depot = 1;
+        
         $data2['klik_cek']=false;
         $data2['klik_tambah']=false;
         $data2['klik_hapus']=false;
         $data2['klik_edit']=false;
+        
+        if ($this->input->post('cek')) {
+            
+        }else if ($this->input->post('tambah')) {
+            
+        }else if ($this->input->post('hapus')) {
+            
+        }else if ($this->input->post('edit')) {
+            
+        }
         
         $data['lv1'] = 6;
         $data['lv2'] = 3;
