@@ -25,7 +25,7 @@ class Mt extends CI_Controller {
         $data_mt = unserialize($this->input->post('data_mt'));
         $this->m_mt->importMobil($data_mt);
 
-        $link = base_url() . "mt/";
+        $link = base_url() . "mt/data_mt";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
@@ -187,14 +187,185 @@ class Mt extends CI_Controller {
         echo '</script>';
     }
     
-//Import CSV
-    public function import_csv() {
+//Import MT
+    public function import_mt() {
 
         $data['lv1'] = 3;
         $data['lv2'] = 1;
+        $data2['mt'] = 0;
+        $data2['error'] = "0";
         $this->header($data);
-        $this->load->view('mt/v_import_csv');
+        $this->load->view('mt/v_import_mt',$data2);
         $this->footer();
+    }
+    
+    public function import_xls_mt() {
+
+        $fileMT = $_FILES['fileMT'];
+        $dir = './assets/file/';
+        if (!file_exists($dir)) {
+            mkdir($dir);
+        }
+
+        $file_target = $dir . $_FILES['fileMT']['name'];
+        move_uploaded_file($_FILES['fileMT']['tmp_name'], $file_target);
+
+        $this->load->library('PHPExcel/Classes/PHPExcel');
+
+        $inputFileName = $file_target;
+        $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+
+        $worksheetData = $objReader->listWorksheetInfo($inputFileName);
+
+        foreach ($worksheetData as $row) {
+            $worksheetRead[] = $row['worksheetName'];
+        }
+
+        $objReader->setLoadSheetsOnly($worksheetRead);
+
+        $objPHPExcel = $objReader->load($inputFileName);
+
+        $loadedSheetNames = $objPHPExcel->getSheetNames();
+        $data2 = array();
+        foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
+            if ($loadedSheetName == 'MT') {
+                $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
+                $sheetData = $objPHPExcel->getActiveSheet();
+                $sheetData->getStyle('H3:H1000')
+                        ->getNumberFormat()
+                        ->setFormatCode('dd-mm-yyyy');
+                $sheetData->getStyle('L3:L1000')
+                        ->getNumberFormat()
+                        ->setFormatCode('dd-mm-yyyy');
+                $i = 0;
+                $status = 0;
+                while ($status == 0) {
+                    $no = $i + 3;
+                    $nopol = $this->m_mt->ambilNopol($sheetData->getCell('B' . $no)->getFormattedValue());
+                    $error = "Error : ";
+                    if (!$sheetData->getCell('B3')->getFormattedValue() && !$sheetData->getCell('C3')->getFormattedValue() && !$sheetData->getCell('D3')->getFormattedValue() && !$sheetData->getCell('E3')->getFormattedValue() && !$sheetData->getCell('F3')->getFormattedValue() && !$sheetData->getCell('G3')->getFormattedValue() && !$sheetData->getCell('H3')->getFormattedValue() && !$sheetData->getCell('I3')->getFormattedValue() && !$sheetData->getCell('J3')->getFormattedValue() && !$sheetData->getCell('K3')->getFormattedValue() && !$sheetData->getCell('L3')->getFormattedValue() && !$sheetData->getCell('M3')->getFormattedValue() && !$sheetData->getCell('N3')->getFormattedValue() && !$sheetData->getCell('O3')->getFormattedValue() && !$sheetData->getCell('P3')->getFormattedValue() && !$sheetData->getCell('Q3')->getFormattedValue() && !$sheetData->getCell('R3')->getFormattedValue() && !$sheetData->getCell('S3')->getFormattedValue() && !$sheetData->getCell('T3')->getFormattedValue()&& !$sheetData->getCell('U3')->getFormattedValue() && !$sheetData->getCell('V3')->getFormattedValue() && !$sheetData->getCell('W3')->getFormattedValue()&& !$sheetData->getCell('X3')->getFormattedValue() && !$sheetData->getCell('Y3')->getFormattedValue() && !$sheetData->getCell('Z3')->getFormattedValue()&& !$sheetData->getCell('AA3')->getFormattedValue() && !$sheetData->getCell('AB3')->getFormattedValue() && !$sheetData->getCell('AC3')->getFormattedValue() && !$sheetData->getCell('AD3')->getFormattedValue() && !$sheetData->getCell('AE3')->getFormattedValue() && !$sheetData->getCell('AF3')->getFormattedValue() && !$sheetData->getCell('AG3')->getFormattedValue() && !$sheetData->getCell('AI3')->getFormattedValue()) {
+                        $status = 1;
+                        $data['mt']=0;
+                        break;
+                    }
+                    if ($sheetData->getCell('B' . $no)->getFormattedValue() == "") {
+                        $error = $error . "Nopol tidak boleh kosong";
+                        $e = 1;
+                    } else if (sizeof($nopol) != 0) {
+                        $error = $error . "Nopol telah ada";
+                        $e = 1;
+                    }
+
+                    if ($sheetData->getCell('E' . $no)->getFormattedValue() != 8 && $sheetData->getCell('E' . $no)->getFormattedValue() != 16 && $sheetData->getCell('E' . $no)->getFormattedValue() != 24 && $sheetData->getCell('E' . $no)->getFormattedValue() != 32 && $sheetData->getCell('E' . $no)->getFormattedValue() != 40) {
+                        $error = $error . ", Klasifikasi harus 8/16/24/32/40 ";
+                        $e = 1;
+                    }
+                    if (strtoupper($sheetData->getCell('F' . $no)->getFormattedValue()) != "SOLAR" && strtoupper($sheetData->getCell('F' . $no)->getFormattedValue()) != "PREMIUM" && strtoupper($sheetData->getCell('F' . $no)->getFormattedValue()) != "PERTAMAX" && strtoupper($sheetData->getCell('F' . $no)->getFormattedValue()) != "PERTAMINA DEX" && strtoupper($sheetData->getCell('F' . $no)->getFormattedValue()) != "PERTAMAX PLUS" && strtoupper($sheetData->getCell('F' . $no)->getFormattedValue()) != "BIO SOLAR") {
+                        $error = $error . ", Klasifikasi harus SOLAR/PERTAMAX/PREMIUM/DLL ";
+                        $e = 1;
+                    }
+
+                    if (strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "ALUMUNIUM AWEKO" && strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "CARBON STEEL" && strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "STEEL") {
+                        $error = $error . ", Jenis Tangki hanya ALUMUNIUM AWEKO/CARBON STELL/STELL ";
+                        $e = 1;
+                    }
+                    if (strtoupper($sheetData->getCell('K' . $no)->getFormattedValue()) != "HAK MILIK" && strtoupper($sheetData->getCell('K' . $no)->getFormattedValue()) != "SEWA" ) {
+                        $error = $error . ", Status mobil hanya HAK MILIK/SEWA ";
+                        $e = 1;
+                    }
+                    if (strtoupper($sheetData->getCell('L' . $no)->getFormattedValue()) != "OK" && strtoupper($sheetData->getCell('L' . $no)->getFormattedValue()) != "NO" ) {
+                        $error = $error . ", GPS hanya OK/NO ";
+                        $e = 1;
+                    }
+                    if (strtoupper($sheetData->getCell('M' . $no)->getFormattedValue()) != "OK" && strtoupper($sheetData->getCell('M' . $no)->getFormattedValue()) != "NO" ) {
+                        $error = $error . ", Sensor Overfill hanya OK/NO ";
+                        $e = 1;
+                    }
+                    if (strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()) != "OK" && strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()) != "NO" ) {
+                        $error = $error . ", Standar Volume hanya OK/NO ";
+                        $e = 1;
+                    }
+                    if (strtoupper($sheetData->getCell('O' . $no)->getFormattedValue()) != "OK" && strtoupper($sheetData->getCell('O' . $no)->getFormattedValue()) != "NO" ) {
+                        $error = $error . ", volume 1 hanya OK/NO ";
+                        $e = 1;
+                    }
+                    if ($sheetData->getCell('P' . $no)->getFormattedValue() != 1 && $sheetData->getCell('P' . $no)->getFormattedValue() != 2 && $sheetData->getCell('P' . $no)->getFormattedValue() != 3 ) {
+                        $error = $error . ", Kategori hanya 1/2/3 ";
+                        $e = 1;
+                    }
+                    if ($sheetData->getCell('Q' . $no)->getFormattedValue() != 4 && $sheetData->getCell('Q' . $no)->getFormattedValue() != 6 && $sheetData->getCell('Q' . $no)->getFormattedValue() != 8 && $sheetData->getCell('Q' . $no)->getFormattedValue() != 10 && $sheetData->getCell('Q' . $no)->getFormattedValue() != 12 ) {
+                        $error = $error . ", Jumlah Segel hanya 4/6/8/10/12 ";
+                        $e = 1;
+                    }
+
+                    if ($error == "Error : ") {
+                        $error = "Sukses";
+                        $e = 0;
+                    }
+
+                    if ($i >= $sheetData->getHighestRow() - 3) {
+                        $status = 1;
+                        break;
+                    }
+                    $data2['mt'][$i] = array(
+                        'nopol' => $sheetData->getCell('B' . $no)->getFormattedValue(),
+                        'id_depot' => $this->session->userdata('id_depot'),
+                        'no_rangka' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                        'no_mesin' => $sheetData->getCell('D' . $no)->getFormattedValue(),
+                        'kapasitas' => $sheetData->getCell('E' . $no)->getFormattedValue(),
+                        'produk' => strtoupper($sheetData->getCell('F' . $no)->getFormattedValue()),
+                        'jenis_kendaraan' => $sheetData->getCell('G' . $no)->getFormattedValue(),
+                        'transportir' => $sheetData->getCell('H' . $no)->getFormattedValue(),
+                        'rasio' => $sheetData->getCell('I' . $no)->getFormattedValue(),
+                        'jenis_tangki' => strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()),
+                        'status_mobil' => strtoupper($sheetData->getCell('K' . $no)->getFormattedValue()),
+                        'gps' => strtoupper($sheetData->getCell('L' . $no)->getFormattedValue()),
+                        'sensor_overfill' => strtoupper($sheetData->getCell('M' . $no)->getFormattedValue()),
+                        'standar_volume' => strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()),
+                        'volume_1' => strtoupper($sheetData->getCell('O' . $no)->getFormattedValue()),
+                        'kategori_mobil' => $sheetData->getCell('P' . $no)->getFormattedValue(),
+                        'jumlah_segel' => $sheetData->getCell('Q' . $no)->getFormattedValue(),
+                        'rk1_komp1' => $sheetData->getCell('R' . $no)->getFormattedValue(),
+                        'rk1_komp2' => $sheetData->getCell('S' . $no)->getFormattedValue(),
+                        'rk1_komp3' => $sheetData->getCell('T' . $no)->getFormattedValue(),
+                        'rk1_komp4' => $sheetData->getCell('U' . $no)->getFormattedValue(),
+                        'rk1_komp5' => $sheetData->getCell('V' . $no)->getFormattedValue(),
+                        'rk1_komp6' => $sheetData->getCell('W' . $no)->getFormattedValue(),
+                        'rk2_komp1' => $sheetData->getCell('X' . $no)->getFormattedValue(),
+                        'rk2_komp2' => $sheetData->getCell('Y' . $no)->getFormattedValue(),
+                        'rk2_komp3' => $sheetData->getCell('Z' . $no)->getFormattedValue(),
+                        'rk2_komp4' => $sheetData->getCell('AA' . $no)->getFormattedValue(),
+                        'rk2_komp5' => $sheetData->getCell('AB' . $no)->getFormattedValue(),
+                        'rk2_komp6' => $sheetData->getCell('AC' . $no)->getFormattedValue(),
+                        'k_komp1' => $sheetData->getCell('AD' . $no)->getFormattedValue(),
+			'k_komp2' => $sheetData->getCell('AE' . $no)->getFormattedValue(),
+			'k_komp3' => $sheetData->getCell('AF' . $no)->getFormattedValue(),
+			'k_komp4' => $sheetData->getCell('AG' . $no)->getFormattedValue(),
+			'k_komp5' => $sheetData->getCell('AH' . $no)->getFormattedValue(),
+			'k_komp6' => $sheetData->getCell('AI' . $no)->getFormattedValue(),
+			'status' => 'AKTIF',
+                        'status_error' => $error,
+                        'error' => $e
+                    );
+                    $i++;
+                    
+                    if (!$sheetData->getCell('B' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('C' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('D' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('E' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('F' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('G' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('H' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('I' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('J' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('K' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('L' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('M' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('N' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('O' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('P' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('Q' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('R' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('S' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('T' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('U' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('V' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('W' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('X' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('Y' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('Z' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AA' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AB' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AC' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AD' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AE' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AF' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AG' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AH' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('AI' . ($no + 1))->getFormattedValue()) {
+                        $status = 1;
+                    }
+                }
+            }
+            $data['error'] = 0;
+        }
+        unlink($file_target);
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('mt/v_import_mt', $data2);
+        $this->load->view('layouts/footer');
+        
     }
     
 //APAR MT

@@ -43,9 +43,9 @@ if(status == 1){
                     Tambah MT <i class="icon-plus"></i>
                 </a>
 
-                <a href="<?php echo base_url() ?>mt/import_csv" rel="stylesheet" class="btn btn-success"> Import Excel <i class="icon-plus"></i></a>
+                <a href="<?php echo base_url() ?>mt/import_mt" rel="stylesheet" class="btn btn-success"> Import Excel <i class="icon-plus"></i></a>
 
-                <div class="adv-table editable-table " style="overflow-y: scroll" >
+                <div class="adv-table editable-table " style="overflow-x: scroll" >
                     <div class="space15"></div>
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
                         <thead>
@@ -54,7 +54,7 @@ if(status == 1){
                                 <th >No.</th> 
                                 <th>Nopol</th>
                                 <th>Transpotir</th>
-                                <th>Kapasitas</th>
+                                <th>Kapasitas(KL)</th>
                                 <th>Produk</th>
                                 <th>No Mesin</th>
                                 <th>No Rangka</th>
@@ -79,7 +79,10 @@ if(status == 1){
                                     <td><?php echo $row->NO_RANGKA; ?></td>
                                     <td><?php echo $row->JENIS_TANGKI; ?></td>
                                     <td><?php echo $row->STATUS_MOBIL; ?></td>
-                                    <td><?php echo $row->GPS; ?></td>
+                                    
+                                    <td>
+                                    <?php if($row->GPS == "0")echo 'OK'?><?php if($row->GPS == "1")echo 'NO'?>
+                                    </td>
 
 
                                 </tr>

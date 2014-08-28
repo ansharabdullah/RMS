@@ -75,7 +75,7 @@ function DateToIndo($date) {
                 Tabel Data APAR  
             </header>
             <div class="panel-body">
-                <div class="adv-table editable-table " style="overflow-y: scroll">
+                <div class="adv-table editable-table " style="overflow-x: scroll">
                     <div class="clearfix">
                         <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahApar">
                             Tambah APAR <i class="icon-plus"></i>
@@ -113,7 +113,7 @@ function DateToIndo($date) {
                                                                                     
                                     <td>
                                         
-                                        <a class="btn btn-warning btn-xs tooltips" href="#ModalEditApar"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
+                                        <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" href="#ModalEditApar"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" href="javascript:hapus('<?php echo $row->ID_APAR; ?>','<?php echo $id_mobil; ?>')"><i class="icon-remove"></i></a>
                                        
                                     </td>

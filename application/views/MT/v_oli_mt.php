@@ -76,7 +76,7 @@ function DateToIndo($date) {
             </header>
 
             <div class="panel-body">
-                <div class="adv-table editable-table " style="overflow-y: scroll">
+                <div class="adv-table editable-table " style="overflow-x: scroll">
                     <div class="clearfix">
                         <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Oli MT <i class="icon-plus"></i>
@@ -108,7 +108,7 @@ function DateToIndo($date) {
                                     <td><?php echo $row->MERK_OLI; ?></td>
                                     <td><?php echo $row->TOTAL_VOLUME; ?></td>
                                    <td>
-                                    <a class="btn btn-warning btn-xs tooltips" href="#ModalEditOli"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
+                                    <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Oli" href="#ModalEditOli"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Oli" href="javascript:hapus('<?php echo $row->ID_OLI ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
                                 </td>
                                 </tr>
