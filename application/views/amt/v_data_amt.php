@@ -18,11 +18,6 @@
                             <a class="btn btn-success" href="<?php echo base_url() ?>amt/import_amt">
                                 Import Excel <i class="icon-plus"></i>
                             </a>
-
-                            <a class="btn btn-success" href="<?php echo base_url() ?>downloads/format_amt.xlsx">
-                                Download Format <i class="icon-download-alt"></i>
-                            </a>
-
                         
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
