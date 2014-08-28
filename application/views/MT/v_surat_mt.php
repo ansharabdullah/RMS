@@ -104,7 +104,9 @@ function DateToIndo($date) {
                                         <?php if($row->ID_JENIS_SURAT == "4")echo 'TERA'?>
                                     </td>
                                     <td><?php echo(DateToIndo($row->TANGGAL_AKHIR_SURAT)); ?></td>
-                                   <td><?php echo $row->KETERANGAN_SURAT; ?></td>
+                                   <td> <?php if($row->KETERANGAN_SURAT == "0")echo 'Aktif'?>
+                                        <?php if($row->KETERANGAN_SURAT == "1")echo 'Tidak AKtif'?>
+                                    </td>
                                    
                                    <td><a class="btn btn-warning btn-xs tooltips" href="#ModalEditSurat"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Surat" href="javascript:hapus('<?php echo $row->ID_SURAT ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
@@ -184,7 +186,7 @@ function DateToIndo($date) {
                     <!-- form tambah-->
 
                    <div class="form-group">
-                        <label class="col-sm-2 control-label col-lg-2" for="tera">Tera</label>
+                        <label class="col-sm-2 control-label col-lg-2" for="tera">Jenis Surat</label>
                         <div class="col-lg-10">
                             <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
                                 <option <?php if($row->ID_JENIS_SURAT == "1")echo "selected"?> value="1">STNK</option>

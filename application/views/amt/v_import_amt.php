@@ -42,7 +42,7 @@
         <section class="panel">
             <header class="panel-heading">
                 Import Data AMT Dari Excel
-                <button type="button" style="float: right;" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" data-placement="left" onclick="downloadCsv()"><i class="icon-download-alt"></i></button>
+                <a href="<?php echo base_url() ?>downloads/format_oscrms_amt.xlsx" type="button" style="float: right;" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" data-placement="left"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>amt/import_xls/" enctype="multipart/form-data">
@@ -55,14 +55,20 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
-                            <input type="submit" style="float: right;" class="btn btn-danger" value="Uploadzxcxzc">
+                            <input type="submit" style="float: right;" class="btn btn-danger" value="Upload">
                         </div>
                 </form>
 
             </div>
         </section>
 
-
+        <?php if ($error) { ?>
+            <div class="col-lg-12">
+                <div class="alert alert-block alert-danger fade in">
+                    <strong>Error!</strong> <?php echo $error; ?>
+                </div>
+            </div>
+        <?php } ?>
         <?php if ($amt) { ?>
             <div id="filePreview">
                 <section class="panel">
@@ -93,7 +99,7 @@
                                 <tbody>
                                     <?php
                                     $e = 0;
-                                    $data= array();
+                                    $data = array();
                                     for ($i = 0; $i < sizeof($amt); $i++) {
                                         ?>
                                         <tr class="">
@@ -110,7 +116,13 @@
                                             <td><?php echo $amt[$i]['no_sim'] ?></td>
                                             <td><?php echo $amt[$i]['no_telepon'] ?></td>
                                             <td><?php echo $amt[$i]['transportir_asal'] ?></td>
-                                            <td><?php if($amt[$i]['error']){echo "<b>".$amt[$i]['status_error']."</b>";}else{echo $amt[$i]['status_error'];} ?></td>
+                                            <td><?php
+                                                if ($amt[$i]['error']) {
+                                                    echo "<b>" . $amt[$i]['status_error'] . "</b>";
+                                                } else {
+                                                    echo $amt[$i]['status_error'];
+                                                }
+                                                ?></td>
                                         </tr>
                                         <?php
                                         $e += $amt[$i]['error'];
@@ -136,9 +148,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <?php ?>
+                        
                         <form method="POST" action="<?php echo base_url() ?>amt/simpan_xls/" enctype="multipart/form-data">
-                            <?php if ($e != 0) { ?>
+    <?php if ($e != 0) { ?>
                                 <div class="col-lg-11">
                                     <div class="alert alert-block alert-danger fade in">
                                         <strong>Error!</strong> Anda harus memperbaiki file excell sesuai dengan format yang telah disediakan agar dapat menyimpan ke database.
@@ -146,13 +158,13 @@
                                 </div>
                             <?php } else { ?>
                                 <input type="hidden" required="required" id="data_amt" class="form-control" name="data_amt" value="<?php echo htmlentities(serialize($data)); ?>">
-                            <?php } ?>
+    <?php } ?>
                             <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit" <?php if ($e != 0) echo "disabled='true'" ?>> 
                         </form>
                     </div>
                 </section>
             </div>
-        <?php } ?>
+<?php } ?>
         <!-- page end-->
     </section>
 </section>
@@ -163,10 +175,10 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- END JAVASCRIPTS -->
 <script>
-                    jQuery(document).ready(function() {
-                        EditableTable.init();
+    jQuery(document).ready(function() {
+        EditableTable.init();
 
-                    });
+    });
 
 </script>
 

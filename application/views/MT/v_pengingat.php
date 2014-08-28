@@ -1,5 +1,6 @@
 <script>
         var apar = new Array();
+        var surat = new Array();
     $(document).ready(function(){
         $("#tabel-ban").hide();
         $("#tabel-surat").hide();
@@ -20,6 +21,34 @@
                  ap['catridge'] = "<?php echo $a->catridge?>";
                  ap['co2'] = "<?php echo $a->co2?>";
                  apar.push(ap);
+                 <?php
+             }
+                        ?>
+                                
+        
+    });
+</script>
+<script>
+        var surat = new Array();
+    $(document).ready(function(){
+        $("#tabel-ban").hide();
+        $("#tabel-surat").hide();
+        
+        //masukin array apar ke javascript
+        var ap;
+       
+        <?php
+             foreach($surat as $a)
+             {
+                 ?>
+                 ap = new Array();
+                 ap['id'] = "<?php echo $a->ID_SURAT?>";
+                 ap['nopol'] = "<?php echo $a->NOPOL?>";
+                 ap['ID_JENIS_SURAT'] = "<?php echo $a->ID_JENIS_SURAT?>";
+                 ap['tgl_akhir_surat'] = "<?php echo $a->tanggal_akhir_surat?>";
+                 ap['tgl_surat'] = "<?php echo $a->tgl_surat?>";
+                 ap['KETERANGAN_SURAT'] = "<?php echo $a->KETERANGAN_SURAT?>";
+                 surat.push(ap);
                  <?php
              }
                         ?>
@@ -65,10 +94,7 @@
                         </thead>
                         <tbody>
                             <?php
-//                            $data = array('D 6308 AD', 'D 1725 AF', 'D 2245 AF', 'D 6066 AF', 'D 3038 AD', 'D 8557 AD', 'D 1346 AD', 'D 7152 AF', 'D 9487 AD', 'D 8827 AF', 'D 8711 AD', 'D 8277 AF');
-//                            $apar1 = array(6, 12, 11, 3);
-//                            $apar2 = array(22, 9, 10, 15);
-//                            $apar3 = array(15, 1, 6, 18);
+//                          
                             $i = 0;
                             foreach ($apar as $row) {
                                 $color = "";
@@ -155,42 +181,42 @@
                                 <th style="display: none;"></th>
                                 <th>No.</th>
                                 <th>Nopol</th>
-                                <th>Jadwal Tera</th>
-                                <th>Jadwal Stnk</th>
-                                <th>STNK 5 Tahun</th>
-                                <th>KIR LLD</th>
-                                <th>KIR Pertamina</th>
+                                <th>Jenis Surat</th>
+                                <th>Tanggal Berakhir</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $data = array('D 6308 AD', 'D 1725 AF', 'D 2245 AF', 'D 6066 AF', 'D 3038 AD', 'D 8557 AD', 'D 1346 AD', 'D 7152 AF', 'D 9487 AD', 'D 8827 AF', 'D 8711 AD', 'D 8277 AF');
-                            $tgl1 = array('25 Agustus 2014', '27 Agustus 2014', '15 Desember 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
-                            $tgl2 = array('10 Agustus 2015', '16 Oktober 2014', '19 September 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
-                            $tgl3 = array('6 September 2014', '19 Februari 2015', '26 Agustus 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
-                            $tgl4 = array('30 Maret 2015', '23 Agustus 2014', '14 Oktober 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
-                            $tgl5 = array('5 Desember 2014', '6 November 2014', '22 Desember 2014', '13 Februari 2015', '11 November 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015', '23 Januari 2015', '16 Maret 2015');
-                            for ($i = 0; $i < 12; $i++) {
-                                if ($i < 3) {
-                                    $color = "orange";
-                                    $action = "editSurat()";
-                                } else {
-                                    $color = "transparent";
-                                    $action = "";
+                           <?php
+//                          
+                            $i = 0;
+                            foreach ($surat as $row) {
+                                if ($row->KETERANGAN_SURAT== "0"){
+                                $color = "";
+                                
+                                    if($row->tanggal_akhir_surat <= 7 )
+                                    {
+                                        $color = "style='background-color: orange;'";
+                                    }
+                                    ?>
+                                    
+                                        <th style="display: none;"></th>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php if($row->ID_JENIS_SURAT == "1")echo 'STNK'?>
+                                        <?php if($row->ID_JENIS_SURAT == "2")echo 'Pajak'?>
+                                        <?php if($row->ID_JENIS_SURAT == "3")echo 'KEUR'?>
+                                        <?php if($row->ID_JENIS_SURAT == "4")echo 'TERA'?>
+                                    </td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat"  data-toggle="modal" onclick="setDetailSurat('<?php echo $i ?>')"><div id="<?php echo 'tgl_akhir-' . $i; ?>"><?php echo $row->tanggal_akhir_surat; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php if($row->KETERANGAN_SURAT == "0")echo 'Aktif'?>
+                                        <?php if($row->KETERANGAN_SURAT == "1")echo 'Tidak Aktif'?></td>
+                                        
+                                        </tr>
+                                    <?php
+                                $i++;
                                 }
-                                ?>
-                                <tr onclick="<?php echo $action ?>" style="cursor: pointer">
-                                    <th style="display: none;"></th>
-                                    <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1 ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl1<?php echo $i ?>"><?php echo $tgl1[$i] ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl2<?php echo $i ?>"><?php echo $tgl2[$i] ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl3<?php echo $i ?>"><?php echo $tgl3[$i] ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl4<?php echo $i ?>"><?php echo $tgl4[$i] ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="tgl5<?php echo $i ?>"><?php echo $tgl5[$i] ?></td>
-
-                                </tr>
-                                <?php
+                                
                             }
                             ?>
                         </tbody>
@@ -362,7 +388,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class=" form">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                <form class="cmxform form-horizontal tasi-form" id="Form-Surat" method="POST" action="">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Pengingat Surat Mobil Tangki</h4>
@@ -373,44 +399,46 @@
                         <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                             <div class="col-lg-10">
-                                <input type="text" required="required" value="D 6308 AD" class="form-control" id="nopol" name="nopol" placeholder="Nopol">
+                                <input type="text" class="form-control"  id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                            </div>
+                        </div>
+                         <div class="form-group">
+                        <label class="col-sm-2 control-label col-lg-2" for="tera">Jenis Surat</label>
+                        <div class="col-lg-10">
+                            <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
+                                <option <?php if($row->ID_JENIS_SURAT == "1")echo "selected"?> value="1">STNK</option>
+                                <option <?php if($row->ID_JENIS_SURAT == "2")echo "selected"?> value="2">PAJAK</option>
+                                <option <?php if($row->ID_JENIS_SURAT == "3")echo "selected"?> value="3">KEUR</option>
+                                <option <?php if($row->ID_JENIS_SURAT == "4")echo "selected"?> value="4">TERA</option>
+                            </select>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label class="col-lg-12 col-sm-2 control-label">TANGGAL BERAKHIR SURAT</label><hr/>
+                        </div>
+                        <div class="form-group">
+                            <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control"  id="hari_surat" readonly="readonly" name="sisa" placeholder="Jenis Apar">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="tgl" class="col-lg-2 col-sm-2 control-label">Jadwal Tera</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" name="tanggal" id="tanggal" value="2014-08-19" required="required" type="date" size="16" />
+                            <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="date" value="" id="tgl_surat" size="16"  name="tgl_surat" required="required"/>
                                 <span class="help-block">Pilih Tanggal</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="tgl" class="col-lg-2 col-sm-2 control-label">Jadwal Stnk</label>
+                             <label class="col-sm-2 control-label col-lg-2" for="tera">Keterangan Surat</label>
                             <div class="col-lg-10">
-                                <input class="form-control" name="tanggal" id="tanggal" value="2014-08-19" required="required" type="date" size="16" />
-                                <span class="help-block">Pilih Tanggal</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tgl" class="col-lg-2 col-sm-2 control-label">STNK 5 Tahun</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" name="tanggal" id="tanggal" value="2014-08-27" required="required" type="date" size="16" />
-                                <span class="help-block">Pilih Tanggal</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tgl" class="col-lg-2 col-sm-2 control-label">KIR LLD</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" name="tanggal" id="tanggal" value="2014-09-12" required="required" type="date" size="16" />
-                                <span class="help-block">Pilih Tanggal</span>
-                            </div>
-                        </div>
+                                <select class="form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT">
+                                   <option <?php if($row->KETERANGAN_SURAT == "0")echo "selected"?> value="0">Aktif</option>
+                                    <option <?php if($row->KETERANGAN_SURAT == "1")echo "selected"?> value="1">Tidak Aktif</option>
 
-                        <div class="form-group">
-                            <label for="tgl" class="col-lg-2 col-sm-2 control-label">KIR Pertamina</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" name="tanggal" id="tanggal" value="2014-11-02" required="required" type="date" size="16" />
-                                <span class="help-block">Pilih Tanggal</span>
+                                </select>
                             </div>
+                           
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
@@ -423,12 +451,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 
 
 
@@ -457,9 +479,10 @@
 //            index = row;
 //            highlight = ".peringatan" + row;
             var action = "<?php echo base_url()?>mt/edit_reminder_apar/"+apar[index]['id'];
+            
             $("#tgl").val("");
-            $("#nopol").val(apar[index]['nopol']);
-            $("#tgl_store").val(apar[index]['tgl_store']);
+            $("#nopol").val(surat[index]['nopol']);
+            $("#tgl_store").val(surat[index]['tgl_store']);
             $("#hari_store").val(apar[index]['store_pressure'] + " hari");
             $("#tgl_catridge").val(apar[index]['tgl_catridge']);
             $("#hari_catridge").val(apar[index]['catridge'] + " hari");
@@ -470,6 +493,20 @@
 //            $("#hari").val(hari+" hari");
            
         }
+        
+        function setDetailSurat(index){
+            
+            var action = "<?php echo base_url()?>mt/edit_reminder_surat/"+surat[index]['id'];
+            $("#tgl").val("");
+            $("#nopol").val(surat[index]['nopol']);
+            $("#ID_JENIS_SURAT").val(surat[index]['ID_JENIS_SURAT']);
+            $("#tgl_surat").val(surat[index]['tgl_surat']);
+            $("#hari_surat").val(surat[index]['tgl_akhir_surat'] + " hari");
+            $("#KETERANGAN_SURAT").val(surat[index]['KETERANGAN_SURAT']);
+            $("#Form-Surat").attr("action",action ); 
+           
+        }
+        
     
         function filter(jenis)
         {

@@ -1,3 +1,20 @@
+<?php
+function DateToIndo($date) { 
+        $BulanIndo = array("Januari", "Februari", "Maret",
+                           "April", "Mei", "Juni",
+                           "Juli", "Agustus", "September",
+                           "Oktober", "November", "Desember");
+    
+        $tahun = substr($date, 0, 4); 
+        $bulan = substr($date, 5, 2); 
+        $tgl   = substr($date, 8, 2); 
+        
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+        return($result);
+}
+
+?>
+
 <script type="text/javascript">
     $( document ).ready(function() {
         $("#ShowProfile").show();
@@ -20,6 +37,9 @@
    
 </script>
 <script type="text/javascript">
+    
+    
+    
     $(function () {
         $('#grafik').highcharts({
             title: {
@@ -558,7 +578,7 @@
                     </form>
 
             </section>
-                
+  <?php } ?>              
 
             <section class="panel">
                 <div class="panel-body">
@@ -601,163 +621,31 @@
                             </thead>
                             <tbody>
                                 <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>1</td>
-
-                                    <td>23-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>2</td>
-
-                                    <td>24-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
+                                    <?php $i = 1;
+                               
+                                foreach ($kinerja as $row) { ?>
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i; ?></td>
+                                    <td><?php echo(DateToIndo($row->tanggal_log_harian)); ?></td>
+                                    <td><?php echo $row->total_km_mt; ?></td>
+                                    <td><?php echo $row->total_kl_mt; ?></td>
+                                    <td><?php echo $row->ritase_mt; ?></td>
+                                    <td><?php echo $row->own_use; ?></td>
+                                    <td><?php echo $row->premium; ?></td>
+                                    <td><?php echo $row->pertamax; ?></td>
+                                    <td><?php echo $row->pertamax_plus; ?></td>
+                                    <td><?php echo $row->pertamina_dex; ?></td>
+                                    <td><?php echo $row->solar; ?></td>
+                                    <td><?php echo $row->bio_solar; ?></td>
+                                    
+                                    
+                                   <td>
+                                   <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
+                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" href="javascript:hapus_kinerja('<?php echo $row->id_kinerja_mt ?>');"><i class="icon-remove"></i></a></td>
 
                                 </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>3</td>
-                                    <td>25-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>4</td>
-                                    <td>26-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>5</td>
-                                    <td>27-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>6</td>
-                                    <td>28-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>7</td>
-                                    <td>29-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>8</td>
-                                    <td>30-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <th style="display: none;"></th>
-                                    <td>9</td>
-                                    <td>30-08-2014</td>
-                                    <td><?php echo rand(300, 500) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(2, 5) ?></td>
-                                    <td><?php echo rand(40, 150) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><?php echo rand(30, 70) ?></td>
-                                    <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" data-toggle="modal" href="#Modal2"><i class="icon-remove"></i></a></td>
-                                </tr>
-
+                                <?php $i++;
+                            } ?>
                             </tbody>
                         </table>
                     </div>
@@ -961,7 +849,7 @@
     </div>
 
     <!-- modal -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="hapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -975,12 +863,12 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                    <button class="btn btn-danger" type="button"> Yes</button>
+                    <a href="#" onclick="klik()" class="btn btn-danger danger">Hapus</a>
                 </div>
             </div>
         </div>
     </div>
-<?php } ?>
+
 
 
 
@@ -1001,7 +889,7 @@
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
     
-        var globalId;
+    var globalId;
     $('#ModalHapus').on('show', function() {
 
     });
@@ -1015,6 +903,26 @@
     function ok()
     {
         var url = "<?php echo base_url(); ?>" + "mt/delete_mobil/" + globalId;
+        window.location.href = url;
+    }
+    
+    
+    var global;
+    var globalMobil;
+    $('#hapusKinerja').on('show', function() {
+
+    });
+
+    function hapus_kinerja(id,id_mobil) {
+        global = id;
+        globalMobil=id_mobil;
+        $('#hapusKinerja').data('id', id).modal('show');
+ 
+    }
+
+    function klik()
+    {
+        var url = "<?php echo base_url(); ?>" + "mt/delete_kinerja/" + global + "/" + globalMobil;
         window.location.href = url;
     }
     

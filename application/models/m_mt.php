@@ -143,6 +143,28 @@ class m_mt extends CI_Model {
         $this->db->delete('surat');
     }
     
+    //kinerja MT
+    public function selectKinerjaMT($id_mobil){
+        $data = $this->db->query("select k.id_kinerja_mt,k.total_km_mt,k.ritase_mt,k.total_kl_mt,k.own_use,k.premium,k.pertamax,k.pertamax_plus,k.pertamina_dex,k.solar,k.bio_solar,l.id_log_harian,l.tanggal_log_harian,m.id_mobil,m.nopol,k.premium from kinerja_mt k,mobil m,log_harian l where k.id_log_harian=l.id_log_harian and k.id_mobil=m.id_mobil and m.id_mobil=$id_mobil");
+        return $data->result();
+    }
+    
+     public function insertKinerja($data) {
+        $this->db->insert('kinerja_mt', $data);
+    }
+    
+    public function editKinerja($data, $id) {
+        $this->db->where('id_kinerja_mt', $id);
+        $this->db->update('kinerja_mt', $data);
+    }
+    
+    public function deleteKinerja($id) {
+        $this->db->where('id_kinerja_mt', $id);
+        $this->db->delete('kinerja_mt');
+    }
+    
+    
+    //rencana
     public function selectRencana(){
         $data = $this->db->query("select T.ID_RENCANA,L.ID_LOG_HARIAN,L.TANGGAL_LOG_HARIAN, T.R_PREMIUM, T.R_PERTAMAX, T.R_PERTAMAXPLUS, T.R_PERTAMINADEX, T.R_SOLAR, T.R_BIOSOLAR, T.R_OWN_USE from rencana T, log_harian L ");
         return $data->result();
@@ -158,6 +180,13 @@ class m_mt extends CI_Model {
 
     public function getTotalMt() {
         return $this->getAllMt()->num_rows();
+    }
+    
+    //penjadwalan
+    public function cekNopol($nopol){
+        $this->db->where('nopol',$nopol);
+        $data = $this->db->get('mobil');
+        return $data->result();
     }
 
     //ss
