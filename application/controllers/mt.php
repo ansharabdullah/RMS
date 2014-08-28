@@ -9,7 +9,7 @@ class Mt extends CI_Controller {
         parent::__construct();
 
         $this->load->model("m_mt");
-        $this->load->model("m_apar");
+        $this->load->model("m_pengingat");
         $this->load->model("m_log_sistem");
         $this->load->helper(array('form', 'url'));
     }
@@ -107,10 +107,10 @@ class Mt extends CI_Controller {
 
     public function detail_mt($id_mobil) {
 
-
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $data1['mt'] = $this->m_mt->detailMT($id_mobil);
+         $data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil);
         $this->header($data);
         $this->load->view('mt/v_detail_mt', $data1);
         $this->footer();
@@ -171,6 +171,17 @@ class Mt extends CI_Controller {
         $this->m_mt->deleteMT($id_mobil);
         
         $link = base_url()."mt/data_mt/";
+        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+    public function delete_kinerja($id_kinerja_mt,$id_mobil){
+        
+        
+        $this->m_mt->deleteKinerja($id_kinerja_mt);
+        
+        $link = base_url()."mt/detail_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
@@ -257,6 +268,7 @@ class Mt extends CI_Controller {
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
+    
 
 //Ban MT    
     
@@ -506,17 +518,38 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_presensi');
         $this->footer();
     }
-
+    
+    
     public function reminder() {
         $data['lv1'] = 3;
         $data['lv2'] = 4;
         //data reminder
-        $data2['apar'] = $this->m_apar->getAparReminder()->result();
+        $data2['apar'] = $this->m_pengingat->getAparReminder()->result();
+        $data2['surat'] = $this->m_pengingat->getSuratReminder()->result();
         $this->header($data);
         $this->load->view('mt/v_pengingat', $data2);
         $this->footer();
     }
     
+    
+    public function edit_reminder_surat($id)
+    {
+        $akhir_surat = $_POST['tgl_surat'];
+        $id_jenis = $_POST['ID_JENIS_SURAT'];
+        $keterangan = $_POST['KETERANGAN_SURAT'];
+        
+        $data = array(
+            "TANGGAL_AKHIR_SURAT"=>$akhir_surat,
+            "ID_JENIS_SURAT"=>$id_jenis,
+            "KETERANGAN_SURAT"=>$keterangan
+        );
+        
+        $this->m_pengingat->editReminderSurat($id,$data);
+        //redirect('mt/reminder');
+          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
+            echo 'window.location.href="' . base_url() . 'mt/reminder";';
+            echo '</script>';
+    }
     
     public function edit_reminder_apar($id)
     {
@@ -530,7 +563,7 @@ class Mt extends CI_Controller {
             "CO2"=>$co2
         );
         
-        $this->m_apar->editReminderApar($id,$data);
+        $this->m_pengingat->editReminderApar($id,$data);
         //redirect('mt/reminder');
           echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
