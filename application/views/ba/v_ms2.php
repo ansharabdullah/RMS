@@ -126,6 +126,7 @@
                                         <th rowspan="2" width="150px">Aksi</th>
                                     </tr>
                                     <tr>
+                                        <th style="display:none;"></th>
                                         <th>Premium</th>
                                         <th>Solar</th>
                                         <th>Pertamax</th>
