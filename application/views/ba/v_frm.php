@@ -82,6 +82,31 @@
                 </button>
                 <strong>Sukses!</strong> Berhasil edit MS2.
             </div>
+        <?php } else if ($klik_tambah == true) { ?>
+            <?php if ($status_id == false) { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> ID Log Harian tidak ditemukan.
+                </div>
+            <?php } else { ?>
+                <?php if ($status_interpolasi != 0) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error!</strong> Data Interpolasi dan FRM yang ditambahkan sudah ada.
+                    </div>
+                <?php } else { ?>
+                    <div class="alert alert-success fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Sukses!</strong> Berhasil tambah data Interpolasi dan FRM.
+                    </div>
+                <?php } ?>
+            <?php } ?>
         <?php } ?>
     </section>
 </section>
@@ -137,7 +162,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                    <input class="btn btn-success" type="submit" value="Simpan" name="tambah"/>
                 </div>
             </form>
         </div>

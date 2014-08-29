@@ -343,16 +343,40 @@ class ba extends CI_Controller {
                     $data2['interpolasi']['nilai'][] = $row->NILAI;
                 }
             }
-        }else if ($this->input->post('edit')) {
+        } else if ($this->input->post('edit')) {
             $data2['klik_edit'] = true;
-            $this->m_ba->editInterpolasi($this->input->post('id_frm1'),$this->input->post('frm1'));
-            $this->m_ba->editInterpolasi($this->input->post('id_frm2'),$this->input->post('frm2'));
-            $this->m_ba->editInterpolasi($this->input->post('id_interpolasi1'),$this->input->post('interpolasi1'));
-            $this->m_ba->editInterpolasi($this->input->post('id_interpolasi2'),$this->input->post('interpolasi2'));
-            
+            $this->m_ba->editInterpolasi($this->input->post('id_frm1'), $this->input->post('frm1'));
+            $this->m_ba->editInterpolasi($this->input->post('id_frm2'), $this->input->post('frm2'));
+            $this->m_ba->editInterpolasi($this->input->post('id_interpolasi1'), $this->input->post('interpolasi1'));
+            $this->m_ba->editInterpolasi($this->input->post('id_interpolasi2'), $this->input->post('interpolasi2'));
         } else if ($this->input->post('tambah')) {
             $data2['klik_tambah'] = true;
-        } 
+
+            $bln_frm = $this->input->post('bln_frm');
+            $bulan = date("m", strtotime($bln_frm));
+            $tahun = date("Y", strtotime($bln_frm));
+            $last_day = date("t", strtotime($bln_frm));
+
+            $data2['id_log_frm1'] = $this->m_ba->getIdLogHarian($depot, $tahun, $bulan, 1);
+            $data2['id_log_frm2'] = $this->m_ba->getIdLogHarian($depot, $tahun, $bulan, 15);
+            $data2['id_log_interpolasi1'] = $this->m_ba->getIdLogHarian($depot, $tahun, $bulan, 1);
+            $data2['id_log_interpolasi2'] = $this->m_ba->getIdLogHarian($depot, $tahun, $bulan, 15);
+
+            $frm1 = $this->input->post('frm1');
+            $frm2 = $this->input->post('frm2');
+            $interpolasi1 = $this->input->post('interpolasi1');
+            $interpolasi2 = $this->input->post('interpolasi2');
+
+            if ($data2['id_log_frm1'] == -1) { // id tidak ditemukan
+                $data2['status_id'] = false;
+            } else {
+                $data2['status_id'] = true;
+                $data2['status_interpolasi'] = $this->m_ba->cekInterpolasi($depot, $tahun, $bulan);
+                if ($data2['status_interpolasi'] == 0) {
+                    $this->m_ba->tambahInterpolasi($depot, $bulan, $tahun, $data2['id_log_frm1'], $frm1, $data2['id_log_frm2'], $frm2, $data2['id_log_interpolasi1'], $interpolasi1, $data2['id_log_interpolasi2'], $interpolasi2);
+                }
+            }
+        }
 
         $data['lv1'] = 6;
         $data['lv2'] = 3;
