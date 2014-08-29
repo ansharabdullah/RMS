@@ -249,10 +249,10 @@ class ba extends CI_Controller {
                         $row_baca = 4;
                         $i = 0;
                         for ($i = 0; $i < $last_day; $i++) {
-                            
-                            $data2['ms2']['id_log_harian'][] = $this->m_ba->getIdLogHarian($depot, date("Y", strtotime($blnms2)), date("m", strtotime($blnms2)), ($i+1));
+
+                            $data2['ms2']['id_log_harian'][] = $this->m_ba->getIdLogHarian($depot, date("Y", strtotime($blnms2)), date("m", strtotime($blnms2)), ($i + 1));
                             $data2['ms2']['tanggal'][] = date("Y-m", strtotime($blnms2)) . '-' . ($i + 1);
-                                                        
+
                             $data2['ms2']['sesuai_premium'][] = is_numeric($sheetData->getCell('B' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('B' . ($row_baca + $i))->getValue() * 100) : -1;
                             $data2['ms2']['sesuai_solar'][] = (is_numeric($sheetData->getCell('C' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('C' . ($row_baca + $i))->getValue() * 100) : -1);
                             $data2['ms2']['sesuai_pertamax'][] = (is_numeric($sheetData->getCell('D' . ($row_baca + $i))->getValue()) ? ($sheetData->getCell('D' . ($row_baca + $i))->getValue() * 100) : -1);
@@ -291,29 +291,75 @@ class ba extends CI_Controller {
     }
 
     public function frm() {
+        $this->load->model('m_ba');
         $depot = 1;
-        
-        $data2['klik_cek']=false;
-        $data2['klik_tambah']=false;
-        $data2['klik_hapus']=false;
-        $data2['klik_edit']=false;
-        
+
+        $data2['klik_cek'] = false;
+        $data2['klik_tambah'] = false;
+        $data2['klik_edit'] = false;
+
         if ($this->input->post('cek')) {
-            
-        }else if ($this->input->post('tambah')) {
-            
-        }else if ($this->input->post('hapus')) {
-            
+            $data2['klik_cek'] = true;
+            $data2['interpolasi']['status'] = false;
+            $bln_frm = $this->input->post('bln_frm');
+            $data2['interpolasi']['bln_frm'] = $bln_frm;
+
+            if (date("m", strtotime($bln_frm)) == 1) {
+                $data2['interpolasi']['bulan_tahun'] = 'Januari ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 2) {
+                $data2['interpolasi']['bulan_tahun'] = 'Februari ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 3) {
+                $data2['interpolasi']['bulan_tahun'] = 'Maret ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 4) {
+                $data2['interpolasi']['bulan_tahun'] = 'April ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 5) {
+                $data2['interpolasi']['bulan_tahun'] = 'Mei ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 6) {
+                $data2['interpolasi']['bulan_tahun'] = 'Juni ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 7) {
+                $data2['interpolasi']['bulan_tahun'] = 'Juli ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 8) {
+                $data2['interpolasi']['bulan_tahun'] = 'Agustus ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 9) {
+                $data2['interpolasi']['bulan_tahun'] = 'September ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 10) {
+                $data2['interpolasi']['bulan_tahun'] = 'Oktober ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 11) {
+                $data2['interpolasi']['bulan_tahun'] = 'November ' . date("Y", strtotime($bln_frm));
+            } else if (date("m", strtotime($bln_frm)) == 12) {
+                $data2['interpolasi']['bulan_tahun'] = 'Desember ' . date("Y", strtotime($bln_frm));
+            }
+
+            $tanggal = date("d-m-Y", strtotime($bln_frm));
+            $last_day = date('t', strtotime($tanggal));
+            $data2['interpolasi']['tanggal_akhir'] = $last_day;
+
+            if ($last_day == $this->m_ba->cekInterpolasi($depot, date("Y", strtotime($bln_frm)), date("m", strtotime($bln_frm)))) {
+                $data2['interpolasi']['status'] = true;
+                $frm = $this->m_ba->getInterpolasi($depot, date("Y", strtotime($bln_frm)), date("m", strtotime($bln_frm)));
+                foreach ($frm as $row) {
+                    $data2['interpolasi']['id_nilai'][] = $row->ID_NILAI;
+                    $data2['interpolasi']['jenis_penilaian'][] = $row->JENIS_PENILAIAN;
+                    $data2['interpolasi']['nilai'][] = $row->NILAI;
+                }
+            }
         }else if ($this->input->post('edit')) {
+            $data2['klik_edit'] = true;
+            $this->m_ba->editInterpolasi($this->input->post('id_frm1'),$this->input->post('frm1'));
+            $this->m_ba->editInterpolasi($this->input->post('id_frm2'),$this->input->post('frm2'));
+            $this->m_ba->editInterpolasi($this->input->post('id_interpolasi1'),$this->input->post('interpolasi1'));
+            $this->m_ba->editInterpolasi($this->input->post('id_interpolasi2'),$this->input->post('interpolasi2'));
             
-        }
-        
+        } else if ($this->input->post('tambah')) {
+            $data2['klik_tambah'] = true;
+        } 
+
         $data['lv1'] = 6;
         $data['lv2'] = 3;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('ba/v_frm');
+        $this->load->view('ba/v_frm', $data2);
         $this->load->view('layouts/footer');
     }
 

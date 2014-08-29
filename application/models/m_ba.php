@@ -53,8 +53,12 @@ class m_ba extends CI_Model {
     }
     
     public function getInterpolasi($depot,$tahun,$bulan) {
-        $query = $this->db->query("select * from log_harian l, jenis_penilaian j, nilai n where l.ID_LOG_HARIAN=n.ID_LOG_HARIAN and n.ID_JENIS_PENILAIAN= j.ID_JENIS_PENILAIAN and j.KELOMPOK_PENILAIAN = 'INTERPOLASI' and l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' order by j.ID_JENIS_PENILAIAN ASC");
+        $query = $this->db->query("select n.ID_NILAI,j.JENIS_PENILAIAN,l.TANGGAL_LOG_HARIAN,n.NILAI from log_harian l, nilai n, jenis_penilaian j where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and n.ID_JENIS_PENILAIAN = j.ID_JENIS_PENILAIAN and j.KELOMPOK_PENILAIAN = 'INTERPOLASI' and l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' order by j.JENIS_PENILAIAN ASC");
         return $query->result();
+    }
+    
+    public function editInterpolasi($id,$nilai) {
+        $query = $this->db->query("update nilai set NILAI = '$nilai' where ID_NILAI = '$id'");
     }
     
     public function simpanInterpolasi($depot,$tahun,$bulan,$frm1,$frm2,$interpolasi1,$interpolasi2) {
