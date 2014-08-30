@@ -3,15 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_penjadwalan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_mt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_data_amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/jadwal/v_jadwal.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_import_amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/jadwal.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

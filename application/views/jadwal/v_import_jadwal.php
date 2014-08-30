@@ -21,7 +21,7 @@
         <section class="panel">
             <header class="panel-heading">
                 Penjadwalan 
-                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                <a style="float:right;" href="<?php base_url()?>download/format_oscrms_penjadwalan.xls" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
 
             </header>
             <header class="panel-heading">

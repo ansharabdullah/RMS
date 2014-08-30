@@ -239,7 +239,7 @@ class amt extends CI_Controller {
                         break;
                     }
                     if ($sheetData->getCell('B' . $no)->getFormattedValue() == "") {
-                        $error = $error . "NIP tidak boleh kosong";
+                        $error = $error . "NIP tidak boleh kosong,";
                         $e = 1;
                     } else if (sizeof($nip) != 0) {
                         $error = $error . "NIP telah ada";
@@ -247,12 +247,12 @@ class amt extends CI_Controller {
                     }
 
                     if ($sheetData->getCell('M' . $no)->getFormattedValue() != 8 && $sheetData->getCell('M' . $no)->getFormattedValue() != 16 && $sheetData->getCell('M' . $no)->getFormattedValue() != 24 && $sheetData->getCell('M' . $no)->getFormattedValue() != 32 && $sheetData->getCell('M' . $no)->getFormattedValue() != 40) {
-                        $error = $error . ", Klasifikasi harus 8/16/24/32/40 ";
+                        $error = $error . " Klasifikasi harus 8/16/24/32/40 ,";
                         $e = 1;
                     }
 
                     if (strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()) != "SUPIR" && strtoupper($sheetData->getCell('N' . $no)->getFormattedValue()) != "KERNET") {
-                        $error = $error . ", Kabatan hanya SUPIR atau KERNET ";
+                        $error = $error . " Jabatan hanya SUPIR atau KERNET ,";
                         $e = 1;
                     }
 
