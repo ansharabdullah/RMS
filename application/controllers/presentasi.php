@@ -13,8 +13,9 @@ class presentasi extends CI_Controller {
     public function index() {
         $data['lv1'] = 8;
         $data['lv2'] = 1;
+        $data2 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'],$data['lv2']);
        $this->load->view("oam/presentasi/v_option");
         $this->load->view('layouts/footer');
@@ -24,8 +25,9 @@ class presentasi extends CI_Controller {
     public function slide($index) {
         $data['lv1'] = 8;
         $data['lv2'] = 1;
+        $data2 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'],$data['lv2']);
         $next = anchor("presentasi/slide/".($index - 1),"<button class='btn btn-danger'><i class='icon-long-arrow-left'></i> kembali</button>");
         $before = anchor("presentasi/slide/".($index + 1),"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-right'></i></button>");
