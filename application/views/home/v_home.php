@@ -190,27 +190,30 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Jenis</th>
                                         <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Data MT hari ini belum diinput</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Data MT tgl 07-08-2014 belum diupload</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Mobil harus segera ganti oli</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Mobil Nopol D9009AD Hari ini tidak masuk</td>
-                                    </tr>
+                                   <?php
+                                    foreach($peringatan_mt as $pm)
+                                    {
+                                        if(isset($pm['data']) && sizeof($pm['data']) > 0){
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $pm['title']?></td>
+                                            <td><a href="<?php echo $pm['url']?>">
+                                                <?php
+                                                    foreach($pm['data'] as $data){
+                                                        echo $data."<br/>";
+                                                    }
+                                                ?>
+                                            </a></td>
+                                        </tr>
+                                       <?php
+                                        }
+                                    }
+                                   ?>
                                 </tbody>
                             </table>
                         </section>
