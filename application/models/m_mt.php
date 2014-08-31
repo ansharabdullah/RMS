@@ -11,6 +11,30 @@ class m_mt extends CI_Model {
         }
     }
     
+     public function importRencana($data){
+        for($i = 0; $i < sizeof($data); $i++){
+            $this->db->insert('rencana', $data[$i]);
+        }
+    }
+    
+    public function ambilTanggal($tanggal)
+    {
+        $data = $this->db->query("select M.ID_LOG_HARIAN,M.TANGGAL_LOG_HARIAN,T.R_PREMIUM,T.R_OWN_USE,T.R_PERTAMAX,T.R_PERTAMAXPLUS,T.R_PERTAMINADEX,T.R_SOLAR,T.R_BIOSOLAR from rencana T, log_harian M where T.id_log_harian=M.id_log_harian and M.TANGGAL_LOG_HARIAN ='$tanggal' ");
+        return $data->result();
+    }
+    
+    public function getRencana($id_log_harian)
+    {
+        $data = $this->db->query("select M.ID_LOG_HARIAN,M.TANGGAL_LOG_HARIAN,T.R_PREMIUM,T.R_OWN_USE,T.R_PERTAMAX,T.R_PERTAMAXPLUS,T.R_PERTAMINADEX,T.R_SOLAR,T.R_BIOSOLAR from rencana T, log_harian M where T.ID_LOG_HARIAN = M.ID_LOG_HARIAN and M.ID_LOG_HARIAN ='$id_log_harian'");
+        return $data->result();
+    }
+    
+    public function ambilLog($id_log_harian)
+    {
+        $data = $this->db->query("select M.ID_LOG_HARIAN,M.TANGGAL_LOG_HARIAN,T.R_PREMIUM,T.R_OWN_USE,T.R_PERTAMAX,T.R_PERTAMAXPLUS,T.R_PERTAMINADEX,T.R_SOLAR,T.R_BIOSOLAR from rencana T, log_harian M where T.id_log_harian=M.id_log_harian and M.ID_LOG_HARIAN ='$id_log_harian' ");
+        return $data->result();
+    }
+    
     //Data Mobil Tangki
     public function insertMobil($data) {
         $this->db->insert('mobil', $data);
@@ -153,7 +177,9 @@ class m_mt extends CI_Model {
     
     //kinerja MT
     public function selectKinerjaMT($id_mobil){
-        $data = $this->db->query("select k.id_kinerja_mt,k.total_km_mt,k.ritase_mt,k.total_kl_mt,k.own_use,k.premium,k.pertamax,k.pertamax_plus,k.pertamina_dex,k.solar,k.bio_solar,l.id_log_harian,l.tanggal_log_harian,m.id_mobil,m.nopol,k.premium from kinerja_mt k,mobil m,log_harian l where k.id_log_harian=l.id_log_harian and k.id_mobil=m.id_mobil and m.id_mobil=$id_mobil");
+        $data = $this->db->query("select (DAY(l.TANGGAL_LOG_HARIAN ))as hari,k.id_kinerja_mt,k.total_km_mt,k.ritase_mt,k.total_kl_mt,k.own_use,k.premium,k.pertamax,k.pertamax_plus,k.pertamina_dex,k.solar,k.bio_solar,l.id_log_harian,l.tanggal_log_harian,m.id_mobil,m.nopol,k.premium from kinerja_mt k,mobil m,log_harian l 
+                                  where k.id_log_harian=l.id_log_harian and k.id_mobil=m.id_mobil and m.id_mobil=$id_mobil
+                                  group by l.TANGGAL_LOG_HARIAN order by l.TANGGAL_LOG_HARIAN asc");
         return $data->result();
     }
     
@@ -171,12 +197,6 @@ class m_mt extends CI_Model {
         $this->db->delete('kinerja_mt');
     }
     
-    
-    //rencana
-    public function selectRencana(){
-        $data = $this->db->query("select T.ID_RENCANA,L.ID_LOG_HARIAN,L.TANGGAL_LOG_HARIAN, T.R_PREMIUM, T.R_PERTAMAX, T.R_PERTAMAXPLUS, T.R_PERTAMINADEX, T.R_SOLAR, T.R_BIOSOLAR, T.R_OWN_USE from rencana T, log_harian L ");
-        return $data->result();
-    }
     
     /*     * DASHBOARD --- Renisa* */
 

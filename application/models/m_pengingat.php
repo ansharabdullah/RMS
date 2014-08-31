@@ -9,7 +9,7 @@ class m_pengingat extends CI_Model {
                           from apar a, mobil m, depot d 
                           where m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
-                          and d.ID_DEPOT = 1 ");
+                          and d.ID_DEPOT = $id_depot ");
         return $query;
     }
     
@@ -28,7 +28,7 @@ class m_pengingat extends CI_Model {
                           where j.id_jenis_surat=a.id_jenis_surat 
                           and m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
-                          and d.ID_DEPOT = 1 ");
+                          and d.ID_DEPOT = $id_depot ");
         return $query;
     }
     

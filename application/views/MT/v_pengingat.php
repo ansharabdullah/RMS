@@ -108,9 +108,9 @@
                                         <th style="display: none;"></th>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal"  onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->store_pressure; ?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->catridge;?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->co2 ; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" style ="text-decoration: underline" data-toggle="modal"  onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->store_pressure; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" style ="text-decoration: underline" data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->catridge;?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" style ="text-decoration: underline" data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->co2 ; ?> hari</div></a></td>
                                         </tr>
                                     <?php
                                 $i++;
@@ -191,7 +191,7 @@
 //                          
                             $i = 0;
                             foreach ($surat as $row) {
-                                if ($row->KETERANGAN_SURAT== "0"){
+                                if ($row->KETERANGAN_SURAT== "Aktif"){
                                 $color = "";
                                 
                                     if($row->tanggal_akhir_surat <= 7 )
@@ -208,9 +208,9 @@
                                         <?php if($row->ID_JENIS_SURAT == "3")echo 'KEUR'?>
                                         <?php if($row->ID_JENIS_SURAT == "4")echo 'TERA'?>
                                     </td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat"  data-toggle="modal" onclick="setDetailSurat('<?php echo $i ?>')"><div id="<?php echo 'tgl_akhir-' . $i; ?>"><?php echo $row->tanggal_akhir_surat; ?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php if($row->KETERANGAN_SURAT == "0")echo 'Aktif'?>
-                                        <?php if($row->KETERANGAN_SURAT == "1")echo 'Tidak Aktif'?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat" style ="text-decoration: underline" data-toggle="modal" onclick="setDetailSurat('<?php echo $i ?>')"><div id="<?php echo 'tgl_akhir-' . $i; ?>"><?php echo $row->tanggal_akhir_surat; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_SURAT?>
+                                        </td>
                                         
                                         </tr>
                                     <?php
@@ -257,7 +257,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
+                        <label for="" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-9">
                             <input class="form-control" type="date" value="" id="tgl_store" size="16"  name="tgl_store" required="required"/>
                             <span class="help-block">Pilih Tanggal</span>
@@ -394,12 +394,12 @@
                         <h4 class="modal-title">Pengingat Surat Mobil Tangki</h4>
                     </div>
 
-
                     <div class="modal-body">
+                        <?php $row->NOPOL ?>
                         <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control"  id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                                <input type="text" class="form-control"  id="nopol" name="nopol" readonly="readonly" name="nopol">
                             </div>
                         </div>
                          <div class="form-group">
@@ -417,14 +417,14 @@
                             <label class="col-lg-12 col-sm-2 control-label">TANGGAL BERAKHIR SURAT</label><hr/>
                         </div>
                         <div class="form-group">
-                            <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
-                            <div class="col-lg-9">
+                            <label for="nopol" class="col-lg-2 col-sm-2 control-label">Sisa waktu</label>
+                            <div class="col-lg-10">
                                 <input type="text" class="form-control"  id="hari_surat" readonly="readonly" name="sisa" placeholder="Jenis Apar">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
-                            <div class="col-lg-9">
+                            <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                            <div class="col-lg-10">
                                 <input class="form-control" type="date" value="" id="tgl_surat" size="16"  name="tgl_surat" required="required"/>
                                 <span class="help-block">Pilih Tanggal</span>
                             </div>
@@ -432,21 +432,16 @@
                         <div class="form-group">
                              <label class="col-sm-2 control-label col-lg-2" for="tera">Keterangan Surat</label>
                             <div class="col-lg-10">
-                                <select class="form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT">
-                                   <option <?php if($row->KETERANGAN_SURAT == "0")echo "selected"?> value="0">Aktif</option>
-                                    <option <?php if($row->KETERANGAN_SURAT == "1")echo "selected"?> value="1">Tidak Aktif</option>
-
-                                </select>
+                                <input class="form-control" type="text" value="" id="KETERANGAN_SURAT" size="16"  name="KETERANGAN_SURAT" required="required"/>
+                                
                             </div>
-                           
                         </div>
-                        <div class="modal-footer">
+                    </div>
+                    <div class="modal-footer">
                             <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
                             <button class="btn btn-success" name="submit"  type="submit" >Simpan</button>
 
                         </div>
-
-                    </div>
                 </form>
             </div>
         </div>
