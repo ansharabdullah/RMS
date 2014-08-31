@@ -106,8 +106,9 @@ if ( ! function_exists('menu_oam'))
 {
     function menu_oam($var = '')
     {
+        $CI =& get_instance();
         $data = array();    
-         $logHarian = $this->m_log_harian->get_log_peringatan_oam();
+         $logHarian =  $CI->m_log_harian->get_log_peringatan_oam();
         $totalNotif = 0;
         $id_depot = "";
         $arrNotif = array();
@@ -183,9 +184,9 @@ if ( ! function_exists('menu_oam'))
        }
         $data['total_notifikasi'] = $totalNotif;
         $data['notifikasi'] = $arrNotif;
-        $data['rencana_bulan'] = $this->m_rencana->get_rencana_bulan_oam(date("n"),date("Y"));
-        $data['kinerja_bulan'] = $this->m_kinerja->get_kinerja_bulan_oam(date("n"),date("Y"));
-        $data['kinerja_amt_bulan'] = $this->m_kinerja->get_kinerja_amt_by_bulan_oam(date("n"),date("Y"));
+        $data['rencana_bulan'] =  $CI->m_rencana->get_rencana_bulan_oam(date("n"),date("Y"));
+        $data['kinerja_bulan'] =  $CI->m_kinerja->get_kinerja_bulan_oam(date("n"),date("Y"));
+        $data['kinerja_amt_bulan'] =  $CI->m_kinerja->get_kinerja_amt_by_bulan_oam(date("n"),date("Y"));
         return $data;
     }   
 }
