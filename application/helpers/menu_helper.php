@@ -107,8 +107,11 @@ if ( ! function_exists('menu_oam'))
     function menu_oam($var = '')
     {
         $CI =& get_instance();
+         $CI->load->model("m_kinerja");
+         $CI->load->model("m_rencana");
+         $CI->load->model("m_log_harian");
         $data = array();    
-         $logHarian =  $CI->m_log_harian->get_log_peringatan_oam();
+        $logHarian =  $CI->m_log_harian->get_log_peringatan_oam();
         $totalNotif = 0;
         $id_depot = "";
         $arrNotif = array();

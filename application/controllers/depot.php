@@ -18,8 +18,9 @@ class Depot extends CI_Controller {
     public function grafik_bulan() {
         $data['lv1'] = 1;
         $data['lv2'] = 1;
+        $data2 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_grafik_bulan');
         $this->load->view('layouts/footer');
@@ -36,8 +37,9 @@ class Depot extends CI_Controller {
 
         $data['lv1'] = 1;
         $data['lv2'] = 1;
+        $data2 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'], $data['lv2']);
         if ($tipe == 'ms2') {
             $this->load->view('oam/v_grafik_ms2_harian');
@@ -59,8 +61,9 @@ class Depot extends CI_Controller {
         $data2['amt'] = $this->m_amt->selectAMT($depot);
         $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_bulan($depot, $tahun);
         $data2['id_depot'] = $depot;    
+        $data3 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data3);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_depot_amt', $data2);
         $this->load->view('layouts/footer');
@@ -75,8 +78,9 @@ class Depot extends CI_Controller {
         $data2['tahun'] = $tahun;
         $data2['bulan'] = $bulan;
 
+        $data3 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data3);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_depot_amt_harian',$data2);
         $this->load->view('layouts/footer');
@@ -102,8 +106,10 @@ class Depot extends CI_Controller {
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
         $data2['rencana_bulan'] = $this->m_rencana->get_rencana_bulan($depot, date("n"), date("Y"));
         $data2['kinerja_bulan'] = $this->m_kinerja->get_kinerja_bulan($depot, date("n"), date("Y"));
+        
+        $data3 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data3);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_depot_mt',$data2);
         $this->load->view('layouts/footer');
@@ -119,8 +125,10 @@ class Depot extends CI_Controller {
         $data2['mt'] = $this->m_mt->selectMT($depot);
         $data2['id_depot'] = $depot;    
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        
+        $data3 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data3);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_depot_mt_harian',$data2);
         $this->load->view('layouts/footer');

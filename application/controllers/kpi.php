@@ -18,8 +18,9 @@ class kpi extends CI_Controller {
 
         $data['lv1'] = 7;
         $data['lv2'] = 1;
+        $data2 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'],$data['lv2']);
         $this->load->view("oam/v_kpi_operasional");
         $this->load->view('layouts/footer');
@@ -28,8 +29,9 @@ class kpi extends CI_Controller {
     public function operasional_bulan($tahun) {
         $data['lv1'] = 7;
         $data['lv2'] = 1;
+        $data2 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'],$data['lv2']);
         $this->load->view("oam/v_kpi_operasional_bulan");
         $this->load->view('layouts/footer');
@@ -38,8 +40,9 @@ class kpi extends CI_Controller {
     public function operasional_depot($tahun,$bulan,$depot) {
         $data['lv1'] = 7;
         $data['lv2'] = 1;
+        $data2 = menu_oam();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'],$data['lv2']);
         $this->load->view("oam/v_kpi_operasional_depot");
         $this->load->view('layouts/footer');
