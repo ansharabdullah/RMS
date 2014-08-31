@@ -23,7 +23,7 @@ class m_pengingat extends CI_Model {
     
     public function getSuratReminder($depot)
     {
-        $query = $this->db->query("select a.ID_SURAT,m.NOPOL,a.KETERANGAN_SURAT,j.ID_JENIS_SURAT,DATEDIFF(a.TANGGAL_AKHIR_SURAT,now()) as tanggal_akhir_surat,
+        $query = $this->db->query("select a.ID_SURAT,m.NOPOL as suratnopol,a.KETERANGAN_SURAT,j.ID_JENIS_SURAT,DATEDIFF(a.TANGGAL_AKHIR_SURAT,now()) as tanggal_akhir_surat,
                             a.TANGGAL_AKHIR_SURAT as tgl_surat
                           from surat a,jenis_surat j, mobil m, depot d 
                           where j.id_jenis_surat=a.id_jenis_surat 
@@ -60,7 +60,7 @@ class m_pengingat extends CI_Model {
     
     public function getOliReminder($depot)
     {
-        $query = $this->db->query("select a.ID_OLI,m.NOPOL,a.KM_AWAL,a.MERK_OLI,a.TOTAL_VOLUME,DATEDIFF(a.TANGGAL_GANTI_OLI,now()) as tanggal_ganti_oli,
+        $query = $this->db->query("select a.ID_OLI,m.NOPOL as olinopol,a.KM_AWAL,a.MERK_OLI,a.TOTAL_VOLUME,DATEDIFF(a.TANGGAL_GANTI_OLI,now()) as tanggal_ganti_oli,
                             a.TANGGAL_GANTI_OLI as tgl_oli
                           from oli a, mobil m, depot d 
                           where m.ID_MOBIL = a.ID_MOBIL 

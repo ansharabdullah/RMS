@@ -45,7 +45,7 @@
                  ?>
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_SURAT?>";
-                 ap['nopol'] = "<?php echo $a->NOPOL?>";
+                 ap['suratnopol'] = "<?php echo $a->suratnopol?>";
                  ap['ID_JENIS_SURAT'] = "<?php echo $a->ID_JENIS_SURAT?>";
                  ap['tgl_akhir_surat'] = "<?php echo $a->tanggal_akhir_surat?>";
                  ap['tgl_surat'] = "<?php echo $a->tgl_surat?>";
@@ -101,7 +101,7 @@
                  ?>
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_OLI?>";
-                 ap['nopol'] = "<?php echo $a->NOPOL?>";
+                 ap['olinopol'] = "<?php echo $a->olinopol?>";
                  ap['tgl_oli'] = "<?php echo $a->tgl_oli?>";
                  ap['tanggal_ganti_oli'] = "<?php echo $a->tanggal_ganti_oli?>";
                  ap['MERK_OLI'] = "<?php echo $a->MERK_OLI?>";
@@ -263,7 +263,7 @@
                                     
                                         <th style="display: none;"></th>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->suratnopol; ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php if($row->ID_JENIS_SURAT == "1")echo 'STNK'?>
                                         <?php if($row->ID_JENIS_SURAT == "2")echo 'Pajak'?>
                                         <?php if($row->ID_JENIS_SURAT == "3")echo 'KEUR'?>
@@ -316,7 +316,7 @@
                                     
                                         <th style="display: none;"></th>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopolmobil<?php echo $i ?>"><?php echo $row->olinopol ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KM_AWAL ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->MERK_OLI ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->TOTAL_VOLUME ?></td> 
@@ -492,20 +492,14 @@
                         <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                             <div class="col-lg-10">
-                                <?php foreach($surat as $row){?>
-                                <input type="text" class="form-control"  value ="<?php echo $row->NOPOL ?>"id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
-                            <?php }?>
-                            </div>
+                                <input type="text" class="form-control"  value ="" id="suratnopol" readonly="readonly" name="suratnopol" placeholder="Nopol">
+                             </div>
                         </div>
                          <div class="form-group">
-                        <label class="col-sm-2 control-label col-lg-2" for="tera">Jenis Surat</label>
+                        <label class="col-sm-2 control-label col-lg-2" for="id_jenis_surat">Jenis Surat</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
-                                <option <?php if($row->ID_JENIS_SURAT == "1")echo "selected"?> value="1">STNK</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "2")echo "selected"?> value="2">PAJAK</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "3")echo "selected"?> value="3">KEUR</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "4")echo "selected"?> value="4">TERA</option>
-                            </select>
+                            <input type="text" class="form-control"  value ="" id="ID_JENIS_SURAT" readonly="readonly" name="ID_JENIS_SURAT" placeholder="Nopol">
+                             
                         </div>
                     </div>
                         <div class="form-group">
@@ -560,9 +554,9 @@
                         <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                             <div class="col-lg-10">
-                                <?php foreach($oli as $row){?>
-                                <input type="text" class="form-control"  value ="<?php echo $row->NOPOL ?>"id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
-                            <?php }?>
+                               
+                                <input type="text" class="form-control"  value ="" id="olinopol" readonly="readonly" name="olinopol" placeholder="Nopol">
+                            
                             </div>
                         </div>
                         <div class="form-group">
@@ -657,7 +651,7 @@
             
             var action = "<?php echo base_url()?>mt/edit_reminder_surat/"+surat[index]['id'];
             $("#tgl").val("");
-            $("#nopol").val(surat[index]['nopol']);
+            $("#suratnopol").val(surat[index]['suratnopol']);
             $("#ID_JENIS_SURAT").val(surat[index]['ID_JENIS_SURAT']);
             $("#tgl_surat").val(surat[index]['tgl_surat']);
             $("#hari_surat").val(surat[index]['tgl_akhir_surat'] + " hari");
@@ -683,7 +677,7 @@
             
             var action = "<?php echo base_url()?>mt/edit_reminder_oli/"+oli[index]['id'];
             $("#tgl").val("");
-            $("#nopol").val(oli[index]['nopol']);
+            $("#olinopol").val(oli[index]['olinopol']);
             $("#KM_AWAL").val(oli[index]['KM_AWAL']);
             $("#MERK_OLI").val(oli[index]['MERK_OLI']);
             $("#tgl_oli").val(oli[index]['tgl_oli']);
