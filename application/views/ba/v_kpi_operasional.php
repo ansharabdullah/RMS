@@ -48,21 +48,25 @@
             </div>
         </section>
 
-        <div id="filePreview">
+        <div id="filePreviewe">
             <section class="panel">
                 <header class="panel-heading">
                     Tabel KPI Operasional (<span id="tgl"></span>)
                     <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit KPI</a>
                 </header>
-                <div class="panel-body">
+                <div class="panel-body" style="overflow-x: scroll">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th rowspan="2">No</th>
                                 <th rowspan="2">Parameter KPI</th>
+                                <th rowspan="2">Aspek</th>
+                                <th rowspan="2">Satuan</th>
+                                <th rowspan="2">Frekuensi</th>
                                 <th rowspan="2">Target</th>
                                 <th rowspan="2">Bobot</th>
                                 <th colspan="5">Realisasi</th>
+                                <th rowspan="2">Ket</th>
                             </tr>
                             <tr>
                                 <td>Realisasi</td>
@@ -74,19 +78,29 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <td colspan="13"><font size="1"><strong>OPERATIONAL TARGET</strong></font></td>
+                            </tr>
+                            <tr>
                                 <td>1</td>
                                 <td>Rencana pengiriman vs realisasi (MS2 Compliance)*</td>
+                                <td>Min</td>
+                                <td>%</td>
+                                <td>Harian</td>
                                 <td>98</td>
                                 <td>30.0%</td>
                                 <td>X</td>
                                 <td>1,54</td>
-                                <td>101,57%</td>
+                                <td><span class="btn-xs btn-warning"> </span> 101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Rencana volume angkutan vs realisasi</td>
+                                <td>Min</td>
+                                <td>%</td>
+                                <td>Harian</td>
                                 <td>100</td>
                                 <td>25.0%</td>
                                 <td>X</td>
@@ -94,10 +108,17 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
+                            </tr>                            
+                            <tr>
+                                <td colspan="13"><font size="1"><strong>TIMELY REPORTING PERFORMANCE</strong></font></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Laporan tagihan ongkos angkut (dokumen lengkap dan benar)</td>
+                                <td>Max</td>
+                                <td>Tanggal</td>
+                                <td>Bulanan</td>
                                 <td>5</td>
                                 <td>5.0%</td>
                                 <td>1</td>
@@ -105,10 +126,18 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="13"><font size="1"><strong>SATISFACTION PERFORMANCE</strong></font></td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Customer  Satisfaction (Lembaga Penyalur)</td>
+                                <td>Min</td>
+                                <td>Likert (1-5)</td>
+                                <td>Caturwulan</td>
                                 <td>3,8</td>
                                 <td>5.0%</td>
                                 <td>1,0</td>
@@ -116,10 +145,14 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Jumlah temuan, keluhan atau komplain terkait pengelolaan MT</td>
+                                <td>Max</td>
+                                <td>Kasus</td>
+                                <td>Bulaan</td>
                                 <td>5</td>
                                 <td>5.0%</td>
                                 <td>2</td>
@@ -127,10 +160,14 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Tindak lanjut penyelesaian keluhan atau komplain yang diterima</td>
+                                <td>Min</td>
+                                <td>%</td>
+                                <td>Bulanan</td>
                                 <td>100</td>
                                 <td>5.0%</td>
                                 <td>30</td>
@@ -138,10 +175,14 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td>Jumlah pekerja pengelola MT  yang mengikuti pelatihan</td>
+                                <td>Min</td>
+                                <td>%</td>
+                                <td>Tahunan</td>
                                 <td>5</td>
                                 <td>5.0%</td>
                                 <td>4</td>
@@ -149,10 +190,17 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="13"><font size="1"><strong>HSSE PERFORMANCE</strong></font></td>
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td>Number of Incidents</td>
+                                <td>Max</td>
+                                <td>Kasus</td>
+                                <td>Bulanan</td>
                                 <td>0</td>
                                 <td>10.0%</td>
                                 <td>0</td>
@@ -160,10 +208,14 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>9</td>
                                 <td>Waktu penyelesaian Incidents</td>
+                                <td>Max</td>
+                                <td>Hari</td>
+                                <td>Kasus</td>
                                 <td>7</td>
                                 <td>10.0%</td>
                                 <td>0</td>
@@ -171,10 +223,17 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="13"><font size="1"><strong>BOUNDARY KPI</strong></font></td>
                             </tr>
                             <tr>
                                 <td>10</td>
                                 <td>Number of Accident</td>
+                                <td>Nil</td>
+                                <td>Kasus</td>
+                                <td></td>
                                 <td>0</td>
                                 <td></td>
                                 <td>0</td>
@@ -182,6 +241,24 @@
                                 <td>101,57%</td>
                                 <td>101,57%</td>
                                 <td>30,47%</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="13"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Jumlah Total Nilai KPI</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>130,47%</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -399,23 +476,3 @@
     </div>
 </div>
 
-
-
-
-<!--script for this page only-->
-<script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
-
-<!-- END JAVASCRIPTS -->
-<script>
-    jQuery(document).ready(function() {
-        EditableTable.init();
-    });
-		  	
-    function FilterData(par) {
-        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
-        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
-    }
-    
-   
-		  
-</script>

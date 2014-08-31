@@ -417,12 +417,4 @@ class ba extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function cek() {
-        if (is_numeric('0')) {
-            echo "angka";
-        } else {
-            echo "bukan angka";
-        }
-    }
-
 }
