@@ -82,16 +82,6 @@ class m_mt extends CI_Model {
         $this->db->insert('apar', $data);
     }
 
-    public function getApar($id_mobil) {
-        $query = $this->db->query("select a.ID_APAR,m.NOPOL,m.KAPASITAS,m.PRODUK,a.STORE_PRESSURE,a.CATRIDGE,a.CO2,a.KETERANGAN_APAR,a.STATUS_APAR
-                          from apar a, mobil m, depot d 
-                          where m.ID_MOBIL = a.ID_MOBIL 
-                          and m.ID_MOBIL = 1
-                          and m.ID_DEPOT = d.ID_DEPOT 
-                          and d.ID_DEPOT = 1 ");
-        return $query;
-    }
-
     public function selectApar($id_mobil) {
         $data = $this->db->query("select a.ID_APAR,m.NOPOL,m.KAPASITAS,m.PRODUK,a.STORE_PRESSURE,a.CATRIDGE,a.CO2,a.KETERANGAN_APAR,a.STATUS_APAR from apar a, mobil m where (m.kapasitas='8' or m.kapasitas='16' or m.kapasitas='24' or m.kapasitas='32') and a.id_mobil=m.id_mobil and m.id_mobil = $id_mobil order by a.STORE_PRESSURE,a.CATRIDGE,a.CO2 DESC");
         return $data->result();

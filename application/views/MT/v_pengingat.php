@@ -1,9 +1,11 @@
+
 <script>
         var apar = new Array();
         var surat = new Array();
     $(document).ready(function(){
         $("#tabel-ban").hide();
         $("#tabel-surat").hide();
+        $("#tabel-oli").hide();
         
         //masukin array apar ke javascript
         var ap;
@@ -33,7 +35,7 @@
     $(document).ready(function(){
         $("#tabel-ban").hide();
         $("#tabel-surat").hide();
-        
+        $("#tabel-oli").hide();
         //masukin array apar ke javascript
         var ap;
        
@@ -55,6 +57,64 @@
         
     });
 </script>
+<script>
+        var ban = new Array();
+    $(document).ready(function(){
+        $("#tabel-ban").hide();
+        $("#tabel-surat").hide();
+        $("#tabel-oli").hide();
+        //masukin array apar ke javascript
+        var ap;
+       
+        <?php
+             foreach($ban as $a)
+             {
+                 ?>
+                 ap = new Array();
+                 ap['id'] = "<?php echo $a->ID_BAN?>";
+                 ap['nopol'] = "<?php echo $a->NOPOL?>";
+                 ap['tgl_ban'] = "<?php echo $a->tgl_ban?>";
+                 ap['TANGGAL_PASANG'] = "<?php echo $a->TANGGAL_PASANG?>";
+                 ap['TANGGAL_GANTI_BAN'] = "<?php echo $a->TANGGAL_GANTI_BAN?>";
+                 ap['MERK_BAN'] = "<?php echo $a->MERK_BAN?>";
+                 ap['NO_SERI_BAN'] = "<?php echo $a->NO_SERI_BAN?>";
+                 ap['JENIS_BAN'] = "<?php echo $a->JENIS_BAN?>";
+                 ban.push(ap);
+                 <?php
+             }
+                        ?>
+        
+    });
+</script>
+<script>
+        var oli = new Array();
+    $(document).ready(function(){
+        $("#tabel-ban").hide();
+        $("#tabel-surat").hide();
+        $("#tabel-oli").hide();
+        //masukin array apar ke javascript
+        var ap;
+       
+        <?php
+             foreach($oli as $a)
+             {
+                 ?>
+                 ap = new Array();
+                 ap['id'] = "<?php echo $a->ID_OLI?>";
+                 ap['nopol'] = "<?php echo $a->NOPOL?>";
+                 ap['tgl_oli'] = "<?php echo $a->tgl_oli?>";
+                 ap['tanggal_ganti_oli'] = "<?php echo $a->tanggal_ganti_oli?>";
+                 ap['MERK_OLI'] = "<?php echo $a->MERK_OLI?>";
+                 ap['KM_AWAL'] = "<?php echo $a->KM_AWAL?>";
+                 ap['TOTAL_VOLUME'] = "<?php echo $a->TOTAL_VOLUME?>";
+                 oli.push(ap);
+                 <?php
+             }
+                        ?>
+        
+    });
+</script>
+
 
 <section id="main-content">
     <section class="wrapper">
@@ -70,6 +130,7 @@
                         <ul class="dropdown-menu pull-right">
                             <li><a href="#" onclick="filter('apar');">Apar</a></li>
                             <li><a href="#" onclick="filter('ban');">Ban</a></li>
+                            <li><a href="#" onclick="filter('oli');">Oli</a></li>
                             <li><a href="#" onclick="filter('surat');">Surat Mobil Tangki</a></li>
                         </ul>
                     </div>
@@ -108,9 +169,9 @@
                                         <th style="display: none;"></th>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" style ="text-decoration: underline" data-toggle="modal"  onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->store_pressure; ?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" style ="text-decoration: underline" data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->catridge;?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" style ="text-decoration: underline" data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->co2 ; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  style ="text-decoration: underline" data-toggle="modal"  onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->store_pressure; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  style ="text-decoration: underline" data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->catridge;?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  style ="text-decoration: underline" data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->co2 ; ?> hari</div></a></td>
                                         </tr>
                                     <?php
                                 $i++;
@@ -133,35 +194,35 @@
                                 <th style="display: none;"></th>
                                 <th>No.</th>
                                 <th>Nopol</th>
-                                <th>Transportir</th>
-                                <th>Produk</th>
+                                <th>MERK BAN</th>
+                                <th>NO SERI BAN</th>
+                                <th>JENIS BAN</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $data = array('D 6308 AD', 'D 1725 AF', 'D 2245 AF', 'D 6066 AF', 'D 3038 AD', 'D 8557 AD', 'D 1346 AD', 'D 7152 AF', 'D 9487 AD', 'D 8827 AF', 'D 8711 AD', 'D 8277 AF');
-                            $transportir = array("PT MA'SOEM", "PT WANDISIRI", "PT PUSPITA CIPATA", "PT PATRA NIAGA", "PT INCOT", "PT JUJUR PARAMARTA", "PT MA'SOEM", "PT PATRA NIAGA", "PT TIARA", "PT PATRA NIAGA", "PT PUSPITA CIPATA", "PT NAGAMAS JAYA");
-                            $produk = array('Premium', 'Solar', 'Pertamax', 'Pertamax Plus', 'Bio Solar', 'Pertamax Dex', 'Premium', 'Solar', 'Pertamax', 'Bio Solar', 'Pertamax Dex', 'Premium');
-                            $apar1 = array(6, 12, 11, 3);
-                            $apar2 = array(22, 9, 10, 15);
-                            $apar3 = array(15, 1, 6, 18);
-                            for ($i = 0; $i < 12; $i++) {
-                                if ($i < 4) {
+                            $i = 0;
+                            foreach ($ban as $row) {
+                            
+                            
+                                if($row->tanggal_ban <= 7 ) {
                                     $color = "orange";
                                 } else {
                                     $color = "transparent";
                                 }
                                 ?>
-                                <tr>
                                     <th style="display: none;"></th>
-                                    <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1 ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="nopol<?php echo $i ?>"><?php echo $data[$i] ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><?php echo $transportir[$i] ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><?php echo $produk[$i] ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1; ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $row->MERK_BAN ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $row->NO_SERI_BAN ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $row->JENIS_BAN ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan" class="btn btn-success btn-xs" onClick="cekBan()">Cek Ban</a></td>
                                 </tr>
-                                <?php
+                                 <?php
+                                $i++;
+                                
                             }
                             ?>
                         </tbody>
@@ -209,7 +270,8 @@
                                         <?php if($row->ID_JENIS_SURAT == "4")echo 'TERA'?>
                                     </td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat" style ="text-decoration: underline" data-toggle="modal" onclick="setDetailSurat('<?php echo $i ?>')"><div id="<?php echo 'tgl_akhir-' . $i; ?>"><?php echo $row->tanggal_akhir_surat; ?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_SURAT?>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>">
+                                        <?php echo $row->KETERANGAN_SURAT ?>
                                         </td>
                                         
                                         </tr>
@@ -217,6 +279,51 @@
                                 $i++;
                                 }
                                 
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="adv-table editable-table " id="tabel-oli">
+                    <div class="space10">
+                        <h3><i class="icon-fire-extinguisher"></i> Pengingat Oli</h3>
+                    </div>
+                    <table class="table table-hover table-bordered" id="editable-sample1">
+                        <thead>
+                            <tr>
+                                <th style="display: none;"></th>
+                                <th>No.</th>
+                                <th>Nopol</th>
+                                <th>KM Awal</th>
+                                <th>Merk Oli</th>
+                                <th>Total Volume</th>
+                                <th>Sisa Waktu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+//                          
+                            $i = 0;
+                            foreach ($oli as $row) {
+                                $color = "";
+                               
+                                    if($row->tanggal_ganti_oli <= 7)
+                                    {
+                                        $color = "style='background-color: orange;'";
+                                    }
+                                    ?>
+                                    
+                                        <th style="display: none;"></th>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KM_AWAL ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->MERK_OLI ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->TOTAL_VOLUME ?></td> 
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalOli" style ="text-decoration: underline" data-toggle="modal" onclick="setDetailOli('<?php echo $i ?>')"><div id="<?php echo 'tgl_akhir-' . $i; ?>"><?php echo $row->tanggal_ganti_oli; ?> hari</div></a></td>
+                                        </tr>
+                                    <?php
+                                $i++;
                             }
                             ?>
                         </tbody>
@@ -257,7 +364,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
+                        <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-9">
                             <input class="form-control" type="date" value="" id="tgl_store" size="16"  name="tgl_store" required="required"/>
                             <span class="help-block">Pilih Tanggal</span>
@@ -324,21 +431,7 @@
                             <input type="text" class="form-control" value="D 6308 AD" id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">Transportir</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" value="PT PATRA NIAGA" id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
-                        </div>
-                    </div>  
-                    <div class="form-group">
-                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">Produk</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" value="Premium" id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
-                        </div>
-                    </div>
-
                 </form>
-                <hr/>
                 <form class="form-inline" role="form" id="form-edit-ban" >
                     <div class="form-group">
                         <input type="text" class="form-control" id="ban" readonly="readonly" placeholder="Ban">
@@ -394,12 +487,14 @@
                         <h4 class="modal-title">Pengingat Surat Mobil Tangki</h4>
                     </div>
 
+
                     <div class="modal-body">
-                        <?php $row->NOPOL ?>
                         <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control"  id="nopol" name="nopol" readonly="readonly" name="nopol">
+                                <?php foreach($surat as $row){?>
+                                <input type="text" class="form-control"  value ="<?php echo $row->NOPOL ?>"id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                            <?php }?>
                             </div>
                         </div>
                          <div class="form-group">
@@ -435,6 +530,7 @@
                                 <input class="form-control" type="text" value="" id="KETERANGAN_SURAT" size="16"  name="KETERANGAN_SURAT" required="required"/>
                                 
                             </div>
+                           
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -446,6 +542,74 @@
             </div>
         </div>
     </div>
+</div>
+
+<!---MODAL Oli--->
+<div class="modal fade" id="modalOli" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class=" form">
+                <form class="cmxform form-horizontal tasi-form" id="Form-Oli" method="POST" action="">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Pengingat Oli Mobil Tangki</h4>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
+                            <div class="col-lg-10">
+                                <?php foreach($oli as $row){?>
+                                <input type="text" class="form-control"  value ="<?php echo $row->NOPOL ?>"id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                            <?php }?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nopol" class="col-lg-2 col-sm-2 control-label">KM AWAL</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control"  id="KM_AWAL" name="KM_AWAL">
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="nopol" class="col-lg-2 col-sm-2 control-label">MERK OLI</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control"  id="MERK_OLI" name="MERK_OLI" placeholder="MERK OLI">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-12 col-sm-2 control-label">TANGGAL BERAKHIR Oli</label><hr/>
+                        </div>
+                        <div class="form-group">
+                            <label for="nopol" class="col-lg-2 col-sm-2 control-label">Sisa waktu</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control"  readonly="readonly" id="hari_ganti" name="sisa">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" type="date" value="" id="tgl_oli" size="16"  name="tgl_oli" required="required"/>
+                                <span class="help-block">Pilih Tanggal</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nopol" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control"  id="TOTAL_VOLUME" name="TOTAL_VOLUME" placeholder="Total Volume">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                            <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
+                            <button class="btn btn-success" name="submit"  type="submit" >Simpan</button>
+
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -476,8 +640,8 @@
             var action = "<?php echo base_url()?>mt/edit_reminder_apar/"+apar[index]['id'];
             
             $("#tgl").val("");
-            $("#nopol").val(surat[index]['nopol']);
-            $("#tgl_store").val(surat[index]['tgl_store']);
+            $("#nopol").val(apar[index]['nopol']);
+            $("#tgl_store").val(apar[index]['tgl_store']);
             $("#hari_store").val(apar[index]['store_pressure'] + " hari");
             $("#tgl_catridge").val(apar[index]['tgl_catridge']);
             $("#hari_catridge").val(apar[index]['catridge'] + " hari");
@@ -502,12 +666,41 @@
            
         }
         
+        function setDetailBan(index){
+            
+            var action = "<?php echo base_url()?>mt/edit_reminder_ban/"+ban[index]['id'];
+            $("#tgl").val("");
+            $("#nopol").val(ban[index]['nopol']);
+            $("#ID_JENIS_ban").val(ban[index]['ID_JENIS_ban']);
+            $("#tgl_surat").val(surat[index]['tgl_surat']);
+            $("#hari_surat").val(surat[index]['tgl_akhir_surat'] + " hari");
+            $("#KETERANGAN_SURAT").val(surat[index]['KETERANGAN_SURAT']);
+            $("#Form-Surat").attr("action",action ); 
+           
+        }
+        
+        function setDetailOli(index){
+            
+            var action = "<?php echo base_url()?>mt/edit_reminder_oli/"+oli[index]['id'];
+            $("#tgl").val("");
+            $("#nopol").val(oli[index]['nopol']);
+            $("#KM_AWAL").val(oli[index]['KM_AWAL']);
+            $("#MERK_OLI").val(oli[index]['MERK_OLI']);
+            $("#tgl_oli").val(oli[index]['tgl_oli']);
+            $("#hari_ganti").val(oli[index]['tanggal_ganti_oli'] + " hari");
+            $("#TOTAL_VOLUME").val(oli[index]['TOTAL_VOLUME']);
+            $("#Form-Oli").attr("action",action ); 
+           
+        }
+        
     
         function filter(jenis)
         {
             $("#tabel-ban").hide();
             $("#tabel-surat").hide();
             $("#tabel-apar").hide();
+            $("#tabel-oli").hide();
+             $("#tabel-baru").hide();
             if(jenis == "apar")
             {
                 $("#tabel-apar").slideDown("slow");
@@ -515,6 +708,10 @@
             else if(jenis=="ban")
             {
                 $("#tabel-ban").slideDown("slow");
+            }
+            else if(jenis=="oli")
+            {
+                $("#tabel-oli").slideDown("slow");
             }
             else
             {
@@ -525,40 +722,8 @@
             $('#editable-sample').dataTable().fnFilter( '' );
             $('#editable-sample2').dataTable().fnFilter( '' );
             $('#editable-sample3').dataTable().fnFilter( '' );
+            $('#editable-sample1').dataTable().fnFilter( '' );
         }
-    
-//        $("#form-edit").submit(function(e){
-//       
-//            var date1 = new Date($("#tgl").val());
-//            var date2 = new Date();
-//            var diffDays = date2.getDate() - date1.getDate(); 
-//            if(diffDays > 0)
-//            {
-//                alert("Tanggal harus lebih dari sekarang");   
-//            }
-//            else
-//            {
-//                diffDays = diffDays*(-1);
-//                apar = "#"+apar;
-//                $(apar).text(diffDays + " hari");
-//                var apar1 = "#apar1-"+index;
-//                var apar2 = "#apar2-"+index;
-//                var apar3 = "#apar3-"+index;
-//                var val1 =  $(apar1).text();
-//                var val2 =  $(apar2).text();
-//                var val3 =  $(apar3).text();
-//                val1 = val1.substr(0, val1.length - 5);
-//                val2 = val2.substr(0, val2.length - 5);
-//                val2 = val3.substr(0, val3.length - 5);
-//                if(parseInt(val1) > 7 && parseInt(val2) > 7 && parseInt(val3) > 7)
-//                {
-//                    $(highlight).css({'background-color': 'transparent'});    
-//                }
-//                $("#myModal").modal('toggle');
-//            }
-//            e.preventDefault();
-//     
-//        });
     
         $("#form-edit-ban").submit(function(e){
             var date1 = new Date($("#tgl-ban").val());

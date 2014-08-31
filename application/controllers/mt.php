@@ -846,8 +846,10 @@ class Mt extends CI_Controller {
         $data['lv1'] = 3;
         $data['lv2'] = 4;
         //data reminder
-        $data2['apar'] = $this->m_pengingat->getAparReminder()->result();
-        $data2['surat'] = $this->m_pengingat->getSuratReminder()->result();
+        $data2['apar'] = $this->m_pengingat->getAparReminder($depot)->result();
+        $data2['surat'] = $this->m_pengingat->getSuratReminder($depot)->result();
+        $data2['ban'] = $this->m_pengingat->getBanReminder($depot)->result();
+        $data2['oli'] = $this->m_pengingat->getOliReminder($depot)->result();
         $this->header($data);
         $this->load->view('mt/v_pengingat', $data2);
         $this->footer();
@@ -868,6 +870,28 @@ class Mt extends CI_Controller {
         );
         
         $this->m_pengingat->editReminderSurat($id,$data);
+        //redirect('mt/reminder');
+          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
+            echo 'window.location.href="' . base_url() . 'mt/reminder";';
+            echo '</script>';
+    }
+    
+    public function edit_reminder_oli($id)
+    {
+        
+        $merk = $_POST['MERK_OLI'];
+        $km = $_POST['KM_AWAL'];
+        $tgl = $_POST['tgl_oli'];
+        $total = $_POST['TOTAL_VOLUME'];
+        
+        $data = array(
+            "MERK_OLI"=>$merk,
+            "KM_AWAL"=>$km,
+            "TANGGAL_GANTI_OLI"=>$tgl,
+            "TOTAL_VOLUME"=>$total
+        );
+        
+        $this->m_pengingat->editReminderOli($id,$data);
         //redirect('mt/reminder');
           echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
