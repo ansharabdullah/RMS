@@ -90,7 +90,6 @@
                     </header>
                     <div class="panel-body">
                         <div class="space15">
-                            <center><h3>DAFTAR AWAK MOBIL TANGKI</h3></center>
                         </div>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
@@ -146,6 +145,7 @@
     var ritase = new Array();
     var spbu = new Array();
     var bulan = new Array();
+    var nomor_bulan = new Array();
     <?php
         foreach($kinerja_amt as $ka){
             ?>
@@ -155,6 +155,7 @@
             ritase.push(<?php echo $ka->ritase?>);
             spbu.push(<?php echo $ka->spbu?>);
             bulan.push("<?php echo $ka->bulan?>");
+            nomor_bulan.push("<?php echo date("n",strtotime($ka->TANGGAL_LOG_HARIAN))?>");
             <?php
         }
     ?>
@@ -167,16 +168,21 @@
                 text: 'Grafik Kinerja Jumlah KM AMT Depot <?php echo $nama_depot?>'
             },
             subtitle: {
-                text: 'Tahun <?php echo date('Y');?>'
+                text: 'Tahun <?php echo $tahun;?>'
             },
             plotOptions: {
-                series: {
-                    events: {
+                column: {
+                   point:{
+                      events:{
                         click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/amt_depot_harian/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+arrBulan[this.index]+"/<?php echo date('Y')?>";
+                                window.location = "<?php echo base_url() ?>depot/amt_depot_harian/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+ nomor_bulan[this.x]+"/<?php echo date('Y')?>";
+                            }
                         }
                     }
                 }
+            },
+            legend:{
+                 enabled: false
             },
             xAxis: [{
                     categories: bulan
@@ -189,7 +195,7 @@
                         }
                     },
                     title: {
-                        text: 'Target',
+                        text: 'Jumlah',
                         style: {
                             color: Highcharts.getOptions().colors[1]
                         }
@@ -199,7 +205,7 @@
                 shared: true
             },
              series: [{
-                    name: 'KM',
+                    name: 'Jumlah',
                     type: 'column',
                     data: km
 
@@ -211,7 +217,6 @@
     function filterAmt(title)
     {
         amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' AMT Depot <?php echo $nama_depot?>'});  
-        amt.legend.allItems[0].update({name:title});
         if(title == "KM"){
              amt.series[0].setData(total_km);
         }else if(title == "KL"){

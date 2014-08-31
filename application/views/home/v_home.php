@@ -75,7 +75,7 @@
                     </div>
                     <div class="value">
                         <h1 class=" count3">
-                            <?php echo ceil(($kinerja_bulan[0]->total_kl / $rencana_bulan[0]->total_kl) * 100) ?>%
+                            <?php if($rencana_bulan[0]->total_kl > 0){echo ceil(($kinerja_bulan[0]->total_kl / $rencana_bulan[0]->total_kl) * 100);}else{echo "0";} ?>%
                         </h1>
                         <p>Realisasi KL</p>
                     </div>
@@ -121,15 +121,15 @@
                         <span>
                             <i class="icon-exclamation-sign"></i>
                         </span>
-                        <h3>Peringatan</h3>
+                        <h3>Peringatan </h3>
                         <span class="rev-combo pull-right">
-                            Agustus 2014
+                            <?php echo date("F Y")?>
                         </span>
                     </div>
                     <div class="panel-body" style="height: 350px; overflow-y:scroll">
                         <section class="panel" id="warning" >
                             <header class="panel-heading">
-                                Peringatan
+                                Peringatan Bulan Ini
                             </header>
                             <table class="table table-striped">
                                 <thead>
@@ -270,6 +270,10 @@
                         Realisasi dari Rencana Bulan Ini
                     </header>
                     <div class="panel-body">
+                        <?php
+                            if($rencana_bulan[0]->r_premium > 0)
+                            {
+                        ?>
                         <p class="text-muted">
                             Kilo Liter Premium (<?php echo $kinerja_bulan[0]->premium ?>/<?php echo $rencana_bulan[0]->r_premium ?> Kl)
                         </p>
@@ -332,6 +336,11 @@
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
+                        <?php
+                            }else{
+                                echo "<span class='btn btn-danger' > <i class='icon-exclamation-sign'></i> Data rencana belum tersedia</span>";
+                            }
+                        ?>
                     </div>
                 </section>
             </div>
@@ -526,6 +535,9 @@ for ($date = strtotime($kinerja_mt[0]->TANGGAL_LOG_HARIAN); $date <= strtotime($
                     },
                     threshold: null
                 }
+            },
+            legend: {
+                enabled: false
             },
 
             series: [{

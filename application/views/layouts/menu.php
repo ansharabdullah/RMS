@@ -19,7 +19,7 @@
                     <li>
                         <p class="green">Kinerja MT</p>
                     </li>
-                    <?php if(isset($kinerja_bulan)){?>
+                    <?php if($rencana_bulan[0]->r_premium > 0){?>
                     <li>
                         <a href="#">
                             <div class="task-info">
@@ -111,7 +111,12 @@
                             </div>
                         </a>
                     </li>
-                    <?php }?>
+                    <?php }
+                    else
+                    {
+                        echo " <li><div class='task-info' style='padding:10px;'><span class='btn btn-danger' > <i class='icon-exclamation-sign'></i> Data rencana belum tersedia</span> </div></li>";
+                    }
+                    ?>
                 </ul>
             </li>
             <!-- settings end -->

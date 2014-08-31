@@ -148,74 +148,79 @@ class home extends CI_Controller {
         $arrNotif = array();
         for($i = 0 ; $i < sizeof($logHarian); $i++)
         {
-            if($id_depot != $logHarian[$i]->ID_DEPOT)
-            {
-                array_push($arrNotif,"<b>&nbsp; DEPOT ".$logHarian[$i]->NAMA_DEPOT."</b>");
-                $id_depot =  $logHarian[$i]->ID_DEPOT;
-            }
-            array_push($arrNotif,"<b>&nbsp;&nbsp;".date_format(date_create($logHarian[$i]->tanggal),'d-M-y')."</b>");
-            //cek jadwal
-            if ($logHarian[$i]->jadwal == 0) {
-                $totalNotif++;
-                array_push($arrNotif, "<a href='#'>
-                                        <span class='label label-success'><i class='icon-calendar'></i></span>
-                                       Data Penjadwalan belum ada.
-                                        </a>");
-            }
-            //cek kinerja
-            if ($logHarian[$i]->input_kinerja == 0) {
-                $totalNotif++;
-                array_push($arrNotif, " <a href='#'>
-                                        <span class='label label-warning'><i class='icon-briefcase'></i></span>
-                                         Data kinerja belum ada.
-                                        </a> ");
-            }
-            //cek ms2
-            if ($logHarian[$i]->ms2 == 0) {
-                $totalNotif++;
-                array_push($arrNotif, " <a href='#'>
-                                        <span class='label label-danger'><i class='icon-bolt'></i></span>
-                                         MS2 belum diisi.
-                                        </a>");
-            }
-            //cek kpi_operasional
-            if ($logHarian[$i]->kpi_operasional == 0) {
-                $totalNotif++;
-                array_push($arrNotif, "<a href='#'>
-                                        <span class='label label-danger'><i class='icon-bolt'></i></span>
-                                        Data KPI Operasional belum ada.
-                                        </a>");
-            }
-            //cek kpi_internal
-            if ($logHarian[$i]->kpi_internal == 0) {
-                $totalNotif++;
-                array_push($arrNotif, "<a href='#'>
-                                        <span class='label label-danger'><i class='icon-bolt'></i></span>
-                                        Data KPI Internal belum ada.
-                                        </a>");
-            }
+           if($logHarian[$i]['notifikasi'] == 1)
+           {
+               if($logHarian[$i]['id_depot'] != $id_depot)
+               {
+                   $id_depot = $logHarian[$i]['id_depot']; 
+                   array_push($arrNotif,"<b>&nbsp; DEPOT ".$logHarian[$i]['depot']."</b>");
+               }
+               array_push($arrNotif,"<b>&nbsp;&nbsp;".date_format(date_create($logHarian[$i]['tanggal']),'d-M-y')."</b>");
+               //cek jadwal
+                if ($logHarian[$i]['jadwal'] == 0) {
+                    $totalNotif++;
+                    array_push($arrNotif, "<a href='#'>
+                                            <span class='label label-success'><i class='icon-calendar'></i></span>
+                                           Data Penjadwalan belum ada.
+                                            </a>");
+                }
+                //cek kinerja
+                if ($logHarian[$i]['input_kinerja'] == 0) {
+                    $totalNotif++;
+                    array_push($arrNotif, "<a href='#'>
+                                            <span class='label label-warning'><i class='icon-briefcase'></i></span>
+                                             Data kinerja belum ada.
+                                            </a> ");
+                 }
+                //cek ms2
+                if ($logHarian[$i]['ms2'] == 0) {
+                    $totalNotif++;
+                    array_push($arrNotif, "<a href='#'>
+                                            <span class='label label-danger'><i class='icon-bolt'></i></span>
+                                             MS2 belum diisi.
+                                            </a>");
+                 }
+                //cek kpi_operasional
+                if ($logHarian[$i]['kpi_operasional'] == 0) {
+                    $totalNotif++;
+                    array_push($arrNotif, "<a href='#'>
+                                            <span class='label label-danger'><i class='icon-bolt'></i></span>
+                                            Data KPI Operasional belum ada.
+                                            </a>");
+                }
+                //cek kpi_internal
+                if ($logHarian[$i]['kpi_internal'] == 0) {
+                    $totalNotif++;
+                    array_push($arrNotif, "<a href='#'>
+                                            <span class='label label-danger'><i class='icon-bolt'></i></span>
+                                            Data KPI Internal belum ada.
+                                            </a>");
+                 }
 
-            //cek interpolasi
-            if ($logHarian[$i]->interpolasi == 0) {
-                $totalNotif++;
-                array_push($arrNotif, "<a href='#'>
-                                        <span class='label label-danger'><i class='icon-bolt'></i></span>
-                                      Data Tarif Interpolasi belum ada.
-                                        </a>");
-            }
-            //cek ba
-            if ($logHarian[$i]->ba == 0) {
-                $totalNotif++;
-                array_push($arrNotif, "<a href='#'>
-                                        <span class='label label-warning'><i class='icon-check'></i></span>
-                                      Berita Acara belum dibuat.
-                                        </a>");
-            }
-        }
+                //cek interpolasi
+                if ($logHarian[$i]['interpolasi'] == 0) {
+                    $totalNotif++;
+                    array_push($arrNotif, "<a href='#'>
+                                            <span class='label label-danger'><i class='icon-bolt'></i></span>
+                                          Data Tarif Interpolasi belum ada.
+                                            </a>");
+                 }
+                //cek ba
+                if ($logHarian[$i]['ba'] == 0) {
+                    $totalNotif++;
+                    array_push($arrNotif, "<a href='#'>
+                                            <span class='label label-warning'><i class='icon-check'></i></span>
+                                          Berita Acara belum dibuat.
+                                            </a>");
+                 }
+           }
+
+       }
         $data3['total_notifikasi'] = $totalNotif;
         $data3['notifikasi'] = $arrNotif;
         $data3['rencana_bulan'] = $data2['rencana_bulan'];
         $data3['kinerja_bulan'] = $data2['kinerja_bulan'];
+        $data3['kinerja_amt_bulan'] = $this->m_kinerja->get_kinerja_amt_by_bulan_oam(date("n"),date("Y"));
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data3);
         $this->navbar();
