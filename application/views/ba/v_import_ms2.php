@@ -68,7 +68,6 @@
                         <div class="panel-body">
                             <div class="adv-table editable-table" style="overflow-x: scroll">
 
-                                <div class="space15"></div>
                                 <table class="table table-bordered table-hover" id="editable-sample">   
                                     <thead>
                                         <tr>

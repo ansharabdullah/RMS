@@ -110,7 +110,6 @@
                     <div class="panel-body">
                         <div class="adv-table editable-table " style="overflow-x: scroll">
 
-                            <div class="space15"></div>
                             <table class="table table-bordered table-hover" id="editable-sample">
                                 <thead>
                                     <tr>
@@ -123,7 +122,7 @@
                                         <th colspan="3">Lambat (Setelah MS2)</th>
                                         <th colspan="3">Tidak Terkirim Sesuai Jadwal MS2</th>
                                         <th colspan="3">Total LO</th>
-                                        <th rowspan="2" width="150px">Aksi</th>
+                                        <th rowspan="2">Aksi</th>
                                     </tr>
                                     <tr>
                                         <th style="display:none;"></th>
@@ -348,3 +347,14 @@
         </div>
     <?php } ?>
 <?php } ?>
+
+        
+        <!--script for this page only-->
+<script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
