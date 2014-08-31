@@ -99,7 +99,7 @@ class m_mt extends CI_Model {
 
     //Data Ban
     public function selectBanMT($id_mobil) {
-        $data = $this->db->query("select T.ID_BAN,T.MERK_BAN, T.NO_SERI_BAN,T.JENIS_BAN,T.POSISI_BAN,T.TANGGAL_PASANG,T.TANGGAL_GANTI_BAN,M.nopol,M.kapasitas,M.produk from ban T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil order by T.POSISI_BAN ASC");
+        $data = $this->db->query("select T.ID_BAN,T.MERK_BAN, T.NO_SERI_BAN,T.JENIS_BAN,T.POSISI_BAN,T.TANGGAL_PASANG,T.TANGGAL_GANTI_BAN,M.nopol,M.kapasitas,M.produk from ban T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil order by T.POSISI_BAN,T.TANGGAl_PASANG ASC");
         return $data->result();
     }
 
