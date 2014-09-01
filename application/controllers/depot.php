@@ -13,16 +13,19 @@ class Depot extends CI_Controller {
         $this->load->model("m_depot");
         $this->load->model("m_kinerja");
         $this->load->model("m_rencana");
+        $this->load->model("m_kpi");
     }
 
-    public function grafik_bulan() {
+    public function grafik_bulan($id_depot,$tahun) {
         $data['lv1'] = 1;
         $data['lv2'] = 1;
         $data2 = menu_oam();
+        $data3['kpi_bulan'] = $this->m_kpi->nilai_kpi_perbulan($id_depot,$tahun);
+        $data3['detail_kpi'] = $this->m_kpi->detail_kpi_perbulan($id_depot,$tahun);
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'], $data['lv2']);
-        $this->load->view('oam/v_grafik_bulan');
+        $this->load->view('oam/v_grafik_bulan',$data3);
         $this->load->view('layouts/footer');
     }
 

@@ -190,6 +190,7 @@
                                         <th style="display:none;"></th>
                                         <th>No</th>
                                         <th>Bulan</th>
+                                        <th>KPI</th>
                                         <th style="white-space: nowrap">Rencana pengiriman vs realisasi (MS2 Compliance)</th>
                                         <th style="white-space: nowrap">Rencana volume angkutan vs realisasi</th>
                                         <th style="white-space: nowrap">Laporan tagihan ongkos angkut </th>
@@ -211,6 +212,7 @@
                                             <td style="display:none;"></td>
                                             <td><?php echo ($i + 1) ?></td>
                                             <td><?php echo $bulan[$i] ?></td>
+                                            <td></td>
                                             <td><?php echo "Target : <br/>Realisasi : <br/>Performansi : <br/>" ?></td>
                                             <td><?php echo "Target : <br/>Realisasi : <br/>Performansi : <br/>" ?></td>
                                             <td><?php echo "Target : <br/>Realisasi : <br/>Performansi : <br/>" ?></td>
