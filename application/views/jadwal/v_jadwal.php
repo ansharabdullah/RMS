@@ -40,11 +40,6 @@
                 </div>
             </div>
         </section>
-        <?php if (!$jadwal) { ?>
-            <div class="alert alert-block alert-danger fade in">
-                <strong>Error!</strong> Jadwal tidak ditemukan.
-            </div>
-        <?php } ?>
         <?php if ($jadwal) { ?>
             <section class="panel" id="tabelJadwal">
                 <header class="panel-heading">
@@ -151,7 +146,18 @@
                 </div>
             </section>
 
-<?php } ?>
+        <?php
+        } else {
+            if ($tanggal) {
+                ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> Jadwal tidak ditemukan.
+                </div>
+    <?php }
+} ?>
     </section>
 </section>
 
