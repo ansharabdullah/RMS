@@ -28,7 +28,6 @@ foreach ($ban as $a) {
                              ap['NO_SERI_BAN'] = "<?php echo $a->NO_SERI_BAN ?>";
                              ap['JENIS_BAN'] = "<?php echo $a->JENIS_BAN ?>";
                              ap['POSISI_BAN'] = "<?php echo $a->POSISI_BAN ?>";
-                             ap['TANGGAL_PASANG'] = "<?php echo $a->TANGGAL_PASANG ?>";
                              ap['TANGGAL_GANTI_BAN'] = "<?php echo $a->TANGGAL_GANTI_BAN ?>";
                      
                              ban.push(ap);
@@ -93,7 +92,6 @@ foreach ($ban as $a) {
                                 <th style="display:none;"></th>
                                 <th>No.</th>
                                 <th>Posisi Ban</th>
-                                <th>Tanggal Pasang</th>
                                 <th>Tanggal Ganti</th>
                                 <th>Merk Ban</th>
                                 <th>No Seri</th>
@@ -111,7 +109,6 @@ foreach ($ban as $a) {
                             <td style="display:none;"></td>
                             <td><?php echo $i; ?></td>
                             <td><?php echo $row->POSISI_BAN; ?></td>
-                            <td><?php echo(DateToIndo($row->TANGGAL_PASANG)); ?></td>
                             <td><?php echo(DateToIndo($row->TANGGAL_GANTI_BAN)); ?></td>
                             <td><?php echo $row->MERK_BAN; ?></td>
                             <td><?php echo $row->NO_SERI_BAN; ?></td>
@@ -175,12 +172,6 @@ foreach ($ban as $a) {
                                 
 
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tanggal Pasang</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="tglpasang" name="TANGGAL_PASANG" minlength="2" type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -274,13 +265,7 @@ foreach ($ban as $a) {
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tanggal Pasang</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15"  id="TANGGAL_PASANG" name="TANGGAL_PASANG" minlength="2" type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
+                   <div class="form-group">
                         <label for="norangka" class="col-lg-2 col-sm-2 control-label">Tanggal Ganti</label>
                         <div class="col-lg-10">
                             <input class=" form-control input-sm m-bot15" id="TANGGAL_GANTI_BAN" name="TANGGAL_GANTI_BAN" minlength="2" type="date" required />
@@ -383,7 +368,6 @@ foreach ($ban as $a) {
         $("#NO_SERI_BAN").val(ban[index]['NO_SERI_BAN']);
         $("#JENIS_BAN").val(ban[index]['JENIS_BAN']);
         $("#POSISI_BAN").val(ban[index]['POSISI_BAN']);
-        $("#TANGGAL_PASANG").val(ban[index]['TANGGAL_PASANG']);
         $("#TANGGAL_GANTI_BAN").val(ban[index]['TANGGAL_GANTI_BAN']);
             
         $("#form-edit").attr("action",action ); 

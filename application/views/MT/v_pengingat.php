@@ -19,7 +19,7 @@
                  ap['tgl_apar'] = "<?php echo $a->tgl_apar?>";
                  ap['apar'] = "<?php echo $a->apar?>";
                  ap['KETERANGAN_APAR'] = "<?php echo $a->KETERANGAN_APAR?>";
-                 ap['ID_JENIS_SURAT'] = "<?php echo $a->ID_JENIS_SURAT?>";
+                 ap['ID_JENIS_APAR'] = "<?php echo $a->ID_JENIS_APAR?>";
                  
                  apar.push(ap);
                  <?php
@@ -215,7 +215,7 @@
                                 ?>
                                     <th style="display: none;"></th>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1; ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row->bannopol ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $row->MERK_BAN ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $row->NO_SERI_BAN ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $row->JENIS_BAN ?></td>
@@ -355,13 +355,21 @@
                             <input type="text" class="form-control"  id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
                         </div>
                     </div>
+                    <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Apar</label>
+                        <div class="col-lg-10">
+                            <select class="form-control input-sm m-bot15" id="ID_JENIS_APAR" name="ID_JENIS_APAR">
+                                <option <?php if ($row->ID_JENIS_APAR == "1")echo "selected" ?> value="1">Store Pressure</option>
+                                
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-lg-3 col-sm-2 control-label">Tanggal Apar</label><hr/>
                     </div>
                     <div class="form-group">
                         <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control"  id="hari_store" readonly="readonly" name="sisa" placeholder="Jenis Apar">
+                            <input type="text" class="form-control"  id="hari_apar" readonly="readonly" name="hari_apar" placeholder="Jenis Apar">
                         </div>
                     </div>
                     <div class="form-group">
@@ -372,6 +380,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Keterangan</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control"  id="KETERANGAN_APAR" readonly="readonly" name="KETERANGAN_APAR" placeholder="Jenis Apar">
+                        </div>
+                    </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
                     <button class="btn btn-success" type="submit">Simpan</button>
@@ -466,12 +480,8 @@
                          <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="id_jenis_surat">Jenis Surat</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
-                                <option <?php if($row->ID_JENIS_SURAT == "1")echo "selected"?> value="1">STNK</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "2")echo "selected"?> value="2">PAJAK</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "3")echo "selected"?> value="3">KEUR</option>
-                                <option <?php if($row->ID_JENIS_SURAT == "4")echo "selected"?> value="4">TERA</option>
-                            </select>
+                            <input type="text" class="form-control"  value ="" id="ID_JENIS_SURAT" readonly="readonly" name="ID_JENIS_SURAT" placeholder="Nopol">
+                             
                         </div>
                     </div>
                         <div class="form-group">

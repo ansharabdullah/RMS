@@ -602,7 +602,6 @@ class Mt extends CI_Controller {
             'NO_SERI_BAN' => $this->input->post('NO_SERI_BAN', true),
             'JENIS_BAN' => $this->input->post('JENIS_BAN', true),
             'POSISI_BAN' => $this->input->post('POSISI_BAN', true),
-            'TANGGAL_PASANG' => $this->input->post('TANGGAL_PASANG', true),
             'TANGGAL_GANTI_BAN' => $this->input->post('TANGGAL_GANTI_BAN', true),
         );
 
@@ -619,7 +618,6 @@ class Mt extends CI_Controller {
         $seri = $_POST['NO_SERI_BAN'];
         $jenis = $_POST['JENIS_BAN'];
         $posisi= $_POST['POSISI_BAN'];
-        $tgl_pasang= $_POST['TANGGAL_PASANG'];
         $tgl_ganti= $_POST['TANGGAL_GANTI_BAN'];
         
         $data = array(
@@ -627,7 +625,6 @@ class Mt extends CI_Controller {
             "NO_SERI_BAN"=>$seri,
             "JENIS_BAN"=>$jenis,
             "POSISI_BAN" =>$posisi,
-            "TANGGAL_PASANG" =>$tgl_pasang,
             "TANGGAL_GANTI_BAN" =>$tgl_ganti,
             );
         
@@ -913,6 +910,8 @@ class Mt extends CI_Controller {
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
             echo '</script>';
     }
+    
+    
  
     public function rencana() {
         

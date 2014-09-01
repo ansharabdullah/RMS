@@ -42,8 +42,8 @@ class m_pengingat extends CI_Model {
     
     public function getBanReminder($depot)
     {
-        $query = $this->db->query("select a.ID_BAN,m.NOPOL,a.POSISI_BAN,a.MERK_BAN,a.NO_SERI_BAN,a.JENIS_BAN,DATEDIFF(a.TANGGAL_PASANG,a.TANGGAL_GANTI_BAN) as tanggal_ban,
-                            a.TANGGAL_PASANG as tgl_pasang,a.TANGGAL_GANTI_BAN as tgl_ganti
+        $query = $this->db->query("select a.ID_BAN,m.NOPOL as bannopol,a.POSISI_BAN,a.MERK_BAN,a.NO_SERI_BAN,a.JENIS_BAN,DATEDIFF(a.TANGGAL_GANTI_BAN,now()) as tanggal_ban,
+                            a.TANGGAL_GANTI_BAN as tgl_ganti
                           from ban a, mobil m, depot d 
                           where m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
