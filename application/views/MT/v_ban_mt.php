@@ -79,7 +79,7 @@ foreach ($ban as $a) {
 
 
             <div class="panel-body">
-                <div class="adv-table editable-table " style="overflow-y: scroll">
+                <div class="adv-table editable-table " style="overflow-x: scroll">
                     <div class="clearfix">
 
                         <a class="btn btn-primary" data-toggle="modal" href="#myModal">
@@ -117,7 +117,7 @@ foreach ($ban as $a) {
                             <td><?php echo $row->NO_SERI_BAN; ?></td>
                             <td><?php echo $row->JENIS_BAN; ?></td>
                             <td>
-                                <a class="btn btn-warning btn-xs tooltips" href="#ModalEditBan"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
+                                <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" href="#ModalEditBan"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" href="javascript:hapus('<?php echo $row->ID_BAN ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
                             </td>
                             </tr>

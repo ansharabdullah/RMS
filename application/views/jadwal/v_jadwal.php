@@ -18,6 +18,7 @@
             <header class="panel-heading">
                 Lihat Jadwal
                 <div style="float:right;">
+                    <a  data-placement="left" href="<?php echo base_url() ?>jadwal/hapus_jadwal/" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Jadwal"><i class="icon-minus"></i></a>
                     <a  data-placement="left" href="<?php echo base_url() ?>jadwal/import_penjadwalan/" class="btn btn-primary btn-xs tooltips" data-original-title="Import Jadwal"><i class="icon-plus"></i></a>
                 </div>
             </header>
@@ -39,7 +40,11 @@
                 </div>
             </div>
         </section>
-
+        <?php if (!$jadwal) { ?>
+            <div class="alert alert-block alert-danger fade in">
+                <strong>Error!</strong> Jadwal tidak ditemukan.
+            </div>
+        <?php } ?>
         <?php if ($jadwal) { ?>
             <section class="panel" id="tabelJadwal">
                 <header class="panel-heading">
@@ -60,7 +65,7 @@
                                         <th>Nama Pegawai</th>
                                         <th>Jabatan</th>
                                         <th>No Polisi</th>
-                                        <th>Status</th>
+                                        <th>Jadwal</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -76,9 +81,14 @@
                                             <td><?php echo $row->NAMA_PEGAWAI ?></td>
                                             <td><?php echo $row->JABATAN ?></td>
                                             <td><?php echo $row->NOPOL ?></td>
-                                            <td><?php echo $row->STATUS_MASUK ?></td>
+                                            <td><?php
+                                                if ($row->STATUS_MASUK == "Libur")
+                                                    echo "<b>" . $row->STATUS_MASUK . "</b>";else {
+                                                    echo $row->STATUS_MASUK;
+                                                }
+                                                ?></td>
                                             <td>
-                                                <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal" onclick="editJadwal('<?php echo $row->ID_JADWAL ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->NAMA_PEGAWAI ?>', '<?php echo $row->STATUS_MASUK ?>')"><span  class="btn btn-warning btn-sm tooltips" data-original-title="Ganti Status" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
+                                                <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal" onclick="editJadwal('<?php echo $row->ID_JADWAL ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->NAMA_PEGAWAI ?>', '<?php echo $row->STATUS_MASUK ?>')"><span  class="btn btn-warning btn-xs tooltips" data-original-title="Ganti Jadwal" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
 
                                             </td>
                                         </tr>
@@ -119,7 +129,7 @@
                                         <input type="hidden" readonly="readonly" value="" name="id_jadwal" required="required" class="form-control"  placeholder="" id="id_jadwal"/>
                                         <input type="hidden" readonly="readonly" value="" name="tanggal_log_harian" required="required" class="form-control"  placeholder="" id="tanggal_log_harian1"/>
                                         <div class="form-group">
-                                            <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Status</label>
+                                            <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Jadwal</label>
                                             <div class="col-lg-10" >
                                                 <select class="form-control m-bot15" name="status_masuk" id="status_masuk">
                                                     <option value="Hadir">Hadir</option>
@@ -140,7 +150,7 @@
                 </div>
             </section>
 
-        <?php } ?>
+<?php } ?>
     </section>
 </section>
 

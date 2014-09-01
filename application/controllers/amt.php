@@ -10,6 +10,7 @@ class amt extends CI_Controller {
         $this->load->model("m_amt");
         $this->load->model("m_log_sistem");
         $this->load->model("m_peringatan");
+        $this->load->model("m_penjadwalan");
         $this->load->helper(array('form', 'url'));
     }
 
@@ -22,6 +23,8 @@ class amt extends CI_Controller {
         $data['lv2'] = 1;
         $depot = $this->session->userdata('id_depot');
         $data1['amt'] = $this->m_amt->selectAMT($depot);
+        $data1['success'] = 0;
+        $data1['error'] = 0;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
@@ -129,36 +132,43 @@ class amt extends CI_Controller {
         } else {
             echo "file upload failed";
         }
+        $nip = $this->m_amt->cekNip($this->input->post('nip', true));
+        if ($nip) {
+            $data = array(
+                'depot' => $depot,
+                'nip' => $this->input->post('nip', true),
+                'nama_pegawai' => $this->input->post('nama_pegawai', true),
+                'jabatan' => $this->input->post('jabatan', true),
+                'klasifikasi' => $this->input->post('klasifikasi', true),
+                'status' => $this->input->post('status', true),
+                'no_telepon' => $this->input->post('no_telepon', true),
+                'no_ktp' => $this->input->post('no_ktp', true),
+                'no_sim' => $this->input->post('no_sim', true),
+                'alamat' => $this->input->post('alamat', true),
+                'tempat_lahir' => $this->input->post('tempat_lahir', true),
+                'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
+                'transportir_asal' => $this->input->post('transportir_asal', true),
+                'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
+                'photo' => $this->input->post('photo', true),
+            );
 
-        $data = array(
-            'depot' => $depot,
-            'nip' => $this->input->post('nip', true),
-            'nama_pegawai' => $this->input->post('nama_pegawai', true),
-            'jabatan' => $this->input->post('jabatan', true),
-            'klasifikasi' => $this->input->post('klasifikasi', true),
-            'status' => $this->input->post('status', true),
-            'no_telepon' => $this->input->post('no_telepon', true),
-            'no_ktp' => $this->input->post('no_ktp', true),
-            'no_sim' => $this->input->post('no_sim', true),
-            'alamat' => $this->input->post('alamat', true),
-            'tempat_lahir' => $this->input->post('tempat_lahir', true),
-            'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
-            'transportir_asal' => $this->input->post('transportir_asal', true),
-            'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
-            'photo' => $this->input->post('photo', true),
-        );
-
-        $this->m_amt->insertPegawai($data);
-        $datalog = array(
-            'keterangan' => 'Tambah Pegawai, NIP : ' . $this->input->post('nip', true),
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Tambah'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        $link = base_url() . "amt/data_amt/";
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
+            $this->m_amt->insertPegawai($data);
+            $datalog = array(
+                'keterangan' => 'Tambah Pegawai, NIP : ' . $this->input->post('nip', true),
+                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                'keyword' => 'Tambah'
+            );
+            $this->m_log_sistem->insertLog($datalog);
+            $link = base_url() . "amt/data_amt/";
+            echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+        } else {
+            $link = base_url() . "amt/data_amt/";
+            echo '<script type="text/javascript">alert("NIP sudah ada. Mohon untuk diganti.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+        }
     }
 
     public function delete_pegawai($id_pegawai, $nip) {
@@ -235,7 +245,7 @@ class amt extends CI_Controller {
                     $error = "Error : ";
                     if (!$sheetData->getCell('B3')->getFormattedValue() && !$sheetData->getCell('C3')->getFormattedValue() && !$sheetData->getCell('D3')->getFormattedValue() && !$sheetData->getCell('E3')->getFormattedValue() && !$sheetData->getCell('F3')->getFormattedValue() && !$sheetData->getCell('G3')->getFormattedValue() && !$sheetData->getCell('H3')->getFormattedValue() && !$sheetData->getCell('I3')->getFormattedValue() && !$sheetData->getCell('J3')->getFormattedValue() && !$sheetData->getCell('K3')->getFormattedValue() && !$sheetData->getCell('L3')->getFormattedValue() && !$sheetData->getCell('M3')->getFormattedValue() && !$sheetData->getCell('N3')->getFormattedValue()) {
                         $status = 1;
-                        $data['amt']=0;
+                        $data['amt'] = 0;
                         break;
                     }
                     if ($sheetData->getCell('B' . $no)->getFormattedValue() == "") {
@@ -315,11 +325,24 @@ class amt extends CI_Controller {
     public function presensi() {
         $data['lv1'] = 2;
         $data['lv2'] = 3;
-
+        $data2['presensi'] = 0;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('amt/v_presensi');
+        $this->load->view('amt/v_presensi',$data2);
+        $this->load->view('layouts/footer');
+    }
+    
+    public function presensi_perbulan(){
+        $data['lv1'] = 2;
+        $data['lv2'] = 3;
+        $depot = $this->session->userdata('id_depot');
+        $tanggal = $this->input->post('tanggal', true);
+        $data2['presensi'] = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('amt/v_presensi',$data2);
         $this->load->view('layouts/footer');
     }
 
@@ -384,5 +407,6 @@ class amt extends CI_Controller {
         $this->load->view('oam/v_grafik_amt_hari');
         $this->load->view('layouts/footer');
     }
+    
 
 }

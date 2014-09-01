@@ -1,20 +1,18 @@
 <script type="text/javascript">
-    $( document ).ready(function() {
+    $(document).ready(function() {
         $("#filePreview").hide();
-        $("#commentForm").submit(function(e){
-            var isvalidate=$("#commentForm").valid();
-            if(isvalidate)
-            {    
-                $("#filePreview").hide();
-                $("#filePreview").slideDown("slow");
+        $("#commentForm").submit(function(e) {
+            var isvalidate = $("#commentForm").valid();
+            if (isvalidate)
                 $("#tgl").html($("#tglForm").val());
+            document.getElementById("commentForm").submit();
             }
             e.preventDefault();
         });
     });
-    
-    
-    
+
+
+
 </script>
 
 
@@ -26,11 +24,11 @@
                 Presensi Awak Mobil Tangki
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/presensi_perbulan/">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
-                            <input type="date" required="required" id="tglForm" class="form-control"  placeholder="Tanggal">
+                            <input type="date" required="required" id="tglForm" class="form-control"  placeholder="Tanggal" name="tanggal">
                             <span class="help-block">Pilih tanggal</span>
                         </div>
                     </div>
@@ -44,128 +42,73 @@
             </div>
         </section>
 
+        <?php if ($presensi) { ?>
+            <div id="filePreview">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Tabel Presensi (<span id="tgl"></span>)
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table " style="overflow-x: scroll">
+                            <div class="clearfix">
 
-        <div id="filePreview">
-            <section class="panel">
-                <header class="panel-heading">
-                    Tabel Presensi (<span id="tgl"></span>)
-                </header>
-                <div class="panel-body">
-                    <div class="adv-table editable-table " style="overflow-x: scroll">
-                        <div class="clearfix">
-
-                            <div class="btn-group pull-right">
-                                <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:FilterData('');">Semua</a></li>
-                                    <li><a href="javascript:FilterData('hadir');">Hadir</a></li>
-                                    <li><a href="javascript:FilterData('absen');">Absen</a></li>
-                                </ul>
+                                <div class="btn-group pull-right">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:FilterData('');">Semua</a></li>
+                                        <li><a href="javascript:FilterData('hadir');">Hadir</a></li>
+                                        <li><a href="javascript:FilterData('absen');">Absen</a></li>
+                                    </ul>
+                                </div>
                             </div>
+                            <div class="space15"></div>
+                            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;"></th>
+                                        <th>No</th>
+                                        <th>NIP</th>
+                                        <th>Nama</th>
+                                        <th>Jabatan</th>
+                                        <th>Klasifikasi</th>
+                                        <th>Kehadiran</th>
+                                        <th>Keterangan</th>
+                                        <th>Alasan</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $i = 1;
+                                    foreach ($presensi as $row) {
+                                        ?>
+                                        <tr class="">
+                                            <td style="display:none;"></td>
+                                            <td><?php echo $i; ?></td>
+                                            <td><?php echo $row->NIP; ?></td>
+                                            <td><?php echo $row->NAMA_PEGAWAI; ?></td>
+                                            <td><?php echo $row->JABATAN; ?></td>
+                                            <td><?php echo $row->KLASIFIKASI; ?></td>
+                                            <td><?php if ($row->STATUS_MASUK == "Hadir") {
+                                    echo "<span class='label label-success'>";
+                                } else {
+                                    echo "<span class='label label-success'>";
+                                }$row->STATUS_MASUK ?><span class="label label-success">Hadir</span></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                        </tr>
+        <?php $i++;
+    } ?>
+
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="space15"></div>
-                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                            <thead>
-                                <tr>
-                                    <th style="display:none;"></th>
-                                    <th>No</th>
-                                    <th>NIP</th>
-                                    <th>Nama</th>
-                                    <th>Jabatan</th>
-                                    <th>Klasifikasi</th>
-                                    <th>Kehadiran</th>
-                                    <th>Keterangan</th>
-                                    <th>Alasan</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>1</td>
-                                    <td>5209527</td>
-                                    <td>Dadan</td>
-                                    <td>Supir</td>
-                                    <td>24</td>
-                                    <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>2</td>
-                                    <td>287250</td>
-                                    <td>Anshar</td>
-                                    <td>Supir</td>
-                                    <td>24</td>
-                                    <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>3</td>
-                                    <td>245828</td>
-                                    <td>Renisa</td>
-                                    <td>Supir</td>
-                                    <td>16</td>
-                                    <td><span class="label label-warning">Absen</span></td>
-                                    <td>Sakit</td>
-                                    <td>Menderita Gangguan Jiwa</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>4</td>
-                                    <td>096704</td>
-                                    <td>Cahyadi</td>
-                                    <td>Kernet</td>
-                                    <td>16</td>
-                                    <td><span class="label label-warning">Absen</span></td>
-                                    <td>Sakit</td>
-                                    <td>Menderita Kanker</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>5</td>
-                                    <td>2350874</td>
-                                    <td>Chepy</td>
-                                    <td>Kernet</td>
-                                    <td>8</td>
-                                    <td><span class="label label-warning">Absen</span></td>
-                                    <td>Bolos</td>
-                                    <td>Tidak ada keterangan</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-
-                                <tr class="">
-
-                                    <td style="display:none;"></td>
-                                    <td>6</td>
-                                    <td>4956296</td>                                
-                                    <td>Firman</td>
-                                    <td>Supir</td>
-                                    <td>32</td>
-                                    <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
+<?php } ?>
 
 
 
@@ -252,12 +195,12 @@
     jQuery(document).ready(function() {
         EditableTable.init();
     });
-		  	
+
     function FilterData(par) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
-    
-   
-		  
+
+
+
 </script>

@@ -72,7 +72,7 @@ function DateToIndo($date) {
             </header>
 
             <div class="panel-body">
-                <div class="adv-table editable-table" style="overflow-y: scroll ">
+                <div class="adv-table editable-table" style="overflow-x: scroll ">
                     <div class="clearfix">
                         <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Surat MT <i class="icon-plus"></i>
@@ -104,11 +104,10 @@ function DateToIndo($date) {
                                         <?php if($row->ID_JENIS_SURAT == "4")echo 'TERA'?>
                                     </td>
                                     <td><?php echo(DateToIndo($row->TANGGAL_AKHIR_SURAT)); ?></td>
-                                   <td> <?php if($row->KETERANGAN_SURAT == "0")echo 'Aktif'?>
-                                        <?php if($row->KETERANGAN_SURAT == "1")echo 'Tidak AKtif'?>
-                                    </td>
+                                     
+                                    <td><?php echo $row->KETERANGAN_SURAT; ?></td>
                                    
-                                   <td><a class="btn btn-warning btn-xs tooltips" href="#ModalEditSurat"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
+                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Surat" href="#ModalEditSurat"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Surat" href="javascript:hapus('<?php echo $row->ID_SURAT ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
                                        </td>
                                 </tr>
@@ -153,13 +152,13 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label for="stnk" class="col-lg-2 col-sm-2 control-label">Tanggal Berakhir Surat</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="stnk" name="TANGGAL_AKHIR_SURAT" minlength="2" type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="stnk" name="TANGGAL_AKHIR_SURAT" type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="stnk" class="col-lg-2 col-sm-2 control-label">KETERANGAN</label>
+                        <label for="keterangan" class="col-lg-2 col-sm-2 control-label">KETERANGAN</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="stnk" placeholder="Keterangan Surat" name="KETERANGAN_SURAT" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="keterangan" placeholder="Keterangan Surat" name="KETERANGAN_SURAT" type="text" required />
                         </div>
                     </div>
 

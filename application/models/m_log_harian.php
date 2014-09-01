@@ -108,6 +108,10 @@ class m_log_harian extends CI_Model {
         $data = $this->db->get('log_harian');
         return $data->result();
     }
+    
+    public function updateStatusJadwal($bulan, $tahun, $depot){
+        $this->db->query("update log_harian set status_penjadwalan=1 where month(tanggal_log_harian)='$bulan' and year(tanggal_log_harian)='$tahun' and id_depot='$depot'");
+    }
 }
 
 ?>

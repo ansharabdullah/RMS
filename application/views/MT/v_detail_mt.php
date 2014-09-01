@@ -620,7 +620,6 @@ function DateToIndo($date) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="">
                                     <?php $i = 1;
                                
                                 foreach ($kinerja as $row) { ?>
