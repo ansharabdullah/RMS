@@ -1,5 +1,37 @@
 <script type="text/javascript">
-
+    var mt;
+    var kl_mt = new Array();
+    var km_mt = new Array();
+    var total_km_mt = new Array();
+    var premium = new Array();
+    var pertamax = new Array();
+    var pertamax_plus = new Array();
+    var pertamina_dex = new Array();
+    var solar = new Array();
+    var bio_solar = new Array();
+    var own_use_mt = new Array();
+    var ritase_mt = new Array();
+    var nopol_mt = new Array();
+    <?php
+        foreach($grafik as $km){
+            ?>
+             
+                kl_mt.push(<?php echo $km->total_kl_mt ?>);
+                km_mt.push(<?php echo $km->total_km_mt ?>);
+                premium.push(<?php echo $km->premium ?>);
+                pertamax.push(<?php echo $km->pertamax ?>);
+                pertamax_plus.push(<?php echo $km->pertamax_plus ?>);
+                pertamina_dex.push(<?php echo $km->pertamina_dex ?>);
+                solar.push(<?php echo $km->solar ?>);
+                bio_solar.push(<?php echo $km->bio_solar ?>);
+                own_use_mt.push(<?php echo $km->own_use ?>);
+                ritase_mt.push(<?php echo $km->ritase_mt ?>);
+                nopol_mt.push("<?php echo $km->nopol ?>");
+                
+            <?php
+        }
+    ?>
+    
     $(function() {
         $('#grafik').highcharts({
             chart: {
@@ -10,11 +42,11 @@
                 x: -20 //center
             },
             subtitle: {
-                text: '10 Januari 2014 (Kilometer)',
+                text: '24 Agustus 2014 ',
                 x: -20
             },
             xAxis: {
-                categories: ["D9870AF","D9004AD","D9870AD","D9750AD","D9100AF","D9055AF","D9750AD","D9100AF","D9055AF","D9750AD","D9100AF","D9055AK"]
+                categories: nopol_mt
             },
             yAxis: {
                 title: {
@@ -33,8 +65,36 @@
                 borderWidth: 1
             },
             series: [{
-                    name: 'Kiloliter',
-                    data: [7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5,13,15,8,2]
+                    name: 'KM',
+                    data: km_mt
+                }, {
+                    name: 'KL',
+                    data: kl_mt
+                }, {
+                    name: 'Premium',
+                    data: premium
+                }, {
+                    name: 'Pertamax',
+                    data: pertamax
+                }, {
+                    name: 'Pertamax Plus',
+                    data: pertamax_plus
+                }, {
+                    name: 'Pertamina Dex',
+                    data: pertamina_dex
+                }, {
+                    name: 'Solar',
+                    data: solar
+                }, {
+                    name: 'Own Use',
+                    data: own_use_mt
+                }, {
+                    name: 'Bio Solar',
+                    data: bio_solar
+                },
+                {
+                    name: 'Ritase',
+                    data: ritase_mt
                 }]
         });
     });
@@ -53,7 +113,7 @@
                 </section>
                 <section class="panel">
                      <header class="panel-heading">
-                            Tabel Kinerja Mobil Tangki 10 Januari Tahun 2014
+                            Tabel Kinerja Mobil Tangki 24 Agustus Tahun 2014
                         </header>
                     <div class="panel-body">
                        
@@ -64,42 +124,44 @@
                                         <th style="display:none;"></th>
                                         <th>No</th>
                                         <th>Nopol</th>
-                                        <th>Transportir</th>
                                         <th>Produk</th>
                                         <th>Kapasitas</th>
-                                        <th>Nomor Mesin</th>
-                                        <th>Nomor Rangka</th>
-                                        <th>Jumlah Kiloliter</th>
+                                        <th>Kilometer (KM)</th>
+                                        <th>Kiloliter (KL)</th>
+                                        <th>Ritase (Rit)</th>
+                                        <th>Premium</th>
+                                        <th>Pertamax</th>
+                                        <th>Pertamax Plus</th>
+                                        <th>Pertamax Dex</th>
+                                        <th>Solar</th>
+                                        <th>Bio Solar</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $premium = array(7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6, 7.0, 6.9, 7.5, 4.5, 6.2, 8.5, 9.2, 11.5, 5.3, 4.3, 7.9, 9.6, 7.0, 6.9, 7.5, 4.5, 6.2, 8.5);
-                                    $nopol = array("D9870AF", "D9004AD", "D9870AD", "D9576AF", "D9000AU", "D9750AD", "D9100AF", "D9055AF");
-                                    $transportir = array("Masoem", "Masoem", "Masoem", "Patra", "Patra", "Patra", "Patra", "Patra");
-                                    $produk = array("Premium", "Premium", "Premium", "Pertamax", "Pertamax", "Solar", "Solar", "Pertamax");
-                                    $kapasitas = array(8, 16, 8, 24, 16, 8, 8, 16);
-                                    $no_mesin = array("LN098242OP", "LN098242GT", "L098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN");
-                                    $no_rangka = array("LN098242MKN", "PLN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN", "LN098242MKN");
+                                     <?php $i = 1;
 
-                                    $alamat = array("Jl. Saturnus Selatan Bandung", "Jl. Cilawu, Garut", "Jl. Gegerkalong Girang, Bandung", "Jl. Buah Batu, Bandung", "Jl. Soekarno Hatta, Garut", "Jl. Saturnus Selatan Bandung", "Jl. Cilawu, Garut", "Jl. Gegerkalong Girang, Bandung");
-                                    for ($i = 0; $i < 8; $i++) {
-                                        ?>
-                                        <tr class="">
-                                            <td style="display:none;"></td>
-                                            <td><?php echo ($i + 1) ?></td>
-                                            <td><a href="<?php echo base_url() ?>mt/detail_mt" style ="text-decoration: underline"><?php echo $nopol[$i] ?></a></td>
-                                            <td><?php echo $transportir[$i] ?></td>
-                                            <td><?php echo $produk[$i] ?></td>
-                                            <td><?php echo $kapasitas[$i] ?></td>
-                                            <td><?php echo $no_mesin[$i] ?></td>
-                                            <td><?php echo $no_rangka[$i] ?></td>
-                                            <td><?php echo $premium[$i] ?></td>
-                                        </tr>
-                                        <?php
-                                    }
-                                    ?>
+                                    foreach ($grafik as $row) { ?>
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i ?></td>
+                                    <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->id_mobil; ?>" style ="text-decoration: underline"><?php echo $row->nopol; ?></a></td>
+                                    <td><?php echo $row->kapasitas; ?></td>
+                                    <td><?php echo $row->produk; ?></td>
+                                   <td><?php echo $row->total_km_mt; ?></td>
+                                    <td><?php echo $row->total_kl_mt; ?></td>
+                                    <td><?php echo $row->ritase_mt; ?></td>
+                                    <td><?php echo $row->premium; ?></td>
+                                    <td><?php echo $row->pertamax; ?></td>
+                                    <td><?php echo $row->pertamax_plus; ?></td>
+                                    <td><?php echo $row->pertamina_dex; ?></td>
+                                    <td><?php echo $row->solar; ?></td>
+                                    <td><?php echo $row->bio_solar; ?></td>
+                                    
+                                    </tr>
+                                    <?php
+                                    $i++;
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>

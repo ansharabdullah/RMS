@@ -5,7 +5,7 @@ class m_log_harian extends CI_Model {
 
     //notifikasi pengingat aktivitas yang belum dilkukan
     public function get_log_peringatan($id_depot) {
-        
+
         //ambil semua tanggal di log harian
         $query = $this->db->query("select *,MONTH(TANGGAL_LOG_HARIAN) as bulan, DAY(TANGGAL_LOG_HARIAN) as tanggal from log_harian where tanggal_log_harian <= CURDATE() and id_depot = $id_depot and  (status_input_kinerja = 0 or status_ms2 = 0 or status_interpolasi = 0 or status_kpi_operasional_internal = 0 or status_kpi_internal = 0 or status_penjadwalan = 0 or generate_ba = 0) order by tanggal_log_harian asc");
         $data = $query->result();
@@ -136,15 +136,34 @@ class m_log_harian extends CI_Model {
 //                                    from log_harian lh, depot d 
 //                                    where lh.ID_DEPOT = d.ID_DEPOT 
 //                                    group by lh.ID_DEPOT,lh.TANGGAL_LOG_HARIAN order by d.ID_DEPOT,tanggal asc");
-         return $notifikasi;
+        return $notifikasi;
     }
 
-    public function cekTanggal($tanggal, $depot){
+    public function cekTanggal($tanggal, $depot) {
         $this->db->where('tanggal_log_harian', $tanggal);
         $this->db->where('id_depot', $depot);
         $data = $this->db->get('log_harian');
         return $data->result();
     }
+
+    public function updateStatusJadwal($bulan, $tahun, $depot) {
+        $this->db->query("update log_harian set status_penjadwalan=1 where month(tanggal_log_harian)='$bulan' and year(tanggal_log_harian)='$tahun' and id_depot='$depot'");
+    }
+
+    //insert setahuneun
+    public function insertLogHarian($data) {
+        $length = count($data);
+        for ($i = 0; $i < $length; $i++) {
+            $this->db->insert("log_harian", $data[$i]);
+        }
+    }
+    
+    //cek log_harian
+    public  function cekLog($id_depot, $tahun){
+        $data = $this->db->query("select count(*) as jumlah from log_harian where id_depot='$id_depot' and year(tanggal_log_harian)='$tahun'");
+        return $data->result();
+    }
+
 }
 
 ?>
