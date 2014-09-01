@@ -18,8 +18,8 @@
                         <span>Depot <?php echo $depot[$i]->NAMA_DEPOT ?></span>
                     </a>
                     <ul class="sub">
-                        <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/amt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>">AMT</a></li>
-                        <li <?php if ($lv2 == 2 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/mt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>">MT</a></li>
+                        <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/amt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>/<?php echo date("Y")?>">AMT</a></li>
+                        <li <?php if ($lv2 == 2 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/mt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>/<?php echo date("Y")?>">MT</a></li>
                         <li <?php if ($lv2 == 3 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/kpi_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>" >KPI</a></li>
                     </ul>
                 </li>

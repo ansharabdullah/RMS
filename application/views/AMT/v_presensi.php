@@ -24,7 +24,7 @@
                 Presensi Awak Mobil Tangki
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/presensi_perbulan/">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="GET" action="<?php echo base_url() ?>amt/presensi_pertanggal/">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
@@ -46,7 +46,7 @@
             <div id="filePreview">
                 <section class="panel">
                     <header class="panel-heading">
-                        Tabel Presensi (<span id="tgl"></span>)
+                        Tabel Presensi (<?php echo $tanggal ?>)
                     </header>
                     <div class="panel-body">
                         <div class="adv-table editable-table " style="overflow-x: scroll">
@@ -90,17 +90,18 @@
                                             <td><?php echo $row->NAMA_PEGAWAI; ?></td>
                                             <td><?php echo $row->JABATAN; ?></td>
                                             <td><?php echo $row->KLASIFIKASI; ?></td>
-                                            <td><?php if ($row->STATUS_MASUK == "Hadir") {
-                                    echo "<span class='label label-success'>";
-                                } else {
-                                    echo "<span class='label label-success'>";
-                                }$row->STATUS_MASUK ?><span class="label label-success">Hadir</span></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                            <td><?php
+                                                if ($row->STATUS_MASUK == "Hadir") {
+                                                } else {
+                                                    echo "<span class='label label-danger'>";
+                                                }echo $row->STATUS_MASUK; ?></td>
+                                            <td><?php echo $row->KETERANGAN_MASUK; ?></td>
+                                            <td><?php echo $row->ALASAN; ?></td>
+                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->KETERANGAN_MASUK ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>')"><i class="icon-pencil"></i></a></td>
                                         </tr>
         <?php $i++;
-    } ?>
+    }
+    ?>
 
                                 </tbody>
                             </table>
@@ -130,47 +131,38 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Presensi Crew Awak Mobil Tangki</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
-
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>amt/ubah_presensi/">
+                <input type="hidden" name="id_jadwal" id="id_jadwal"/>
+                <input type="hidden" name="tanggal_log_harian" id="tanggal_log_harian"/>
                 <div class="modal-body">
-
                     <div class="col-lg-12">
                         <section class="panel">
-
                             <div class="panel-body">
-
                                 <div class="form-group ">                                            
-                                    <label for="ctglberlaku" class="control-label col-lg-4">Tanggal Berlaku</label>
+                                    <label for="ctglberlaku" class="control-label col-lg-4">Tanggal</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="ctglberlaku" name="tglbelaku" size="16" type="date" value="" required/>
+                                        <input class=" form-control input-sm m-bot15" id="tanggal" name="tanggal" size="16" type="date" value="" required readonly/>
                                         <span class="help-block">Pilih tanggal</span>
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="cjenis" class="control-label col-lg-4">Keterangan</label>
                                     <div class="col-lg-8">
-                                        <select class="form-control input-sm m-bot15" id="cjenis" name="jenis">
-                                            <option>Hadir</option>
-                                            <option>Sakit</option>
-                                            <option>Ijin</option>
-                                            <option>Alfa</option>
+                                        <select class="form-control input-sm m-bot15" id="keterangan_masuk" name="keterangan_masuk">
+                                            <option value="Hadir">Hadir</option>
+                                            <option value="Libur">Libur</option>
+                                            <option value="Sakit">Sakit</option>
+                                            <option value="Ijin">Ijin</option>
+                                            <option value="Alfa">Alfa</option>
                                         </select>
                                     </div>
-
-
                                 </div>
-
-
                                 <div class="form-group ">
-                                    <label for="calasan" class="control-label col-lg-4">Alasan</label>
+                                    <label for="alasan" class="control-label col-lg-4">Alasan</label>
                                     <div class="col-lg-8">
-                                        <textarea class=" form-control input-sm m-bot15" id="calasan" name="alasan" minlength="2" type="text" required ></textarea>
+                                        <textarea class=" form-control input-sm m-bot15" id="alasan" name="alasan" minlength="2" type="text" required ></textarea>
                                     </div>
-
-
                                 </div>
-
-
                             </div>
                         </section>
                     </div>
@@ -192,14 +184,22 @@
 
 <!-- END JAVASCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
-        EditableTable.init();
-    });
+                                                jQuery(document).ready(function() {
+                                                    EditableTable.init();
+                                                });
 
-    function FilterData(par) {
-        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
-        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
-    }
+                                                function FilterData(par) {
+                                                    jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+                                                    jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+                                                }
+
+                                                function editPresensi(tanggal, keterangan, alasan, id_jadwal) {
+                                                    $("#tanggal_log_harian").val(tanggal);
+                                                    $("#tanggal").val(tanggal);
+                                                    $("#keterangan_masuk").val(keterangan);
+                                                    $("#alasan").val(alasan);
+                                                    $("#id_jadwal").val(id_jadwal);
+                                                }
 
 
 

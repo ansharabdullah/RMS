@@ -163,6 +163,7 @@
     var bio_solar = new Array();
     var own_use_mt = new Array();
     var bulan = new Array();
+    var nomor_bulan = new Array();
     
     <?php
         foreach($kinerja_mt as $km){
@@ -178,6 +179,7 @@
                 bio_solar.push(<?php echo $km->bio_solar ?>);
                 own_use_mt.push(<?php echo $km->own_use ?>);
                  bulan.push("<?php echo $km->bulan?>");
+                nomor_bulan.push("<?php echo date("n",strtotime($km->TANGGAL_LOG_HARIAN))?>");
             <?php
         }
     ?>
@@ -191,13 +193,15 @@
                 text: 'Grafik Kinerja Jumlah KM MT Depot 1'
             },
             subtitle: {
-                text: 'Tahun <?php echo date('Y')?>'
+                text: 'Tahun <?php echo $tahun?>'
             },
             plotOptions: {
-                series: {
-                    events: {
+                column: {
+                   point:{
+                      events:{
                         click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/mt_depot_harian/2";
+                                window.location = "<?php echo base_url() ?>depot/mt_depot_harian/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+ nomor_bulan[this.x]+"/<?php echo date('Y')?>";
+                            }
                         }
                     }
                 }

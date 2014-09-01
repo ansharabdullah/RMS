@@ -25,8 +25,9 @@ class amt extends CI_Controller {
         $data1['amt'] = $this->m_amt->selectAMT($depot);
         $data1['success'] = 0;
         $data1['error'] = 0;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_data_amt', $data1);
         $this->load->view('layouts/footer');
@@ -39,8 +40,9 @@ class amt extends CI_Controller {
         $data1['grafik'] = 0;
         $data1['kinerja'] = 0;
         $data1['peringatan'] = $this->m_peringatan->getPeringatan($id_pegawai);
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_detail', $data1);
         $this->load->view('layouts/footer');
@@ -133,9 +135,10 @@ class amt extends CI_Controller {
             echo "file upload failed";
         }
         $nip = $this->m_amt->cekNip($this->input->post('nip', true));
-        if ($nip) {
+        print_r($nip);
+        if (!$nip) {
             $data = array(
-                'depot' => $depot,
+                'id_depot' => $depot,
                 'nip' => $this->input->post('nip', true),
                 'nama_pegawai' => $this->input->post('nama_pegawai', true),
                 'jabatan' => $this->input->post('jabatan', true),
@@ -166,7 +169,7 @@ class amt extends CI_Controller {
         } else {
             $link = base_url() . "amt/data_amt/";
             echo '<script type="text/javascript">alert("NIP sudah ada. Mohon untuk diganti.");';
-            echo 'window.location.href="' . $link . '"';
+            //echo 'window.location.href="' . $link . '"';
             echo '</script>';
         }
     }
@@ -191,8 +194,9 @@ class amt extends CI_Controller {
         $data['lv2'] = 1;
         $data2['amt'] = 0;
         $data2['error'] = "0";
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_import_amt', $data2);
         $this->load->view('layouts/footer');
@@ -305,8 +309,9 @@ class amt extends CI_Controller {
         unlink($file_target);
         $data['lv1'] = 2;
         $data['lv2'] = 1;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_import_amt', $data2);
         $this->load->view('layouts/footer');
@@ -326,32 +331,52 @@ class amt extends CI_Controller {
         $data['lv1'] = 2;
         $data['lv2'] = 3;
         $data2['presensi'] = 0;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('amt/v_presensi',$data2);
+        $this->load->view('amt/v_presensi', $data2);
         $this->load->view('layouts/footer');
     }
-    
-    public function presensi_perbulan(){
+
+    public function presensi_pertanggal() {
         $data['lv1'] = 2;
         $data['lv2'] = 3;
         $depot = $this->session->userdata('id_depot');
-        $tanggal = $this->input->post('tanggal', true);
+        $tanggal = $this->input->get('tanggal', true);
+        $data2['tanggal'] = $tanggal;
         $data2['presensi'] = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('amt/v_presensi',$data2);
+        $this->load->view('amt/v_presensi', $data2);
         $this->load->view('layouts/footer');
+    }
+
+    public function ubah_presensi() {
+        $id_jadwal = $this->input->post('id_jadwal', true);
+        $data = array(
+            'alasan' => $this->input->post('alasan', true),
+            'keterangan_masuk' => $this->input->post('keterangan_masuk', true)
+        );
+        $tanggal = $this->input->post('tanggal_log_harian', true);
+        
+        $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
+        
+        $link = base_url() . "amt/presensi_pertanggal/?tanggal=" . $tanggal;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
 
     public function koefisien() {
         $data['lv1'] = 2;
         $data['lv2'] = 4;
 
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_koefisien');
         $this->load->view('layouts/footer');
@@ -360,8 +385,9 @@ class amt extends CI_Controller {
     public function grafik() {
         $data['lv1'] = 2;
         $data['lv2'] = 2;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_grafik');
         $this->load->view('layouts/footer');
@@ -370,8 +396,9 @@ class amt extends CI_Controller {
     public function grafik_bulan() {
         $data['lv1'] = 2;
         $data['lv2'] = 2;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_grafik_bulan');
         $this->load->view('layouts/footer');
@@ -380,8 +407,9 @@ class amt extends CI_Controller {
     public function grafik_hari() {
         $data['lv1'] = 2;
         $data['lv2'] = 2;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_grafik_hari');
         $this->load->view('layouts/footer');
@@ -391,8 +419,9 @@ class amt extends CI_Controller {
     public function oam_bulanan() {
         $data['lv1'] = 1;
         $data['lv2'] = 1;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar_oam', $data);
         $this->load->view('oam/v_grafik_amt_bulan');
         $this->load->view('layouts/footer');
@@ -401,12 +430,12 @@ class amt extends CI_Controller {
     public function oam_harian() {
         $data['lv1'] = 1;
         $data['lv2'] = 1;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar_oam', $data);
         $this->load->view('oam/v_grafik_amt_hari');
         $this->load->view('layouts/footer');
     }
-    
 
 }

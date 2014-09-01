@@ -8,6 +8,7 @@ class login extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('m_user');
+        $this->load->model('m_log_harian');
     }
 
     public function index() {
@@ -39,6 +40,29 @@ class login extends CI_Controller {
                 'ip' => $_SERVER['REMOTE_ADDR']
             );
             $this->session->set_userdata($session_user);
+
+            $depot = $this->session->userdata('id_depot');
+            $tahun = date('Y');
+            $cek = $this->m_log_harian->cekLog($depot, $tahun);
+            // Set timezone
+            if ($cek[0]->jumlah <= 365) {
+                date_default_timezone_set('UTC');
+
+                // Start date
+                $date = date('Y') . '-01-01';
+                // End date
+                $end_date = date('Y') . '-12-31';
+                $i = 0;
+                while (strtotime($date) <= strtotime($end_date)) {
+                    $data[$i] = array(
+                        'id_depot' => $this->session->userdata('id_depot'),
+                        'tanggal_log_harian' => $date
+                    );
+                    $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+                    $i++;
+                }
+                $this->m_log_harian->insertLogHarian($data);
+            }
             $link = base_url();
             echo '<script type="text/javascript">alert("Selamat datang di OSCRMS.COM");';
             echo 'window.location.href="' . $link . '"';
@@ -50,6 +74,7 @@ class login extends CI_Controller {
             echo '</script>';
         }
     }
+
 
     public function logout() {
         $this->session->sess_destroy();

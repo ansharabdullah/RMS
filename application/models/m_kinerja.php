@@ -266,10 +266,21 @@ class m_kinerja extends CI_Model {
                                     and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun");
         return $query->result();
     }
+    //total kinerja amt dalam sebulan
+     public function get_kinerja_amt_by_bulan_oam($bulan,$tahun) {
+        $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl , 
+                                    sum(ka.RITASE_AMT) as ritase , sum(ka.SPBU) as spbu
+                                    from kinerja_amt ka, log_harian lh 
+                                    where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
+                                    ka.STATUS_TUGAS = 'SUPIR' and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
+                                    and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun");
+        return $query->result();
+    }
     
     //grafik amt
     public function get_kinerja_amt_hari($id_depot, $bulan,$tahun) {
         $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl , 
+                                    sum(ka.RITASE_AMT) as ritase , sum(ka.SPBU) as spbu,
                                     lh.TANGGAL_LOG_HARIAN, DAY(lh.TANGGAL_LOG_HARIAN) as tanggal  
                                     from kinerja_amt ka, log_harian lh 
                                     where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and

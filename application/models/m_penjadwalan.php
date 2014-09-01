@@ -41,7 +41,7 @@ class m_penjadwalan extends CI_Model {
     }
     
     public function getPresensiAMT($depot, $tanggal){
-        $data = $this->db->query("select * from jadwal j, log_harian l where j.id_log_harian=j.id_log_harian and l.id_depot='$depot' and l.tanggal_log_harian='$tanggal'");
+        $data = $this->db->query("select * from jadwal j, log_harian l, pegawai p where p.id_pegawai=j.id_pegawai and l.id_log_harian=j.id_log_harian and l.id_depot='$depot' and l.tanggal_log_harian='$tanggal'");
         return $data->result();
     }
 

@@ -9,18 +9,21 @@
                         Grafik Harian AMT Depot <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
-                        <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm">
-
+<!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
+                            <?php
+                                $attr = array("class"=>"cmxform form-horizontal tasi-form");
+                               echo form_open("depot/amt_hari/".$id_depot."/".$nama_depot,$attr);
+                            ?>
                             <div class="form-group">
-                                <div class="col-lg-6">
+<!--                                <div class="col-lg-6">
                                     <select class="form-control m-bot2"  id="jenis" >
 
                                         <option value="">Jumlah KM</option>
                                         <option value="">Jumlah KL</option>
 
                                     </select>
-                                </div>
-                                <div class="col-lg-4">
+                                </div>-->
+                                <div class="col-lg-3">
                                     <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
                                 </div>
 
@@ -29,8 +32,18 @@
                                 </div>
 
                             </div>
-                        </form>
+                            <?php echo form_close()?>
                         <br/><br/>
+                         <div class="btn-group pull-right">
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">Filter AMT<i class="icon-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-left">
+                                    <li><a style="cursor: pointer" onclick="filterAmt('KM')">KM</a></li>
+                                    <li><a style="cursor: pointer" onclick="filterAmt('KL')">KL</a></li>
+                                    <li><a style="cursor: pointer" onclick="filterAmt('Ritase')">Ritase</a></li>
+                                    <li><a style="cursor: pointer" onclick="filterAmt('SPBU')">SPBU</a></li>
+                                </ul>
+                            </div>
                         <div id="grafik"></div>
 
                     </div>
@@ -44,10 +57,9 @@
                                     Tabel Kinerja AMT <?php echo $nama_depot?>
                                 </header>
                                 <div class="panel-body">
-                                    <div class="adv-table editable-table">
 
                                         <div class="space15"></div>
-                                        <table class="table table-bordered table-hover" id="editable-sample">   
+                                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none;"></th>
@@ -55,6 +67,8 @@
                                                     <th >Tanggal</th>
                                                     <th >Jumlah KM</th>
                                                     <th >Jumlah KL</th>
+                                                    <th >Jumlah Ritase</th>
+                                                    <th >Jumlah SPBU</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -68,6 +82,8 @@
                                                         <td style="white-space: nowrap"><?php echo date_format(date_create($ka->TANGGAL_LOG_HARIAN),'d F Y');?></td>
                                                         <td><?php echo $ka->total_kl ?> KL</td>
                                                         <td><?php echo $ka->total_km ?> KM</td>
+                                                        <td><?php echo $ka->ritase ?> Rit</td>
+                                                        <td><?php echo $ka->spbu ?> </td>
                                                     </tr>
                                                     <?php
                                                     $i++;
@@ -89,26 +105,39 @@
 </section>
 
 <script type="text/javascript">
-
+    
+    var tanggal = new Array();
+    var amt;
+    var total_km = new Array();
+    var km = new Array();
+    var total_kl = new Array();
+    var ritase = new Array();
+    var spbu = new Array();
+    <?php
+        foreach($kinerja_amt as $ka){
+            ?>
+                tanggal.push("<?php echo $ka->tanggal;?>");
+                total_km.push(<?php echo $ka->total_km?>);
+                km.push(<?php echo $ka->total_km?>);
+                total_kl.push(<?php echo $ka->total_kl?>);
+                ritase.push(<?php echo $ka->ritase?>);
+                spbu.push(<?php echo $ka->spbu?>);
+            <?php
+        }
+    ?>
     $(function() {
-        $('#grafik').highcharts({
+       amt = new Highcharts.Chart({ 
             chart: {
-                zoomType: 'xy'
+                renderTo:'grafik'
             },
             title: {
-                text: 'Jumlah KM'
+                text: 'Grafik Kinerja Jumlah KM Awak Mobil Tangki Depot <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun?>'
             },
             xAxis: [{
-                    categories: [<?php
-                        for($i = 0;$i < sizeof($kinerja_amt);$i++)
-                        {
-                            ?>'<?php echo $kinerja_amt[$i]->tanggal;?>'<?php
-                            if($i < sizeof($kinerja_amt) - 1) echo ",";
-                        }
-                    ?>]
+                    categories: tanggal
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -118,7 +147,7 @@
                         }
                     },
                     title: {
-                        text: 'Total KM',
+                        text: 'Jumlah',
                         style: {
                             color: Highcharts.getOptions().colors[1]
                         }
@@ -128,27 +157,33 @@
                 shared: true
             },
             legend: {
-                layout: 'vertical',
-                align: 'right',
-                x: -10,
-                verticalAlign: 'top',
-                y: 50,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+               enabled:false
             },
             series: [{
                     type: 'column',
                     name: 'Jumlah',
-                     data: [<?php
-                        for($i = 0;$i < sizeof($kinerja_amt);$i++)
-                        {
-                            echo $kinerja_amt[$i]->total_km;
-                            if($i < sizeof($kinerja_amt) - 1) echo ",";
-                        }
-                    ?>]
+                     data: km
                 }]
         });
     });
+    
+    function filterAmt(title)
+    {
+        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Awak Mobil Tangki Depot <?php echo $nama_depot?>'});  
+        if(title == "KM"){
+             amt.series[0].setData(total_km);
+        }else if(title == "KL"){
+            amt.series[0].setData(total_kl);
+            
+        }else if(title == "Ritase"){
+            amt.series[0].setData(ritase);
+                
+        }else if(title == "SPBU"){
+            amt.series[0].setData(spbu);
+            
+        }
+        
+    }
 </script>
 
 
@@ -157,3 +192,16 @@
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+		  	
+    function FilterData(par) {
+        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+    }
+    
+   
+		  
+</script>
