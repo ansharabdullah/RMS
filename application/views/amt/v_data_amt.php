@@ -2,6 +2,17 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        <?php if ($success ) { ?>
+            <div class="alert alert-block alert-success fade in">
+                <strong>Berhasil!</strong> <?php echo $success ?>
+            </div>
+        <?php } ?>
+        
+        <?php if ($error) { ?>
+            <div class="alert alert-block alert-danger fade in">
+                <strong>Error!</strong> <?php echo $error ?>
+            </div>
+        <?php } ?>
         <section class="panel">
             <header class="panel-heading">
                 Data Crew AMT
@@ -9,16 +20,16 @@
             <div class="panel-body">
                 <div class="adv-table editable-table " style="overflow-x: scroll">
                     <div class="clearfix">
-                        
 
-                            <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahManual">
-                                Tambah AMT <i class="icon-plus"></i>
-                            </a>
 
-                            <a class="btn btn-success" href="<?php echo base_url() ?>amt/import_amt">
-                                Import Excel <i class="icon-plus"></i>
-                            </a>
-                        
+                        <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahManual">
+                            Tambah AMT <i class="icon-plus"></i>
+                        </a>
+
+                        <a class="btn btn-success" href="<?php echo base_url() ?>amt/import_amt">
+                            Import Excel <i class="icon-plus"></i>
+                        </a>
+
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
                             </button>
@@ -47,22 +58,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i=1;
-                            foreach($amt as $row){ ?>
-                            <tr class="">
-                                <td style="display:none;"></td>
-                                <td><?php echo $i;?></td>
-                               <td><a href="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI; ?>" style ="text-decoration: underline"><?php echo $row->NIP; ?></a></td>
+                            <?php $i = 1;
+                            foreach ($amt as $row) {
+                                ?>
+                                <tr class="">
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i; ?></td>
+                                    <td><a href="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI; ?>" style ="text-decoration: underline"><?php echo $row->NIP; ?></a></td>
 
-                                <td><?php echo $row->NAMA_PEGAWAI;?></td>
-                                <td><?php echo $row->JABATAN;?></td>
-                                <td><?php echo $row->KLASIFIKASI;?></td>
-                                <td><?php echo $row->TANGGAL_MASUK;?></td>
-                                <td><?php echo $row->TRANSPORTIR_ASAL;?></td>
-                                <td><?php echo $row->NO_TELEPON;?></td>
-                                <td><span class="label label-success"><?php echo $row->STATUS;?>.</span></td>
-                            </tr>
-                            <?php $i++;} ?>
+                                    <td><?php echo $row->NAMA_PEGAWAI; ?></td>
+                                    <td><?php echo $row->JABATAN; ?></td>
+                                    <td><?php echo $row->KLASIFIKASI; ?></td>
+                                    <td><?php echo $row->TANGGAL_MASUK; ?></td>
+                                    <td><?php echo $row->TRANSPORTIR_ASAL; ?></td>
+                                    <td><?php echo $row->NO_TELEPON; ?></td>
+                                    <td><span class="label label-success"><?php echo $row->STATUS; ?>.</span></td>
+                                </tr>
+    <?php $i++;
+} ?>
                         </tbody>
                     </table>
                 </div>
@@ -80,7 +93,7 @@
                 <h4 class="modal-title">Tambah AMT</h4>
             </div>
             <div class=" form">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url()?>amt/tambah_pegawai/">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/tambah_pegawai/">
 
                     <div class="modal-body">
 
@@ -213,8 +226,8 @@
                                                     hanya dapat dilihat dalam  
                                                     Firefox, Chrome, Opera, 
                                                     Safari terbaru dan Internet Explorer 10
-                                                    
-                                                    
+
+
                                                 </span>
                                             </div>
                                         </div>
@@ -230,7 +243,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <input type="reset" data-dismiss="modal" class="btn btn-default" value="Batal">
                         <input class="btn btn-success" type="submit" value="Simpan"/>
                     </div>
                 </form>
@@ -247,13 +260,13 @@
     jQuery(document).ready(function() {
         EditableTable.init();
     });
-		  	
+
     function FilterData(par) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
-    
-   
-		  
+
+
+
 </script>
 

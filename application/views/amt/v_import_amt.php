@@ -120,7 +120,7 @@
                                                 if ($amt[$i]['error']) {
                                                     echo "<b>" . $amt[$i]['status_error'] . "</b>";
                                                 } else {
-                                                    echo $amt[$i]['status_error'];
+                                                    echo "<span class='btn btn-success btn-xs tooltips' >".$amt[$i]['status_error']."</span>";
                                                 }
                                                 ?></td>
                                         </tr>
@@ -148,7 +148,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+                        <br />
                         <form method="POST" action="<?php echo base_url() ?>amt/simpan_xls/" enctype="multipart/form-data">
                     <?php if ($e != 0) { ?>
                                 <div class="col-lg-11">

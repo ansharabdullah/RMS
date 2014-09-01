@@ -16,19 +16,15 @@
     <section class="wrapper">
         <section class="panel" id="LihatJadwal">
             <header class="panel-heading">
-                Lihat Jadwal
-                <div style="float:right;">
-                    <a  data-placement="left" href="<?php echo base_url() ?>jadwal/hapus_jadwal/" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Jadwal"><i class="icon-minus"></i></a>
-                    <a  data-placement="left" href="<?php echo base_url() ?>jadwal/import_penjadwalan/" class="btn btn-primary btn-xs tooltips" data-original-title="Import Jadwal"><i class="icon-plus"></i></a>
-                </div>
+                Hapus Jadwal
             </header>
             <div class="panel-body" >
                 <div class="clearfix">
-                    <form class="cmxform form-horizontal tasi-form" id ="signupForm" method="GET" action="<?php echo base_url() ?>jadwal/lihat_jadwal/">
+                    <form class="cmxform form-horizontal tasi-form" id ="signupForm" method="GET" action="<?php echo base_url() ?>jadwal/hapus_jadwal_preview/">
                         <div class="form-group" style="margin-top: 20px;">
-                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                             <div class="col-lg-10">
-                                <input type="date" required="required" id="tanggalJadwal" class="form-control"  placeholder="Tanggal" name="tanggal">
+                                <input type="month" required="required" id="bulanJadwal" class="form-control"  placeholder="Bulan" name="bulan">
                             </div>
                         </div>
                         <div class="form-group">
@@ -48,7 +44,7 @@
         <?php if ($jadwal) { ?>
             <section class="panel" id="tabelJadwal">
                 <header class="panel-heading">
-                    Jadwal (<?php echo $tanggal; ?>)
+                    Hapus Jadwal (<?php echo date("M-Y", strtotime($tanggal)); ?>)
                 </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
@@ -61,12 +57,12 @@
                                     <tr>
                                         <th style="display: none;">-</th>
                                         <th>No.</th>
+                                        <th>Tanggal</th>
                                         <th>NIP</th>
                                         <th>Nama Pegawai</th>
                                         <th>Jabatan</th>
                                         <th>No Polisi</th>
                                         <th>Jadwal</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,6 +73,7 @@
                                         <tr class="">
                                             <th style="display: none;"></th>
                                             <td><?php echo ($i + 1) ?></td>
+                                            <td><?php echo date("d-M-Y", strtotime($row->TANGGAL_LOG_HARIAN)) ?></td>
                                             <td><?php echo $row->NIP ?></td>
                                             <td><?php echo $row->NAMA_PEGAWAI ?></td>
                                             <td><?php echo $row->JABATAN ?></td>
@@ -87,10 +84,6 @@
                                                     echo $row->STATUS_MASUK;
                                                 }
                                                 ?></td>
-                                            <td>
-                                                <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal" onclick="editJadwal('<?php echo $row->ID_JADWAL ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->NAMA_PEGAWAI ?>', '<?php echo $row->STATUS_MASUK ?>', '<?php echo $row->NIP ?>')"><span  class="btn btn-warning btn-xs tooltips" data-original-title="Ganti Jadwal" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
-
-                                            </td>
                                         </tr>
 
                                         <?php
@@ -100,6 +93,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <a style="float:right;" href="<?php echo base_url() ?>jadwal/hapus_jadwal_perbulan/<?php echo $tanggal ?>" data-placement="left" class="btn btn-danger btn-sm tooltips" data-original-title="Hapus jadwal bulan ini"><i class="icon-remove"></i> Hapus</a>
                     </div>
                 </div>
                 <!-- Modal -->
@@ -128,7 +122,6 @@
                                         </div>
                                         <input type="hidden" readonly="readonly" value="" name="id_jadwal" required="required" class="form-control"  placeholder="" id="id_jadwal"/>
                                         <input type="hidden" readonly="readonly" value="" name="tanggal_log_harian" required="required" class="form-control"  placeholder="" id="tanggal_log_harian1"/>
-                                        <input type="hidden" readonly="readonly" value="" name="nip" required="required" class="form-control"  placeholder="" id="nip"/>
                                         <div class="form-group">
                                             <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Jadwal</label>
                                             <div class="col-lg-10" >
@@ -151,7 +144,7 @@
                 </div>
             </section>
 
-<?php } ?>
+        <?php } ?>
     </section>
 </section>
 
@@ -161,16 +154,15 @@
 <!-- END JAVASCRIPTS -->
 <script>
 
-                                                    jQuery(document).ready(function() {
-                                                        EditableTable.init();
-                                                    });
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
 
-                                                    function editJadwal(id_jadwal, tanggal, nama_pegawai, status, nip) {
-                                                        $("#nip").val(nip);
-                                                        $("#id_jadwal").val(id_jadwal);
-                                                        $("#tanggal_log_harian").val(tanggal);
-                                                        $("#tanggal_log_harian1").val(tanggal);
-                                                        $("#nama_pegawai").val(nama_pegawai);
-                                                        $("#status_masuk").val(status);
-                                                    }
+    function editJadwal(id_jadwal, tanggal, nama_pegawai, status) {
+        $("#id_jadwal").val(id_jadwal);
+        $("#tanggal_log_harian").val(tanggal);
+        $("#tanggal_log_harian1").val(tanggal);
+        $("#nama_pegawai").val(nama_pegawai);
+        $("#status_masuk").val(status);
+    }
 </script>
