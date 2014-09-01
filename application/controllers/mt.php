@@ -528,9 +528,8 @@ class Mt extends CI_Controller {
 
         $data = array(
             'id_mobil' => $id_mobil,
-            'STORE_PRESSURE' => $this->input->post('STORE_PRESSURE', true),
-            'CATRIDGE' => $this->input->post('CATRIDGE', true),
-            'CO2' => $this->input->post('CO2', true),
+            'ID_JENIS_APAR' => $this->input->post('ID_JENIS_APAR', true),
+            'TANGGAL_APAR' => $this->input->post('TANGGAL_APAR', true),
             'KETERANGAN_APAR' => $this->input->post('KETERANGAN_APAR', true),
             'STATUS_APAR' => $this->input->post('STATUS_APAR', true),
         );
@@ -545,16 +544,14 @@ class Mt extends CI_Controller {
     
     public function edit_apar($id,$id_mobil) {
         
-        $store = $_POST['STORE_PRESSURE'];
-        $catridge = $_POST['CATRIDGE'];
-        $co2 = $_POST['CO2'];
+        $tanggal_apar = $_POST['TANGGAL_APAR'];
+        $id_jenis= $_POST['ID_JENIS_APAR'];
         $keterangan= $_POST['KETERANGAN_APAR'];
         $status= $_POST['STATUS_APAR'];
         
         $data = array(
-            "STORE_PRESSURE"=>$store,
-            "CATRIDGE"=>$catridge,
-            "CO2"=>$co2,
+            "TANGGAL_APAR"=>$tanggal_apar,
+            "ID_JENIS_APAR"=>$id_jenis,
             "KETERANGAN_APAR" =>$keterangan,
             "STATUS_APAR" =>$status,
         );
@@ -900,14 +897,14 @@ class Mt extends CI_Controller {
     
     public function edit_reminder_apar($id)
     {
-        $store = $_POST['tgl_store'];
-        $catridge = $_POST['tgl_catridge'];
-        $co2 = $_POST['tgl_co2'];
-        
+        $tgl = $_POST['tgl_apar'];
+        $id_jenis= $_POST['ID_JENIS_APAR'];
+        $keterangan = $_POST['KETERANGAN_APAR'];
         $data = array(
-            "STORE_PRESSURE"=>$store,
-            "CATRIDGE"=>$catridge,
-            "CO2"=>$co2
+            "TANGGAL_APAR"=>$tgl,
+            "ID_JENIS_APAR"=>$id_jenis,
+            "KETERANGAN_APAR"=>$keterangan,
+            
         );
         
         $this->m_pengingat->editReminderApar($id,$data);

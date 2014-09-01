@@ -6,8 +6,9 @@ class m_notifikasi extends CI_Model {
         
         $notifikasi = array();
         //reminder apar
-         $query = $this->db->query("select a.ID_APAR,m.NOPOL,a.STATUS_APAR,DATEDIFF(a.STORE_PRESSURE,now()) as store_pressure,DATEDIFF(a.CATRIDGE,now()) as  catridge,DATEDIFF(a.CO2,now()) as co2,
-                            a.STORE_PRESSURE as tgl_store,a.CATRIDGE as tgl_catridge,a.CO2 as tgl_co2
+        
+         $query = $this->db->query("select a.ID_APAR,m.NOPOL,a.STATUS_APAR,DATEDIFF(a.TANGGAL_APAR,now()) as store_pressure,
+                            a.TANGGAL_APAR as tgl_store
                           from apar a, mobil m, depot d 
                           where m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
@@ -18,7 +19,7 @@ class m_notifikasi extends CI_Model {
          $set = array();
          foreach($data as $dt)
          {
-             if($dt->store_pressure <= 7 || $dt->catridge <= 7 || $dt->co2 <=7)
+             if($dt->store_pressure <= 7)
              {  
                  array_push($set,"Mobil Tangki ".$dt->NOPOL);
              }

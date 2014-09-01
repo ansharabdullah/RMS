@@ -5,12 +5,12 @@ class m_pengingat extends CI_Model {
     
     public function getAparReminder($depot)
     {
-        $query = $this->db->query("select a.ID_APAR,m.NOPOL,a.STATUS_APAR,DATEDIFF(a.STORE_PRESSURE,now()) as store_pressure,DATEDIFF(a.CATRIDGE,now()) as  catridge,DATEDIFF(a.CO2,now()) as co2,
-                            a.STORE_PRESSURE as tgl_store,a.CATRIDGE as tgl_catridge,a.CO2 as tgl_co2
+        $query = $this->db->query("select a.ID_APAR,m.NOPOL,a.ID_JENIS_APAR,a.STATUS_APAR,a.KETERANGAN_APAR,DATEDIFF(a.TANGGAL_APAR,now()) as apar,
+                            a.TANGGAL_APAR as tgl_apar
                           from apar a, mobil m, depot d 
                           where m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
-                          and d.ID_DEPOT = $depot ");
+                          and d.ID_DEPOT = $depot order by m.ID_MOBIL,apar ASC");
         return $query;
     }
     
