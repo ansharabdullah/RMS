@@ -97,7 +97,7 @@
                                                 }echo $row->STATUS_MASUK; ?></td>
                                             <td><?php echo $row->KETERANGAN_MASUK; ?></td>
                                             <td><?php echo $row->ALASAN; ?></td>
-                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->KETERANGAN_MASUK ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>')"><i class="icon-pencil"></i></a></td>
+                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->KETERANGAN_MASUK ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a></td>
                                         </tr>
         <?php $i++;
     }
@@ -134,6 +134,7 @@
             <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>amt/ubah_presensi/">
                 <input type="hidden" name="id_jadwal" id="id_jadwal"/>
                 <input type="hidden" name="tanggal_log_harian" id="tanggal_log_harian"/>
+                <input type="hidden" name="nip" id="nip"/>
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <section class="panel">
@@ -193,8 +194,9 @@
                                                     jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
                                                 }
 
-                                                function editPresensi(tanggal, keterangan, alasan, id_jadwal) {
+                                                function editPresensi(tanggal, keterangan, alasan, id_jadwal, nip) {
                                                     $("#tanggal_log_harian").val(tanggal);
+                                                    $("#nip").val(nip);
                                                     $("#tanggal").val(tanggal);
                                                     $("#keterangan_masuk").val(keterangan);
                                                     $("#alasan").val(alasan);

@@ -38,31 +38,59 @@ function DateToIndo($date) {
 </script>
 <script type="text/javascript">
     
+    var mt;
+    var kl_mt = new Array();
+    var km_mt = new Array();
+    var total_km_mt = new Array();
+    var premium = new Array();
+    var pertamax = new Array();
+    var pertamax_plus = new Array();
+    var pertamina_dex = new Array();
+    var solar = new Array();
+    var bio_solar = new Array();
+    var own_use_mt = new Array();
+    var ritase_mt = new Array();
+    var hari = new Array();
     
+     <?php
+        foreach($kinerja as $km){
+            ?>
+             
+                kl_mt.push(<?php echo $km->total_kl_mt ?>);
+                km_mt.push(<?php echo $km->total_km_mt ?>);
+                premium.push(<?php echo $km->premium ?>);
+                pertamax.push(<?php echo $km->pertamax ?>);
+                pertamax_plus.push(<?php echo $km->pertamax_plus ?>);
+                pertamina_dex.push(<?php echo $km->pertamina_dex ?>);
+                solar.push(<?php echo $km->solar ?>);
+                bio_solar.push(<?php echo $km->bio_solar ?>);
+                own_use_mt.push(<?php echo $km->own_use ?>);
+                ritase_mt.push(<?php echo $km->ritase_mt ?>);
+                hari.push(<?php echo $km->hari ?>);
+                
+            <?php
+        }
+    ?>
     
-    $(function () {
+    $(function() {
         $('#grafik').highcharts({
+            chart: {
+                type: 'column'
+            },
             title: {
-                text: 'Grafik Kinerja Awak Mobil Tangki Juli',
+                text: 'Grafik Mobil Tangki',
                 x: -20 //center
             },
             subtitle: {
-                text: 'PT. Pertamina Patra Niaga',
+                text: 'Bulan Januari 2014',
                 x: -20
             },
             xAxis: {
-                title: {
-                    text: 'Tanggal'
-                },
-                categories: ['1', '2', '3', '4', '5', '6',
-                    '7', '8', '9', '10', '11', '12',
-                    '13', '14', '15', '16', '17', '18', '19', '20',
-                    '21', '22', '23', '24', '25', '26', '27', '28',
-                    '29', '30', '31', '16']
+                categories: hari
             },
             yAxis: {
                 title: {
-                    text: 'Kinerja'
+                    text: 'Jumlah'
                 },
                 plotLines: [{
                         value: 0,
@@ -76,49 +104,50 @@ function DateToIndo($date) {
             legend: {
                 borderWidth: 1
             },
+            plotOptions: {
+                series: {
+                    events: {
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>mt/grafik_hari_mt";
+                        }
+                    }
+                }
+            },
             series: [{
-                    type: 'spline',
                     name: 'KM',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 13.5, 10.2, 6.5, 5.3, 8.3, 13.9, 9.6,5,7,3,4,2,1,3,4,6,7,8,9,2,3,5,6,8,6,5]
+                    data: km_mt
                 }, {
-                    type: 'spline',
                     name: 'KL',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5,3,4,5,6,7,5,2,5,8,9,6,5,4,5,5,6,7,9,13]
+                    data: kl_mt
                 }, {
-                    type: 'spline',
-                    name: 'Rit',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,3,5,6,8,3,1,8,5,3,4,8,7,3,4,2,1,9,4,5]
-                }, {
-                    type: 'spline',
-                    name: 'Own Use',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5,3,4,5,6,7,5,2,5,8,9,6,5,4,5,5,6,7,9,13]
-                }, {
-                    type: 'spline',
                     name: 'Premium',
-                    data: [-0.11, 0.9, 3.9, 9.4, 12.5, 15.0, 13.6, 15.9, 11.3, 10.0, 2.4, 3.0,7,8,9,11,7,3,6,5,3,9,2,7,3,4,1,5,6,2,3]
+                    data: premium
                 }, {
-                    type: 'spline',
                     name: 'Pertamax',
-                    data: [0.2, 0.1, 3.7, 6.3, 15.0, 5.0, 21.8, 20.1, 25.1, 12.1, 9.6, 2.9,3,5,5,8,8,8,8,9,8,12,13,14,12,16,17,10,7,9,10]
+                    data: pertamax
                 }, {
-                    type: 'spline',
-                    name: 'pertamax Plus',
-                    data: [0.9, 0.2, 3.7, 11.9, 10.0, 19.0, 20.8, 21.1, 10.1, 4.1, 8.2, 3.5,1,4,4,5,7,6,8,4,3,9,6.1,5.1,4.1,5.1,5.1,6,5,9,13]
+                    name: 'Pertamax Plus',
+                    data: pertamax_plus
                 }, {
-                    type: 'spline',
-                    name: 'Pertamax Dex',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,3,5,6,8,3,1,8,5,3,4,8,7,3,4,2,1,9,4,5]
+                    name: 'Pertamina Dex',
+                    data: pertamina_dex
                 }, {
-                    type: 'spline',
                     name: 'Solar',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5,3,4,5,6,7,5,2,5,8,9,6,5,4,5,5,6,7,9,13]
+                    data: solar
                 }, {
-                    type: 'spline',
+                    name: 'Own Use',
+                    data: own_use_mt
+                }, {
                     name: 'Bio Solar',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0,3,5,6,8,3,1,8,5,3,4,8,7,3,4,2,1,9,4,5]
+                    data: bio_solar
+                },
+                {
+                    name: 'Ritase',
+                    data: ritase_mt
                 }]
         });
     });
+    
 </script>
 
 <section id="main-content">

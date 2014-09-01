@@ -306,6 +306,7 @@ class amt extends CI_Controller {
             }
             $data['error'] = 0;
         }
+        
         unlink($file_target);
         $data['lv1'] = 2;
         $data['lv2'] = 1;
@@ -321,6 +322,13 @@ class amt extends CI_Controller {
         $data_amt = unserialize($this->input->post('data_amt'));
         $this->m_amt->importPegawai($data_amt);
 
+        $datalog = array(
+            'keterangan' => 'Import data pegawai',
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+        );
+        $this->m_log_sistem->insertLog($datalog);
+        
         $link = base_url() . "amt/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
@@ -356,13 +364,21 @@ class amt extends CI_Controller {
 
     public function ubah_presensi() {
         $id_jadwal = $this->input->post('id_jadwal', true);
+        $nip = $this->input->post('nip', true);
         $data = array(
             'alasan' => $this->input->post('alasan', true),
             'keterangan_masuk' => $this->input->post('keterangan_masuk', true)
         );
         $tanggal = $this->input->post('tanggal_log_harian', true);
-        
+
         $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
+        
+        $datalog = array(
+            'keterangan' => "Ubah presensi NIP : $nip pada $tanggal",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         
         $link = base_url() . "amt/presensi_pertanggal/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';

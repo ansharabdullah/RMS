@@ -88,7 +88,7 @@
                                                 }
                                                 ?></td>
                                             <td>
-                                                <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal" onclick="editJadwal('<?php echo $row->ID_JADWAL ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->NAMA_PEGAWAI ?>', '<?php echo $row->STATUS_MASUK ?>')"><span  class="btn btn-warning btn-xs tooltips" data-original-title="Ganti Jadwal" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
+                                                <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal" onclick="editJadwal('<?php echo $row->ID_JADWAL ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->NAMA_PEGAWAI ?>', '<?php echo $row->STATUS_MASUK ?>', '<?php echo $row->NIP ?>')"><span  class="btn btn-warning btn-xs tooltips" data-original-title="Ganti Jadwal" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
 
                                             </td>
                                         </tr>
@@ -128,6 +128,7 @@
                                         </div>
                                         <input type="hidden" readonly="readonly" value="" name="id_jadwal" required="required" class="form-control"  placeholder="" id="id_jadwal"/>
                                         <input type="hidden" readonly="readonly" value="" name="tanggal_log_harian" required="required" class="form-control"  placeholder="" id="tanggal_log_harian1"/>
+                                        <input type="hidden" readonly="readonly" value="" name="nip" required="required" class="form-control"  placeholder="" id="nip"/>
                                         <div class="form-group">
                                             <label for="pertamax" class="col-lg-2 col-sm-2 control-label">Jadwal</label>
                                             <div class="col-lg-10" >
@@ -164,7 +165,8 @@
                                                         EditableTable.init();
                                                     });
 
-                                                    function editJadwal(id_jadwal, tanggal, nama_pegawai, status) {
+                                                    function editJadwal(id_jadwal, tanggal, nama_pegawai, status, nip) {
+                                                        $("#nip").val(nip);
                                                         $("#id_jadwal").val(id_jadwal);
                                                         $("#tanggal_log_harian").val(tanggal);
                                                         $("#tanggal_log_harian1").val(tanggal);

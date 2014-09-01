@@ -216,7 +216,14 @@ class jadwal extends CI_Controller {
         $depot = $this->session->userdata("id_depot");
         $this->m_penjadwalan->importJadwal($data_jadwal);
         $this->m_log_harian->updateStatusJadwal($bulan, $tahun, $depot);
-        //print_r($data_jadwal);
+        
+        $datalog = array(
+            'keterangan' => "Import jadwal bulan $tanggal",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+        );
+        $this->m_log_sistem->insertLog($datalog);
+        
         $link = base_url() . "jadwal/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
@@ -241,11 +248,19 @@ class jadwal extends CI_Controller {
 
     public function edit_jadwal() {
         $id_jadwal = $this->input->post('id_jadwal', true);
+        $nip = $this->input->post('nip', true);
         $data = array(
             'status_masuk' => $this->input->post('status_masuk', true)
         );
         $tanggal = $this->input->post('tanggal_log_harian', true);
         $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
+        
+        $datalog = array(
+            'keterangan' => "Ubah Jadwal NIP : $nip pada $tanggal",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+        );
+        $this->m_log_sistem->insertLog($datalog);
 
         $link = base_url() . "jadwal/lihat_jadwal/?tanggal=$tanggal";
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
@@ -287,6 +302,13 @@ class jadwal extends CI_Controller {
         $depot = $this->session->userdata('id_depot');
         
         $this->m_penjadwalan->deleteJadwal($depot, $bulan, $tahun);
+        
+        $datalog = array(
+            'keterangan' => "Menghapus jadwal bulan : $tanggal",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Hapus'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         $link = base_url() . "jadwal/hapus_jadwal/";
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
         echo 'window.location.href="' . $link . '"';
