@@ -20,8 +20,10 @@ class Depot extends CI_Controller {
         $data['lv1'] = 1;
         $data['lv2'] = 1;
         $data2 = menu_oam();
+        $data3['depot'] = $this->m_depot->get_depot();
         $data3['kpi_bulan'] = $this->m_kpi->nilai_kpi_perbulan($id_depot,$tahun);
         $data3['detail_kpi'] = $this->m_kpi->detail_kpi_perbulan($id_depot,$tahun);
+        $data3['tahun'] = $tahun;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'], $data['lv2']);
@@ -33,7 +35,7 @@ class Depot extends CI_Controller {
         $index = $_POST['indikator'];
         $tahun = $_POST['tahun'];
         $depot = $_POST['depot'];
-        redirect('depot/grafik_bulan/' . $index);
+        redirect('depot/grafik_bulan/' . $depot.'/'.$tahun);
     }
 
     public function grafik_hari($tipe,$index,$id_depot) {

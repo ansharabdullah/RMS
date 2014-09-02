@@ -64,10 +64,11 @@ class m_kpi extends CI_Model {
     }
 
     public function nilai_kpi_perbulan($id_depot,$tahun) {
-        $query = $this->db->query("select sum(kp.WEIGHTED_SCORE) as total, MONTH(lh.TANGGAL_LOG_HARIAN) as bulan 
-                                    from kpi_operasional kp, log_harian lh 
-                                    where lh.ID_LOG_HARIAN = kp.ID_LOG_HARIAN 
-                                    and lh.ID_DEPOT = 1 and YEAR(lh.TANGGAL_LOG_HARIAN) = 2014 
+        $query = $this->db->query("select d.NAMA_DEPOT as nama_depot, sum(kp.WEIGHTED_SCORE) as total, MONTH(lh.TANGGAL_LOG_HARIAN) as bulan ,
+                                    lh.TANGGAL_LOG_HARIAN as tanggal    
+                                    from kpi_operasional kp, log_harian lh, depot d 
+                                    where lh.ID_LOG_HARIAN = kp.ID_LOG_HARIAN and d.ID_DEPOT = lh.ID_DEPOT
+                                    and lh.ID_DEPOT = $id_depot and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
                                     group by bulan order by bulan asc");
         
         return $query->result();
@@ -75,10 +76,10 @@ class m_kpi extends CI_Model {
     
     public function detail_kpi_perbulan($id_depot,$tahun) {
         $query = $this->db->query("select kp.ID_KPI_OPERASIONAL,kp.ID_LOG_HARIAN,kp.ID_JENIS_KPI_OPERASIONAL,
-                                   kp.TARGET,kp.REALISASI,kp.DEVIASI,kp.PERFORMANCE_SCORE,kp.NORMAL_SCORE,
-                                   kp.WEIGHTED_SCORE , MONTH(lh.TANGGAL_LOG_HARIAN) as bulan 
-                                   from kpi_operasional kp, log_harian lh 
-                                   where lh.ID_LOG_HARIAN = kp.ID_LOG_HARIAN 
+                                   kp.TARGET,kp.REALISASI,kp.DEVIASI,kp.PERFORMANCE_SCORE,kp.NORMAL_SCORE,jk.JENIS_KPI_OPERASIONAL,
+                                   kp.WEIGHTED_SCORE , MONTH(lh.TANGGAL_LOG_HARIAN) as bulan ,lh.TANGGAL_LOG_HARIAN as tanggal
+                                   from kpi_operasional kp, log_harian lh ,jenis_kpi_operasional as jk
+                                   where lh.ID_LOG_HARIAN = kp.ID_LOG_HARIAN  and jk.ID_JENIS_KPI_OPERASIONAL = kp.ID_JENIS_KPI_OPERASIONAL
                                    and lh.ID_DEPOT = $id_depot and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
                                    group by bulan,kp.ID_JENIS_KPI_OPERASIONAL");
         
