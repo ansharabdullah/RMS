@@ -1,38 +1,11 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_penjadwalan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_log_harian.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/jadwal/v_jadwal.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_presensi.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
-=======
-<?xml version="1.0" encoding="UTF-8"?><project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
->>>>>>> a92e9bd1499ef98287b6514fd7f4945b18b51d33
->>>>>>> 59893a86cf4d4bcb0dbe8fe897551b7010820176
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_kpi_operasional.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/controllers/ba.php</file>
-<<<<<<< HEAD
-=======
             <file>file:/C:/xampp/htdocs/RMS/application/models/m_ba.php</file>
->>>>>>> 62fa3dad27d988ffb81a59d2e2ed4f3bf8453dbf
->>>>>>> 59893a86cf4d4bcb0dbe8fe897551b7010820176
         </group>
     </open-files>
 </project-private>

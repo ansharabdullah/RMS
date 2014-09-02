@@ -417,4 +417,136 @@ class ba extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
+    public function dummy_kinerja() {
+        $this->load->model('m_ba');
+        /*
+         * Dummy untuk depot 1
+         */
+        /*
+          $id_kinerja = 1;
+          $id_log_harian = 1;
+          $id_pegawai = 1;
+          $tidak_hadir = 1;
+          for ($id_log_harian = 1; $id_log_harian <= 943; $id_log_harian++) {
+          for ($id_pegawai = 1; $id_pegawai <= 10; $id_pegawai++) {
+          if ($tidak_hadir != $id_pegawai) {
+          if (rand(0, 1) == 0) {
+          $status_tugas = 'SUPIR';
+          } else {
+          $status_tugas = 'KERNET';
+          }
+          $total_km = rand(50, 400);
+          $total_kl = rand(8,80);
+          $ritase = rand(1,3);
+          $pendapatan = rand(50000,200000);
+          $spbu = rand(1,5);
+
+          $this->m_ba->dummy_kinerja_amt($id_kinerja, $id_log_harian, $id_pegawai, $status_tugas,$total_km,$total_kl,$ritase,$pendapatan,$spbu);
+          $id_kinerja++;
+          }
+          }
+          $tidak_hadir++;
+          if ($tidak_hadir == 11) {
+          $tidak_hadir = 1;
+          }
+          }
+         * 
+         */
+        /*
+         * Dummy untuk depot 2
+         */
+        /*
+          $id_kinerja = 8488;
+          $id_log_harian = 1097;
+          $id_pegawai = 11;
+          $tidak_hadir = 11;
+          for ($id_log_harian = 1097; $id_log_harian <= 2039; $id_log_harian++) {
+          $tidak_hadir = rand(11,20);
+          for ($id_pegawai = 11; $id_pegawai <= 20; $id_pegawai++) {
+          if ($tidak_hadir != $id_pegawai) {
+          if (rand(0, 1) == 0) {
+          $status_tugas = 'SUPIR';
+          } else {
+          $status_tugas = 'KERNET';
+          }
+          $total_km = rand(50, 400);
+          $total_kl = rand(8,80);
+          $ritase = rand(1,3);
+          $pendapatan = rand(50000,200000);
+          $spbu = rand(1,5);
+
+          $this->m_ba->dummy_kinerja_amt($id_kinerja, $id_log_harian, $id_pegawai, $status_tugas,$total_km,$total_kl,$ritase,$pendapatan,$spbu);
+          $id_kinerja++;
+          }
+          }
+          }
+         */
+
+
+        /*
+         * Dummy mt untuk depot 1
+         */
+/*
+        $id_kinerja = 1;
+        $id_log_harian = 1;
+        $id_mobil = 1;
+        $tidak_hadir = 1;
+        for ($id_log_harian = 1; $id_log_harian <= 943; $id_log_harian++) {
+            for ($id_mobil = 1; $id_mobil <= 10; $id_mobil++) {
+                if ($tidak_hadir != $id_mobil) {
+                    
+                    $total_km = rand(50, 400);
+                    $total_kl = rand(8, 80);
+                    $ritase = rand(1, 3);
+                    $ownuse = rand(20,150);
+                    $premium = rand(0,100);
+                    $pertamax = rand(0,8);
+                    $pertamax_plus = 0;
+                    $pertamina_dex = 0;
+                    $solar = rand(0,40);
+                    $bio_solar = rand(0,40);
+
+                    $this->m_ba->dummy_kinerja_mt($id_kinerja, $id_log_harian, $id_mobil, $ritase,$total_km,$total_kl,$ownuse,$premium,$pertamax,$pertamax_plus,$pertamina_dex,$solar,$bio_solar);
+                    $id_kinerja++;
+                }
+            }
+            $tidak_hadir++;
+            if ($tidak_hadir == 11) {
+                $tidak_hadir = 1;
+            }
+        }
+*/
+        /*
+         * Dummy mt untuk depot 2
+         */
+/*
+        $id_kinerja = 8488;
+        $id_log_harian = 1097;
+        $id_mobil = 11;
+        $tidak_hadir = 11;
+        for ($id_log_harian = 1097; $id_log_harian <= 2039; $id_log_harian++) {
+            $tidak_hadir = rand(11, 20);
+            for ($id_mobil = 11; $id_mobil <= 20; $id_mobil++) {
+                if ($tidak_hadir != $id_mobil) {
+                    $total_km = rand(50, 400);
+                    $total_kl = rand(8, 80);
+                    $ritase = rand(1, 3);
+                    $ownuse = rand(20,150);
+                    $premium = rand(0,100);
+                    $pertamax = rand(0,8);
+                    $pertamax_plus = 0;
+                    $pertamina_dex = 0;
+                    $solar = rand(0,40);
+                    $bio_solar = rand(0,40);
+
+                    $this->m_ba->dummy_kinerja_mt($id_kinerja, $id_log_harian, $id_mobil, $ritase,$total_km,$total_kl,$ownuse,$premium,$pertamax,$pertamax_plus,$pertamina_dex,$solar,$bio_solar);
+                    $id_kinerja++;
+                }
+            }
+        }
+*/
+
+        echo "berhasil";
+    }
+
 }
