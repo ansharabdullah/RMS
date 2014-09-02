@@ -354,6 +354,9 @@ class amt extends CI_Controller {
         $tanggal = $this->input->get('tanggal', true);
         $data2['tanggal'] = $tanggal;
         $data2['presensi'] = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
+        
+        $this->load->model("m_kinerja");
+        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensi($tanggal);
         $data3 = menu_ss();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);

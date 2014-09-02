@@ -27,7 +27,8 @@ class pengaturan extends CI_Controller {
         $id_depot = $this->input->post('id_depot', true);
         $data = array(
             'nama_depot' => $this->input->post('nama_depot', true),
-            'alamat_depot' => $this->input->post('alamat_depot', true)
+            'alamat_depot' => $this->input->post('alamat_depot', true),
+            'nama_oh' => $this->input->post('nama_oh', true),
         );
         $this->m_pengaturan->editDepot($data, $id);
     }

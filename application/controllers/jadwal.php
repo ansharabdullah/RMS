@@ -21,9 +21,12 @@ class jadwal extends CI_Controller {
         $data['lv1'] = 5;
         $data['lv2'] = 1;
         $data2['jadwal'] = 0;
+        $data2['tanggal'] = 0;
 
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
+
         $this->load->view('layouts/navbar', $data);
         $this->load->view('jadwal/v_jadwal', $data2);
         $this->load->view('layouts/footer');
@@ -34,8 +37,10 @@ class jadwal extends CI_Controller {
         $data['lv2'] = 1;
         $data2['jadwal'] = 0;
         $data2['error'] = 0;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
+
         $this->load->view('layouts/navbar', $data);
         $this->load->view('jadwal/v_import_jadwal', $data2);
         $this->load->view('layouts/footer');
@@ -201,8 +206,10 @@ class jadwal extends CI_Controller {
         unlink($file_target);
         $data['lv1'] = 5;
         $data['lv2'] = 1;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
+
         $this->load->view('layouts/navbar', $data);
         $this->load->view('jadwal/v_import_jadwal', $data2);
         $this->load->view('layouts/footer');
@@ -239,8 +246,10 @@ class jadwal extends CI_Controller {
 
         $data2['jadwal'] = $this->m_penjadwalan->getJadwal($depot, $tanggal);
         $data2['tanggal'] = $tanggal;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
+
         $this->load->view('layouts/navbar', $data);
         $this->load->view('jadwal/v_jadwal', $data2);
         $this->load->view('layouts/footer');
@@ -272,8 +281,10 @@ class jadwal extends CI_Controller {
         $data['lv1'] = 5;
         $data['lv2'] = 1;
         $data2['jadwal'] = 0;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
+
         $this->load->view('layouts/navbar', $data);
         $this->load->view('jadwal/v_hapus_jadwal',$data2);
         $this->load->view('layouts/footer');
@@ -289,8 +300,10 @@ class jadwal extends CI_Controller {
         $data2['tanggal'] = $tanggal;
         $data['lv1'] = 5;
         $data['lv2'] = 1;
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
+        $this->load->view('layouts/menu', $data3);
+
         $this->load->view('layouts/navbar', $data);
         $this->load->view('jadwal/v_hapus_jadwal',$data2);
         $this->load->view('layouts/footer');
