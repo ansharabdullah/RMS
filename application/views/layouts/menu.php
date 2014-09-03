@@ -114,7 +114,7 @@
                     <?php }
                     else
                     {
-                        echo " <li><div class='task-info' style='padding:10px;'><span class='btn btn-danger' > <i class='icon-exclamation-sign'></i> Data rencana belum tersedia</span> </div></li>";
+                        echo " <li><div class='task-info' style='padding:10px;'><span class='btn btn-danger' > <i class='icon-exclamation-sign'></i> Data rencana belum </br>tersedia</span> </div></li>";
                     }
                     ?>
                 </ul>

@@ -134,7 +134,7 @@
                 text: 'Grafik Kinerja Jumlah KM Awak Mobil Tangki Depot <?php echo $nama_depot?>'
             },
             subtitle: {
-                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun?>'
+                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
             },
             xAxis: [{
                     categories: tanggal
