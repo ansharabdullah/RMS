@@ -25,9 +25,8 @@ function DateToIndo($date) {
                  ?>
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_APAR?>";
-                 ap['STORE_PRESSURE'] = "<?php echo $a->STORE_PRESSURE?>";
-                 ap['CATRIDGE'] = "<?php echo $a->CATRIDGE?>";
-                 ap['CO2'] = "<?php echo $a->CO2?>";
+                 ap['TANGGAL_APAR'] = "<?php echo $a->TANGGAL_APAR?>";
+                 ap['ID_JENIS_APAR'] = "<?php echo $a->ID_JENIS_APAR?>";
                  ap['KETERANGAN_APAR'] = "<?php echo $a->KETERANGAN_APAR?>";
                  ap['STATUS_APAR'] = "<?php echo $a->STATUS_APAR?>";
                  
@@ -87,9 +86,8 @@ function DateToIndo($date) {
                             <tr>
                                 <th style="display:none;"></th>
                                 <th>No.</th>
-                                <th>Store Pressure</th>
-                                <th>Catridge</th>
-                                <th>C02</th>
+                                <th>Jenis Apar</th>
+                                <th>Tanggal Apar</th>
                                 <th>Keterangan</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
@@ -103,9 +101,11 @@ function DateToIndo($date) {
                                 foreach ($apar as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo(DateToIndo($row->STORE_PRESSURE)); ?></td>
-                                    <td><?php echo(DateToIndo($row->CATRIDGE)); ?></td>
-                                    <td><?php echo(DateToIndo($row->CO2)); ?></td>
+                                    <td><div id="<?php echo 'id_jenis-' . $i; ?>"><?php if($row->ID_JENIS_APAR == "1")echo 'Store Pressure'?>
+                                        <?php if($row->ID_JENIS_APAR == "2")echo 'Catridge'?>
+                                        <?php if($row->ID_JENIS_APAR == "3")echo 'CO2'?>
+                                    </td>
+                                    <td><?php echo(DateToIndo($row->TANGGAL_APAR)); ?></td>
                                     <td><div id="<?php echo 'keterangan-' . $i; ?>">
                                     <?php echo $row->KETERANGAN_APAR; ?></td>
                                     <td><div id="<?php echo 'status-' . $i; ?>"><?php if($row->STATUS_APAR == "0")echo 'Aktif'?>
@@ -150,21 +150,19 @@ function DateToIndo($date) {
 
 
                     <div class="form-group">
-                        <label for="inputJK" class="col-lg-2 col-sm-2 control-label">Store Pressure</label>
+                        <label for="inputJK" class="col-lg-2 col-sm-2 control-label">Jenis Apar</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="sp" name="STORE_PRESSURE"  type="date" required />
+                            <select class="form-control input-sm m-bot15" id="id_jenis" name="ID_JENIS_APAR">
+                                <option value="1">Store Pressure</option>
+                                <option value="2">Catridge</option>
+                                <option value="3">CO2</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Catridge</label>
+                        <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tanggal Apar</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="cat" name="CATRIDGE"  type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="norangka" class="col-lg-2 col-sm-2 control-label">C02</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="co" name="CO2"  type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="cat" name="TANGGAL_APAR"  type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -207,21 +205,20 @@ function DateToIndo($date) {
                     <!-- form edit-->
                     
                     <div class="form-group">
-                        <label for="inputJK" class="col-lg-2 col-sm-2 control-label">Store Pressure</label>
+                         <label class="col-sm-2 control-label col-lg-2" for="apar">Jenis Apar</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="STORE_PRESSURE" name="STORE_PRESSURE"  type="date" required />
+                            <select class="form-control input-sm m-bot15" id="ID_JENIS_APAR" name="ID_JENIS_APAR">
+                                <option <?php if($row->ID_JENIS_APAR == "1")echo "selected"?> value="1">Store Pressure</option>
+                                <option <?php if($row->ID_JENIS_APAR == "2")echo "selected"?> value="2">Catridge</option>
+                                <option <?php if($row->ID_JENIS_APAR == "3")echo "selected"?> value="3">CO2</option>
+                            </select>
                         </div>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Catridge</label>
+                        <label for="co2" class="col-lg-2 col-sm-2 control-label">Tanggal Apar</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="CATRIDGE" name="CATRIDGE"  type="date" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="co2" class="col-lg-2 col-sm-2 control-label">C02</label>
-                        <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="CO2" name="CO2"  type="date" required />
+                            <input class=" form-control input-sm m-bot15" id="TANGGAL_APAR" name="TANGGAL_APAR"  type="date" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -314,9 +311,8 @@ function DateToIndo($date) {
             var action = "<?php echo base_url()?>mt/edit_apar/"+apar[index]['id']+"/"+<?php echo $id_mobil?>;
            
             
-            $("#STORE_PRESSURE").val(apar[index]['STORE_PRESSURE']);
-            $("#CATRIDGE").val(apar[index]['CATRIDGE']);
-            $("#CO2").val(apar[index]['CO2']);
+            $("#ID_JENIS_APAR").val(apar[index]['ID_JENIS_APAR']);
+            $("#TANGGAL_APAR").val(apar[index]['TANGGAL_APAR']);
             $("#KETERANGAN_APAR").val(apar[index]['KETERANGAN_APAR']);
             $("#STATUS_APAR").val(apar[index]['STATUS_APAR']);
             $("#form-edit").attr("action",action ); 

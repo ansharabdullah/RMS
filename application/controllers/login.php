@@ -45,7 +45,7 @@ class login extends CI_Controller {
             $tahun = date('Y');
             $cek = $this->m_log_harian->cekLog($depot, $tahun);
             // Set timezone
-            if ($cek[0]->jumlah <= 365) {
+            if ($cek[0]->jumlah < 1) {
                 date_default_timezone_set('UTC');
 
                 // Start date

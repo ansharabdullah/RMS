@@ -72,8 +72,8 @@
                                         <th>Nama</th>
                                         <th>Jabatan</th>
                                         <th>Klasifikasi</th>
+                                        <th>Jadwal</th>
                                         <th>Kehadiran</th>
-                                        <th>Keterangan</th>
                                         <th>Alasan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -82,6 +82,13 @@
                                     <?php
                                     $i = 1;
                                     foreach ($presensi as $row) {
+                                        $hadir = "Tidak Hadir";
+                                        foreach ($kinerja as $row2) {
+                                            if ($row->ID_PEGAWAI == $row2->ID_PEGAWAI) {
+                                                $hadir = "Hadir";
+                                                break;
+                                            }
+                                        }
                                         ?>
                                         <tr class="">
                                             <td style="display:none;"></td>
@@ -92,16 +99,19 @@
                                             <td><?php echo $row->KLASIFIKASI; ?></td>
                                             <td><?php
                                                 if ($row->STATUS_MASUK == "Hadir") {
+                                                    
                                                 } else {
                                                     echo "<span class='label label-danger'>";
-                                                }echo $row->STATUS_MASUK; ?></td>
-                                            <td><?php echo $row->KETERANGAN_MASUK; ?></td>
+                                                }echo $row->STATUS_MASUK;
+                                                ?></td>
+                                            <td><?php echo $hadir; ?></td>
                                             <td><?php echo $row->ALASAN; ?></td>
-                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->KETERANGAN_MASUK ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a></td>
+                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a></td>
                                         </tr>
-        <?php $i++;
-    }
-    ?>
+                                        <?php
+                                        $i++;
+                                    }
+                                    ?>
 
                                 </tbody>
                             </table>
@@ -135,6 +145,7 @@
                 <input type="hidden" name="id_jadwal" id="id_jadwal"/>
                 <input type="hidden" name="tanggal_log_harian" id="tanggal_log_harian"/>
                 <input type="hidden" name="nip" id="nip"/>
+                <input type="hidden" name="keterangan_masuk" id="keterangan_masuk1"/>
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <section class="panel">
@@ -149,8 +160,9 @@
                                 <div class="form-group ">
                                     <label for="cjenis" class="control-label col-lg-4">Keterangan</label>
                                     <div class="col-lg-8">
-                                        <select class="form-control input-sm m-bot15" id="keterangan_masuk" name="keterangan_masuk">
+                                        <select class="form-control input-sm m-bot15" id="keterangan_masuk" name="keterangan_masuk" disabled="true">
                                             <option value="Hadir">Hadir</option>
+                                            <option value="Tidak Hadir">Tidak Hadir</option>
                                             <option value="Libur">Libur</option>
                                             <option value="Sakit">Sakit</option>
                                             <option value="Ijin">Ijin</option>
@@ -185,23 +197,24 @@
 
 <!-- END JAVASCRIPTS -->
 <script>
-                                                jQuery(document).ready(function() {
-                                                    EditableTable.init();
-                                                });
+                                        jQuery(document).ready(function() {
+                                            EditableTable.init();
+                                        });
 
-                                                function FilterData(par) {
-                                                    jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
-                                                    jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
-                                                }
+                                        function FilterData(par) {
+                                            jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+                                            jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+                                        }
 
-                                                function editPresensi(tanggal, keterangan, alasan, id_jadwal, nip) {
-                                                    $("#tanggal_log_harian").val(tanggal);
-                                                    $("#nip").val(nip);
-                                                    $("#tanggal").val(tanggal);
-                                                    $("#keterangan_masuk").val(keterangan);
-                                                    $("#alasan").val(alasan);
-                                                    $("#id_jadwal").val(id_jadwal);
-                                                }
+                                        function editPresensi(tanggal, keterangan, alasan, id_jadwal, nip) {
+                                            $("#tanggal_log_harian").val(tanggal);
+                                            $("#nip").val(nip);
+                                            $("#tanggal").val(tanggal);
+                                            $("#keterangan_masuk1").val(keterangan);
+                                            $("#keterangan_masuk").val(keterangan);
+                                            $("#alasan").val(alasan);
+                                            $("#id_jadwal").val(id_jadwal);
+                                        }
 
 
 

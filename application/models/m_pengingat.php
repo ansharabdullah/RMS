@@ -5,12 +5,12 @@ class m_pengingat extends CI_Model {
     
     public function getAparReminder($depot)
     {
-        $query = $this->db->query("select a.ID_APAR,m.NOPOL,a.STATUS_APAR,DATEDIFF(a.STORE_PRESSURE,now()) as store_pressure,DATEDIFF(a.CATRIDGE,now()) as  catridge,DATEDIFF(a.CO2,now()) as co2,
-                            a.STORE_PRESSURE as tgl_store,a.CATRIDGE as tgl_catridge,a.CO2 as tgl_co2
+        $query = $this->db->query("select a.ID_APAR,m.NOPOL,a.ID_JENIS_APAR,a.STATUS_APAR,a.KETERANGAN_APAR,DATEDIFF(a.TANGGAL_APAR,now()) as apar,
+                            a.TANGGAL_APAR as tgl_apar
                           from apar a, mobil m, depot d 
                           where m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
-                          and d.ID_DEPOT = $depot ");
+                          and d.ID_DEPOT = $depot order by m.ID_MOBIL,apar ASC");
         return $query;
     }
     
@@ -42,8 +42,8 @@ class m_pengingat extends CI_Model {
     
     public function getBanReminder($depot)
     {
-        $query = $this->db->query("select a.ID_BAN,m.NOPOL,a.POSISI_BAN,a.MERK_BAN,a.NO_SERI_BAN,a.JENIS_BAN,DATEDIFF(a.TANGGAL_PASANG,a.TANGGAL_GANTI_BAN) as tanggal_ban,
-                            a.TANGGAL_PASANG as tgl_pasang,a.TANGGAL_GANTI_BAN as tgl_ganti
+        $query = $this->db->query("select a.ID_BAN,m.NOPOL as bannopol,a.POSISI_BAN,a.MERK_BAN,a.NO_SERI_BAN,a.JENIS_BAN,DATEDIFF(a.TANGGAL_GANTI_BAN,now()) as tanggal_ban,
+                            a.TANGGAL_GANTI_BAN as tgl_ganti
                           from ban a, mobil m, depot d 
                           where m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 

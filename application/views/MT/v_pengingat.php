@@ -16,12 +16,11 @@
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_APAR?>";
                  ap['nopol'] = "<?php echo $a->NOPOL?>";
-                 ap['tgl_store'] = "<?php echo $a->tgl_store?>";
-                 ap['tgl_catridge'] = "<?php echo $a->tgl_catridge?>";
-                 ap['tgl_co2'] = "<?php echo $a->tgl_co2?>";
-                 ap['store_pressure'] = "<?php echo $a->store_pressure?>";
-                 ap['catridge'] = "<?php echo $a->catridge?>";
-                 ap['co2'] = "<?php echo $a->co2?>";
+                 ap['tgl_apar'] = "<?php echo $a->tgl_apar?>";
+                 ap['apar'] = "<?php echo $a->apar?>";
+                 ap['KETERANGAN_APAR'] = "<?php echo $a->KETERANGAN_APAR?>";
+                 ap['ID_JENIS_APAR'] = "<?php echo $a->ID_JENIS_APAR?>";
+                 
                  apar.push(ap);
                  <?php
              }
@@ -138,7 +137,7 @@
             </div>
 
             <div class="panel-body">
-                <div class="adv-table editable-table " id="tabel-apar">
+                <div class="adv-table editable-table " id="tabel-apar" style="overflow-x: scroll">
                     <div class="space10">
                         <h3><i class="icon-fire-extinguisher"></i> Pengingat Apar</h3>
                     </div>
@@ -148,9 +147,9 @@
                                 <th style="display: none;"></th>
                                 <th>No.</th>
                                 <th>Nopol</th>
-                                <th>Store Pressure</th>
-                                <th>Catridge</th>
-                                <th>C02</th>
+                                <th>Jenis Apar</th>
+                                <th>Keterangan</th>
+                                <th>Tanggal Apar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,18 +159,20 @@
                             foreach ($apar as $row) {
                                 $color = "";
                                 if ($row->STATUS_APAR== "0"){
-                                    if($row->store_pressure <= 7 || $row->catridge <=7 || $row->co2 <=7)
+                                    if($row->apar <= 7)
                                     {
                                         $color = "style='background-color: orange;'";
                                     }
                                     ?>
-                                    <tr>
                                         <th style="display: none;"></th>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  style ="text-decoration: underline" data-toggle="modal"  onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->store_pressure; ?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  style ="text-decoration: underline" data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar2-' . $i; ?>"><?php echo $row->catridge;?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  style ="text-decoration: underline" data-toggle="modal" onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar3-' . $i; ?>"><?php echo $row->co2 ; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php if($row->ID_JENIS_APAR == "1")echo 'Store Pressure'?>
+                                        <?php if($row->ID_JENIS_APAR == "2")echo 'Catridge'?>
+                                        <?php if($row->ID_JENIS_APAR == "3")echo 'CO2'?>
+                                        </td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_APAR ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  style ="text-decoration: underline" data-toggle="modal"  onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->apar; ?> hari</div></a></td>
                                         </tr>
                                     <?php
                                 $i++;
@@ -182,7 +183,7 @@
                     </table>
                 </div>
 
-                <div class="adv-table editable-table " id="tabel-ban">
+                <div class="adv-table editable-table " id="tabel-ban" style="overflow-x: scroll">
                     <div class="space10">
 
                         <h3><i class="icon-compass"></i> Pengingat Ban</h3>
@@ -214,7 +215,7 @@
                                 ?>
                                     <th style="display: none;"></th>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1; ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="nopol<?php echo $i ?>"><?php echo $row->NOPOL ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row->bannopol ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $row->MERK_BAN ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $row->NO_SERI_BAN ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $row->JENIS_BAN ?></td>
@@ -230,7 +231,7 @@
                 </div>
 
 
-                <div class="adv-table editable-table " id="tabel-surat">
+                <div class="adv-table editable-table " id="tabel-surat" style="overflow-x: scroll">
                     <div class="space10">
 
                         <h3><i class="icon-envelope"></i> Pengingat Surat Mobil Tangki</h3>
@@ -285,7 +286,7 @@
                     </table>
                 </div>
                 
-                <div class="adv-table editable-table " id="tabel-oli">
+                <div class="adv-table editable-table " id="tabel-oli" style="overflow-x: scroll">
                     <div class="space10">
                         <h3><i class="icon-fire-extinguisher"></i> Pengingat Oli</h3>
                     </div>
@@ -354,56 +355,37 @@
                             <input type="text" class="form-control"  id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
                         </div>
                     </div>
+                    <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Apar</label>
+                        <div class="col-lg-10">
+                            <select class="form-control input-sm m-bot15" id="ID_JENIS_APAR" name="ID_JENIS_APAR">
+                                <option <?php if ($row->ID_JENIS_APAR == "1")echo "selected" ?> value="1">Store Pressure</option>
+                                
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group">
-                        <label class="col-lg-3 col-sm-2 control-label">STORE PRESSURE</label><hr/>
+                        <label class="col-lg-3 col-sm-2 control-label">Tanggal Apar</label><hr/>
                     </div>
                     <div class="form-group">
                         <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control"  id="hari_store" readonly="readonly" name="sisa" placeholder="Jenis Apar">
+                            <input type="text" class="form-control"  id="hari_apar" readonly="readonly" name="hari_apar" placeholder="Jenis Apar">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="date" value="" id="tgl_store" size="16"  name="tgl_store" required="required"/>
+                            <input class="form-control" type="date" value="" id="tgl_apar" size="16"  name="tgl_apar" required="required"/>
                             <span class="help-block">Pilih Tanggal</span>
                         </div>
                     </div>
-                    <div class="form-group">
-                         <label class="col-lg-3 col-sm-2 control-label">CATRIDGE</label><hr/>
-                    </div>
-                    <div class="form-group">
-                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
-                        <div class="col-lg-9">
-                            <input type="text" class="form-control"  id="hari_catridge" readonly="readonly" name="sisa" placeholder="Jenis Apar">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="date" value="" id="tgl_catridge" size="16"  name="tgl_catridge" required="required"/>
-                            <span class="help-block">Pilih Tanggal</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                         <label class="col-lg-3 col-sm-2 control-label">CO2</label><hr/>
-                    </div>
-                    <div class="form-group">
-                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
-                        <div class="col-lg-9">
-                            <input type="text" class="form-control"  id="hari_co2" readonly="readonly" name="sisa" placeholder="Jenis Apar">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" type="date" value="" id="tgl_co2" size="16"  name="tgl_co2" required="required"/>
-                            <span class="help-block">Pilih Tanggal</span>
-                        </div>
-                    </div>
-
                 </div>
+                <div class="form-group">
+                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Keterangan</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control"  id="KETERANGAN_APAR" readonly="readonly" name="KETERANGAN_APAR" placeholder="Jenis Apar">
+                        </div>
+                    </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
                     <button class="btn btn-success" type="submit">Simpan</button>
@@ -635,12 +617,11 @@
             
             $("#tgl").val("");
             $("#nopol").val(apar[index]['nopol']);
-            $("#tgl_store").val(apar[index]['tgl_store']);
-            $("#hari_store").val(apar[index]['store_pressure'] + " hari");
-            $("#tgl_catridge").val(apar[index]['tgl_catridge']);
-            $("#hari_catridge").val(apar[index]['catridge'] + " hari");
-            $("#tgl_co2").val(apar[index]['tgl_co2']);
-            $("#hari_co2").val(apar[index]['co2'] + " hari");
+            $("#tgl_apar").val(apar[index]['tgl_apar']);
+            $("#KETERANGAN_APAR").val(apar[index]['KETERANGAN_APAR']);
+            $("#ID_JENIS_APAR").val(apar[index]['ID_JENIS_APAR']);
+            $("#hari_apar").val(apar[index]['apar'] + " hari");
+            
             $("#form-edit").attr("action",action ); 
 //            $("#apar").val(jenis);
 //            $("#hari").val(hari+" hari");

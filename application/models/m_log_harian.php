@@ -161,7 +161,7 @@ class m_log_harian extends CI_Model {
     
     //cek log_harian
     public  function cekLog($id_depot, $tahun){
-        $data = $this->db->query("select count(*) as jumlah from log_harian where id_depot='$id_depot' and year(tanggal_log_harian)='$tahun'");
+        $data = $this->db->query("select count(*) as jumlah from log_harian where id_depot='$id_depot' and tanggal_log_harian='$tahun-12-31'");
         return $data->result();
     }
 
