@@ -6,7 +6,7 @@ class m_kpi extends CI_Model {
     public function kpi_pertahun() {
         //kpi tiga tahun terakhir
         //data depot
-        $query = $this->db->get('depot');
+        $query = $this->db->query('select * from depot where ID_DEPOT > 0');
         $depot = $query->result();
         //data tahun yang ada di tabel kpi
         $query = $this->db->query("select YEAR(lh.TANGGAL_LOG_HARIAN) as tahun from kpi_operasional kp, log_harian lh where kp.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and YEAR(lh.TANGGAL_LOG_HARIAN) > (YEAR(CURDATE()) - 3) group by tahun");
@@ -20,6 +20,7 @@ class m_kpi extends CI_Model {
                                   from kpi_operasional kp, log_harian lh,depot d 
                                   where d.ID_DEPOT = lh.ID_DEPOT 
                                   and kp.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
+                                  and lh.ID_DEPOT > 0 
                                   and YEAR(lh.TANGGAL_LOG_HARIAN) > (YEAR(CURDATE()) - 3) 
                                   group by tahun,d.ID_DEPOT order by lh.TANGGAL_LOG_HARIAN asc");
         $data = $query->result();

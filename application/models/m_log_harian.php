@@ -71,6 +71,7 @@ class m_log_harian extends CI_Model {
         $query = $this->db->query("select *,MONTH(TANGGAL_LOG_HARIAN) as bulan, DAY(TANGGAL_LOG_HARIAN) as tanggal 
                                     from log_harian, depot 
                                     where tanggal_log_harian <= CURDATE() 
+                                    and log_harian.ID_DEPOT > 0
                                     and log_harian.ID_DEPOT = depot.ID_DEPOT 
                                     and  (status_input_kinerja = 0 or status_ms2 = 0 or status_interpolasi = 0 or status_kpi_operasional_internal = 0 or status_kpi_internal = 0 or status_penjadwalan = 0 or generate_ba = 0)  
                                     order by tanggal_log_harian,depot.ID_DEPOT asc");

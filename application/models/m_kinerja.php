@@ -174,6 +174,7 @@ class m_kinerja extends CI_Model {
                                    sum(km.total_kl_mt) as total_kl
                                    from kinerja_mt km, log_harian lh 
                                    where km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
+                                   and lh.ID_DEPOT > 0
                                    and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun");
         return $query->result();
     }
@@ -185,6 +186,7 @@ class m_kinerja extends CI_Model {
                                    sum(km.total_kl_mt) as total_kl
                                    from kinerja_mt km, log_harian lh 
                                    where km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
+                                   and lh.ID_DEPOT > 0
                                    and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun");
         return $query->result();
     }
@@ -196,6 +198,7 @@ class m_kinerja extends CI_Model {
                                    sum(km.total_kl_mt) as total_kl
                                    from kinerja_mt km, log_harian lh 
                                    where km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
+                                   and lh.ID_DEPOT > 0
                                    and lh.TANGGAL_LOG_HARIAN = '$tanggal'");
         return $query->result();
     }
@@ -242,6 +245,16 @@ class m_kinerja extends CI_Model {
         return $query->result();
     }
     
+    public function get_kinerja_mt_detail($id_depot , $tanggal){
+        $query = $this->db->query("select * 
+                                    from kinerja_mt km,log_harian lh,mobil m  
+                                    where m.ID_MOBIL = km.ID_MOBIL 
+                                    and km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
+                                    and lh.TANGGAL_LOG_HARIAN = '$tanggal' 
+                                    and lh.ID_DEPOT = $id_depot");
+        return $query->result();
+    }
+    
      public function get_kinerja_mt_tahun_oam() {
         $query = $this->db->query("select d.ID_DEPOT,d.NAMA_DEPOT, sum(total_km_mt )as total_km, sum(total_kl_mt) as total_kl ,
                                     sum(ritase_mt) as ritase,sum(premium) as premium,sum(pertamax) as pertamax,
@@ -249,6 +262,7 @@ class m_kinerja extends CI_Model {
                                     sum(solar) as solar,sum(bio_solar) as bio_solar,YEAR(lh.TANGGAL_LOG_HARIAN) as tahun 
                                     from kinerja_mt km, log_harian lh,depot d 
                                     where  km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN
+                                    and lh.ID_DEPOT > 0
                                     and lh.ID_DEPOT = d.ID_DEPOT
                                     group by d.ID_DEPOT,tahun  order by tahun asc");
         return $query->result();
@@ -273,6 +287,7 @@ class m_kinerja extends CI_Model {
                                     from kinerja_amt ka, log_harian lh 
                                     where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
                                     ka.STATUS_TUGAS = 'SUPIR' and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
+                                     and lh.ID_DEPOT > 0
                                     and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun");
         return $query->result();
     }
@@ -324,6 +339,7 @@ class m_kinerja extends CI_Model {
                                     from kinerja_amt ka, log_harian lh , depot d
                                     where lh.ID_LOG_HARIAN = ka.ID_LOG_HARIAN  
                                     and d.ID_DEPOT = lh.ID_DEPOT and ka.STATUS_TUGAS = 'SUPIR'
+                                    and lh.ID_DEPOT > 0
                                     group by d.ID_DEPOT,tahun  order by tahun asc");
         return $query->result();
     }

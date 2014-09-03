@@ -139,6 +139,28 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/footer');
     }
     
+    public function mt_depot_detail($depot,$nama,$tanggal) {
+        $data['lv1'] = $depot;
+        $data['lv2'] = 2;
+        $data2['hari'] = date('d',strtotime($tanggal));
+        $data2['bulan_mt'] = date('F',strtotime($tanggal));
+        $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_detail($depot , '2014-07-03');
+        $data2['tahun'] = date('Y',strtotime($tanggal));;
+        $data2['tanggal'] = date("d F Y",strtotime($tanggal));
+//        $data2['bulan'] = $bulan;
+//        $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_hari($depot, $bulan,$tahun);
+        $data2['mt'] = $this->m_mt->selectMT($depot);
+        $data2['id_depot'] = $depot;    
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        
+        $data3 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data3);
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_depot_mt_detail_harian',$data2);
+        $this->load->view('layouts/footer');
+    }
+    
     public function mt_hari($depot,$nama)
     {
        $tanggal =  $_POST['bulan'];
