@@ -344,6 +344,16 @@ class m_kinerja extends CI_Model {
         return $query->result();
     }
     
+    public function get_kinerja_amt_detail($id_depot , $tanggal){
+        $query = $this->db->query("select * 
+                                    from kinerja_amt ka,log_harian lh,pegawai p 
+                                    where p.ID_PEGAWAI = ka.ID_PEGAWAI 
+                                    and ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
+                                    and lh.TANGGAL_LOG_HARIAN = '$tanggal' 
+                                    and lh.ID_DEPOT = $id_depot");
+        return $query->result();
+    }
+    
     public function getKinerjaPresensi($tanggal){
         $data = $this->db->query("select p.ID_PEGAWAI, l.ID_LOG_HARIAN, k.ID_KINERJA_AMT from pegawai p, log_harian l, kinerja_amt k where p.ID_PEGAWAI=k.ID_PEGAWAI and k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and l.tanggal_log_harian='$tanggal'");
         return $data->result();

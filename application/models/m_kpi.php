@@ -86,5 +86,47 @@ class m_kpi extends CI_Model {
         
         return $query->result();
     }
+    
+    public function performance_kpi_perbulan($id_depot,$bulan,$tahun)
+    {
+        $query = $this->db->query("select * from depot d, kpi_operasional ko , log_harian lh,jenis_kpi_operasional as jk 
+                                    where jk.ID_JENIS_KPI_OPERASIONAL = ko.ID_JENIS_KPI_OPERASIONAL 
+                                    and lh.ID_LOG_HARIAN = ko.ID_LOG_HARIAN and lh.ID_DEPOT = d.ID_DEPOT
+                                    and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan and
+                                    YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun and lh.ID_DEPOT = $id_depot ");
+        
+        return $query->result();
+        
+    }
+    
+    
+    public function ms2_oam($id_depot,$bulan,$tahun)
+    {
+        $query = $this->db->query("select *,DAY(lh.TANGGAL_LOG_HARIAN) as tanggal 
+                                    from ms2 ,log_harian lh 
+                                    where ms2.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
+                                    and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
+                                    and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun and lh.ID_DEPOT = $id_depot");
+        
+        return $query->result();
+        
+    }
+    
+    public function volume_realisasi_oam($id_depot,$bulan,$tahun)
+    {
+         $query = $this->db->query("select *,sum(RITASE_MT) as ritase,sum(TOTAL_KM_MT) as km,sum(TOTAL_KL_MT) as kl,
+                                     sum(OWN_USE) as own_use,sum(PREMIUM) as premium,sum(PERTAMAX) as pertamax,
+                                     sum(PERTAMAX_PLUS) as pertamax_plus,sum(PERTAMINA_DEX) as pertamina_dex,
+                                     sum(SOLAR) as solar,sum(BIO_SOLAR) as bio_solar, DAY(lh.TANGGAL_LOG_HARIAN) as tanggal 
+                                     from kinerja_mt km, rencana r, log_harian lh ,depot d
+                                     where lh.ID_LOG_HARIAN = km.ID_LOG_HARIAN and km.ID_LOG_HARIAN = r.ID_LOG_HARIAN 
+                                     and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
+                                     and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun 
+                                     and lh.ID_DEPOT = d.ID_DEPOT
+                                     and lh.ID_DEPOT = $id_depot
+                                     group by tanggal");
+        
+        return $query->result();
+    }
 
 }

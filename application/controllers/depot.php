@@ -20,6 +20,7 @@ class Depot extends CI_Controller {
         $data['lv1'] = 1;
         $data['lv2'] = 1;
         $data2 = menu_oam();
+        $data3['id_depot'] = $id_depot;
         $data3['depot'] = $this->m_depot->get_depot();
         $data3['kpi_bulan'] = $this->m_kpi->nilai_kpi_perbulan($id_depot,$tahun);
         $data3['detail_kpi'] = $this->m_kpi->detail_kpi_perbulan($id_depot,$tahun);
@@ -38,18 +39,23 @@ class Depot extends CI_Controller {
         redirect('depot/grafik_bulan/' . $depot.'/'.$tahun);
     }
 
-    public function grafik_hari($tipe,$index,$id_depot) {
+    public function grafik_hari($tipe,$id_depot,$bulan,$tahun) {
 
         $data['lv1'] = 1;
         $data['lv2'] = 1;
         $data2 = menu_oam();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data2);
+        $data3['bulan'] = $bulan;
+        $data3['tahun'] = $tahun;
+        $data3['kpi'] = $this->m_kpi->performance_kpi_perbulan($id_depot,$bulan,$tahun);
         $this->navbar($data['lv1'], $data['lv2']);
         if ($tipe == 'ms2') {
-            $this->load->view('oam/v_grafik_ms2_harian');
+            $data3['ms2'] = $this->m_kpi->ms2_oam($id_depot,$bulan,$tahun);
+            $this->load->view('oam/v_grafik_ms2_harian',$data3);
         } else if ($tipe == 'volume') {
-            $this->load->view('oam/v_grafik_volume_harian');
+             $data3['volume'] = $this->m_kpi->volume_realisasi_oam($id_depot,$bulan,$tahun);
+            $this->load->view('oam/v_grafik_volume_harian',$data3);
         }
         $this->load->view('layouts/footer');
     }
@@ -88,6 +94,24 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/menu',$data3);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_depot_amt_harian',$data2);
+        $this->load->view('layouts/footer');
+    }
+    
+     public function amt_depot_detail($depot,$nama,$tanggal) {
+        $data['lv1'] = $depot;
+        $data['lv2'] = 1;
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $data2['id_depot'] = $depot;
+        $data2['hari'] = date('d',strtotime($tanggal));
+        $data2['bulan'] = date('F',strtotime($tanggal));
+        $data2['tahun'] = date('Y',strtotime($tanggal));;
+        $data2['tanggal'] = date("d F Y",strtotime($tanggal));
+        $data2['kinerja'] = $this->m_kinerja->get_kinerja_amt_detail($depot , $tanggal);
+        $data3 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data3);
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_depot_amt_detail_harian',$data2);
         $this->load->view('layouts/footer');
     }
 

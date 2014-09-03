@@ -74,7 +74,7 @@ class m_log_harian extends CI_Model {
                                     and log_harian.ID_DEPOT > 0
                                     and log_harian.ID_DEPOT = depot.ID_DEPOT 
                                     and  (status_input_kinerja = 0 or status_ms2 = 0 or status_interpolasi = 0 or status_kpi_operasional_internal = 0 or status_kpi_internal = 0 or status_penjadwalan = 0 or generate_ba = 0)  
-                                    order by tanggal_log_harian,depot.ID_DEPOT asc");
+                                    order by depot.ID_DEPOT,tanggal_log_harian asc");
         $data = $query->result();
         //gabung semua notifikasi
         $notifikasi = array();

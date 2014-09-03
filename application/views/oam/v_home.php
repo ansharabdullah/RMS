@@ -653,7 +653,7 @@
     var arrRitaseAmt = new Array();
     var arrSpbuAmt = new Array();
     var arrColorAmt = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
-    var arrTahun = new Array('2014');
+    var arrTahun = new Array();
     var id_depot_amt = new Array();
     <?php
         $tahun = "";

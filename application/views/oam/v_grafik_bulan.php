@@ -13,6 +13,7 @@
     var accidents = new Array();
     var realisasi_pengiriman = new Array();
     var bulan = new Array();
+    var nomor_bulan = new Array();
 //    realisasi_pengiriman = pengiriman;
 <?php
     $j = 0;
@@ -20,6 +21,7 @@
     $bulan ="";
     while($j < sizeof($kpi_bulan)) {
         ?>
+        nomor_bulan.push(<?php echo date('n',strtotime($kpi_bulan[$j]->tanggal))?>);
         bulan.push("<?php echo date('F',strtotime($kpi_bulan[$j]->tanggal))?>");
         pengiriman.push(<?php echo $detail_kpi[$index]->PERFORMANCE_SCORE?>);
         realisasi_pengiriman.push(<?php echo $detail_kpi[$index]->PERFORMANCE_SCORE?>);
@@ -69,26 +71,27 @@
                             }
                         },
                         y: 0
-                    }
-                },
-                series: {
-                    events: {
-                        click: function(event) {
-                            if(activeIndex < 3)
-                            {
-                                var title;
-                                if(activeIndex == 1)
+                    },
+                    point:{
+                        events:{
+                            click: function(event) {
+                               if(activeIndex < 3)
                                 {
-                                    title = "ms2";
+                                    var title;
+                                    if(activeIndex == 1)
+                                    {
+                                        title = "ms2";
+                                    }
+                                    else
+                                    {
+                                        title = "volume";
+                                    }
+                                    window.location = "<?php echo base_url() ?>depot/grafik_hari/"+title+"/<?php echo $id_depot?>/"+nomor_bulan[this.x]+"/<?php echo $tahun?>";
                                 }
-                                else
-                                {
-                                    title = "volume";
-                                }
-                                window.location = "<?php echo base_url() ?>depot/grafik_hari/"+title+"/1/1/";
                             }
                         }
                     }
+                    
                 }
             },
             xAxis: [{
@@ -156,7 +159,7 @@
         <!-- page start-->
                 <section class="panel">
                         <header class="panel-heading">
-                            Grafik KPI Bulanan Depot 1
+                            Grafik KPI Bulanan Depot <?php echo $kpi_bulan[0]->nama_depot?>
                         </header>
                         <div class="panel-body" >
                             <?php $attr = array("class"=>"cmxform form-horizontal tasi-form");
@@ -214,10 +217,9 @@
                 <section class="panel">
                     <div class="panel-body">
                         <header class="panel-heading">
-                            Key Performance Indicator (KPI) Depot 1 (Tahun 2014)
+                            Key Performance Indicator (KPI) Depot <?php echo $kpi_bulan[0]->nama_depot?> (Tahun <?php echo $tahun?>)
                         </header>
-                        <div class="adv-table editable-table " style="overflow-x: scroll;">
-                           <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                            <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
                                 <tr>
                                         <th style="display:none;"></th>
@@ -274,7 +276,6 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
                 </section>
     </section>
 </section>
