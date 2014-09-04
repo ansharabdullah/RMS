@@ -34,12 +34,38 @@
                     <strong>Error!</strong> Data KPI Operasional <strong><?php echo $kpi['nama_bulan'] ?></strong> sudah ada.
                 </div>
             <?php } else { ?>
-                <div class="alert alert-success fade in">
-                    <button data-dismiss="alert" class="close close-sm" type="button">
-                        <i class="icon-remove"></i>
-                    </button>
-                    <strong>Sukses!</strong> Berhasil tambah data KPI Operasional <strong><?php echo $kpi['nama_bulan'] ?></strong>.
-                </div>
+                <?php if ($kpi['error_ms2'] == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error MS2!</strong> Data MS2 Compliance <strong><?php echo $kpi['nama_bulan'] ?></strong> tidak ditemukan.
+                    </div>
+                <?php } ?>
+                <?php if ($kpi['error_rencana'] == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error Rencana!</strong> Data Rencana <strong><?php echo $kpi['nama_bulan'] ?></strong> tidak ditemukan.
+                    </div>
+                <?php } ?>
+                <?php if ($kpi['error_kinerja'] == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error Kinerja!</strong> Data Kinerja <strong><?php echo $kpi['nama_bulan'] ?></strong> belum lengkap.
+                    </div>
+                <?php } ?>
+                <?php if ($kpi['error_ms2'] == false && $kpi['error_rencana'] == false && $kpi['error_kinerja'] == false) { ?>
+                    <div class="alert alert-success fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Sukses!</strong> Berhasil tambah data KPI Operasional <strong><?php echo $kpi['nama_bulan'] ?></strong>.
+                    </div>
+                <?php } ?>
             <?php } ?>
         <?php } ?>
 
@@ -694,49 +720,49 @@
                                 <td>3</td>
                                 <td>Laporan tagihan ongkos angkut (dokumen lengkap dan benar)</td>
                                 <td><input type="number" required="required" id="kpitarget3" name="kpitarget3" class="form-control"></td>
-                                <td><input type="number" required="required" id="kpireal3" name="kpireal3" class="form-control"></td>
+                                <td><input type="number" required="required" id="kpirealisasi3" name="kpirealisasi3" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Customer  Satisfaction (Lembaga Penyalur)</td>
                                 <td><input type="number" required="required" id="kpitarget4" name="kpitarget4" class="form-control"></td>
-                                <td><input type="number" required="required" id="kpireal4" name="kpireal4" class="form-control"></td>
+                                <td><input type="number" required="required" id="kpirealisasi4" name="kpirealisasi4" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Jumlah temuan, keluhan atau komplain terkait pengelolaan MT</td>
                                 <td><input type="number" required="required" id="kpitarget5" name="kpitarget5" class="form-control"></td>
-                                <td><input type="number" required="required" id="kpireal5" name="kpireal5" class="form-control"></td>
+                                <td><input type="number" required="required" id="kpirealisasi5" name="kpirealisasi5" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Tindak lanjut penyelesaian keluhan atau komplain yang diterima</td>
                                 <td><input type="number" required="required" id="kpitarget6" name="kpitarget6" class="form-control"></td>
-                                <td><input type="number" required="required" id="kpireal6" name="kpireal6" class="form-control"></td>
+                                <td><input type="number" required="required" id="kpirealisasi6" name="kpirealisasi6" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td>Jumlah pekerja pengelola MT  yang mengikuti pelatihan</td>
                                 <td><input type="number" required="required" id="kpitarget7" name="kpitarget7" class="form-control"></td>
-                                <td><input type="number" required="required" id="kpireal7" name="kpireal7" class="form-control"></td>
+                                <td><input type="number" required="required" id="kpirealisasi7" name="kpirealisasi7" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td>Number of Incidents</td>
                                 <td><input type="number" required="required" id="kpitarget8" name="kpitarget8" class="form-control"></td>
-                                <td><input type="number" required="required" id="kpireal8" name="kpireal8" class="form-control"></td>
+                                <td><input type="number" required="required" id="kpirealisasi8" name="kpirealisasi8" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>9</td>
                                 <td>Waktu penyelesaian Incidents</td>
                                 <td><input type="number" required="required" id="kpitarget9" name="kpitarget9" class="form-control"></td>
-                                <td><input type="number" required="required" id="kpireal9" name="kpireal9" class="form-control"></td>
+                                <td><input type="number" required="required" id="kpirealisasi9" name="kpirealisasi9" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>10</td>
                                 <td>Number of Accident</td>
                                 <td><input type="number" required="required" id="kpitarget0" name="kpitarget10" class="form-control"></td>
-                                <td><input type="number" required="required" id="kpireal10" name="kpireal10" class="form-control"></td>
+                                <td><input type="number" required="required" id="kpirealisasi10" name="kpirealisasi10" class="form-control"></td>
                             </tr>
                         </tbody>
                     </table>

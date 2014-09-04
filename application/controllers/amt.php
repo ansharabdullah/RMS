@@ -9,6 +9,7 @@ class amt extends CI_Controller {
         parent::__construct();
         $this->load->model("m_amt");
         $this->load->model("m_log_sistem");
+        $this->load->model("m_log_harian");
         $this->load->model("m_peringatan");
         $this->load->model("m_penjadwalan");
         $this->load->helper(array('form', 'url'));
@@ -306,7 +307,7 @@ class amt extends CI_Controller {
             }
             $data['error'] = 0;
         }
-        
+
         unlink($file_target);
         $data['lv1'] = 2;
         $data['lv2'] = 1;
@@ -328,7 +329,7 @@ class amt extends CI_Controller {
             'keyword' => 'Tambah'
         );
         $this->m_log_sistem->insertLog($datalog);
-        
+
         $link = base_url() . "amt/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
@@ -354,7 +355,7 @@ class amt extends CI_Controller {
         $tanggal = $this->input->get('tanggal', true);
         $data2['tanggal'] = $tanggal;
         $data2['presensi'] = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
-        
+
         $this->load->model("m_kinerja");
         $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensi($tanggal);
         $data3 = menu_ss();
@@ -375,14 +376,14 @@ class amt extends CI_Controller {
         $tanggal = $this->input->post('tanggal_log_harian', true);
 
         $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
-        
+
         $datalog = array(
             'keterangan' => "Ubah presensi NIP : $nip pada $tanggal",
             'id_pegawai' => $this->session->userdata("id_pegawai"),
             'keyword' => 'Edit'
         );
         $this->m_log_sistem->insertLog($datalog);
-        
+
         $link = base_url() . "amt/presensi_pertanggal/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
@@ -392,13 +393,185 @@ class amt extends CI_Controller {
     public function koefisien() {
         $data['lv1'] = 2;
         $data['lv2'] = 4;
-
+        $tahun = date('Y');
+        $depot = $this->session->userdata("id_depot");
+        $data2['koefisien'] = $this->m_amt->getKoefisien($depot, $tahun);
         $data3 = menu_ss();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('amt/v_koefisien');
+        $this->load->view('amt/v_koefisien', $data2);
         $this->load->view('layouts/footer');
+    }
+
+    public function cek_koefisien() {
+        $data['lv1'] = 2;
+        $data['lv2'] = 4;
+        $tahun = $this->input->get('tahun', true);
+        $depot = $this->session->userdata("id_depot");
+        $data2['koefisien'] = $this->m_amt->getKoefisien($depot, $tahun);
+        $data3 = menu_ss();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu', $data3);
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('amt/v_koefisien', $data2);
+        $this->load->view('layouts/footer');
+    }
+
+    public function import_koefisien() {
+        $data['lv1'] = 2;
+        $data['lv2'] = 4;
+        $data3 = menu_ss();
+        $data3 = menu_ss();
+
+                $data2['error'] = 0;
+        $data2['koefisien'] = 0;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu', $data3);
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('amt/v_import_koefisien', $data2);
+        $this->load->view('layouts/footer');
+    }
+
+    public function import_koefisien_xls() {
+        $tahun = $this->input->post('tahun', true);
+        $depot = $this->session->userdata('id_depot');
+
+            $data2['koefisien'] = 0;
+        $cek = $this->m_amt->getKoefisien($depot, $tahun);
+        if ($cek) {
+            $data2['error'] = "Data koefisien tahun $tahun telah tersedia";
+        } else if (!$cek) {
+            $fileAMT = $_FILES['fileKoef'];
+            $dir = './assets/file/';
+            if (!file_exists($dir)) {
+                mkdir($dir);
+            }
+
+            $file_target = $dir . $_FILES['fileKoef']['name'];
+            move_uploaded_file($_FILES['fileKoef']['tmp_name'], $file_target);
+
+            $this->load->library('PHPExcel/Classes/PHPExcel');
+
+            $inputFileName = $file_target;
+            $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+
+            $worksheetData = $objReader->listWorksheetInfo($inputFileName);
+
+            foreach ($worksheetData as $row) {
+                $worksheetRead[] = $row['worksheetName'];
+            }
+
+            $objReader->setLoadSheetsOnly($worksheetRead);
+
+            $objPHPExcel = $objReader->load($inputFileName);
+
+            $loadedSheetNames = $objPHPExcel->getSheetNames();
+            $data2 = array();
+            foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
+                if ($loadedSheetName == 'KOEFISIEN') {
+                    $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
+                    $sheetData = $objPHPExcel->getActiveSheet();
+                    $i = 0;
+                    $status = 0;
+                    while ($status == 0) {
+                        $no = $i + 2;
+                        $error = "Error : ";
+                        if (!$sheetData->getCell('B3')->getFormattedValue() && !$sheetData->getCell('C3')->getFormattedValue() && !$sheetData->getCell('D3')->getFormattedValue() && !$sheetData->getCell('E3')->getFormattedValue() && !$sheetData->getCell('F3')->getFormattedValue() && !$sheetData->getCell('G3')->getFormattedValue() && !$sheetData->getCell('H3')->getFormattedValue() && !$sheetData->getCell('I3')->getFormattedValue() && !$sheetData->getCell('J3')->getFormattedValue() && !$sheetData->getCell('K3')->getFormattedValue() && !$sheetData->getCell('L3')->getFormattedValue() && !$sheetData->getCell('M3')->getFormattedValue() && !$sheetData->getCell('N3')->getFormattedValue()) {
+                            $status = 1;
+                            $data['amt'] = 0;
+                            break;
+                        }
+                        if (!is_numeric($sheetData->getCell('C' . $no)->getFormattedValue()) && !is_numeric($sheetData->getCell('D' . $no)->getFormattedValue()) && !is_numeric($sheetData->getCell('E' . $no)->getFormattedValue()) && !is_numeric($sheetData->getCell('F' . $no)->getFormattedValue())) {
+                            $error = "Isi harus berupa angka";
+                            $e = 1;
+                        }
+                        if ($error == "Error : ") {
+                            $error = "Sukses";
+                            $e = 0;
+                        }
+
+                        if ($i >= $sheetData->getHighestRow() - 3) {
+                            $status = 1;
+                            break;
+                        }
+                        $id_log_harian = $this->m_log_harian->getIdLogHarian($tahun, $depot);
+                        //koefisien KM
+                        $data2['koefisien'][($i * 4) + 0] = array(
+                            'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
+                            'id_jenis_penilaian' => 25 + ($i * 4),
+                            'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                            'status_error' => $error,
+                            'error' => $e
+                        );
+
+                        //koefisien KL
+                        $data2['koefisien'][($i * 4) + 1] = array(
+                            'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
+                            'id_jenis_penilaian' => 26 + ($i * 4),
+                            'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                            'status_error' => $error,
+                            'error' => $e
+                        );
+
+                        //koefisien Ritase
+                        $data2['koefisien'][($i * 4) + 2] = array(
+                            'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
+                            'id_jenis_penilaian' => 27 + ($i * 4),
+                            'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                            'status_error' => $error,
+                            'error' => $e
+                        );
+
+                        //koefisien SPBU
+                        $data2['koefisien'][($i * 4) + 3] = array(
+                            'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
+                            'id_jenis_penilaian' => 28 + ($i * 4),
+                            'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                            'status_error' => $error,
+                            'error' => $e
+                        );
+                        $i++;
+                        if (!$sheetData->getCell('B' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('C' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('D' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('E' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('F' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('G' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('H' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('I' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('J' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('K' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('L' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('M' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('N' . ($no + 1))->getFormattedValue()) {
+                            $status = 1;
+                        }
+                    }
+                }
+                $data['error'] = 0;
+                $data2['error'] = 0;
+            }
+            unlink($file_target);
+        }
+        $data['lv1'] = 2;
+        $data['lv2'] = 4;
+        $data3 = menu_ss();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu', $data3);
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('amt/v_import_koefisien', $data2);
+        $this->load->view('layouts/footer');
+    }
+
+    public function simpan_koefisien() {
+        $data_koef = unserialize($this->input->post('data'));
+        $this->m_amt->importKoefisien($data_koef);
+
+        $datalog = array(
+            'keterangan' => 'Import Koefisien',
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+        );
+        $this->m_log_sistem->insertLog($datalog);
+
+        $link = base_url() . "amt/koefisien/";
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
 
     public function grafik() {
