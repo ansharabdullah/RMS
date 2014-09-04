@@ -22,33 +22,32 @@
     var gagal_premium = new Array();
     var gagal_pertamax = new Array();
     var gagal_solar = new Array();
-    <?php
-        foreach($ms2 as $row)
-        { ?>
-            tanggal.push("<?php echo $row->tanggal?>");
-            total_lo_premium.push(<?php echo $row->TOTAL_LO_PREMIUM?>);
-            total_lo_pertamax.push(<?php echo $row->TOTAL_LO_PERTAMAX?>);
-            total_lo_solar.push(<?php echo $row->TOTAL_LO_SOLAR?>);
-            lo_premium.push(<?php echo $row->TOTAL_LO_PREMIUM?>);
-            lo_pertamax.push(<?php echo $row->TOTAL_LO_PERTAMAX?>);
-            lo_solar.push(<?php echo $row->TOTAL_LO_SOLAR?>);
-            sesuai_premium.push(<?php echo $row->SESUAI_PREMIUM?>);
-            sesuai_pertamax.push(<?php echo $row->SESUAI_PERTAMAX?>);
-            sesuai_solar.push(<?php echo $row->SESUAI_SOLAR?>);
-            cepat_premium.push(<?php echo $row->CEPAT_PREMIUM?>);
-            cepat_pertamax.push(<?php echo $row->CEPAT_PERTAMAX?>);
-            cepat_solar.push(<?php echo $row->CEPAT_SOLAR?>);
-            cepat_shift_1_premium.push(<?php echo $row->CEPAT_SHIFT1_PREMIUM?>);
-            cepat_shift_1_pertamax.push(<?php echo $row->CEPAT_SHIFT1_PERTAMAX?>);
-            cepat_shift_1_solar.push(<?php echo $row->CEPAT_SHIFT1_SOLAR?>);
-            lambat_premium.push(<?php echo $row->LAMBAT_PREMIUM?>);
-            lambat_pertamax.push(<?php echo $row->LAMBAT_PERTAMAX?>);
-            lambat_solar.push(<?php echo $row->LAMBAT_SOLAR?>);
-            gagal_premium.push(<?php echo $row->TIDAK_TERKIRIM_PREMIUM?>);
-            gagal_pertamax.push(<?php echo $row->TIDAK_TERKIRIM_PERTAMAX?>);
-            gagal_solar.push(<?php echo $row->TIDAK_TERKIRIM_SOLAR?>);
-       <?php }
+<?php
+foreach ($ms2 as $row) {
     ?>
+            tanggal.push("<?php echo $row->tanggal ?>");
+            total_lo_premium.push(<?php echo $row->TOTAL_LO_PREMIUM ?>);
+            total_lo_pertamax.push(<?php echo $row->TOTAL_LO_PERTAMAX ?>);
+            total_lo_solar.push(<?php echo $row->TOTAL_LO_SOLAR ?>);
+            lo_premium.push(<?php echo $row->TOTAL_LO_PREMIUM ?>);
+            lo_pertamax.push(<?php echo $row->TOTAL_LO_PERTAMAX ?>);
+            lo_solar.push(<?php echo $row->TOTAL_LO_SOLAR ?>);
+            sesuai_premium.push(<?php echo $row->SESUAI_PREMIUM ?>);
+            sesuai_pertamax.push(<?php echo $row->SESUAI_PERTAMAX ?>);
+            sesuai_solar.push(<?php echo $row->SESUAI_SOLAR ?>);
+            cepat_premium.push(<?php echo $row->CEPAT_PREMIUM ?>);
+            cepat_pertamax.push(<?php echo $row->CEPAT_PERTAMAX ?>);
+            cepat_solar.push(<?php echo $row->CEPAT_SOLAR ?>);
+            cepat_shift_1_premium.push(<?php echo $row->CEPAT_SHIFT1_PREMIUM ?>);
+            cepat_shift_1_pertamax.push(<?php echo $row->CEPAT_SHIFT1_PERTAMAX ?>);
+            cepat_shift_1_solar.push(<?php echo $row->CEPAT_SHIFT1_SOLAR ?>);
+            lambat_premium.push(<?php echo $row->LAMBAT_PREMIUM ?>);
+            lambat_pertamax.push(<?php echo $row->LAMBAT_PERTAMAX ?>);
+            lambat_solar.push(<?php echo $row->LAMBAT_SOLAR ?>);
+            gagal_premium.push(<?php echo $row->TIDAK_TERKIRIM_PREMIUM ?>);
+            gagal_pertamax.push(<?php echo $row->TIDAK_TERKIRIM_PERTAMAX ?>);
+            gagal_solar.push(<?php echo $row->TIDAK_TERKIRIM_SOLAR ?>);
+<?php } ?>
     $(function() {
         ms2 = new Highcharts.Chart({ 
             chart: {
@@ -59,11 +58,11 @@
                 text: 'TOTAL LO'
             },
             subtitle: {
-                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
+                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>'
             },
             xAxis: [{
                     categories:tanggal
-            }],
+                }],
             yAxis: [{ // Primary yAxis
                     labels: {
                         format: '',
@@ -79,9 +78,9 @@
                     }
                 }],
             tooltip: {
-                 formatter: function() {
-                     return this.x +' <?php echo date('F', mktime(0, 0, 0, $bulan, 1, $tahun))." ".$tahun;?>' + '<br/>' + this.series.name + " : " + this.y + '%' ;
-                 }
+                formatter: function() {
+                    return this.x +' <?php echo date('F', mktime(0, 0, 0, $bulan, 1, $tahun)) . " " . $tahun; ?>' + '<br/>' + this.series.name + " : " + this.y + '%' ;
+                }
             },
             series: [{
                     type: 'column',
@@ -144,167 +143,176 @@
     }
 </script>
 
+
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        <div class="row">
-            <div class="col-lg-12">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Grafik Harian Depot <?php echo $kpi[0]->NAMA_DEPOT ;?>
-                    </header>
-                    <div class="panel-body" >
-                        <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm">
+        <section class="panel">
+            <header class="panel-heading">
+                Grafik Harian Depot <?php if (sizeof($kpi) > 0)
+    echo $kpi[0]->NAMA_DEPOT; ?>
+            </header>
+            <div class="panel-body" >
+                <?php
+                $attr = array("class" => "cmxform form-horizontal tasi-form");
+                echo form_open("depot/ganti_kpi_harian/ms2/", $attr);
+                ?>
+                <div class="form-group">
+                    <div class="col-lg-2">
+                        <select class="form-control m-bot2"  id="depot" name="depot">
+                            <?php
+                            foreach ($depot as $d) {
+                                ?>
+                                <option value="<?php echo $d->ID_DEPOT ?>"><?php echo $d->NAMA_DEPOT ?></option>
+                                <?php
+                            }
+                            ?>
 
-                            <div class="form-group">
-                                <div class="col-lg-2">
-                                    <select class="form-control m-bot2"  id="depot" >
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                    </div>
 
-                                        <option value="">Depot 1</option>
-                                        <option value="">Depot 2</option>
-                                        <option value="">Depot 3</option>
-                                        <option value="">Depot 4</option>
-                                        <option value="">Depot 5</option>
+                    <div class=" col-lg-2">
+                        <input type="submit" class="btn btn-danger" value="Submit">
+                    </div>
 
-                                    </select>
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
-                                </div>
+                </div>
 
-                                <div class=" col-lg-2">
-                                    <input type="submit" class="btn btn-danger" value="Submit">
-                                </div>
+                <?php echo form_close() ?>
+                <br/><br/>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="btn-group pull-right">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">Filter Grafik<i class="icon-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-left">
 
-                            </div>
-                        </form>
-                        <br/><br/>
-                        <div class="row">
-                            <div class="col-lg-7">
-
-                                <div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MS2<i class="icon-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-left">
-
-                                        <li><a style="cursor: pointer" onclick="filterMs2('sesuai')">Sesuai MS2</a></li>
-                                        <li><a style="cursor: pointer" onclick="filterMs2('cepat')">Sebelum MS2</a></li>
-                                        <li><a style="cursor: pointer" onclick="filterMs2('cepat_shift1')">Sebelum Shift 1</a></li>
-                                        <li><a style="cursor: pointer" onclick="filterMs2('lambat')">Setelah MS2</a></li>
-                                        <li><a style="cursor: pointer" onclick="filterMs2('gagal')">Tidak Terkirim Sesuai Jadwal</a></li>
-                                        <li><a style="cursor: pointer" onclick="filterMs2('total')">Total LO</a></li>
+                                <li><a style="cursor: pointer" onclick="filterVolume('Premium')">Premium</a></li>
+                                <li><a style="cursor: pointer" onclick="filterVolume('Pertamax')">Pertamax</a></li>
+                                <li><a style="cursor: pointer" onclick="filterVolume('Solar')">Solar</a></li>
+                                <li><a style="cursor: pointer" onclick="filterVolume('Bio Solar')">Bio Solar</a></li>
 
 
-                                    </ul>
-                                </div>
-                                <div id="grafik"></div>
-                            </div>
-                            <div class="col-lg-5">
+                            </ul>
+                        </div>
+                        <div id="grafik"></div>
+                    </div>
+                    <div class="col-lg-5">
 
-                                <div id="grafikKpi"></div>
+                        <div id="grafikKpi"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="panel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Tabel MS2 Complience Bulan <?php echo date('F Y', mktime(0, 0, 0, $bulan, 1, $tahun))?>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table editable-table" style="overflow-x: scroll">
+
+                                <div class="space15"></div>
+                                <table class="table table-striped  table-bordered" id="editable-sample">   
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;"></th>
+                                            <th rowspan="2">No</th>
+                                            <th rowspan="2">Tanggal</th>
+                                            <th colspan="3">Sesuai Dengan MS2</th>
+                                            <th colspan="3">Cepat (Sebelum MS2)</th>
+                                            <th colspan="3">Lebih Cepat (Sebelum Shift 1)</th>
+                                            <th colspan="3">Lambat (Setelah MS2)</th>
+                                            <th colspan="3">Tidak Terkirim Sesuai Jadwal MS2</th>
+                                            <th colspan="3">Total LO</th>
+                                        </tr>
+                                        <tr>
+                                            <th style="display:none;"></th>
+                                            <th>Premium</th>
+                                            <th>Solar</th>
+                                            <th>Pertamax</th>
+                                            <th>Premium</th>
+                                            <th>Solar</th>
+                                            <th>Pertamax</th>
+                                            <th>Premium</th>
+                                            <th>Solar</th>
+                                            <th>Pertamax</th>
+                                            <th>Premium</th>
+                                            <th>Solar</th>
+                                            <th>Pertamax</th>
+                                            <th>Premium</th>
+                                            <th>Solar</th>
+                                            <th>Pertamax</th>
+                                            <th>Premium</th>
+                                            <th>Solar</th>
+                                            <th>Pertamax</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $i = 0;
+                                        foreach ($ms2 as $row) {
+                                            ?>
+                                            <tr class="">
+                                                <td style="display:none;"></td>
+                                                <td><?php echo ($i + 1) ?></td>
+                                                <td style="white-space: nowrap"><?php echo date('d F Y', strtotime($row->TANGGAL_LOG_HARIAN)) ?></td>
+                                                <td><?php echo $row->SESUAI_PREMIUM ?>%</td>
+                                                <td><?php echo $row->SESUAI_SOLAR ?>%</td>
+                                                <td><?php echo $row->SESUAI_PERTAMAX ?>%</td>  
+                                                <td><?php echo $row->CEPAT_PREMIUM ?>%</td>
+                                                <td><?php echo $row->CEPAT_SOLAR ?>%</td>
+                                                <td><?php echo $row->CEPAT_PERTAMAX ?>%</td>
+                                                <td><?php echo $row->CEPAT_SHIFT1_PREMIUM ?>%</td>
+                                                <td><?php echo $row->CEPAT_SHIFT1_SOLAR ?>%</td>
+                                                <td><?php echo $row->CEPAT_SHIFT1_PERTAMAX ?>%</td> 
+                                                <td><?php echo $row->LAMBAT_PREMIUM ?>%</td>
+                                                <td><?php echo $row->LAMBAT_SOLAR ?>%</td>
+                                                <td><?php echo $row->LAMBAT_PERTAMAX ?>%</td> 
+                                                <td><?php echo $row->TIDAK_TERKIRIM_PREMIUM ?>%</td>
+                                                <td><?php echo $row->TIDAK_TERKIRIM_SOLAR ?>%</td>
+                                                <td><?php echo $row->TIDAK_TERKIRIM_PERTAMAX ?>%</td> 
+                                                <td><?php echo $row->TOTAL_LO_PREMIUM ?>%</td>
+                                                <td><?php echo $row->TOTAL_LO_SOLAR ?>%</td>
+                                                <td><?php echo $row->TOTAL_LO_PERTAMAX ?>%</td>
+                                            </tr>
+                                            <?php
+                                            $i++;
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
-                </section>
-                <section class="panel">
-                    <div class="panel-body" >
-                        <div id="filePreview">
-                            <section class="panel">
-                                <header class="panel-heading">
-                                    Tabel MS2 Complience Bulan Januari 2014
-                                </header>
-                                <div class="panel-body">
-                                    <div class="adv-table editable-table" style="overflow-x: scroll">
+                    </section>
+                </div>
+        </section>
+    </section>
+</section>
 
-                                        <div class="space15"></div>
-                                        <table class="table table-bordered table-hover" id="editable-sample">   
-                                            <thead>
-                                                <tr>
-                                                    <th style="display:none;"></th>
-                                                    <th rowspan="2">No</th>
-                                                    <th rowspan="2">Tanggal</th>
-                                                    <th colspan="3">Sesuai Dengan MS2</th>
-                                                    <th colspan="3">Cepat (Sebelum MS2)</th>
-                                                    <th colspan="3">Lebih Cepat (Sebelum Shift 1)</th>
-                                                    <th colspan="3">Lambat (Setelah MS2)</th>
-                                                    <th colspan="3">Tidak Terkirim Sesuai Jadwal MS2</th>
-                                                    <th colspan="3">Total LO</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>Premium</th>
-                                                    <th>Solar</th>
-                                                    <th>Pertamax</th>
-                                                    <th>Premium</th>
-                                                    <th>Solar</th>
-                                                    <th>Pertamax</th>
-                                                    <th>Premium</th>
-                                                    <th>Solar</th>
-                                                    <th>Pertamax</th>
-                                                    <th>Premium</th>
-                                                    <th>Solar</th>
-                                                    <th>Pertamax</th>
-                                                    <th>Premium</th>
-                                                    <th>Solar</th>
-                                                    <th>Pertamax</th>
-                                                    <th>Premium</th>
-                                                    <th>Solar</th>
-                                                    <th>Pertamax</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $i = 0;
-                                                foreach ($ms2 as $row) {
-                                                    ?>
-                                                    <tr class="">
-                                                        <td style="display:none;"></td>
-                                                        <td><?php echo ($i + 1) ?></td>
-                                                        <td style="white-space: nowrap"><?php echo date('d F Y',strtotime($row->TANGGAL_LOG_HARIAN))?></td>
-                                                        <td><?php echo $row->SESUAI_PREMIUM ?>%</td>
-                                                        <td><?php echo $row->SESUAI_SOLAR ?>%</td>
-                                                        <td><?php echo $row->SESUAI_PERTAMAX ?>%</td>  
-                                                        <td><?php echo $row->CEPAT_PREMIUM ?>%</td>
-                                                        <td><?php echo $row->CEPAT_SOLAR ?>%</td>
-                                                        <td><?php echo $row->CEPAT_PERTAMAX?>%</td>
-                                                        <td><?php echo $row->CEPAT_SHIFT1_PREMIUM ?>%</td>
-                                                        <td><?php echo $row->CEPAT_SHIFT1_SOLAR ?>%</td>
-                                                        <td><?php echo $row->CEPAT_SHIFT1_PERTAMAX?>%</td> 
-                                                        <td><?php echo $row->LAMBAT_PREMIUM ?>%</td>
-                                                        <td><?php echo $row->LAMBAT_SOLAR ?>%</td>
-                                                        <td><?php echo $row->LAMBAT_PERTAMAX?>%</td> 
-                                                        <td><?php echo $row->TIDAK_TERKIRIM_PREMIUM ?>%</td>
-                                                        <td><?php echo $row->TIDAK_TERKIRIM_SOLAR ?>%</td>
-                                                        <td><?php echo $row->TIDAK_TERKIRIM_PERTAMAX?>%</td> 
-                                                        <td><?php echo $row->TOTAL_LO_PREMIUM ?>%</td>
-                                                        <td><?php echo $row->TOTAL_LO_SOLAR ?>%</td>
-                                                        <td><?php echo $row->TOTAL_LO_PERTAMAX?>%</td>
-                                                    </tr>
-                                                    <?php
-                                                    $i++;
-                                                }
-                                                ?>
+<!--script for this page only-->
+<script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </section>
-                <!-- page end-->
+<!-- END JAVASCRIPTS -->
 
-<script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
-<script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>
+<!-- page end-->
 
 <script type="text/javascript">
     var category = new Array();
     var nilai = new Array();
-    <?php foreach($kpi as $k)
-    { ?>
-      category.push("<?php echo $k->JENIS_KPI_OPERASIONAL?>");  
-      nilai.push(<?php echo $k->PERFORMANCE_SCORE?>);  
-    <?php } ?>
+<?php foreach ($kpi as $k) {
+    if ($k->ID_JENIS_KPI_OPERASIONAL < 10) { ?>
+                category.push("<?php echo $k->JENIS_KPI_OPERASIONAL ?>");  
+                nilai.push(<?php echo $k->PERFORMANCE_SCORE ?>);  
+        <?php
+    }
+}
+?>
     $(function () {
         
         $('#grafikKpi').highcharts({
@@ -315,7 +323,7 @@
             },
 
             title: {
-                text: "Nilai KPI DEPOT <?php echo $kpi[0]->NAMA_DEPOT ;?>",
+                text: "Nilai KPI DEPOT <?php echo $kpi[0]->NAMA_DEPOT; ?>",
                 x: -80
             },
 
@@ -353,9 +361,17 @@
         });
     });
 </script>
-
 <script>
     jQuery(document).ready(function() {
         EditableTable.init();
     });
+		  	
+    function FilterData(par) {
+        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+    }
+    
+   
+		  
 </script>
+

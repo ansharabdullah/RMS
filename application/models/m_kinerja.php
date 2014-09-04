@@ -226,7 +226,8 @@ class m_kinerja extends CI_Model {
                                     lh.TANGGAL_LOG_HARIAN
                                     from kinerja_mt km, log_harian lh 
                                     where  km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and 
-                                    lh.id_depot = $id_depot
+                                    YEAR(lh.TANGGAL_LOG_HARIAN) = YEAR(CURDATE())
+                                    and lh.id_depot = $id_depot
                                     group by lh.TANGGAL_LOG_HARIAN order by lh.TANGGAL_LOG_HARIAN asc");
         return $query->result();
     }
@@ -313,7 +314,8 @@ class m_kinerja extends CI_Model {
                                     from kinerja_amt ka, log_harian lh 
                                     where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
                                     ka.STATUS_TUGAS = 'SUPIR' and
-                                    lh.id_depot = $id_depot
+                                    lh.id_depot = $id_depot and 
+                                    YEAR(lh.TANGGAL_LOG_HARIAN) = YEAR(CURDATE())
                                     group by lh.TANGGAL_LOG_HARIAN order by lh.TANGGAL_LOG_HARIAN asc");
         return $query->result();
     }

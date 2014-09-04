@@ -138,7 +138,27 @@
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
-                    <div class="panel-body" id="grafikBody">
+                    
+                    <header class="panel-heading">
+                        Grafik Detail Harian AMT Depot <?php echo $nama_depot ?>
+                    </header>
+                  <div class="panel-body" >
+                        <?php
+                        $attr = array("class" => "cmxform form-horizontal tasi-form");
+                        echo form_open("depot/ganti_detail_amt/" . $id_depot . "/" . $nama_depot, $attr);
+                        ?>
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <input type="date" name="tanggal"  required="required" id="tahunLaporan"  class="form-control"/>
+                            </div>
+
+                            <div class=" col-lg-2">
+                                <input type="submit" class="btn btn-danger" value="Submit">
+                            </div>
+
+                        </div>
+                        <?php echo form_close() ?>
+                        <br/><br/>
                         <div id="grafik"></div><br/><br/>
                         <button class='btn btn-danger' id="sebelum" onclick="sebelumOnClick()"><i class='icon-long-arrow-left'></i> sebelumnya</button>
                         <button class='btn btn-danger' style='float:right;' id="selanjutnya" onclick="selanjutnyaOnClick()">selanjutnya <i class='icon-long-arrow-right'></i></button>
