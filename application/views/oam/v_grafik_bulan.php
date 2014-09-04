@@ -200,7 +200,7 @@
                                     </div>
 
                                 </div>
-                            </form>
+                            <?php echo form_close();?>
                             <br/><br/>
                             <div class="btn-group pull-right">
                                 <button class="btn dropdown-toggle" data-toggle="dropdown">Filter Grafik<i class="icon-angle-down"></i>
@@ -226,11 +226,13 @@
                         </div>
             </section>
                 <section class="panel">
-                    <div class="panel-body">
                         <header class="panel-heading">
                             Key Performance Indicator (KPI) Depot <?php echo $kpi_bulan[0]->nama_depot?> (Tahun <?php echo $tahun?>)
                         </header>
-                            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                    <div class="panel-body">
+                        <div class="space15">
+                        </div>
+                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
                                 <tr>
                                         <th style="display:none;"></th>
@@ -245,8 +247,8 @@
                                         <th style="white-space: nowrap">Weighted Score</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
+                            <tbody>
+                                <?php
                                     $j = 0;
                                     $index = 0;
                                     $bulan ="";
@@ -284,9 +286,9 @@
                                         $j++;
                                     }
                                     ?>
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
     </section>
 </section>
@@ -309,4 +311,3 @@
    
 		  
 </script>
-
