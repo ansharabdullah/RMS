@@ -176,6 +176,18 @@
                         }
                     }
                 }],
+             plotOptions: {
+                column: {
+                   point:{
+                      events:{
+                        click: function(event) {
+                               var tgl = '<?php echo $tahun."-".$bulan."-";?>'+this.category;
+                                window.location = "<?php echo base_url() ?>depot/mt_depot_detail/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+tgl;
+                            }
+                        }
+                    }
+                }
+            },
             tooltip: {
                 shared: true
             },

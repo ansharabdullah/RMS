@@ -52,6 +52,7 @@ class home extends CI_Controller {
 
     public function home_oam() {
         //if (($this->session->userdata('isLoggedIn')) && (($this->session->userdata('id_role') == 1) || ($this->session->userdata('id_role') == 2) )) {
+       $this->load->model('m_kpi');
         $data2['total_mt'] = $this->m_mt->getTotalMt();
         $data2['total_amt'] = $this->m_amt->getTotalAMt();
         $data2['rencana_bulan'] = $this->m_rencana->get_rencana_bulan_oam(date("n"),date("Y"));
@@ -60,7 +61,7 @@ class home extends CI_Controller {
         $data2['kinerja_bulan'] = $this->m_kinerja->get_kinerja_bulan_oam(date("n"),date("Y"));
         $data2['kinerja_tahun'] = $this->m_kinerja->get_kinerja_tahun_oam(date("Y"));
         $data2['kinerja_hari'] = $this->m_kinerja->get_kinerja_hari_oam(date("Y-m-d"));
-        
+        $data2['kpi'] = $this->m_kpi->kpi_pertahun();
         $data2['kinerja_mt'] = $this->m_kinerja->get_kinerja_mt_tahun_oam();
         $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_tahun_oam();
         $data2['depot'] = $this->m_depot->get_depot();

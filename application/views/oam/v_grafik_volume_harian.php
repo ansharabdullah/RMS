@@ -1,46 +1,96 @@
 <script type="text/javascript">
-
-    $(function() {
-        $('#grafik').highcharts({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                text: 'Grafik Pencapaian Premium'
-            },
-            subtitle: {
-                text: 'Bulan Januari Tahun 2014'
-            },
-            xAxis: [{
-                    categories: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-                }],
-            yAxis: [{ // Primary yAxis
-                    labels: {
-                        format: '',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
+    var volume;
+    var tanggal = new Array();
+    var premium = new Array();
+    var r_premium = new Array();
+    var solar = new Array();
+    var r_solar = new Array();
+    var pertamax = new Array();
+    var r_pertamax = new Array();
+    var bio_solar = new Array();
+    var r_biosolar = new Array();
+    var realisasi = new Array();
+    var rencana = new Array();
+<?php
+foreach ($volume as $row) {
+    ?>
+                tanggal.push("<?php echo $row->tanggal ?>");
+                premium.push(<?php echo $row->premium ?>);
+                r_premium.push(<?php echo $row->R_PREMIUM ?>);
+                realisasi.push(<?php echo $row->premium ?>);
+                rencana.push(<?php echo $row->R_PREMIUM ?>);
+                pertamax.push(<?php echo $row->pertamax ?>);
+                r_pertamax.push(<?php echo $row->R_PERTAMAX ?>);
+                solar.push(<?php echo $row->solar ?>);
+                r_solar.push(<?php echo $row->R_SOLAR ?>);
+                bio_solar.push(<?php echo $row->premium ?>);
+                r_biosolar.push(<?php echo $row->R_BIOSOLAR ?>);
+<?php } ?>
+        $(function() {
+            volume = new Highcharts.Chart({ 
+                chart: {
+                    renderTo:'grafik',
+                    zoomType:'x'
+                },
+                title: {
+                    text: 'Grafik Pencapaian Premium'
+                },
+                subtitle: {
+                    text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>'
+                },
+                xAxis: [{
+                        categories: tanggal
+                    }],
+                yAxis: [{ // Primary yAxis
+                        labels: {
+                            format: '',
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
+                        },
+                        title: {
+                            text: 'Total (%)',
+                            style: {
+                                color: Highcharts.getOptions().colors[1]
+                            }
                         }
-                    },
-                    title: {
-                        text: 'Total (%)',
-                        style: {
-                            color: Highcharts.getOptions().colors[1]
-                        }
-                    }
-                }],
-            tooltip: {
-                shared: true
-            },
-            legend:{
-                enabled:false
-            },
-            series: [{
-                    type: 'spline',
-                    data: [99,98,97,96,95,99,94,98,97,95,98,101,93,94,98,99,102,95,96,97,98,94,95,101,99,98,97,93,94,99,98]
-                }]
+                    }],
+                tooltip: {
+                    shared: true
+                },
+                series: [{
+                        name: 'Rencana',
+                        type: 'column',
+                        color : '#FF002B',
+                        data: rencana
+                    },{
+                        name: 'Realisasi',
+                        type: 'column',
+                        color : '#2C88D4',
+                        data: realisasi
+                    
+                    }]
+            });
         });
-    });
    
+        function filterVolume(tipe)
+        {
+            volume.setTitle({text: "Grafik Pencapaian "+tipe});
+            if(tipe == "Premium"){
+                volume.series[0].setData(r_premium);
+                volume.series[1].setData(premium);
+            }else if(tipe == "Pertamax"){
+                volume.series[0].setData(r_pertamax);
+                volume.series[1].setData(pertamax);
+            }else if(tipe == "Solar"){
+                volume.series[0].setData(r_solar);
+                volume.series[1].setData(solar);
+            }else if(tipe == "Bio Solar"){
+                volume.series[0].setData(r_biosolar);
+                volume.series[1].setData(bio_solar);
+            }
+       
+        }
 
 </script>
 
@@ -51,7 +101,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Rencana Volume vs Realisasi Harian Depot 1
+                        Grafik Rencana Volume vs Realisasi Harian Depot <?php echo $volume[0]->NAMA_DEPOT?>
                     </header>
                     <div class="panel-body" >
                         <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm">
@@ -86,10 +136,10 @@
                                     </button>
                                     <ul class="dropdown-menu pull-left">
 
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Premium')">Premium</a></li>
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Pertamax')">Pertamax</a></li>
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Solar')">Solar</a></li>
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Bio Solar')">Bio Solar</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterVolume('Premium')">Premium</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterVolume('Pertamax')">Pertamax</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterVolume('Solar')">Solar</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterVolume('Bio Solar')">Bio Solar</a></li>
 
 
                                     </ul>
@@ -108,7 +158,7 @@
                         <div id="filePreview">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    Tabel Rencana Volume vs Realisasi Harian Depot 1 Bulan Januari 2014
+                                    Tabel Rencana Volume vs Realisasi Harian Depot <?php echo $volume[0]->NAMA_DEPOT?> Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>
                                 </header>
                                 <div class="panel-body">
                                     <div class="row">
@@ -119,11 +169,12 @@
                                                         <tr>
                                                             <th style="display: none;"></th>
                                                             <th rowspan="2">No</th>
-                                                            <th rowspan="2">Bulan</th>
+                                                            <th rowspan="2">Tanggal</th>
                                                             <th colspan="2">Premium</th>
                                                             <th colspan="2">Bio Solar</th>
                                                             <th colspan="2">Pertamax</th>
                                                             <th colspan="2">Solar</th>
+                                                            <th rowspan="2">Pencapaian</th>
                                                         </tr>
                                                         <tr>
                                                             <th>Rencana</th>
@@ -137,42 +188,28 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>1 Januari 2014</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8899281</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>2 Januari 2014</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8899281</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>3 Januari 2014</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8099281</td>
-                                                            <td>8899281</td>
-                                                            <td>8899281</td>
-                                                        </tr>
+                                                        <?php
+                                                        $i = 0;
+                                                        foreach ($volume as $v) {
+//                                                                $pencapaian = (($v->premium / $v->R_PREMIUM) + ($v->bio_solar/$v->R_BIOSOLAR) + ($v->pertamax / $v->R_PERTAMAX) + ($v->solar / $v->R_SOLAR)) / 4 * 100;
+                                                            ?>
+                                                            <tr>
+                                                                <td><?php echo ($i + 1) ?></td>
+                                                                <td style="white-space: nowrap"><?php echo date('d F Y', strtotime($v->TANGGAL_LOG_HARIAN)) ?></td>
+                                                                <td><?php echo $v->R_PREMIUM ?></td>
+                                                                <td><?php echo $v->premium ?></td>
+                                                                <td><?php echo $v->R_BIOSOLAR ?></td>
+                                                                <td><?php echo $v->bio_solar ?></td>
+                                                                <td><?php echo $v->R_PERTAMAX ?></td>
+                                                                <td><?php echo $v->pertamax ?></td>
+                                                                <td><?php echo $v->R_SOLAR ?></td>
+                                                                <td><?php echo $v->solar ?></td>
+                                                                <td></td>
+                                                            </tr>
+    <?php
+    $i++;
+}
+?>
                                                     </tbody>
                                                 </table>
                                             </center>
@@ -185,54 +222,58 @@
                 </section>
                 <!-- page end-->
 
-<script type="text/javascript">
-    $(function () {
+                <script type="text/javascript">
+                    var category = new Array();
+                    var nilai = new Array();
+<?php foreach ($kpi as $k) { ?>
+                            category.push("<?php echo $k->JENIS_KPI_OPERASIONAL ?>");  
+                            nilai.push(<?php echo $k->PERFORMANCE_SCORE ?>);  
+<?php } ?>
+                        $(function () {
+        
+                            $('#grafikKpi').highcharts({
 
-        $('#grafikKpi').highcharts({
+                                chart: {
+                                    polar: true,
+                                    type: 'line'
+                                },
 
-            chart: {
-                polar: true,
-                type: 'line'
-            },
+                                title: {
+                                    text: "Nilai KPI DEPOT <?php echo $kpi[0]->NAMA_DEPOT; ?>",
+                                    x: -80
+                                },
 
-            title: {
-                text: 'Nilai KPI DEPOT 1',
-                x: -80
-            },
+                                pane: {
+                                    size: '80%'
+                                },
 
-            pane: {
-                size: '80%'
-            },
+                                xAxis: {
+                                    categories: category,
+                                    tickmarkPlacement: 'on',
+                                    lineWidth: 0
+                                },
 
-            xAxis: {
-                categories: ['MS2','Volume','Laporan tagihan Ongkos','Customer Satisfaction','Keluhan & Komplain',
-                    'Penyelesaian keluhan','Pekerja Mengikuti Pelatihan','Number Of Incidents',
-                    'Penyelesaian Incidents','Number Of Accidents'],
-                tickmarkPlacement: 'on',
-                lineWidth: 0
-            },
+                                yAxis: {
+                                    gridLineInterpolation: 'polygon',
+                                    lineWidth: 0,
+                                    min: 0
+                                },
 
-            yAxis: {
-                gridLineInterpolation: 'polygon',
-                lineWidth: 0,
-                min: 0
-            },
+                                tooltip: {
+                                    shared: true,
+                                    pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}%</b><br/>'
+                                },
 
-            tooltip: {
-                shared: true,
-                pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}%</b><br/>'
-            },
-            
-            legend:{
-                enabled:false
-            },
-            series: [{
-                    type:'area',
-                    name: 'Nilai KPI',
-                    data: [101.57,101.59,120,97.37,120,100,140,80,120],
-                    pointPlacement: 'on'
-                }]
+                                legend:{
+                                    enabled:false
+                                },
+                                series: [{
+                                        type:'area',
+                                        name: 'Nilai KPI',
+                                        data: nilai,
+                                        pointPlacement: 'on'
+                                    }]
 
-        });
-    });
-</script>
+                            });
+                        });
+                </script>

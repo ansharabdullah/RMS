@@ -542,7 +542,39 @@
 <script src="<?php echo base_url() ?>assets/js/grouped-categories.js"></script>
 <script type="text/javascript">
     var amt;
-    var kpi;
+     var tahun_kpi = new Array();
+    var series_kpi = new Array();
+    var set = new Array();
+    var arrColorKpi = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
+    <?php
+        foreach($kpi['tahun'] as $tahun)
+        {
+            ?>
+            tahun_kpi.push("<?php echo $tahun?>");
+            <?php
+        }
+        $i = 0;
+        foreach($kpi['data'] as $data){
+            ?>
+            set = new Array();
+            <?php
+            foreach($data['kpi'] as $dt)
+            {
+                ?>
+                set.push(<?php echo round($dt,2)?>);
+                <?php
+            }
+            ?>
+            series_kpi.push({
+                name:'<?php echo $data['depot'] ?>',
+                color : arrColorKpi[<?php echo $i?>],
+                id : '<?php echo $data['id_depot'] ?>',
+                data: set
+            });
+            <?php
+            $i++;
+        }
+    ?>
     $(function() {
         kpi = new Highcharts.Chart({ 
             chart: {
@@ -553,35 +585,32 @@
                 text: 'Nilai KPI Depot Pertahun'
             },
             plotOptions: {
-                column: {
+               
+               column: {
+                   point:{
+                      events:{
+                        click: function(event) {
+                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/"+ this.series.options.id +"/"+this.category;
+                            }
+                        }
+                    },
+                    
                     dataLabels: {
                         enabled: true,
                         useHTML: true,
                         formatter: function() {
-                            if(this.y < 100){
+                            if(this.y < 100 && this.y > 0){
                                 return "<span class='btn btn-danger' > <i class='icon-exclamation-sign'></i></span>"; 
                             }
                         },
                         y: 0
                     }
-                },
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>depot/grafik_bulan/";
-                        }
-                    }
                 }
             },
             xAxis: [{
-                    categories: ['2014'],
+                    categories: tahun_kpi,
                     gridLineWidth: 0
-                },{
-                    categories:['Target Depot 1','Target Depot 2','Target Depot 3','Target Depot 4','Target Depot 5'],
-                    opposite:true,
-                    labels: {
-                        enabled:false
-                    }
+              
                 }],
 
             yAxis: [{ // Primary yAxis
@@ -603,7 +632,7 @@
 
             tooltip: {
                  positioner: function () {
-                    return { x: 10, y: 35 };
+                    return { x: 10, y: 0};
                  }
             },
             labels: {
@@ -616,26 +645,7 @@
                         }
                     }]
             },
-            series: [{
-                    name: 'Depot 1',
-                    color:'#FF002B',
-                    data: [99]
-                }, {
-                    name: 'Depot 2',
-                    color:'#2C88D4',
-                    data: [110]
-                }, {
-                    name: 'Depot 3',
-                    color:'#23C906',
-                    data: [106]
-                }, {
-                    name: 'Depot 4',
-                    data: [92]
-                }, {
-                    name: 'Depot 5',
-                    color:'#F5A905',
-                    data: [98]
-                }]
+            series: series_kpi
         });
     });
     var arrKmAmt = new Array();
@@ -643,7 +653,7 @@
     var arrRitaseAmt = new Array();
     var arrSpbuAmt = new Array();
     var arrColorAmt = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
-    var arrTahun = new Array('2014');
+    var arrTahun = new Array();
     var id_depot_amt = new Array();
     <?php
         $tahun = "";
