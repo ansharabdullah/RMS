@@ -339,7 +339,9 @@ class Mt extends CI_Controller {
     }
     
     public function import_xls_mt() {
-
+        
+        
+        
         $fileMT = $_FILES['fileMT'];
         $dir = './assets/file/';
         if (!file_exists($dir)) {

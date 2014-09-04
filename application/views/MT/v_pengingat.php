@@ -71,9 +71,8 @@
                  ?>
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_BAN?>";
-                 ap['nopol'] = "<?php echo $a->NOPOL?>";
+                 ap['bannopol'] = "<?php echo $a->bannopol?>";
                  ap['tgl_ban'] = "<?php echo $a->tgl_ban?>";
-                 ap['TANGGAL_PASANG'] = "<?php echo $a->TANGGAL_PASANG?>";
                  ap['TANGGAL_GANTI_BAN'] = "<?php echo $a->TANGGAL_GANTI_BAN?>";
                  ap['MERK_BAN'] = "<?php echo $a->MERK_BAN?>";
                  ap['NO_SERI_BAN'] = "<?php echo $a->NO_SERI_BAN?>";
@@ -355,41 +354,44 @@
                             <input type="text" class="form-control"  id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
                         </div>
                     </div>
-                    <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Jenis Apar</label>
+                    <div class="form-group">
+                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">Jenis Apar</label>
                         <div class="col-lg-10">
                             <select class="form-control input-sm m-bot15" id="ID_JENIS_APAR" name="ID_JENIS_APAR">
-                                <option <?php if ($row->ID_JENIS_APAR == "1")echo "selected" ?> value="1">Store Pressure</option>
-                                
+                                <option value="1">Store Pressure</option>
+                                <option value="2">Catridge</option>
+                                <option value="3">CO2</option>
                             </select>
                         </div>
                     </div>
+                   
                     <div class="form-group">
                         <label class="col-lg-3 col-sm-2 control-label">Tanggal Apar</label><hr/>
                     </div>
                     <div class="form-group">
-                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Sisa waktu</label>
-                        <div class="col-lg-9">
+                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">Sisa waktu</label>
+                        <div class="col-lg-10">
                             <input type="text" class="form-control"  id="hari_apar" readonly="readonly" name="hari_apar" placeholder="Jenis Apar">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="tgl" class="col-lg-3 col-sm-2 control-label">Tanggal</label>
-                        <div class="col-lg-9">
+                        <label for="tgl" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                        <div class="col-lg-10">
                             <input class="form-control" type="date" value="" id="tgl_apar" size="16"  name="tgl_apar" required="required"/>
                             <span class="help-block">Pilih Tanggal</span>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                        <label for="nopol" class="col-lg-3 col-sm-2 control-label">Keterangan</label>
-                        <div class="col-lg-9">
-                            <input type="text" class="form-control"  id="KETERANGAN_APAR" readonly="readonly" name="KETERANGAN_APAR" placeholder="Jenis Apar">
+                    <div class="form-group">
+                            <label for="nopol" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control"  id="KETERANGAN_APAR" readonly="readonly" name="KETERANGAN_APAR" placeholder="Jenis Apar">
+                            </div>
                         </div>
-                    </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Tutup</button>
                     <button class="btn btn-success" type="submit">Simpan</button>
 
+                    </div>
                 </div>
             </form>
 
@@ -406,21 +408,21 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-horizontal" role="form" id="form-edit" >
+                <form class="cmxform form-horizontal tasi-form" role="form" id="form-edit-1"  >
                     <div class="form-group">
                         <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" value="D 6308 AD" id="nopol" readonly="readonly" name="nopol" placeholder="Nopol">
+                            <input type="text" class="form-control" id="bannopol" readonly="readonly" name="bannopol" placeholder="Nopol">
                         </div>
                     </div>
                 </form>
-                <form class="form-inline" role="form" id="form-edit-ban" >
+                <form class="form-inline" role="form" id="form-edit-ban" method="POST" >
                     <div class="form-group">
-                        <input type="text" class="form-control" id="ban" readonly="readonly" placeholder="Ban">
+                        <input type="text" class="form-control" id="POSISI_BAN" name="POSISI_BAN" readonly="readonly" placeholder="Ban">
 
                     </div>  
                     <div class="form-group">
-                        <input class="form-control" type="date" required="required" value="" id="tgl-ban" size="16" required="required"/>
+                        <input class="form-control" type="date" required="required" id="tgl-ban" size="16" name="tgl_ban" required="required"/>
 
                     </div>
                     <div class="form-group">
@@ -436,20 +438,21 @@
                         <th>Aksi</th>
                     </tr>
                     <?php
-                    for ($i = 0; $i < 16; $i++) {
-                        $sisa = rand(0, 15);
+                    foreach ($ban as $row){
+                  
                         $color = "";
-                        if ($sisa < 8) {
+                        if ($row->tanggal_ban < 8) {
                             $color = "style='background-color: orange;'";
                         }
                         ?>
-                        <tr id="row-ban-<?php echo $i + 1 ?>" <?php echo $color ?>>
-                            <td><?php echo $i + 1 ?></td>
-                            <td><span id="aturban<?php echo $i + 1 ?>"><?php echo $sisa ?></span> hari</td>
+                        <tr id="row-ban-<?php echo $row->POSISI_BAN?>" <?php echo $color ?>>
+                            <td><?php echo $row->POSISI_BAN ?></td>
+                            <td><span id="aturban<?php echo $i + 1 ?>"><?php echo $row->tanggal_ban ?></span> hari</td>
                             <td><button type="button" class="btn btn-success btn-xs" onclick="setBan('<?php echo $i + 1 ?>')">Atur</button></td>
                         </tr>
                         <?php
                     }
+                    
                     ?>
                 </table>
             </div>
@@ -480,8 +483,12 @@
                          <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="id_jenis_surat">Jenis Surat</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control"  value ="" id="ID_JENIS_SURAT" readonly="readonly" name="ID_JENIS_SURAT" placeholder="Nopol">
-                             
+                            <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
+                                <option value="1">STNK</option>
+                                <option value="2">Pajak</option>
+                                <option value="3">KEUR</option>
+                                <option value="4">Tera</option>
+                            </select>
                         </div>
                     </div>
                         <div class="form-group">
@@ -645,12 +652,12 @@
             
             var action = "<?php echo base_url()?>mt/edit_reminder_ban/"+ban[index]['id'];
             $("#tgl").val("");
-            $("#nopol").val(ban[index]['nopol']);
+            
             $("#ID_JENIS_ban").val(ban[index]['ID_JENIS_ban']);
-            $("#tgl_surat").val(surat[index]['tgl_surat']);
-            $("#hari_surat").val(surat[index]['tgl_akhir_surat'] + " hari");
-            $("#KETERANGAN_SURAT").val(surat[index]['KETERANGAN_SURAT']);
-            $("#Form-Surat").attr("action",action ); 
+            $("#tgl_surat").val(ban[index]['tgl_surat']);
+            $("#hari_surat").val(ban[index]['tgl_akhir_surat'] + " hari");
+            $("#KETERANGAN_SURAT").val(ban[index]['KETERANGAN_SURAT']);
+            $("#Form-Ban").attr("action",action ); 
            
         }
         
@@ -699,42 +706,25 @@
             $('#editable-sample3').dataTable().fnFilter( '' );
             $('#editable-sample1').dataTable().fnFilter( '' );
         }
-    
-        $("#form-edit-ban").submit(function(e){
-            var date1 = new Date($("#tgl-ban").val());
-            var date2 = new Date();
-            var diffDays = date2.getDate() - date1.getDate(); 
-            var idBan = "#aturban"+indexBan;
-            var rowBan = "#row-ban-"+indexBan;
-            diffDays = diffDays*(-1);
-            if(diffDays > 0)
-            {
-                alert("Tanggal harus lebih dari sekarang");   
-            }
-            else
-            {
-                if(diffDays > 7)
-                {
-                    $(rowBan).css({'background-color': 'transparent'});   
-                }
-                $(idBan).html(diffDays);
-                $("#form-edit-ban").hide();
-            }
-            e.preventDefault();
-        });
-    
         function setBan(index)
         {
-            indexBan = index;
+            
             $("#form-edit-ban").hide();
             $("#form-edit-ban").show("slow");
-            $("#ban").val("Ban " + index);
+            var action = "<?php echo base_url()?>mt/edit_reminder_ban/"+ban[index]['id'];
+            $("#bannopol").val(ban[index]['bannopol']);
+            $("#tgl_ban").val(ban[index]['tgl_ban']);
+            $("#POSISI_BAN").val(ban[index]['POSISI_BAN']);
+            $("#form-edit").attr("action",action );
+           
         }
     
-        function cekBan()
+        function cekBan(index)
         {
             $("#tgl-ban").val("");
             $("#form-edit-ban").hide();
+           
+            
         }
     
         function editSurat()
