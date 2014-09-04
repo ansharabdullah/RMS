@@ -395,7 +395,7 @@ for ($date = strtotime($kinerja_amt[0]->TANGGAL_LOG_HARIAN); $date <= strtotime(
                 renderTo:'grafik'
             },
             title: {
-                text: 'Grafik AMT'
+                text: 'Grafik AMT Indikator KM'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -435,7 +435,7 @@ for ($date = strtotime($kinerja_amt[0]->TANGGAL_LOG_HARIAN); $date <= strtotime(
                     threshold: null
                 }
             },
-            legend : {enabled: true},
+            legend : {enabled: false},
             series: [{
                     type: 'area',
                     name: 'KM',
@@ -502,7 +502,7 @@ for ($date = strtotime($kinerja_mt[0]->TANGGAL_LOG_HARIAN); $date <= strtotime($
                 renderTo: 'grafik1'
             },
             title: {
-                text: 'Grafik MT'
+                text: 'Grafik MT Indikator KM'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -556,7 +556,9 @@ for ($date = strtotime($kinerja_mt[0]->TANGGAL_LOG_HARIAN); $date <= strtotime($
   
     function filterMt(title)
     {
-        mt.legend.allItems[0].update({name:title});
+        
+        mt.setTitle({text: "Grafik MT Indikator " + title});
+//        mt.legend.allItems[0].update({name:title});
         if(title == "KM"){
              mt.series[0].setData(total_km_mt);
         }
@@ -589,7 +591,8 @@ for ($date = strtotime($kinerja_mt[0]->TANGGAL_LOG_HARIAN); $date <= strtotime($
     
     function filterAmt(title)
     {
-        amt.legend.allItems[0].update({name:title});
+        amt.setTitle({text: "Grafik AMT Indikator " + title});
+//        amt.legend.allItems[0].update({name:title});
         if(title == "KM"){
              amt.series[0].setData(total_km_amt);
         }

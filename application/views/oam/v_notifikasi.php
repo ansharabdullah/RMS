@@ -79,7 +79,7 @@
                                                   Berita Acara belum dibuat.
                                                     <br/><br/>";
                                             }
-                                            if ($id_depot != $logHarian[$i + 1]['id_depot']) {
+                                            if ($i == sizeof($logHarian)-1 || $id_depot != $logHarian[$i + 1]['id_depot']) {
                                         ?>
                                     </div>
                                 </section>
