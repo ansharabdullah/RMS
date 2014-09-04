@@ -8,6 +8,7 @@
                 $("#filePreview").hide();
                 $("#filePreview").slideDown("slow");
                 $("#tgl").html($("#tglForm").val());
+                document.getElementById("commentForm").submit();
             }
             e.preventDefault();
         });
@@ -25,7 +26,7 @@
                 Presensi Mobil Tangki
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="GET" action="<?php echo base_url() ?>mt/cek_presensi/">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
@@ -43,11 +44,11 @@
             </div>
         </section>
 
-
+        <?php if ($presensi) { ?>
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
-                    Tabel Presensi (<span id="tgl"></span>)
+                    Tabel Presensi (<?php echo $tanggal ?>)
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">
@@ -73,7 +74,7 @@
                                     <th>Kapasitas</th>
                                     <th>Transportir</th>
                                     <th>Produk</th>
-                                    <th>Kategori</th>
+                                    <th>Jadwal</th>
                                     <th>Kehadiran</th>
                                     <th>Keterangan</th>
                                     <th>Aksi</th>
@@ -81,82 +82,40 @@
                             </thead>
                             <tbody>
 
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>1</td>
-                                    <td>D9809AD</td>
-                                    <td>24</td>
-                                    <td>PT Incot</td>
-                                    <td>Premium</td>
-                                    <td>1</td>
-                                    <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
+                                <?php
+                                    $i = 1;
+                                    foreach ($presensi as $row) {
+                                        $hadir = "Tidak Hadir";
+                                        foreach ($kinerja as $row2) {
+                                            if ($row->ID_MOBIL == $row2->ID_MOBIL) {
+                                                $hadir = "Hadir";
+                                                break;
+                                            }
+                                        }
+                                        ?>
+                                        <tr class="">
+                                            <td style="display:none;"></td>
+                                            <td><?php echo $i; ?></td>
+                                            <td><?php echo $row->NOPOL; ?></td>
+                                            <td><?php echo $row->KAPASITAS; ?></td>
+                                            <td><?php echo $row->TRANSPORTIR; ?></td>
+                                            <td><?php echo $row->PRODUK; ?></td>
+                                            <td><?php
+                                                if ($row->STATUS_MASUK == "Hadir") {
+                                                    
+                                                } else {
+                                                    echo "<span class='label label-danger'>";
+                                                }echo $row->STATUS_MASUK;
+                                                ?></td>
+                                            <td><?php echo $hadir; ?></td>
+                                            <td><?php echo $row->ALASAN; ?></td>
+                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a></td>
+                                        </tr>
+                                        <?php
+                                        $i++;
+                                    }
+                                    ?>
 
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>2</td>
-                                    <td>D9709AF</td>
-                                    <td>16</td>
-                                    <td>PT Incot</td>
-                                    <td>Premium</td>
-                                    <td>1</td>
-                                    <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>3</td>
-                                    <td>D9119AD</td>
-                                    <td>24</td>
-                                    <td>PT Masoem</td>
-                                    <td>Pertamax</td>
-                                    <td>2</td>
-                                    <td><span class="label label-warning">Absen</span></td>
-                                    <td>Update Tera</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>4</td>
-                                    <td>D9823AU</td>
-                                    <td>8</td>
-                                    <td>PT Masoem</td>
-                                    <td>Solar</td>
-                                    <td>1</td>
-                                    <td><span class="label label-warning">Absen</span></td>
-                                    <td>Ganti Oli</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>5</td>
-                                    <td>D9009AD</td>
-                                    <td>24</td>
-                                    <td>PT Patra</td>
-                                    <td>Pertamax</td>
-                                    <td>2</td>
-                                    <td><span class="label label-warning">Absen</span></td>
-                                    <td>Update STNK</td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
-                                <tr class="">
-                                    <td style="display:none;"></td>
-                                    <td>6</td>
-                                    <td>D9811AU</td>
-                                    <td>24</td>
-                                    <td>PT Patra</td>
-                                    <td>Slar</td>
-                                    <td>3</td>
-                                    <td><span class="label label-success">Hadir</span></td>
-                                    <td></td>
-                                    <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -164,11 +123,7 @@
             </section>
         </div>
 
-
-
-
-
-
+<?php } ?>
 
     </section>
 </section>

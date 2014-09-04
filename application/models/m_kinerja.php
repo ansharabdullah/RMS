@@ -360,4 +360,9 @@ class m_kinerja extends CI_Model {
         $data = $this->db->query("select p.ID_PEGAWAI, l.ID_LOG_HARIAN, k.ID_KINERJA_AMT from pegawai p, log_harian l, kinerja_amt k where p.ID_PEGAWAI=k.ID_PEGAWAI and k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and l.tanggal_log_harian='$tanggal'");
         return $data->result();
     }
+
+    public function getKinerjaPresensiMT($tanggal){
+        $data = $this->db->query("select m.ID_MOBIL, l.ID_LOG_HARIAN, k.ID_KINERJA_MT from mobil m, log_harian l, kinerja_mt k where m.ID_MOBIL=k.ID_MOBIL and k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and l.tanggal_log_harian='$tanggal'");
+        return $data->result();
+    }
 }

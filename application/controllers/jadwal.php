@@ -11,6 +11,7 @@ class jadwal extends CI_Controller {
         $this->load->model('m_log_harian');
         $this->load->model('m_mt');
         $this->load->model('m_penjadwalan');
+        $this->load->model('m_log_sistem');
     }
 
     public function index() {
