@@ -67,10 +67,10 @@
                         useHTML: true,
                         formatter: function() {
                             if(this.y < 100){
-                                return "<span class='btn btn-danger' > <i class='icon-exclamation-sign'></i></span>"; 
+                                return "<span class='btn btn-warning'> <i class='icon-warning-sign'></i></span>"; 
                             }
                         },
-                        y: 0
+                        y: 100
                     },
                     point:{
                         events:{
@@ -92,6 +92,9 @@
                         }
                     }
                     
+                },
+             series: {
+                 groupPadding: 0
                 }
             },
             xAxis: [{
@@ -109,7 +112,15 @@
                         style: {
                             color: Highcharts.getOptions().colors[1]
                         }
-                    }
+                    },
+                    
+                     plotLines:[{
+                            value:100,
+                            color: '#ff0000',
+                            width:2,
+                            zIndex:4,
+                            label:{text:'Target'}
+                        }]
                 }],
             tooltip: {
                  positioner: function () {
@@ -211,7 +222,7 @@
                             </div>
                             <div id="grafik2"></div>
 
-                                    &nbsp;&nbsp;<span class='btn btn-danger' > <i class='icon-exclamation-sign'></i></span>  <b> = Hasil dibawah target</b>
+                                    &nbsp;&nbsp;<span class='btn btn-warning'> <i class='icon-warning-sign'></i></span>  <b> = Hasil dibawah target</b>
                         </div>
             </section>
                 <section class="panel">
