@@ -435,7 +435,8 @@
                     <tr>
                         <th>Ban</th>
                         <th>Sisa Waktu</th>
-                        <th>Aksi</th>
+                        <th>Tanggal</th>
+                        
                     </tr>
                     <?php
                     foreach ($ban as $row){
@@ -448,8 +449,8 @@
                         <tr id="row-ban-<?php echo $row->POSISI_BAN?>" <?php echo $color ?>>
                             <td><?php echo $row->POSISI_BAN ?></td>
                             <td><span id="aturban<?php echo $i + 1 ?>"><?php echo $row->tanggal_ban ?></span> hari</td>
-                            <td><button type="button" class="btn btn-success btn-xs" onclick="setBan('<?php echo $i + 1 ?>')">Atur</button></td>
-                        </tr>
+                            <td><input class="form-control" type="date" required="required" id="tgl-ban" size="16" name="tgl_ban" required="required"/></td>
+                             </tr>
                         <?php
                     }
                     

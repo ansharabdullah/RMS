@@ -1,20 +1,18 @@
 <script type="text/javascript">
-    $( document ).ready(function() {
+    $(document).ready(function() {
         $("#filePreview").hide();
-        $("#commentForm").submit(function(e){
-            var isvalidate=$("#commentForm").valid();
-            if(isvalidate)
-            {    
-                $("#filePreview").hide();
-                $("#filePreview").slideDown("slow");
+        $("#commentForm").submit(function(e) {
+            var isvalidate = $("#commentForm").valid();
+            if (isvalidate)
                 $("#tgl").html($("#tglForm").val());
-                document.getElementById("commentForm").submit();
+            document.getElementById("commentForm").submit();
             }
             e.preventDefault();
         });
     });
-    
-    
+
+
+
 </script>
 
 
@@ -30,7 +28,7 @@
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
-                            <input type="date" required="required" id="tglForm" class="form-control"  placeholder="Tanggal">
+                            <input type="date" required="required" id="tglForm" class="form-control"  placeholder="Tanggal" name="tanggal">
                             <span class="help-block">Pilih tanggal</span>
                         </div>
                     </div>
@@ -43,8 +41,7 @@
                 </form>
             </div>
         </section>
-
-        <?php if ($presensi) { ?>
+<?php if ($presensi) { ?>
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
@@ -76,7 +73,7 @@
                                     <th>Produk</th>
                                     <th>Jadwal</th>
                                     <th>Kehadiran</th>
-                                    <th>Keterangan</th>
+                                    <th>Alasan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -85,15 +82,14 @@
                                 <?php
                                     $i = 1;
                                     foreach ($presensi as $row) {
-                                        $hadir = "Tidak Hadir";
+                                        $hadir = "Absen";
                                         foreach ($kinerja as $row2) {
                                             if ($row->ID_MOBIL == $row2->ID_MOBIL) {
                                                 $hadir = "Hadir";
-                                                break;
+                                                
                                             }
                                         }
                                         ?>
-                                        <tr class="">
                                             <td style="display:none;"></td>
                                             <td><?php echo $i; ?></td>
                                             <td><?php echo $row->NOPOL; ?></td>
@@ -102,14 +98,19 @@
                                             <td><?php echo $row->PRODUK; ?></td>
                                             <td><?php
                                                 if ($row->STATUS_MASUK == "Hadir") {
-                                                    
+                                                    echo "<span class='label label-success'>";
                                                 } else {
                                                     echo "<span class='label label-danger'>";
                                                 }echo $row->STATUS_MASUK;
                                                 ?></td>
-                                            <td><?php echo $hadir; ?></td>
+                                            <td><?php
+                                             if ($hadir == "Hadir") {
+                                                    echo "<span class='label label-success'>";
+                                                } else {
+                                                    echo "<span class='label label-danger'>";
+                                                }echo $hadir; ?></td>
                                             <td><?php echo $row->ALASAN; ?></td>
-                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a></td>
+                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a></td>
                                         </tr>
                                         <?php
                                         $i++;
@@ -122,9 +123,19 @@
                 </div>
             </section>
         </div>
-
-<?php } ?>
-
+    <?php }else {
+            if ($tanggal) {
+                ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> Tidak ada data absen.
+                </div>
+    <?php } 
+    
+ }?>
+        
     </section>
 </section>
 <!--main content end-->
@@ -137,48 +148,50 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Peringatan</h4>
+                <h4 class="modal-title">Presensi Mobil Tangki</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
-
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>mt/ubah_presensi/">
+                <input type="hidden" name="id_jadwal" id="id_jadwal"/>
+                <input type="hidden" name="tanggal_log_harian" id="tanggal_log_harian"/>
+                <input type="hidden" name="nopol" id="nopol"/>
+                <input type="hidden" name="keterangan_masuk" id="keterangan_masuk1"/>
                 <div class="modal-body">
-
                     <div class="col-lg-12">
                         <section class="panel">
-
                             <div class="panel-body">
-
                                 <div class="form-group ">                                            
                                     <label for="ctglberlaku" class="control-label col-lg-4">Tanggal</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="ctglberlaku" name="tglbelaku" size="16" type="date" value="" required/>
-                                        <span class="help-block">Pilih Tanggal</span>
+                                        <input class=" form-control input-sm m-bot15" id="tanggal" name="tanggal" size="16" type="date" value="" required readonly/>
+                                        <span class="help-block">Pilih tanggal</span>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label for="cjenis" class="control-label col-lg-4">Status Masuk</label>
+                                    <label for="cjenis" class="control-label col-lg-4">Kehadiran</label>
                                     <div class="col-lg-8">
-                                        <select class="form-control input-sm m-bot15" id="cjenis" name="jenis">
-                                            <option>Hilang</option>
-                                            <option>Kecelakaan</option>
-                                            <option>Pemeliharaan</option>
-                                            <option>Rusak</option>
-                                            
+                                        <select class="form-control input-sm m-bot15" id="keterangan_masuk" name="keterangan_masuk">
+                                            <option value="Hadir">Hadir</option>
+                                            <option value="Absen">Absen</option>
+                                            <option value="Libur">Libur</option>
+                                            <option value="Sakit">Sakit</option>
+                                            <option value="Ijin">Ijin</option>
+                                            <option value="Alfa">Alfa</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label for="cKeterangan" class="control-label col-lg-4">Keterangan</label>
+                                    <label for="alasan" class="control-label col-lg-4">Alasan</label>
                                     <div class="col-lg-8">
-                                        <input class=" form-control input-sm m-bot15" id="cKeterangan" name="Keterangan" minlength="2" type="text" required />
+                                        <textarea class=" form-control input-sm m-bot15" id="alasan" name="alasan" minlength="2" type="text" required ></textarea>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </div>
+
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                     <input class="btn btn-success" type="submit" value="Simpan"/>
                 </div>
             </form>
@@ -202,6 +215,14 @@
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
     
-   
+   function editPresensi(tanggal, keterangan, alasan, id_jadwal, nip) {
+                                            $("#tanggal_log_harian").val(tanggal);
+                                            $("#nopol").val(nopol);
+                                            $("#tanggal").val(tanggal);
+                                            $("#keterangan_masuk1").val(keterangan);
+                                            $("#keterangan_masuk").val(keterangan);
+                                            $("#alasan").val(alasan);
+                                            $("#id_jadwal").val(id_jadwal);
+                                        }
 		  
 </script>
