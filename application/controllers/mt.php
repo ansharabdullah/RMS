@@ -830,10 +830,28 @@ class Mt extends CI_Controller {
     public function presensi() {
         $data['lv1'] = 3;
         $data['lv2'] = 3;
+        
+        $data2['presensi'] = 0;
         $this->header($data);
-        $this->load->view('mt/v_presensi');
+        $this->load->view('mt/v_presensi',$data2);
         $this->footer();
     }
+    
+    public function cek_presensi() {
+        $data['lv1'] = 3;
+        $data['lv2'] = 3;
+        $depot = $this->session->userdata('id_depot');
+        $tanggal = $this->input->get('tanggal', true);
+        $data2['tanggal'] = $tanggal;
+        $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
+        
+        $this->load->model("m_kinerja");
+        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($tanggal);
+        $this->header($data);
+        $this->load->view('mt/v_presensi',$data2);
+        $this->footer();
+    }
+
     
     
     public function reminder() {
