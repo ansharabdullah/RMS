@@ -53,6 +53,18 @@ class m_amt extends CI_Model {
         return $data->result();
     }
     
+     //koefisien
+    public function getKoefisien($depot, $tahun){
+        $data = $this->db->query("select * from nilai n, jenis_penilaian j, log_harian l where j.id_jenis_penilaian=n.id_jenis_penilaian and n.ID_LOG_HARIAN=l.ID_LOG_HARIAN and l.ID_DEPOT='$depot' and year(l.TANGGAL_LOG_HARIAN)='$tahun' and j.id_jenis_penilaian between 25 and 64");
+        return $data->result();
+    }
+    
+    public function importKoefisien($data){
+        for($i = 0; $i < sizeof($data); $i++){
+            $this->db->insert('nilai', $data[$i]);
+        }
+    }
+    
     /*     * DASHBOARD --- Renisa* */
 
     //oam
