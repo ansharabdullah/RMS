@@ -108,7 +108,13 @@
                                                 ?></td>
                                             <td><?php echo $text; ?></td>
                                             <td><?php echo $row->ALASAN ?></td>
-                                           <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a></td>
+                                            <td>
+                                                <?php if ($row->STATUS_MASUK != $text) { ?>
+                                                    <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a>
+                                                <?php }else{ ?>
+                                                    <span class='label label-danger'>Ok</span>
+                                                <?php }?>
+                                            </td>
                                         </tr>
                                         <?php
                                         $i++;
@@ -200,24 +206,24 @@
 
 <!-- END JAVASCRIPTS -->
 <script>
-                                                jQuery(document).ready(function() {
-                                                    EditableTable.init();
-                                                });
+                                                   jQuery(document).ready(function() {
+                                                       EditableTable.init();
+                                                   });
 
-                                                function FilterData(par) {
-                                                    jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
-                                                    jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
-                                                }
+                                                   function FilterData(par) {
+                                                       jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+                                                       jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+                                                   }
 
-                                                function editPresensi(tanggal, keterangan, alasan, id_jadwal, nip) {
-                                                    $("#tanggal_log_harian").val(tanggal);
-                                                    $("#nip").val(nip);
-                                                    $("#tanggal").val(tanggal);
-                                                    $("#keterangan_masuk1").val(keterangan);
-                                                    $("#keterangan_masuk").val(keterangan);
-                                                    $("#alasan").val(alasan);
-                                                    $("#id_jadwal").val(id_jadwal);
-                                                }
+                                                   function editPresensi(tanggal, keterangan, alasan, id_jadwal, nip) {
+                                                       $("#tanggal_log_harian").val(tanggal);
+                                                       $("#nip").val(nip);
+                                                       $("#tanggal").val(tanggal);
+                                                       $("#keterangan_masuk1").val(keterangan);
+                                                       $("#keterangan_masuk").val(keterangan);
+                                                       $("#alasan").val(alasan);
+                                                       $("#id_jadwal").val(id_jadwal);
+                                                   }
 
 
 

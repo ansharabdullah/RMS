@@ -8,6 +8,9 @@ class amt extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model("m_amt");
+        $this->load->model("m_mt");
+        $this->load->model("m_rencana");
+        $this->load->model("m_kinerja");
         $this->load->model("m_log_sistem");
         $this->load->model("m_log_harian");
         $this->load->model("m_peringatan");
@@ -340,6 +343,14 @@ class amt extends CI_Controller {
         $data['lv1'] = 2;
         $data['lv2'] = 3;
         $data2['presensi'] = 0;
+
+        $depot = $this->session->userdata('id_depot');
+        $tanggal = date('Y-m-d');
+        $data2['tanggal'] = $tanggal;
+        $data2['presensi'] = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
+        $this->load->model("m_kinerja");
+        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensi($tanggal);
+
         $data3 = menu_ss();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
@@ -424,7 +435,7 @@ class amt extends CI_Controller {
         $data3 = menu_ss();
         $data3 = menu_ss();
 
-                $data2['error'] = 0;
+        $data2['error'] = 0;
         $data2['koefisien'] = 0;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
@@ -437,7 +448,7 @@ class amt extends CI_Controller {
         $tahun = $this->input->post('tahun', true);
         $depot = $this->session->userdata('id_depot');
 
-            $data2['koefisien'] = 0;
+        $data2['koefisien'] = 0;
         $cek = $this->m_amt->getKoefisien($depot, $tahun);
         if ($cek) {
             $data2['error'] = "Data koefisien tahun $tahun telah tersedia";
@@ -574,15 +585,89 @@ class amt extends CI_Controller {
         echo '</script>';
     }
 
-    public function grafik() {
+    //grafik
+    public function amt_depot($depot, $nama, $tahun) {
+
         $data['lv1'] = 2;
         $data['lv2'] = 2;
+        $data2['tahun'] = $tahun;
+        $data2['total_mt'] = $this->m_mt->getTotalMtByDepot($depot);
+        $data2['total_amt'] = $this->m_amt->getTotalAMtByDepot($depot);
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $data2['rencana_bulan'] = $this->m_rencana->get_rencana_bulan($depot, date("n"), date("Y"));
+        $data2['kinerja_bulan'] = $this->m_kinerja->get_kinerja_bulan($depot, date("n"), date("Y"));
+        $data2['amt'] = $this->m_amt->selectAMT($depot);
+        $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_bulan($depot, $tahun);
+        $data2['id_depot'] = $depot;
         $data3 = menu_ss();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('amt/v_grafik');
+        $this->load->view('oam/v_depot_amt', $data2);
         $this->load->view('layouts/footer');
+    }
+
+    public function amt_depot_harian($depot, $nama, $bulan, $tahun) {
+        $data['lv1'] = 2;
+        $data['lv2'] = 2;
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_hari($depot, $bulan, $tahun);
+        $data2['id_depot'] = $depot;
+        $data2['tahun'] = $tahun;
+        $data2['bulan'] = $bulan;
+
+        $data3 = menu_ss();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu', $data3);
+        $this->load->view('layouts/navbar', $data);
+        $this->load->view('oam/v_depot_amt_harian', $data2);
+        $this->load->view('layouts/footer');
+    }
+
+    public function ganti_detail_amt($depot, $nama) {
+        $tanggal = date("Y-m-d", strtotime($_POST['tanggal']));
+        redirect("depot/amt_depot_detail/" . $depot . "/" . $nama . "/" . $tanggal . "/");
+    }
+
+    public function amt_depot_detail($depot, $nama, $tanggal) {
+        $data['lv1'] = $depot + 1;
+        $data['lv2'] = 1;
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $data2['id_depot'] = $depot;
+        $data2['hari'] = date('d', strtotime($tanggal));
+        $data2['bulan'] = date('F', strtotime($tanggal));
+        $data2['tahun'] = date('Y', strtotime($tanggal));
+        ;
+        $data2['tanggal'] = date("d F Y", strtotime($tanggal));
+        $data2['kinerja'] = $this->m_kinerja->get_kinerja_amt_detail($depot, $tanggal);
+        $data3 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu', $data3);
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_depot_amt_detail_harian', $data2);
+        $this->load->view('layouts/footer');
+    }
+
+    public function amt_hari($depot, $nama) {
+        $tanggal = $_POST['bulan'];
+        $bulan = date('n', strtotime($tanggal));
+        $tahun = date('Y', strtotime($tanggal));
+        redirect('depot/amt_depot_harian/' . $depot . "/" . $nama . "/" . $bulan . "/" . $tahun);
+    }
+
+    public function grafik() {
+        $depot = $this->session->userdata("id_depot");
+        $tahun = date('Y');
+        $nama = 'TEGAL';
+        $this->amt_depot($depot, $nama, $tahun);
+//        $data['lv1'] = 2;
+//        $data['lv2'] = 2;
+//        $data3 = menu_ss();
+//        $this->load->view('layouts/header');
+//        $this->load->view('layouts/menu', $data3);
+//        $this->load->view('layouts/navbar', $data);
+//        $this->load->view('amt/v_grafik');
+//        $this->load->view('layouts/footer');
     }
 
     public function grafik_bulan() {
