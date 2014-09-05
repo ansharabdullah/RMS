@@ -60,7 +60,7 @@ foreach ($volume as $row) {
             },
             series: [{
                     name: 'Rencana',
-                    type: 'column',
+                    type: 'spline',
                     color : '#FF002B',
                     data: rencana
                 },{

@@ -19,12 +19,17 @@ class jadwal extends CI_Controller {
     }
 
     public function penjadwalan() {
-        $data['lv1'] = 5;
+        $data['lv1'] = 6;
         $data['lv2'] = 1;
         $data2['jadwal'] = 0;
         $data2['tanggal'] = 0;
 
         $data3 = menu_ss();
+        $depot = $this->session->userdata('id_depot');
+        $tanggal = date('Y-m-d');
+
+        $data2['jadwal'] = $this->m_penjadwalan->getJadwal($depot, $tanggal);
+        $data2['tanggal'] = $tanggal;
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
 
@@ -34,7 +39,7 @@ class jadwal extends CI_Controller {
     }
 
     public function import_penjadwalan() {
-        $data['lv1'] = 5;
+        $data['lv1'] = 6;
         $data['lv2'] = 1;
         $data2['jadwal'] = 0;
         $data2['error'] = 0;
@@ -96,7 +101,9 @@ class jadwal extends CI_Controller {
                         while ($status == 0) {
                             $no = $i + 5;
                             $nip = $this->m_amt->cekNIP($sheetData->getCell('B' . $no)->getFormattedValue());
-                            $nopol = $this->m_mt->cekNopol(strtoupper(str_replace(" ", "", $sheetData->getCell('E' . $no)->getFormattedValue())));
+                            $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . $no)->getFormattedValue()));
+                            $depot = $this->session->userdata('id_depot');
+                            $nopol = $this->m_mt->cekNopol($no_polisi, $depot);
                             $error = "Error : ";
                             $nip_pegawai = "";
                             $nama_pegawai = "";
@@ -150,7 +157,23 @@ class jadwal extends CI_Controller {
 
 
                             //loop column
-                            for ($column = 'F'; $column != 'AK'; $column++) {
+                            $cekbulan = $sheetData->getCell('B2')->getFormattedValue();
+                            $cektahun = $sheetData->getCell('B1')->getFormattedValue();
+                            
+                            //cek jumlah hari dalam satu bulan
+                            if($cekbulan == 1 || $cekbulan == 3 || $cekbulan == 5 || $cekbulan == 7 ||$cekbulan == 8 || $cekbulan == 10 ||$cekbulan == 12){
+                                $jumlahHari = 'AK';
+                            }else if($cekbulan == 2){
+                                if(date('L', strtotime($cektahun.'-01-01')) == 1){
+                                    $jumlahHari = 'AH';
+                                }else{
+                                    $jumlahHari = 'AI';
+                                }
+                            }else{
+                                $jumlahHari = 'AJ';
+                            }
+                            
+                            for ($column = 'F'; $column != $jumlahHari; $column++) {
                                 $tanggal = $sheetData->getCell('B1')->getFormattedValue() . '-' . $sheetData->getCell('B2')->getFormattedValue() . '-' . $sheetData->getCell($column . 5)->getFormattedValue();
                                 //cek absen
                                 if ($sheetData->getCell($column . $no)->getFormattedValue() == "0") {
@@ -205,7 +228,7 @@ class jadwal extends CI_Controller {
             $data['error'] = 0;
         }
         unlink($file_target);
-        $data['lv1'] = 5;
+        $data['lv1'] = 6;
         $data['lv2'] = 1;
         $data3 = menu_ss();
         $this->load->view('layouts/header');
@@ -240,7 +263,7 @@ class jadwal extends CI_Controller {
 
     public function lihat_jadwal() {
 
-        $data['lv1'] = 5;
+        $data['lv1'] = 6;
         $data['lv2'] = 1;
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
@@ -279,7 +302,7 @@ class jadwal extends CI_Controller {
     }
     
     public function hapus_jadwal(){
-        $data['lv1'] = 5;
+        $data['lv1'] = 6;
         $data['lv2'] = 1;
         $data2['jadwal'] = 0;
         $data3 = menu_ss();
@@ -299,7 +322,7 @@ class jadwal extends CI_Controller {
         
         $data2['jadwal'] = $this->m_penjadwalan->getJadwalPerbulan($depot, $bulan, $tahun);
         $data2['tanggal'] = $tanggal;
-        $data['lv1'] = 5;
+        $data['lv1'] = 6;
         $data['lv2'] = 1;
         $data3 = menu_ss();
         $this->load->view('layouts/header');

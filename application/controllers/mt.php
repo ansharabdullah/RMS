@@ -832,6 +832,8 @@ class Mt extends CI_Controller {
         $data['lv2'] = 3;
         
         $data2['presensi'] = 0;
+        $tanggal = $this->input->get('tanggal', true);
+        $data['tanggal']= $tanggal;
         $this->header($data);
         $this->load->view('mt/v_presensi',$data2);
         $this->footer();
@@ -843,6 +845,7 @@ class Mt extends CI_Controller {
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
         $data2['tanggal'] = $tanggal;
+        $this->load->model("m_penjadwalan");
         $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
         
         $this->load->model("m_kinerja");
@@ -852,7 +855,24 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    
+    public function ubah_presensi() {
+        
+        $this->load->model("m_penjadwalan");
+        $id_jadwal = $this->input->post('id_jadwal', true);
+        $nopol = $this->input->post('nopol', true);
+        $data = array(
+            'alasan' => $this->input->post('alasan', true),
+            'keterangan_masuk' => $this->input->post('keterangan_masuk', true)
+        );
+        $tanggal = $this->input->post('tanggal_log_harian', true);
+
+        $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
+        
+        $link = base_url() . "mt/cek_presensi/?tanggal=" . $tanggal;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
     
     public function reminder() {
         
@@ -885,7 +905,7 @@ class Mt extends CI_Controller {
         
         $this->m_pengingat->editReminderSurat($id,$data);
         //redirect('mt/reminder');
-          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
+          echo '<script type="text/javascript">alert("Pengingat surat berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
             echo '</script>';
     }
@@ -907,7 +927,7 @@ class Mt extends CI_Controller {
         
         $this->m_pengingat->editReminderOli($id,$data);
         //redirect('mt/reminder');
-          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
+          echo '<script type="text/javascript">alert("Pengingat oli berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
             echo '</script>';
     }

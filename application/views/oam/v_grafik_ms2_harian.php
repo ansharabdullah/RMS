@@ -83,19 +83,19 @@ foreach ($ms2 as $row) {
                 }
             },
             series: [{
-                    type: 'column',
+                    type: 'spline',
                     name: 'Premium',
                     color : '#FF002B',
                     data: total_lo_premium,
                     visible: false
                 }, {
-                    type: 'column',
+                    type: 'spline',
                     name: 'Solar',
                     color : '#2C88D4',
                     data: total_lo_solar,
                     visible: false
                 }, {
-                    type: 'column',
+                    type: 'spline',
                     name: 'Pertamax',
                     color : '#23C906',
                     data: total_lo_pertamax,
@@ -189,13 +189,15 @@ foreach ($ms2 as $row) {
                             </button>
                             <ul class="dropdown-menu pull-left">
 
-                                <li><a style="cursor: pointer" onclick="filterVolume('Premium')">Premium</a></li>
-                                <li><a style="cursor: pointer" onclick="filterVolume('Pertamax')">Pertamax</a></li>
-                                <li><a style="cursor: pointer" onclick="filterVolume('Solar')">Solar</a></li>
-                                <li><a style="cursor: pointer" onclick="filterVolume('Bio Solar')">Bio Solar</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterMs2('sesuai')">Sesuai MS2</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterMs2('cepat')">Sebelum MS2</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterMs2('cepat_shift1')">Sebelum Shift 1</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterMs2('lambat')">Setelah MS2</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterMs2('gagal')">Tidak Terkirim Sesuai Jadwal</a></li>
+                                        <li><a style="cursor: pointer" onclick="filterMs2('total')">Total LO</a></li>
 
 
-                            </ul>
+                                    </ul>
                         </div>
                         <div id="grafik"></div>
                     </div>

@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tahun</label>
                             <div class="col-lg-10">
-                                <input type="number" min="2000" maxlength="4" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tahun" name="tahun">
+                                <input type="number" min="2010" maxlength="4" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tahun" name="tahun">
                             </div>
                         </div>
                         <div class="form-group">
