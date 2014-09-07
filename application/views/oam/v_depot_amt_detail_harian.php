@@ -76,7 +76,7 @@
         });
     });
     $(document).ready(function(){
-        amt.series[0].setVisible(true);
+        amt.series[1].setVisible(true);
         $("#sebelum").hide();
         if(pegawai.length < limit)
         {
@@ -117,12 +117,7 @@
     
     function setData()
     {
-        var i = 0;
-        for(i = 0 ; i < amt.series.length ; i++)
-        {
-            amt.series[i].setVisible(false);
-        }
-        amt.series[0].setVisible(true);
+       
         amt.xAxis[0].setCategories(pegawai.slice(start,start + limit));
         amt.series[0].setData(km.slice(start,start + limit));
         amt.series[1].setData(kl.slice(start,start + limit));

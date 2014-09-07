@@ -121,7 +121,7 @@ foreach ($grafik as $km) {
                 $("#selanjutnya").hide();
             }
        
-            mt.series[0].setVisible(true);
+            mt.series[1].setVisible(true);
         });
     
     
@@ -156,12 +156,7 @@ foreach ($grafik as $km) {
     
         function setData()
         {
-            var i = 0;
-            for(i = 0 ; i < mt.series.length ; i++)
-            {
-                mt.series[i].setVisible(false);
-            }
-            mt.series[0].setVisible(true);
+           
             mt.xAxis[0].setCategories(nopol_mt.slice(start,start + limit));
             mt.series[0].setData(km_mt.slice(start,start + limit));
             mt.series[1].setData(kl_mt.slice(start,start + limit));
