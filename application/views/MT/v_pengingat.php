@@ -69,11 +69,13 @@
              foreach($ban as $a)
              {
                  ?>
+                         
+                         
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_BAN?>";
                  ap['bannopol'] = "<?php echo $a->bannopol?>";
                  ap['tgl_ban'] = "<?php echo $a->tgl_ban?>";
-                 ap['TANGGAL_GANTI_BAN'] = "<?php echo $a->TANGGAL_GANTI_BAN?>";
+                 ap['tgl_ganti'] = "<?php echo $a->tgl_ganti?>";
                  ap['MERK_BAN'] = "<?php echo $a->MERK_BAN?>";
                  ap['NO_SERI_BAN'] = "<?php echo $a->NO_SERI_BAN?>";
                  ap['JENIS_BAN'] = "<?php echo $a->JENIS_BAN?>";
@@ -149,6 +151,7 @@
                                 <th>Jenis Apar</th>
                                 <th>Keterangan</th>
                                 <th>Tanggal Apar</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -171,7 +174,9 @@
                                         <?php if($row->ID_JENIS_APAR == "3")echo 'CO2'?>
                                         </td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_APAR ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal"  style ="text-decoration: underline" data-toggle="modal"  onclick="setDetail('<?php echo $i ?>')"><div id="<?php echo 'apar1-' . $i; ?>"><?php echo $row->apar; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->apar; ?> hari</td>
+                                        
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" data-toggle="modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" onclick="setDetail('<?php echo $i ?>')"><i class="icon-pencil"></i></a></td>
                                         </tr>
                                     <?php
                                 $i++;
@@ -194,31 +199,32 @@
                                 <th style="display: none;"></th>
                                 <th>No.</th>
                                 <th>Nopol</th>
-                                <th>MERK BAN</th>
-                                <th>NO SERI BAN</th>
-                                <th>JENIS BAN</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $i = 0;
-                            foreach ($ban as $row) {
                             
-                            
-                                if($row->tanggal_ban <= 7 ) {
+                            foreach($mobil as $row2){
+                                $color="";
+                                foreach ($ban as $row){
+                                  if($row->ID_MOBIL==$row2->ID_MOBIL){
+                                    if($row->tanggal_ban <= 7 ) {
                                     $color = "orange";
                                 } else {
                                     $color = "transparent";
                                 }
+
+                                }
+                                
+                                }
                                 ?>
                                     <th style="display: none;"></th>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1; ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row->bannopol ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><?php echo $row->MERK_BAN ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><?php echo $row->NO_SERI_BAN ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><?php echo $row->JENIS_BAN ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan" class="btn btn-success btn-xs" onClick="cekBan()">Cek Ban</a></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row2->nopol ?></td>
+                                       
+                                    <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan" class="btn btn-success btn-xs" onClick="setBan('<?php echo '0' ?>')">Cek Ban</a></td>
                                 </tr>
                                  <?php
                                 $i++;
@@ -245,6 +251,7 @@
                                 <th>Jenis Surat</th>
                                 <th>Tanggal Berakhir</th>
                                 <th>Keterangan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -269,10 +276,10 @@
                                         <?php if($row->ID_JENIS_SURAT == "3")echo 'KEUR'?>
                                         <?php if($row->ID_JENIS_SURAT == "4")echo 'TERA'?>
                                     </td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat" style ="text-decoration: underline" data-toggle="modal" onclick="setDetailSurat('<?php echo $i ?>')"><div id="<?php echo 'tgl_akhir-' . $i; ?>"><?php echo $row->tanggal_akhir_surat; ?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>">
-                                        <?php echo $row->KETERANGAN_SURAT ?>
-                                        </td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->tanggal_akhir_surat; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_SURAT ?></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat" data-toggle="modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" onclick="setDetailSurat('<?php echo $i ?>')"><i class="icon-pencil"></i></a></td>
+                                        
                                         
                                         </tr>
                                     <?php
@@ -299,6 +306,7 @@
                                 <th>Merk Oli</th>
                                 <th>Total Volume</th>
                                 <th>Sisa Waktu</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -320,7 +328,8 @@
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KM_AWAL ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->MERK_OLI ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->TOTAL_VOLUME ?></td> 
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalOli" style ="text-decoration: underline" data-toggle="modal" onclick="setDetailOli('<?php echo $i ?>')"><div id="<?php echo 'tgl_akhir-' . $i; ?>"><?php echo $row->tanggal_ganti_oli; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->tanggal_ganti_oli; ?> hari</div></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalOli" data-toggle="modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" onclick="setDetailOli('<?php echo $i ?>')"><i class="icon-pencil"></i></a></td>
                                         </tr>
                                     <?php
                                 $i++;
@@ -357,7 +366,7 @@
                     <div class="form-group">
                         <label for="nopol" class="col-lg-2 col-sm-2 control-label">Jenis Apar</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="ID_JENIS_APAR" name="ID_JENIS_APAR">
+                            <select class="form-control input-sm m-bot15" readonly="readonly" id="ID_JENIS_APAR" name="ID_JENIS_APAR">
                                 <option value="1">Store Pressure</option>
                                 <option value="2">Catridge</option>
                                 <option value="3">CO2</option>
@@ -406,30 +415,17 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Edit Ban</h4>
             </div>
-            <div class="modal-body">
+            
+                <form class="form-horizontal" role="form" id="form-edit-ban" action="" method="POST">
+                <div class="modal-body">
 
-                <form class="cmxform form-horizontal tasi-form" role="form" id="form-edit-1"  >
+
                     <div class="form-group">
                         <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="bannopol" readonly="readonly" name="bannopol" placeholder="Nopol">
+                            <input type="text" class="form-control"  id="bannopol" readonly="readonly" name="bannopol" placeholder="Nopol">
                         </div>
                     </div>
-                </form>
-                <form class="form-inline" role="form" id="form-edit-ban" method="POST" >
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="POSISI_BAN" name="POSISI_BAN" readonly="readonly" placeholder="Ban">
-
-                    </div>  
-                    <div class="form-group">
-                        <input class="form-control" type="date" required="required" id="tgl-ban" size="16" name="tgl_ban" required="required"/>
-
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success" type="submit" >Simpan</button>
-                    </div>
-                </form>
-                <br/><br/>
                 
                 <table class="table table-bordered" >
                     <tr>
@@ -448,14 +444,20 @@
                         ?>
                         <tr id="row-ban-<?php echo $row->POSISI_BAN?>" <?php echo $color ?>>
                             <td><?php echo $row->POSISI_BAN ?></td>
-                            <td><span id="aturban<?php echo $i + 1 ?>"><?php echo $row->tanggal_ban ?></span> hari</td>
-                            <td><input class="form-control" type="date" required="required" id="tgl-ban" size="16" name="tgl_ban" required="required"/></td>
+                            <td><?php echo $row->tanggal_ban ?></span> hari</td>
+                            <td><input class="form-control" type="date" id="tgl_ganti" size="16" name="tgl_ganti" required="required"/></td>
                              </tr>
                         <?php
                     }
                     
                     ?>
-                </table>
+                 </table>
+                    <div class="modal-footer">
+                            <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
+                            <button class="btn btn-success" name="submit"  type="submit" >Simpan</button>
+
+                        </div>
+                </form>
             </div>
 
         </div>
@@ -484,7 +486,7 @@
                          <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="id_jenis_surat">Jenis Surat</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
+                            <select class="form-control input-sm m-bot15" readonly="readonly" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
                                 <option value="1">STNK</option>
                                 <option value="2">Pajak</option>
                                 <option value="3">KEUR</option>
@@ -511,7 +513,7 @@
                         <div class="form-group">
                              <label class="col-sm-2 control-label col-lg-2" for="tera">Keterangan Surat</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" value="" id="KETERANGAN_SURAT" size="16"  name="KETERANGAN_SURAT" required="required"/>
+                                <input class="form-control" type="text" readonly="readonly" value="" id="KETERANGAN_SURAT" size="16"  name="KETERANGAN_SURAT" required="required"/>
                                 
                             </div>
                            
@@ -552,13 +554,13 @@
                         <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">KM AWAL</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control"  id="KM_AWAL" name="KM_AWAL">
+                                <input type="text" class="form-control" readonly="readonly"  id="KM_AWAL" name="KM_AWAL">
                             </div>
                         </div>
                          <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">MERK OLI</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control"  id="MERK_OLI" name="MERK_OLI" placeholder="MERK OLI">
+                                <input type="text" class="form-control" readonly="readonly"  id="MERK_OLI" name="MERK_OLI" placeholder="MERK OLI">
                             </div>
                         </div>
                         <div class="form-group">
@@ -580,7 +582,7 @@
                         <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">Total Volume</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control"  id="TOTAL_VOLUME" name="TOTAL_VOLUME" placeholder="Total Volume">
+                                <input type="text" class="form-control" readonly="readonly"  id="TOTAL_VOLUME" name="TOTAL_VOLUME" placeholder="Total Volume">
                             </div>
                         </div>
                     </div>
@@ -649,19 +651,6 @@
            
         }
         
-        function setDetailBan(index){
-            
-            var action = "<?php echo base_url()?>mt/edit_reminder_ban/"+ban[index]['id'];
-            $("#tgl").val("");
-            
-            $("#ID_JENIS_ban").val(ban[index]['ID_JENIS_ban']);
-            $("#tgl_surat").val(ban[index]['tgl_surat']);
-            $("#hari_surat").val(ban[index]['tgl_akhir_surat'] + " hari");
-            $("#KETERANGAN_SURAT").val(ban[index]['KETERANGAN_SURAT']);
-            $("#Form-Ban").attr("action",action ); 
-           
-        }
-        
         function setDetailOli(index){
             
             var action = "<?php echo base_url()?>mt/edit_reminder_oli/"+oli[index]['id'];
@@ -707,24 +696,14 @@
             $('#editable-sample3').dataTable().fnFilter( '' );
             $('#editable-sample1').dataTable().fnFilter( '' );
         }
-        function setBan(index)
+        function setBanizzz(index)
         {
-            
-            $("#form-edit-ban").hide();
-            $("#form-edit-ban").show("slow");
             var action = "<?php echo base_url()?>mt/edit_reminder_ban/"+ban[index]['id'];
             $("#bannopol").val(ban[index]['bannopol']);
-            $("#tgl_ban").val(ban[index]['tgl_ban']);
+            $("#tgl_ban").val(ban[index]['tgl_ban']);            
+            $("#tgl_ganti").val(ban[index]['tgl_ganti']);
             $("#POSISI_BAN").val(ban[index]['POSISI_BAN']);
-            $("#form-edit").attr("action",action );
-           
-        }
-    
-        function cekBan(index)
-        {
-            $("#tgl-ban").val("");
-            $("#form-edit-ban").hide();
-           
+            $("#form-edit-ban").attr("action",action );
             
         }
     

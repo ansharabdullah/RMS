@@ -75,7 +75,7 @@ function DateToIndo($date) {
     $(function() {
         $('#grafik').highcharts({
             chart: {
-                type: 'column'
+                type: 'spline'
             },
             title: {
                 text: 'Grafik Mobil Tangki',

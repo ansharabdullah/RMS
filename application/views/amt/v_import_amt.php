@@ -65,6 +65,9 @@
         <?php if ($error) { ?>
             <div class="col-lg-12">
                 <div class="alert alert-block alert-danger fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="icon-remove"></i>
+                </button>
                     <strong>Error!</strong> <?php echo $error; ?>
                 </div>
             </div>

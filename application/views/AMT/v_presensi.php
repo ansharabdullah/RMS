@@ -46,7 +46,7 @@
             <div id="filePreview">
                 <section class="panel">
                     <header class="panel-heading">
-                        Tabel Presensi (<?php echo $tanggal ?>)
+                        Tabel Presensi (<?php echo date('d-M-Y',  strtotime($tanggal)) ?>)
                     </header>
                     <div class="panel-body">
                         <div class="adv-table editable-table " style="overflow-x: scroll">
@@ -127,6 +127,13 @@
                         </div>
                     </div>
                 </section>
+            </div>
+        <?php }else{?>
+            <div class="alert alert-block alert-danger fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="icon-remove"></i>
+                </button>
+                <strong>Error!</strong> <?php echo "Presensi tanggal $tanggal tidak ditemukan"; ?>
             </div>
         <?php } ?>
 

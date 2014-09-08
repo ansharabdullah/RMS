@@ -147,6 +147,7 @@
                                         <th>Kilometer (KM)</th>
                                         <th>Kiloliter (KL)</th>
                                         <th>Ritase (Rit)</th>
+                                        <th>Own Use</th>
                                         <th>Premium</th>
                                         <th>Pertamax</th>
                                         <th>Pertamax Plus</th>
@@ -165,6 +166,7 @@
                                     <td><?php echo $row->total_km; ?></td>
                                     <td><?php echo $row->total_kl; ?></td>
                                     <td><?php echo $row->ritase; ?></td>
+                                    <td><?php echo $row->own_use; ?></td>
                                     <td><?php echo $row->premium; ?></td>
                                     <td><?php echo $row->pertamax; ?></td>
                                     <td><?php echo $row->pertamax_plus; ?></td>

@@ -41,7 +41,8 @@
                 </form>
             </div>
         </section>
-<?php if ($presensi) { ?>
+        
+  <?php if ($kinerja) { ?>      
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
@@ -71,9 +72,7 @@
                                     <th>Kapasitas</th>
                                     <th>Transportir</th>
                                     <th>Produk</th>
-                                    <th>Jadwal</th>
                                     <th>Kehadiran</th>
-                                    <th>Alasan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -81,7 +80,7 @@
 
                                 <?php
                                     $i = 1;
-                                    foreach ($presensi as $row) {
+                                    foreach ($mobil as $row) {
                                         $hadir = "Absen";
                                         foreach ($kinerja as $row2) {
                                             if ($row->ID_MOBIL == $row2->ID_MOBIL) {
@@ -96,21 +95,15 @@
                                             <td><?php echo $row->KAPASITAS; ?></td>
                                             <td><?php echo $row->TRANSPORTIR; ?></td>
                                             <td><?php echo $row->PRODUK; ?></td>
-                                            <td><?php
-                                                if ($row->STATUS_MASUK == "Hadir") {
-                                                    echo "<span class='label label-success'>";
-                                                } else {
-                                                    echo "<span class='label label-danger'>";
-                                                }echo $row->STATUS_MASUK;
-                                                ?></td>
+                                            
                                             <td><?php
                                              if ($hadir == "Hadir") {
                                                     echo "<span class='label label-success'>";
                                                 } else {
                                                     echo "<span class='label label-danger'>";
                                                 }echo $hadir; ?></td>
-                                            <td><?php echo $row->ALASAN; ?></td>
-                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a></td>
+                                           
+                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $hadir ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a></td>
                                         </tr>
                                         <?php
                                         $i++;
@@ -123,18 +116,18 @@
                 </div>
             </section>
         </div>
-    <?php }else {
+   <?php
+        } else {
             if ($tanggal) {
                 ?>
                 <div class="alert alert-block alert-danger fade in">
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Error!</strong> Tidak ada data absen.
+                    <strong>Error!</strong> Absen Mobil Tangki tidak ditemukan.
                 </div>
-    <?php } 
-    
- }?>
+    <?php }
+} ?>
         
     </section>
 </section>
