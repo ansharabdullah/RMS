@@ -87,7 +87,7 @@
         <?php if ($koefisien) { ?>
             <section class="panel" id="PreviewCekKoefisien">
                 <header class="panel-heading">
-                    Tabel Koefisien Performansi Tahun <span id="tgl"></span>
+                    Tabel Koefisien Performansi Tahun <?php echo $tahun ?><span id="tgl"></span>
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">
@@ -124,6 +124,13 @@
                     </div>
                 </div>
             </section>
+        <?php }else{?>
+            <div class="alert alert-block alert-danger fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="icon-remove"></i>
+                </button>
+                <strong>Error!</strong> <?php echo "Koefisien tahun $tahun tidak ditemukan."; ?>
+            </div>
         <?php } ?>
     </section>
 </section>

@@ -407,6 +407,7 @@ class amt extends CI_Controller {
         $tahun = date('Y');
         $depot = $this->session->userdata("id_depot");
         $data2['koefisien'] = $this->m_amt->getKoefisien($depot, $tahun);
+        $data2['tahun'] = $tahun;
         $data3 = menu_ss();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
@@ -420,6 +421,7 @@ class amt extends CI_Controller {
         $data['lv2'] = 4;
         $tahun = $this->input->get('tahun', true);
         $depot = $this->session->userdata("id_depot");
+        $data2['tahun'] = $tahun;
         $data2['koefisien'] = $this->m_amt->getKoefisien($depot, $tahun);
         $data3 = menu_ss();
         $this->load->view('layouts/header');
@@ -603,7 +605,7 @@ class amt extends CI_Controller {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('oam/v_depot_amt', $data2);
+        $this->load->view('amt/v_grafik_amt', $data2);
         $this->load->view('layouts/footer');
     }
 
@@ -620,13 +622,13 @@ class amt extends CI_Controller {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
-        $this->load->view('oam/v_depot_amt_harian', $data2);
+        $this->load->view('amt/v_grafik_amt_harian', $data2);
         $this->load->view('layouts/footer');
     }
 
     public function ganti_detail_amt($depot, $nama) {
         $tanggal = date("Y-m-d", strtotime($_POST['tanggal']));
-        redirect("depot/amt_depot_detail/" . $depot . "/" . $nama . "/" . $tanggal . "/");
+        redirect("amt/amt_depot_detail/" . $depot . "/" . $nama . "/" . $tanggal . "/");
     }
 
     public function amt_depot_detail($depot, $nama, $tanggal) {
@@ -644,7 +646,7 @@ class amt extends CI_Controller {
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
         $this->navbar($data['lv1'], $data['lv2']);
-        $this->load->view('oam/v_depot_amt_detail_harian', $data2);
+        $this->load->view('amt/v_grafik_amt_detail', $data2);
         $this->load->view('layouts/footer');
     }
 
