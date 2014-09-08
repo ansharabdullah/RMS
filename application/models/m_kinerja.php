@@ -112,7 +112,7 @@ class m_kinerja extends CI_Model {
     }
     
     public function getMobil($depot) {
-        $query = $this->db->query("select ID_MOBIL,NOPOL,TRANSPORTIR,KAPASITAS,PRODUK,KATEGORI_MOBIL,STATUS_MOBIL from mobil where ID_DEPOT = '$depot' order by TRANSPORTIR ASC, NOPOL ASC");
+        $query = $this->db->query("select ID_MOBIL,NOPOL,TRANSPORTIR,KAPASITAS,PRODUK,KATEGORI_MOBIL,STATUS_MOBIL from mobil where ID_DEPOT = '$depot' order by ID_MOBIL ASC");
         return $query->result();
     }
     
@@ -361,8 +361,8 @@ class m_kinerja extends CI_Model {
         return $data->result();
     }
 
-    public function getKinerjaPresensiMT($tanggal){
-        $data = $this->db->query("select m.ID_MOBIL, l.ID_LOG_HARIAN, k.ID_KINERJA_MT from mobil m, log_harian l, kinerja_mt k where m.ID_MOBIL=k.ID_MOBIL and k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and l.tanggal_log_harian='$tanggal'");
+    public function getKinerjaPresensiMT($depot,$tanggal){
+        $data = $this->db->query("select m.ID_MOBIL, l.ID_LOG_HARIAN,l.TANGGAL_LOG_HARIAN,m.VOLUME_1, k.ID_KINERJA_MT from mobil m, log_harian l, kinerja_mt k where m.ID_MOBIL=k.ID_MOBIL and k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and m.id_depot='$depot' and l.tanggal_log_harian='$tanggal'");
         return $data->result();
     }
 }

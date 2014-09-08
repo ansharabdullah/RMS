@@ -7,166 +7,217 @@ class Mt extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-
+        
+        if(!$this->session->userdata('isLoggedIn')){
+            redirect('login');
+        }else if ($this->session->userdata('id_role')<=2){
+            redirect();
+        }
+        
         $this->load->model("m_mt");
         $this->load->model("m_grafik_mt");
         $this->load->model("m_pengingat");
         $this->load->model("m_log_sistem");
-        $this->load->helper(array('form', 'url'));
+        $this->load->model("m_rencana_mt");
+
     }
 
     public function index() {
         $this->data_mt();
 
     }
-    
-    //Import Excel
-    
-    public function simpan_xls() {
-        $data_mt = unserialize($this->input->post('data_mt'));
-        $this->m_mt->importMobil($data_mt);
-
-        $link = base_url() . "mt/data_mt";
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
-     public function simpan_rencana() {
-        $data_rencana = unserialize($this->input->post('data_rencana'));
-        $this->m_mt->importRencana($data_rencana);
-
-        $link = base_url() . "mt/v_rencana_manual";
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
-    public function import_xls_rencana() {
-
-            $fileSIOD = $_FILES['fileSIOD'];
-
-            $dir = './assets/file/';
-            if (!file_exists($dir)) {
-                mkdir($dir);
-            }
-
-            $file_target = $dir . $_FILES['fileSIOD']['name'];
-            move_uploaded_file($_FILES['fileSIOD']['tmp_name'], $file_target);
-
-            $this->load->library('PHPExcel/Classes/PHPExcel');
-
-            $inputFileName = $file_target;
-
-            $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-            //echo 'File ', pathinfo($inputFileName, PATHINFO_BASENAME), ' has been identified as an ', $inputFileType, ' file<br />';
-            //echo 'Loading file ', pathinfo($inputFileName, PATHINFO_BASENAME), ' using IOFactory with the identified reader type<br />';
-            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-
-            $worksheetData = $objReader->listWorksheetInfo($inputFileName);
-
-            //$worksheetRead = array_column($worksheetData, 'worksheetName');
-
-            foreach ($worksheetData as $row) {
-                $worksheetRead[] = $row['worksheetName'];
-            }
-
-            $objReader->setLoadSheetsOnly($worksheetRead);
-
-            $objPHPExcel = $objReader->load($inputFileName);
-
-
-            $loadedSheetNames = $objPHPExcel->getSheetNames();
-            
-            $data2 = array();
-            
-            foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
-                if ($loadedSheetName == 'RENCANA') {
-                    //echo $sheetIndex, ' -> ', $loadedSheetName, '<br />';
-                    $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
-                    $sheetData = $objPHPExcel->getActiveSheet();
-                    $sheetData->getStyle('H3:H1000')
-                        ->getNumberFormat()
-                        ->setFormatCode('dd-mm-yyyy');
-					$sheetData->getStyle('L3:L1000')
-                        ->getNumberFormat()
-                        ->setFormatCode('dd-mm-yyyy');
-					
-		$i=0;
-		$status=0;
-                    while ($status==0) {
-			$no = $i + 2;
-			$tanggal=$this->m_mt->ambilTanggal($sheetData->getCell('B' . $no)->getFormattedValue());
-			$error ="Error:";
-						
-                    if (!$sheetData->getCell('B2')->getFormattedValue() && !$sheetData->getCell('C2')->getFormattedValue() && !$sheetData->getCell('D2')->getFormattedValue() && !$sheetData->getCell('E2')->getFormattedValue() && !$sheetData->getCell('F2')->getFormattedValue() && !$sheetData->getCell('G2')->getFormattedValue() && !$sheetData->getCell('H2')->getFormattedValue() && !$sheetData->getCell('I2')->getFormattedValue()){
-                        $status= 1;
-			$data['mt']=0;
-			break;
-			}
-			if ($sheetData->getCell('B' . $no)->getFormattedValue() == "") {
-                        $error = $error . "Tanggal Tidak Boleh Kosong";
-                        $e = 1;
-                    }
-                    else if (sizeof($tanggal) != 0) {
-                        $error = $error . "Tanggal telah ada";
-                        $e = 1;
-                    }
-                    if ($error == "Error : ") {
-                        $error = "Sukses";
-                        $e = 0;
-                    }
-                    if ($i >= $sheetData->getHighestRow() - 2) {
-                        $status = 1;
-                        break;
-                    }
-                    $e=0;
-		$data2['mt'][$i] = array(
-                        'tanggal_log_harian' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                        'r_own_use' => $sheetData->getCell('C' . $no)->getFormattedValue(),
-                        'r_premium' => $sheetData->getCell('D' . $no)->getFormattedValue(),
-                        'r_pertamax' => $sheetData->getCell('E' . $no)->getFormattedValue(),
-                        'r_pertamaxplus' => $sheetData->getCell('F' . $no)->getFormattedValue(),
-                        'r_pertaminadex' => $sheetData->getCell('G' . $no)->getFormattedValue(),
-                        'r_solar' => $sheetData->getCell('H' . $no)->getFormattedValue(),
-                        'r_biosolar' => $sheetData->getCell('I' . $no)->getFormattedValue(),
-                        'status_error' => $error,
-                        'error' => $e,
-			);
-					$i++;
-                    if (!$sheetData->getCell('B' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('C' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('D' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('E' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('F' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('G' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('H' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('I' . ($no + 1))->getFormattedValue()) {
-                        $status = 1;
-				} 
-                    }
-		}
-	$data['error'] = 0;
-	}
-            unlink($file_target);
-
-            $data['lv1'] = 3;
-            $data['lv2'] = 5;
-            $this->load->view('layouts/header');
-            $this->load->view('layouts/menu');
-            $this->load->view('layouts/navbar', $data);
-            $this->load->view('mt/v_rencana', $data2);
-            $this->load->view('layouts/footer');
+    //RENCANA *
+    public function rencana() {
         
-    }
-    
-    public function manual($id_log_harian) {
-        
-       
-        $data2['id_log_harian'] =  $id_log_harian;
-        $data2['mt'] = $this->m_mt->getRencana($id_log_harian);
-        $data2['KLIK_SIMPAN'] = false;
+        $data2['rencana'] = 0;
+        $data2['tanggal'] = 0;
 
         $data['lv1'] = 3;
         $data['lv2'] = 5;
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('mt/v_rencana_manual', $data2);
-        $this->load->view('layouts/footer');
+        $this->header($data);
+        $this->load->view('mt/v_rencana',$data2);
+        $this->footer();
+    }
+    
+    public function lihat_rencana() {
+        
+        $depot = $this->session->userdata("id_depot");
+        $data['lv1'] = 3;
+        $data['lv2'] = 5;
+        $tanggal = $this->input->get('tanggal', true);
+        
+
+        $data2['rencana'] = $this->m_rencana_mt->getRencana($depot,$tanggal);
+        $data2['tanggal'] = $tanggal;
+        
+        $this->header($data);
+        $this->load->view('mt/v_rencana',$data2);
+        $this->footer();
+    }
+    
+     public function edit_rencana() {
+        $id = $this->input->post('id', true);
+        
+        $data = array(
+            'R_PREMIUM' => $this->input->post('R_PREMIUM', true),
+            'r_pertamax' => $this->input->post('r_pertamax', true),
+            'r_pertamaxplus' => $this->input->post('r_pertamaxplus', true),
+            'r_pertaminadex' => $this->input->post('r_solar', true),
+            'r_solar' => $this->input->post('r_premium', true),
+            'r_biosolar' => $this->input->post('r_biosolar', true),
+            'r_own_use' => $this->input->post('r_own_use', true)
+
+        );
+        $tanggal = $this->input->post('tanggal_log_harian', true);
+        $this->m_rencana_mt->updateRencana($data, $id);
+        
+        //$datalog = array(
+          //  'keterangan' => "Ubah Jadwal NIP : $nip pada $tanggal",
+            //'id_pegawai' => $this->session->userdata("id_pegawai"),
+            //'keyword' => 'Edit'
+        //);
+        //$this->m_log_sistem->insertLog($datalog);
+
+        $link = base_url() . "mt/lihat_rencana/?tanggal=$tanggal";
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+    public function rencana_import() {
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 5;
+        $data2['rencana'] = 0;
+        $data2['error'] = 0;
+        
+        $this->header($data);
+        $this->load->view('mt/v_import_rencana',$data2);
+        $this->footer();
+    }
+    
+    public function import_rencana() {
+        
+        $depot = $this->session->userdata("id_depot");
+        $data2['klik_upload'] = false;
+        $data2['klik_simpan'] = false;
+        if ($this->input->post('upload')) {
+            $data2['klik_upload'] = true;
+            $data2['rencana']['error'] = true;
+
+            $blnrencana = $this->input->post('blnrencana');
+            $bulan = date("d-m-Y", strtotime($blnrencana));
+            $data2['cek_ada'] = $this->m_rencana_mt->cekRencana($depot, date("Y", strtotime($blnrencana)), date("m", strtotime($blnrencana)));
+            if ($data2['cek_ada'] == 0) {
+                if (date("m", strtotime($blnrencana)) == 1) {
+                    $data2['nama_bulan'] = 'Januari ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 2) {
+                    $data2['nama_bulan'] = 'Februari ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 3) {
+                    $data2['nama_bulan'] = 'Maret ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 4) {
+                    $data2['nama_bulan'] = 'April ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 5) {
+                    $data2['nama_bulan'] = 'Mei ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 6) {
+                    $data2['nama_bulan'] = 'Juni ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 7) {
+                    $data2['nama_bulan'] = 'Juli ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 8) {
+                    $data2['nama_bulan'] = 'Agustus ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 9) {
+                    $data2['nama_bulan'] = 'September ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 10) {
+                    $data2['nama_bulan'] = 'Oktober ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 11) {
+                    $data2['nama_bulan'] = 'November ' . date("Y", strtotime($blnrencana));
+                } else if (date("m", strtotime($blnrencana)) == 12) {
+                    $data2['nama_bulan'] = 'Desember ' . date("Y", strtotime($blnrencana));
+                }
+
+                $fileRencana = $_FILES['fileRencana'];
+                $last_day = date('t', strtotime($bulan));
+
+                $data2['rencana']['jumlah'] = $last_day;
+
+                $dir = './assets/file/';
+                if (!file_exists($dir)) {
+                    mkdir($dir);
+                }
+
+                $file_target = $dir . $_FILES['fileRencana']['name'];
+                move_uploaded_file($_FILES['fileRencana']['tmp_name'], $file_target);
+
+                $this->load->library('PHPExcel/Classes/PHPExcel');
+
+                $inputFileName = $file_target;
+
+                $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+                $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+
+                $worksheetData = $objReader->listWorksheetInfo($inputFileName);
+
+                foreach ($worksheetData as $row) {
+                    $worksheetRead[] = $row['worksheetName'];
+                }
+
+                $objReader->setLoadSheetsOnly($worksheetRead);
+
+                $objPHPExcel = $objReader->load($inputFileName);
+
+                $loadedSheetNames = $objPHPExcel->getSheetNames();
+
+                foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
+                    if ($loadedSheetName == 'Rencana') {
+                        $data2['rencana']['error'] = false;
+                        $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
+                        $sheetData = $objPHPExcel->getActiveSheet();
+                        $row_baca = 3;
+                        $i = 0;
+                        for ($i = 0; $i < $last_day; $i++) {
+
+                            $data2['rencana']['id_log_harian'][] = $this->m_rencana_mt->getIdLogHarian($depot, date("Y", strtotime($blnrencana)), date("m", strtotime($blnrencana)), ($i + 1));
+                            $data2['rencana']['tanggal'][] = date("Y-m", strtotime($blnrencana)) . '-' . ($i + 1);
+                            
+                            
+                            $data2['rencana']['r_premium'][] = is_numeric($sheetData->getCell('B' . ($row_baca + $i))->getValue())? ($sheetData->getCell('B' . ($row_baca + $i))->getValue() * 1) : -1;
+                            $data2['rencana']['r_solar'][] = is_numeric($sheetData->getCell('C' . ($row_baca + $i))->getValue())? ($sheetData->getCell('C' . ($row_baca + $i))->getValue() * 1) : -1;
+                            $data2['rencana']['r_pertamax'][] = is_numeric($sheetData->getCell('D' . ($row_baca + $i))->getValue())? ($sheetData->getCell('D' . ($row_baca + $i))->getValue() * 1) : -1;
+
+                            $data2['rencana']['r_pertamaxplus'][] = is_numeric($sheetData->getCell('E' . ($row_baca + $i))->getValue())? ($sheetData->getCell('E' . ($row_baca + $i))->getValue() * 1) : -1;
+                            $data2['rencana']['r_pertaminadex'][] = is_numeric($sheetData->getCell('F' . ($row_baca + $i))->getValue())? ($sheetData->getCell('F' . ($row_baca + $i))->getValue() * 1) : -1;
+                            $data2['rencana']['r_biosolar'][] = is_numeric($sheetData->getCell('G' . ($row_baca + $i))->getValue())? ($sheetData->getCell('G' . ($row_baca + $i))->getValue() * 1) : -1;
+                            $data2['rencana']['r_own_use'][] = is_numeric($sheetData->getCell('H' . ($row_baca + $i))->getValue())? ($sheetData->getCell('H' . ($row_baca + $i))->getValue() * 1) : -1;
+                        }
+                    }
+                }
+            }
+        } else if ($this->input->post('simpan')) {
+            $data2['klik_simpan'] = true;
+            $rencana = unserialize($this->input->post('data_rencana'));
+            $this->m_rencana_mt->simpanRencana($rencana);
+        }
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 5;
+        
+        $this->header($data);
+        $this->load->view('mt/v_import_rencana',$data2);
+        $this->footer();
+    }
+    
+    public function hapus_rencana() {
+       
+            $rencana = unserialize($this->input->post('id_rencana'));
+            $this->m_rencana_mt->deleteRencana($rencana);
+
+           
+
+            $link = base_url()."mt/rencana/";
+            echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+
     }
     
 //data MT
@@ -800,11 +851,12 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function grafik_bulan_mt($bulan_mt) {
+    public function grafik_bulan_mt($bulan_mt,$tahun) {
         
         $data1['bulan_mt'] = $bulan_mt;
+        $data1['tahun'] = $tahun;
         $depot = $this->session->userdata("id_depot");
-        $data1['grafik'] = $this->m_grafik_mt->get_kinerja_tanggal($depot,$bulan_mt);
+        $data1['grafik'] = $this->m_grafik_mt->get_kinerja_tanggal($depot,$bulan_mt,$tahun);
         $data['lv1'] = 3;
         $data['lv2'] = 2;
         $this->header($data);
@@ -812,12 +864,18 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function grafik_hari_mt($bulan_mt,$hari) {
+    public function grafik_hari_mt($hari,$bulan_mt,$tahun) {
         
-        $data1['hari'] = $hari;
-        $data1['bulan_mt'] = $bulan_mt;
+        
         $depot = $this->session->userdata("id_depot");
-        $data1['grafik'] = $this->m_grafik_mt->get_kinerja_harian($depot,$bulan_mt,$hari);
+        $data1['bulan_mt'] = $bulan_mt;
+        $data1['tahun'] = $tahun;
+        $data1['hari'] = $hari;
+       // $data2['hari'] = date('d',strtotime($tanggal));
+        //$data2['bulan_mt'] = date('F',strtotime($tanggal));
+        $data1['grafik'] = $this->m_grafik_mt->get_kinerja_harian($depot ,$bulan_mt,$hari,$tahun);
+        //$data2['tahun'] = date('Y',strtotime($tanggal));;
+        //$data2['tanggal'] = date("d F Y",strtotime($tanggal));
         
         $data['lv1'] = 3;
         $data['lv2'] = 2;
@@ -825,13 +883,30 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_grafik_hari_mt',$data1);
         $this->footer();
     }
-
-
+    
+    public function mt_masuk($depot)
+    {
+       $tanggal =  $_POST['bulan'];
+       $bulan = date('n',strtotime($tanggal));
+       $tahun = date('Y',strtotime($tanggal));
+       redirect('mt/grafik_bulan_mt/'.$bulan."/".$tahun);
+    }
+    
+    public function mt_aja($depot)
+    {
+       $tanggal =  $_POST['bulan'];
+       $bulan_mt = date('n',strtotime($tanggal));
+       $hari = date('n',strtotime($tanggal));
+       $tahun = date('Y',strtotime($tanggal));
+       redirect('mt/grafik_harian_mt/'.$bulan."/".$bulan."/".$tahun);
+    }
+    
+    //presensi
     public function presensi() {
         $data['lv1'] = 3;
         $data['lv2'] = 3;
         
-        $data2['presensi'] = 0;
+        $data2['kinerja'] = 0;
         $tanggal = $this->input->get('tanggal', true);
         $data['tanggal']= $tanggal;
         $this->header($data);
@@ -845,11 +920,11 @@ class Mt extends CI_Controller {
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
         $data2['tanggal'] = $tanggal;
-        $this->load->model("m_penjadwalan");
-        $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
         
         $this->load->model("m_kinerja");
-        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($tanggal);
+        $data2['mobil'] = $this->m_kinerja->getMobil($depot);
+        
+        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
         $this->header($data);
         $this->load->view('mt/v_presensi',$data2);
         $this->footer();
@@ -880,6 +955,8 @@ class Mt extends CI_Controller {
         $data['lv1'] = 3;
         $data['lv2'] = 4;
         //data reminder
+        
+        $data2['mobil'] = $this->m_pengingat->mobil($depot)->result();
         $data2['apar'] = $this->m_pengingat->getAparReminder($depot)->result();
         $data2['surat'] = $this->m_pengingat->getSuratReminder($depot)->result();
         $data2['ban'] = $this->m_pengingat->getBanReminder($depot)->result();
@@ -951,18 +1028,19 @@ class Mt extends CI_Controller {
             echo '</script>';
     }
     
-    
- 
-    public function rencana() {
+    public function edit_reminder_ban($id)
+    {
+        $tgl_ganti= $_POST['tgl_ganti'];
+        $data = array(
+            "TANGGAL_GANTI_BAN"=>$tgl_ganti,
+            
+        );
         
-        
-        $data2['mt'] = 0;
-        $data2['error'] = "0";
-        $data['lv1'] = 3;
-        $data['lv2'] = 5;
-        $this->header($data);
-        $this->load->view('mt/v_rencana',$data2);
-        $this->footer();
+        $this->m_pengingat->editReminderBan($id,$data);
+        //redirect('mt/reminder');
+          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
+            echo 'window.location.href="' . base_url() . 'mt/reminder";';
+            echo '</script>';
     }
     
 
