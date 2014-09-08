@@ -37,7 +37,11 @@
                     </div>
                     <div class="value">
                         <h1 class=" count3">
-                            <?php if($rencana_bulan[0]->total_kl > 0)echo ceil(($kinerja_bulan[0]->total_kl / $rencana_bulan[0]->total_kl) * 100) ?>%
+                              <?php if ($rencana_bulan[0]->total_kl > 0) {
+                                echo ceil(($kinerja_bulan[0]->total_kl / $rencana_bulan[0]->total_kl) * 100);
+                            } else {
+                                echo "0";
+                            } ?>%
                         </h1>
                         <p>Traget KL</p>
                     </div>
@@ -50,7 +54,11 @@
                     </div>
                     <div class="value">
                         <h1 class=" count4">
-                            <?php echo $kinerja_bulan[0]->own_use ?>
+                           <?php if($kinerja_bulan[0]->own_use  > 0){
+                                echo $kinerja_bulan[0]->own_use ;
+                            } else {
+                                echo "0";
+                            }?>
                         </h1>
                         <p>KL (Own Use)</p>
                     </div>
@@ -66,6 +74,22 @@
                         Grafik Bulanan MT Depot <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
+                         <?php
+                                $attr = array("class"=>"cmxform form-horizontal tasi-form");
+                                 echo form_open("depot/mt_tahun/".$id_depot."/".$nama_depot,$attr);
+                            ?>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <input type="number" name="tahun" minlength="4" maxlength="4" min="2010" value="<?php echo date('Y')?>" required="required" id="tahunLaporan"  class="form-control"/>
+                                </div>
+
+                                <div class=" col-lg-2">
+                                    <input type="submit" class="btn btn-danger" value="Submit">
+                                </div>
+
+                            </div>
+                            <?php echo form_close()?>
+                            <br/><br/>
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
                             </button>

@@ -137,7 +137,7 @@
                 text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
             },
             plotOptions: {
-                column: {
+                series: {
                    point:{
                       events:{
                         click: function(event) {
@@ -172,7 +172,7 @@
                enabled:false
             },
             series: [{
-                    type: 'column',
+                    type: 'spline',
                     name: 'Jumlah',
                      data: km
                 }]

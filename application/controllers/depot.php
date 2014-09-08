@@ -69,6 +69,12 @@ class Depot extends CI_Controller {
       redirect('depot/grafik_hari/' . $tipe.'/'.$id_depot.'/'.$bulan.'/'.$tahun.'/');
     }
 
+    public function amt_tahun($depot,$nama)
+    {
+       $tahun =  $_POST['tahun'];
+       redirect('depot/amt_depot/'.$depot."/".$nama."/".$tahun);
+    }
+    
     public function amt_depot($depot,$nama,$tahun) {
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 1;
@@ -137,6 +143,12 @@ class Depot extends CI_Controller {
        $bulan = date('n',strtotime($tanggal));
        $tahun = date('Y',strtotime($tanggal));
        redirect('depot/amt_depot_harian/'.$depot."/".$nama."/".$bulan."/".$tahun);
+    }
+    
+    public function mt_tahun($depot,$nama)
+    {
+       $tahun =  $_POST['tahun'];
+       redirect('depot/mt_depot/'.$depot."/".$nama."/".$tahun);
     }
     
     public function mt_depot($depot,$nama,$tahun) {

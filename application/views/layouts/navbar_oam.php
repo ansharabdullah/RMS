@@ -40,7 +40,7 @@
             <?php $level++; ?>
             <li class="sub-menu">
                 <a  href="<?php echo base_url()?>presentasi" <?php if ($lv1 == $level) echo "class='active'" ?>>
-                    <i class="icon-bar-chart"></i><span>Grafik</span>
+                    <i class="icon-bar-chart"></i><span>Presentasi Triwulan</span>
                 </a>
             </li>
             <?php $level++; ?>

@@ -26,6 +26,29 @@
                                        Data Penjadwalan belum ada.
                                         </a><br/><br/>";
                                 }
+                                
+                                //cek presensi AMT
+                                if ($logHarian[$i]['presensi_amt'] == 0) {
+
+                                    echo "<a href='".base_url()."amt/presensi'><span class='label label-primary'><i class='icon-user'></i></span>
+                                       Presensi AMT belum dilakukan.
+                                        </a><br/><br/>";
+                                }
+                                 //cek presensi MT
+                                if ($logHarian[$i]['presensi_mt'] == 0) {
+
+                                    echo "<a href='".base_url()."mt/presensi'><span class='label label-primary'><i class='icon-truck'></i></span>
+                                       Presensi MT belum dilakukan.
+                                        </a><br/><br/>";
+                                }
+                                 //cek rencana
+                                if ($logHarian[$i]['rencana'] == 0) {
+
+                                    echo "<a href='".base_url()."mt/rencana'><span class='label label-danger'><i class='icon-truck'></i></span>
+                                       Data Rencana MT belum ada.
+                                        </a><br/><br/>";
+                                }
+                                                
                                 //cek kinerja
                                 if ($logHarian[$i]['input_kinerja'] == 0) {
 
@@ -59,6 +82,13 @@
                                         </a><br/><br/>";
                                 }
 
+                                //cek koefisien
+                                if ($logHarian[$i]['koefisien'] == 0) {
+
+                                    echo "<a href='".base_url()."kpi_internal'><span class='label label-danger'><i class='icon-bolt'></i></span>
+                                      Data Koefisien belum ada.
+                                        </a><br/><br/>";
+                                }
                                 //cek interpolasi
                                 if ($logHarian[$i]['interpolasi'] == 0) {
 
