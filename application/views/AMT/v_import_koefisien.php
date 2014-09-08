@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tahun</label>
                             <div class="col-lg-10">
-                                <input type="number" min="2000" maxlength="4" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tahun" name="tahun">
+                                <input type="number" min="2010" maxlength="4" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tahun" name="tahun">
                             </div>
                         </div>
                         <div class="form-group">
@@ -33,6 +33,9 @@
         </section>
         <?php if ($error) { ?>
             <div class="alert alert-block alert-danger fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="icon-remove"></i>
+                </button>
                 <strong>Error!</strong> <?php echo $error; ?>
             </div>
         <?php } ?>

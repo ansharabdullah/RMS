@@ -177,8 +177,9 @@ class m_mt extends CI_Model {
     }
     
     //penjadwalan
-    public function cekNopol($nopol){
+    public function cekNopol($nopol, $depot){
         $this->db->where('nopol',$nopol);
+        $this->db->where('id_depot',$depot);
         $data = $this->db->get('mobil');
         return $data->result();
     }
