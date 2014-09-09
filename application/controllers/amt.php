@@ -394,7 +394,9 @@ class amt extends CI_Controller {
             'keyword' => 'Edit'
         );
         $this->m_log_sistem->insertLog($datalog);
-
+        $jadwal = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
+        
+        
         $link = base_url() . "amt/presensi_pertanggal/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
@@ -654,7 +656,7 @@ class amt extends CI_Controller {
         $tanggal = $_POST['bulan'];
         $bulan = date('n', strtotime($tanggal));
         $tahun = date('Y', strtotime($tanggal));
-        redirect('depot/amt_depot_harian/' . $depot . "/" . $nama . "/" . $bulan . "/" . $tahun);
+        redirect('amt/amt_depot_harian/' . $depot . "/" . $nama . "/" . $bulan . "/" . $tahun);
     }
 
     public function grafik() {
