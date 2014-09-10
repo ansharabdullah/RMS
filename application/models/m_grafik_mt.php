@@ -29,14 +29,16 @@ class m_grafik_mt extends CI_Model {
     }
     
     public function get_kinerja($depot,$tahun) {
-        $query = $this->db->query("select (DAY(lh.TANGGAL_LOG_HARIAN ))as hari,(MONTHNAME(lh.TANGGAL_LOG_HARIAN ))as bulan,lh.TANGGAL_LOG_HARIAN,sum(ritase_mt) as ritase,sum(total_km_mt) as total_km, sum(total_kl_mt) as total_kl ,
+        $query = $this->db->query("select sum(total_km_mt) as total_km,sum(ritase_mt) as ritase, sum(total_kl_mt) as total_kl ,
                                     sum(km.PREMIUM) as premium , sum(km.PERTAMAX) as pertamax, 
                                     sum(km.PERTAMAX_PLUS) as pertamax_plus,sum(km.PERTAMINA_DEX) as pertamina_dex , 
-                                    sum(km.OWN_USE) as own_use,sum(km.solar) as solar, sum(km.bio_solar) as bio_solar
+                                    sum(km.OWN_USE) as own_use,sum(km.solar) as solar, sum(km.bio_solar) as bio_solar, 
+                                    lh.TANGGAL_LOG_HARIAN , MONTHNAME(STR_TO_DATE(MONTH(lh.TANGGAL_LOG_HARIAN),'%m')) as bulan,
+                                    MONTH(lh.TANGGAL_LOG_HARIAN) as no_bulan 
                                     from kinerja_mt km, log_harian lh 
                                     where  km.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and 
                                     lh.id_depot = $depot and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
-                                    group by MONTH(lh.TANGGAL_LOG_HARIAN) order by lh.TANGGAL_LOG_HARIAN asc");
+                                    group by MONTH(lh.TANGGAL_LOG_HARIAN) order by no_bulan asc");
         return $query->result();
     }
 }

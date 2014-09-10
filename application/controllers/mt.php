@@ -841,11 +841,13 @@ class Mt extends CI_Controller {
      //Data Grafik
     
     
-    public function grafik_mt() {
+    public function grafik_mt($depot,$tahun) {
 
         $depot = $this->session->userdata("id_depot");
         
-        $data1['grafik'] = $this->m_grafik_mt->get_kinerja($depot,date("Y"));
+        $data1['tahun'] = $tahun;
+        $data1['depot'] = $depot;
+        $data1['grafik'] = $this->m_grafik_mt->get_kinerja($depot, $tahun);
         
         $data['lv1'] = 3;
         $data['lv2'] = 2;
@@ -874,11 +876,8 @@ class Mt extends CI_Controller {
         $data1['bulan_mt'] = $bulan_mt;
         $data1['tahun'] = $tahun;
         $data1['hari'] = $hari;
-       // $data2['hari'] = date('d',strtotime($tanggal));
-        //$data2['bulan_mt'] = date('F',strtotime($tanggal));
         $data1['grafik'] = $this->m_grafik_mt->get_kinerja_harian($depot ,$bulan_mt,$hari,$tahun);
-        //$data2['tahun'] = date('Y',strtotime($tanggal));;
-        //$data2['tanggal'] = date("d F Y",strtotime($tanggal));
+        
         
         $data['lv1'] = 3;
         $data['lv2'] = 2;
@@ -887,11 +886,10 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function mt_tahun()
+    public function mt_tahun($depot)
     {
-       $tanggal =  $_POST['tahun'];
-       $tahun = date('Y',strtotime($tanggal));
-       redirect('mt/grafik_mt/'.$tahun);
+       $tahun =  $_POST['tahun'];
+       redirect('mt/grafik_mt/'.$depot."/".$tahun);
     }
     
     public function mt_masuk()

@@ -75,7 +75,7 @@
                         click: function(event) {
                             
                             
-                            window.location = "<?php echo base_url() ?>mt/grafik_bulan_mt/"+ nomor_bulan[this.x]+"/<?php echo date('Y')?>";
+                            window.location = "<?php echo base_url() ?>mt/grafik_bulan_mt/"+ nomor_bulan[this.x]+"/"+ <?php echo $tahun?> ;
                             
                             }
                         }
@@ -86,6 +86,7 @@
                     
                     name: 'KM',
                     type: 'column',
+                    color: 'violet',
                     data: km_mt
 
                 }]
@@ -140,22 +141,21 @@
                     </header>
                     <div class="panel-body">
                         <?php
-                        $attr = array("class" => "cmxform form-horizontal tasi-form");
-                        echo form_open("mt/mt_tahun/", $attr);
-                        ?>
-                        <div class="form-group">
-                            <div class="col-lg-3">
-                                <input type="number" name="tahun"  required="required" id="tahunLaporan"  class="form-control"/>
-                            </div>
+                                $attr = array("class"=>"cmxform form-horizontal tasi-form");
+                                 echo form_open("mt/mt_tahun/".$depot,$attr);
+                            ?>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <input type="number" name="tahun" minlength="4" maxlength="4" min="2010" value="" required="required" id="tahunLaporan"  class="form-control"/>
+                                </div>
 
-                            <div class=" col-lg-2">
-                                <input type="submit" class="btn btn-danger" value="Submit">
-                            </div>
+                                <div class=" col-lg-2">
+                                    <input type="submit" class="btn btn-danger" value="Submit">
+                                </div>
 
-                        </div>
-                        <?php echo form_close() ?>
-                        
-                        <br/><br/>
+                            </div>
+                            <?php echo form_close()?>
+                            <br/><br/>
                         
                          <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
