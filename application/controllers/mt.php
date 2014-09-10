@@ -27,62 +27,130 @@ class Mt extends CI_Controller {
         $this->data_mt();
 
     }
-    //RENCANA *
+    
     public function rencana() {
         
-        $data2['rencana'] = 0;
-        $data2['tanggal'] = 0;
-
-        $data['lv1'] = 3;
-        $data['lv2'] = 5;
-        $this->header($data);
-        $this->load->view('mt/v_rencana',$data2);
-        $this->footer();
-    }
-    
-    public function lihat_rencana() {
-        
         $depot = $this->session->userdata("id_depot");
+        
+        $data2['submit'] = false;
+        $data2['hapus'] = false;
+        $data2['edit'] = false;
+        if ($this->input->post('submit')) {
+            $data2['submit'] = true;
+
+            $data2['bln'] = $this->input->post('bln');
+
+            $tanggal = date("d-m-Y", strtotime($this->input->post('bln')));
+            $bulan = date("m", strtotime($this->input->post('bln')));
+            $tahun = date("Y", strtotime($this->input->post('bln')));
+
+            $data2['tahun'] = $tahun;
+            if ($bulan == 1) {
+                $data2['bulan'] = 'Januari';
+            } else if ($bulan == 2) {
+                $data2['bulan'] = 'Februari';
+            } else if ($bulan == 3) {
+                $data2['bulan'] = 'Maret';
+            } else if ($bulan == 4) {
+                $data2['bulan'] = 'April';
+            } else if ($bulan == 5) {
+                $data2['bulan'] = 'Mei';
+            } else if ($bulan == 6) {
+                $data2['bulan'] = 'Juni';
+            } else if ($bulan == 7) {
+                $data2['bulan'] = 'Juli';
+            } else if ($bulan == 8) {
+                $data2['bulan'] = 'Agustus';
+            } else if ($bulan == 9) {
+                $data2['bulan'] = 'September';
+            } else if ($bulan == 10) {
+                $data2['bulan'] = 'Oktober';
+            } else if ($bulan == 11) {
+                $data2['bulan'] = 'November';
+            } else if ($bulan == 12) {
+                $data2['bulan'] = 'Desember';
+            }
+
+            $data2['status_rencana'] = $this->m_rencana_mt->cekRencana($depot, $tahun, $bulan);
+            if ($data2['status_rencana'] == date('t', strtotime($tanggal))) {
+                //rencana ada
+                $data2['rencana'] = $this->m_rencana_mt->getRencana($depot, $tahun, $bulan);
+            }
+        }
+        
         $data['lv1'] = 3;
         $data['lv2'] = 5;
-        $tanggal = $this->input->get('tanggal', true);
-        
-
-        $data2['rencana'] = $this->m_rencana_mt->getRencana($depot,$tanggal);
-        $data2['tanggal'] = $tanggal;
-        
         $this->header($data);
         $this->load->view('mt/v_rencana',$data2);
         $this->footer();
     }
     
      public function edit_rencana() {
-        $id = $this->input->post('id', true);
-        
-        $data = array(
-            'R_PREMIUM' => $this->input->post('R_PREMIUM', true),
-            'r_pertamax' => $this->input->post('r_pertamax', true),
-            'r_pertamaxplus' => $this->input->post('r_pertamaxplus', true),
-            'r_pertaminadex' => $this->input->post('r_solar', true),
-            'r_solar' => $this->input->post('r_premium', true),
-            'r_biosolar' => $this->input->post('r_biosolar', true),
-            'r_own_use' => $this->input->post('r_own_use', true)
+        if (!$this->input->post('submit')) {
+            redirect('mt/rencana');
+        } else {
+            $depot = $this->session->userdata("id_depot");
+            
+            $id = $this->input->post('id_rencana');
+            $r_premium = $this->input->post('r_premium');
+            $r_pertamax = $this->input->post('r_pertamax');
+            $r_pertamaxplus = $this->input->post('r_pertamaxplus');
+            $r_pertaminadex = $this->input->post('r_pertaminadex');
+            $r_solar = $this->input->post('r_solar');
+            $r_biosolar = $this->input->post('r_biosolar');
+            $r_own_use = $this->input->post('r_own_use');
 
-        );
-        $tanggal = $this->input->post('tanggal_log_harian', true);
-        $this->m_rencana_mt->updateRencana($data, $id);
-        
-        //$datalog = array(
-          //  'keterangan' => "Ubah Jadwal NIP : $nip pada $tanggal",
-            //'id_pegawai' => $this->session->userdata("id_pegawai"),
-            //'keyword' => 'Edit'
-        //);
-        //$this->m_log_sistem->insertLog($datalog);
+            $this->m_rencana_mt->editRencana($id, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
 
-        $link = base_url() . "mt/lihat_rencana/?tanggal=$tanggal";
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
+            $data2['bln'] = $this->input->post('bln');
+
+            $tanggal = date("d-m-Y", strtotime($this->input->post('bln')));
+            $bulan = date("m", strtotime($this->input->post('bln')));
+            $tahun = date("Y", strtotime($this->input->post('bln')));
+
+            $data2['tahun'] = $tahun;
+            if ($bulan == 1) {
+                $data2['bulan'] = 'Januari';
+            } else if ($bulan == 2) {
+                $data2['bulan'] = 'Februari';
+            } else if ($bulan == 3) {
+                $data2['bulan'] = 'Maret';
+            } else if ($bulan == 4) {
+                $data2['bulan'] = 'April';
+            } else if ($bulan == 5) {
+                $data2['bulan'] = 'Mei';
+            } else if ($bulan == 6) {
+                $data2['bulan'] = 'Juni';
+            } else if ($bulan == 7) {
+                $data2['bulan'] = 'Juli';
+            } else if ($bulan == 8) {
+                $data2['bulan'] = 'Agustus';
+            } else if ($bulan == 9) {
+                $data2['bulan'] = 'September';
+            } else if ($bulan == 10) {
+                $data2['bulan'] = 'Oktober';
+            } else if ($bulan == 11) {
+                $data2['bulan'] = 'November';
+            } else if ($bulan == 12) {
+                $data2['bulan'] = 'Desember';
+            }
+
+            $data2['status_rencana'] = $this->m_rencana_mt->cekRencana($depot, $tahun, $bulan);
+            if ($data2['status_rencana'] == date('t', strtotime($tanggal))) {
+                $data2['rencana'] = $this->m_rencana_mt->getRencana($depot, $tahun, $bulan);
+            }
+
+            $data2['submit'] = true;
+            $data2['hapus'] = false;
+            $data2['edit'] = true;
+            
+            $data['lv1'] = 3;
+            $data['lv2'] = 5;
+            $this->header($data);
+            $this->load->view('mt/v_rencana',$data2);
+            $this->footer();
+         }
+            
     }
     
     public function rencana_import() {
@@ -211,16 +279,23 @@ class Mt extends CI_Controller {
     
     public function hapus_rencana() {
        
+
+           if (!$this->input->post('submit')) {
+            redirect('mt/rencana');
+            } else {
             $rencana = unserialize($this->input->post('id_rencana'));
             $this->m_rencana_mt->deleteRencana($rencana);
 
-           
-
-            $link = base_url()."mt/rencana/";
-            echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-            echo 'window.location.href="' . $link . '"';
-            echo '</script>';
-
+            $data2['submit'] = false;
+            $data2['hapus'] = true;
+            $data2['edit'] = false;
+            
+            $data['lv1'] = 3;
+            $data['lv2'] = 5;
+            $this->header($data);
+            $this->load->view('mt/v_rencana',$data2);
+            $this->footer();
+         }
     }
     
 //data MT

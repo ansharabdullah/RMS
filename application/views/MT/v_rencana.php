@@ -29,6 +29,55 @@ function DateToIndo($date) {
         });
     });
 </script>
+
+<script type="text/javascript">
+    var rencana = new Array();
+
+    $(document).ready(function() {
+
+        //masukin array apar ke javascript
+        var data;
+<?php foreach ($rencana as $a) { ?>
+            data = new Array();
+            data['id'] = "<?php echo $a->ID_RENCANA ?>";
+
+            data['tanggal'] = "<?php echo $a->TANGGAL ?>";
+
+            data['r_premium'] = "<?php echo $a->R_PREMIUM ?>";
+            data['r_pertamax'] = "<?php echo $a->R_PERTAMAX ?>";
+            data['r_pertamaxplus'] = "<?php echo $a->R_PERTAMAXPLUS ?>";
+
+            data['r_pertaminaplus'] = "<?php echo $a->R_PERTAMINADEX ?>";
+            data['r_solar'] = "<?php echo $a->R_SOLAR ?>";
+            data['r_biosolar'] = "<?php echo $a->R_BIO_SOLAR ?>";
+            data['r_own_use'] = "<?php echo $a->R_OWN_USE ?>";
+
+            
+
+            rencana.push(data);
+<?php } ?>
+
+
+    });
+
+    function setDetailRencana(index) {
+        $("#id_rencana").val(rencana[index]['id']);
+        $("#tanggal_rencana").val(rencana[index]['tanggal']);
+
+        $("#premium").val(rencana[index]['r_premium']);
+        $("#solar").val(rencana[index]['r_solar']);
+        $("#pertamax").val(rencana[index]['r_pertamax']);
+
+        $("#pertamxplus").val(rencana[index]['r_pertamaxplus']);
+        $("#pertaminadex").val(rencana[index]['r_pertaminadex']);
+        $("#biosolar").val(rencana[index]['r_biosolar']);
+        $("#own_use").val(rencana[index]['r_own_use']);
+
+
+    }
+ 
+
+</script>
 <section id="main-content">
     <section class="wrapper">
         <section class="panel" id="LihatJadwal">
@@ -40,26 +89,35 @@ function DateToIndo($date) {
             </header>
             <div class="panel-body" >
                 <div class="clearfix">
-                    <form class="cmxform form-horizontal tasi-form" id ="signupForm" method="GET" action="<?php echo base_url() ?>mt/lihat_rencana/">
+                    <form class="cmxform form-horizontal tasi-form" id ="signupForm" method="POST" action="<?php echo base_url() ?>mt/rencana/">
                         <div class="form-group" style="margin-top: 20px;">
-                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                             <div class="col-lg-10">
-                                <input type="date" required="required" id="tanggalJadwal" class="form-control"  placeholder="Tanggal" name="tanggal">
-                            </div>
+                                <input type="month" required="required" id="bln" name="bln" class="form-control"  placeholder="Tanggal">
+                        </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <input type="submit" style="float: right;" class="btn btn-warning" value="Cek">
+                                <input type="submit" name="submit" style="float: right;" class="btn btn-warning" value="Cek">
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </section>
-        <?php if ($rencana) { ?>
-            <section class="panel" id="tabelJadwal">
-                <header class="panel-heading">
-                    Rencana (<?php echo $tanggal; ?>)
+        <?php if ($submit == true) { ?>
+            <?php if ($status_rencana > 0) { ?>
+                <?php if ($edit == true) { ?>
+                    <div class="alert alert-success fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Sukses!</strong> Berhasil edit Rencana.
+                    </div>
+                <?php } ?>
+                <section class="panel">
+                    <header class="panel-heading">
+                        Tabel Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong>
                     <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalHapusRencana" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Rencana"><i class="icon-remove"></i></a>
                 </header>
                 <div class="panel-body"  >
@@ -86,12 +144,12 @@ function DateToIndo($date) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $i = 0;
+                                    $i = 1;
                                     foreach ($rencana as $row) {
                                         ?>
                                         <tr class="">
                                             <th style="display: none;"></th>
-                                            <td><?php echo ($i + 1) ?></td>
+                                            <td><?php echo $i ?></td>
                                              <td><?php echo(DateToIndo($row->TANGGAL_LOG_HARIAN)); ?></td>
                                             <td><?php echo $row->R_PREMIUM ?></td>
                                             <td><?php echo $row->R_PERTAMAX?></td>
@@ -101,8 +159,7 @@ function DateToIndo($date) {
                                             <td><?php echo $row->R_BIOSOLAR ?></td>
                                             <td><?php echo $row->R_OWN_USE ?></td>
                                             <td>
-                                                <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal" onclick="editRencana('<?php echo $row->ID_RENCANA ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->R_PREMIUM ?>', '<?php echo $row->R_PERTAMAX ?>', '<?php echo $row->R_PERTAMAXPLUS ?>', '<?php echo $row->R_PERTAMINADEX ?>', '<?php echo $row->R_SOLAR ?>','<?php echo $row->R_BIOSOLAR ?>','<?php echo $row->R_OWN_USE ?>')"><span  class="btn btn-warning btn-xs tooltips" data-original-title="Ganti Rencana" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
-
+                                                <a data-placement="top" data-toggle="modal" href="#ModalRencana" onclick="setDetailRencana('2')" class="btn btn-warning btn-xs tooltips" data-original-title="Rencana Edit"><i class="icon-pencil"></i></a>
                                             </td>
                                         </tr>
 
@@ -115,99 +172,104 @@ function DateToIndo($date) {
                         </div>
                     </div>
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Edit Rencana</h4>
-                            </div>
-                            <div class=" form">
-                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>mt/edit_rencana/">
-
-                                    <div class="modal-body">
-                                        <input type="hidden" readonly="readonly" value="" name="id_jadwal" required="required" class="form-control"  placeholder="" id="id_jadwal"/>
-                                        <input type="hidden" readonly="readonly" value="" name="tanggal_log_harian" required="required" class="form-control"  placeholder="" id="tanggal_log_harian1"/>
-                                        <input type="hidden" readonly="readonly" value="" name="nip" required="required" class="form-control"  placeholder="" id="nip"/>
-                                        
-                                        <div class="form-group">
-                                            <label for="ou" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" value="" readonly="readonly" name="own-use" required="required" class="form-control" id="tanggal_log_harian"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Premium</label>
-                                            <div class="col-lg-10">
-                                                <input type="number" value="" name="R_PREMIUM" required="required" class="form-control"  placeholder="Nama Pegawai" id="R_PREMIUM"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
-                                            <div class="col-lg-10">
-                                                <input type="number" value="" name="r_pertamax" required="required" class="form-control"  placeholder="Nama Pegawai" id="r_pertamax"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
-                                            <div class="col-lg-10">
-                                                <input type="number" value="" name="r_pertamaxplus" required="required" class="form-control"  placeholder="Nama Pegawai" id="r_pertamaxplus"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Pertamina Dex</label>
-                                            <div class="col-lg-10">
-                                                <input type="number" value="" name="r_pertaminadex" required="required" class="form-control"  placeholder="Nama Pegawai" id="r_pertaminadex"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Solar</label>
-                                            <div class="col-lg-10">
-                                                <input type="number" value="" name="r_solar" required="required" class="form-control"  placeholder="Nama Pegawai" id="r_solar"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Bio Solar</label>
-                                            <div class="col-lg-10">
-                                                <input type="number" value="" name="r_biosolar" required="required" class="form-control"  placeholder="Nama Pegawai" id="r_biosolar"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="premium" class="col-lg-2 col-sm-2 control-label">Own Use</label>
-                                            <div class="col-lg-10">
-                                                <input type="number" value="" name="r_own_use" required="required" class="form-control"  placeholder="Nama Pegawai" id="r_own_use"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
-                                        <input class="btn btn-success" name="submit"  type="submit" value="Simpan">
-                                      </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
 
-        <?php
-        } else {
-            if ($tanggal) {
-                ?>
+        <?php } else { ?>
                 <div class="alert alert-block alert-danger fade in">
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Error!</strong> Rencana tidak ditemukan.
+                    <strong>Peringatan!</strong> Rencana bulan <strong><?php echo $bulan . ' ' . $tahun; ?></strong> belum diimport.
                 </div>
-    <?php }
-} ?>
+            <?php } ?>
+        <?php } else if ($hapus == true) { ?>
+            <div class="alert alert-success fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="icon-remove"></i>
+                </button>
+                <strong>Sukses!</strong> Berhasil hapus Rencana.
+            </div>
+        <?php } ?>
     </section>
 </section>
 
+<!-- Modal -->
+<?php if ($submit == true) { ?>
+    <?php if ($status_rencana > 0) { ?>
+                <!-- modal edit ms2-->
+        <div class="modal fade" id="ModalRencana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/edit_rencana">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Ubah Rencana</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-lg-12">
+                                <section class="panel">
+                                    <div class="panel-body">
 
-        <!-- modal hapus Rencana-->
+                                        <div class="form-group "> 
+                                            <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_rencana" name="tanggal_rencana" value="" placeholder="Tanggal "required readonly/>
+                                            </div>
+                                            <input type="text" class=" form-control input-sm m-bot15" id="id" name="id" value="" required/>
+                                            <input type="text" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bln; ?>" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                            </div>
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                            </div>
+                                        </div>
+                                          <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                            </div>
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamina Dex</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                            </div>
+                                        </div>
+                                          <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Solar</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                            </div>
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">bio Solar</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                            </div>
+                                        </div>
+                                          <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Own Use</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                            </div>
+                                           
+                                        </div>
+                                        
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
+                            <input class="btn btn-success" type="submit" name="submit" value="Simpan"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="ModalHapusRencana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -217,7 +279,7 @@ function DateToIndo($date) {
                             <h4 class="modal-title">Konfirmasi Hapus Rencana</h4>
                         </div>
                         <div class="modal-body">
-                            Yakin Hapus Rencana <strong><?php echo $tanggal; ?></strong> ?
+                            Yakin Hapus Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong> ?
                             <input type="hidden" required="required" id="id_rencana" class="form-control" name="id_rencana" value="<?php echo htmlentities(serialize($rencana)); ?>">
                         </div>
                         <div class="modal-footer">
@@ -228,6 +290,10 @@ function DateToIndo($date) {
                 </div>
             </div>
         </div>
+    <?php } ?>
+<?php } ?>
+        <!-- modal hapus Rencana-->
+        
  
 
 <!--script for this page only-->
