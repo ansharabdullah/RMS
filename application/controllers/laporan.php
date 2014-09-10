@@ -3,12 +3,71 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class ba extends CI_Controller {
+class laporan extends CI_Controller {
 
+    function __construct() {
+        parent::__construct();
+        
+        if(!$this->session->userdata('isLoggedIn')){
+            redirect('login');
+        }else if($this->session->userdata('id_role')<=2){
+            redirect();
+        }
+    }
+
+    public function header($lv1,$lv2) {
+        $data['lv1'] = $lv1;
+        $data['lv2'] = $lv2;
+        $data_notifikasi = menu_ss();        
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu', $data_notifikasi);
+        $this->load->view('layouts/navbar', $data);
+    }
+    
+    public function footer() {
+        $this->load->view('layouts/footer');
+    }
+    
+    
     public function index() {
         $this->berita_acara();
     }
 
+    public function harian(){
+        $this->header(7, 1);
+        $this->load->view('laporan/v_laporan_harian');
+        $this->footer();
+    }
+    
+    public function rentang(){
+        $this->header(7, 2);
+        $this->load->view('laporan/v_laporan_sepuluh_hari');
+        $this->footer();
+    }
+    public function custom_hari(){
+        $this->header(7, 3);
+        $this->load->view('laporan/v_laporan_sepuluh_hari');
+        $this->footer();
+    }
+    
+    public function bulanan(){
+        $this->header(7, 4);
+        $this->load->view('laporan/v_laporan_bulanan');
+        $this->footer();
+    }
+    
+    public function triwulan(){
+        $this->header(7, 5);
+        $this->load->view('laporan/v_laporan_triwulan');
+        $this->footer();
+    }
+    
+    public function tahunan(){
+        $this->header(7, 6);
+        $this->load->view('laporan/v_laporan_tahunan');
+        $this->footer();
+    }
+    
     public function ms2() {
         $depot = 1;
         $this->load->model('m_ba');

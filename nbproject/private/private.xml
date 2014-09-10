@@ -2,16 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_kpi_operasional.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_bulanan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_tahunan.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/layouts/navbar.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_berita_acara.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/kinerja.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/kinerja/v_kinerja_siod.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/ba.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_ba.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/laporan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_sepuluh_hari.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_kinerja.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_triwulan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_harian.php</file>
         </group>
-=======
-        <group/>
->>>>>>> 2f8c06834a2c407bfca702d3a2dcd5dbbb8464f0
     </open-files>
 </project-private>

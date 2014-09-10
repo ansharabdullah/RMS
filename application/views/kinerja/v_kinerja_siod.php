@@ -1,7 +1,6 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-
         $("#signupForm").submit(function(e) {
             var isvalidate = $("#signupForm").valid();
             if (isvalidate)
@@ -21,9 +20,7 @@
                 }
             }
         });
-
     });
-
 
 </script>
 <section id="main-content">
@@ -40,7 +37,7 @@
                 </div>
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" action="<?php echo base_url() ?>kinerja/preview" method="POST" enctype="multipart/form-data">
+                <form class="cmxform form-horizontal tasi-form" id="signupForm" action="<?php echo base_url() ?>kinerja" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10 col-sm-6">
@@ -55,14 +52,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10 col-sm-6">
-                            <input type="submit" style="float: right;" class="btn btn-danger" value="Upload" name="submit">
+                            <input type="submit" style="float: right;" class="btn btn-danger" value="Upload" name="cek">
                         </div>
                     </div>
                 </form>
             </div>
         </section>
         <?php
-        if ($submit == true) {
+        if ($data_kinerja['submit'] == true) {
             $status_simpan = true;
             ?>
 
@@ -128,7 +125,7 @@
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
                         </button>
-                        <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki tidak ditemukan.
+                        <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki (Supir) tidak ditemukan.
                     </div>
                 <?php } ?>
                 <?php if ($data_kinerja['KERNET']['koefisien_error'] == true) { ?>
@@ -136,7 +133,7 @@
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
                         </button>
-                        <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki tidak ditemukan.
+                        <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki (Kernet) tidak ditemukan.
                     </div>
                 <?php } ?>
                 <?php if ($data_kinerja['KERNET']['error'] == true) { ?>
@@ -328,13 +325,13 @@
 
                 <section class="panel">
                     <div class="panel-body">
-                        <form class="cmxform form-horizontal tasi-form" id="signupForm1" action="<?php echo base_url() ?>kinerja/simpan" method="POST" enctype="multipart/form-data">
+                        <form class="cmxform form-horizontal tasi-form" id="signupForm1" action="<?php echo base_url() ?>kinerja" method="POST" enctype="multipart/form-data">
                             <input type="hidden" required="required" id="data_kinerja" class="form-control" name="data_kinerja" value="<?php echo htmlentities(serialize($data_kinerja)); ?>">
 
                             <div class="form-group">
                                 <div class="col-lg-12 col-sm-6">
                                     <?php if ($status_simpan == true) { ?>
-                                        <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit">
+                                        <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="simpan">
                                     <?php } else { ?>
                                         <div class="alert alert-block alert-danger fade in">
                                             <strong>Error!</strong> Terdapat beberapa data yang salah, tidak dapat disimpan.
@@ -352,7 +349,7 @@
 
         <?php } ?>
 
-        <?php if ($simpan == true) { ?>
+        <?php if ($data_kinerja['simpan'] == true) { ?>
             <div class="alert alert-success fade in">
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
@@ -360,7 +357,6 @@
                 <strong>Sukses!</strong> Berhasil simpan kinerja ke database.
             </div>
         <?php } ?>
-
 
         <!-- page end-->
     </section>
