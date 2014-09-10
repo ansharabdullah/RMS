@@ -150,6 +150,12 @@ class m_log_harian extends CI_Model {
     public function updateStatusJadwal($bulan, $tahun, $depot) {
         $this->db->query("update log_harian set status_penjadwalan=1 where month(tanggal_log_harian)='$bulan' and year(tanggal_log_harian)='$tahun' and id_depot='$depot'");
     }
+    
+    public function updateStatusPresensiAMT($depot, $tanggal, $data){
+        $this->db->where('id_depot', $id_depot);
+        $this->db->where('tanggal_log_harian', $tanggal);
+        $this->db->update($data);
+    }
 
     //insert setahuneun
     public function insertLogHarian($data) {
