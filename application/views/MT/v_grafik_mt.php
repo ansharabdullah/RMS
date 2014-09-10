@@ -36,9 +36,10 @@
         }
     ?>
     $(function() {
-        $('#grafik').highcharts({
+       mt = new Highcharts.Chart({ 
             chart: {
-                type: 'spline'
+                zoomType: 'x',
+                renderTo: 'grafik'
             },
             title: {
                 text: 'Grafik Mobil Tangki',
@@ -68,9 +69,8 @@
                 borderWidth: 1
             },
             plotOptions: {
-                series: {
-                    cursor:'pointer',
-                    point:{
+               column: {
+                   point:{
                         events: {
                         click: function(event) {
                             
@@ -83,39 +83,48 @@
                 }
             },
             series: [{
+                    
                     name: 'KM',
+                    type: 'column',
                     data: km_mt
-                }, {
-                    name: 'KL',
-                    data: kl_mt
-                }, {
-                    name: 'Premium',
-                    data: premium
-                }, {
-                    name: 'Pertamax',
-                    data: pertamax
-                }, {
-                    name: 'Pertamax Plus',
-                    data: pertamax_plus
-                }, {
-                    name: 'Pertamina Dex',
-                    data: pertamina_dex
-                }, {
-                    name: 'Solar',
-                    data: solar
-                }, {
-                    name: 'Own Use',
-                    data: own_use_mt
-                }, {
-                    name: 'Bio Solar',
-                    data: bio_solar
-                },
-                {
-                    name: 'Ritase',
-                    data: ritase_mt
+
                 }]
         });
     });
+    
+    function filterMt(title)
+    {
+        mt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Mobil Tangki'});  
+        mt.legend.allItems[0].update({name:title});
+        if(title == "KM"){
+             mt.series[0].setData(total_km_mt);
+        }
+        else if(title == "KL"){
+            mt.series[0].setData(kl_mt);
+            
+        }else if(title == "Own Use"){
+            mt.series[0].setData(own_use_mt);
+                
+        }else if(title == "Premium"){
+            mt.series[0].setData(premium);
+            
+        }else if(title == "Pertamax"){
+            mt.series[0].setData(pertamax);
+            
+        }else if(title == "Pertamax Plus") {
+            mt.series[0].setData(pertamax_plus);
+            
+        }else if(title == "Pertamax Dex") {
+            mt.series[0].setData(pertamina_dex);
+            
+        }else if(title == "Solar"){
+            mt.series[0].setData(solar);
+            
+        }else if(title == "Bio Solar"){
+            mt.series[0].setData(bio_solar);
+        } 
+        
+    }
 
     
 </script>
@@ -126,7 +135,43 @@
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
+                     <header class="panel-heading">
+                        Grafik Detail Mobil Tangki
+                    </header>
                     <div class="panel-body">
+                        <?php
+                        $attr = array("class" => "cmxform form-horizontal tasi-form");
+                        echo form_open("mt/mt_tahun/", $attr);
+                        ?>
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <input type="number" name="tahun"  required="required" id="tahunLaporan"  class="form-control"/>
+                            </div>
+
+                            <div class=" col-lg-2">
+                                <input type="submit" class="btn btn-danger" value="Submit">
+                            </div>
+
+                        </div>
+                        <?php echo form_close() ?>
+                        
+                        <br/><br/>
+                        
+                         <div class="btn-group pull-right">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-left">
+                                <li><a style="cursor: pointer" onclick="filterMt('KM')">KM</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('KL')">KL</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Own Use')">Own Use</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Plus')">Pertamax Plus</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Dex')">Pertamax Dex</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
+                            </ul>
+                        </div>
                         <div id="grafik"></div>
 
                     </div>

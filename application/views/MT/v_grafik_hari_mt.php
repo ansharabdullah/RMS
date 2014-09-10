@@ -151,17 +151,13 @@ foreach ($grafik as $km) {
                 $("#selanjutnya").hide();
             }
             $("#sebelum").show();
+            
             setData();
         }
     
         function setData()
         {
-            var i = 0;
-            for(i = 0 ; i < mt.series.length ; i++)
-            {
-                mt.series[i].setVisible(false);
-            }
-            mt.series[0].setVisible(true);
+            
             mt.xAxis[0].setCategories(nopol_mt.slice(start,start + limit));
             mt.series[0].setData(km_mt.slice(start,start + limit));
             mt.series[1].setData(kl_mt.slice(start,start + limit));
@@ -186,6 +182,22 @@ foreach ($grafik as $km) {
                         Grafik Detail Harian MT 
                     </header>
                     <div class="panel-body" >
+                         <?php
+                        $attr = array("class" => "cmxform form-horizontal tasi-form");
+                        echo form_open("mt/ganti_harian_mt/", $attr);
+                        ?>
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <input type="date" name="tanggal"  required="required" id="tahunLaporan"  class="form-control"/>
+                            </div>
+
+                            <div class=" col-lg-2">
+                                <input type="submit" class="btn btn-danger" value="Submit">
+                            </div>
+
+                        </div>
+                        <?php echo form_close() ?>
+                        
                         <br/><br/>
                         <div id="grafik"></div><br/><br/>
                         <button class='btn btn-danger' id="sebelum" onclick="sebelumOnClick()"><i class='icon-long-arrow-left'></i> sebelumnya</button>

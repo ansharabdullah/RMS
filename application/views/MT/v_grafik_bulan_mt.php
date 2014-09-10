@@ -9,7 +9,22 @@
                         Grafik Harian MT
                     </header>
                     <div class="panel-body" >
-                        
+                        <?php
+                                $attr = array("class"=>"cmxform form-horizontal tasi-form");
+                               echo form_open("mt/mt_masuk/",$attr);
+                            ?>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                </div>
+
+                                <div class=" col-lg-2">
+                                    <input type="submit" class="btn btn-danger" value="Submit">
+                                </div>
+
+                            </div>
+                            <?php echo form_close()?>
+                        <br/><br/>
                          <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
                             </button>
@@ -132,7 +147,7 @@
                 renderTo:'grafik'
             },
             title: {
-                text: 'Grafik Kinerja Harian Jumlah KM Mobil Tangki Depot'
+                text: 'Grafik Kinerja Harian Jumlah KM Mobil Tangki'
             },
             subtitle: {
                 text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan_mt, 1, 2005))?> Tahun <?php echo $tahun ?>'
@@ -155,8 +170,9 @@
                     }
                 }],
             plotOptions: {
-                column: {
-                   point:{
+                  series: {
+                    cursor:'pointer',
+                    point:{
                       events:{
                         click: function(event) {
                             
@@ -176,7 +192,7 @@
                 enabled:false
             },
             series: [{
-                    type: 'column',
+                    type: 'spline',
                     name: 'Jumlah',
                     data: km_mt
                 }]

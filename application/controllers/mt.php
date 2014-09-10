@@ -14,6 +14,7 @@ class Mt extends CI_Controller {
             redirect();
         }
         
+        $this->load->helper("form");
         $this->load->model("m_mt");
         $this->load->model("m_grafik_mt");
         $this->load->model("m_pengingat");
@@ -90,6 +91,8 @@ class Mt extends CI_Controller {
         $data['lv2'] = 5;
         $data2['rencana'] = 0;
         $data2['error'] = 0;
+        $data2['klik_upload'] = false;
+        $data2['klik_simpan'] = false;
         
         $this->header($data);
         $this->load->view('mt/v_import_rencana',$data2);
@@ -884,7 +887,14 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function mt_masuk($depot)
+    public function mt_tahun()
+    {
+       $tanggal =  $_POST['tahun'];
+       $tahun = date('Y',strtotime($tanggal));
+       redirect('mt/grafik_mt/'.$tahun);
+    }
+    
+    public function mt_masuk()
     {
        $tanggal =  $_POST['bulan'];
        $bulan = date('n',strtotime($tanggal));
@@ -892,13 +902,13 @@ class Mt extends CI_Controller {
        redirect('mt/grafik_bulan_mt/'.$bulan."/".$tahun);
     }
     
-    public function mt_aja($depot)
+    public function ganti_harian_mt()
     {
-       $tanggal =  $_POST['bulan'];
-       $bulan_mt = date('n',strtotime($tanggal));
-       $hari = date('n',strtotime($tanggal));
+       $tanggal =  $_POST['tanggal'];
+       $hari = date('d',strtotime($tanggal));
+       $bulan = date('n',strtotime($tanggal));
        $tahun = date('Y',strtotime($tanggal));
-       redirect('mt/grafik_harian_mt/'.$bulan."/".$bulan."/".$tahun);
+        redirect("mt/grafik_hari_mt/".$bulan."/".$hari."/".$tahun);
     }
     
     //presensi
