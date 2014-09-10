@@ -192,7 +192,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" name="tahun" data-mask="9999" name="tahun" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                        <input type="number" value="<?php echo date('Y')?>" name="tahun" maxlength="4" minlength="4" min="2010"  placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
                                     </div>
 
                                     <div class=" col-lg-2">

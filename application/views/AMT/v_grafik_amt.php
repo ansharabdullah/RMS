@@ -2,66 +2,11 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        <div class="row state-overview">
-            <div class="col-lg-3 col-sm-6">
-                <section class="panel">
-                    <div class="symbol terques">
-                        <i class="icon-user"></i>
-                    </div>
-                    <div class="value">
-                        <h1 class="count">
-                            <?php echo $total_amt ?>
-                        </h1>
-                        <p>Awak Mobil Tangki</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <section class="panel">
-                    <div class="symbol red">
-                        <i class="icon-truck"></i>
-                    </div>
-                    <div class="value">
-                        <h1 class=" count2">
-                            <?php echo $total_mt ?>
-                        </h1>
-                        <p>Mobil Tangki</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <section class="panel">
-                    <div class="symbol yellow">
-                        <i class="icon-star"></i>
-                    </div>
-                    <div class="value">
-                        <h1 class=" count3">
-                            <?php if($rencana_bulan[0]->total_kl > 0)echo ceil(($kinerja_bulan[0]->total_kl / $rencana_bulan[0]->total_kl) * 100) ?>%
-                        </h1>
-                        <p>Traget KL</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <section class="panel">
-                    <div class="symbol blue">
-                        <i class="icon-dashboard"></i>
-                    </div>
-                    <div class="value">
-                        <h1 class=" count4">
-                            <?php echo $kinerja_bulan[0]->own_use ?>
-                        </h1>
-                        <p>KL (Own Use)</p>
-                    </div>
-                </section>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Bulanan Kinerja AMT Depot <?php echo $nama_depot?>
+                        Grafik Bulanan Kinerja AMT
                     </header>
                     <div class="panel-body" >
                         <div class="btn-group pull-right">
@@ -86,7 +31,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Awak Mobil Tangki Depot <?php echo $nama_depot?>
+                        Awak Mobil Tangki
                     </header>
                     <div class="panel-body">
                         <div class="space15">
@@ -165,7 +110,7 @@
                 renderTo:'grafik2'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM AMT Depot <?php echo $nama_depot?>'
+                text: 'Grafik Kinerja Jumlah KM AMT'
             },
             subtitle: {
                 text: 'Tahun <?php echo $tahun;?>'
@@ -216,7 +161,7 @@
     
     function filterAmt(title)
     {
-        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' AMT Depot <?php echo $nama_depot?>'});  
+        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' AMT'});  
         if(title == "KM"){
              amt.series[0].setData(total_km);
         }else if(title == "KL"){

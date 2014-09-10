@@ -177,7 +177,7 @@
                     }
                 }],
              plotOptions: {
-                column: {
+                series: {
                    point:{
                       events:{
                         click: function(event) {
@@ -195,7 +195,7 @@
                 enabled:false
             },
             series: [{
-                    type: 'column',
+                    type: 'spline',
                     name: 'Jumlah',
                     data: km_mt
                 }]
