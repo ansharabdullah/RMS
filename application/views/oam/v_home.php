@@ -75,7 +75,11 @@
                     </div>
                     <div class="value">
                         <h1 class=" count4">
-<?php echo $kinerja_bulan[0]->own_use ?>
+                            <?php if($kinerja_bulan[0]->own_use  > 0){
+                                echo $kinerja_bulan[0]->own_use ;
+                            } else {
+                                echo "0";
+                            }?>
                         </h1>
                         <p>KL (Own Use)</p>
                     </div>
@@ -413,28 +417,11 @@ if ($kinerja_hari[0]->premium != NULL && $rencana_hari[0]->premium != NULL) {
                             </span>
                         </div></a>
                     <div id="ms2VolumeBody">
-<!--                        <section class="panel" >
-                            <div class="panel-body">
-                                <div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Filter INDIKATOR<i class="icon-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-left">
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('KM')">KM</a></li>
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('KL')">KL</a></li>
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Ritase')">Ritase</a></li>
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('SPBU')">SPBU</a></li>
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Jumlah Hadir')">Jumlah Hadir</a></li>
-                                        <li><a style="cursor: pointer" onclick="changeAmtTitle('Jumlah Tidak Hadir')">Jumlah Tidak Hadir</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </section>-->
                         <section class="panel" >
                             <div class="panel-body">
                                 <div id="grafikKpi"></div>
                                 &nbsp;&nbsp;<span class='btn btn-warning' > <i class='icon-warning-sign'></i></span>  <b> = Hasil dibawah target</a>
-                                    <!--                                <div id="grafikVolume"  style="width:80% "></div>-->
-                                    <!--                            -->
+                                   
                             </div>
                         </section>
                     </div>
@@ -453,6 +440,7 @@ if ($kinerja_hari[0]->premium != NULL && $rencana_hari[0]->premium != NULL) {
 <script src="<?php echo base_url() ?>assets/js/grouped-categories.js"></script>
 <script type="text/javascript">
     var amt;
+    var kpi;
     var tahun_kpi = new Array();
     var series_kpi = new Array();
     var set = new Array();

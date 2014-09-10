@@ -7,6 +7,14 @@ class m_depot extends CI_Model {
         $query = $this->db->query("select * from depot where ID_DEPOT > 0");
         return $query->result();
     }
+    
+    public function get_total_depot()
+    {
+        $query = $this->db->query("select * from depot where ID_DEPOT > 0");
+        
+        return $query->num_rows();
+        
+    }
 
 }
 
