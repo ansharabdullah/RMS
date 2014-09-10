@@ -1,23 +1,118 @@
-<?php
-function DateToIndo($date) { 
-        $BulanIndo = array("Januari", "Februari", "Maret",
-                           "April", "Mei", "Juni",
-                           "Juli", "Agustus", "September",
-                           "Oktober", "November", "Desember");
-    
-        $tahun = substr($date, 0, 4); 
-        $bulan = substr($date, 5, 2); 
-        $tgl   = substr($date, 8, 2); 
-        
-        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
-        return($result);
-}
 
-?>
+<section id="main-content">
+    <section class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Grafik Harian MT
+                    </header>
+                    <div class="panel-body" >
+                        <?php
+                                $attr = array("class"=>"cmxform form-horizontal tasi-form");
+                               echo form_open("mt/mt_masuk/",$attr);
+                            ?>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                </div>
+
+                                <div class=" col-lg-2">
+                                    <input type="submit" class="btn btn-danger" value="Submit">
+                                </div>
+
+                            </div>
+                            <?php echo form_close()?>
+                        <br/><br/>
+                         <div class="btn-group pull-right">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-left">
+                                <li><a style="cursor: pointer" onclick="filterMt('KM')">KM</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('KL')">KL</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Own Use')">Own Use</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Plus')">Pertamax Plus</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Dex')">Pertamax Dex</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
+                            </ul>
+                        </div>
+                        <div id="grafik"></div>
+
+                    </div>
+                </section>
+                
+                <section class="panel">
+                    <div class="panel-body" >
+                        <div id="filePreview">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    Tabel Kinerja Mobil Tangki
+                                </header>
+                                <div class="panel-body">
+
+                                        <div class="space15"></div>
+                                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none;"></th>
+                                                    <th >No</th>
+                                                    <th >Tanggal</th>
+                                                    <th >Jumlah KM</th>
+                                                    <th >Jumlah KL</th>
+                                                    <th >Own Use</th>
+                                                    <th >Premium</th>
+                                                    <th >Pertamax</th>
+                                                    <th >Pertamax Plus</th>
+                                                    <th >Pertamax Dex</th>
+                                                    <th >Solar</th>
+                                                    <th >Bio Solar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $i = 1;
+                                                foreach ($grafik as $km) {
+                                                    ?>
+                                                    <tr class="">
+                                                        <td style="display:none;"></td>
+                                                        <td><?php echo $i ?></td>
+                                                        <td style="white-space: nowrap"><?php echo date_format(date_create($km->TANGGAL_LOG_HARIAN),'d F Y');?></td>
+                                                        <td><?php echo $km->total_km ?> KM</td>
+                                                        <td><?php echo $km->total_kl ?> KL</td>
+                                                        <td><?php echo $km->own_use ?></td>
+                                                        <td><?php echo $km->premium ?></td>
+                                                        <td><?php echo $km->pertamax ?></td>
+                                                        <td><?php echo $km->pertamax_plus ?></td>
+                                                        <td><?php echo $km->pertamina_dex ?></td>
+                                                        <td><?php echo $km->solar ?></td>
+                                                        <td><?php echo $km->bio_solar ?></td>
+                                                    </tr>
+                                                    <?php
+                                                    $i++;
+                                                }
+                                                ?>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                <!-- page end-->
+            </div>            
+        </div>        
+    </section>
+</section>
 
 <script type="text/javascript">
-    
     var mt;
+    var hari = new Array();
     var kl_mt = new Array();
     var km_mt = new Array();
     var total_km_mt = new Array();
@@ -28,16 +123,14 @@ function DateToIndo($date) {
     var solar = new Array();
     var bio_solar = new Array();
     var own_use_mt = new Array();
-    var ritase_mt = new Array();
-    var hari = new Array();
-    var nomor_bulan = new Array();
     
     <?php
         foreach($grafik as $km){
             ?>
-             
+                hari.push("<?php echo $km->hari;?>");
                 kl_mt.push(<?php echo $km->total_kl ?>);
                 km_mt.push(<?php echo $km->total_km ?>);
+                total_km_mt.push(<?php echo $km->total_km ?>);
                 premium.push(<?php echo $km->premium ?>);
                 pertamax.push(<?php echo $km->pertamax ?>);
                 pertamax_plus.push(<?php echo $km->pertamax_plus ?>);
@@ -45,172 +138,118 @@ function DateToIndo($date) {
                 solar.push(<?php echo $km->solar ?>);
                 bio_solar.push(<?php echo $km->bio_solar ?>);
                 own_use_mt.push(<?php echo $km->own_use ?>);
-                ritase_mt.push(<?php echo $km->ritase ?>);
-                hari.push(<?php echo $km->hari ?>)
-                nomor_bulan.push("<?php echo date("n",strtotime($km->TANGGAL_LOG_HARIAN))?>");
-                
             <?php
         }
     ?>
-    
     $(function() {
-        $('#grafik').highcharts({
+        mt = new Highcharts.Chart({ 
             chart: {
-                type: 'column'
+                renderTo:'grafik'
             },
             title: {
-                text: 'Grafik Mobil Tangki',
-                x: -20 //center
+                text: 'Grafik Kinerja Harian Jumlah KM Mobil Tangki'
             },
             subtitle: {
-                text: 'Bulan Januari 2014',
-                x: -20
+                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan_mt, 1, 2005))?> Tahun <?php echo $tahun ?>'
             },
-            xAxis: {
-                categories: hari
-            },
-            yAxis: {
-                title: {
-                    text: 'Jumlah'
-                },
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-            },
-            tooltip: {
-                valueSuffix: ''
-            },
-            legend: {
-                borderWidth: 1
-            },
-             plotOptions: {
-                series: {
+            xAxis: [{
+                    categories: hari
+                }],
+            yAxis: [{// Primary yAxis
+                    labels: {
+                        format: '',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Total',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+                }],
+            plotOptions: {
+                  series: {
                     cursor:'pointer',
                     point:{
-                        events: {
+                      events:{
                         click: function(event) {
                             
                             
-                            window.location = "<?php echo base_url() ?>mt/grafik_hari_mt/"+ nomor_bulan[this.x]+"/"+ hari[this.x]+"/<?php echo date('Y')?>";
+                            window.location = "<?php echo base_url() ?>mt/grafik_hari_mt/"+ <?php echo $bulan_mt?>+"/"+ hari[this.x]+"/<?php echo $tahun?>";
                             
                             }
                         }
                     }
                 }
             },
+
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                enabled:false
+            },
             series: [{
-                    name: 'KM',
+                    type: 'spline',
+                    name: 'Jumlah',
                     data: km_mt
-                }, {
-                    name: 'KL',
-                    data: kl_mt
-                }, {
-                    name: 'Premium',
-                    data: premium
-                }, {
-                    name: 'Pertamax',
-                    data: pertamax
-                }, {
-                    name: 'Pertamax Plus',
-                    data: pertamax_plus
-                }, {
-                    name: 'Pertamina Dex',
-                    data: pertamina_dex
-                }, {
-                    name: 'Solar',
-                    data: solar
-                }, {
-                    name: 'Own Use',
-                    data: own_use_mt
-                }, {
-                    name: 'Bio Solar',
-                    data: bio_solar
-                },
-                {
-                    name: 'Ritase',
-                    data: ritase_mt
                 }]
         });
     });
-
     
+    
+    function filterMt(title)
+    {
+        mt.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' Mobil Tangki'});  
+        if(title == "KM"){
+             mt.series[0].setData(total_km_mt);
+        }
+        else if(title == "KL"){
+            mt.series[0].setData(kl_mt);
+            
+        }else if(title == "Own Use"){
+            mt.series[0].setData(own_use_mt);
+                
+        }else if(title == "Premium"){
+            mt.series[0].setData(premium);
+            
+        }else if(title == "Pertamax"){
+            mt.series[0].setData(pertamax);
+            
+        }else if(title == "Pertamax Plus") {
+            mt.series[0].setData(pertamax_plus);
+            
+        }else if(title == "Pertamax Dex") {
+            mt.series[0].setData(pertamina_dex);
+            
+        }else if(title == "Solar"){
+            mt.series[0].setData(solar);
+            
+        }else if(title == "Bio Solar"){
+            mt.series[0].setData(bio_solar);
+        } 
+        
+    }
 </script>
 
-<section id="main-content">
-    <section class="wrapper">
-        <!-- page start-->
-        <div class="row">
-            <div class="col-lg-12">
-                <section class="panel">
-                    <div class="panel-body">
-                        <div id="grafik"></div> 
-                    </div>
-                </section>
-                <section class="panel">
-                    <header class="panel-heading">
-                            Tabel Kinerja Mobil Tangki Bulan Agustus 2014
-                        </header>
-                    <div class="panel-body">
-                        
-                        <div class="adv-table editable-table " style="overflow-x: scroll">
-                            <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                                <thead>
-                                    <tr>
-                                        <th style="display:none;"></th>
-                                        <th>No </th>
-                                        <th>Tanggal</th>
-                                        <th>Kilometer (KM)</th>
-                                        <th>Kiloliter (KL)</th>
-                                        <th>Ritase (Rit)</th>
-                                        <th>Premium</th>
-                                        <th>Pertamax</th>
-                                        <th>Pertamax Plus</th>
-                                        <th>Pertamax Dex</th>
-                                        <th>Solar</th>
-                                        <th>Bio Solar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                  <?php $i = 1;
-
-                                    foreach ($grafik as $row) { ?>
-                                    <td style="display:none;"></td>
-                                    <td><?php echo $i ?></td>
-                                    <td><?php echo (DateToIndo($row->TANGGAL_LOG_HARIAN)); ?></td>
-                                    <td><?php echo $row->total_km; ?></td>
-                                    <td><?php echo $row->total_kl; ?></td>
-                                    <td><?php echo $row->ritase; ?></td>
-                                    <td><?php echo $row->premium; ?></td>
-                                    <td><?php echo $row->pertamax; ?></td>
-                                    <td><?php echo $row->pertamax_plus; ?></td>
-                                    <td><?php echo $row->pertamina_dex; ?></td>
-                                    <td><?php echo $row->solar; ?></td>
-                                    <td><?php echo $row->bio_solar; ?></td>
-                                    
-                                    </tr>
-                                    <?php
-                                    $i++;
-                                }
-                                ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-            </div>            
-        </div>        
-    </section>
-</section>
 
 <!--script for this page only-->
-<script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/editable-table.js"></script>
 
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- END JAVASCRIPTS -->
 <script>
     jQuery(document).ready(function() {
         EditableTable.init();
     });
 		  	
+    function FilterData(par) {
+        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+    }
+    
+   
+		  
 </script>

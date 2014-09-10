@@ -136,6 +136,18 @@
             subtitle: {
                 text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
             },
+            plotOptions: {
+                series: {
+                   point:{
+                      events:{
+                        click: function(event) {
+                               var tgl = '<?php echo $tahun."-".$bulan."-";?>'+this.category;
+                                window.location = "<?php echo base_url() ?>depot/amt_depot_detail/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+tgl;
+                            }
+                        }
+                    }
+                }
+            },
             xAxis: [{
                     categories: tanggal
                 }],
@@ -160,7 +172,7 @@
                enabled:false
             },
             series: [{
-                    type: 'column',
+                    type: 'spline',
                     name: 'Jumlah',
                      data: km
                 }]

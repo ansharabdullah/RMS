@@ -1,164 +1,300 @@
+<?php
+function DateToIndo($date) { 
+        $BulanIndo = array("Januari", "Februari", "Maret",
+                           "April", "Mei", "Juni",
+                           "Juli", "Agustus", "September",
+                           "Oktober", "November", "Desember");
+    
+        $tahun = substr($date, 0, 4); 
+        $bulan = substr($date, 5, 2); 
+        $tgl   = substr($date, 8, 2); 
+        
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+        return($result);
+}
+
+?>
+
 <script type="text/javascript">
 
     $(document).ready(function() {
-
         $("#signupForm").submit(function(e) {
             var isvalidate = $("#signupForm").valid();
             if (isvalidate)
             {
-                var ext = $("#fileSIOD").val().split('.').pop();
-                if (ext == "xls" || ext == "xlsx") {
-                    //$("#filePreview").hide();
-                    //$("#filePreview").slideDown("slow");
-                    //$("#filePreview1").slideDown("slow");
-                    //$("#tgl").html($("#tanggalSIOD").val());
-                    //$("#tgl1").html($("#tanggalSIOD").val());
-                } else if (ext == "") {
-                    e.preventDefault();
-                } else {
-                    alert("Tipe file yang diupload tidak sesuai (file excel)");
-                    e.preventDefault();
-                }
+                $("#tgl").html($("#tglForm").val());
+                document.getElementById("commentForm").submit();
             }
+            e.preventDefault();
         });
+    });
+</script>
+
+<script type="text/javascript">
+    var rencana = new Array();
+
+    $(document).ready(function() {
+
+        //masukin array apar ke javascript
+        var data;
+<?php foreach ($rencana as $a) { ?>
+            data = new Array();
+            data['id'] = "<?php echo $a->ID_RENCANA ?>";
+
+            data['tanggal'] = "<?php echo $a->TANGGAL ?>";
+
+            data['r_premium'] = "<?php echo $a->R_PREMIUM ?>";
+            data['r_pertamax'] = "<?php echo $a->R_PERTAMAX ?>";
+            data['r_pertamaxplus'] = "<?php echo $a->R_PERTAMAXPLUS ?>";
+
+            data['r_pertaminaplus'] = "<?php echo $a->R_PERTAMINADEX ?>";
+            data['r_solar'] = "<?php echo $a->R_SOLAR ?>";
+            data['r_biosolar'] = "<?php echo $a->R_BIO_SOLAR ?>";
+            data['r_own_use'] = "<?php echo $a->R_OWN_USE ?>";
+
+            
+
+            rencana.push(data);
+<?php } ?>
+
 
     });
-    
-    function loadExcel() {
-        $("#filePreview").hide();
-        $("#filePreview").slideDown("slow");
-    }
 
+    function setDetailRencana(index) {
+        $("#id_rencana").val(rencana[index]['id']);
+        $("#tanggal_rencana").val(rencana[index]['tanggal']);
+
+        $("#premium").val(rencana[index]['r_premium']);
+        $("#solar").val(rencana[index]['r_solar']);
+        $("#pertamax").val(rencana[index]['r_pertamax']);
+
+        $("#pertamxplus").val(rencana[index]['r_pertamaxplus']);
+        $("#pertaminadex").val(rencana[index]['r_pertaminadex']);
+        $("#biosolar").val(rencana[index]['r_biosolar']);
+        $("#own_use").val(rencana[index]['r_own_use']);
+
+
+    }
+ 
 
 </script>
 <section id="main-content">
     <section class="wrapper">
-        <!-- page start-->
-        <section class="panel">
+        <section class="panel" id="LihatJadwal">
             <header class="panel-heading">
-                Input Kinerja dari SIOD
+                Lihat Rencana
                 <div style="float:right;">
-                    <a  data-placement="left" href="<?php echo base_url() ?>mt/manual" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
-                    <a  data-placement="left" href="<?php echo base_url() ?>rencana/hapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Kinerja SIOD"><i class="icon-minus"></i></a>
-
-                    <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>downloads/format_oscrms_rencana.xlsx"><i class="icon-download-alt"></i></a>
+                    <a  data-placement="left" href="<?php echo base_url() ?>mt/rencana_import/" class="btn btn-success btn-xs tooltips" data-original-title="Import Rencana">Import Rencana</a>
                 </div>
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" action="<?php echo base_url() ?>mt/import_xls_rencana/" method="POST" enctype="multipart/form-data">
-                    
-                    <div class="form-group">
-                        <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">File Excel</label>
-                        <div class="col-lg-10">
-                            <input type="file" name="fileSIOD" id="fileSIOD" required="required" class="form-control"  placeholder="FileSIOD">
+                <div class="clearfix">
+                    <form class="cmxform form-horizontal tasi-form" id ="signupForm" method="POST" action="<?php echo base_url() ?>mt/rencana/">
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Bulan</label>
+                            <div class="col-lg-10">
+                                <input type="month" required="required" id="bln" name="bln" class="form-control"  placeholder="Tanggal">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
-                            <input type="submit" style="float: right;" class="btn btn-danger" value="Upload">
                         </div>
-                </form>
-
-            </div>
-        </section>
-
-        <?php if ($error) { ?>
-            <div class="col-lg-12">
-                <div class="alert alert-block alert-danger fade in">
-                    <strong>Error!</strong> <?php echo $error; ?>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <input type="submit" name="submit" style="float: right;" class="btn btn-warning" value="Cek">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        <?php } ?>
-        <?php if ($mt) { ?>
-            <div id="filePreview">
+        </section>
+        <?php if ($submit == true) { ?>
+            <?php if ($status_rencana > 0) { ?>
+                <?php if ($edit == true) { ?>
+                    <div class="alert alert-success fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Sukses!</strong> Berhasil edit Rencana.
+                    </div>
+                <?php } ?>
                 <section class="panel">
                     <header class="panel-heading">
-                        Data dari Excel
-                    </header>
-                    <div class="panel-body">
-                        <div class="adv-table editable-table "  style="overflow-x: scroll">
+                        Tabel Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong>
+                    <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalHapusRencana" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Rencana"><i class="icon-remove"></i></a>
+                </header>
+                <div class="panel-body"  >
+                    <div class="panel-body" >
+                        <div class="adv-table editable-table ">
+                            <div class="clearfix">
+                            </div>
+                            <div class="space15"></div>
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
-                                    <th style="display: none;">-</th>
-                                    <th>No.</th>
-                                    <th>Tanggal</th>
-                                    <th>Own Use</th>
-                                    <th>Premium</th>
-                                    <th>Pertamax</th>
-                                    <th>Pertamax Plus</th>
-                                    <th>Pertamina Dex</th>
-                                    <th>Solar</th>
-                                    <th>Bio Solar</th>
-                                    <th>Status</th>
-
+                                        <th style="display: none;">-</th>
+                                        <th>No.</th>
+                                        <th>Tanggal</th>
+                                        <th>Premium</th>
+                                        <th>Pertamax</th>
+                                        <th>Pertamax Plus</th>
+                                        <th>Pertamina Dex</th>
+                                        <th>Solar</th>
+                                        <th>Bio Solar</th>
+                                        <th>Own Use</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $e = 0;
-                                    $data = array();
-                                    for ($i = 0; $i < sizeof($mt); $i++) {
+                                    $i = 1;
+                                    foreach ($rencana as $row) {
                                         ?>
                                         <tr class="">
                                             <th style="display: none;"></th>
-                                            <td><?php echo ($i + 1) ?></td>
-                                            <td><?php echo $mt[$i]['tanggal_log_harian'] ?></td>
-                                            <td><?php echo $mt[$i]['r_own_use'] ?></td>
-                                            <td><?php echo $mt[$i]['r_premium'] ?></td>
-                                            <td><?php echo $mt[$i]['r_pertamax'] ?></td>
-                                            <td><?php echo $mt[$i]['r_pertamaxplus'] ?></td>
-                                            <td><?php echo $mt[$i]['r_pertaminadex'] ?></td>
-                                            <td><?php echo $mt[$i]['r_solar'] ?></td>
-                                            <td><?php echo $mt[$i]['r_biosolar'] ?></td>
-                                            
-                                            <td><?php
-                                                if ($mt[$i]['error']) {
-                                                    echo "<b>" . $mt[$i]['status_error'] . "</b>";
-                                                } else {
-                                                    echo $mt[$i]['status_error'];
-                                                }
-                                                ?></td>
+                                            <td><?php echo $i ?></td>
+                                             <td><?php echo(DateToIndo($row->TANGGAL_LOG_HARIAN)); ?></td>
+                                            <td><?php echo $row->R_PREMIUM ?></td>
+                                            <td><?php echo $row->R_PERTAMAX?></td>
+                                            <td><?php echo $row->R_PERTAMAXPLUS ?></td>
+                                            <td><?php echo $row->R_PERTAMINADEX ?></td>
+                                            <td><?php echo $row->R_SOLAR ?></td>
+                                            <td><?php echo $row->R_BIOSOLAR ?></td>
+                                            <td><?php echo $row->R_OWN_USE ?></td>
+                                            <td>
+                                                <a data-placement="top" data-toggle="modal" href="#ModalRencana" onclick="setDetailRencana('2')" class="btn btn-warning btn-xs tooltips" data-original-title="Rencana Edit"><i class="icon-pencil"></i></a>
+                                            </td>
                                         </tr>
+
                                         <?php
-                                        $e += $mt[$i]['error'];
-                                        $data[$i] = array(
-                                            'tanggal_log_harian' => $mt[$i]['tanggal_log_harian'],
-                                            'r_premium' => $mt[$i]['r_premium'],
-                                            'r_pertamax' => $mt[$i]['r_pertamax'],
-                                            'r_pertamaxplus' => $mt[$i]['r_pertamaxplus'],
-                                            'r_pertaminadex' => $mt[$i]['r_pertaminadex'],
-                                            'r_solar' => $mt[$i]['r_solar'],
-                                            'r_biosolar' => $mt[$i]['r_biosolar'],
-                                            
-                                        );
+                                        $i++;
                                     }
                                     ?>
                                 </tbody>
                             </table>
                         </div>
-                        
-                        <form method="POST" action="<?php echo base_url() ?>mt/simpan_rencana/" enctype="multipart/form-data">
-                            <?php if ($e != 0) { ?>
-                                    <div class="col-lg-11">
-                                        <div class="alert alert-block alert-danger fade in">
-                                            <strong>Error!</strong> Anda harus memperbaiki file excell sesuai dengan format yang telah disediakan agar dapat menyimpan ke database.
-                                        </div>
-                                    </div>
-                                <?php } else { ?>
-                                    <input type="hidden" required="required" id="data_rencana" class="form-control" name="data_rencana" value="<?php echo htmlentities(serialize($data)); ?>">
-                             <?php } ?>
-                                   <br>
-                                <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit" <?php if ($e != 0) echo "disabled='true'" ?>> 
-                      </form>
                     </div>
-                </section>
-            </div>
-                    <?php } ?>
+                </div>
+            </section>
 
-        <!-- page end-->
+        <?php } else { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Peringatan!</strong> Rencana bulan <strong><?php echo $bulan . ' ' . $tahun; ?></strong> belum diimport.
+                </div>
+            <?php } ?>
+        <?php } else if ($hapus == true) { ?>
+            <div class="alert alert-success fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="icon-remove"></i>
+                </button>
+                <strong>Sukses!</strong> Berhasil hapus Rencana.
+            </div>
+        <?php } ?>
     </section>
 </section>
+
+<!-- Modal -->
+<?php if ($submit == true) { ?>
+    <?php if ($status_rencana > 0) { ?>
+                <!-- modal edit ms2-->
+        <div class="modal fade" id="ModalRencana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/edit_rencana">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Ubah Rencana</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-lg-12">
+                                <section class="panel">
+                                    <div class="panel-body">
+
+                                        <div class="form-group "> 
+                                            <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_rencana" name="tanggal_rencana" value="" placeholder="Tanggal "required readonly/>
+                                            </div>
+                                            <input type="text" class=" form-control input-sm m-bot15" id="id" name="id" value="" required/>
+                                            <input type="text" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bln; ?>" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                            </div>
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                            </div>
+                                        </div>
+                                          <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                            </div>
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamina Dex</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                            </div>
+                                        </div>
+                                          <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Solar</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                            </div>
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">bio Solar</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                            </div>
+                                        </div>
+                                          <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Own Use</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                            </div>
+                                           
+                                        </div>
+                                        
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
+                            <input class="btn btn-success" type="submit" name="submit" value="Simpan"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ModalHapusRencana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>mt/hapus_rencana/">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Konfirmasi Hapus Rencana</h4>
+                        </div>
+                        <div class="modal-body">
+                            Yakin Hapus Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong> ?
+                            <input type="hidden" required="required" id="id_rencana" class="form-control" name="id_rencana" value="<?php echo htmlentities(serialize($rencana)); ?>">
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
+                            <input class="btn btn-danger" type="submit" name="submit" value="Hapus"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+<?php } ?>
+        <!-- modal hapus Rencana-->
+        
+ 
 
 <!--script for this page only-->
 <script src="<?php echo base_url(); ?>assets/js/editable-table.js"></script>
@@ -166,8 +302,19 @@
 <!-- END JAVASCRIPTS -->
 <script>
 
-    jQuery(document).ready(function() {
-        EditableTable.init();
-    });
-
+  jQuery(document).ready(function() {
+   EditableTable.init();
+      });
+function editRencana(id_jadwal, tanggal, R_PREMIUM, r_pertamax, r_pertaminadex, r_pertamaxplus, r_solar, r_biosolar, r_own_use ) {
+    $("#R_PREMIUM").val(R_PREMIUM);
+    $("#id_jadwal").val(id_jadwal);
+    $("#tanggal_log_harian").val(tanggal);
+    $("#tanggal_log_harian1").val(tanggal);
+    $("#r_pertamax").val(r_pertamax);
+    $("#r_pertamaxplus").val(r_pertamaxplus);
+    $("#r_pertaminadex").val(r_pertaminadex);
+    $("#r_solar").val(r_solar);
+    $("#r_biosolar").val(r_biosolar);
+    $("#r_own_use").val(r_own_use);
+   }
 </script>

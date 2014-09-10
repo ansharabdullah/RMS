@@ -21,7 +21,13 @@
                                 <section class="panel">
                                         <header class="panel-heading">
                                         <?php
-                                                echo"<i class='icon-building'></i>&nbsp;DEPOT " . $logHarian[$i]['depot'] . "";
+                                                if( $logHarian[$i]['id_depot'] > 0) {
+                                                    echo"<i class='icon-building'></i>&nbsp;DEPOT " . $logHarian[$i]['depot'] . "";
+                                                }
+                                                else
+                                                {
+                                                     echo"<i class='icon-building'></i>&nbsp;" . $logHarian[$i]['depot'] . "";
+                                                }
                                                 $id_depot = $logHarian[$i]['id_depot'];
                                                 ?>
                                            </header>
@@ -29,55 +35,98 @@
                                                 <?php
                                             }
                                             echo "<br/><b>" . date_format(date_create($logHarian[$i]['tanggal']), 'd-M-y') . "</b><br/><br/>";
-                                            //cek jadwal
-                                            if ($logHarian[$i]['jadwal'] == 0) {
-
-                                                echo "<span class='label label-success'><i class='icon-calendar'></i></span>
-                                                   Data Penjadwalan belum ada.
-                                                    <br/><br/>";
+                                            
+                                            //cek kpi oam
+                                            if($logHarian[$i]['id_depot'] < 0)
+                                            { 
+                                                if ($logHarian[$i]['kpi_oam'] == 0) 
+                                                {
+                                                 echo " <span class='label label-warning'><i class='icon-check'></i></span>
+                                                   KPI OAM belum dibuat.<br/><br/>";
+                                                }
                                             }
-                                            //cek kinerja
-                                            if ($logHarian[$i]['input_kinerja'] == 0) {
+                                            else
+                                            {
+                                            
+                                                //cek jadwal
+                                                if ($logHarian[$i]['jadwal'] == 0) {
 
-                                                echo " <span class='label label-warning'><i class='icon-briefcase'></i></span>
-                                                         Data kinerja belum ada.
+                                                    echo "<span class='label label-success'><i class='icon-calendar'></i></span>
+                                                       Data Penjadwalan belum ada.
                                                         <br/><br/>";
-                                            }
-                                            //cek ms2
-                                            if ($logHarian[$i]['ms2'] == 0) {
+                                                }
+                                                 //cek presensi AMT
+                                                if ($logHarian[$i]['presensi_amt'] == 0) {
 
-                                                echo " <span class='label label-danger'><i class='icon-bolt'></i></span>
-                                                     MS2 belum diisi.
-                                                    <br/><br/>";
-                                            }
-                                            //cek kpi_operasional
-                                            if ($logHarian[$i]['kpi_operasional'] == 0) {
+                                                    echo "<span class='label label-primary'><i class='icon-user'></i></span>
+                                                       Presensi AMT belum dilakukan.
+                                                        <br/><br/>";
+                                                }
+                                                 //cek presensi MT
+                                                if ($logHarian[$i]['presensi_mt'] == 0) {
 
-                                                echo "<span class='label label-danger'><i class='icon-bolt'></i></span>
-                                                    Data KPI Operasional belum ada.
-                                                    <br/><br/>";
-                                            }
-                                            //cek kpi_internal
-                                            if ($logHarian[$i]['kpi_internal'] == 0) {
+                                                    echo "<span class='label label-primary'><i class='icon-truck'></i></span>
+                                                       Presensi MT belum dilakukan.
+                                                        <br/><br/>";
+                                                }
+                                                 //cek rencana
+                                                if ($logHarian[$i]['rencana'] == 0) {
 
-                                                echo "<span class='label label-danger'><i class='icon-bolt'></i></span>
-                                                    Data KPI Internal belum ada.
-                                                    <br/><br/>";
-                                            }
+                                                    echo "<span class='label label-danger'><i class='icon-truck'></i></span>
+                                                       Data Rencana MT belum ada.
+                                                        <br/><br/>";
+                                                }
+                                                //cek kinerja
+                                                if ($logHarian[$i]['input_kinerja'] == 0) {
 
-                                            //cek interpolasi
-                                            if ($logHarian[$i]['interpolasi'] == 0) {
+                                                    echo " <span class='label label-warning'><i class='icon-briefcase'></i></span>
+                                                             Data kinerja belum ada.
+                                                            <br/><br/>";
+                                                }
+                                                //cek ms2
+                                                if ($logHarian[$i]['ms2'] == 0) {
 
-                                                echo "<span class='label label-danger'><i class='icon-bolt'></i></span>
-                                                  Data Tarif Interpolasi belum ada.
-                                                    <br/><br/>";
-                                            }
-                                            //cek ba
-                                            if ($logHarian[$i]['ba'] == 0) {
+                                                    echo " <span class='label label-danger'><i class='icon-bolt'></i></span>
+                                                         MS2 belum diisi.
+                                                        <br/><br/>";
+                                                }
+                                                //cek kpi_operasional
+                                                if ($logHarian[$i]['kpi_operasional'] == 0) {
 
-                                                echo "<span class='label label-warning'><i class='icon-check'></i></span>
-                                                  Berita Acara belum dibuat.
-                                                    <br/><br/>";
+                                                    echo "<span class='label label-danger'><i class='icon-bolt'></i></span>
+                                                        Data KPI Operasional belum ada.
+                                                        <br/><br/>";
+                                                }
+                                                //cek kpi_internal
+                                                if ($logHarian[$i]['kpi_internal'] == 0) {
+
+                                                    echo "<span class='label label-danger'><i class='icon-bolt'></i></span>
+                                                        Data KPI Internal belum ada.
+                                                        <br/><br/>";
+                                                }
+                                                
+                                                //cek koefisien
+                                                if ($logHarian[$i]['koefisien'] == 0) {
+
+                                                    echo "<span class='label label-danger'><i class='icon-bolt'></i></span>
+                                                      Data Koefisien belum ada.
+                                                        <br/><br/>";
+                                                }
+
+                                                //cek interpolasi
+                                                if ($logHarian[$i]['interpolasi'] == 0) {
+
+                                                    echo "<span class='label label-danger'><i class='icon-bolt'></i></span>
+                                                      Data Tarif Interpolasi belum ada.
+                                                        <br/><br/>";
+                                                }
+                                                //cek ba
+                                                if ($logHarian[$i]['ba'] == 0) {
+
+                                                    echo "<span class='label label-warning'><i class='icon-check'></i></span>
+                                                      Berita Acara belum dibuat.
+                                                        <br/><br/>";
+                                                }
                                             }
                                             if ($i == sizeof($logHarian)-1 || $id_depot != $logHarian[$i + 1]['id_depot']) {
                                         ?>

@@ -1,64 +1,116 @@
 <script type="text/javascript">
-    $(function () {
-        $('#grafik').highcharts({
-            chart:{
-                
-                type:'bar'
+    var kpi;
+    var tahun_kpi = new Array();
+    var series_kpi = new Array();
+    var set = new Array();
+    var target = new Array();
+    var arrColorKpi = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
+<?php
+foreach ($kpi['tahun'] as $tahun) {
+    ?>
+            tahun_kpi.push("<?php echo $tahun ?>");
+    <?php
+}
+$i = 0;
+foreach ($kpi['data'] as $data) {
+    ?>
+            set = new Array();
+    <?php
+    foreach ($data['kpi'] as $dt) {
+        ?>
+                    set.push(<?php echo round($dt, 2) ?>);
+                    target.push(100);
+        <?php
+    }
+    ?>
+            series_kpi.push({
+                name:'<?php echo $data['depot'] ?>',
+                color : arrColorKpi[<?php echo $i ?>],
+                id : '<?php echo $data['id_depot'] ?>',
+                data: set
+            });
+    <?php
+    $i++;
+}
+?>
+    $(function() {
+        kpi = new Highcharts.Chart({ 
+            chart: {
+                renderTo:'grafikKpi',
+                type:'column'
             },
             title: {
-                text: 'KPI Operasional',
-                x: -20 //center
+                text: 'Nilai KPI Operasional Depot Pertahun'
             },
-            subtitle: {
-                text: 'Kategori Pertahun',
-                x: -20
-            }, 
             plotOptions: {
-                series: {
-                    events: {
-                        click: function(event) {
-                            window.location = "<?php echo base_url() ?>kpi/operasional_bulan/2014/";
+               
+                column: {
+                    point:{
+                        events:{
+                            click: function(event) {
+                                window.location = "<?php echo base_url() ?>kpi/operasional_bulan/"+ this.series.options.id +"/"+this.category;
+                            }
                         }
+                    },
+                    
+                    dataLabels: {
+                        enabled: true,
+                        useHTML: true,
+                        formatter: function() {
+                            if(this.y < 100 && this.y > 0){
+                                return "<span class='btn btn-warning' > <i class='icon-warning-sign'></i></span>"; 
+                            }
+                        },
+                        y: 100
                     }
                 }
             },
-            xAxis: {
-                categories: ['Tahun 2014']
+            xAxis: [{
+                    categories: tahun_kpi,
+                    gridLineWidth: 0
+              
+                }],
+
+            yAxis: [{ // Primary yAxis
+                    gridLineWidth: 1,
+                    labels: {
+
+                        style: {
+                            color: '#89A54E'
+                        }
+                    },
+                    title: {
+                        text: 'Nilai KPI (%)',
+                        style: {
+                            color: '#89A54E'
+                        }
+                    },
+                    plotLines:[{
+                            value:100,
+                            color: '#ff0000',
+                            width:2,
+                            zIndex:4,
+                            label:{text:'Target'}
+                        }]
+                }],
+           
+
+            tooltip: {
+                positioner: function () {
+                    return { x: 10, y: 0};
+                }
             },
-            yAxis: {
-                title: {
-                    text: 'rata - rata'
-                },
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
+            labels: {
+                items: [{
+                        html: '',
+                        style: {
+                            left: '40px',
+                            top: '8px',
+                            color: 'black'
+                        }
                     }]
             },
-            tooltip: {
-                valueSuffix: ''
-            },
-            series: [{
-                    name: 'Depot 1',
-                    data: [106],
-                    color:'#FF002B'
-                }, {
-                    name: 'Depot 2',
-                    data: [109],
-                    color:'#2C88D4'
-                }, {
-                    name: 'Depot 3',
-                    data: [103],
-                    color:'#23C906'
-                }, {
-                    name: 'Depot 4',
-                    data: [109]
-                }, {
-                    name: 'Depot 5',
-                    data: [103],
-                    color:'#F5A905'
-               
-                }]
+            series: series_kpi
         });
     });
 </script>
@@ -70,44 +122,49 @@
                 KPI OPERASIONAL
             </header>
             <div class="panel-body">
-                <div id="grafik"></div>
-                <br/><br/>
+                <div id="grafikKpi"></div>
+                &nbsp;&nbsp;<span class='btn btn-warning' > <i class='icon-warning-sign'></i></span>  <b> = Hasil dibawah target</b>
+
+                <br/><br/><br/><br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
                                 <tr>
+                                    <th style="display:none;"></th>
                                     <th>No.</th>
                                     <th>Depot</th>
-                                    <th>Tahun 2014</th>
+                                    <?php
+                                    foreach ($kpi['tahun'] as $tahun) {
+                                        ?>
+                                        <th>Tahun <?php echo $tahun ?></th>
+                                    <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Depot 1</td>
-                                    <td>106</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Depot 2</td>
-                                    <td>109</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Depot 3</td>
-                                    <td>103</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Depot 4</td>
-                                    <td>109</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Depot 5</td>
-                                    <td>103</td>
-                                </tr>
+                                <?php
+                                $i = 1;
+                                foreach ($kpi['data'] as $data) {
+                                    ?>
+
+                                    <tr>
+                                        <td style="display:none;"></td>
+                                        <td><?php echo $i?></td>  
+                                        <td><?php echo $data['depot'] ?></td>
+                                        <?php
+                                        foreach ($data['kpi'] as $dt) {
+                                            ?>
+                                            <td><?php echo round($dt,2) ?></td>
+                                            <?php
+                                        }
+                                        ?>
+
+                                    </tr>
+                                    <?php
+                                    $i++;
+                                }
+                                ?>
+
                             </tbody>
                         </table>
                     </center>
@@ -116,3 +173,19 @@
         </section>
     </section>
 </section>
+
+<!--script for this page only-->
+<script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+		  	
+    function FilterData(par) {
+        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+    }
+    
+   
+		  
+</script>

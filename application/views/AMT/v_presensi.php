@@ -46,7 +46,7 @@
             <div id="filePreview">
                 <section class="panel">
                     <header class="panel-heading">
-                        Tabel Presensi (<?php echo $tanggal ?>)
+                        Tabel Presensi (<?php echo date('d-M-Y',  strtotime($tanggal)) ?>)
                     </header>
                     <div class="panel-body">
                         <div class="adv-table editable-table " style="overflow-x: scroll">

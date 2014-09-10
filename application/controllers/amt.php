@@ -393,11 +393,31 @@ class amt extends CI_Controller {
             'id_pegawai' => $this->session->userdata("id_pegawai"),
             'keyword' => 'Edit'
         );
-        $this->m_log_sistem->insertLog($datalog);
-
+        //$this->m_log_sistem->insertLog($datalog);
+        $depot = $this->session->userdata('id_depot');
+        //cek apakah jadwal dan kinerja sudah sesuai
+        $jadwal = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
+        $this->load->model("m_kinerja");
+        $kinerja = $this->m_kinerja->getKinerjaPresensi($tanggal);
+        foreach($jadwal as $row){
+            foreach($kinerja as $row2){
+                if($row->ID_PEGAWAI == $row2->ID_PEGAWAI){
+                    if($row->KETERANGAN_MASUK !=''){
+                        //status log_harian.status_presensi_amt jadikan 1
+                        $data = array(
+                            'status_presensi_amt' => 1
+                        );
+                        
+                        $this->m_log_harian->updateStatusPresensiAMT($depot, $tanggal, $data);
+                    }
+                }
+            }
+        }
+        
+        
         $link = base_url() . "amt/presensi_pertanggal/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
+        //echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
 
@@ -654,7 +674,7 @@ class amt extends CI_Controller {
         $tanggal = $_POST['bulan'];
         $bulan = date('n', strtotime($tanggal));
         $tahun = date('Y', strtotime($tanggal));
-        redirect('depot/amt_depot_harian/' . $depot . "/" . $nama . "/" . $bulan . "/" . $tahun);
+        redirect('amt/amt_depot_harian/' . $depot . "/" . $nama . "/" . $bulan . "/" . $tahun);
     }
 
     public function grafik() {
