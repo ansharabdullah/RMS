@@ -11,10 +11,20 @@ class m_pengaturan extends CI_Model {
         $query = $this->db->get('depot');
         return $query->result();
     }
+    
+    public function selectAllDepot() {
+        $this->db->where('ID_DEPOT <>', -1);
+        $query = $this->db->get('depot');
+        return $query->result();
+    }
+    
+    public function tambahDepot($data){
+        $this->db->insert('depot', $data);
+    }
 
     public function editDepot($data, $id) {
         $this->db->where('id_depot', $id);
-        $this->db->update($data);
+        $this->db->update('depot',$data);
     }
 
     public function selectAllUser() {

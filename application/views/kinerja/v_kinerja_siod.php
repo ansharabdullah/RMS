@@ -1,7 +1,6 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-
         $("#signupForm").submit(function(e) {
             var isvalidate = $("#signupForm").valid();
             if (isvalidate)
@@ -21,9 +20,7 @@
                 }
             }
         });
-
     });
-
 
 </script>
 <section id="main-content">
@@ -40,7 +37,7 @@
                 </div>
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" action="<?php echo base_url() ?>kinerja/preview" method="POST" enctype="multipart/form-data">
+                <form class="cmxform form-horizontal tasi-form" id="signupForm" action="<?php echo base_url() ?>kinerja" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10 col-sm-6">
@@ -55,14 +52,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10 col-sm-6">
-                            <input type="submit" style="float: right;" class="btn btn-danger" value="Upload" name="submit">
+                            <input type="submit" style="float: right;" class="btn btn-danger" value="Upload" name="cek">
                         </div>
                     </div>
                 </form>
             </div>
         </section>
         <?php
-        if ($submit == true) {
+        if ($data_kinerja['submit'] == true) {
             $status_simpan = true;
             ?>
 
@@ -80,73 +77,72 @@
                         </button>
                         <strong>Log harian error!</strong> ID log harian tidak ditemukan.
                     </div>
-                <?php } ?>
-
-                <?php if ($data_kinerja['STATUS_INPUT_HARIAN'] == 1) { ?>
+                <?php } else if ($data_kinerja['STATUS_INPUT_HARIAN'] == 1) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
                         </button>
-                        <strong>Log harian error!</strong> Kinerja tanggal yang dipilih telah diinput, proses input SIOD hanya bisa dilakukan satu kali.
+                        <strong>Error input!</strong> Kinerja tanggal yang dipilih telah diinput, proses input SIOD hanya bisa dilakukan satu kali.
                     </div>
-                <?php } ?>
+                <?php } else if ($data_kinerja['TANGGAL']['error'] == true) { ?>
 
-                <?php if ($data_kinerja['TANGGAL']['error'] == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
                         </button>
                         <strong>Tanggal error!</strong> Tanggal di file SIOD tidak sesuai dengan tanggal pilihan.
                     </div>
+                <?php } else { ?>
+                    <?php if ($data_kinerja['SPBU']['error'] == true) { ?>
+                        <div class="alert alert-block alert-danger fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <strong>SPBU error!</strong> Gagal membaca sheet <strong>Produk SPBU</strong>.
+                        </div>
+                    <?php } ?>
+                    <?php if ($data_kinerja['MT']['error'] == true) { ?>
+                        <div class="alert alert-block alert-danger fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <strong>MT error!</strong> Gagal membaca sheet <strong>Detail MT Report</strong>.
+                        </div>
+                    <?php } ?>
+                    <?php if ($data_kinerja['SUPIR']['error'] == true) { ?>
+                        <div class="alert alert-block alert-danger fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <strong>Supir error!</strong> Gagal membaca sheet <strong>Detail Crew Supir</strong>.
+                        </div>
+                    <?php } ?>
+                    <?php if ($data_kinerja['SUPIR']['koefisien_error'] == true) { ?>
+                        <div class="alert alert-block alert-danger fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki (Supir) tidak ditemukan.
+                        </div>
+                    <?php } ?>
+                    <?php if ($data_kinerja['KERNET']['koefisien_error'] == true) { ?>
+                        <div class="alert alert-block alert-danger fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki (Kernet) tidak ditemukan.
+                        </div>
+                    <?php } ?>
+                    <?php if ($data_kinerja['KERNET']['error'] == true) { ?>
+                        <div class="alert alert-block alert-danger fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="icon-remove"></i>
+                            </button>
+                            <strong>Kernet error!</strong> Gagal membaca sheet <strong>Detail Crew Kernet</strong>.
+                        </div>
+                    <?php } ?>
                 <?php } ?>
-                <?php if ($data_kinerja['SPBU']['error'] == true) { ?>
-                    <div class="alert alert-block alert-danger fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                        </button>
-                        <strong>SPBU error!</strong> Gagal membaca sheet <strong>Produk SPBU</strong>.
-                    </div>
-                <?php } ?>
-                <?php if ($data_kinerja['MT']['error'] == true) { ?>
-                    <div class="alert alert-block alert-danger fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                        </button>
-                        <strong>MT error!</strong> Gagal membaca sheet <strong>Detail MT Report</strong>.
-                    </div>
-                <?php } ?>
-                <?php if ($data_kinerja['SUPIR']['error'] == true) { ?>
-                    <div class="alert alert-block alert-danger fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                        </button>
-                        <strong>Supir error!</strong> Gagal membaca sheet <strong>Detail Crew Supir</strong>.
-                    </div>
-                <?php } ?>
-                <?php if ($data_kinerja['SUPIR']['koefisien_error'] == true) { ?>
-                    <div class="alert alert-block alert-danger fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                        </button>
-                        <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki tidak ditemukan.
-                    </div>
-                <?php } ?>
-                <?php if ($data_kinerja['KERNET']['koefisien_error'] == true) { ?>
-                    <div class="alert alert-block alert-danger fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                        </button>
-                        <strong>Koefisien error!</strong> Koefisien performansi awak mobil tangki tidak ditemukan.
-                    </div>
-                <?php } ?>
-                <?php if ($data_kinerja['KERNET']['error'] == true) { ?>
-                    <div class="alert alert-block alert-danger fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                        </button>
-                        <strong>Kernet error!</strong> Gagal membaca sheet <strong>Detail Crew Kernet</strong>.
-                    </div>
-                <?php } ?>
+
             <?php } else { ?>
 
                 <div class="alert alert-success fade in">
@@ -193,6 +189,7 @@
                                         <th>Pertamina Dex</th>
                                         <th>Solar</th>
                                         <th>Status</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -216,13 +213,16 @@
                                             <td><?php echo $data_kinerja['MT']['solar'][$no - 1]; ?></td>
                                             <td>
                                                 <?php
-                                                if ($data_kinerja['MT']['id'][$no - 1] == -1 || $data_kinerja['MT']['id_kinerja'][$no - 1] == 1) {
+                                                if ($data_kinerja['MT']['data_error'][$no - 1] == true) {
                                                     $status_simpan = false;
                                                     ?>
-                                                    <span class="label label-warning tooltips" data-placement="left" data-original-title="Nopol tidak ditemukan atau kinerja telah diinput">ERROR</span>
+                                                    <span class="label label-warning" >ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
                                                 <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php echo implode(', ', $data_kinerja['MT']['pesan_error'][$no - 1]); ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -257,6 +257,7 @@
                                         <th>SPBU</th>
                                         <th>Pendapatan</th>
                                         <th>Status</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -279,13 +280,16 @@
                                             <td><?php echo $data_kinerja['SUPIR']['pendapatan'][$no - 1]; ?></td>
                                             <td>
                                                 <?php
-                                                if ($data_kinerja['SUPIR']['id'][$no - 1] == -1 || $data_kinerja['SUPIR']['id_kinerja'][$no - 1] == 1) {
+                                                if ($data_kinerja['SUPIR']['data_error'][$no - 1] == true) {
                                                     $status_simpan = false;
                                                     ?>
-                                                    <span class="label label-warning tooltips" data-placement="left" data-original-title="NIP tidak ditemukan atau kinerja telah diinput">ERROR</span>
+                                                    <span class="label label-warning" >ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
                                                 <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php echo implode(', ', $data_kinerja['SUPIR']['pesan_error'][$no - 1]); ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -310,13 +314,16 @@
                                             <td><?php echo $data_kinerja['KERNET']['pendapatan'][$noo - 1]; ?></td>
                                             <td>
                                                 <?php
-                                                if ($data_kinerja['KERNET']['id'][$noo - 1] == -1 || $data_kinerja['KERNET']['id_kinerja'][$no - 1] == 1) {
+                                                if ($data_kinerja['KERNET']['data_error'][$noo - 1] == true) {
                                                     $status_simpan = false;
                                                     ?>
-                                                    <span class="label label-warning tooltips" data-placement="left" data-original-title="NIP tidak ditemukan atau kinerja telah diinput">ERROR</span>
+                                                    <span class="label label-warning" >ERROR</span>
                                                 <?php } else { ?>
                                                     <span class="label label-success">OK</span>
                                                 <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php echo implode(', ', $data_kinerja['KERNET']['pesan_error'][$noo - 1]); ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -328,13 +335,13 @@
 
                 <section class="panel">
                     <div class="panel-body">
-                        <form class="cmxform form-horizontal tasi-form" id="signupForm1" action="<?php echo base_url() ?>kinerja/simpan" method="POST" enctype="multipart/form-data">
+                        <form class="cmxform form-horizontal tasi-form" id="signupForm1" action="<?php echo base_url() ?>kinerja" method="POST" enctype="multipart/form-data">
                             <input type="hidden" required="required" id="data_kinerja" class="form-control" name="data_kinerja" value="<?php echo htmlentities(serialize($data_kinerja)); ?>">
 
                             <div class="form-group">
                                 <div class="col-lg-12 col-sm-6">
                                     <?php if ($status_simpan == true) { ?>
-                                        <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit">
+                                        <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="simpan">
                                     <?php } else { ?>
                                         <div class="alert alert-block alert-danger fade in">
                                             <strong>Error!</strong> Terdapat beberapa data yang salah, tidak dapat disimpan.
@@ -352,15 +359,24 @@
 
         <?php } ?>
 
-        <?php if ($simpan == true) { ?>
-            <div class="alert alert-success fade in">
-                <button data-dismiss="alert" class="close close-sm" type="button">
-                    <i class="icon-remove"></i>
-                </button>
-                <strong>Sukses!</strong> Berhasil simpan kinerja ke database.
-            </div>
-        <?php } ?>
+        <?php if ($data_kinerja['simpan'] == true) { ?>
+            <?php if ($data_kinerja['error_simpan'] == true) { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> Gagal simpan kinerja ke database.
+                </div>
+            <?php } else { ?>
+                <div class="alert alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Sukses!</strong> Berhasil simpan kinerja ke database.
+                </div>
+            <?php } ?>
 
+        <?php } ?>
 
         <!-- page end-->
     </section>

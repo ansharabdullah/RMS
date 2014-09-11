@@ -29,7 +29,7 @@
                 </a>
                 <ul class="sub">
                     <li <?php if ($lv2 == 1 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/data_mt" >Data MT</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/grafik_mt" >Grafik</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/grafik_mt/<?php echo $this->session->userdata("id_depot")?>/<?php echo date("Y")?>" >Grafik</a></li>
                     <li <?php if ($lv2 == 3 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/presensi" >Presensi</a></li>
                     <li <?php if ($lv2 == 4 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/reminder" >Reminder</a></li>
                     <li <?php if ($lv2 == 5 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/rencana">Rencana</a></li>
@@ -68,11 +68,12 @@
                     <span>Laporan</span>
                 </a>
                 <ul class="sub">
-                    <li <?php if ($lv2 == 1 && $lv1 == 7) echo "class='active'" ?>><a  href="#">Harian</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 7) echo "class='active'" ?>><a  href="#">10 Hari</a></li>
-                    <li <?php if ($lv2 == 3 && $lv1 == 7) echo "class='active'" ?>><a  href="#">Bulanan</a></li>
-                    <li <?php if ($lv2 == 4 && $lv1 == 7) echo "class='active'" ?>><a  href="#">Triwulan</a></li>
-                    <li <?php if ($lv2 == 5 && $lv1 == 7) echo "class='active'" ?>><a  href="#">Tahunan</a></li>
+                    <li <?php if ($lv2 == 1 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/harian">Harian</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/rentang">Rentang Hari</a></li>
+                    <li <?php if ($lv2 == 3 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/custom_hari">Custom Hari</a></li>
+                    <li <?php if ($lv2 == 4 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/bulanan">Bulanan</a></li>
+                    <li <?php if ($lv2 == 5 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/triwulan">Triwulan</a></li>
+                    <li <?php if ($lv2 == 6 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/tahunan">Tahunan</a></li>
                 </ul>
             </li>
             

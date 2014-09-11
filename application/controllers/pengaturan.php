@@ -9,20 +9,72 @@ class pengaturan extends CI_Controller {
         parent::__construct();
         $this->load->model('m_pengaturan');
         $this->load->model('m_amt');
+        $this->load->model('m_depot');
     }
 
     public function index() {
-        $this->pengaturan_ss();  
+        if (($this->session->userdata('isLoggedIn')) && (($this->session->userdata('id_role') == 1) || ($this->session->userdata('id_role') == 2) )) {
+            $this->pengaturan_oam();
+        } else if (($this->session->userdata('isLoggedIn')) && (($this->session->userdata('id_role') != 1) || ($this->session->userdata('id_role') != 2) )) {
+            $this->pengaturan_ss();
+        } else {
+            redirect(base_url() . "login/");
+        }
     }
 
     public function pengaturan_oam() {
         $data['lv1'] = 9;
         $data['lv2'] = 1;
+        
+        $depot = $this->session->userdata('id_depot');
+        $data1['user'] = $this->m_pengaturan->selectAllUserDepot($depot);
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->navbar($data['lv1'], $data['lv2']);
-        $this->load->view('oam/v_pengaturan');
+        $this->load->view('oam/v_pengaturan',$data1);
         $this->load->view('layouts/footer');
+    }
+    
+    public function pengaturan_depot() {
+        $data['lv1'] = 9;
+        $data['lv2'] = 1;
+        
+        $depot = $this->session->userdata('id_depot');
+        $data1['depot'] = $this->m_pengaturan->selectAllDepot();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_pengaturan_depot',$data1);
+        $this->load->view('layouts/footer');
+    }
+    
+    public function tambah_depot() {
+        $data = array(
+            'nama_depot' => $this->input->post('nama_depot', true),
+            'alamat_depot' => $this->input->post('alamat_depot', true),
+            'nama_oh' => $this->input->post('nama_oh', true),
+        );
+        $this->m_pengaturan->tambahDepot($data);
+        
+        $link = base_url() . "pengaturan/pengaturan_depot/";
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+     public function ubah_depot() {
+        $depot = $this->input->post('id_depot', true);
+        $data = array(
+            'nama_depot' => $this->input->post('nama_depot', true),
+            'alamat_depot' => $this->input->post('alamat_depot', true),
+            'nama_oh' => $this->input->post('nama_oh', true),
+        );
+        $this->m_pengaturan->editDepot($data, $depot);
+        
+        $link = base_url() . "pengaturan/pengaturan_depot/";
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
 
     public function navbar($lv1, $lv2) {
@@ -53,6 +105,11 @@ class pengaturan extends CI_Controller {
             'nama_oh' => $this->input->post('nama_oh', true),
         );
         $this->m_pengaturan->editDepot($data, $depot);
+        
+        $link = base_url() . "pengaturan/";
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
 
     public function delete_akun($id_user) {
@@ -77,8 +134,6 @@ class pengaturan extends CI_Controller {
             'email' => $this->input->post('email', true),
             'id_role' => $this->input->post('id_role', true),
         );
-        echo $id_pegawai . "<br>";
-        echo $id_role_assignment . "<br>";
         $this->m_amt->editPegawai($data1, $id_pegawai);
 
         $link = base_url() . "pengaturan/";

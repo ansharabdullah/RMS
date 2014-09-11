@@ -7,11 +7,6 @@
             {
                 var ext = $("#fileRencana").val().split('.').pop();
                 if (ext == "xls" || ext == "xlsx") {
-                    //$("#filePreview").hide();
-                    //$("#filePreview").slideDown("slow");
-                    //$("#filePreview1").slideDown("slow");
-                    //$("#tgl").html($("#tanggalSIOD").val());
-                    //$("#tgl1").html($("#tanggalSIOD").val());
                 } else if (ext == "") {
                     e.preventDefault();
                 } else {
