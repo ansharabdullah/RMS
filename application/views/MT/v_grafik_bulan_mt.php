@@ -40,6 +40,7 @@
                                 <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
                             </ul>
                         </div>
+                        <br><br><br>
                         <div id="grafik"></div>
 
                     </div>
@@ -50,7 +51,7 @@
                         <div id="filePreview">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    Tabel Kinerja Mobil Tangki
+                                    Tabel Kinerja Mobil Tangki <?php echo date("F", mktime(0, 0, 0, $bulan_mt, 1, 2005))?> <?php echo $tahun ?>
                                 </header>
                                 <div class="panel-body">
 

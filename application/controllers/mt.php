@@ -92,13 +92,13 @@ class Mt extends CI_Controller {
             $depot = $this->session->userdata("id_depot");
             
             $id = $this->input->post('id_rencana');
-            $r_premium = $this->input->post('r_premium');
-            $r_pertamax = $this->input->post('r_pertamax');
-            $r_pertamaxplus = $this->input->post('r_pertamaxplus');
-            $r_pertaminadex = $this->input->post('r_pertaminadex');
-            $r_solar = $this->input->post('r_solar');
-            $r_biosolar = $this->input->post('r_biosolar');
-            $r_own_use = $this->input->post('r_own_use');
+            $r_premium = $this->input->post('premium');
+            $r_pertamax = $this->input->post('pertamax');
+            $r_pertamaxplus = $this->input->post('pertamaxplus');
+            $r_pertaminadex = $this->input->post('pertaminadex');
+            $r_solar = $this->input->post('solar');
+            $r_biosolar = $this->input->post('biosolar');
+            $r_own_use = $this->input->post('own_use');
 
             $this->m_rencana_mt->editRencana($id, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
 
@@ -378,7 +378,7 @@ class Mt extends CI_Controller {
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $data1['mt'] = $this->m_mt->detailMT($id_mobil);
-        $data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil);
+        $data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil,date('Y'));
         $this->header($data);
         $this->load->view('mt/v_detail_mt', $data1);
         $this->footer();
