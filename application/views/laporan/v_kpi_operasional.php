@@ -7,7 +7,7 @@
                 <a style="float:right;" data-placement="left" href="#ModalTambah" data-toggle="modal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah"> Tambah Data <i class="icon-plus"></i></a>
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url(); ?>ba/kpi_operasional">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url(); ?>laporan/kpi_operasional">
                     <div class="form-group">
                         <label for="bln_kpi" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                         <div class="col-lg-10">
@@ -547,7 +547,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Edit Data</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url(); ?>ba/kpi_operasional">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url(); ?>laporan/kpi_operasional">
 
                 <div class="modal-body">
                     <div class="form-group ">                                            
@@ -682,7 +682,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Tambah Data</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url(); ?>ba/kpi_operasional">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url(); ?>laporan/kpi_operasional">
 
                 <div class="modal-body">
                     <div class="form-group ">                                            
