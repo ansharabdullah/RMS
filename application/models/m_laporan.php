@@ -1,6 +1,6 @@
 <?php
 
-class m_ba extends CI_Model {
+class m_laporan extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -27,15 +27,51 @@ class m_ba extends CI_Model {
         return $query->result();
     }
 
-    public function deleteMS2($ms2) {
+    public function getTotalMS2($depot, $tahun, $bulan) {
+        $query = $this->db->query("select n.ID_NILAI,n.NILAI,j.JENIS_PENILAIAN from log_harian l, nilai n, jenis_penilaian j where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and n.ID_JENIS_PENILAIAN = j.ID_JENIS_PENILAIAN and l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and j.KELOMPOK_PENILAIAN = 'MS2' ORDER BY j.ID_JENIS_PENILAIAN");
+        return $query->result();
+    }
+    
+    public function SyncRataMS2($depot, $tahun, $bulan) {
+        $query = $this->db->query("select l.ID_LOG_HARIAN,m.ID_MS2, DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y')as TANGGAL,((AVG(m.SESUAI_PREMIUM)+AVG(m.SESUAI_PERTAMAX)+AVG(m.SESUAI_SOLAR))/3)as RATA_SESUAI,((AVG(m.CEPAT_PREMIUM)+AVG(m.CEPAT_PERTAMAX)+AVG(m.CEPAT_SOLAR))/3)as RATA_CEPAT,((AVG(m.CEPAT_SHIFT1_PREMIUM)+AVG(m.CEPAT_SHIFT1_PERTAMAX)+AVG(m.CEPAT_SHIFT1_SOLAR))/3)as RATA_CEPAT_SHIFT1,((AVG(m.LAMBAT_PREMIUM)+AVG(m.LAMBAT_PERTAMAX)+AVG(m.LAMBAT_SOLAR))/3)as RATA_LAMBAT,((AVG(m.TIDAK_TERKIRIM_PREMIUM)+AVG(m.TIDAK_TERKIRIM_PERTAMAX)+AVG(m.TIDAK_TERKIRIM_SOLAR))/3)as RATA_TIDAK_TERKIRIM,((AVG(m.TOTAL_LO_PREMIUM)+AVG(m.TOTAL_LO_PERTAMAX)+AVG(m.TOTAL_LO_SOLAR))/3)as RATA_TOTAL_LO from log_harian l, ms2 m where l.ID_LOG_HARIAN = m.ID_LOG_HARIAN and l.ID_DEPOT = '$depot' and  YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
+        $data = $query->row();
+        
+        $nilai = round($data->RATA_SESUAI, 2);
+        $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 65");
+        
+        $nilai = round($data->RATA_CEPAT, 2);
+        $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 66");
+        
+        $nilai = round($data->RATA_CEPAT_SHIFT1, 2);
+        $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 67");
+        
+        $nilai = round($data->RATA_LAMBAT, 2);
+        $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 68");
+        
+        $nilai = round($data->RATA_TIDAK_TERKIRIM, 2);
+        $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 69");
+        
+        $nilai = round($data->RATA_TOTAL_LO, 2);
+        $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 70");
+        
+        $nilai = round($data->RATA_SESUAI, 2) + round($data->RATA_CEPAT, 2) + round($data->RATA_CEPAT_SHIFT1, 2);
+        $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 71");
+            
+    }
+    
+    public function deleteMS2($ms2,$total_ms2) {
+        foreach ($total_ms2 as $row) {
+            $query = $this->db->query("delete from nilai where ID_NILAI='$row->ID_NILAI'");
+        }
         foreach ($ms2 as $row) {
             $query = $this->db->query("delete from ms2 where ID_MS2='$row->ID_MS2'");
             $query = $this->db->query("update log_harian set STATUS_MS2 = 0 where ID_LOG_HARIAN='$row->ID_LOG_HARIAN'");
         }
     }
 
-    public function editMS2($id, $sesuai_premium, $sesuai_solar, $sesuai_pertamax, $cepat_premium, $cepat_solar, $cepat_pertamax, $cepat_shift1_premium, $cepat_shift1_solar, $cepat_shift1_pertamax, $lambat_premium, $lambat_solar, $lambat_pertamax, $tidak_terkirim_premium, $tidak_terkirim_solar, $tidak_terkirim_pertamax) {
+    public function editMS2($id, $sesuai_premium, $sesuai_solar, $sesuai_pertamax, $cepat_premium, $cepat_solar, $cepat_pertamax, $cepat_shift1_premium, $cepat_shift1_solar, $cepat_shift1_pertamax, $lambat_premium, $lambat_solar, $lambat_pertamax, $tidak_terkirim_premium, $tidak_terkirim_solar, $tidak_terkirim_pertamax,$depot,$tahun,$bulan) {
         $query = $this->db->query("update ms2 set SESUAI_PREMIUM = '$sesuai_premium',SESUAI_SOLAR='$sesuai_solar', SESUAI_PERTAMAX = '$sesuai_pertamax',CEPAT_PREMIUM = '$cepat_premium',CEPAT_SOLAR='$cepat_solar', CEPAT_PERTAMAX = '$cepat_pertamax',CEPAT_SHIFT1_PREMIUM = '$cepat_shift1_premium',CEPAT_SHIFT1_SOLAR='$cepat_shift1_solar', CEPAT_SHIFT1_PERTAMAX = '$cepat_shift1_pertamax',LAMBAT_PREMIUM = '$lambat_premium',LAMBAT_SOLAR='$lambat_solar', LAMBAT_PERTAMAX = '$lambat_pertamax',TIDAK_TERKIRIM_PREMIUM = '$tidak_terkirim_premium',TIDAK_TERKIRIM_SOLAR='$tidak_terkirim_solar', TIDAK_TERKIRIM_PERTAMAX = '$tidak_terkirim_pertamax' where ID_MS2='$id'");
+        $this->SyncRataMS2($depot, $tahun, $bulan);
     }
 
     public function simpanMS2($ms2) {
@@ -44,6 +80,14 @@ class m_ba extends CI_Model {
             $query = $this->db->query("insert into ms2(ID_LOG_HARIAN,SESUAI_PREMIUM,SESUAI_SOLAR,SESUAI_PERTAMAX,CEPAT_PREMIUM,CEPAT_SOLAR,CEPAT_PERTAMAX,CEPAT_SHIFT1_PREMIUM,CEPAT_SHIFT1_SOLAR,CEPAT_SHIFT1_PERTAMAX,LAMBAT_PREMIUM,LAMBAT_SOLAR,LAMBAT_PERTAMAX,TIDAK_TERKIRIM_PREMIUM,TIDAK_TERKIRIM_SOLAR,TIDAK_TERKIRIM_PERTAMAX)values('" . $ms2['id_log_harian'][$no] . "','" . $ms2['sesuai_premium'][$no] . "','" . $ms2['sesuai_solar'][$no] . "','" . $ms2['sesuai_pertamax'][$no] . "','" . $ms2['cepat_premium'][$no] . "','" . $ms2['cepat_solar'][$no] . "','" . $ms2['cepat_pertamax'][$no] . "','" . $ms2['cepat_shift1_premium'][$no] . "','" . $ms2['cepat_shift1_solar'][$no] . "','" . $ms2['cepat_shift1_pertamax'][$no] . "','" . $ms2['lambat_premium'][$no] . "','" . $ms2['lambat_solar'][$no] . "','" . $ms2['lambat_pertamax'][$no] . "','" . $ms2['tidak_terkirim_premium'][$no] . "','" . $ms2['tidak_terkirim_solar'][$no] . "','" . $ms2['tidak_terkirim_pertamax'][$no] . "')");
             $query = $this->db->query("update log_harian set STATUS_MS2 = 1 where ID_LOG_HARIAN = '" . $ms2['id_log_harian'][$no] . "'");
         }
+        $id_log_harian = $ms2['id_log_harian'][0];
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('65','$id_log_harian','".$ms2['rata_sesuai']."')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('66','$id_log_harian','".$ms2['rata_cepat']."')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('67','$id_log_harian','".$ms2['rata_cepat_shift1']."')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('68','$id_log_harian','".$ms2['rata_lambat']."')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('69','$id_log_harian','".$ms2['rata_tidak_terkirim']."')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('70','$id_log_harian','".$ms2['rata_total_lo']."')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('71','$id_log_harian','".$ms2['hasil_akhir']."')");
     }
 
     public function cekInterpolasi($depot, $tahun, $bulan) {

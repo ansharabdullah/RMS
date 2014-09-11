@@ -2,7 +2,6 @@
     var mt;
     var kl_mt = new Array();
     var km_mt = new Array();
-    var total_km_mt = new Array();
     var premium = new Array();
     var pertamax = new Array();
     var pertamax_plus = new Array();
@@ -46,7 +45,7 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Tahun 2014',
+                text: 'Tahun <?php echo $tahun?>',
                 x: -20
             },
             xAxis: {
@@ -86,7 +85,6 @@
                     
                     name: 'KM',
                     type: 'column',
-                    color: 'violet',
                     data: km_mt
 
                 }]
@@ -172,13 +170,14 @@
                                 <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
                             </ul>
                         </div>
+                            <br><br><br>
                         <div id="grafik"></div>
 
                     </div>
                 </section>
                 <section class="panel">
                     <header class="panel-heading">
-                        Tabel Kinerja Mobil Tangki Tahun 2014
+                        Tabel Kinerja Mobil Tangki Tahun <?php echo $tahun?>
                     </header>
                     <div class="panel-body">
 

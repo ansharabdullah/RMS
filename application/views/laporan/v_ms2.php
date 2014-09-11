@@ -71,10 +71,10 @@
         <section class="panel">
             <div class="panel-heading">
                 MS2 Complience
-                <a style="float: right;" class="btn btn-xs btn-success" href="<?php echo base_url() ?>ba/import_ms2">Import MS2</a>
+                <a style="float: right;" class="btn btn-xs btn-success" href="<?php echo base_url() ?>laporan/import_ms2">Import MS2</a>
             </div>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" action="<?php echo base_url() ?>ba/ms2" role="form" id="commentForm" method="post">
+                <form class="cmxform form-horizontal tasi-form" action="<?php echo base_url() ?>laporan/ms2" role="form" id="commentForm" method="post">
                     <div class="form-group">
                         <label for="blnms2" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                         <div class="col-lg-10">
@@ -84,7 +84,7 @@
 
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
-                            <input type="submit" name="submit" style="float: right;" class="btn btn-warning" value="Cek">
+                            <input type="submit" name="cek" style="float: right;" class="btn btn-warning" value="Cek">
                         </div>
                     </div>
                 </form>
@@ -181,7 +181,25 @@
                                         $no++;
                                     }
                                     ?>
-
+                                        
+                                        <tr>
+                                            <td style="display:none;"></td>
+                                            <td colspan="2"><strong><font size="2">Rata-rata</font></strong></td>
+                                            <td colspan="3"><strong><font size="2"><?php echo $total_ms2[0]->NILAI;?>%</font></strong></td>
+                                            <td colspan="3"><strong><font size="2"><?php echo $total_ms2[1]->NILAI;?>%</font></strong></td>
+                                            <td colspan="3"><strong><font size="2"><?php echo $total_ms2[2]->NILAI;?>%</font></strong></td>
+                                            <td colspan="3"><strong><font size="2"><?php echo $total_ms2[3]->NILAI;?>%</font></strong></td>
+                                            <td colspan="3"><strong><font size="2"><?php echo $total_ms2[4]->NILAI;?>%</font></strong></td>
+                                            <td colspan="3"><strong><font size="2"><?php echo $total_ms2[5]->NILAI;?>%</font></strong></td>
+                                            <td></td>                                            
+                                        </tr>
+                                        <tr>
+                                            <td style="display:none;"></td>
+                                            <td colspan="2"><strong><font size="3">Hasil</font></strong></td>
+                                            <td colspan="9"><strong><font size="3"><?php echo $total_ms2[6]->NILAI;?>%</font></strong></td>
+                                            <td colspan="9"></td>
+                                            <td></td>                                            
+                                        </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -203,16 +221,6 @@
                 <strong>Sukses!</strong> Berhasil hapus MS2.
             </div>
         <?php } ?>
-
-
-
-
-
-
-
-
-
-
     </section>
 </section>
 <!--main content end-->
@@ -226,7 +234,7 @@
         <div class="modal fade" id="ModalMs2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>ba/edit_ms2">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>laporan/ms2">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Ubah MS2</h4>
@@ -317,7 +325,7 @@
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
-                            <input class="btn btn-success" type="submit" name="submit" value="Simpan"/>
+                            <input class="btn btn-success" type="submit" name="edit" value="Simpan"/>
                         </div>
                     </form>
                 </div>
@@ -328,18 +336,19 @@
         <div class="modal fade" id="ModalHapusMs2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>ba/hapus_ms2">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>laporan/ms2">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Konfirmasi Hapus MS2</h4>
                         </div>
                         <div class="modal-body">
                             Yakin Hapus  MS2 Complience <strong><?php echo $bulan . ' ' . $tahun; ?></strong> ?
-                            <input type="hidden" required="required" id="id_ms2" class="form-control" name="id_ms2" value="<?php echo htmlentities(serialize($ms2)); ?>">
+                            <input type="hidden" required="required" class="form-control" name="id_ms2" value="<?php echo htmlentities(serialize($ms2)); ?>">
+                            <input type="hidden" required="required" class="form-control" name="total_ms2" value="<?php echo htmlentities(serialize($total_ms2)); ?>">
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
-                            <input class="btn btn-danger" type="submit" name="submit" value="Hapus"/>
+                            <input class="btn btn-danger" type="submit" name="hapus" value="Hapus"/>
                         </div>
                     </form>
                 </div>
@@ -347,14 +356,3 @@
         </div>
     <?php } ?>
 <?php } ?>
-
-        
-        <!--script for this page only-->
-<script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
-
-<!-- END JAVASCRIPTS -->
-<script>
-    jQuery(document).ready(function() {
-        EditableTable.init();
-    });
-</script>

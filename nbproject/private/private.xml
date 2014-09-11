@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
@@ -23,11 +23,15 @@
             <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_tahunan.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/layouts/navbar.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_berita_acara.php</file>
+=======
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+>>>>>>> fb5071061148df32429688f5e65ea6414b55f6db
             <file>file:/C:/xampp/htdocs/RMS/application/controllers/kinerja.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/kinerja/v_kinerja_siod.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/laporan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_sepuluh_hari.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/models/m_kinerja.php</file>
+<<<<<<< HEAD
             <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_triwulan.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_harian.php</file>
 =======
@@ -43,6 +47,8 @@
 =======
 >>>>>>> 66523d6b9e6b1fec9f0d3acf83852b7a4493d6de
 >>>>>>> caec80b2df77a8a81031280caf8a947f21543fab
+=======
+>>>>>>> fb5071061148df32429688f5e65ea6414b55f6db
         </group>
     </open-files>
 </project-private>

@@ -93,7 +93,7 @@ function DateToIndo($date) {
                         <div class="form-group" style="margin-top: 20px;">
                             <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                             <div class="col-lg-10">
-                                <input type="month" required="required" id="bln" name="bln" class="form-control"  placeholder="Tanggal">
+                                <input type="month" required="required" id="bln" name="bln" class="form-control"  placeholder="tahun - bulan">
                         </div>
                         </div>
                         <div class="form-group">
@@ -213,10 +213,10 @@ function DateToIndo($date) {
                                         <div class="form-group "> 
                                             <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_rencana" name="tanggal_rencana" value="" placeholder="Tanggal "required readonly/>
+                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal" name="tanggal" value="" placeholder="Tanggal "required readonly/>
                                             </div>
-                                            <input type="text" class=" form-control input-sm m-bot15" id="id" name="id" value="" required/>
-                                            <input type="text" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bln; ?>" required/>
+                                            <input type="hidden" class=" form-control input-sm m-bot15" id="id" name="id" value="" required/>
+                                            <input type="hidden" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bln; ?>" required/>
                                         </div>
                                         <div class="form-group">
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
