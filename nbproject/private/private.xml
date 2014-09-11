@@ -1,32 +1,11 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-=======
-<?xml version="1.0" encoding="UTF-8"?><project-private xmlns="http://www.netbeans.org/ns/project-private/1">
->>>>>>> 4bff33925918af1fd49965005013e35f2217a4fb
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_bulanan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_tahunan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/layouts/navbar.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/ba/v_berita_acara.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/controllers/kinerja.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/kinerja/v_kinerja_siod.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/laporan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_sepuluh_hari.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/models/m_kinerja.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_triwulan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_harian.php</file>
-=======
-            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_grafik_amt_harian.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_presensi.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_grafik_amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
->>>>>>> 66523d6b9e6b1fec9f0d3acf83852b7a4493d6de
         </group>
     </open-files>
 </project-private>
