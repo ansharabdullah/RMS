@@ -393,7 +393,7 @@ class amt extends CI_Controller {
             'id_pegawai' => $this->session->userdata("id_pegawai"),
             'keyword' => 'Edit'
         );
-        //$this->m_log_sistem->insertLog($datalog);
+        $this->m_log_sistem->insertLog($datalog);
         $depot = $this->session->userdata('id_depot');
         //cek apakah jadwal dan kinerja sudah sesuai
         $jadwal = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);

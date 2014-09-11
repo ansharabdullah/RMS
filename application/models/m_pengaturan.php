@@ -6,8 +6,7 @@ class m_pengaturan extends CI_Model {
         parent::__construct();
     }
 
-    public function selectDepot() {
-        $depot = 1;
+    public function selectDepot($depot) {
         $this->db->where('ID_DEPOT', $depot);
         $query = $this->db->get('depot');
         return $query->result();
@@ -20,6 +19,11 @@ class m_pengaturan extends CI_Model {
 
     public function selectAllUser() {
         $query = $this->db->query('SELECT RA.EMAIL, RA.ID_ROLE, RA.PASSWORD, P.ID_PEGAWAI, RA.ID_ROLE_ASSIGNMENT, P.NAMA_PEGAWAI, P.NIP, P.JABATAN, R.NAMA_ROLE FROM pegawai P, role R, role_assignment RA WHERE P.ID_PEGAWAI=RA.ID_PEGAWAI AND RA.ID_ROLE=R.ID_ROLE');
+        return $query->result();
+    }
+    
+    public function selectAllUserDepot($depot) {
+        $query = $this->db->query("SELECT RA.EMAIL, RA.ID_ROLE, RA.PASSWORD, P.ID_PEGAWAI, RA.ID_ROLE_ASSIGNMENT, P.NAMA_PEGAWAI, P.NIP, P.JABATAN, R.NAMA_ROLE FROM pegawai P, role R, role_assignment RA WHERE P.ID_PEGAWAI=RA.ID_PEGAWAI AND RA.ID_ROLE=R.ID_ROLE AND P.ID_DEPOT=$depot");
         return $query->result();
     }
 

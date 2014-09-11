@@ -12,10 +12,32 @@ class pengaturan extends CI_Controller {
     }
 
     public function index() {
+        $this->pengaturan_ss();  
+    }
+
+    public function pengaturan_oam() {
         $data['lv1'] = 9;
         $data['lv2'] = 1;
-        $data1['user'] = $this->m_pengaturan->selectAllUser();
-        $data1['depot'] = $this->m_pengaturan->selectDepot();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_pengaturan');
+        $this->load->view('layouts/footer');
+    }
+
+    public function navbar($lv1, $lv2) {
+        $data['lv1'] = $lv1;
+        $data['lv2'] = $lv2;
+        $data['depot'] = $this->m_depot->get_depot();
+        $this->load->view('layouts/navbar_oam', $data);
+    }
+
+    public function pengaturan_ss() {
+        $data['lv1'] = 9;
+        $data['lv2'] = 1;
+        $depot = $this->session->userdata('id_depot');
+        $data1['user'] = $this->m_pengaturan->selectAllUserDepot($depot);
+        $data1['depot'] = $this->m_pengaturan->selectDepot($depot);
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->load->view('layouts/navbar', $data);
@@ -24,13 +46,13 @@ class pengaturan extends CI_Controller {
     }
 
     public function edit_depot() {
-        $id_depot = $this->input->post('id_depot', true);
+        $depot = $this->session->userdata('id_depot');
         $data = array(
             'nama_depot' => $this->input->post('nama_depot', true),
             'alamat_depot' => $this->input->post('alamat_depot', true),
             'nama_oh' => $this->input->post('nama_oh', true),
         );
-        $this->m_pengaturan->editDepot($data, $id);
+        $this->m_pengaturan->editDepot($data, $depot);
     }
 
     public function delete_akun($id_user) {
@@ -50,15 +72,15 @@ class pengaturan extends CI_Controller {
             'nama_pegawai' => $this->input->post('nama_pegawai', true),
             'nip' => $this->input->post('nip', true),
         );
-        $this->m_amt->editPegawai($data1,$id_pegawai);
+        $this->m_amt->editPegawai($data1, $id_pegawai);
         $data2 = array(
             'email' => $this->input->post('email', true),
             'id_role' => $this->input->post('id_role', true),
         );
-        echo $id_pegawai."<br>";
-        echo $id_role_assignment."<br>";
-        $this->m_amt->editPegawai($data1,$id_pegawai);
-        
+        echo $id_pegawai . "<br>";
+        echo $id_role_assignment . "<br>";
+        $this->m_amt->editPegawai($data1, $id_pegawai);
+
         $link = base_url() . "pengaturan/";
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
@@ -68,7 +90,7 @@ class pengaturan extends CI_Controller {
     public function tambah_akun() {
 
         //insert ke tabel pegawai
-        $depot = 1;
+       $depot = $this->session->userdata('id_depot');
         $data1 = array(
             'nama_pegawai' => $this->input->post('nama_pegawai', true),
             'nip' => $this->input->post('nip', true),
