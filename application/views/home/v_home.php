@@ -88,7 +88,7 @@
                     </div>
                     <div class="value">
                         <h1 class=" count4">
-                            <?php echo $kinerja_bulan[0]->own_use ?>
+                            <?php if($kinerja_bulan[0]->own_use > 0){echo $kinerja_bulan[0]->own_use;}else{echo "0";} ?>
                         </h1>
                         <p>KL (Own Use)</p>
                     </div>
@@ -110,6 +110,7 @@
                                     <li><a style="cursor: pointer" onclick="filterAmt('SPBU')">SPBU</a></li>
                                 </ul>
                             </div>
+                        <br/><br/><br/>
                         <div id="grafik"></div>
                     </div>
                 </section>
@@ -263,6 +264,7 @@
                                 <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
                             </ul>
                         </div>
+                        <br/><br/><br/>
                         <div id="grafik1"></div>
                     </div>
                 </section>

@@ -98,6 +98,8 @@
                                     <li><a style="cursor: pointer" onclick="filterAmt('SPBU')">SPBU</a></li>
                                 </ul>
                             </div>
+                            
+                        <br/><br/><br/>
                         <div id="grafik2"></div>
 
                     </div>

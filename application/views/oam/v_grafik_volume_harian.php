@@ -145,6 +145,7 @@ foreach ($volume as $row) {
 
                             </ul>
                         </div>
+                        <br/><br/><br/>
                         <div id="grafik"></div>
                     </div>
                     <div class="col-lg-5">

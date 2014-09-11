@@ -1,4 +1,40 @@
 <script type="text/javascript">
+    var arrBulan = new Array();
+    var arrDepot = new Array();
+    var series = new Array();
+    var data;
+    <?php
+        foreach($bulan as $b)
+        {
+        ?>
+            arrBulan.push("<?php echo $b?>");
+       <?php     
+        }
+        foreach($depot as $d)
+        {
+            ?>
+                data = new Array();
+            <?php
+             foreach($ms2 as $m)
+             {
+                 if($m->ID_DEPOT == $d->ID_DEPOT)
+                 {
+                     ?>
+                         data.push(<?php echo $m->nilai?>);
+                     <?php
+                     
+                 }
+             }
+         ?>
+             series.push({
+                 name:'<?php echo $d->NAMA_DEPOT?>',
+                 data: data
+             });
+             arrDepot.push("<?php echo $d->NAMA_DEPOT?>");
+        <?php   
+            
+        }
+    ?>
     $(function () {
         $('#grafik').highcharts({
             chart:{
@@ -10,11 +46,11 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Tahun 2014',
+                text: 'Tahun <?php echo date('Y')?>',
                 x: -20
             },
             xAxis: {
-                categories: ['Januari','Februari','Maret']
+                categories: arrBulan
             },
             yAxis: {
                 title: {
@@ -35,16 +71,7 @@
                 verticalAlign: 'middle',
                 borderWidth: 0
             },
-            series: [{
-                name: 'Panjang',
-                data: [101,102,109]
-            }, {
-                name: 'Lahat',
-                data: [101,101,101]
-            }, {
-                name: 'Baturaja',
-                data: [99.69,99.81,98.46]
-            }]
+            series: series
         });
     });
 </script>
@@ -61,41 +88,44 @@
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                            <thead>
+                           <thead>
                                 <tr>
                                     <th style="display: none;"></th>
                                     <th>No.</th>
                                     <th>Wilayah</th>
-                                    <th>Januari</th>
-                                    <th>Februari</th>
-                                    <th>Maret</th>
+                                    <th><?php echo $bulan[0]?></th>
+                                    <th><?php echo $bulan[1]?></th>
+                                    <th><?php echo $bulan[2]?></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>1</td>
-                                    <td>Panjang</td>
-                                    <td>101</td>
-                                    <td>102</td>
-                                    <td>109</td>
-                                </tr>
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>2</td>
-                                    <td>Lahat</td>
-                                    <td>101</td>
-                                    <td>101</td>
-                                    <td>101</td>
-                                </tr>
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>3</td>
-                                    <td>Baturaja</td>
-                                    <td>99,69</td>
-                                    <td>99,81</td>
-                                    <td>98,46</td>
-                                </tr>
+                                <?php
+                                    $i = 1;
+                                    foreach($depot as $d)
+                                    {
+                                        ?>
+                                         <tr>
+                                            <td style="display: none;"></td>
+                                            <td><?php echo $i?></td>
+                                            <td><?php echo $d->NAMA_DEPOT?></td>
+                                            <?php
+                                                foreach($ms2 as $m)
+                                                {
+                                                    if($m->ID_DEPOT == $d->ID_DEPOT)
+                                                    {
+                                                        ?>
+                                                            <td><?php echo $m->nilai?></td>
+                                                        <?php
+                                                        
+                                                    }
+                                                    
+                                                }
+                                            ?>
+                                        </tr>
+                                        <?php
+                                        $i++;
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </center>

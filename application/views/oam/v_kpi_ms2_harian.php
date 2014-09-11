@@ -199,10 +199,12 @@ foreach ($ms2 as $row) {
 
                                     </ul>
                         </div>
+                        <br/><br/><br/>
                         <div id="grafik"></div>
                     </div>
                     <div class="col-lg-5">
-
+                        
+                        <br/><br/><br/>
                         <div id="grafikKpi"></div>
                     </div>
                 </div>

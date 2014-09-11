@@ -220,6 +220,7 @@
 
                                 </ul>
                             </div>
+                        <br/><br/><br/>
                             <div id="grafik2"></div>
 
                                     &nbsp;&nbsp;<span class='btn btn-warning'> <i class='icon-warning-sign'></i></span>  <b> = Hasil dibawah target</b>

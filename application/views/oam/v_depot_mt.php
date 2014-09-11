@@ -105,6 +105,7 @@
                                 <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
                             </ul>
                         </div>
+                        <br/><br/><br/>
                         <div id="grafik"></div>
 
                     </div>

@@ -6,12 +6,17 @@
             <div class="panel-body" style="height: 500px">
                 <div style="margin-top: 150px;" >
                   <center>  <h3> PRESENTASI TRIWULAN OAM </h3><hr/></center>
-                        <form class="cmxform form-horizontal tasi-form" style="margin-left:25%;" action="<?php echo base_url() ?>presentasi/slide/1" role="form" id="commentForm" method="post">
+                        <form class="cmxform form-horizontal tasi-form" style="margin-left:25%;" action="<?php echo base_url() ?>presentasi/set_slide" role="form" id="commentForm" method="post">
 
                             <div class="form-group" id="bulan">
                                 <label for="bulanLaporan" class="col-lg-2 col-sm-2 control-label">Pilih Bulan</label>
                                 <div class="col-lg-4">
-                                    <input type="month" name="bulan" value="<?php echo date('Y-m')?>" required="required" id="bulanLaporan"  class="form-control"/>
+                                    <select name="bulan" class="form-control">
+                                         <option value="1"> Triwulan I </option>
+                                         <option value="4"> Triwulan II </option>
+                                         <option value="7"> Triwulan III </option>
+                                         <option value="10"> Triwulan IV </option>
+                                    </select>
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="submit" style="float: right;" class="btn btn-danger" value="Mulai">

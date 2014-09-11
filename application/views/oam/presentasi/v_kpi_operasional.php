@@ -1,4 +1,40 @@
 <script type="text/javascript">
+    var arrBulan = new Array();
+    var arrDepot = new Array();
+    var series = new Array();
+    var data;
+    <?php
+        foreach($bulan as $b)
+        {
+        ?>
+            arrBulan.push("<?php echo $b?>");
+       <?php     
+        }
+        foreach($depot as $d)
+        {
+            ?>
+                data = new Array();
+            <?php
+             foreach($kpi as $k)
+             {
+                 if($k->ID_DEPOT == $d->ID_DEPOT)
+                 {
+                     ?>
+                         data.push(<?php echo $k->nilai?>);
+                     <?php
+                     
+                 }
+             }
+         ?>
+             series.push({
+                 name:'<?php echo $d->NAMA_DEPOT?>',
+                 data: data
+             });
+             arrDepot.push("<?php echo $d->NAMA_DEPOT?>");
+        <?php   
+            
+        }
+    ?>
     $(function () {
         $('#grafik').highcharts({
             chart:{
@@ -11,11 +47,11 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Tahun 2014',
+                text: 'Tahun <?php echo date('Y')?>',
                 x: -20
             },
             xAxis: {
-                categories: ['Rata - rata 2013','Januari','Februari','Maret']
+                categories: arrBulan
             },
             yAxis: {
                 title: {
@@ -36,16 +72,7 @@
                 verticalAlign: 'middle',
                 borderWidth: 0
             },
-            series: [{
-                name: 'Panjang',
-                data: [100,106,107,107]
-            }, {
-                name: 'Lahat',
-                data: [105,109,101,101]
-            }, {
-                name: 'Baturaja',
-                data: [107,103,103,103]
-            }]
+            series: series
         });
     });
 </script>
@@ -67,40 +94,39 @@
                                     <th style="display: none;"></th>
                                     <th>No.</th>
                                     <th>Wilayah</th>
-                                    <th>Rata - Rata 2013</th>
-                                    <th>Januari</th>
-                                    <th>Februari</th>
-                                    <th>Maret</th>
+                                    <th><?php echo $bulan[0]?></th>
+                                    <th><?php echo $bulan[1]?></th>
+                                    <th><?php echo $bulan[2]?></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>1</td>
-                                    <td>Panjang</td>
-                                    <td>100</td>
-                                    <td>106</td>
-                                    <td>107</td>
-                                    <td>107</td>
-                                </tr>
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>2</td>
-                                    <td>Lahat</td>
-                                    <td>105</td>
-                                    <td>109</td>
-                                    <td>101</td>
-                                    <td>101</td>
-                                </tr>
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>3</td>
-                                    <td>Baturaja</td>
-                                    <td>107</td>
-                                    <td>103</td>
-                                    <td>103</td>
-                                    <td>103</td>
-                                </tr>
+                                <?php
+                                    $i = 1;
+                                    foreach($depot as $d)
+                                    {
+                                        ?>
+                                         <tr>
+                                            <td style="display: none;"></td>
+                                            <td><?php echo $i?></td>
+                                            <td><?php echo $d->NAMA_DEPOT?></td>
+                                            <?php
+                                                foreach($kpi as $k)
+                                                {
+                                                    if($k->ID_DEPOT == $d->ID_DEPOT)
+                                                    {
+                                                        ?>
+                                                            <td><?php echo $k->nilai?></td>
+                                                        <?php
+                                                        
+                                                    }
+                                                    
+                                                }
+                                            ?>
+                                        </tr>
+                                        <?php
+                                        $i++;
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </center>

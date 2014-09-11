@@ -8,6 +8,7 @@ class presentasi extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model("m_depot");
+        $this->load->model("m_kpi");
     }
 
     public function index() {
@@ -21,29 +22,43 @@ class presentasi extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
+    public function set_slide()
+    {
+        $bulan = $_POST['bulan'];
+        redirect("presentasi/slide/1/".$bulan);
+        
+    }
     
-    public function slide($index) {
+    public function slide($index,$bulan) {
         $data['lv1'] = 8;
         $data['lv2'] = 1;
         $data2 = menu_oam();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'],$data['lv2']);
-        $next = anchor("presentasi/slide/".($index - 1),"<button class='btn btn-danger'><i class='icon-long-arrow-left'></i> kembali</button>");
-        $before = anchor("presentasi/slide/".($index + 1),"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-right'></i></button>");
+        $next = anchor("presentasi/slide/".($index - 1)."/".$bulan,"<button class='btn btn-danger'><i class='icon-long-arrow-left'></i> kembali</button>");
+        $before = anchor("presentasi/slide/".($index + 1)."/".$bulan,"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-right'></i></button>");
         $slide['paging'] = " <section class='panel'>
             <div class='panel-body'>".$before." ".$next."
             </div>
         </section>";
+        $slide['depot'] = $this->m_depot->get_depot();
+        $slide['bulan'] = array();
+        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan)));
+        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan + 1)));
+        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan + 2)));
         //pilih slide
         switch ($index){
             case 1:
+                $slide['kpi'] = $this->m_kpi->kpi_triwulan($bulan);
                 $this->load->view('oam/presentasi/v_kpi_operasional',$slide);
                 break;
             case 2:
+                $slide['volume'] = $this->m_kpi->realisasi_volume_triwulan($bulan);
                 $this->load->view('oam/presentasi/v_realisasi_thruput',$slide);
                 break;
             case 3:
+                $slide['ms2'] = $this->m_kpi->realisasi_ms2_triwulan($bulan);
                 $this->load->view('oam/presentasi/v_ms2_compliance',$slide);
                 break;
             case 4:

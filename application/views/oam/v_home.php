@@ -111,6 +111,7 @@
                                     <li><a style="cursor: pointer" onclick="changeAmtTitle('SPBU')">SPBU</a></li>
                                 </ul>
                             </div>
+                        <br/><br/><br/>
                             <center>
                                 <div id="grafikAmt" style="width: 1000px"></div>
                             </center>
@@ -129,6 +130,7 @@
                                     <li><a style="cursor: pointer" onclick="changeMtTitle('Bio Solar')">Bio Solar</a></li>
                                 </ul>
                             </div>
+                        <br/><br/><br/>
                             <center>
                                 <div id="grafikMt" style="width: 1000px"></div>
                             </center>

@@ -128,5 +128,57 @@ class m_kpi extends CI_Model {
         
         return $query->result();
     }
+    
+    public function realisasi_volume_triwulan($bulan)
+    {
+        $tahun = date('Y');
+        $akhir = $bulan + 3;
+        $query = $this->db->query("select kp.ID_KPI_OPERASIONAL,kp.TARGET,
+                                    kp.REALISASI,kp.DEVIASI,kp.PERFORMANCE_SCORE as nilai,kp.NORMAL_SCORE,
+                                    lh.ID_DEPOT,MONTHNAME(lh.TANGGAL_LOG_HARIAN) as nama_bulan,
+                                   kp.WEIGHTED_SCORE , MONTH(lh.TANGGAL_LOG_HARIAN) as bulan ,lh.TANGGAL_LOG_HARIAN as tanggal
+                                   from kpi_operasional kp, log_harian lh 
+                                   where lh.ID_LOG_HARIAN = kp.ID_LOG_HARIAN
+                                   and MONTH(lh.TANGGAL_LOG_HARIAN) >= $bulan and MONTH(lh.TANGGAL_LOG_HARIAN) < $akhir 
+                                    and lh.ID_DEPOT > 0 
+                                    and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
+                                   and kp.ID_JENIS_KPI_OPERASIONAL = 2");
+        
+        return $query->result();
+    }
+    
+     public function realisasi_ms2_triwulan($bulan)
+    {
+        $tahun = date('Y');
+        $akhir = $bulan + 3;
+        $query = $this->db->query("select kp.ID_KPI_OPERASIONAL,kp.TARGET,
+                                    kp.REALISASI,kp.DEVIASI,kp.PERFORMANCE_SCORE as nilai,kp.NORMAL_SCORE,
+                                    lh.ID_DEPOT,MONTHNAME(lh.TANGGAL_LOG_HARIAN) as nama_bulan,
+                                   kp.WEIGHTED_SCORE , MONTH(lh.TANGGAL_LOG_HARIAN) as bulan ,lh.TANGGAL_LOG_HARIAN as tanggal
+                                   from kpi_operasional kp, log_harian lh 
+                                   where lh.ID_LOG_HARIAN = kp.ID_LOG_HARIAN
+                                   and MONTH(lh.TANGGAL_LOG_HARIAN) >= $bulan and MONTH(lh.TANGGAL_LOG_HARIAN) < $akhir 
+                                    and lh.ID_DEPOT > 0 
+                                    and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
+                                   and kp.ID_JENIS_KPI_OPERASIONAL = 1");
+        
+        return $query->result();
+    }
+    
+    public function kpi_triwulan($bulan)
+    {
+        $tahun = date('Y');
+        $akhir = $bulan + 3;
+        $query = $this->db->query("select d.ID_DEPOT , n.ID_NILAI,d.NAMA_DEPOT, MONTHNAME(lh.TANGGAL_LOG_HARIAN) as nama_bulan, 
+                                    MONTH(lh.TANGGAL_LOG_HARIAN) as bulan, n.NILAI as nilai 
+                                    from nilai n,log_harian lh,depot d 
+                                    where n.id_jenis_penilaian = 72
+                                    and d.ID_DEPOT = lh.ID_DEPOT and lh.ID_LOG_HARIAN = n.ID_LOG_HARIAN 
+                                    and MONTH(lh.TANGGAL_LOG_HARIAN) >= $bulan and MONTH(lh.TANGGAL_LOG_HARIAN) < $akhir
+                                    and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun group by d.ID_DEPOT,bulan");
+        
+        return $query->result();
+        
+    }
 
 }
