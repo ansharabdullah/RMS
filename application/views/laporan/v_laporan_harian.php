@@ -2,7 +2,7 @@
     $( document ).ready(function() {
         $("#laporanPreview").hide();
         $("#laporanPreview2").hide();
-        $("#laporan_harian").hide();
+        // $("#laporan_harian").hide();
         hideAll();
         $("#tanggal").show();
         
@@ -11,8 +11,9 @@
             if($("#commentForm").valid())
             {
                 
-                $("#laporan_harian").hide();
-                $("#laporan_harian").slideDown("slow");
+                $("#laporan_harian").modal('show');
+                //$("#laporan_harian").hide();
+                //$("#laporan_harian").slideDown("slow");
                 //previewLaporan();
                 //previewAwak();
             }
@@ -45,7 +46,7 @@
     }
     
     function previewAwak(){
-         $("#laporanPreview2").hide();
+        $("#laporanPreview2").hide();
         $("#laporanPreview2").slideDown("slow");
     }
     
@@ -79,14 +80,11 @@
                 </form>
             </div>
         </section>
-        <section class="panel" id="laporan_harian"> 
-            <header class="panel-heading">
-                Laporan <b><span id="waktu"></span></b> Harian
-            </header>
-            <div class="panel-body" >
-                <iframe src="http://view.officeapps.live.com/op/view.aspx?src=oscrms.com/RMS/assets/file/Hasil Generate.xls" width="100%" height="500" style="border: none;"></iframe>
-            </div>
-        </section>
+        <div class="modal fade" id="laporan_harian" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <center><br/><br/><br/>
+                <iframe src="http://view.officeapps.live.com/op/view.aspx?src=oscrms.com/RMS/assets/file/Hasil Generate.xls" width="90%" height="600" style="border: none;"></iframe>
+            </center>
+        </div>
         <section class="panel" id="laporanPreview">
             <header class="panel-heading">
                 Laporan <b><span id="waktu"></span></b> Kinerja Mobil Tangki
@@ -335,7 +333,7 @@
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
                                 <td><?php echo rand(0, 20) ?></td>
-                                
+
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -344,8 +342,8 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
-                               
+                                <td><?php echo rand(0, 20) ?></td>
+
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -354,7 +352,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -363,7 +361,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -372,7 +370,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -381,7 +379,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -390,7 +388,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -399,7 +397,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -426,7 +424,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -435,7 +433,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
 
                             </tr>
                         </tbody>
