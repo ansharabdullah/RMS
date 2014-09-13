@@ -2,6 +2,7 @@
     $( document ).ready(function() {
         $("#laporanPreview").hide();
         $("#laporanPreview2").hide();
+        $("#laporan_harian").hide();
         hideAll();
         $("#tanggal").show();
         
@@ -9,8 +10,11 @@
         $("#commentForm").submit(function(e){
             if($("#commentForm").valid())
             {
-                previewLaporan();
-                previewAwak();
+                
+                $("#laporan_harian").hide();
+                $("#laporan_harian").slideDown("slow");
+                //previewLaporan();
+                //previewAwak();
             }
             e.preventDefault();
         });
@@ -75,7 +79,14 @@
                 </form>
             </div>
         </section>
-
+        <section class="panel" id="laporan_harian"> 
+            <header class="panel-heading">
+                Laporan <b><span id="waktu"></span></b> Harian
+            </header>
+            <div class="panel-body" >
+                <iframe src="http://docs.google.com/viewer?url=oscrms.com%2FRMS%2Fassets%2Ffile%2FHasil%20Generate.xls&embedded=true" width="100%" height="500" style="border: none;"></iframe>
+            </div>
+        </section>
         <section class="panel" id="laporanPreview">
             <header class="panel-heading">
                 Laporan <b><span id="waktu"></span></b> Kinerja Mobil Tangki
