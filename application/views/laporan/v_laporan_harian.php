@@ -84,7 +84,7 @@
                 Laporan <b><span id="waktu"></span></b> Harian
             </header>
             <div class="panel-body" >
-                <iframe src="http://docs.google.com/viewer?url=oscrms.com%2FRMS%2Fassets%2Ffile%2FHasil%20Generate.xls&embedded=true" width="100%" height="500" style="border: none;"></iframe>
+                <iframe src="http://view.officeapps.live.com/op/view.aspx?src=oscrms.com/RMS/assets/file/Hasil Generate.xls" width="100%" height="500" style="border: none;"></iframe>
             </div>
         </section>
         <section class="panel" id="laporanPreview">
