@@ -1,25 +1,26 @@
 <script type="text/javascript">
-    $( document ).ready(function() {
+    $(document).ready(function() {
         $("#laporanPreview").hide();
         $("#laporanPreview2").hide();
         hideAll();
         $("#tanggal").show();
-        
-        
-        $("#commentForm").submit(function(e){
-            if($("#commentForm").valid())
+
+
+        $("#commentForm").submit(function(e) {
+            if ($("#commentForm").valid())
             {
                 previewLaporan();
                 previewAwak();
+                
             }
             e.preventDefault();
         });
     });
-    
-    
+
+
     function hideAll()
     {
-        
+
         $("#tanggal").hide();
         $("#tglLaporan").val("");
         $("#bulan").hide();
@@ -30,26 +31,26 @@
         $("#tglAkhir").val("");
         $("#range-tanggal").hide();
     }
-       
-    
+
+
     function previewLaporan()
     {
         $("#waktu").html($("#jenis").val());
         $("#laporanPreview").hide();
         $("#laporanPreview").slideDown("slow");
-        
+
     }
-    
-    function previewAwak(){
-         $("#laporanPreview2").hide();
+
+    function previewAwak() {
+        $("#laporanPreview2").hide();
         $("#laporanPreview2").slideDown("slow");
     }
-    
+
     function importTable()
     {
         alert("Berhasil disimpan !");
     }
-    
+
 </script>
 <section id="main-content">
     <section class="wrapper">
@@ -63,7 +64,7 @@
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>laporan/ms2">MS2 Complience</a>
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>laporan/frm">Tarif Interpolasi dan FRM</a>
                     <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>laporan/kpi_operasional">KPI Operasional</a>                    
-                    </div>
+                </div>
             </div>
             <div class="panel-body" >
                 <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm">
@@ -74,12 +75,12 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-12">
                             <div class="col-lg-4" style="float:right;">
-                            <input type="submit" class="btn btn-success" value="Generate"> 
-                            <input type="submit" class="btn btn-warning" value="Cek">
+                                <input type="submit" class="btn btn-success" value="Generate"> 
+                                <input type="submit" class="btn btn-warning" value="Cek">
                             </div>
                         </div>
                     </div>                    
@@ -335,7 +336,7 @@
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
                                 <td><?php echo rand(0, 20) ?></td>
-                                
+
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -344,8 +345,8 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
-                               
+                                <td><?php echo rand(0, 20) ?></td>
+
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -354,7 +355,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -363,7 +364,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -372,7 +373,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -381,7 +382,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -390,7 +391,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -399,7 +400,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -426,7 +427,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
                             </tr>
                             <tr class="">
                                 <th style="display: none;"></th>
@@ -435,7 +436,7 @@
                                 <td><?php echo rand(300, 500) ?></td>
                                 <td><?php echo rand(40, 150) ?></td>
                                 <td><?php echo rand(2, 5) ?></td>
-                                 <td><?php echo rand(0, 20) ?></td>
+                                <td><?php echo rand(0, 20) ?></td>
 
                             </tr>
                         </tbody>
@@ -455,10 +456,10 @@
 <script src="<?php echo base_url(); ?>assets/js/editable-table.js"></script>
 <!-- END JAVASCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
-        EditableTable.init();
-        
-    });
-    
+                    jQuery(document).ready(function() {
+                        EditableTable.init();
+
+                    });
+
 </script>
 

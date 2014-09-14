@@ -1,139 +1,14 @@
 
-<script type="text/javascript">
-    $( document ).ready(function() {
-        $("#tambahkpi").hide();
-        $("#cekkpi").hide();
-        $("#previewtambahkpi").hide();
-        $("#previewcekkpi").hide();
-        
-        $("#commentForm").submit(function(e){
-            var isvalidate=$("#commentForm").valid();
-            if(isvalidate)
-            {    
-                $("#previewtambahkpi").hide();
-                $("#previewtambahkpi").fadeIn("slow");
-            }
-            e.preventDefault();
-        });
-        
-        $("#signupForm").submit(function(e){
-            var isvalidate=$("#signupForm").valid();
-            if(isvalidate)
-            {    
-                $("#previewcekkpi").hide();
-                $("#previewcekkpi").fadeIn("slow");
-                $("#tgl").html($("#tglForm").val());
-            }
-            e.preventDefault();
-        });
-        
-        
-        
-    });
-    
-    
-    function importTable()
-    {
-        alert("Berhasil disimpan !");
-    }
-    
-    
-    function showTambahKPI()
-    {
-        $("#tambahkpi").fadeIn("slow");
-        $("#cekkpi").hide();
-        $("#previewtambahkpi").hide();
-        $("#previewcekkpi").hide();
-    }
-    
-    function showCekKPI()
-    {
-        $("#cekkpi").fadeIn("slow");
-        $("#tambahkpi").hide();
-        $("#previewtambahkpi").hide();
-        $("#previewcekkpi").hide();
-    }
-    
-</script>
-
 <section id="main-content">
-    <section class="wrapper">
-        <section class="panel">
+    <section class="wrapper">       
+
+        <section class="panel" >
             <header class="panel-heading">
                 KPI Internal Depot
+                <a style="float:right;" data-placement="left" href="#ModalTambah" data-toggle="modal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah"> Tambah Data <i class="icon-plus"></i></a>
             </header>
             <div class="panel-body">
-                <a class="btn btn-primary" onclick="showTambahKPI()">
-                    Tambah KPI <i class="icon-plus"></i>
-                </a>
-
-                <a class="btn btn-warning" onclick="showCekKPI()">
-                    Cek KPI Iternal <i class="icon-check"></i>
-                </a>
-            </div>
-        </section>
-
-
-        <section class="panel" id="tambahkpi">
-            <header class="panel-heading">
-                Tambah KPI Iternal
-                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
-            </header>
-            <div class="panel-body">
-                <div class="clearfix" >
-
-                    <form class="cmxform form-horizontal tasi-form" id="commentForm">
-                        <div class="form-group">
-                            <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Tahun</label>
-                            <div class="col-lg-10 col-sm-6">
-                                <input type="number" min="2000" maxlength="4" required="required" id="tanggalSIOD" class="form-control"  placeholder="Tahun" name="tanggalSIOD">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">Jenis Data</label>
-                            <div class="col-lg-10 col-sm-6">
-                                <select class="form-control input-sm m-bot15" id="jenis" name="jenis">
-                                    <option>Total</option>
-                                    <option>Triwulan 1</option>
-                                    <option>Triwulan 2</option>
-                                    <option>Triwulan 3</option>
-                                    <option>Triwulan 4</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fileSIOD" class="col-lg-2 col-sm-2 control-label">File Jadwal</label>
-                            <div class="col-lg-10 col-sm-6">
-                                <input type="file"  id="fileName" required="required" class="form-control"  placeholder="File SIOD" name="fileSIOD">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-offset-2 col-lg-10">
-                                <input type="submit" style="float: right;" class="btn btn-danger" value="Upload">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel" id="previewtambahkpi">
-            <header class="panel-heading">
-                KPI Internal
-            </header>
-            <div class="panel-body">
-                Preview Tambah KPI Internal
-            </div>
-        </section>
-
-
-        <section class="panel" id="cekkpi">
-            <header class="panel-heading">
-                Cek KPI Internal
-            </header>
-            <div class="panel-body">
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
+                <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tahun</label>
                         <div class="col-lg-10 col-sm-6">
@@ -166,7 +41,157 @@
                 KPI Internal Tahun <span id="tgl"></span>
             </header>
             <div class="panel-body">
-                Preview KPI Internal
+                <div class="adv-table editable-table " style="overflow-x: scroll">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th rowspan="3">KELOMPOK KPI</th>
+                                <th rowspan="3" colspan="2">INDIKATOR KINERJA UTAMA</th>
+                                <th rowspan="3">ASPEK</th>
+                                <th rowspan="3">Satuan</th>
+                                <th rowspan="3">Frekuensi Monitoring</th>
+                                <th rowspan="3">Bobot</th>
+                                <th colspan="10">TARGET</th>
+                                <th rowspan="3">Aksi</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">KPI 2014</td>
+                                <td colspan="2">TW I</td>
+                                <td colspan="2">TW II</td>
+                                <td colspan="2">TW III</td>
+                                <td colspan="2">TW IV</td>
+                            </tr>
+                            <tr>
+                                <td>Base</td>
+                                <td>Stretch</td>
+                                <td>Base</td>
+                                <td>Stretch</td>
+                                <td>Base</td>
+                                <td>Stretch</td>
+                                <td>Base</td>
+                                <td>Stretch</td>
+                                <td>Base</td>
+                                <td>Stretch</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="49">Individual Performance Contract</td>
+                                <td colspan="17">Financial</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">1</td>
+                                <td><strong>Revenue</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Terminal Storage Management</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> 
+                            <tr>
+                                <td rowspan="4">2</td>
+                                <td><strong>Laba Usaha</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>a. Laba usaha Own fleet management</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>b. Laba usaha Fuel Retail Fleet Management (APMS/SPBB)</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>c. Laba Usaha  Terminal Storage</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
@@ -290,12 +315,12 @@
     jQuery(document).ready(function() {
         EditableTable.init();
     });
-		  	
+
     function FilterData(par) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
-    
-   
-		  
+
+
+
 </script>
