@@ -41,7 +41,12 @@ class amt extends CI_Controller {
         $data['lv1'] = 2;
         $data['lv2'] = 1;
         $data1['amt'] = $this->m_amt->detailAMT($id_pegawai);
-        $data1['grafik'] = 0;
+        
+        $depot = $this->session->userdata('id_depot');
+        $tahun = date('Y');
+        //$bulan = date('m');
+        $bulan = 1;
+        $data1['grafik'] = $this->m_amt->get_kinerja_amt_hari($depot, $bulan, $tahun, $id_pegawai);
         $data1['kinerja'] = 0;
         $data1['peringatan'] = $this->m_peringatan->getPeringatan($id_pegawai);
         $data3 = menu_ss();

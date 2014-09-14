@@ -1,5 +1,17 @@
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>laporan/bulanan">Laporan Bulanan</a></li>
+                    <li class="active">Tarif Interpolasi dan FRM</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        
         <section class="panel">
             <header class="panel-heading">
                 Tarif Interpolasi dan FRM

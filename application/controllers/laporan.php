@@ -29,7 +29,7 @@ class laporan extends CI_Controller {
     }
 
     public function index() {
-        $this->berita_acara();
+        $this->harian();
     }
 
     public function harian() {
@@ -38,32 +38,20 @@ class laporan extends CI_Controller {
         $this->footer();
     }
 
-    public function rentang() {
-        $this->header(7, 2);
-        $this->load->view('laporan/v_laporan_sepuluh_hari');
-        $this->footer();
-    }
-
-    public function custom_hari() {
-        $this->header(7, 3);
-        $this->load->view('laporan/v_laporan_sepuluh_hari');
-        $this->footer();
-    }
-
     public function bulanan() {
-        $this->header(7, 4);
+        $this->header(7, 2);
         $this->load->view('laporan/v_laporan_bulanan');
         $this->footer();
     }
 
     public function triwulan() {
-        $this->header(7, 5);
+        $this->header(7, 3);
         $this->load->view('laporan/v_laporan_triwulan');
         $this->footer();
     }
 
     public function tahunan() {
-        $this->header(7, 6);
+        $this->header(7, 4);
         $this->load->view('laporan/v_laporan_tahunan');
         $this->footer();
     }
@@ -454,17 +442,6 @@ class laporan extends CI_Controller {
         $this->header(7, 4);
         $this->load->view('laporan/v_frm', $data2);
         $this->footer();
-    }
-
-    public function berita_acara() {
-        $data['lv1'] = 6;
-        $data['lv2'] = 1;
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('ba/v_berita_acara');
-
-        $this->load->view('layouts/footer');
     }
 
     public function kpi_operasional() {
@@ -1071,14 +1048,21 @@ class laporan extends CI_Controller {
     }
 
     public function kpi_internal() {
-        $data['lv1'] = 6;
-        $data['lv2'] = 1;
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu');
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('ba/v_kpi_internal');
-
-        $this->load->view('layouts/footer');
+        $this->header(7, 5);
+        $this->load->view('laporan/v_kpi_internal');
+        $this->footer();
+    }
+    
+    public function tambah_kpi_internal() {
+        $this->header(7, 5);
+        $this->load->view('laporan/v_tambah_kpi_internal');
+        $this->footer();
+    }
+    
+    public function edit_kpi_internal() {
+        $this->header(7, 5);
+        $this->load->view('laporan/v_edit_kpi_internal');
+        $this->footer();
     }
 
     public function dummy_kinerja() {

@@ -69,8 +69,6 @@
                 </a>
                 <ul class="sub">
                     <li <?php if ($lv2 == 1 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/harian">Harian</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/rentang">Rentang Hari</a></li>
-                    <li <?php if ($lv2 == 3 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/custom_hari">Custom Hari</a></li>
                     <li <?php if ($lv2 == 4 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/bulanan">Bulanan</a></li>
                     <li <?php if ($lv2 == 5 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/triwulan">Triwulan</a></li>
                     <li <?php if ($lv2 == 6 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/tahunan">Tahunan</a></li>
