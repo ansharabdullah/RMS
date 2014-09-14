@@ -25,8 +25,20 @@
 </script>
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>laporan/bulanan">Laporan Bulanan</a></li>
+                    <li><a href="<?php echo base_url(); ?>laporan/ms2">MS2 Complience</a></li>
+                    <li class="active">Import</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
-
+        
 
 
         <section class="panel">
