@@ -82,6 +82,17 @@
 </script>
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li class="active">Laporan Harian</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -222,7 +233,6 @@
             </div>
         </section>
 
-
         <!-- page end-->
     </section>
 </section>
@@ -235,13 +245,3 @@
     </div>
 </div>
 
-<!--script for this page only-->
-<script src="<?php echo base_url(); ?>assets/js/editable-table.js"></script>
-<!-- END JAVASCRIPTS -->
-<script>
-    jQuery(document).ready(function() {
-        EditableTable.init();
-
-    });
-
-</script>
