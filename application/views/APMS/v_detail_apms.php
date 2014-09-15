@@ -171,25 +171,25 @@ function DateToIndo($date) {
                                 <aside class="profile-nav col-lg-12">
                                     <div class="row">
                                         <div class="bio-row">
-											<p><span>Nomor APMS </span>: <?php echo $row->NO_APMS; ?></p>
+											<p><span class="col col-lg-3">Nomor APMS </span>: <?php echo $row->NO_APMS; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nama Pengusaha </span>: <?php echo $row->NAMA_PENGUSAHA; ?></p>
+                                            <p><span class="col col-lg-3">Nama Pengusaha </span>: <?php echo $row->NAMA_PENGUSAHA; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Supply Point </span>: <?php echo $row->SUPPLY_POINT; ?></p>
+                                            <p><span class="col col-lg-3">Supply Point </span>: <?php echo $row->SUPPLY_POINT; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Alamat </span>: <?php echo $row->ALAMAT; ?></p>
+                                            <p><span class="col col-lg-3">Nama Transportir </span>: <?php echo $row->NAMA_TRANSPORTIR; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nama Transportir </span>: <?php echo $row->NAMA_TRANSPORTIR; ?></p>
+                                            <p><span class="col col-lg-3">Nomor Perjanjian </span>: <?php echo $row->NO_PERJANJIAN; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nomor Perjanjian </span>: <?php echo $row->NO_PERJANJIAN; ?></p>
+                                            <p><span class="col col-lg-3">Tarif Patra Niaga </span>: <?php echo $row->TARIF_PATRA_NIAGA; ?></p>
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Tarif Patra Niaga </span>: <?php echo $row->TARIF_PATRA_NIAGA; ?></p>
+										<div class="bio-row">
+                                            <p><span class="col col-lg-3">Alamat </span>: <?php echo $row->ALAMAT; ?></p>
                                         </div>
                                     </div>
                                 </aside>
