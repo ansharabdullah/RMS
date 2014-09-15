@@ -247,6 +247,14 @@ class m_log_harian extends CI_Model {
         return $data->result();
     }
     
+     public function getIdLogHarianTanggal($now, $depot) {
+        $this->db->where('tanggal_log_harian', $now);
+        $this->db->where('id_depot', $depot);
+        $data = $this->db->get('log_harian');
+        return $data->result();
+    }
+    
+    
 
 }
 

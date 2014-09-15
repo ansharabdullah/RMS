@@ -39,9 +39,12 @@ foreach ($grafik as $ka) {
 }
 ?>
     $(function() {
-        $('#grafik').highcharts({
+        amt = new Highcharts.Chart({ 
+            chart: {
+                renderTo:'grafik'
+            },
             title: {
-                text: 'Grafik Kinerja Awak Mobil Tangki Juli',
+                text: 'Grafik Kinerja Jumlah KM',
                 x: -20 //center
             },
             subtitle: {
@@ -346,12 +349,13 @@ foreach ($grafik as $ka) {
                             <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
                             <?php
                             $attr = array("class" => "cmxform form-horizontal tasi-form");
-                            echo form_open("amt/amt_hari/", $attr);
+                            echo form_open("amt/detail_hari/", $attr);
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                    <input type="month" name="bulan" data-mask="9999" placeholder="Bulan" required="required" id="tahunLaporan"  class="form-control"/>
                                 </div>
+                                <input type="hidden" name="id_pegawai" value="<?php echo $id_pegawai?>"/>
 
                                 <div class=" col-lg-2">
                                     <input type="submit" class="btn btn-danger" value="Submit">
@@ -378,7 +382,7 @@ foreach ($grafik as $ka) {
                         <!--        //tabel kinerja-->
                         <section class="panel">
                             <header class="panel-heading">
-                                Tabel Kinerja
+                                Tabel Kinerja Bulan <?php echo $bulan . "-" . $tahun ?>
                             </header>
                             <div class="panel-body">
                                 <div class="adv-table editable-table ">
@@ -406,6 +410,7 @@ foreach ($grafik as $ka) {
                                                 <th>Rit</th>
                                                 <th>SPBU</th>
                                                 <th>Pendapatan</th>
+                                                <th>Status Tugas</th>
                                                 <th>Kehadiran</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -413,20 +418,20 @@ foreach ($grafik as $ka) {
                                         <tbody>
                                             <?php
                                             $i = 1;
-                                            $bulan = 1;
+
                                             $jumlah = 0;
-//                                            if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
-//                                                $jumlah = 31;
-//                                            } else if ($bulan == 4 || $bulan == 6 || $bulan == 9 || $bulan == 11) {
-//                                                $jumlah = 30;
-//                                            } else if ($bulan == 2) {
-//                                                $jumlah = 29;
-//                                                //jika kabisat
-//                                                if ($kabisat) {
-//                                                    
-//                                                }
-//                                            }
-                                            $jumlah = 31;
+                                            if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
+                                                $jumlah = 31;
+                                            } else if ($bulan == 4 || $bulan == 6 || $bulan == 9 || $bulan == 11) {
+                                                $jumlah = 30;
+                                            } else if ($bulan == 2) {
+                                                $jumlah = 29;
+                                                //jika kabisat
+                                                if (date('L', strtotime($tahun . '-01-01'))) {
+                                                    $jumlah = 28;
+                                                }
+                                            }
+
                                             for ($i = 1; $i <= $jumlah; $i++) {
                                                 foreach ($grafik as $row) {
                                                     $status = 0;
@@ -442,24 +447,33 @@ foreach ($grafik as $ka) {
                                                     <tr class="">
                                                         <td style="display:none;"></td>
                                                         <td><?php echo $i ?></td>
-                                                        <td><?php echo $row->tanggal ?></td>
+                                                        <td><?php echo date('d-M-Y',  strtotime($row->TANGGAL_LOG_HARIAN)) ?></td>
                                                         <td><?php echo $row->total_km ?></td>
                                                         <td><?php echo $row->total_kl ?></td>
                                                         <td><?php echo $row->ritase ?></td>
                                                         <td><?php echo $row->spbu ?></td>
-                                                        <td><?php echo 'pendapatan' ?></td>
+                                                        <td>Rp. <?php echo number_format($row->pendapatan,0,',','.') ?></td>
+                                                        <td><?php echo $row->status_tugas ?></td>
                                                         <td><span class="label label-success">Hadir</span></td>
                                                         <td>
-                                                            <a onlcik="editKinerja('<?php echo $row->tanggal ?>','<?php echo $row->total_km ?>','<?php echo $row->total_kl ?>','<?php echo $row->ritase ?>','<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                            <a onclick="editKinerja('<?php echo $row->status_tugas ?>','<?php echo $id_pegawai ?>','<?php echo $row->ID_KINERJA_AMT ?>','<?php echo $row->TANGGAL_LOG_HARIAN ?>','<?php echo $row->total_km ?>','<?php echo $row->total_kl ?>','<?php echo $row->ritase ?>','<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                         </td>
                                                     </tr>
                                                     <?php
                                                 } else {
+                                                    $day = 0;
+                                                    if ($i < 10) {
+                                                        $day = $day . $i;
+                                                    } else {
+                                                        $day = $i;
+                                                    }
+                                                    $tanggal = $tahun . "-" . $bulan . "-" . $day;
                                                     ?>
                                                     <tr class="">
                                                         <td style="display:none;"></td>
                                                         <td><?php echo $i ?></td>
-                                                        <td></td>
+                                                        <td><?php echo date('d-M-Y',  strtotime($tanggal)) ?></td>
+                                                        <td>-</td>
                                                         <td>-</td>
                                                         <td>-</td>
                                                         <td>-</td>
@@ -467,7 +481,7 @@ foreach ($grafik as $ka) {
                                                         <td>-</td>
                                                         <td><span class="label label-danger">Absen</span></td>
                                                         <td>
-                                                            <a onlcik="editKinerja('<?php echo $row->tanggal ?>','<?php echo $row->total_km ?>','<?php echo $row->total_kl ?>','<?php echo $row->ritase ?>','<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" disabled><i class="icon-pencil"></i></a>
+                                                            <a onclick="tambahKinerja('<?php echo $tanggal?>','<?php echo $id_pegawai?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -517,7 +531,7 @@ foreach ($grafik as $ka) {
                                                         <a href="javascript:hapusPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>','<?php echo $row->ID_PEGAWAI ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                                     </td>
                                                 </tr>
-    <?php } ?>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -572,7 +586,7 @@ foreach ($grafik as $ka) {
 
                                                         <?php foreach ($amt as $row) { ?>
                                                             <input name="id_pegawai" size="16" type="hidden" value="<?php echo $row->ID_PEGAWAI ?>" required/>
-    <?php } ?>
+                                                        <?php } ?>
                                                         <div class="form-group ">
                                                             <label for="calasan" class="control-label col-lg-4">Alasan</label>
                                                             <div class="col-lg-8">
@@ -701,69 +715,62 @@ foreach ($grafik as $ka) {
 
 
 
-                        <div class="modal fade" id="ModalTambahKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="ModalEditKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title">Tambah Kinerja</h4>
+                                        <h4 class="modal-title">Edit Kinerja</h4>
                                     </div>
-
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="get" action="">
-
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url()?>amt/edit_kinerja/">
                                         <div class="modal-body">
-
                                             <div class="col-lg-12">
                                                 <section class="panel">
-
                                                     <div class="panel-body">
-
-
-
                                                         <div class="form-group ">                                            
                                                             <label for="ctglkinerja" class="control-label col-lg-4">Tanggal Kinerja</label>
                                                             <div class="col-lg-8">
-                                                                <input class=" form-control input-sm m-bot15" id="ctglkinerja" name="tglkinerja" size="16" type="date" value="" required/>
-                                                                <span class="help-block">Pilih Tanggal</span>
+                                                                <input class=" form-control input-sm m-bot15" id="tanggal_kinerja" name="tanggal_kinerja" size="16" type="date" value="" readonly/>
                                                             </div>
                                                         </div>
-
+                                                        <input class=" form-control input-sm m-bot15" id="id_kinerja" name="id_kinerja_amt" minlength="1" type="hidden" required />
+                                                        <input class=" form-control input-sm m-bot15" id="id_pegawai" name="id_pegawai" minlength="1" type="hidden" required />
                                                         <div class="form-group ">
                                                             <label for="ckm" class="control-label col-lg-2">Kilometer</label>
                                                             <div class="col-lg-4">
-                                                                <input class=" form-control input-sm m-bot15" id="ckm" name="km" minlength="2" type="text" required />
+                                                                <input class=" form-control input-sm m-bot15" id="km" name="total_km" minlength="1" type="number" required />
                                                             </div>
-
                                                             <label for="ckl" class="control-label col-lg-2">Kiloliter</label>
                                                             <div class="col-lg-4">
-                                                                <input class=" form-control input-sm m-bot15" id="ckl" name="kl" minlength="2" type="text" required />
+                                                                <input class=" form-control input-sm m-bot15" id="kl" name="total_kl" minlength="1" type="number" required />
                                                             </div>
                                                         </div>
-
                                                         <div class="form-group ">
                                                             <label for="crit" class="control-label col-lg-2">Ritase</label>
                                                             <div class="col-lg-4">
-                                                                <input class=" form-control input-sm m-bot15" id="crit" name="rit" minlength="2" type="text" required />
+                                                                <input class=" form-control input-sm m-bot15" id="rit" name="ritase_amt" minlength="1" type="number" required />
                                                             </div>
-
                                                             <label for="cspbu" class="control-label col-lg-2">Jumlah SPBU</label>
                                                             <div class="col-lg-4">
-                                                                <input class=" form-control input-sm m-bot15" id="cspbu" name="spbu" minlength="2" type="text" required />
+                                                                <input class=" form-control input-sm m-bot15" id="spbu" name="spbu" minlength="1" type="number" required />
                                                             </div>
                                                         </div>
                                                         <div class="form-group ">
+                                                            <label for="crit" class="control-label col-lg-2">Status Tugas</label>
+                                                            <div class="col-lg-4">
+                                                                <select class=" form-control input-sm m-bot15" id="status_tugas" name="status_tugas" required>
+                                                                    <option value="SUPIR">SUPIR</option>
+                                                                    <option value="KERNET">KERNET</option>
+                                                                </select>
+                                                            </div>
                                                             <label for="chadir" class="control-label col-lg-2">Kehadiran</label>
                                                             <div class="col-lg-4">
-                                                                <select class="form-control input-sm m-bot15" id="kehadiran" name="kehadiran">
-                                                                    <option>Hadir</option>
-                                                                    <option>Absen</option>
-                                                                </select>
+                                                                <input class=" form-control input-sm m-bot15" id="kehadiran" name="kehadiran" minlength="1" type="text" value="Hadir" readonly />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </section>
                                             </div>
-
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
@@ -773,6 +780,74 @@ foreach ($grafik as $ka) {
                                 </div>
                             </div>
                         </div>
+
+                        <div class="modal fade" id="ModalTambahKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Edit Kinerja</h4>
+                                    </div>
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url()?>amt/tambah_kinerja/">
+                                        <div class="modal-body">
+                                            <div class="col-lg-12">
+                                                <section class="panel">
+                                                    <div class="panel-body">
+                                                        <div class="form-group ">                                            
+                                                            <label for="ctglkinerja" class="control-label col-lg-4">Tanggal Kinerja</label>
+                                                            <div class="col-lg-8">
+                                                                <input class=" form-control input-sm m-bot15" id="ttanggal_kinerja" name="tanggal_kinerja" size="16" type="date" value="" readonly/>
+                                                            </div>
+                                                        </div>
+                                                        <input class=" form-control input-sm m-bot15" id="tid_kinerja" name="id_kinerja_amt" minlength="1" type="hidden" required />
+                                                        <input class=" form-control input-sm m-bot15" id="tid_pegawai" name="id_pegawai" minlength="1" type="hidden" required />
+                                                        <div class="form-group ">
+                                                            <label for="ckm" class="control-label col-lg-2">Kilometer</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="tkm" name="total_km" minlength="1" type="number" required />
+                                                            </div>
+                                                            <label for="ckl" class="control-label col-lg-2">Kiloliter</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="tkl" name="total_kl" minlength="1" type="number" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="crit" class="control-label col-lg-2">Ritase</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="trit" name="ritase_amt" minlength="1" type="number" required />
+                                                            </div>
+                                                            <label for="cspbu" class="control-label col-lg-2">Jumlah SPBU</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="tspbu" name="spbu" minlength="1" type="number" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="crit" class="control-label col-lg-2">Status Tugas</label>
+                                                            <div class="col-lg-4">
+                                                                <select class=" form-control input-sm m-bot15" id="tstatus_tugas" name="status_tugas" required>
+                                                                    <option value="SUPIR">SUPIR</option>
+                                                                    <option value="KERNET">KERNET</option>
+                                                                </select>
+                                                            </div>
+                                                            <label for="chadir" class="control-label col-lg-2">Kehadiran</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="tkehadiran" name="kehadiran" minlength="1" type="text" value="Hadir" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        
                         <div class="modal fade" id="HapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -793,69 +868,91 @@ foreach ($grafik as $ka) {
                             </div>
                         </div>
 
-<?php } ?>
+                    <?php } ?>
                     <!--script for this page only-->
                     <script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
 
                     <!-- END JAVASCRIPTS -->
                     <script>
-                                                                jQuery(document).ready(function() {
-                                                            EditableTable.init();
-                                                            });
+                                            jQuery(document).ready(function() {
+                                                EditableTable.init();
+                                            });
 
-                                                                function FilterData(par) {
-                                                                jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
-                                                            jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
-                                                            }
-
-                                                            var globalId;
-                                                            var globalId2;
-                                                            $('#modalHapus').on('show', function() {
-
-                                                            });
-
-                                                                function hapus(id, id2) {
-                                                                globalId = id;
-                                                                globalId2 = id2;
-                                                            $('#modalHapus').data('id', id).modal('show');
-                                                            }
-
-                                                            function ok()
-                                                                {
-                                                                $('#modalHapus').modal('hide');
-                                                        var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId + "/" + globalId2;
-                                                    window.location.href = url;
-                                                    }
-
-                                                    var id_peringatan;
-                                                    var id_pegawai;
-                                                    $('#modalHapus').on('show', function() {
-
-                                                    });
-
-                                                        function hapusPeringatan(id, id2) {
-                                                        id_peringatan = id;
-                                                        id_pegawai = id2;
-                                                    $('#modalHapusPeringatan').data('id', id).modal('show');
-                                                    }
-
-                                                    function ok_peringatan()
-                                                        {
-                                                        $('#modalHapusPeringatan').modal('hide');
-                                                        var url = "<?php echo base_url(); ?>" + "peringatan/delete_peringatan/" + id_peringatan + "/" + id_pegawai;
-                                                    window.location.href = url;
-                                                    }
-
-                                                        function editPeringatan(id_log_peringatan, id_pegawai, peringatan_pegawai, jenis_peringatan, tanggal_berlaku, tanggal_berakhir) {
-                                                        $("#eid_log_peringatan").val(id_log_peringatan);
-                                                        $("#eid_pegawai").val(id_pegawai);
-                                                        $("#ejenis_peringatan").val(jenis_peringatan);
-                                                        $("#eperingatan_pegawai").html(peringatan_pegawai);
-                                                        $("#etanggal_berlaku").val(tanggal_berlaku);
-                                                    $("#etanggal_berakhir").val(tanggal_berakhir);
-                                                    }
-
-                                                    function editKinerja(id_kinerja, tanggal, km, kl, ritase, spbu) {
-
+                                            function FilterData(par) {
+                                                jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+                                                jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
                                             }
+
+                                            //pegawai
+                                            var globalId;
+                                            var globalId2;
+                                            $('#modalHapus').on('show', function() {
+
+                                            });
+
+                                            function hapus(id, id2) {
+                                                globalId = id;
+                                                globalId2 = id2;
+                                                $('#modalHapus').data('id', id).modal('show');
+                                            }
+
+                                            function ok()
+                                            {
+                                                $('#modalHapus').modal('hide');
+                                                var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId + "/" + globalId2;
+                                                window.location.href = url;
+                                            }
+
+                                            //kinerja
+                                            function editKinerja(status_tugas, id_pegawai,id_kinerja, tanggal, km, kl, ritase, spbu) {
+                                                $("#status_tugas").val(status_tugas);
+                                                $("#id_pegawai").val(id_pegawai);
+                                                $("#id_kinerja").val(id_kinerja);
+                                                $("#tanggal_kinerja").val(tanggal);
+                                                $("#km").val(km);
+                                                $("#kl").val(kl);
+                                                $("#rit").val(ritase);
+                                                $("#spbu").val(spbu);
+                                            }
+
+                                            function tambahKinerja(tanggal, id_pegawai) {
+                                                $("#tstatus_tugas").val("");
+                                                $("#tid_pegawai").val(id_pegawai);
+                                                $("#tid_kinerja").val("");
+                                                $("#ttanggal_kinerja").val(tanggal);
+                                                $("#tkm").val("");
+                                                $("#tkl").val("");
+                                                $("#trit").val("");
+                                                $("#tspbu").val("");
+                                            }
+
+                                            //peringatan
+                                            var id_peringatan;
+                                            var id_pegawai;
+                                            $('#modalHapus').on('show', function() {
+
+                                            });
+
+                                            function hapusPeringatan(id, id2) {
+                                                id_peringatan = id;
+                                                id_pegawai = id2;
+                                                $('#modalHapusPeringatan').data('id', id).modal('show');
+                                            }
+
+                                            function ok_peringatan()
+                                            {
+                                                $('#modalHapusPeringatan').modal('hide');
+                                                var url = "<?php echo base_url(); ?>" + "peringatan/delete_peringatan/" + id_peringatan + "/" + id_pegawai;
+                                                window.location.href = url;
+                                            }
+
+                                            function editPeringatan(id_log_peringatan, id_pegawai, peringatan_pegawai, jenis_peringatan, tanggal_berlaku, tanggal_berakhir) {
+                                                $("#eid_log_peringatan").val(id_log_peringatan);
+                                                $("#eid_pegawai").val(id_pegawai);
+                                                $("#ejenis_peringatan").val(jenis_peringatan);
+                                                $("#eperingatan_pegawai").html(peringatan_pegawai);
+                                                $("#etanggal_berlaku").val(tanggal_berlaku);
+                                                $("#etanggal_berakhir").val(tanggal_berakhir);
+                                            }
+
                     </script>

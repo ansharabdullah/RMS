@@ -64,6 +64,19 @@ class m_amt extends CI_Model {
             $this->db->insert('nilai', $data[$i]);
         }
     }
+    
+    public function getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun) {
+        $query = $this->db->query("select n.NILAI from nilai n, jenis_penilaian j, log_harian l
+        where n.ID_JENIS_PENILAIAN=j.ID_JENIS_PENILAIAN and l.ID_LOG_HARIAN=n.ID_LOG_HARIAN and j.JENIS_PENILAIAN='KOEFISIEN $jenis $tugas $klasifikasi' and l.ID_DEPOT=$depot and year(l.TANGGAL_LOG_HARIAN)='$tahun'");
+        return $query->result();
+    }
+    
+    public function getKlasifikasi($id_pegawai){
+        $this->db->where('id_pegawai', $id_pegawai);
+        $query = $this->db->get('pegawai');
+        return $query->result();
+    }
+
 
     /*     * DASHBOARD --- Renisa* */
 
@@ -89,17 +102,17 @@ class m_amt extends CI_Model {
 
     //grafik detail
     public function get_kinerja_amt_hari($id_depot, $bulan, $tahun, $id_pegawai) {
-        $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl , 
-                                    sum(ka.RITASE_AMT) as ritase , sum(ka.SPBU) as spbu,
+        $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl , ka.ID_KINERJA_AMT, ka.status_tugas,
+                                    sum(ka.RITASE_AMT) as ritase , sum(ka.SPBU) as spbu, sum(ka.PENDAPATAN) as pendapatan,
                                     lh.TANGGAL_LOG_HARIAN, DAY(lh.TANGGAL_LOG_HARIAN) as tanggal  
                                     from kinerja_amt ka, log_harian lh 
                                     where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
                                     ka.ID_PEGAWAI=$id_pegawai and
-                                    ka.STATUS_TUGAS = 'SUPIR' and
                                     lh.id_depot = $id_depot and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
                                     and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun 
                                     group by lh.TANGGAL_LOG_HARIAN order by tanggal asc");
         return $query->result();
     }
 
+    
 }

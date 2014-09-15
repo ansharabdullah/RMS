@@ -41,12 +41,15 @@ class amt extends CI_Controller {
         $data['lv1'] = 2;
         $data['lv2'] = 1;
         $data1['amt'] = $this->m_amt->detailAMT($id_pegawai);
-        
+
         $depot = $this->session->userdata('id_depot');
         $tahun = date('Y');
         //$bulan = date('m');
-        $bulan = 1;
+        $bulan = '01';
         $data1['grafik'] = $this->m_amt->get_kinerja_amt_hari($depot, $bulan, $tahun, $id_pegawai);
+        $data1['tahun'] = $tahun;
+        $data1['bulan'] = $bulan;
+        $data1['id_pegawai'] = $id_pegawai;
         $data1['kinerja'] = 0;
         $data1['peringatan'] = $this->m_peringatan->getPeringatan($id_pegawai);
         $data3 = menu_ss();
@@ -55,6 +58,119 @@ class amt extends CI_Controller {
         $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_detail', $data1);
         $this->load->view('layouts/footer');
+    }
+
+    public function edit_kinerja() {
+        $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
+        $id_pegawai = $this->input->post('id_pegawai', true);
+
+        $tugas = $this->input->post('status_tugas', true);
+        $k = $this->m_amt->getKlasifikasi($id_pegawai);
+        $klasifikasi = $k[0]->KLASIFIKASI;
+        $depot = $this->session->userdata('id_depot');
+        //$tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+        $tahun = 2013;
+
+        //KM
+        $jenis = "KM";
+        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+        $koef_km = $a[0]->NILAI;
+
+        //KL
+        $jenis = "KL";
+        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+        $koef_kl = $a[0]->NILAI;
+
+        //RITASE
+        $jenis = "RIT";
+        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+        $koef_rit = $a[0]->NILAI;
+
+        //SPBU
+        $jenis = "SPBU";
+        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+        $koef_spbu = $a[0]->NILAI;
+
+        $km = $this->input->post('total_km', true);
+        $kl = $this->input->post('total_kl', true);
+        $ritase = $this->input->post('ritase_amt', true);
+        $spbu = $this->input->post('spbu', true);
+
+        $pendapatan = ($koef_km * $km) + ($koef_kl * $kl) + ($koef_rit * $ritase) + ($koef_spbu * $spbu);
+
+        $data = array(
+            'status_tugas' => $tugas,
+            'total_km' => $km,
+            'total_kl' => $kl,
+            'ritase_amt' => $ritase,
+            'pendapatan' => $pendapatan,
+            'spbu' => $spbu
+        );
+        $this->m_kinerja->editKinerjaAMT($data, $id_kinerja_amt);
+
+        $link = base_url() . "amt/detail/" . $id_pegawai;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+
+    public function tambah_kinerja() {
+        $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
+        $id_pegawai = $this->input->post('id_pegawai', true);
+
+        $tugas = $this->input->post('status_tugas', true);
+        $k = $this->m_amt->getKlasifikasi($id_pegawai);
+        $klasifikasi = $k[0]->KLASIFIKASI;
+        $depot = $this->session->userdata('id_depot');
+        //$tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+        $tahun = 2013;
+
+        //KM
+        $jenis = "KM";
+        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+        $koef_km = $a[0]->NILAI;
+
+        //KL
+        $jenis = "KL";
+        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+        $koef_kl = $a[0]->NILAI;
+
+        //RITASE
+        $jenis = "RIT";
+        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+        $koef_rit = $a[0]->NILAI;
+
+        //SPBU
+        $jenis = "SPBU";
+        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+        $koef_spbu = $a[0]->NILAI;
+
+        $km = $this->input->post('total_km', true);
+        $kl = $this->input->post('total_kl', true);
+        $ritase = $this->input->post('ritase_amt', true);
+        $spbu = $this->input->post('spbu', true);
+
+        $pendapatan = ($koef_km * $km) + ($koef_kl * $kl) + ($koef_rit * $ritase) + ($koef_spbu * $spbu);
+
+        $tanggal = $this->input->post('tanggal_kinerja', true);
+        $a = $this->m_log_harian->getIdLogHarianTanggal($tanggal, $depot);
+        $id_log_harian = $a[0]->ID_LOG_HARIAN;
+        $data = array(
+            'id_log_harian' => $id_log_harian,
+            'id_pegawai' => $id_pegawai,
+            'status_tugas' => $tugas,
+            'total_km' => $km,
+            'total_kl' => $kl,
+            'ritase_amt' => $ritase,
+            'pendapatan' => $pendapatan,
+            'spbu' => $spbu
+        );
+        $this->m_kinerja->insertKinerjaAMT($data, $id_kinerja_amt);
+
+        $link = base_url() . "amt/detail/" . $id_pegawai;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        //echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
 
     public function edit_pegawai($id_pegawai) {
@@ -404,22 +520,22 @@ class amt extends CI_Controller {
         $jadwal = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
         $this->load->model("m_kinerja");
         $kinerja = $this->m_kinerja->getKinerjaPresensi($tanggal);
-        foreach($jadwal as $row){
-            foreach($kinerja as $row2){
-                if($row->ID_PEGAWAI == $row2->ID_PEGAWAI){
-                    if($row->KETERANGAN_MASUK !=''){
+        foreach ($jadwal as $row) {
+            foreach ($kinerja as $row2) {
+                if ($row->ID_PEGAWAI == $row2->ID_PEGAWAI) {
+                    if ($row->KETERANGAN_MASUK != '') {
                         //status log_harian.status_presensi_amt jadikan 1
                         $data = array(
                             'status_presensi_amt' => 1
                         );
-                        
+
                         $this->m_log_harian->updateStatusPresensiAMT($depot, $tanggal, $data);
                     }
                 }
             }
         }
-        
-        
+
+
         $link = base_url() . "amt/presensi_pertanggal/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         //echo 'window.location.href="' . $link . '"';
@@ -673,6 +789,13 @@ class amt extends CI_Controller {
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('amt/v_grafik_amt_detail', $data2);
         $this->load->view('layouts/footer');
+    }
+
+    public function detail_hari($id_pegawai, $bulan) {
+        $tanggal = $_POST['bulan'];
+        $bulan = date('n', strtotime($tanggal));
+        $tahun = date('Y', strtotime($tanggal));
+        redirect('amt/detail/' . $id_pegawai . "/" . $bulan . "/" . $tahun);
     }
 
     public function amt_hari($depot, $nama) {
