@@ -28,23 +28,52 @@ class Mt extends CI_Controller {
 
     }
     
+   
     public function rencana() {
-        
-        $depot = $this->session->userdata("id_depot");
-        
+        $depot = $this->session->userdata('id_depot');
+
         $data2['submit'] = false;
         $data2['hapus'] = false;
         $data2['edit'] = false;
-        if ($this->input->post('submit')) {
+
+        if ($this->input->post('cek')) {
             $data2['submit'] = true;
+            $tanggal = $this->input->post('bln');
+        } else if ($this->input->post('edit')) {
+            $id_rencana = $this->input->post('id_rencana');
 
-            $data2['bln'] = $this->input->post('bln');
+            $tanggal = $this->input->post('bln');
+            $bulan = date("m", strtotime($tanggal));
+            $tahun = date("Y", strtotime($tanggal));
+            
+            $r_premium = $this->input->post('premium');
+            $r_pertamax = $this->input->post('pertamax');
+            $r_pertamaxplus = $this->input->post('pertamaxplus');
+            $r_pertaminadex = $this->input->post('pertaminadex');
+            $r_solar = $this->input->post('solar');
+            $r_biosolar = $this->input->post('biosolar');
+            $r_own_use = $this->input->post('own_use');
 
-            $tanggal = date("d-m-Y", strtotime($this->input->post('bln')));
-            $bulan = date("m", strtotime($this->input->post('bln')));
-            $tahun = date("Y", strtotime($this->input->post('bln')));
+            $this->m_rencana_mt->editRencana($id_rencana, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
 
-            $data2['tahun'] = $tahun;
+            $data2['submit'] = true;
+            $data2['edit'] = true;
+        } else if ($this->input->post('hapus')) {
+            $data2['hapus'] = true;
+            $rencana = unserialize($this->input->post('id_rencana'));
+            $this->m_rencana_mt->deleteRencana($rencana);
+        } else {
+            $data2['submit'] = true;
+            $tanggal = date('Y-m-d');
+        }
+
+        if ($data2['hapus'] == false) {
+            $data2['bln'] = $tanggal;
+            $tanggal = date("d-m-Y", strtotime($tanggal));
+            $bulan = date("m", strtotime($tanggal));
+            $tahun = date("Y", strtotime($tanggal));
+
+            $data2 ['tahun'] = $tahun;
             if ($bulan == 1) {
                 $data2['bulan'] = 'Januari';
             } else if ($bulan == 2) {
@@ -71,13 +100,12 @@ class Mt extends CI_Controller {
                 $data2['bulan'] = 'Desember';
             }
 
-            $data2['status_rencana'] = $this->m_rencana_mt->cekRencana($depot, $tahun, $bulan);
+           $data2['status_rencana'] = $this->m_rencana_mt->cekRencana($depot, $tahun, $bulan);
             if ($data2['status_rencana'] == date('t', strtotime($tanggal))) {
                 //rencana ada
                 $data2['rencana'] = $this->m_rencana_mt->getRencana($depot, $tahun, $bulan);
             }
         }
-        
         $data['lv1'] = 3;
         $data['lv2'] = 5;
         $this->header($data);
@@ -85,13 +113,13 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-     public function edit_rencana() {
+      public function edit_rencana() {
         if (!$this->input->post('submit')) {
             redirect('mt/rencana');
         } else {
             $depot = $this->session->userdata("id_depot");
             
-            $id = $this->input->post('id_rencana');
+            $id_rencana = $this->input->post('id_rencana');
             $r_premium = $this->input->post('premium');
             $r_pertamax = $this->input->post('pertamax');
             $r_pertamaxplus = $this->input->post('pertamaxplus');
@@ -100,7 +128,7 @@ class Mt extends CI_Controller {
             $r_biosolar = $this->input->post('biosolar');
             $r_own_use = $this->input->post('own_use');
 
-            $this->m_rencana_mt->editRencana($id, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
+            $this->m_rencana_mt->editRencana($id_rencana, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
 
             $data2['bln'] = $this->input->post('bln');
 
@@ -152,6 +180,8 @@ class Mt extends CI_Controller {
          }
             
     }
+    
+    
     
     public function rencana_import() {
         

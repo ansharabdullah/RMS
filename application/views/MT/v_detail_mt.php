@@ -73,80 +73,98 @@ function DateToIndo($date) {
     ?>
     
     $(function() {
-        $('#grafik').highcharts({
+        mt = new Highcharts.Chart({ 
             chart: {
-                type: 'spline'
+                renderTo:'grafik'
             },
             title: {
-                text: 'Grafik Mobil Tangki',
-                x: -20 //center
+                text: 'Grafik Kinerja Harian Jumlah KM Mobil Tangki'
             },
             subtitle: {
-                text: 'Bulan Januari 2014',
-                x: -20
+                text: 'Bulan '
             },
-            xAxis: {
-                categories: hari
-            },
-            yAxis: {
-                title: {
-                    text: 'Jumlah'
-                },
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-            },
-            tooltip: {
-                valueSuffix: ''
-            },
-            legend: {
-                borderWidth: 1
-            },
+            xAxis: [{
+                    categories: hari
+                }],
+            yAxis: [{// Primary yAxis
+                    labels: {
+                        format: '',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Total',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+                }],
             plotOptions: {
-                series: {
-                    events: {
+                  series: {
+                    cursor:'pointer',
+                    point:{
+                      events:{
                         click: function(event) {
-                            window.location = "<?php echo base_url() ?>mt/grafik_hari_mt";
+                            
+                            }
                         }
                     }
                 }
             },
+
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                enabled:false
+            },
             series: [{
-                    name: 'KM',
-                    data: km_mt
-                }, {
-                    name: 'KL',
-                    data: kl_mt
-                }, {
-                    name: 'Premium',
-                    data: premium
-                }, {
-                    name: 'Pertamax',
-                    data: pertamax
-                }, {
-                    name: 'Pertamax Plus',
-                    data: pertamax_plus
-                }, {
-                    name: 'Pertamina Dex',
-                    data: pertamina_dex
-                }, {
-                    name: 'Solar',
-                    data: solar
-                }, {
-                    name: 'Own Use',
-                    data: own_use_mt
-                }, {
-                    name: 'Bio Solar',
-                    data: bio_solar
-                },
-                {
-                    name: 'Ritase',
-                    data: ritase_mt
+                    type: 'spline',
+                    name: 'Jumlah',
+                    data: km_mt,
+                    visible : false
                 }]
         });
     });
+    
+    
+    function filterMt(title)
+    {
+        mt.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' Mobil Tangki'});  
+        if(title == "KM"){
+             mt.series[0].setData(total_km_mt);
+        }
+        else if(title == "KL"){
+            mt.series[0].setData(kl_mt);
+            
+        }else if(title == "Own Use"){
+            mt.series[0].setData(own_use_mt);
+                
+        }else if(title == "Premium"){
+            mt.series[0].setData(premium);
+            
+        }else if(title == "Pertamax"){
+            mt.series[0].setData(pertamax);
+            
+        }else if(title == "Pertamax Plus") {
+            mt.series[0].setData(pertamax_plus);
+            
+        }else if(title == "Pertamax Dex") {
+            mt.series[0].setData(pertamina_dex);
+            
+        }else if(title == "Solar"){
+            mt.series[0].setData(solar);
+            
+        }else if(title == "Bio Solar"){
+            mt.series[0].setData(bio_solar);
+        } 
+        
+    }
+    
+     $(document).ready(function(){
+            mt.series[0].setVisible(true);
+        });
     
 </script>
 
@@ -608,9 +626,25 @@ function DateToIndo($date) {
 
             </section>
   <?php } ?>              
-
+            
             <section class="panel">
                 <div class="panel-body">
+                    <div class="btn-group pull-right">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-left">
+                                <li><a style="cursor: pointer" onclick="filterMt('KM')">KM</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('KL')">KL</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Own Use')">Own Use</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Plus')">Pertamax Plus</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Dex')">Pertamax Dex</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
+                            </ul>
+                        </div>
+                        <br><br><br>
                     <div class="col-lg-12">
                         <div id="grafik"></div>
                     </div>
