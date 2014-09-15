@@ -1,0 +1,16 @@
+﻿ok
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   application/controllers/apms.php
+#	modified:   application/controllers/login.php
+#	new file:   application/models/m_apms.php
+#	new file:   application/views/APMS/v_data_apms.php
+#	new file:   bfcjnxfu.aqp.txt
+#	new file:   crksl51c.lnx.txt
+#	new file:   v0wjhslb.ptf.txt
+#
+

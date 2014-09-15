@@ -1,0 +1,21 @@
+﻿apms
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   application/controllers/apms.php
+#	modified:   application/controllers/login.php
+#	new file:   application/models/m_apms.php
+#	new file:   application/views/APMS/v_data_apms.php
+#	new file:   application/views/APMS/v_detail_apms.php
+#	deleted:    assets/file/coba - Copy.xlsx
+#	new file:   bfcjnxfu.aqp.txt
+#	new file:   crksl51c.lnx.txt
+#	new file:   fqeev0kt.uym.txt
+#	new file:   hon55fww.t2x.txt
+#	new file:   izxldsgk.ckg.txt
+#	new file:   v0wjhslb.ptf.txt
+#
+

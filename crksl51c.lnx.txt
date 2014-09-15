@@ -1,0 +1,15 @@
+﻿nyieun file apms dina controller model jeung views, tapi error keneh
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   application/controllers/login.php
+#
+# Untracked files:
+#	application/controllers/apms.php
+#	application/models/m_apms.php
+#	application/views/APMS/
+#
+
