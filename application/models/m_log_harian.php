@@ -7,7 +7,7 @@ class m_log_harian extends CI_Model {
     public function get_log_peringatan($id_depot) {
 
         //ambil semua tanggal di log harian
-        $query = $this->db->query("select *,MONTH(TANGGAL_LOG_HARIAN) as bulan, DAY(TANGGAL_LOG_HARIAN) as tanggal 
+        $query = $this->db->query("select *,MONTH(TANGGAL_LOG_HARIAN) as bulan, DAY(TANGGAL_LOG_HARIAN) as tanggal,YEAR(TANGGAL_LOG_HARIAN) as tahun 
                                     from log_harian 
                                     where tanggal_log_harian <= CURDATE() and id_depot = $id_depot 
                                     and  (status_input_kinerja = 0 or status_ms2 = 0 or status_interpolasi = 0 
@@ -22,6 +22,7 @@ class m_log_harian extends CI_Model {
         foreach ($data as $dt) {
             $set['tanggal'] = $dt->TANGGAL_LOG_HARIAN;
             $set['bulan'] = $dt->bulan;
+            $set['tahun'] = $dt->tahun;
             $set['ms2'] = 1;
             $set['interpolasi'] = 1;
             $set['ba'] = 1;

@@ -115,6 +115,9 @@
         <div class ="row">
             <div class="col-lg-12">
                 <section class="panel">
+                     <header class="panel-heading">
+                        Data MT Depot <?php echo $nama_depot?>
+                    </header>
                     <div class="panel-body" >
                         <div class="adv-table editable-table " style="overflow-x: scroll" >
                             <div class="space15"></div>
@@ -215,7 +218,7 @@
                 renderTo: 'grafik'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot 1'
+                text: 'Grafik Kinerja Jumlah KM MT Depot <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Tahun <?php echo $tahun?>'

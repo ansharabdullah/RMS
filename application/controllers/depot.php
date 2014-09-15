@@ -31,6 +31,22 @@ class Depot extends CI_Controller {
         $this->load->view('oam/v_grafik_bulan',$data3);
         $this->load->view('layouts/footer');
     }
+    
+     public function grafik_apms_bulan($id_depot,$tahun) {
+        $data['lv1'] = $id_depot + 1;
+        $data['lv2'] = 3;
+        $data2 = menu_oam();
+        $data3['id_depot'] = $id_depot;
+        $data3['depot'] = $this->m_depot->get_depot();
+        $data3['kpi_bulan'] = $this->m_kpi->nilai_kpi_perbulan($id_depot,$tahun);
+        $data3['detail_kpi'] = $this->m_kpi->detail_kpi_perbulan($id_depot,$tahun);
+        $data3['tahun'] = $tahun;
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data2);
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_grafik_apms_bulan',$data3);
+        $this->load->view('layouts/footer');
+    }
 
     public function changeGrafikBulan() {
         $index = $_POST['indikator'];
@@ -227,6 +243,83 @@ class Depot extends CI_Controller {
        $tahun = date('Y',strtotime($tanggal));
        redirect('depot/mt_depot_harian/'.$depot."/".$nama."/".$bulan."/".$tahun);
     }
+    
+    public function apms_tahun($depot,$nama)
+    {
+       $tahun =  $_POST['tahun'];
+       redirect('depot/apms_depot/'.$depot."/".$nama."/".$tahun);
+    }
+    
+    public function apms_depot($depot,$nama,$tahun)
+    {
+        $data['lv1'] = $depot + 1;
+        $data['lv2'] = 5;
+        $data2['tahun'] = $tahun;
+        $data2['id_depot'] = $depot;    
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        
+        $data3 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data3);
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_depot_apms',$data2);
+        $this->load->view('layouts/footer');
+    }
+    
+    public function apms_hari($depot,$nama)
+    {
+       $tanggal =  $_POST['bulan'];
+       $bulan = date('n',strtotime($tanggal));
+       $tahun = date('Y',strtotime($tanggal));
+       redirect('depot/apms_depot_harian/'.$depot."/".$nama."/".$bulan."/".$tahun);
+    }
+    
+    
+    public function apms_depot_harian($depot,$nama,$bulan,$tahun) {
+        $data['lv1'] = $depot + 1;
+        $data['lv2'] = 5;
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_hari($depot, $bulan,$tahun);
+        $data2['id_depot'] = $depot;
+        $data2['tahun'] = $tahun;
+        $data2['bulan'] = $bulan;
+
+        $data3 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data3);
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_depot_apms_harian',$data2);
+        $this->load->view('layouts/footer');
+    }
+    
+    
+    public function ganti_detail_apms($depot,$nama)
+    {
+        $tanggal = date("Y-m-d",strtotime($_POST['tanggal']));
+        redirect("depot/apms_depot_detail/".$depot."/".$nama."/".$tanggal."/");
+    }
+    
+    
+     public function apms_depot_detail($depot,$nama,$tanggal) {
+        $data['lv1'] = $depot + 1;
+        $data['lv2'] = 5;
+        $data2['hari'] = date('d',strtotime($tanggal));
+        $data2['bulan_mt'] = date('F',strtotime($tanggal));
+        $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_detail($depot , '2014-07-03');
+        $data2['tahun'] = date('Y',strtotime($tanggal));;
+        $data2['tanggal'] = date("d F Y",strtotime($tanggal));
+        $data2['mt'] = $this->m_mt->selectMT($depot);
+        $data2['id_depot'] = $depot;    
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        
+        $data3 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data3);
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_depot_apms_detail_harian',$data2);
+        $this->load->view('layouts/footer');
+    }
+    
     public function navbar($lv1, $lv2) {
         $data['lv1'] = $lv1;
         $data['lv2'] = $lv2;
