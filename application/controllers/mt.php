@@ -409,6 +409,7 @@ class Mt extends CI_Controller {
         $data['lv2'] = 1;
         
         $data1['id_mobil'] = $id_mobil;
+        
         $data1['tahun'] = $tahun;
         $data1['bulan'] = $bulan;
         $depot = $this->session->userdata("id_depot");

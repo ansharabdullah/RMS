@@ -349,7 +349,7 @@ function DateToIndo($date) {
                     Edit MT  
                 </header>
                 <div class="panel-body bio-graph-primary" >
-                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/edit_mobil/<?php echo $row->ID_MOBIL ?>">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/edit_mobil/<?php echo $row->ID_MOBIL ?>/<?php echo $bulan ?>/<?php echo $tahun ?>">
                         <div class="panel-body">
                             <input type="hidden" name="id" value="<?php echo $row->ID_MOBIL?>">
                             <div class="row">
