@@ -422,8 +422,9 @@ if ($kinerja_hari[0]->premium != NULL && $rencana_hari[0]->premium != NULL) {
                         <section class="panel" >
                             <div class="panel-body">
                                 <div id="grafikKpi"></div>
-                                &nbsp;&nbsp;<span class='btn btn-warning' > <i class='icon-warning-sign'></i></span>  <b> = Hasil dibawah target</a>
-                                   
+                                &nbsp;&nbsp;<span class='btn btn-warning' > <i class='icon-warning-sign'></i></span>  <b> = Hasil dibawah target</b>
+                                   <br/><br/><br/>
+                                <div id="grafikKpiApms"></div>
                             </div>
                         </section>
                     </div>
@@ -445,8 +446,10 @@ if ($kinerja_hari[0]->premium != NULL && $rencana_hari[0]->premium != NULL) {
     var kpi;
     var tahun_kpi = new Array();
     var series_kpi = new Array();
+    var series_kpi_apms = new Array();
     var set = new Array();
     var target = new Array();
+    var set_apms = new Array();
     var arrColorKpi = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
 <?php
 foreach ($kpi['tahun'] as $tahun) {
@@ -462,6 +465,7 @@ foreach ($kpi['data'] as $data) {
     foreach ($data['kpi'] as $dt) {
         ?>
                             set.push(<?php echo round($dt, 2) ?>);
+                            set_apms.push(<?php echo rand(97, 105)?>);
                             target.push(100);
         <?php
     }
@@ -472,16 +476,17 @@ foreach ($kpi['data'] as $data) {
                         id : '<?php echo $data['id_depot'] ?>',
                         data: set
                     });
+                     series_kpi_apms.push({
+                        name:'<?php echo $data['depot'] ?>',
+                        color : arrColorKpi[<?php echo $i ?>],
+                        id : '<?php echo $data['id_depot'] ?>',
+                        data: set
+                    });
     <?php
     $i++;
 }
 ?>
-//        series_kpi.push({
-//            name:'Target',
-//            type:'spline',
-//            data: target
-//        });
-        $(function() {
+         $(function() {
             kpi = new Highcharts.Chart({ 
                 chart: {
                     renderTo:'grafikKpi',
@@ -540,6 +545,70 @@ foreach ($kpi['data'] as $data) {
                             zIndex:4,
                             label:{text:'Target'}
                         }]
+                    }],
+           
+
+                tooltip: {
+                    positioner: function () {
+                        return { x: 10, y: 0};
+                    }
+                },
+                labels: {
+                    items: [{
+                            html: '',
+                            style: {
+                                left: '40px',
+                                top: '8px',
+                                color: 'black'
+                            }
+                        }]
+                },
+                series: series_kpi_apms
+            });
+        });
+        
+         var apms;
+        $(function() {
+            apms = new Highcharts.Chart({ 
+                chart: {
+                    renderTo:'grafikKpiApms',
+                    type:'column'
+                },
+                title: {
+                    text: 'Nilai KPI APMS Depot Pertahun'
+                },
+                plotOptions: {
+               
+                    column: {
+                        point:{
+                            events:{
+                                click: function(event) {
+                                    window.location = "<?php echo base_url() ?>depot/grafik_apms_bulan/"+ this.series.options.id +"/"+this.category;
+                                }
+                            }
+                        }
+                    }
+                },
+                xAxis: [{
+                        categories: tahun_kpi,
+                        gridLineWidth: 0
+              
+                    }],
+
+                yAxis: [{ // Primary yAxis
+                        gridLineWidth: 1,
+                        labels: {
+
+                            style: {
+                                color: '#89A54E'
+                            }
+                        },
+                        title: {
+                            text: 'Nilai KPI (%)',
+                            style: {
+                                color: '#89A54E'
+                            }
+                        }
                     }],
            
 

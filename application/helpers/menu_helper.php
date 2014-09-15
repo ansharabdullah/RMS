@@ -132,7 +132,7 @@ if ( ! function_exists('menu_ss'))
                                             </a>");
                      $set['keterangan'] = $set['keterangan']. "<a href='".base_url()."ba/berita_acara'>Berita Acara belum dibuat.</a><br/>";
                 }
-              if($logHarian[$i]['bulan'] == date('n')) array_push($arrPeringatan,$set);
+              if($logHarian[$i]['bulan'] == date('n') && $logHarian[$i]['tahun'] == date('Y')) array_push($arrPeringatan,$set);
            }
         }
         $data['total_notifikasi'] = $totalNotif;

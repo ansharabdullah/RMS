@@ -161,7 +161,7 @@
                 </section>
                 <section class="panel">
                      <header class="panel-heading">
-                            Tabel Kinerja Mobil Tangki 24 Agustus Tahun 2014
+                            Tabel Kinerja Mobil Tangki <?php echo $tanggal ?>
                         </header>
                     <div class="panel-body">
                        
