@@ -26,7 +26,7 @@ class apms extends CI_Controller {
     }
 
     public function data_apms() {
-        $data['lv1'] = 2;
+        $data['lv1'] = 4;
         $data['lv2'] = 1;
         $depot = $this->session->userdata('id_depot');
         $data1['apms'] = $this->m_apms->selectAllApms($depot);
@@ -59,7 +59,7 @@ class apms extends CI_Controller {
         echo '</script>';
 	}
 	public function detail_apms($id_apms){
-		$data['lv1'] = 3;
+		$data['lv1'] = 4;
         $data['lv2'] = 1;
         $data1['apms'] = $this->m_apms->detailApms($id_apms);
 		$data3 = menu_ss();

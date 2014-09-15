@@ -154,7 +154,17 @@ function DateToIndo($date) {
     <section class="wrapper">
             <?php foreach ($apms as $row) { ?>
             <!-- page start-->
-
+			<div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>apms/data_apms/"></i>Data APMS</a></li>
+                    <li class="active">Detail APMS</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
             <section class="panel" id="ShowProfile">
                 <header class="panel-heading">
                     <div class="col-lg-10">Detail APMS
