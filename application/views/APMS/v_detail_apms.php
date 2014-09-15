@@ -201,6 +201,9 @@ function DateToIndo($date) {
 										<div class="bio-row">
                                             <p><span class="col col-lg-3">Alamat </span>: <?php echo $row->ALAMAT; ?></p>
                                         </div>
+										<div class="bio-row">
+                                            <p><span class="col col-lg-3">Ship-To </span>: <?php echo $row->SHIP_TO; ?></p>
+                                        </div>
                                     </div>
                                 </aside>
                             </div>
@@ -257,7 +260,13 @@ function DateToIndo($date) {
                                 <div class="bio-row">
                                     <label for="tarif" class="control-label col-lg-4">Tarif Patra Niaga</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->TARIF_PATRA_NIAGA?>" id="tarif" name="tarif"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->TARIF_PATRA_NIAGA?>" id="tarif" name="tarif"  type="number" required />
+                                    </div>
+                                </div>
+								<div class="bio-row">
+                                    <label for="ship_to" class="control-label col-lg-4">Ship-To</label>
+                                    <div class="col-lg-6">
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->SHIP_TO?>" id="ship_to" name="ship_to"  type="text" required />
                                     </div>
                                 </div>
                             </div>

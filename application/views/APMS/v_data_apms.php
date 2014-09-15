@@ -140,6 +140,12 @@
                                             </div>
                                         </div>
 										<div class="form-group ">
+                                            <label for="ship_to" class="control-label col-lg-2">Ship-To</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="ship_to" name="ship_to" minlength="2" type="text" required />
+                                            </div>
+                                        </div>
+										<div class="form-group ">
                                             <label for="no_perjanjian" class="control-label col-lg-2">No. Perjanjian</label>
                                             <div class="col-lg-10">
                                                 <input class=" form-control input-sm m-bot15" id="no_perjanjian" name="no_perjanjian" minlength="2" type="text" required />
