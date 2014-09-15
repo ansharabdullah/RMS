@@ -7,12 +7,17 @@ class m_rencana_mt extends CI_Model {
     }
 
     function getRencana($depot,$tahun,$bulan) {
-        $data = $this->db->query("SELECT L.ID_LOG_HARIAN, R.ID_RENCANA,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y')as TANGGAL,R.R_PREMIUM,R.R_PERTAMAX,R.R_PERTAMAXPLUS,R.R_PERTAMINADEX,R.R_SOLAR,R.R_BIOSOLAR,R.R_OWN_USE,L.TANGGAL_LOG_HARIAN from rencana R, log_harian L where R.id_log_harian=L.id_log_harian and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan'");
+        $data = $this->db->query("SELECT L.ID_LOG_HARIAN, R.ID_RENCANA,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y')as TANGGAL,R.R_PREMIUM,R.R_PERTAMAX,R.R_PERTAMAXPLUS,R.R_PERTAMINADEX,R.R_SOLAR,R.R_BIOSOLAR,R.R_OWN_USE,L.TANGGAL_LOG_HARIAN from rencana R, log_harian L where R.id_log_harian=L.id_log_harian and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
         return $data->result();
     }
 
-    public function editRencana($id, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use) {
-        $query = $this->db->query("update rencana set R_PREMIUM = '$r_premium',R_PERTAMAX='$r_pertamax', R_PERTAMAXPLUS = '$r_pertamaxplus',R_PERTAMINADEX = '$r_pertaminadex',R_SOLAR='$r_solar', R_BIOSOLAR = '$r_biosolar', R_OWN_USE = '$r_own_use' where ID_RENCANA='$id'");
+    public function editRencana($id_rencana, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use) {
+        $query = $this->db->query("update rencana set R_PREMIUM = '$r_premium',R_PERTAMAX='$r_pertamax', R_PERTAMAXPLUS = '$r_pertamaxplus',R_PERTAMINADEX = '$r_pertaminadex',R_SOLAR='$r_solar', R_BIOSOLAR = '$r_biosolar', R_OWN_USE = '$r_own_use' where ID_RENCANA='$id_rencana'");
+    }
+    
+    function updateRencana($data, $id) {
+        $this->db->where('id_rencana', $id);
+        $this->db->update('rencana', $data);
     }
 
     public function importRencana($data) {

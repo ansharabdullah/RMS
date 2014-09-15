@@ -224,7 +224,7 @@
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1; ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row2->nopol ?></td>
                                        
-                                    <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan" class="btn btn-success btn-xs" onClick="setBan('<?php echo '0' ?>')">Cek Ban</a></td>
+                                    <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan" class="btn btn-success btn-xs" onClick="setBan('<?php echo $row2->nopol ?>')">Cek Ban</a></td>
                                 </tr>
                                  <?php
                                 $i++;
@@ -416,7 +416,7 @@
                 <h4 class="modal-title">Edit Ban</h4>
             </div>
             
-                <form class="form-horizontal" role="form" id="form-edit-ban" action="" method="POST">
+                <form class="form-horizontal" role="form" id="form-edit-ban" action="mt/edit_ban" method="POST">
                 <div class="modal-body">
 
 
@@ -696,14 +696,12 @@
             $('#editable-sample3').dataTable().fnFilter( '' );
             $('#editable-sample1').dataTable().fnFilter( '' );
         }
-        function setBanizzz(index)
+        function setBan(index)
         {
-            var action = "<?php echo base_url()?>mt/edit_reminder_ban/"+ban[index]['id'];
-            $("#bannopol").val(ban[index]['bannopol']);
+            $("#bannopol").val(ban[index]['id']);
             $("#tgl_ban").val(ban[index]['tgl_ban']);            
             $("#tgl_ganti").val(ban[index]['tgl_ganti']);
             $("#POSISI_BAN").val(ban[index]['POSISI_BAN']);
-            $("#form-edit-ban").attr("action",action );
             
         }
     

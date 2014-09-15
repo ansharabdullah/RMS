@@ -395,7 +395,7 @@ class laporan extends CI_Controller {
         } else {
             $bln_frm = date('Y-m-d');
         }
-        
+
         $data2['interpolasi']['bln_frm'] = $bln_frm;
 
         if (date("m", strtotime($bln_frm)) == 1) {
@@ -1048,17 +1048,49 @@ class laporan extends CI_Controller {
     }
 
     public function kpi_internal() {
+        $this->load->model('m_laporan');
+        $depot = $this->session->userdata('id_depot');
+        $tahun = date('Y');
+        $data2['edit_kpi']=false;
+
+        if ($this->input->post('cek')) {
+            $tahun = $this->input->post('tahun');
+        }if ($this->input->post('edit')) {
+            $tahun = $this->input->post('tahun');
+            $id = $this->input->post('id_kpi_internal');
+            $bobot = $this->input->post('bobot_kpi');
+            $tahun_base = $this->input->post('tahun_base');
+            $tahun_stretch = $this->input->post('tahun_stretch');
+            $tw1_base = $this->input->post('tw1_base');
+            $tw1_stretch = $this->input->post('tw1_stretch');
+            $tw2_base = $this->input->post('tw2_base');
+            $tw2_stretch = $this->input->post('tw2_stretch');
+            $tw3_base = $this->input->post('tw3_base');
+            $tw3_stretch = $this->input->post('tw3_stretch');
+            $tw4_base = $this->input->post('tw4_base');
+            $tw4_stretch = $this->input->post('tw4_stretch');
+            $this->m_laporan->editKPIInternal($id,$bobot,$tahun_base,$tahun_stretch,$tw1_base,$tw1_stretch,$tw2_base,$tw2_stretch,$tw3_base,$tw3_stretch,$tw4_base,$tw4_stretch);
+            
+            $data2['edit_kpi']=true;
+        }
+
+        $data2['tahun_kpi'] = $tahun;
+        $data2['error_kpi'] = $this->m_laporan->cetKPIInternal($tahun, $depot);
+        if ($data2['error_kpi'] >= 365) {
+            $data2['data_kpi'] = $this->m_laporan->getKPIInternal($tahun, $depot);
+        }
+
         $this->header(7, 5);
-        $this->load->view('laporan/v_kpi_internal');
+        $this->load->view('laporan/v_kpi_internal', $data2);
         $this->footer();
     }
-    
+
     public function tambah_kpi_internal() {
         $this->header(7, 5);
         $this->load->view('laporan/v_tambah_kpi_internal');
         $this->footer();
     }
-    
+
     public function edit_kpi_internal() {
         $this->header(7, 5);
         $this->load->view('laporan/v_edit_kpi_internal');
