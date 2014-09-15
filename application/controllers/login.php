@@ -24,7 +24,6 @@ class login extends CI_Controller {
         $email = $this->input->post('email');
         $password = md5($this->input->post('password'));
         $login = $this->m_user->validate_login($email, $password);
-
         if ($login->num_rows() == 1) {
             $data = $login->result();
             $session_user = array(
