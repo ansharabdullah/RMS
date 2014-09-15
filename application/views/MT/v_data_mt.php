@@ -78,7 +78,7 @@ if(status == 1){
                                 foreach ($mt as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
+                                    <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>/<?php echo date("n")?>/<?php echo date("Y")?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
 
                                     <td><?php echo $row->TRANSPORTIR; ?></td>
                                     <td><?php echo $row->KAPASITAS; ?></td>

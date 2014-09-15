@@ -29,7 +29,7 @@
                 </a>
                 <ul class="sub">
                     <li <?php if ($lv2 == 1 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/data_mt" >Data MT</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/grafik_mt/<?php echo $this->session->userdata("id_depot")?>/<?php echo date("Y")?>" >Grafik</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/grafik_mt/<?php echo date("Y")?>" >Grafik</a></li>
                     <li <?php if ($lv2 == 3 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/presensi" >Presensi</a></li>
                     <li <?php if ($lv2 == 4 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/reminder" >Reminder</a></li>
                     <li <?php if ($lv2 == 5 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/rencana">Rencana</a></li>

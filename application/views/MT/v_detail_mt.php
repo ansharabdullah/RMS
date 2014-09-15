@@ -81,7 +81,7 @@ function DateToIndo($date) {
                 text: 'Grafik Kinerja Harian Jumlah KM Mobil Tangki'
             },
             subtitle: {
-                text: 'Bulan '
+                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun ?>'
             },
             xAxis: [{
                     categories: hari
@@ -629,6 +629,27 @@ function DateToIndo($date) {
             
             <section class="panel">
                 <div class="panel-body">
+                    <div class="col-lg-12"><header class="panel-heading">
+                            Grafik Harian MT
+                        </header>
+                        <div class="panel-body" >
+                            <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
+                            <?php
+                                $attr = array("class"=>"cmxform form-horizontal tasi-form");
+                               echo form_open("mt/mt_hari/".$id_mobil,$attr);
+                               
+                            ?>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                </div>
+
+                                <div class=" col-lg-2">
+                                    <input type="submit" class="btn btn-danger" value="Submit">
+                                </div>
+
+                            </div>
+                            <?php echo form_close()?>
                     <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter MT<i class="icon-angle-down"></i>
                             </button>
@@ -653,7 +674,7 @@ function DateToIndo($date) {
 
             <section class="panel">
                 <header class="panel-heading">
-                    Tabel Kinerja MT  
+                    Tabel Kinerja MT
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">
@@ -703,8 +724,7 @@ function DateToIndo($date) {
                                     
                                    <td>
                                    <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" href="javascript:hapus_kinerja('<?php echo $row->id_kinerja_mt ?>');"><i class="icon-remove"></i></a></td>
-
+                                       
                                 </tr>
                                 <?php $i++;
                             } ?>

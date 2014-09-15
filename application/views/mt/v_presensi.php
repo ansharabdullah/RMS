@@ -1,11 +1,11 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#filePreview").hide();
-        $("#commentForm").submit(function(e) {
-            var isvalidate = $("#commentForm").valid();
+       $("#signupForm").submit(function(e) {
+            var isvalidate = $("#signupForm").valid();
             if (isvalidate)
+            {
                 $("#tgl").html($("#tglForm").val());
-            document.getElementById("commentForm").submit();
+                document.getElementById("commentForm").submit();
             }
             e.preventDefault();
         });
@@ -24,7 +24,7 @@
                 Presensi Mobil Tangki
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="GET" action="<?php echo base_url() ?>mt/cek_presensi/">
+                <form class="cmxform form-horizontal tasi-form" id="signupForm" method="GET" action="<?php echo base_url() ?>mt/cek_presensi/">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
@@ -35,7 +35,7 @@
 
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
-                            <button type="submit" style="float: right;" class="btn btn-warning">Cek</button>
+                            <button type="submit" id="cek" style="float: right;" class="btn btn-warning">Cek</button>
                         </div>
                     </div>
                 </form>

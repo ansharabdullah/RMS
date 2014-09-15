@@ -403,12 +403,17 @@ class Mt extends CI_Controller {
     }
 
 
-    public function detail_mt($id_mobil) {
+    public function detail_mt($id_mobil,$bulan,$tahun) {
 
         $data['lv1'] = 3;
         $data['lv2'] = 1;
+        
+        $data1['id_mobil'] = $id_mobil;
+        $data1['tahun'] = $tahun;
+        $data1['bulan'] = $bulan;
+        $depot = $this->session->userdata("id_depot");
         $data1['mt'] = $this->m_mt->detailMT($id_mobil);
-        $data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil,date('Y'));
+        $data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil,$depot,$bulan,$tahun);
         $this->header($data);
         $this->load->view('mt/v_detail_mt', $data1);
         $this->footer();
@@ -418,7 +423,6 @@ class Mt extends CI_Controller {
     public function edit_mobil($id_mobil) {
 
        
-        
         $id = $this->input->post('id', true);
         $data = array(
             'nopol' => $this->input->post('nopol', true),
@@ -458,7 +462,7 @@ class Mt extends CI_Controller {
         );
         $this->m_mt->editMT($data, $id);
         
-         $link = base_url()."mt/detail_mt/".$id_mobil;
+         $link = base_url()."mt/data_mt/";
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
@@ -946,7 +950,7 @@ class Mt extends CI_Controller {
      //Data Grafik
     
     
-    public function grafik_mt($depot,$tahun) {
+    public function grafik_mt($tahun) {
 
         $depot = $this->session->userdata("id_depot");
         
@@ -1005,6 +1009,14 @@ class Mt extends CI_Controller {
        redirect('mt/grafik_bulan_mt/'.$bulan."/".$tahun);
     }
     
+    public function mt_hari($id_mobil)
+    {
+       $tanggal =  $_POST['bulan'];
+       $bulan = date('n',strtotime($tanggal));
+       $tahun = date('Y',strtotime($tanggal));
+       redirect('mt/detail_mt/'.$id_mobil."/".$bulan."/".$tahun);
+    }
+    
     public function ganti_harian_mt()
     {
        $tanggal =  $_POST['tanggal'];
@@ -1015,10 +1027,21 @@ class Mt extends CI_Controller {
     }
     
     //presensi
+    
     public function presensi() {
         $data['lv1'] = 3;
         $data['lv2'] = 3;
+        $data2['kinerja'] = 0;
+        $data2['tanggal'] = 0;
         
+        $this->load->model("m_kinerja");
+        $depot = $this->session->userdata('id_depot');
+        $tanggal = date('Y-m-d');
+
+        $data2['mobil'] = $this->m_kinerja->getMobil($depot);
+        
+        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
+        $data2['tanggal'] = $tanggal; 
         $data2['kinerja'] = 0;
         $tanggal = $this->input->get('tanggal', true);
         $data['tanggal']= $tanggal;
