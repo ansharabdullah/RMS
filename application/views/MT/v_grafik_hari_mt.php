@@ -236,7 +236,7 @@ foreach ($grafik as $km) {
                                     foreach ($grafik as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i ?></td>
-                                    <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
+                                    <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>/<?php echo $hari?>/<?php echo $tahun?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
                                     <td><?php echo $row->KAPASITAS; ?></td>
                                     <td><?php echo $row->PRODUK; ?></td>
                                     <td><?php echo $row->TOTAL_KM_MT; ?></td>

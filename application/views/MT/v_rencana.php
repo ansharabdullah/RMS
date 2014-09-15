@@ -15,20 +15,6 @@ function DateToIndo($date) {
 
 ?>
 
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        $("#signupForm").submit(function(e) {
-            var isvalidate = $("#signupForm").valid();
-            if (isvalidate)
-            {
-                $("#tgl").html($("#tglForm").val());
-                document.getElementById("commentForm").submit();
-            }
-            e.preventDefault();
-        });
-    });
-</script>
 
 <script type="text/javascript">
     var rencana = new Array();
@@ -39,10 +25,8 @@ function DateToIndo($date) {
         var data;
 <?php foreach ($rencana as $a) { ?>
             data = new Array();
-            data['id'] = "<?php echo $a->ID_RENCANA ?>";
-
-            data['tanggal'] = "<?php echo $a->TANGGAL ?>";
-
+            data['id_rencana'] = "<?php echo $a->ID_RENCANA ?>";
+            data['TANGGAL'] = "<?php echo $a->TANGGAL ?>";
             data['r_premium'] = "<?php echo $a->R_PREMIUM ?>";
             data['r_pertamax'] = "<?php echo $a->R_PERTAMAX ?>";
             data['r_pertamaxplus'] = "<?php echo $a->R_PERTAMAXPLUS ?>";
@@ -61,8 +45,8 @@ function DateToIndo($date) {
     });
 
     function setDetailRencana(index) {
-        $("#id_rencana").val(rencana[index]['id']);
-        $("#tanggal_rencana").val(rencana[index]['tanggal']);
+        $("#id_rencana").val(rencana[index]['id_rencana']);
+        $("#tanggal_rencana").val(rencana[index]['TANGGAL']);
 
         $("#premium").val(rencana[index]['r_premium']);
         $("#solar").val(rencana[index]['r_solar']);
@@ -98,7 +82,7 @@ function DateToIndo($date) {
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <input type="submit" name="submit" style="float: right;" class="btn btn-warning" value="Cek">
+                                <input type="submit" name="cek" style="float: right;" class="btn btn-warning" value="Cek">
                             </div>
                         </div>
                     </form>
@@ -159,7 +143,7 @@ function DateToIndo($date) {
                                             <td><?php echo $row->R_BIOSOLAR ?></td>
                                             <td><?php echo $row->R_OWN_USE ?></td>
                                             <td>
-                                                <a data-placement="top" data-toggle="modal" href="#ModalRencana" onclick="setDetailRencana('2')" class="btn btn-warning btn-xs tooltips" data-original-title="Rencana Edit"><i class="icon-pencil"></i></a>
+                                                <a data-placement="top" data-toggle="modal" href="#ModalRencana" onclick="setDetailRencana('<?php echo ($i) ?>')"><span class="btn btn-warning btn-xs tooltips" data-original-title="Rencana Edit"><i class="icon-pencil"></i></span></a>
                                             </td>
                                         </tr>
 
@@ -200,7 +184,7 @@ function DateToIndo($date) {
         <div class="modal fade" id="ModalRencana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/edit_rencana">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/rencana">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Ubah Rencana</h4>
@@ -213,10 +197,11 @@ function DateToIndo($date) {
                                         <div class="form-group "> 
                                             <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal" name="tanggal" value="" placeholder="Tanggal "required readonly/>
+                                                <input type="date" class=" form-control input-sm m-bot15" id="tanggal_rencana" name="tanggal_rencana" value="" placeholder="Tanggal "required readonly/>
                                             </div>
-                                            <input type="hidden" class=" form-control input-sm m-bot15" id="id" name="id" value="" required/>
-                                            <input type="hidden" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bln; ?>" required/>
+                                            <input type="text" class=" form-control input-sm m-bot15" id="id_rencana" name="id_rencana" value="" required/>
+                                            <input type="text" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bln; ?>" required/>
+                                       
                                         </div>
                                         <div class="form-group">
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
@@ -225,33 +210,33 @@ function DateToIndo($date) {
                                             </div>
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                                <input class=" form-control input-sm m-bot15" id="pertamax" name="pertamax"  type="number" required />
                                             </div>
                                         </div>
                                           <div class="form-group">
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamax Plus</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                                <input class=" form-control input-sm m-bot15" id="r_pertamaxplus" name="r_pertamaxplus"  type="number" required />
                                             </div>
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamina Dex</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                                <input class=" form-control input-sm m-bot15" id="r_pertaminadex" name="r_pertaminadex"  type="number" required />
                                             </div>
                                         </div>
                                           <div class="form-group">
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Solar</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                                <input class=" form-control input-sm m-bot15" id="r_solar" name="r_solar"  type="number" required />
                                             </div>
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">bio Solar</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax"  type="number" required />
+                                                <input class=" form-control input-sm m-bot15" id="r_biosolar" name="r_biosolar"  type="number" required />
                                             </div>
                                         </div>
                                           <div class="form-group">
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Own Use</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                                <input class=" form-control input-sm m-bot15" id="r_own_use" name="r_own_use"  type="number" required />
                                             </div>
                                            
                                         </div>
@@ -305,16 +290,17 @@ function DateToIndo($date) {
   jQuery(document).ready(function() {
    EditableTable.init();
       });
-function editRencana(id_jadwal, tanggal, R_PREMIUM, r_pertamax, r_pertaminadex, r_pertamaxplus, r_solar, r_biosolar, r_own_use ) {
-    $("#R_PREMIUM").val(R_PREMIUM);
-    $("#id_jadwal").val(id_jadwal);
-    $("#tanggal_log_harian").val(tanggal);
-    $("#tanggal_log_harian1").val(tanggal);
-    $("#r_pertamax").val(r_pertamax);
-    $("#r_pertamaxplus").val(r_pertamaxplus);
-    $("#r_pertaminadex").val(r_pertaminadex);
-    $("#r_solar").val(r_solar);
-    $("#r_biosolar").val(r_biosolar);
-    $("#r_own_use").val(r_own_use);
-   }
+   
+function rencana(id_rencana, tanggal, r_premium, r_pertamax,r_pertamaxplus,r_pertaminadex,r_solar,r_biosolar,r_own_use) {
+                                                        $("#id_rencana").val(id_rencana);
+                                                        $("#tanggal_log_harian").val(tanggal);
+                                                        $("#tanggal_log_harian1").val(tanggal);
+                                                        $("#r_pertamax").val(r_pertamax);
+                                                        $("#r_premium").val(r_premium);
+                                                        $("#r_pertamaxplus").val(r_pertamaxplus);
+                                                        $("#r_pertaminadex").val(r_pertaminadex);
+                                                        $("#r_solar").val(r_solar);
+                                                        $("#r_biosolar").val(r_biosolar);
+                                                        $("#r_own_use").val(r_own_use);
+                                                    }
 </script>

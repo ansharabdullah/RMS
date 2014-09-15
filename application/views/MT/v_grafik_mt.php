@@ -140,7 +140,7 @@
                     <div class="panel-body">
                         <?php
                                 $attr = array("class"=>"cmxform form-horizontal tasi-form");
-                                 echo form_open("mt/mt_tahun/".$depot,$attr);
+                                 echo form_open("mt/mt_tahun/",$attr);
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">

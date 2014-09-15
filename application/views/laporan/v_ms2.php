@@ -272,7 +272,7 @@
                                                 Premium <input class=" form-control input-sm m-bot15" id="premium1" name="premium1" min="0" type="number" value="" placeholder="Premium"required/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Solar <input class=" form-control input-sm m-bot15" id="solar1" name="solar1" mi="0" type="number" value="" placeholder="Solar"required/>
+                                                Solar <input class=" form-control input-sm m-bot15" id="solar1" name="solar1" min="0" type="number" value="" placeholder="Solar"required/>
                                             </div>
                                             <div class="col-lg-4">
                                                 Pertamax <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax1" min="0" type="number" value="" placeholder="Pertamax"required/>

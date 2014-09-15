@@ -187,13 +187,35 @@ class m_laporan extends CI_Model {
                 
         $query = $this->db->query("update log_harian l set l.STATUS_KPI_OPERASIONAL_INTERNAL = 1 where l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun'");
     }
-
+    
+    public function cetKPIInternal($tahun,$depot){
+        $query = $this->db->query("select SUM(STATUS_KPI_INTERNAL) as STATUS_KPI_INTERNAL from log_harian where ID_DEPOT = '$depot' and  YEAR(TANGGAL_LOG_HARIAN) = '$tahun'");
+        $row = $query->row();
+        return $row->STATUS_KPI_INTERNAL;
+    }
+    
+    public function getKPIInternal($tahun,$depot){
+        $query = $this->db->query("select l.ID_LOG_HARIAN, k.ID_KPI_INTERNAL,j.ID_JENIS_KPI_INTERNAL,j.JENIS_KPI_INTERNAL, k.BOBOT,k.TAHUN_BASE,k.TAHUN_STRETCH,k.TW1_BASE,k.TW1_STRETCH,k.TW2_BASE,k.TW2_STRETCH,k.TW3_BASE,k.TW3_STRETCH,k.TW4_BASE,k.TW4_STRETCH from log_harian l, kpi_internal k, jenis_kpi_internal j where l.ID_LOG_HARIAN = k.ID_LOG_HARIAN and k.ID_JENIS_KPI_INTERNAL = j.ID_JENIS_KPI_INTERNAL and l.ID_DEPOT = '$depot' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and j.KELOMPOK = 'DEPOT' ORDER BY j.ID_JENIS_KPI_INTERNAL ASC");
+        return $query->result();
+    }
+    
+    public function editKPIInternal($id,$bobot,$th_b,$th_s,$tw1_b,$tw1_s,$tw2_b,$tw2_s,$tw3_b,$tw3_s,$tw4_b,$tw4_s){
+        $query = $this->db->query("update kpi_internal set BOBOT='$bobot',TAHUN_BASE='$th_b',TAHUN_STRETCH='$th_s',TW1_BASE='$tw1_b',TW1_STRETCH='$tw1_s',TW2_BASE='$tw2_b',TW2_STRETCH='$tw2_s',TW3_BASE='$tw3_b',TW3_STRETCH='$tw3_s',TW4_BASE='$tw4_b',TW4_STRETCH='$tw4_s' where ID_KPI_INTERNAL='$id'");        
+    }
+    
+    public function tambahKPIInternal(){
+        
+    }
+    
+    
+    
+    /*
     public function dummy_kinerja_amt($id_kinerja, $id_log_harian, $id_pegawai, $status_tugas, $total_km, $total_kl, $ritase, $pendapatan, $spbu) {
         $query = $this->db->query("insert into kinerja_amt(ID_KINERJA_AMT,ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,PENDAPATAN,SPBU) values('$id_kinerja','$id_log_harian','$id_pegawai','$status_tugas','$total_km','$total_kl','$ritase','$pendapatan','$spbu')");
     }
 
     public function dummy_kinerja_mt($id_kinerja, $id_log_harian, $id_mobil, $ritase, $total_km, $total_kl, $ownuse, $premium, $pertamax, $pertamax_plus, $pertamina_dex, $solar, $biosolar) {
         $query = $this->db->query("insert into kinerja_mt(ID_KINERJA_MT,ID_LOG_HARIAN,ID_MOBIL,RITASE_MT,TOTAL_KM_MT,TOTAL_KL_MT,OWN_USE,PREMIUM,PERTAMAX,PERTAMAX_PLUS,PERTAMINA_DEX,SOLAR,BIO_SOLAR) values('$id_kinerja','$id_log_harian','$id_mobil','$ritase','$total_km','$total_kl','$ownuse','$premium','$pertamax','$pertamax_plus','$pertamina_dex','$solar','$biosolar')");
-    }
+    }*/
 
 }
