@@ -169,7 +169,7 @@ class amt extends CI_Controller {
 
         $link = base_url() . "amt/detail/" . $id_pegawai;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        //echo 'window.location.href="' . $link . '"';
+        echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
 
@@ -520,11 +520,14 @@ class amt extends CI_Controller {
         $jadwal = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
         $this->load->model("m_kinerja");
         $kinerja = $this->m_kinerja->getKinerjaPresensi($tanggal);
+        print_r($kinerja);
         foreach ($jadwal as $row) {
             foreach ($kinerja as $row2) {
                 if ($row->ID_PEGAWAI == $row2->ID_PEGAWAI) {
+                    echo " - -- masuk euyyyyyyyy";
                     if ($row->KETERANGAN_MASUK != '') {
                         //status log_harian.status_presensi_amt jadikan 1
+                        echo "masuk";
                         $data = array(
                             'status_presensi_amt' => 1
                         );
@@ -724,6 +727,53 @@ class amt extends CI_Controller {
 
         $link = base_url() . "amt/koefisien/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+
+    public function ubah_koefisien() {
+        $depot = $this->session->userdata("id_depot");
+        $index = $this->input->post('index', true);
+        $tahun = $this->input->post('tahun', true);
+
+        //km
+        $koef = 25 + $index * 4 + 0;
+        $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+        $id_nilai = $a[0]->ID_NILAI;
+        $data = array(
+            'nilai' => $this->input->post('km', true)
+        );
+        $this->m_amt->editNilaiKoef($data, $id_nilai);
+
+        //kl
+        $koef = 25 + $index * 4 + 1;
+        $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+        $id_nilai = $a[0]->ID_NILAI;
+        $data = array(
+            'nilai' => $this->input->post('kl', true)
+        );
+        $this->m_amt->editNilaiKoef($data, $id_nilai);
+
+        //rit
+        $koef = 25 + $index * 4 + 2;
+        $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+        $id_nilai = $a[0]->ID_NILAI;
+        $data = array(
+            'nilai' => $this->input->post('rit', true)
+        );
+        $this->m_amt->editNilaiKoef($data, $id_nilai);
+
+        //spbu
+        $koef = 25 + $index * 4 + 3;
+        $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+        $id_nilai = $a[0]->ID_NILAI;
+        $data = array(
+            'nilai' => $this->input->post('spbu', true)
+        );
+        $this->m_amt->editNilaiKoef($data, $id_nilai);
+
+        $link = base_url() . "amt/koefisien/";
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
