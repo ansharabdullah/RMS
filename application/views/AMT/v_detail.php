@@ -524,8 +524,8 @@ foreach ($grafik as $ka) {
                                                     <td><?php echo $i ?></td>
                                                     <td><?php echo $row->JENIS_PERINGATAN ?></td>
                                                     <td><?php echo $row->PERINGATAN_PEGAWAI ?></td>
-                                                    <td><?php echo $row->TANGGAL_BERLAKU ?></td>
-                                                    <td><?php echo $row->TANGGAL_BERAKHIR ?></td>
+                                                    <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_BERLAKU)) ?></td>
+                                                    <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_BERAKHIR)) ?></td>
                                                     <td>
                                                         <a onclick="editPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>', '<?php echo $row->ID_PEGAWAI ?>', '<?php echo $row->PERINGATAN_PEGAWAI ?>', '<?php echo $row->JENIS_PERINGATAN ?>', '<?php echo $row->TANGGAL_BERLAKU ?>', '<?php echo $row->TANGGAL_BERAKHIR ?>')" data-placement="top" data-toggle="modal" href="#ModalEditPeringatan" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                         <a href="javascript:hapusPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>','<?php echo $row->ID_PEGAWAI ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>

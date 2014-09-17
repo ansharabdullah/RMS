@@ -26,7 +26,7 @@ class apms extends CI_Controller {
     }
 
     public function data_apms() {
-        $data['lv1'] = 2;
+        $data['lv1'] = 4;
         $data['lv2'] = 1;
         $depot = $this->session->userdata('id_depot');
         $data1['apms'] = $this->m_apms->selectAllApms($depot);
@@ -45,6 +45,7 @@ class apms extends CI_Controller {
         $data = array(
             'NO_APMS' => $this->input->post('no_apms', true),
 			'ID_DEPOT'=> $depot,
+            'SHIP_TO' => $this->input->post('ship_to', true),
             'NAMA_PENGUSAHA' => $this->input->post('nama_pengusaha', true),
             'SUPPLY_POINT' => $this->input->post('supply_point', true),
             'ALAMAT' => $this->input->post('alamat', true),
@@ -59,7 +60,7 @@ class apms extends CI_Controller {
         echo '</script>';
 	}
 	public function detail_apms($id_apms){
-		$data['lv1'] = 3;
+		$data['lv1'] = 4;
         $data['lv2'] = 1;
         $data1['apms'] = $this->m_apms->detailApms($id_apms);
 		$data3 = menu_ss();
@@ -69,7 +70,7 @@ class apms extends CI_Controller {
         $this->load->view('layouts/navbar', $data);
         $this->load->view('apms/v_detail_apms', $data1);
         $this->load->view('layouts/footer');
-        
+
 	}
 	
     public function edit_apms($id_apms) {
@@ -82,6 +83,7 @@ class apms extends CI_Controller {
             'NAMA_TRANSPORTIR' => $this->input->post('nama_transportir', true),
             'NO_PERJANJIAN' => $this->input->post('no_perjanjian', true),
             'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
+			'SHIP_TO' => $this->input->post('ship_to', true),
         );
         $this->m_apms->editApms($data, $id);
         

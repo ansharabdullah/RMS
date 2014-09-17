@@ -76,6 +76,16 @@ class m_amt extends CI_Model {
         $query = $this->db->get('pegawai');
         return $query->result();
     }
+    
+    public function getIDNilaiKoef($depot, $tahun, $koef){
+        $query = $this->db->query("select * from nilai n, jenis_penilaian j, log_harian l where j.id_jenis_penilaian=n.id_jenis_penilaian and n.ID_LOG_HARIAN=l.ID_LOG_HARIAN and l.ID_DEPOT=$depot and year(l.TANGGAL_LOG_HARIAN)=$tahun and j.id_jenis_penilaian=$koef");
+        return $query->result();
+    }
+    
+    public function editNilaiKoef($data, $id){
+        $this->db->where('ID_NILAI', $id);
+        $this->db->update('nilai', $data);
+    }
 
 
     /*     * DASHBOARD --- Renisa* */

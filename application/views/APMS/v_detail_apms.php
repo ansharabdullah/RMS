@@ -154,7 +154,17 @@ function DateToIndo($date) {
     <section class="wrapper">
             <?php foreach ($apms as $row) { ?>
             <!-- page start-->
-
+			<div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>apms/data_apms/"></i>Data APMS</a></li>
+                    <li class="active">Detail APMS</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
             <section class="panel" id="ShowProfile">
                 <header class="panel-heading">
                     <div class="col-lg-10">Detail APMS
@@ -171,25 +181,28 @@ function DateToIndo($date) {
                                 <aside class="profile-nav col-lg-12">
                                     <div class="row">
                                         <div class="bio-row">
-											<p><span>Nomor APMS </span>: <?php echo $row->NO_APMS; ?></p>
+											<p><span class="col col-lg-3">Nomor APMS </span>: <?php echo $row->NO_APMS; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nama Pengusaha </span>: <?php echo $row->NAMA_PENGUSAHA; ?></p>
+                                            <p><span class="col col-lg-3">Nama Pengusaha </span>: <?php echo $row->NAMA_PENGUSAHA; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Supply Point </span>: <?php echo $row->SUPPLY_POINT; ?></p>
+                                            <p><span class="col col-lg-3">Supply Point </span>: <?php echo $row->SUPPLY_POINT; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Alamat </span>: <?php echo $row->ALAMAT; ?></p>
+                                            <p><span class="col col-lg-3">Nama Transportir </span>: <?php echo $row->NAMA_TRANSPORTIR; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nama Transportir </span>: <?php echo $row->NAMA_TRANSPORTIR; ?></p>
+                                            <p><span class="col col-lg-3">Nomor Perjanjian </span>: <?php echo $row->NO_PERJANJIAN; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nomor Perjanjian </span>: <?php echo $row->NO_PERJANJIAN; ?></p>
+                                            <p><span class="col col-lg-3">Tarif Patra Niaga </span>: <?php echo $row->TARIF_PATRA_NIAGA; ?></p>
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Tarif Patra Niaga </span>: <?php echo $row->TARIF_PATRA_NIAGA; ?></p>
+										<div class="bio-row">
+                                            <p><span class="col col-lg-3">Alamat </span>: <?php echo $row->ALAMAT; ?></p>
+                                        </div>
+										<div class="bio-row">
+                                            <p><span class="col col-lg-3">Ship-To </span>: <?php echo $row->SHIP_TO; ?></p>
                                         </div>
                                     </div>
                                 </aside>
@@ -247,7 +260,13 @@ function DateToIndo($date) {
                                 <div class="bio-row">
                                     <label for="tarif" class="control-label col-lg-4">Tarif Patra Niaga</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->TARIF_PATRA_NIAGA?>" id="tarif" name="tarif"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->TARIF_PATRA_NIAGA?>" id="tarif" name="tarif"  type="number" required />
+                                    </div>
+                                </div>
+								<div class="bio-row">
+                                    <label for="ship_to" class="control-label col-lg-4">Ship-To</label>
+                                    <div class="col-lg-6">
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->SHIP_TO?>" id="ship_to" name="ship_to"  type="text" required />
                                     </div>
                                 </div>
                             </div>
