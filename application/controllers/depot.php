@@ -34,7 +34,7 @@ class Depot extends CI_Controller {
     
      public function grafik_apms_bulan($id_depot,$tahun) {
         $data['lv1'] = $id_depot + 1;
-        $data['lv2'] = 3;
+        $data['lv2'] = 1;
         $data2 = menu_oam();
         $data3['id_depot'] = $id_depot;
         $data3['depot'] = $this->m_depot->get_depot();

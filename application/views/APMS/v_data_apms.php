@@ -13,6 +13,16 @@
                 <strong>Error!</strong> <?php echo $error ?>
             </div>
         <?php } ?>
+		<div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li class="active">Data APMS</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <section class="panel">
             <header class="panel-heading">
                 Data APMS
@@ -47,10 +57,8 @@
                                 <th>No</th>
                                 <th>NO. APMS</th>
                                 <th>Nama Pengusaha</th>
-                                <th>Suppy Point</th>
                                 <th>Alamat</th>
                                 <th>Nama Transportir</th>
-                                <th>No. Perjanjian</th>
                                 <th>Tarif Patra Niaga</th>
                             </tr>
                         </thead>
@@ -62,10 +70,8 @@
                                     <td><?php echo $i; ?></td>
 									<td><a href="<?php echo base_url()?>apms/detail_apms/<?php echo $row->ID_APMS; ?>" style ="text-decoration: underline"><?php echo $row->NO_APMS; ?></a></td>
                                     <td><?php echo $row->NAMA_PENGUSAHA; ?></td>
-                                    <td><?php echo $row->SUPPLY_POINT; ?></td>
                                     <td><?php echo $row->ALAMAT; ?></td>
                                     <td><?php echo $row->NAMA_TRANSPORTIR; ?></td>
-                                    <td><?php echo $row->NO_PERJANJIAN; ?></td>
                                     <td><?php echo $row->TARIF_PATRA_NIAGA; ?></td>
                                  
                                 </tr>
@@ -131,6 +137,12 @@
                                             <label for="nama_transportir" class="control-label col-lg-2">Nama Transportir</label>
                                             <div class="col-lg-4">
                                                 <input class=" form-control input-sm m-bot15" id="nama_transportir" name="nama_transportir" minlength="2" type="text" required />
+                                            </div>
+                                        </div>
+										<div class="form-group ">
+                                            <label for="ship_to" class="control-label col-lg-2">Ship-To</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="ship_to" name="ship_to" minlength="2" type="text" required />
                                             </div>
                                         </div>
 										<div class="form-group ">

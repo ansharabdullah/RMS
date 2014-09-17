@@ -42,7 +42,7 @@
                     <span>APMS</span>
                 </a>
                 <ul class="sub">
-                    <li <?php if ($lv2 == 1 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Data APMS</a></li>
+                    <li <?php if ($lv2 == 1 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url()?>apms/data_apms" >Data APMS</a></li>
                     <li <?php if ($lv2 == 2 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Grafik</a></li>
                     <li <?php if ($lv2 == 3 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Presensi</a></li>
                     <li <?php if ($lv2 == 4 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Reminder</a></li>
