@@ -9,6 +9,21 @@
                         Grafik Bulanan Kinerja AMT
                     </header>
                     <div class="panel-body" >
+                        <?php
+                                $attr = array("class"=>"cmxform form-horizontal tasi-form");
+                               echo form_open("amt/ganti_tahun_grafik/",$attr);
+                            ?>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <input type="month" name="tahun" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                </div>
+
+                                <div class=" col-lg-2">
+                                    <input type="submit" class="btn btn-danger" value="Submit">
+                                </div>
+
+                            </div>
+                            <?php echo form_close()?>
                         <div class="btn-group pull-right">
                                 <button class="btn dropdown-toggle" data-toggle="dropdown">Filter AMT<i class="icon-angle-down"></i>
                                 </button>
@@ -120,7 +135,7 @@
                    point:{
                       events:{
                         click: function(event) {
-                                window.location = "<?php echo base_url() ?>amt/amt_depot_harian/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+ nomor_bulan[this.x]+"/<?php echo date('Y')?>";
+                                window.location = "<?php echo base_url() ?>amt/grafik_harian/"+ nomor_bulan[this.x]+"/<?php echo date('Y')?>";
                             }
                         }
                     }

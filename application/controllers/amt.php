@@ -37,15 +37,12 @@ class amt extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function detail($id_pegawai) {
+    public function detail($id_pegawai, $bulan, $tahun) {
         $data['lv1'] = 2;
         $data['lv2'] = 1;
         $data1['amt'] = $this->m_amt->detailAMT($id_pegawai);
 
         $depot = $this->session->userdata('id_depot');
-        $tahun = date('Y');
-        //$bulan = date('m');
-        $bulan = '01';
         $data1['grafik'] = $this->m_amt->get_kinerja_amt_hari($depot, $bulan, $tahun, $id_pegawai);
         $data1['tahun'] = $tahun;
         $data1['bulan'] = $bulan;
@@ -183,14 +180,15 @@ class amt extends CI_Controller {
         $config['file_name'] = $nip;
 
         $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('userfile')) {
-            $upload = $this->upload->data();
-            $ext = $upload['file_ext'];
-            $photo = $nip . $ext;
-            echo $photo;
-        } else {
-            echo "file upload failed";
+        if (isset($photo)) {
+            if ($this->upload->do_upload('userfile')) {
+                $upload = $this->upload->data();
+                $ext = $upload['file_ext'];
+                $photo = $nip . $ext;
+                echo $photo;
+            } else {
+                echo "file upload failed";
+            }
         }
 
         $id = $this->input->post('id', true);
@@ -207,7 +205,7 @@ class amt extends CI_Controller {
                 'alamat' => $this->input->post('alamat', true),
                 'tempat_lahir' => $this->input->post('tempat_lahir', true),
                 'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
-                'transportir_asal' => $this->input->post('transportir_asal', true),
+                'transportir_asal' => $this->input->post('transportir', true),
                 'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
                 'photo' => $photo
             );
@@ -224,7 +222,7 @@ class amt extends CI_Controller {
                 'alamat' => $this->input->post('alamat', true),
                 'tempat_lahir' => $this->input->post('tempat_lahir', true),
                 'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
-                'transportir_asal' => $this->input->post('transportir_asal', true),
+                'transportir_asal' => $this->input->post('transportir', true),
                 'tanggal_masuk' => $this->input->post('tanggal_masuk', true)
             );
         }
@@ -236,7 +234,7 @@ class amt extends CI_Controller {
             'keyword' => 'EDIT'
         );
         $this->m_log_sistem->insertLog($datalog);
-        $link = base_url() . "amt/detail/" . $id_pegawai;
+        $link = base_url() . "amt/detail/" . $id_pegawai . "/" . date('m') . "/" . date('Y');
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
@@ -470,7 +468,7 @@ class amt extends CI_Controller {
         $data2['tanggal'] = $tanggal;
         $data2['presensi'] = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
         $this->load->model("m_kinerja");
-        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensi($tanggal);
+        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensi($depot, $tanggal);
 
         $data3 = menu_ss();
         $this->load->view('layouts/header');
@@ -489,7 +487,7 @@ class amt extends CI_Controller {
         $data2['presensi'] = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
 
         $this->load->model("m_kinerja");
-        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensi($tanggal);
+        $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensi($depot, $tanggal);
         $data3 = menu_ss();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
@@ -519,29 +517,43 @@ class amt extends CI_Controller {
         //cek apakah jadwal dan kinerja sudah sesuai
         $jadwal = $this->m_penjadwalan->getPresensiAMT($depot, $tanggal);
         $this->load->model("m_kinerja");
-        $kinerja = $this->m_kinerja->getKinerjaPresensi($tanggal);
-        print_r($kinerja);
-        foreach ($jadwal as $row) {
-            foreach ($kinerja as $row2) {
-                if ($row->ID_PEGAWAI == $row2->ID_PEGAWAI) {
-                    echo " - -- masuk euyyyyyyyy";
-                    if ($row->KETERANGAN_MASUK != '') {
-                        //status log_harian.status_presensi_amt jadikan 1
-                        echo "masuk";
-                        $data = array(
-                            'status_presensi_amt' => 1
-                        );
+        $kinerja = $this->m_kinerja->getKinerjaPresensi($depot, $tanggal);
 
-                        $this->m_log_harian->updateStatusPresensiAMT($depot, $tanggal, $data);
-                    }
+        $jumlah_kosong = 0;
+        $jumlah_sama = 0;
+        //loop jadwal
+        $j = 0;
+        $i = 0;
+        $indexi = 0;
+        $indexj = 0;
+        $status = 0;
+        while ($status == 0 && $indexi < count($jadwal) && $indexj < count($kinerja)) {
+            $i = $indexi;
+            $j = $indexj;
+            if ($jadwal[$i]->ID_PEGAWAI == $kinerja[$j]->ID_PEGAWAI) {
+                $indexi++;
+                $indexj++;
+            } else {
+                if ($jadwal[$i]->STATUS_MASUK == "Hadir" && $jadwal[$i]->ALASAN == "") {
+                    $status = 1;
+                    $jumlah_kosong++;
                 }
+                $indexi++;
             }
+        }
+        //echo $ketemu;
+
+        if ($jumlah_kosong == 0) {
+            $data = array(
+                'status_presensi_amt' => 1
+            );
+            $this->m_log_harian->updateStatusPresensiAMT($depot, $tanggal, $data);
         }
 
 
         $link = base_url() . "amt/presensi_pertanggal/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        //echo 'window.location.href="' . $link . '"';
+        echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
 
@@ -800,10 +812,10 @@ class amt extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function amt_depot_harian($depot, $nama, $bulan, $tahun) {
+    public function grafik_harian($bulan, $tahun) {
         $data['lv1'] = 2;
         $data['lv2'] = 2;
-        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $depot = $this->session->userdata("id_depot");
         $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_hari($depot, $bulan, $tahun);
         $data2['id_depot'] = $depot;
         $data2['tahun'] = $tahun;
@@ -817,26 +829,31 @@ class amt extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function ganti_detail_amt($depot, $nama) {
+    public function ganti_detail_amt() {
         $tanggal = date("Y-m-d", strtotime($_POST['tanggal']));
-        redirect("amt/amt_depot_detail/" . $depot . "/" . $nama . "/" . $tanggal . "/");
+        redirect("amt/grafik_detail/" . $tanggal . "/");
     }
 
-    public function amt_depot_detail($depot, $nama, $tanggal) {
-        $data['lv1'] = $depot + 1;
-        $data['lv2'] = 1;
-        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
-        $data2['id_depot'] = $depot;
+    public function ganti_tahun_grafik() {
+        $tahun = $_POST['tahun'];
+        redirect("amt/grafik/" . $tahun . "/");
+    }
+
+    public function grafik_detail($tanggal) {
+        $data['lv1'] = 2;
+        $data['lv2'] = 2;
+        $depot = $this->session->userdata("id_depot");
         $data2['hari'] = date('d', strtotime($tanggal));
         $data2['bulan'] = date('F', strtotime($tanggal));
         $data2['tahun'] = date('Y', strtotime($tanggal));
         ;
         $data2['tanggal'] = date("d F Y", strtotime($tanggal));
         $data2['kinerja'] = $this->m_kinerja->get_kinerja_amt_detail($depot, $tanggal);
-        $data3 = menu_oam();
+
+        $data3 = menu_ss();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
-        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('layouts/navbar', $data);
         $this->load->view('amt/v_grafik_amt_detail', $data2);
         $this->load->view('layouts/footer');
     }
@@ -852,12 +869,11 @@ class amt extends CI_Controller {
         $tanggal = $_POST['bulan'];
         $bulan = date('n', strtotime($tanggal));
         $tahun = date('Y', strtotime($tanggal));
-        redirect('amt/amt_depot_harian/' . $depot . "/" . $nama . "/" . $bulan . "/" . $tahun);
+        redirect('amt/grafik_harian/' . $depot . "/" . $nama . "/" . $bulan . "/" . $tahun);
     }
 
-    public function grafik() {
+    public function grafik($tahun) {
         $depot = $this->session->userdata("id_depot");
-        $tahun = date('Y');
         $nama = 'TEGAL';
         $this->amt_depot($depot, $nama, $tahun);
 //        $data['lv1'] = 2;

@@ -26,6 +26,11 @@ class login extends CI_Controller {
         $login = $this->m_user->validate_login($email, $password);
         if ($login->num_rows() == 1) {
             $data = $login->result();
+            if($data[0]->PHOTO == ""){
+                $photo = "default.png";
+            }else{
+                $photo = $data[0]->PHOTO;
+            }
             $session_user = array(
                 'id_role_assignment' => $data[0]->ID_ROLE_ASSIGNMENT,
                 'id_pegawai' => $data[0]->ID_PEGAWAI,
@@ -34,7 +39,7 @@ class login extends CI_Controller {
                 'password' => $data[0]->PASSWORD,
                 'isLoggedIn' => true,
                 'nama_pegawai' => $data[0]->NAMA_PEGAWAI,
-                'photo' => $data[0]->PHOTO,
+                'photo' => $photo,
                 'id_depot' => $data[0]->ID_DEPOT,
                 'ip' => $_SERVER['REMOTE_ADDR']
             );

@@ -86,7 +86,7 @@
                                         $text = "<span class='label label-danger'>Absen</span>";
                                         foreach ($kinerja as $row2) {
                                             if ($row->ID_PEGAWAI == $row2->ID_PEGAWAI) {
-                                                $text = "Hadir";
+                                                $text = "<span class='label label-success'>Hadir</span>";
                                                 $hadir = "Hadir";
                                                 break;
                                             }
@@ -101,7 +101,7 @@
                                             <td><?php echo $row->KLASIFIKASI; ?></td>
                                             <td><?php
                                                 if ($row->STATUS_MASUK == "Hadir") {
-                                                    
+                                                    echo "<span class='label label-success'>";
                                                 } else {
                                                     echo "<span class='label label-danger'>";
                                                 }echo $row->STATUS_MASUK;
@@ -109,10 +109,10 @@
                                             <td><?php echo $text; ?></td>
                                             <td><?php echo $row->ALASAN ?></td>
                                             <td>
-                                                <?php if ($row->STATUS_MASUK != $text) { ?>
+                                                <?php if ($row->STATUS_MASUK != $hadir) { ?>
                                                     <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a>
                                                 <?php }else{ ?>
-                                                    <span class='label label-danger'>Ok</span>
+                                                    <span class='label label-success'>Ok</span>
                                                 <?php }?>
                                             </td>
                                         </tr>

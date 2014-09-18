@@ -2,15 +2,15 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        <?php if ($success ) { ?>
+		<?php if ($pesan==1) {  ?>
             <div class="alert alert-block alert-success fade in">
-                <strong>Berhasil!</strong> <?php echo $success ?>
+                <strong>Berhasil! </strong><?php echo $pesan_text;?> 
             </div>
         <?php } ?>
         
-        <?php if ($error) { ?>
+        <?php if ($pesan==2) { ?>
             <div class="alert alert-block alert-danger fade in">
-                <strong>Error!</strong> <?php echo $error ?>
+                <strong>Error!</strong> 
             </div>
         <?php } ?>
 		<div class="row">
@@ -95,7 +95,7 @@
                 <h4 class="modal-title">Tambah APMS</h4>
             </div>
             <div class=" form">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/tambah_apms/">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/data_apms/">
 
                     <div class="modal-body">
 
@@ -159,7 +159,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="reset" data-dismiss="modal" class="btn btn-default" value="Batal">
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                        <input class="btn btn-success" type="submit" name="simpan" value="Simpan"/>
                     </div>
                 </form>
             </div>
