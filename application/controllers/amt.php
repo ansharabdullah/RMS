@@ -169,7 +169,7 @@ class amt extends CI_Controller {
 
         $link = base_url() . "amt/detail/" . $id_pegawai;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        //echo 'window.location.href="' . $link . '"';
+        echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
 

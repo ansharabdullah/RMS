@@ -44,7 +44,7 @@
                 renderTo: 'grafik'
             },
             title: {
-                text: 'Grafik Mobil Tangki',
+                text: 'Grafik Kinerja Jumlah KM Mobil Tangki',
                 x: -20 //center
             },
             subtitle: {

@@ -106,7 +106,7 @@ function DateToIndo($date) {
                 </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
-                        <div class="adv-table editable-table ">
+                        <div class="adv-table editable-table " style="overflow-x: scroll">
                             <div class="clearfix">
                             </div>
                             <div class="space15"></div>
@@ -143,8 +143,8 @@ function DateToIndo($date) {
                                             <td><?php echo $row->R_BIOSOLAR ?></td>
                                             <td><?php echo $row->R_OWN_USE ?></td>
                                             <td>
-                                                <a data-placement="top" data-toggle="modal" href="#ModalRencana" onclick="setDetailRencana('<?php echo ($i) ?>')"><span class="btn btn-warning btn-xs tooltips" data-original-title="Rencana Edit"><i class="icon-pencil"></i></span></a>
-                                            </td>
+                                                <a onclick="cekRencana('<?php echo $row->ID_RENCANA ?>','<?php echo (DateToIndo($row->TANGGAL_LOG_HARIAN)) ?>','<?php echo $row->R_PREMIUM ?>','<?php echo $row->R_PERTAMAX ?>','<?php echo $row->R_PERTAMAXPLUS ?>','<?php echo $row->R_PERTAMINADEX ?>','<?php echo $row->R_SOLAR ?>','<?php echo $row->R_BIOSOLAR ?>','<?php echo $row->R_OWN_USE ?>')" data-placement="top" data-toggle="modal" href="#ModalRencana" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                        </td>
                                         </tr>
 
                                         <?php
@@ -197,20 +197,20 @@ function DateToIndo($date) {
                                         <div class="form-group "> 
                                             <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                                             <div class="col-lg-10">
-                                                <input type="date" class=" form-control input-sm m-bot15" id="tanggal_rencana" name="tanggal_rencana" value="" placeholder="Tanggal "required readonly/>
+                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="" placeholder="Tanggal "required readonly/>
                                             </div>
-                                            <input type="text" class=" form-control input-sm m-bot15" id="id_rencana" name="id_rencana" value="" required/>
-                                            <input type="text" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bln; ?>" required/>
+                                            <input type="hidden" class=" form-control input-sm m-bot15" id="id_rencana" name="id_rencana" value="" required/>
+                                            <input type="hidden" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bln; ?>" required/>
                                        
                                         </div>
                                         <div class="form-group">
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
+                                                <input class=" form-control input-sm m-bot15" id="r_premium" name="r_premium"  type="number" required />
                                             </div>
                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pertamax</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="pertamax" name="pertamax"  type="number" required />
+                                                <input class=" form-control input-sm m-bot15" id="r_pertamax" name="r_pertamax"  type="number" required />
                                             </div>
                                         </div>
                                           <div class="form-group">
@@ -248,7 +248,7 @@ function DateToIndo($date) {
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
-                            <input class="btn btn-success" type="submit" name="submit" value="Simpan"/>
+                            <input class="btn btn-success" type="submit" name="edit" value="Simpan"/>
                         </div>
                     </form>
                 </div>
@@ -291,10 +291,9 @@ function DateToIndo($date) {
    EditableTable.init();
       });
    
-function rencana(id_rencana, tanggal, r_premium, r_pertamax,r_pertamaxplus,r_pertaminadex,r_solar,r_biosolar,r_own_use) {
+function cekRencana(id_rencana, tanggal, r_premium, r_pertamax,r_pertamaxplus,r_pertaminadex,r_solar,r_biosolar,r_own_use) {
                                                         $("#id_rencana").val(id_rencana);
                                                         $("#tanggal_log_harian").val(tanggal);
-                                                        $("#tanggal_log_harian1").val(tanggal);
                                                         $("#r_pertamax").val(r_pertamax);
                                                         $("#r_premium").val(r_premium);
                                                         $("#r_pertamaxplus").val(r_pertamaxplus);

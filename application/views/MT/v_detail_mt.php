@@ -751,7 +751,7 @@ function DateToIndo($date) {
                                     <td><span class="label label-success">Hadir</span></td>
                                     
                                    <td>
-                                   <a onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo $row->tanggal_log_harian ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                   <a onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo (DateToIndo($row->tanggal_log_harian)) ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                            
                                 </tr>
                                 <?php
@@ -780,7 +780,7 @@ function DateToIndo($date) {
                                                         <td>-</td>
                                                         <td><span class="label label-danger">Absen</span></td>
                                                         <td>
-                                                            <a onclick="tambahKinerja('<?php echo $tanggal?>','<?php echo $id_mobil?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                            <a onclick="tambahKinerja('<?php echo date('d M Y',  strtotime($tanggal))?>','<?php echo $id_mobil?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -829,7 +829,7 @@ function DateToIndo($date) {
 
     <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="<?php echo base_url()?>mt/edit_kinerja/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/edit_kinerja/">
 
                 <div class="modal-content">
                     <div class="modal-header">
@@ -839,10 +839,9 @@ function DateToIndo($date) {
                     <div class="modal-body">
                         <div class="form-group ">
                             <label for="nip" class="control-label col-lg-2">Tanggal</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tanggal_kinerja" name="tanggal_kinerja" minlength="1" type="date" required readonly/>
+                            <div class="col-lg-10">
+                                <input class=" form-control input-sm m-bot15" id="tanggal_kinerja" name="tanggal_kinerja" type="text" required readonly/>
                                 
-                                <span class="help-block">Pilih Tanggal</span>
                             </div>
                                 <input class=" form-control input-sm m-bot15" id="id_kinerja" name="id_kinerja_mt" minlength="1" type="hidden" required readonly/>
                                 <input class=" form-control input-sm m-bot15" id="id_mobil" name="id_mobil" minlength="1" type="hidden" required />
@@ -852,11 +851,11 @@ function DateToIndo($date) {
                         <div class="form-group ">
                             <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="kl"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="kl" name="total_km_mt"  type="number" required />
                             </div>
                              <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="km" name="total_kl_mt"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
@@ -897,7 +896,7 @@ function DateToIndo($date) {
                              
                             <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="rit" name="rit"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="rit" name="ritase_mt"  type="number" required />
                             </div>
 
                         </div>
@@ -915,76 +914,80 @@ function DateToIndo($date) {
 
     <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="get" action="">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="POST" action="<?php echo base_url()?>mt/tambah_kinerja/">
+
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Atur Kinerja</h4>
                     </div>
-
                     <div class="modal-body">
-
                         <div class="form-group ">
                             <label for="nip" class="control-label col-lg-2">Tanggal</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal_kinerja"  type="date" required />
-                                <span class="help-block">Pilih Tanggal</span>
+                            <div class="col-lg-10">
+                                
+                                <input class=" form-control input-sm m-bot15" id="ttanggal_kinerja" name="tanggal_kinerja" size="16" type="text" value="" readonly/>
+                                
                             </div>
-                            <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
-                            </div>
+                                <input class=" form-control input-sm m-bot15" id="tid_kinerja" name="id_kinerja_mt" minlength="1" type="hidden" required readonly/>
+                                <input class=" form-control input-sm m-bot15" id="tid_mobil" name="id_mobil" minlength="1" type="hidden" required />
+                                 
 
                         </div>
                         <div class="form-group ">
                             <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="kl"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="mkl" name="total_kl_mt"  type="number" required />
                             </div>
-                            <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
+                             <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="rit" name="rit"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="mkm" name="total_km_mt"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="ou"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="mown_use" name="own_use"  type="number" required />
                             </div>
                             <label for="p" class="control-label col-lg-2">Premium (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="p" name="p"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="mpremium" name="premium"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="per" class="control-label col-lg-2">Pertamax (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="per" name="per"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="mpertamax" name="pertamax"  type="number" required />
                             </div>
                             <label for="pp" class="control-label col-lg-2">Pertamax Plus (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="pp" name="pp"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="mpertamax_plus" name="pertamax_plus"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="perdex" class="control-label col-lg-2">Pertamax Dex (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="perdex" name="perdex"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="mpertamina_dex" name="pertamina_dex"  type="number" required />
                             </div>
                             <label for="solar" class="control-label col-lg-2">Solar (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="solar" name="solar"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="msolar" name="solar"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="bio" class="control-label col-lg-2">Bio Solar (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="bio" name="bio"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="mbio_solar" name="bio_solar"  type="number" required />
+                            </div>
+                             
+                            <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="mrit" name="ritase_mt"  type="number" required />
                             </div>
 
                         </div>
-                    </div>
 
+                    </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                         <input class="btn btn-success" type="submit" value="Simpan"/>
@@ -1087,6 +1090,21 @@ function DateToIndo($date) {
                                                 $("#pertamina_dex").val(pertamina_dex);
                                                 $("#solar").val(solar);
                                                 $("#bio_solar").val(bio_solar);
+                                            }
+    function tambahKinerja(tanggal,id_mobil) {
+                                                $("#ttanggal_kinerja").val(tanggal);
+                                                $("#tid_mobil").val(id_mobil);
+                                                $("#tid_kinerja").val("");
+                                                $("#mkm").val("");
+                                                $("#mkl").val("");
+                                                $("#mrit").val("ritase");
+                                                $("#mown_use").val("");
+                                                $("#mpremium").val("");
+                                                $("#mpertamax").val("");
+                                                $("#mpertamax_plus").val("");
+                                                $("#mpertamina_dex").val("");
+                                                $("#msolar").val("");
+                                                $("#mbio_solar").val("");
                                             }
     
      

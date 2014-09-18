@@ -49,16 +49,25 @@ class Mt extends CI_Controller {
             $bulan = date("m", strtotime($tanggal));
             $tahun = date("Y", strtotime($tanggal));
             
-            $r_premium = $this->input->post('premium');
-            $r_pertamax = $this->input->post('pertamax');
-            $r_pertamaxplus = $this->input->post('pertamaxplus');
-            $r_pertaminadex = $this->input->post('pertaminadex');
-            $r_solar = $this->input->post('solar');
-            $r_biosolar = $this->input->post('biosolar');
-            $r_own_use = $this->input->post('own_use');
+            $r_premium = $this->input->post('r_premium');
+            $r_pertamax = $this->input->post('r_pertamax');
+            $r_pertamaxplus = $this->input->post('r_pertamaxplus');
+            $r_pertaminadex = $this->input->post('r_pertaminadex');
+            $r_solar = $this->input->post('r_solar');
+            $r_biosolar = $this->input->post('r_biosolar');
+            $r_own_use = $this->input->post('r_own_use');
 
-            $this->m_rencana_mt->editRencana($id_rencana, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
-
+            $data = array(
+                    'r_premium' => $r_premium,
+                    'r_own_use' => $r_own_use,
+                    'r_pertamax' => $r_pertamax,
+                    'r_pertamaxplus' => $r_pertamaxplus,
+                    'r_pertaminadex' => $r_pertaminadex,
+                    'r_solar' => $r_solar,
+                    'r_biosolar' => $r_biosolar
+                );
+                $this->m_rencana_mt->editRencana($data, $id_rencana);
+                
             $data2['submit'] = true;
             $data2['edit'] = true;
         } else if ($this->input->post('hapus')) {
@@ -115,75 +124,6 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_rencana',$data2);
         $this->footer();
     }
-    
-      public function edit_rencana() {
-        if (!$this->input->post('submit')) {
-            redirect('mt/rencana');
-        } else {
-            $depot = $this->session->userdata("id_depot");
-            
-            $id_rencana = $this->input->post('id_rencana');
-            $r_premium = $this->input->post('premium');
-            $r_pertamax = $this->input->post('pertamax');
-            $r_pertamaxplus = $this->input->post('pertamaxplus');
-            $r_pertaminadex = $this->input->post('pertaminadex');
-            $r_solar = $this->input->post('solar');
-            $r_biosolar = $this->input->post('biosolar');
-            $r_own_use = $this->input->post('own_use');
-
-            $this->m_rencana_mt->editRencana($id_rencana, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
-
-            $data2['bln'] = $this->input->post('bln');
-
-            $tanggal = date("d-m-Y", strtotime($this->input->post('bln')));
-            $bulan = date("m", strtotime($this->input->post('bln')));
-            $tahun = date("Y", strtotime($this->input->post('bln')));
-
-            $data2['tahun'] = $tahun;
-            if ($bulan == 1) {
-                $data2['bulan'] = 'Januari';
-            } else if ($bulan == 2) {
-                $data2['bulan'] = 'Februari';
-            } else if ($bulan == 3) {
-                $data2['bulan'] = 'Maret';
-            } else if ($bulan == 4) {
-                $data2['bulan'] = 'April';
-            } else if ($bulan == 5) {
-                $data2['bulan'] = 'Mei';
-            } else if ($bulan == 6) {
-                $data2['bulan'] = 'Juni';
-            } else if ($bulan == 7) {
-                $data2['bulan'] = 'Juli';
-            } else if ($bulan == 8) {
-                $data2['bulan'] = 'Agustus';
-            } else if ($bulan == 9) {
-                $data2['bulan'] = 'September';
-            } else if ($bulan == 10) {
-                $data2['bulan'] = 'Oktober';
-            } else if ($bulan == 11) {
-                $data2['bulan'] = 'November';
-            } else if ($bulan == 12) {
-                $data2['bulan'] = 'Desember';
-            }
-
-            $data2['status_rencana'] = $this->m_rencana_mt->cekRencana($depot, $tahun, $bulan);
-            if ($data2['status_rencana'] == date('t', strtotime($tanggal))) {
-                $data2['rencana'] = $this->m_rencana_mt->getRencana($depot, $tahun, $bulan);
-            }
-
-            $data2['submit'] = true;
-            $data2['hapus'] = false;
-            $data2['edit'] = true;
-            
-            $data['lv1'] = 3;
-            $data['lv2'] = 5;
-            $this->header($data);
-            $this->load->view('mt/v_rencana',$data2);
-            $this->footer();
-         }
-            
-    }
-    
     
     
     public function rencana_import() {
@@ -424,9 +364,12 @@ class Mt extends CI_Controller {
     }
     
     public function edit_kinerja() {
+        
         $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
         $id_mobil = $this->input->post('id_mobil', true);
-        $data['id_mobil'] = $id_mobil;
+        
+        $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+        $bulan = date('n',  strtotime($this->input->post('tanggal_kinerja', true)));
         
         $km = $this->input->post('total_km_mt', true);
         $kl = $this->input->post('total_kl_mt', true);
@@ -453,7 +396,55 @@ class Mt extends CI_Controller {
         );
         $this->m_kinerja->editKinerjaMT($data, $id_kinerja_mt);
 
-        $link = base_url() . "mt/detail_mt/" . $id_mobil;
+        $link = base_url() . "mt/detail_mt/" . $id_mobil."/".$bulan."/".$tahun;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+    public function tambah_kinerja() {
+        $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
+        $id_mobil = $this->input->post('id_mobil', true);
+
+       
+        $depot = $this->session->userdata('id_depot');
+        $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+        $bulan = date('n',  strtotime($this->input->post('tanggal_kinerja', true)));
+       
+
+        $km = $this->input->post('total_km_mt', true);
+        $kl = $this->input->post('total_kl_mt', true);
+        $ritase = $this->input->post('ritase_mt', true);
+        $own_use = $this->input->post('own_use', true);
+        $premium = $this->input->post('premium', true);
+        $pertamax = $this->input->post('pertamax', true);
+        $pertamax_plus = $this->input->post('pertamax_plus', true);
+        $pertamina_dex = $this->input->post('pertamina_dex', true);
+        $solar = $this->input->post('solar', true);
+        $bio_solar = $this->input->post('bio_solar', true);
+
+        $tanggal = date ("Y-m-d",strtotime($this->input->post('tanggal_kinerja', true)));
+        $a = $this->m_log_harian->getIdLogHarianTanggal($tanggal, $depot);
+       
+        $id_log_harian = $a[0]->ID_LOG_HARIAN;
+        $data = array(
+            'id_log_harian' => $id_log_harian,
+            'id_mobil' => $id_mobil,
+            'premium' => $premium,
+            'total_km_mt' => $km,
+            'total_kl_mt' => $kl,
+            'own_use' => $own_use,
+            'ritase_mt' => $ritase,
+            'pertamax' => $pertamax,
+            'pertamax_plus' => $pertamax_plus,
+            'pertamina_dex' => $pertamina_dex,
+            'solar' => $solar,
+            'bio_solar' => $bio_solar
+        );
+        
+        $this->m_kinerja->insertKinerjaMT($data, $id_kinerja_mt);
+
+        $link = base_url() . "mt/detail_mt/" . $id_mobil."/".$bulan."/".$tahun;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';

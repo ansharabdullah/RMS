@@ -130,7 +130,7 @@ function DateToIndo($date) {
                                            <td><?php if ($row->STATUS_MASUK != $text) { ?>
                                                     <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a>
                                                 <?php }else{ ?>
-                                                    <span class='label label-danger'>Ok</span>
+                                                    <span class='label label-success'>Ok</span>
                                                 <?php }?> </td></tr>
                                         <?php
                                         $i++;

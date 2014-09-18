@@ -11,8 +11,9 @@ class m_rencana_mt extends CI_Model {
         return $data->result();
     }
 
-    public function editRencana($id_rencana, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use) {
-        $query = $this->db->query("update rencana set R_PREMIUM = '$r_premium',R_PERTAMAX='$r_pertamax', R_PERTAMAXPLUS = '$r_pertamaxplus',R_PERTAMINADEX = '$r_pertaminadex',R_SOLAR='$r_solar', R_BIOSOLAR = '$r_biosolar', R_OWN_USE = '$r_own_use' where ID_RENCANA='$id_rencana'");
+   public function editRencana($data, $id) {
+        $this->db->where('id_rencana', $id);
+        $this->db->update('rencana', $data);
     }
     
     function updateRencana($data, $id) {
