@@ -74,15 +74,19 @@
                     <li <?php if ($lv2 == 6 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/tahunan">Tahunan</a></li>
                 </ul>
             </li>
-            
             <li>
-                <a href="<?php echo base_url() ?>log"  <?php if ($lv1 == 8) echo "class='active'" ?>>
+                <a  href="<?php echo base_url()?>presentasi" <?php if ($lv1 == 8) echo "class='active'" ?>>
+                    <i class="icon-bar-chart"></i><span>Presentasi Triwulan</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo base_url() ?>log"  <?php if ($lv1 == 9) echo "class='active'" ?>>
                     <i class="icon-list-ul"></i>
                     <span>Log Sistem</span>
                 </a>
             </li>
             <li>
-                <a href="<?php echo base_url() ?>pengaturan"  <?php if ($lv1 == 9) echo "class='active'" ?>>
+                <a href="<?php echo base_url() ?>pengaturan"  <?php if ($lv1 == 10) echo "class='active'" ?>>
                     <i class="icon-group"></i>
                     <span>Pengaturan User</span>
                 </a>

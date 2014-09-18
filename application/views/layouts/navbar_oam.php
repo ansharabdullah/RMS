@@ -21,7 +21,7 @@
                         <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/amt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>/<?php echo date("Y")?>">AMT</a></li>
                         <li <?php if ($lv2 == 2 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/mt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>/<?php echo date("Y")?>">MT</a></li>
                         <li <?php if ($lv2 == 3 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/grafik_bulan/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo date('Y')?>" >KPI Operasional</a></li>
-                        <li <?php if ($lv2 == 4 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/kpi_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>" >KPI Internal</a></li>
+                        <li <?php if ($lv2 == 4 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/kpi_internal/<?php echo $depot[$i]->ID_DEPOT ?>">KPI Internal</a></li>
                         <li <?php if ($lv2 == 5 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/apms_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo $depot[$i]->NAMA_DEPOT?>/<?php echo date("Y")?>" >APMS</a></li>
                     </ul>
                 </li>

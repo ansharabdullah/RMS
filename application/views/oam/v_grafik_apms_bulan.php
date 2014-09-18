@@ -38,18 +38,10 @@
                     point:{
                         events:{
                             click: function(event) {
-                               if(activeIndex < 3)
+                               if(activeIndex == 2)
                                 {
-                                    var title;
-                                    if(activeIndex == 1)
-                                    {
-                                        title = "ms2";
-                                    }
-                                    else
-                                    {
-                                        title = "volume";
-                                    }
-                                    window.location = "<?php echo base_url() ?>depot/grafik_hari/"+title+"/<?php echo $id_depot?>/"+nomor_bulan[this.x]+"/<?php echo $tahun?>";
+                                    window.location = "<?php echo base_url() ?>depot/apms_depot_harian/<?php echo $id_depot?>/<?php echo $kpi_bulan[0]->nama_depot?>/"+nomor_bulan[this.x]+"/<?php echo $tahun?>";
+                                
                                 }
                             }
                         }

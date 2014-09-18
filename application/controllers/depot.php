@@ -33,7 +33,7 @@ class Depot extends CI_Controller {
     }
     
      public function grafik_apms_bulan($id_depot,$tahun) {
-        $data['lv1'] = $id_depot + 1;
+        $data['lv1'] = 1;
         $data['lv2'] = 1;
         $data2 = menu_oam();
         $data3['id_depot'] = $id_depot;
@@ -317,6 +317,37 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/menu',$data3);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_depot_apms_detail_harian',$data2);
+        $this->load->view('layouts/footer');
+    }
+    
+     public function kpi_internal($depot) {
+        $this->load->model('m_laporan');
+        $tahun = date('Y');
+        $data2['edit_kpi'] = false;
+        $data2['depot'] = $depot;
+        if ($this->input->post('cek')) {
+            $tahun = $this->input->post('tahun');
+        }
+        else
+        {
+            
+            $tahun = date('Y');
+        }
+
+        $data2['tahun_kpi'] = $tahun;
+        $data2['error_kpi'] = $this->m_laporan->cetKPIInternal($tahun, $depot);
+        if ($data2['error_kpi'] >= 365) {
+            $data2['data_kpi'] = $this->m_laporan->getKPIInternal($tahun, $depot);
+        }
+        $data2['nama_depot'] = $this->m_depot->get_nama_depot($depot);
+        $data['lv1'] = $depot + 1;
+        $data['lv2'] = 4;
+        $data3 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data3);
+        $this->navbar($data['lv1'], $data['lv2']);
+
+        $this->load->view('oam/v_kpi_internal_depot', $data2);
         $this->load->view('layouts/footer');
     }
     

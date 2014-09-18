@@ -15,6 +15,13 @@ class m_depot extends CI_Model {
         return $query->num_rows();
         
     }
+    
+    public function get_nama_depot($id)
+    {
+        $query = $this->db->query("select * from depot where ID_DEPOT = $id");
+        $data = $query->result();
+        return $data[0]->NAMA_DEPOT;
+    }
 
 }
 

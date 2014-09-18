@@ -1,53 +1,49 @@
 <script type="text/javascript">
     $(function () {
         $('#grafik').highcharts({
-            chart: {
-                type: 'column'
+            chart:{
+                
+                type:'line',
+                zoomType:'xy'
             },
             title: {
-                text: 'Pencapaian Ritase'
+                text: 'Breakdown Occurance MT',
+                x: -20 //center
             },
             subtitle: {
-                text: 'Tahun 2014'
+                text: 'Tahun 2014',
+                x: -20
             },
             xAxis: {
-                categories: [
-                    'Januari',
-                    'Februari',
-                    'Maret'
-                ]
+                categories: ['Januari','Februari','Maret']
             },
             yAxis: {
-                min: 0,
                 title: {
                     text: ''
-                }
+                },
+                plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
             },
             tooltip: {
-                shared: true,
-                useHTML: true
+                valueSuffix: ''
             },
-            plotOptions: {
-                column: {
-                    borderWidth: 0
-                }
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
             },
             series: [{
-                name: 'Baturaja',
-                data: [2.47,2.20,2.68],
-                color:'#FF002B'
-
-            }, {
-                name: 'Lahat',
-                data: [4.97,2.92,1.87],
-                color:'#2C88D4'
-
-            }, {
-                name: 'Panjang',
-                data: [1.84,1.84,1.94],
-                color:'#23C906'
-
-            }]
+                    name: '<?php echo $nama_depot?>',
+                    data: [0,0,0]
+                },{
+                    name: 'Target',
+                    data: [3,3,3],
+                    color: 'red'
+                }]
         });
     });
 </script>
@@ -60,17 +56,8 @@
                 <a href="<?php echo base_url()?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
             </header>
             <div class="panel-body">
-                <div class="row">
-                   
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <div class="panel-body">
-                                <div id="grafik"></div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <br/><br/>
+                <div id="grafik"></div>
+                <br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -79,9 +66,7 @@
                                     <th style="display: none;"></th>
                                     <th>No.</th>
                                     <th>Bulan</th>
-                                    <th>Panjang</th>
-                                    <th>Lahat</th>
-                                    <th>Baturaja</th>
+                                    <th>Breakdown Occurance MT</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,25 +74,19 @@
                                     <td style="display: none;"></td>
                                     <td>1</td>
                                     <td>Januari</td>
-                                    <td>2,47</td>
-                                    <td>2,20</td>
-                                    <td>2,68</td>
+                                    <td>0</td>
                                 </tr> 
                                 <tr>
                                     <td style="display: none;"></td>
                                     <td>2</td>
                                     <td>Februari</td>
-                                    <td>4,97</td>
-                                    <td>2,92</td>
-                                    <td>1,87</td>
+                                    <td>0</td>
                                 </tr>
                                 <tr>
                                     <td style="display: none;"></td>
                                     <td>3</td>
                                     <td>Maret</td>
-                                    <td>1,84</td>
-                                    <td>1,84</td>
-                                    <td>1,94</td>
+                                    <td>0</td>
                                 </tr>
                             </tbody>
                         </table>

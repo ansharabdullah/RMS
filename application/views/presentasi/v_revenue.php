@@ -5,16 +5,55 @@
                 type: 'column'
             },
             title: {
-                text: 'Pencapaian Ritase'
+                text: 'Revenue'
             },
             subtitle: {
                 text: 'Tahun 2014'
             },
             xAxis: {
                 categories: [
-                    'Januari',
-                    'Februari',
-                    'Maret'
+                    'OAM RKAP',
+                    'Fuel Ritel Realisasi'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            tooltip: {
+               
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                    name: 'Revenue',
+                    data: [195352,459479]
+
+                }]
+        });
+    });
+    $(function () {
+        $('#grafik2').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Revenue'
+            },
+            subtitle: {
+                text: 'Tahun 2014'
+            },
+            xAxis: {
+                categories: [
+                    '<?php echo $nama_depot?>'
                 ]
             },
             yAxis: {
@@ -29,22 +68,23 @@
             },
             plotOptions: {
                 column: {
+                    pointPadding: 0.2,
                     borderWidth: 0
                 }
             },
             series: [{
-                name: 'Baturaja',
-                data: [2.47,2.20,2.68],
+                name: 'Januari',
+                data: [49132],
                 color:'#FF002B'
 
             }, {
-                name: 'Lahat',
-                data: [4.97,2.92,1.87],
+                name: 'Februari',
+                data: [46053],
                 color:'#2C88D4'
 
             }, {
-                name: 'Panjang',
-                data: [1.84,1.84,1.94],
+                name: 'Maret',
+                data: [51273],
                 color:'#23C906'
 
             }]
@@ -62,15 +102,14 @@
             <div class="panel-body">
                 <div class="row">
                    
-                    <div class="col-lg-12">
-                        <section class="panel">
-                            <div class="panel-body">
+                    <div class="col-lg-4">
                                 <div id="grafik"></div>
-                            </div>
-                        </section>
+                    </div>
+                    <div class="col-lg-8">
+                                <div id="grafik2"></div>
                     </div>
                 </div>
-                <br/><br/>
+                <br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -79,9 +118,7 @@
                                     <th style="display: none;"></th>
                                     <th>No.</th>
                                     <th>Bulan</th>
-                                    <th>Panjang</th>
-                                    <th>Lahat</th>
-                                    <th>Baturaja</th>
+                                    <th>Revenue</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,25 +126,19 @@
                                     <td style="display: none;"></td>
                                     <td>1</td>
                                     <td>Januari</td>
-                                    <td>2,47</td>
-                                    <td>2,20</td>
-                                    <td>2,68</td>
-                                </tr> 
+                                    <td>49.132</td>
+                                </tr>
                                 <tr>
                                     <td style="display: none;"></td>
                                     <td>2</td>
                                     <td>Februari</td>
-                                    <td>4,97</td>
-                                    <td>2,92</td>
-                                    <td>1,87</td>
+                                    <td>46.053</td>
                                 </tr>
                                 <tr>
                                     <td style="display: none;"></td>
                                     <td>3</td>
                                     <td>Maret</td>
-                                    <td>1,84</td>
-                                    <td>1,84</td>
-                                    <td>1,94</td>
+                                    <td>51.273</td>
                                 </tr>
                             </tbody>
                         </table>

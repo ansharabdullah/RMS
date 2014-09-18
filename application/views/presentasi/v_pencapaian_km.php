@@ -5,7 +5,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Pencapaian Ritase'
+                text: 'Pencapaian KM'
             },
             subtitle: {
                 text: 'Tahun 2014'
@@ -33,19 +33,9 @@
                 }
             },
             series: [{
-                name: 'Baturaja',
-                data: [2.47,2.20,2.68],
+                name: '<?php echo $nama_depot?>',
+                data: [185.07,190.55,214.35],
                 color:'#FF002B'
-
-            }, {
-                name: 'Lahat',
-                data: [4.97,2.92,1.87],
-                color:'#2C88D4'
-
-            }, {
-                name: 'Panjang',
-                data: [1.84,1.84,1.94],
-                color:'#23C906'
 
             }]
         });
@@ -63,14 +53,10 @@
                 <div class="row">
                    
                     <div class="col-lg-12">
-                        <section class="panel">
-                            <div class="panel-body">
                                 <div id="grafik"></div>
-                            </div>
-                        </section>
                     </div>
                 </div>
-                <br/><br/>
+                <br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -79,9 +65,7 @@
                                     <th style="display: none;"></th>
                                     <th>No.</th>
                                     <th>Bulan</th>
-                                    <th>Panjang</th>
-                                    <th>Lahat</th>
-                                    <th>Baturaja</th>
+                                    <th>Pencapaian KM</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,25 +73,19 @@
                                     <td style="display: none;"></td>
                                     <td>1</td>
                                     <td>Januari</td>
-                                    <td>2,47</td>
-                                    <td>2,20</td>
-                                    <td>2,68</td>
+                                    <td>185,07</td>
                                 </tr> 
                                 <tr>
                                     <td style="display: none;"></td>
                                     <td>2</td>
                                     <td>Februari</td>
-                                    <td>4,97</td>
-                                    <td>2,92</td>
-                                    <td>1,87</td>
+                                    <td>238,66</td>
                                 </tr>
                                 <tr>
                                     <td style="display: none;"></td>
                                     <td>3</td>
                                     <td>Maret</td>
-                                    <td>1,84</td>
-                                    <td>1,84</td>
-                                    <td>1,94</td>
+                                    <td>305,14</td>
                                 </tr>
                             </tbody>
                         </table>

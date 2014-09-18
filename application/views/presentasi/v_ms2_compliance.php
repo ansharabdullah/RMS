@@ -2,7 +2,7 @@
     var arrBulan = new Array();
     var arrDepot = new Array();
     var series = new Array();
-    var data;
+    var data = new Array();
     <?php
         foreach($bulan as $b)
         {
@@ -10,30 +10,12 @@
             arrBulan.push("<?php echo $b?>");
        <?php     
         }
-        foreach($depot as $d)
-        {
-            ?>
-                data = new Array();
-            <?php
-             foreach($ms2 as $m)
-             {
-                 if($m->ID_DEPOT == $d->ID_DEPOT)
-                 {
-                     ?>
-                         data.push(<?php echo $m->nilai?>);
-                     <?php
-                     
-                 }
-             }
-         ?>
-             series.push({
-                 name:'<?php echo $d->NAMA_DEPOT?>',
-                 data: data
-             });
-             arrDepot.push("<?php echo $d->NAMA_DEPOT?>");
-        <?php   
-            
-        }
+        foreach($ms2 as $m)
+         {
+             ?>
+                 data.push(<?php echo $m->nilai?>);
+             <?php
+         }
     ?>
     $(function () {
         $('#grafik').highcharts({
@@ -71,7 +53,14 @@
                 verticalAlign: 'middle',
                 borderWidth: 0
             },
-            series: series
+            series: [{
+                    name:'Nilai',
+                    data:data
+            },   {
+                    name: 'target',
+                    data: [100,100,100],
+                    color: 'red'
+                }]
         });
     });
 </script>
@@ -85,7 +74,7 @@
             </header>
             <div class="panel-body">
                 <div id="grafik"></div>
-                <br/><br/>
+                <br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -93,39 +82,26 @@
                                 <tr>
                                     <th style="display: none;"></th>
                                     <th>No.</th>
-                                    <th>Wilayah</th>
-                                    <th><?php echo $bulan[0]?></th>
-                                    <th><?php echo $bulan[1]?></th>
-                                    <th><?php echo $bulan[2]?></th>
+                                    <th>Bulan</th>
+                                    <th>Nilai</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                    $i = 1;
-                                    foreach($depot as $d)
-                                    {
-                                        ?>
-                                         <tr>
-                                            <td style="display: none;"></td>
-                                            <td><?php echo $i?></td>
-                                            <td><?php echo $d->NAMA_DEPOT?></td>
-                                            <?php
-                                                foreach($ms2 as $m)
-                                                {
-                                                    if($m->ID_DEPOT == $d->ID_DEPOT)
-                                                    {
-                                                        ?>
-                                                            <td><?php echo $m->nilai?></td>
-                                                        <?php
-                                                        
-                                                    }
-                                                    
-                                                }
-                                            ?>
-                                        </tr>
-                                        <?php
-                                        $i++;
-                                    }
+                                $i = 1;
+                                foreach($ms2 as $m)
+                                {
+                                ?>
+                                 <tr>
+                                    <td style="display: none;"></td>
+                                    <td><?php echo $i?></td>
+                                    <td><?php echo $m->nama_bulan?></td>
+                                    <td><?php echo $m->nilai?></td>
+
+                                 </tr>
+                                <?php
+                                $i++;
+                                }
                                 ?>
                             </tbody>
                         </table>
