@@ -9,14 +9,15 @@
         }
         $("#blnPilih").val(j);
         settingBulan();
-
+        
+        /*
         $("#commentForm").submit(function(e) {
             if ($("#commentForm").valid())
             {
                 $("#laporan_harian").modal('show');
             }
             e.preventDefault();
-        });
+        });*/
     });
 
     function settingBulan() {
@@ -99,14 +100,14 @@
                 Laporan Harian
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" action="#" role="form" id="commentForm" method="post">
+                <form class="cmxform form-horizontal tasi-form" action="<?php echo base_url(); ?>laporan/preview_harian" role="form" id="commentForm" method="post">
                     <div class="form-group" id="tanggal">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                         <div class="col-lg-10">
-                            <input type="month" name="tanggal" required="required" id="blnPilih" onchange="settingBulan()" class="form-control"/>
+                            <input type="month" name="bulan" required="required" id="blnPilih" onchange="settingBulan()" class="form-control"/>
                         </div>
                     </div>
-
+                    
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>
                             <tr>
@@ -226,7 +227,7 @@
                     
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
-                            <input type="submit" style="float: right;" class="btn btn-warning" value="Cek">
+                            <input type="submit" name ="cek" style="float: right;" class="btn btn-warning" value="Cek">
                         </div>
                     </div>                    
                 </form>
@@ -236,7 +237,7 @@
         <!-- page end-->
     </section>
 </section>
-
+<!--
 <div class="modal fade" id="laporan_harian" role="modal" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width:90%">
         <div class="modal-content">
@@ -244,4 +245,4 @@
         </div>
     </div>
 </div>
-
+-->

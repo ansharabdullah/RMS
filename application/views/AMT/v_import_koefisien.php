@@ -4,7 +4,7 @@
         <section class="panel" id="cekkoefisien">        
             <header class="panel-heading">
                 Tambah Koefisien Performansi
-                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" href="<?php echo base_url()?>downloads/format_oscrms_koefisien.xlsx"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" id="tambahJadwal">
                 <div class="clearfix" >

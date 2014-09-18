@@ -39,9 +39,9 @@ foreach ($grafik as $ka) {
 }
 ?>
     $(function() {
-        amt = new Highcharts.Chart({ 
+        amt = new Highcharts.Chart({
             chart: {
-                renderTo:'grafik'
+                renderTo: 'grafik'
             },
             title: {
                 text: 'Grafik Kinerja Jumlah KM',
@@ -84,6 +84,7 @@ foreach ($grafik as $ka) {
     function filterAmt(title)
     {
         amt.setTitle({text: 'Grafik Kinerja Jumlah ' + title});
+        amt.setName(title);
         if (title == "KM") {
             amt.series[0].setData(total_km);
         } else if (title == "KL") {
@@ -123,7 +124,11 @@ foreach ($grafik as $ka) {
                     <section class="panel">
                         <div class="user-heading round">
                             <a href="#">
-                                <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO; ?>" alt="<?php echo $row->NAMA_PEGAWAI ?>">
+                                <?php if ($row->PHOTO != "") { ?>
+                                    <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO; ?>" alt="<?php echo $row->NAMA_PEGAWAI ?>">
+                                <?php } else { ?>
+                                    <img src="<?php echo base_url() ?>assets/img/photo/default.png" alt="<?php echo $row->NAMA_PEGAWAI ?>">
+                                <?php } ?>
                             </a>
                             <h1><?php echo $row->NAMA_PEGAWAI; ?></h1>
                             <p></p>
@@ -173,14 +178,14 @@ foreach ($grafik as $ka) {
                                     <p><span>Tempat Lahir </span>: <?php echo $row->TEMPAT_LAHIR ?></p>
                                 </div>
                                 <div class="bio-row">
-                                    <p><span>Tanggal Lahir </span>: <?php echo $row->TANGGAL_LAHIR ?></p>
+                                    <p><span>Tanggal Lahir </span>: <?php echo date("d-M-Y", strtotime($row->TANGGAL_LAHIR)) ?></p>
                                 </div>
 
                                 <div class="bio-row">
                                     <p><span>Transportir Asal </span>: <?php echo $row->TRANSPORTIR_ASAL ?></p>
                                 </div>
                                 <div class="bio-row">
-                                    <p><span>Tanggal Masuk </span>: <?php echo $row->TANGGAL_MASUK ?></p>
+                                    <p><span>Tanggal Masuk </span>: <?php echo date("d-M-Y", strtotime($row->TANGGAL_MASUK)) ?></p>
                                 </div>
 
                                 <div class="bio-row">
@@ -276,13 +281,13 @@ foreach ($grafik as $ka) {
                                     <div class="bio-row">
                                         <label for="transportir_asal" class="control-label col-lg-4">Transportir Asal</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir" minlength="2" type="text" value="<?php echo $row->TRANSPORTIR_ASAL ?>"/>
+                                            <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir" type="text" value="<?php echo $row->TRANSPORTIR_ASAL ?>"/>
                                         </div>
                                     </div>
                                     <div class="bio-row">
                                         <label for="tanggal_masuk" class="control-label col-lg-4">Tanggal Masuk</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tglmasuk" type="date" size="16" type="text" value="<?php echo $row->TANGGAL_MASUK ?>"/>
+                                            <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tanggal_masuk" type="date" size="16" type="text" value="<?php echo $row->TANGGAL_MASUK ?>"/>
                                             <span class="help-block">Pilih tanggal</span>
                                         </div>
                                     </div>
@@ -349,13 +354,13 @@ foreach ($grafik as $ka) {
                             <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
                             <?php
                             $attr = array("class" => "cmxform form-horizontal tasi-form");
-                            echo form_open("amt/detail_hari/", $attr);
+                            echo form_open("amt/detail_hari/$id_pegawai/", $attr);
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">
                                     <input type="month" name="bulan" data-mask="9999" placeholder="Bulan" required="required" id="tahunLaporan"  class="form-control"/>
                                 </div>
-                                <input type="hidden" name="id_pegawai" value="<?php echo $id_pegawai?>"/>
+                                <input type="hidden" name="id_pegawai" value="<?php echo $id_pegawai ?>"/>
 
                                 <div class=" col-lg-2">
                                     <input type="submit" class="btn btn-danger" value="Submit">
@@ -432,6 +437,7 @@ foreach ($grafik as $ka) {
                                                 }
                                             }
 
+                                            $status = 0;
                                             for ($i = 1; $i <= $jumlah; $i++) {
                                                 foreach ($grafik as $row) {
                                                     $status = 0;
@@ -447,16 +453,16 @@ foreach ($grafik as $ka) {
                                                     <tr class="">
                                                         <td style="display:none;"></td>
                                                         <td><?php echo $i ?></td>
-                                                        <td><?php echo date('d-M-Y',  strtotime($row->TANGGAL_LOG_HARIAN)) ?></td>
+                                                        <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_LOG_HARIAN)) ?></td>
                                                         <td><?php echo $row->total_km ?></td>
                                                         <td><?php echo $row->total_kl ?></td>
                                                         <td><?php echo $row->ritase ?></td>
                                                         <td><?php echo $row->spbu ?></td>
-                                                        <td>Rp. <?php echo number_format($row->pendapatan,0,',','.') ?></td>
+                                                        <td>Rp. <?php echo number_format($row->pendapatan, 0, ',', '.') ?></td>
                                                         <td><?php echo $row->status_tugas ?></td>
                                                         <td><span class="label label-success">Hadir</span></td>
                                                         <td>
-                                                            <a onclick="editKinerja('<?php echo $row->status_tugas ?>','<?php echo $id_pegawai ?>','<?php echo $row->ID_KINERJA_AMT ?>','<?php echo $row->TANGGAL_LOG_HARIAN ?>','<?php echo $row->total_km ?>','<?php echo $row->total_kl ?>','<?php echo $row->ritase ?>','<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                            <a onclick="editKinerja('<?php echo $row->status_tugas ?>', '<?php echo $id_pegawai ?>', '<?php echo $row->ID_KINERJA_AMT ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->total_km ?>', '<?php echo $row->total_kl ?>', '<?php echo $row->ritase ?>', '<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -472,7 +478,7 @@ foreach ($grafik as $ka) {
                                                     <tr class="">
                                                         <td style="display:none;"></td>
                                                         <td><?php echo $i ?></td>
-                                                        <td><?php echo date('d-M-Y',  strtotime($tanggal)) ?></td>
+                                                        <td><?php echo date('d-M-Y', strtotime($tanggal)) ?></td>
                                                         <td>-</td>
                                                         <td>-</td>
                                                         <td>-</td>
@@ -481,7 +487,7 @@ foreach ($grafik as $ka) {
                                                         <td>-</td>
                                                         <td><span class="label label-danger">Absen</span></td>
                                                         <td>
-                                                            <a onclick="tambahKinerja('<?php echo $tanggal?>','<?php echo $id_pegawai?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                            <a onclick="tambahKinerja('<?php echo $tanggal ?>', '<?php echo $id_pegawai ?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -722,7 +728,7 @@ foreach ($grafik as $ka) {
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">Edit Kinerja</h4>
                                     </div>
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url()?>amt/edit_kinerja/">
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/edit_kinerja/">
                                         <div class="modal-body">
                                             <div class="col-lg-12">
                                                 <section class="panel">
@@ -788,7 +794,7 @@ foreach ($grafik as $ka) {
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">Edit Kinerja</h4>
                                     </div>
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url()?>amt/tambah_kinerja/">
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/tambah_kinerja/">
                                         <div class="modal-body">
                                             <div class="col-lg-12">
                                                 <section class="panel">
@@ -847,7 +853,7 @@ foreach ($grafik as $ka) {
                             </div>
                         </div>
 
-                        
+
                         <div class="modal fade" id="HapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -904,7 +910,7 @@ foreach ($grafik as $ka) {
                                             }
 
                                             //kinerja
-                                            function editKinerja(status_tugas, id_pegawai,id_kinerja, tanggal, km, kl, ritase, spbu) {
+                                            function editKinerja(status_tugas, id_pegawai, id_kinerja, tanggal, km, kl, ritase, spbu) {
                                                 $("#status_tugas").val(status_tugas);
                                                 $("#id_pegawai").val(id_pegawai);
                                                 $("#id_kinerja").val(id_kinerja);

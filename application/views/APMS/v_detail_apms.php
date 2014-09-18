@@ -151,7 +151,19 @@ function DateToIndo($date) {
 </script>
 
 <section id="main-content">
+	
     <section class="wrapper">
+	<?php if ($pesan==1) {  ?>
+            <div class="alert alert-block alert-success fade in">
+                <strong>Berhasil! </strong><?php echo $pesan_text;?>
+            </div>
+        <?php } ?>
+        
+        <?php if ($pesan==2) { ?>
+            <div class="alert alert-block alert-danger fade in">
+                <strong>Error!</strong> 
+            </div>
+        <?php } ?>
             <?php foreach ($apms as $row) { ?>
             <!-- page start-->
 			<div class="row">
@@ -216,7 +228,7 @@ function DateToIndo($date) {
                     Edit APMS
                 </header>
                 <div class="panel-body bio-graph-primary" >
-                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/edit_apms/<?php echo $row->ID_APMS?>">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
                         <div class="panel-body">
                             <input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                             <div class="row">
@@ -273,7 +285,7 @@ function DateToIndo($date) {
                         </div>
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-default" onclick="ShowProfile()"value="Batal" />
-                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                            <input class="btn btn-success" type="submit" value="Simpan" name="simpan"/>
                         </div>
                     </form>
 
@@ -358,27 +370,25 @@ function DateToIndo($date) {
         </section>
     </section>
     <!--main content end-->
-
-
-
-
-
-    <div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Hapus Kinerja</h4>
+                    <h4 class="modal-title">Hapus APMS</h4>
                 </div>
                 <div class="modal-body">
 
                     Apakah anda yakin ?
 
                 </div>
+                    <form method="POST" action="<?php echo base_url() ?>apms/data_apms">
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                    <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
+					<input type="hidden" value="<?php echo $row->ID_APMS ?>" name="ID_APMS"></input>
+                    <input type="submit" value="Hapus" name="simpan" class="btn btn-danger danger"></input>
                 </div>
+					</form>
             </div>
         </div>
     </div>
@@ -562,7 +572,9 @@ function DateToIndo($date) {
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                    <a href="#" onclick="klik()" class="btn btn-danger danger">Hapus</a>
+					<form method="GET" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
+                    <input type="submit" value="Hapus"class="btn btn-danger danger">Hapus</a>
+					</form>
                 </div>
             </div>
         </div>
@@ -619,9 +631,5 @@ function DateToIndo($date) {
  
     }
 
-    function klik()
-    {
-        var url = "<?php echo base_url(); ?>" + "mt/delete_kinerja/" + global + "/" + globalMobil;
-        window.location.href = url;
-    }
+    
 </script>

@@ -45,6 +45,7 @@
                                 <th style="display:none;"></th>
                                 <th>No</th>
                                 <th>Waktu</th>
+                                <th>Depot</th>
                                 <th>User</th>
                                 <th>Hak Akses</th>
                                 <th>Aksi</th>
@@ -60,6 +61,7 @@
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $row->TANGGAL_LOG ?></td>
+                                    <td><?php echo $row->NAMA_DEPOT ?></td>
                                     <td><?php echo $row->NAMA_PEGAWAI ?></td>
                                     <td><?php echo $row->JABATAN ?></td>
                                     <td><?php echo $row->KETERANGAN ?></td>
