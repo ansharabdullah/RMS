@@ -2,17 +2,27 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        <?php if ($success ) { ?>
+		<?php if ($pesan==1) {  ?>
             <div class="alert alert-block alert-success fade in">
-                <strong>Berhasil!</strong> <?php echo $success ?>
+                <strong>Berhasil! </strong><?php echo $pesan_text;?> 
             </div>
         <?php } ?>
         
-        <?php if ($error) { ?>
+        <?php if ($pesan==2) { ?>
             <div class="alert alert-block alert-danger fade in">
-                <strong>Error!</strong> <?php echo $error ?>
+                <strong>Error!</strong> 
             </div>
         <?php } ?>
+		<div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li class="active">Data APMS</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <section class="panel">
             <header class="panel-heading">
                 Data APMS
@@ -47,10 +57,8 @@
                                 <th>No</th>
                                 <th>NO. APMS</th>
                                 <th>Nama Pengusaha</th>
-                                <th>Suppy Point</th>
                                 <th>Alamat</th>
                                 <th>Nama Transportir</th>
-                                <th>No. Perjanjian</th>
                                 <th>Tarif Patra Niaga</th>
                             </tr>
                         </thead>
@@ -62,10 +70,8 @@
                                     <td><?php echo $i; ?></td>
 									<td><a href="<?php echo base_url()?>apms/detail_apms/<?php echo $row->ID_APMS; ?>" style ="text-decoration: underline"><?php echo $row->NO_APMS; ?></a></td>
                                     <td><?php echo $row->NAMA_PENGUSAHA; ?></td>
-                                    <td><?php echo $row->SUPPLY_POINT; ?></td>
                                     <td><?php echo $row->ALAMAT; ?></td>
                                     <td><?php echo $row->NAMA_TRANSPORTIR; ?></td>
-                                    <td><?php echo $row->NO_PERJANJIAN; ?></td>
                                     <td><?php echo $row->TARIF_PATRA_NIAGA; ?></td>
                                  
                                 </tr>
@@ -89,7 +95,7 @@
                 <h4 class="modal-title">Tambah APMS</h4>
             </div>
             <div class=" form">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/tambah_apms/">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/data_apms/">
 
                     <div class="modal-body">
 
@@ -134,6 +140,12 @@
                                             </div>
                                         </div>
 										<div class="form-group ">
+                                            <label for="ship_to" class="control-label col-lg-2">Ship-To</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="ship_to" name="ship_to" minlength="2" type="text" required />
+                                            </div>
+                                        </div>
+										<div class="form-group ">
                                             <label for="no_perjanjian" class="control-label col-lg-2">No. Perjanjian</label>
                                             <div class="col-lg-10">
                                                 <input class=" form-control input-sm m-bot15" id="no_perjanjian" name="no_perjanjian" minlength="2" type="text" required />
@@ -147,7 +159,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="reset" data-dismiss="modal" class="btn btn-default" value="Batal">
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                        <input class="btn btn-success" type="submit" name="simpan" value="Simpan"/>
                     </div>
                 </form>
             </div>

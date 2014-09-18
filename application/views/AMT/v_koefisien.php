@@ -63,7 +63,7 @@
             <header class="panel-heading">
                 Cek Koefisien Performansi   
                 <div style="float:right;">
-                   <a  data-placement="left" href="<?php echo base_url() ?>amt/import_koefisien/" class="btn btn-primary btn-xs tooltips" data-original-title="Import Koefisien"><i class="icon-plus"></i></a>
+                    <a  data-placement="left" href="<?php echo base_url() ?>amt/import_koefisien/" class="btn btn-primary btn-xs tooltips" data-original-title="Import Koefisien"><i class="icon-plus"></i></a>
                 </div></header>
 
             <div class="panel-body" >
@@ -111,11 +111,11 @@
                                     <tr class="">
                                         <td><?php echo ($i + 1) ?></td>
                                         <td><?php echo $koefisien[$i * 4]->KELOMPOK_PENILAIAN ?></td>
-                                        <td><?php echo $koefisien[$i]->NILAI ?></td>
-                                        <td><?php echo $koefisien[$i + 1]->NILAI ?></td>
-                                        <td><?php echo $koefisien[$i + 2]->NILAI ?></td>
-                                        <td><?php echo $koefisien[$i + 3]->NILAI ?></td>
-                                        <td><a data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                        <td><?php echo $koefisien[$i * 4]->NILAI ?></td>
+                                        <td><?php echo $koefisien[$i * 4 + 1]->NILAI ?></td>
+                                        <td><?php echo $koefisien[$i *4 + 2]->NILAI  ?></td>
+                                        <td><?php echo $koefisien[$i *4 + 3]->NILAI  ?></td>
+                                        <td><a onclick="editKoef('<?php echo $i?>','<?php echo $koefisien[$i * 4]->KELOMPOK_PENILAIAN ?>', '<?php echo $koefisien[$i * 4]->NILAI ?>', '<?php echo $koefisien[$i *4 + 1]->NILAI ?>', '<?php echo $koefisien[$i *4 + 2]->NILAI ?>', '<?php echo $koefisien[$i *4  + 3]->NILAI ?>')" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                     </tr>
                                 <?php } ?>
 
@@ -124,12 +124,12 @@
                     </div>
                 </div>
             </section>
-        <?php }else{?>
+        <?php } else { ?>
             <div class="alert alert-block alert-danger fade in">
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
                 </button>
-                <strong>Error!</strong> <?php echo "Koefisien tahun $tahun tidak ditemukan."; ?>
+                <strong>Error!</strong> <?php echo "Koefisien tahun <b>$tahun</b> tidak ditemukan."; ?>
             </div>
         <?php } ?>
     </section>
@@ -144,47 +144,39 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Edit Data</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="get" action="">
-
+            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="POST" action="<?php echo base_url(); ?>amt/ubah_koefisien/">
                 <div class="modal-body">
-
                     <div class="col-lg-12">
                         <section class="panel">
-
                             <div class="panel-body">
-
                                 <div class="form-group ">
                                     <label for="cbulan" class="control-label col-lg-2">Jenis Jabatan</label>
                                     <div class="col-lg-10">
-                                        <input type="text" required="required" id="jabatan" class="form-control"  placeholder="Jenis Jabatan">
+                                        <input type="text" required="required" id="jabatan" name="jabatan" class="form-control"  placeholder="Jenis Jabatan" readonly>
                                     </div>
                                 </div>
+                                <input class=" form-control input-sm m-bot15" id="index" name="index" minlength="1" type="hidden" required />
+                                <input class=" form-control input-sm m-bot15" id="tahun" name="tahun" minlength="1" type="hidden" value="<?php echo $tahun?>" required />
                                 <div class="form-group ">
                                     <label for="cfrm1" class="control-label col-lg-2">Koefisien KM</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="cfrm1" name="frm1" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="km" name="km" minlength="1" type="number" required />
                                     </div>
-
                                     <label for="cfrm2" class="control-label col-lg-2">Koefisien KL</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="cfrm2" name="frm2" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="kl" name="kl" minlength="1" type="number" required />
                                     </div>
                                 </div>
-
-
                                 <div class="form-group ">
                                     <label for="cinterpolasi1" class="control-label col-lg-2">Koefisien Rit</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="cinterpolasi1" name="interpolasi1" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="rit" name="rit" minlength="1" type="number" required />
                                     </div>
-
                                     <label for="cinterpolasi" class="control-label col-lg-2">Koefisien Jumlah SPBU</label>
                                     <div class="col-lg-4">
-                                        <input class=" form-control input-sm m-bot15" id="cinterpolasi2" name="interpolasi2" minlength="2" type="number" required />
+                                        <input class=" form-control input-sm m-bot15" id="spbu" name="spbu" minlength="1" type="number" required />
                                     </div>
                                 </div>
-
-
                             </div>
                         </section>
                     </div>
@@ -198,3 +190,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    function editKoef(index, jabatan, km, kl, rit, spbu) {
+        $("#index").val(index);
+        $("#jabatan").val(jabatan);
+        $("#km").val(km);
+        $("#kl").val(kl);
+        $("#rit").val(rit);
+        $("#spbu").val(spbu);
+    }
+</script>

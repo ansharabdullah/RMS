@@ -140,12 +140,12 @@
                 <section class="panel">
                     
                     <header class="panel-heading">
-                        Grafik Detail Harian AMT Depot <?php echo $nama_depot ?>
+                        Grafik Detail Harian AMT
                     </header>
                   <div class="panel-body" >
                         <?php
                         $attr = array("class" => "cmxform form-horizontal tasi-form");
-                        echo form_open("depot/ganti_detail_amt/" . $id_depot . "/" . $nama_depot, $attr);
+                        echo form_open("amt/ganti_detail_amt/", $attr);
                         ?>
                         <div class="form-group">
                             <div class="col-lg-3">
@@ -199,7 +199,7 @@
                                         <tr class="">
                                             <td style="display:none;"></td>
                                             <td><?php echo ($i + 1) ?></td>
-                                            <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">320519000<?php echo ($i + 1) ?></a></td>
+                                            <td><a href="<?php echo base_url() ?>amt/detail/<?php echo $k->ID_PEGAWAI ?>/<?php echo date('m',  strtotime($tanggal))?>/<?php echo date('Y',  strtotime($tanggal))?>" style ="text-decoration: underline">320519000<?php echo ($i + 1) ?></a></td>
                                             <td><?php echo $k->NAMA_PEGAWAI ?></td>
                                             <td><?php echo $k->STATUS_TUGAS ?></td>
                                             <td><?php echo $k->KLASIFIKASI ?></td>

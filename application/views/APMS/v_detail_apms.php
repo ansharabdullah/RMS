@@ -151,10 +151,32 @@ function DateToIndo($date) {
 </script>
 
 <section id="main-content">
+	
     <section class="wrapper">
+	<?php if ($pesan==1) {  ?>
+            <div class="alert alert-block alert-success fade in">
+                <strong>Berhasil! </strong><?php echo $pesan_text;?>
+            </div>
+        <?php } ?>
+        
+        <?php if ($pesan==2) { ?>
+            <div class="alert alert-block alert-danger fade in">
+                <strong>Error!</strong> 
+            </div>
+        <?php } ?>
             <?php foreach ($apms as $row) { ?>
             <!-- page start-->
-
+			<div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>apms/data_apms/"></i>Data APMS</a></li>
+                    <li class="active">Detail APMS</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
             <section class="panel" id="ShowProfile">
                 <header class="panel-heading">
                     <div class="col-lg-10">Detail APMS
@@ -171,25 +193,28 @@ function DateToIndo($date) {
                                 <aside class="profile-nav col-lg-12">
                                     <div class="row">
                                         <div class="bio-row">
-											<p><span>Nomor APMS </span>: <?php echo $row->NO_APMS; ?></p>
+											<p><span class="col col-lg-3">Nomor APMS </span>: <?php echo $row->NO_APMS; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nama Pengusaha </span>: <?php echo $row->NAMA_PENGUSAHA; ?></p>
+                                            <p><span class="col col-lg-3">Nama Pengusaha </span>: <?php echo $row->NAMA_PENGUSAHA; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Supply Point </span>: <?php echo $row->SUPPLY_POINT; ?></p>
+                                            <p><span class="col col-lg-3">Supply Point </span>: <?php echo $row->SUPPLY_POINT; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Alamat </span>: <?php echo $row->ALAMAT; ?></p>
+                                            <p><span class="col col-lg-3">Nama Transportir </span>: <?php echo $row->NAMA_TRANSPORTIR; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nama Transportir </span>: <?php echo $row->NAMA_TRANSPORTIR; ?></p>
+                                            <p><span class="col col-lg-3">Nomor Perjanjian </span>: <?php echo $row->NO_PERJANJIAN; ?></p>
                                         </div>
                                         <div class="bio-row">
-                                            <p><span>Nomor Perjanjian </span>: <?php echo $row->NO_PERJANJIAN; ?></p>
+                                            <p><span class="col col-lg-3">Tarif Patra Niaga </span>: <?php echo $row->TARIF_PATRA_NIAGA; ?></p>
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Tarif Patra Niaga </span>: <?php echo $row->TARIF_PATRA_NIAGA; ?></p>
+										<div class="bio-row">
+                                            <p><span class="col col-lg-3">Alamat </span>: <?php echo $row->ALAMAT; ?></p>
+                                        </div>
+										<div class="bio-row">
+                                            <p><span class="col col-lg-3">Ship-To </span>: <?php echo $row->SHIP_TO; ?></p>
                                         </div>
                                     </div>
                                 </aside>
@@ -203,7 +228,7 @@ function DateToIndo($date) {
                     Edit APMS
                 </header>
                 <div class="panel-body bio-graph-primary" >
-                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/edit_apms/<?php echo $row->ID_APMS?>">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
                         <div class="panel-body">
                             <input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                             <div class="row">
@@ -247,14 +272,20 @@ function DateToIndo($date) {
                                 <div class="bio-row">
                                     <label for="tarif" class="control-label col-lg-4">Tarif Patra Niaga</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->TARIF_PATRA_NIAGA?>" id="tarif" name="tarif"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->TARIF_PATRA_NIAGA?>" id="tarif" name="tarif"  type="number" required />
+                                    </div>
+                                </div>
+								<div class="bio-row">
+                                    <label for="ship_to" class="control-label col-lg-4">Ship-To</label>
+                                    <div class="col-lg-6">
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->SHIP_TO?>" id="ship_to" name="ship_to"  type="text" required />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-default" onclick="ShowProfile()"value="Batal" />
-                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                            <input class="btn btn-success" type="submit" value="Simpan" name="simpan"/>
                         </div>
                     </form>
 
@@ -339,27 +370,25 @@ function DateToIndo($date) {
         </section>
     </section>
     <!--main content end-->
-
-
-
-
-
-    <div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Hapus Kinerja</h4>
+                    <h4 class="modal-title">Hapus APMS</h4>
                 </div>
                 <div class="modal-body">
 
                     Apakah anda yakin ?
 
                 </div>
+                    <form method="POST" action="<?php echo base_url() ?>apms/data_apms">
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                    <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
+					<input type="hidden" value="<?php echo $row->ID_APMS ?>" name="ID_APMS"></input>
+                    <input type="submit" value="Hapus" name="simpan" class="btn btn-danger danger"></input>
                 </div>
+					</form>
             </div>
         </div>
     </div>
@@ -543,7 +572,9 @@ function DateToIndo($date) {
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                    <a href="#" onclick="klik()" class="btn btn-danger danger">Hapus</a>
+					<form method="GET" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
+                    <input type="submit" value="Hapus"class="btn btn-danger danger">Hapus</a>
+					</form>
                 </div>
             </div>
         </div>
@@ -600,9 +631,5 @@ function DateToIndo($date) {
  
     }
 
-    function klik()
-    {
-        var url = "<?php echo base_url(); ?>" + "mt/delete_kinerja/" + global + "/" + globalMobil;
-        window.location.href = url;
-    }
+    
 </script>

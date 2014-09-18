@@ -1051,7 +1051,7 @@ class laporan extends CI_Controller {
         $this->load->model('m_laporan');
         $depot = $this->session->userdata('id_depot');
         $tahun = date('Y');
-        $data2['edit_kpi']=false;
+        $data2['edit_kpi'] = false;
 
         if ($this->input->post('cek')) {
             $tahun = $this->input->post('tahun');
@@ -1069,9 +1069,9 @@ class laporan extends CI_Controller {
             $tw3_stretch = $this->input->post('tw3_stretch');
             $tw4_base = $this->input->post('tw4_base');
             $tw4_stretch = $this->input->post('tw4_stretch');
-            $this->m_laporan->editKPIInternal($id,$bobot,$tahun_base,$tahun_stretch,$tw1_base,$tw1_stretch,$tw2_base,$tw2_stretch,$tw3_base,$tw3_stretch,$tw4_base,$tw4_stretch);
-            
-            $data2['edit_kpi']=true;
+            $this->m_laporan->editKPIInternal($id, $bobot, $tahun_base, $tahun_stretch, $tw1_base, $tw1_stretch, $tw2_base, $tw2_stretch, $tw3_base, $tw3_stretch, $tw4_base, $tw4_stretch);
+
+            $data2['edit_kpi'] = true;
         }
 
         $data2['tahun_kpi'] = $tahun;
@@ -1095,6 +1095,122 @@ class laporan extends CI_Controller {
         $this->header(7, 5);
         $this->load->view('laporan/v_edit_kpi_internal');
         $this->footer();
+    }
+
+    public function preview_harian() {
+        $this->load->model('m_laporan');
+        $depot = $this->session->userdata('id_depot');
+
+        if (!$this->input->post('cek')) {
+            //redirect('laporan/harian');
+        } else {
+            $bulan_input = $this->input->post('bulan');
+            $tanggal = date("d-m-Y", strtotime($bulan_input));
+            $bulan = date("m", strtotime($bulan_input));
+            $tahun = date("Y", strtotime($bulan_input));
+            $last_day = date('t', strtotime($tanggal));
+            $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan);
+            $jumlah_data = $data->num_rows();
+            $hasil_data = $data->result();
+
+            $column_name = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO");
+
+            if ($jumlah_data > 0) {
+                $this->load->library('PHPExcel/Classes/PHPExcel');
+                $inputFileName = './data_laporan/template/harian.xls';
+
+                $objReader = PHPExcel_IOFactory::createReader('Excel5');
+                $objPHPExcel = $objReader->load($inputFileName);
+
+                /*
+                 * KM
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('KM');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AG', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AI', 1);
+                }
+
+                $no = $jumlah_data;
+                foreach ($hasil_data as $row) {
+                    $array = (array) $row;
+
+                    $sheetData->insertNewRowBefore(5, 1);
+                    $sheetData->setCellValue('A5', $no);
+                    $sheetData->setCellValue('B5', $array['TRANSPORTIR']);
+                    $sheetData->setCellValue('C5', $array['NOPOL']);
+                    $sheetData->setCellValue('D5', $array['KAPASITAS']);
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($this->input->post('bln' . $i)) {
+                            if ($array['KM' . $i] != "") {
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', $array['KM' . $i]);
+                            } else {
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                            }
+                        } else {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                        }
+                    }
+                    
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=SUM(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
+                    $i++;
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 1] . '5)');
+                
+                    
+                    if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
+                        $sheetData->mergeCells('B5:B6');
+                    }
+                    $no--;
+                }
+
+                $objPHPExcel->getActiveSheet()->removeRow(4, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
+
+                for ($i = 1; $i <= $last_day+2; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=SUM(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 5), '=AVERAGE(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+                $objWriter->setPreCalculateFormulas(FALSE);
+                $objWriter->save('./data_laporan/harian/asd.xls');
+            }
+        }
     }
 
     public function dummy_kinerja() {
