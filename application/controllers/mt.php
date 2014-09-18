@@ -20,6 +20,9 @@ class Mt extends CI_Controller {
         $this->load->model("m_pengingat");
         $this->load->model("m_log_sistem");
         $this->load->model("m_rencana_mt");
+        $this->load->model("m_log_harian");
+        $this->load->model("m_penjadwalan");
+        $this->load->model("m_kinerja");
 
     }
 
@@ -419,7 +422,42 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_detail_mt', $data1);
         $this->footer();
     }
+    
+    public function edit_kinerja() {
+        $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
+        $id_mobil = $this->input->post('id_mobil', true);
+        $data['id_mobil'] = $id_mobil;
+        
+        $km = $this->input->post('total_km_mt', true);
+        $kl = $this->input->post('total_kl_mt', true);
+        $ritase = $this->input->post('ritase_mt', true);
+        $own_use = $this->input->post('own_use', true);
+        $premium = $this->input->post('premium', true);
+        $pertamax = $this->input->post('pertamax', true);
+        $pertamax_plus = $this->input->post('pertamax_plus', true);
+        $pertamina_dex = $this->input->post('pertamina_dex', true);
+        $solar = $this->input->post('solar', true);
+        $bio_solar = $this->input->post('bio_solar', true);
 
+        $data = array(
+            'premium' => $premium,
+            'total_km_mt' => $km,
+            'total_kl_mt' => $kl,
+            'own_use' => $own_use,
+            'ritase_mt' => $ritase,
+            'pertamax' => $pertamax,
+            'pertamax_plus' => $pertamax_plus,
+            'pertamina_dex' => $pertamina_dex,
+            'solar' => $solar,
+            'bio_solar' => $bio_solar
+        );
+        $this->m_kinerja->editKinerjaMT($data, $id_kinerja_mt);
+
+        $link = base_url() . "mt/detail_mt/" . $id_mobil;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
 
     public function edit_mobil($id_mobil) {
 
@@ -999,7 +1037,7 @@ class Mt extends CI_Controller {
     public function mt_tahun($depot)
     {
        $tahun =  $_POST['tahun'];
-       redirect('mt/grafik_mt/'.$depot."/".$tahun);
+       redirect('mt/grafik_mt/'.$tahun);
     }
     
     public function mt_masuk()
@@ -1035,12 +1073,11 @@ class Mt extends CI_Controller {
         $data2['kinerja'] = 0;
         $data2['tanggal'] = 0;
         
-        $this->load->model("m_kinerja");
+        
         $depot = $this->session->userdata('id_depot');
         $tanggal = date('Y-m-d');
 
-        $data2['mobil'] = $this->m_kinerja->getMobil($depot);
-        
+        $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
         $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
         $data2['tanggal'] = $tanggal; 
         $data2['kinerja'] = 0;
@@ -1054,12 +1091,13 @@ class Mt extends CI_Controller {
     public function cek_presensi() {
         $data['lv1'] = 3;
         $data['lv2'] = 3;
+        $this->load->model("m_penjadwalan");
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
         $data2['tanggal'] = $tanggal;
         
         $this->load->model("m_kinerja");
-        $data2['mobil'] = $this->m_kinerja->getMobil($depot);
+        $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);;
         
         $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
         $this->header($data);
@@ -1068,18 +1106,38 @@ class Mt extends CI_Controller {
     }
 
     public function ubah_presensi() {
-        
-        $this->load->model("m_penjadwalan");
         $id_jadwal = $this->input->post('id_jadwal', true);
+        $nip = $this->input->post('nip', true);
         $nopol = $this->input->post('nopol', true);
         $data = array(
             'alasan' => $this->input->post('alasan', true),
-            'keterangan_masuk' => $this->input->post('keterangan_masuk', true)
+            'keterangan' => $this->input->post('keterangan', true)
         );
         $tanggal = $this->input->post('tanggal_log_harian', true);
-
-        $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
         
+        $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
+
+        $depot = $this->session->userdata('id_depot');
+        //cek apakah jadwal dan kinerja sudah sesuai
+        $jadwal = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
+        $this->load->model("m_kinerja");
+        $kinerja = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
+        foreach ($jadwal as $row) {
+            foreach ($kinerja as $row2) {
+                if ($row->ID_MOBIL == $row2->ID_MOBIL) {
+                    if ($row->KETERANGAN != '') {
+                        //status log_harian.status_presensi_mt jadikan 1
+                        $data = array(
+                            'status_presensi_mt' => 1
+                        );
+
+                        $this->m_log_harian->updateStatusPresensiMT($depot, $tanggal, $data);
+                    }
+                }
+            }
+        }
+
+
         $link = base_url() . "mt/cek_presensi/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';

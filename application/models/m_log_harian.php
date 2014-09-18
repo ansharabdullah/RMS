@@ -226,6 +226,12 @@ class m_log_harian extends CI_Model {
         $this->db->where('tanggal_log_harian', $tanggal);
         $this->db->update($data);
     }
+    
+     public function updateStatusPresensiMT($depot, $tanggal, $data){
+        $this->db->where('id_depot', $depot);
+        $this->db->where('tanggal_log_harian', $tanggal);
+        $this->db->update($data);
+    }
 
     //insert setahuneun
     public function insertLogHarian($data) {

@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    
     var mt;
     var kl_mt = new Array();
     var km_mt = new Array();
@@ -8,6 +9,7 @@
     var pertamina_dex = new Array();
     var solar = new Array();
     var bio_solar = new Array();
+    var total_km_mt = new Array();
     var own_use_mt = new Array();
     var ritase_mt = new Array();
     var bulan_mt = new Array();
@@ -16,6 +18,7 @@
         foreach($grafik as $km){
             ?>
                 kl_mt.push(<?php echo $km->total_kl ?>);
+                total_km_mt.push(<?php echo $km->total_km ?>);
                 km_mt.push(<?php echo $km->total_km ?>);
                 premium.push(<?php echo $km->premium ?>);
                 pertamax.push(<?php echo $km->pertamax ?>);
@@ -144,7 +147,7 @@
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    <input type="number" name="tahun" minlength="4" maxlength="4" min="2010" value="" required="required" id="tahunLaporan"  class="form-control"/>
+                                    <input type="number" name="tahun" minlength="4" max="9999" min="2010" value="" required="required" id="tahunLaporan"  class="form-control"/>
                                 </div>
 
                                 <div class=" col-lg-2">

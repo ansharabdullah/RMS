@@ -56,6 +56,7 @@
                                 <div class="panel-body">
 
                                         <div class="space15"></div>
+                                        <div class="adv-table editable-table " style="overflow-x: scroll">
                                          <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                             <thead>
                                                 <tr>
@@ -99,6 +100,7 @@
 
                                             </tbody>
                                         </table>
+                                       </div>
                                     </div>
                                 </div>
                             </section>

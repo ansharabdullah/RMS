@@ -396,5 +396,14 @@ class m_kinerja extends CI_Model {
     public function insertKinerjaAMT($data){
         $this->db->insert('kinerja_amt', $data);
     }
+    //detail MT
+     public function editKinerjaMT($data, $id) {
+        $this->db->where('id_kinerja_mt', $id);
+        $this->db->update('kinerja_mt', $data);
+    }
+    
+    public function insertKinerjaMT($data){
+        $this->db->insert('kinerja_mt', $data);
+    }
 
 }

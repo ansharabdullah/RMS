@@ -683,7 +683,7 @@ function DateToIndo($date) {
                                 Tambah Kinerja <i class="icon-plus"></i>
                             </a>
                         </div>
-
+                        <div class="adv-table editable-table " style="overflow-x: scroll">
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
                                 <tr>
@@ -700,13 +700,41 @@ function DateToIndo($date) {
                                     <th>Pertamax Dex</th>
                                     <th>Solar</th>
                                     <th>Bio Solar</th>
+                                    <th>Kehadiran</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <?php $i = 1;
-                               
-                                foreach ($kinerja as $row) { ?>
+                                
+                                    <?php
+                                        $status=0;
+                                            $i = 1;
+
+                                            $jumlah = 0;
+                                            if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
+                                                $jumlah = 31;
+                                            } else if ($bulan == 4 || $bulan == 6 || $bulan == 9 || $bulan == 11) {
+                                                $jumlah = 30;
+                                            } else if ($bulan == 2) {
+                                                $jumlah = 29;
+                                                //jika kabisat
+                                                if (date('L', strtotime($tahun . '-01-01'))) {
+                                                    $jumlah = 28;
+                                                }
+                                            }
+
+                                 for ($i = 1; $i <= $jumlah; $i++) {
+                                     foreach ($kinerja as $row) {
+                                        $status = 0;
+                                         if ($i == $row->hari) {
+                                            $status = 1;
+                                             break;
+                                                    } else {
+                                                        $status = 0;
+                                                    }
+                                                }
+                                                if ($status == 1) {
+                                                    ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo(DateToIndo($row->tanggal_log_harian)); ?></td>
@@ -720,16 +748,48 @@ function DateToIndo($date) {
                                     <td><?php echo $row->pertamina_dex; ?></td>
                                     <td><?php echo $row->solar; ?></td>
                                     <td><?php echo $row->bio_solar; ?></td>
-                                    
+                                    <td><span class="label label-success">Hadir</span></td>
                                     
                                    <td>
-                                   <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                       
+                                   <a onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo $row->tanggal_log_harian ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                           
                                 </tr>
-                                <?php $i++;
-                            } ?>
+                                <?php
+                                                } else {
+                                                    $day = 0;
+                                                    if ($i < 10) {
+                                                        $day = $day . $i;
+                                                    } else {
+                                                        $day = $i;
+                                                    }
+                                                    $tanggal = $tahun . "-" . $bulan . "-" . $day;
+                                                    ?>
+                                                    <tr class="">
+                                                        <td style="display:none;"></td>
+                                                        <td><?php echo $i ?></td>
+                                                        <td><?php echo date('d M Y',  strtotime($tanggal)) ?></td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td><span class="label label-danger">Absen</span></td>
+                                                        <td>
+                                                            <a onclick="tambahKinerja('<?php echo $tanggal?>','<?php echo $id_mobil?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
                             </tbody>
                         </table>
+                       </div>
                     </div>
                 </div>
 
@@ -767,9 +827,9 @@ function DateToIndo($date) {
     </div>
 
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="<?php echo base_url()?>mt/edit_kinerja/">
 
                 <div class="modal-content">
                     <div class="modal-header">
@@ -780,14 +840,13 @@ function DateToIndo($date) {
                         <div class="form-group ">
                             <label for="nip" class="control-label col-lg-2">Tanggal</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal"  type="date" required />
+                                <input class=" form-control input-sm m-bot15" id="tanggal_kinerja" name="tanggal_kinerja" minlength="1" type="date" required readonly/>
+                                
                                 <span class="help-block">Pilih Tanggal</span>
                             </div>
-
-                            <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
-                            </div>
+                                <input class=" form-control input-sm m-bot15" id="id_kinerja" name="id_kinerja_mt" minlength="1" type="hidden" required readonly/>
+                                <input class=" form-control input-sm m-bot15" id="id_mobil" name="id_mobil" minlength="1" type="hidden" required />
+                                 
 
                         </div>
                         <div class="form-group ">
@@ -795,35 +854,35 @@ function DateToIndo($date) {
                             <div class="col-lg-4">
                                 <input class=" form-control input-sm m-bot15" id="kl" name="kl"  type="number" required />
                             </div>
-                            <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
+                             <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="rit" name="rit"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="ou"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="own_use" name="own_use"  type="number" required />
                             </div>
                             <label for="p" class="control-label col-lg-2">Premium (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="p" name="p"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="premium" name="premium"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="per" class="control-label col-lg-2">Pertamax (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="per" name="per"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="pertamax" name="pertamax"  type="number" required />
                             </div>
                             <label for="pp" class="control-label col-lg-2">Pertamax Plus (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="pp" name="pp"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="pertamax_plus" name="pertamax_plus"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="perdex" class="control-label col-lg-2">Pertamax Dex (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="perdex" name="perdex"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="pertamina_dex" name="pertamina_dex"  type="number" required />
                             </div>
                             <label for="solar" class="control-label col-lg-2">Solar (kl)</label>
                             <div class="col-lg-4">
@@ -833,7 +892,12 @@ function DateToIndo($date) {
                         <div class="form-group ">
                             <label for="bio" class="control-label col-lg-2">Bio Solar (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="bio" name="bio"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="bio_solar" name="bio_solar"  type="number" required />
+                            </div>
+                             
+                            <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="rit" name="rit"  type="number" required />
                             </div>
 
                         </div>
@@ -863,7 +927,7 @@ function DateToIndo($date) {
                         <div class="form-group ">
                             <label for="nip" class="control-label col-lg-2">Tanggal</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal"  type="date" required />
+                                <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal_kinerja"  type="date" required />
                                 <span class="help-block">Pilih Tanggal</span>
                             </div>
                             <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
@@ -1007,6 +1071,23 @@ function DateToIndo($date) {
         var url = "<?php echo base_url(); ?>" + "mt/delete_kinerja/" + global + "/" + globalMobil;
         window.location.href = url;
     }
+    
+    function editKinerja(id_mobil,id_kinerja, tanggal, km, kl, ritase,own_use, premium,pertamax,pertamax_plus,pertamina_dex,solar,bio_solar) {
+                     
+                                                $("#id_mobil").val(id_mobil);
+                                                $("#id_kinerja").val(id_kinerja);
+                                                $("#tanggal_kinerja").val(tanggal);
+                                                $("#km").val(km);
+                                                $("#kl").val(kl);
+                                                $("#rit").val(ritase);
+                                                $("#own_use").val(own_use);
+                                                $("#premium").val(premium);
+                                                $("#pertamax").val(pertamax);
+                                                $("#pertamax_plus").val(pertamax_plus);
+                                                $("#pertamina_dex").val(pertamina_dex);
+                                                $("#solar").val(solar);
+                                                $("#bio_solar").val(bio_solar);
+                                            }
     
      
 </script>

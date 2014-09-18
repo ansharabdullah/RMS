@@ -210,7 +210,7 @@ foreach ($grafik as $km) {
                     </header>
                     <div class="panel-body">
 
-                        <div class="adv-table editable-table " >
+                        <div class="adv-table editable-table " style="overflow-x: scroll">
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
