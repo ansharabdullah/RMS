@@ -9,21 +9,28 @@ class m_apms extends CI_Model {
     }
 	//insert
 	public function insertApms($data){
-		var_dump($data);
-		$this->db->insert('apms',$data);
+		$result = $this->db->insert('apms',$data);
+		return $result;
 	}
 	public function detailApms($id_apms)
 	{
 		$data = $this->db->query("select * from apms where ID_APMS = $id_apms");
         return $data->result();
 	}
+	public function getIdApms($no_apms)
+	{
+		$data = $this->db->query("select ID_APMS from apms where NO_APMS = $no_apms");
+        return $data->result();
+	}
 	public function editApms($data, $id) {
         $this->db->where('ID_APMS', $id);
-        $this->db->update('apms', $data);
+       $result = $this->db->update('apms', $data);
+	   return $result;
     }
 
     public function deleteApms($id) {
         $this->db->where('ID_APMS', $id);
-        $this->db->delete('apms');
+          $result =$this->db->delete('apms');
+		  return $result;
     }
 }
