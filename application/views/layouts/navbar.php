@@ -15,7 +15,7 @@
                 </a>
                 <ul class="sub">
                     <li <?php if ($lv2 == 1 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/data_amt"  >Data AMT</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/grafik">Grafik</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/grafik/<?php echo date('Y')?>">Grafik</a></li>
                     <li <?php if ($lv2 == 3 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/presensi" >Presensi</a></li>
                     <li <?php if ($lv2 == 4 && $lv1 == 2) echo "class='active'" ?>><a  href="<?php echo base_url() ?>amt/koefisien" >Koefisien</a></li>
                 </ul>

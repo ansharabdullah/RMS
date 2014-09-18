@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Harian AMT Depot <?php echo $nama_depot?>
+                        Grafik Harian AMT
                     </header>
                     <div class="panel-body" >
 <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
@@ -15,14 +15,6 @@
                                echo form_open("amt/amt_hari/",$attr);
                             ?>
                             <div class="form-group">
-<!--                                <div class="col-lg-6">
-                                    <select class="form-control m-bot2"  id="jenis" >
-
-                                        <option value="">Jumlah KM</option>
-                                        <option value="">Jumlah KL</option>
-
-                                    </select>
-                                </div>-->
                                 <div class="col-lg-3">
                                     <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
                                 </div>
@@ -55,7 +47,7 @@
                         <div id="filePreview">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    Tabel Kinerja AMT <?php echo $nama_depot?>
+                                    Tabel Kinerja AMT
                                 </header>
                                 <div class="panel-body">
 
@@ -132,7 +124,7 @@
                 renderTo:'grafik'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM Awak Mobil Tangki Depot <?php echo $nama_depot?>'
+                text: 'Grafik Kinerja Jumlah KM Awak Mobil Tangki'
             },
             subtitle: {
                 text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
@@ -143,7 +135,7 @@
                       events:{
                         click: function(event) {
                                var tgl = '<?php echo $tahun."-".$bulan."-";?>'+this.category;
-                                window.location = "<?php echo base_url() ?>depot/amt_depot_detail/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+tgl;
+                                window.location = "<?php echo base_url() ?>amt/grafik_detail/"+tgl;
                             }
                         }
                     }
@@ -182,7 +174,7 @@
     
     function filterAmt(title)
     {
-        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Awak Mobil Tangki Depot <?php echo $nama_depot?>'});  
+        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Awak Mobil Tangki'});  
         if(title == "KM"){
              amt.series[0].setData(total_km);
         }else if(title == "KL"){

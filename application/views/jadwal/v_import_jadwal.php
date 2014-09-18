@@ -23,7 +23,7 @@
         <section class="panel" id="tambahJadwal">
             <header class="panel-heading">
                 Tambah Jadwal
-                <a style="float:right;" href="<?php base_url() ?>download/format_oscrms_penjadwalan.xls" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                <a style="float:right;" href="<?php echo base_url() ?>downloads/format_oscrms_penjadwalan.xlsx" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" >
 

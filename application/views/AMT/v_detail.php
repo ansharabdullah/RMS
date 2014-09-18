@@ -84,6 +84,7 @@ foreach ($grafik as $ka) {
     function filterAmt(title)
     {
         amt.setTitle({text: 'Grafik Kinerja Jumlah ' + title});
+        amt.setName(title);
         if (title == "KM") {
             amt.series[0].setData(total_km);
         } else if (title == "KL") {
@@ -349,7 +350,7 @@ foreach ($grafik as $ka) {
                             <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
                             <?php
                             $attr = array("class" => "cmxform form-horizontal tasi-form");
-                            echo form_open("amt/detail_hari/", $attr);
+                            echo form_open("amt/detail_hari/$id_pegawai/", $attr);
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">
@@ -432,6 +433,7 @@ foreach ($grafik as $ka) {
                                                 }
                                             }
 
+                                                    $status = 0;
                                             for ($i = 1; $i <= $jumlah; $i++) {
                                                 foreach ($grafik as $row) {
                                                     $status = 0;
