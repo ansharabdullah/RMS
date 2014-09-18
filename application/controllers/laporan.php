@@ -1051,7 +1051,7 @@ class laporan extends CI_Controller {
         $this->load->model('m_laporan');
         $depot = $this->session->userdata('id_depot');
         $tahun = date('Y');
-        $data2['edit_kpi']=false;
+        $data2['edit_kpi'] = false;
 
         if ($this->input->post('cek')) {
             $tahun = $this->input->post('tahun');
@@ -1069,9 +1069,9 @@ class laporan extends CI_Controller {
             $tw3_stretch = $this->input->post('tw3_stretch');
             $tw4_base = $this->input->post('tw4_base');
             $tw4_stretch = $this->input->post('tw4_stretch');
-            $this->m_laporan->editKPIInternal($id,$bobot,$tahun_base,$tahun_stretch,$tw1_base,$tw1_stretch,$tw2_base,$tw2_stretch,$tw3_base,$tw3_stretch,$tw4_base,$tw4_stretch);
-            
-            $data2['edit_kpi']=true;
+            $this->m_laporan->editKPIInternal($id, $bobot, $tahun_base, $tahun_stretch, $tw1_base, $tw1_stretch, $tw2_base, $tw2_stretch, $tw3_base, $tw3_stretch, $tw4_base, $tw4_stretch);
+
+            $data2['edit_kpi'] = true;
         }
 
         $data2['tahun_kpi'] = $tahun;
@@ -1095,6 +1095,28 @@ class laporan extends CI_Controller {
         $this->header(7, 5);
         $this->load->view('laporan/v_edit_kpi_internal');
         $this->footer();
+    }
+
+    public function coba_harian() {
+        $this->load->library('PHPExcel/Classes/PHPExcel');
+        $inputFileName = 'D:\Format Laporan Harian.xls';
+
+        $objReader = PHPExcel_IOFactory::createReader('Excel5');
+        $objPHPExcel = $objReader->load($inputFileName);
+
+        /*
+         * KM
+         */
+        $objPHPExcel->setActiveSheetIndexByName('KM');
+        $sheetData = $objPHPExcel->getActiveSheet();
+        
+        for ($i=4;$i<15;$i++){
+            $sheetData->setCellValue('E'.$i, $i);
+        }
+        
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->setPreCalculateFormulas(FALSE);
+        $objWriter->save('E:\Format Laporan Harian.xls');
     }
 
     public function dummy_kinerja() {
