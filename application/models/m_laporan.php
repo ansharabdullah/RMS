@@ -31,35 +31,34 @@ class m_laporan extends CI_Model {
         $query = $this->db->query("select n.ID_NILAI,n.NILAI,j.JENIS_PENILAIAN from log_harian l, nilai n, jenis_penilaian j where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and n.ID_JENIS_PENILAIAN = j.ID_JENIS_PENILAIAN and l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and j.KELOMPOK_PENILAIAN = 'MS2' ORDER BY j.ID_JENIS_PENILAIAN");
         return $query->result();
     }
-    
+
     public function SyncRataMS2($depot, $tahun, $bulan) {
         $query = $this->db->query("select l.ID_LOG_HARIAN,m.ID_MS2, DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y')as TANGGAL,((AVG(m.SESUAI_PREMIUM)+AVG(m.SESUAI_PERTAMAX)+AVG(m.SESUAI_SOLAR))/3)as RATA_SESUAI,((AVG(m.CEPAT_PREMIUM)+AVG(m.CEPAT_PERTAMAX)+AVG(m.CEPAT_SOLAR))/3)as RATA_CEPAT,((AVG(m.CEPAT_SHIFT1_PREMIUM)+AVG(m.CEPAT_SHIFT1_PERTAMAX)+AVG(m.CEPAT_SHIFT1_SOLAR))/3)as RATA_CEPAT_SHIFT1,((AVG(m.LAMBAT_PREMIUM)+AVG(m.LAMBAT_PERTAMAX)+AVG(m.LAMBAT_SOLAR))/3)as RATA_LAMBAT,((AVG(m.TIDAK_TERKIRIM_PREMIUM)+AVG(m.TIDAK_TERKIRIM_PERTAMAX)+AVG(m.TIDAK_TERKIRIM_SOLAR))/3)as RATA_TIDAK_TERKIRIM,((AVG(m.TOTAL_LO_PREMIUM)+AVG(m.TOTAL_LO_PERTAMAX)+AVG(m.TOTAL_LO_SOLAR))/3)as RATA_TOTAL_LO from log_harian l, ms2 m where l.ID_LOG_HARIAN = m.ID_LOG_HARIAN and l.ID_DEPOT = '$depot' and  YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
         $data = $query->row();
-        
+
         $nilai = round($data->RATA_SESUAI, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 65");
-        
+
         $nilai = round($data->RATA_CEPAT, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 66");
-        
+
         $nilai = round($data->RATA_CEPAT_SHIFT1, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 67");
-        
+
         $nilai = round($data->RATA_LAMBAT, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 68");
-        
+
         $nilai = round($data->RATA_TIDAK_TERKIRIM, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 69");
-        
+
         $nilai = round($data->RATA_TOTAL_LO, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 70");
-        
+
         $nilai = round($data->RATA_SESUAI, 2) + round($data->RATA_CEPAT, 2) + round($data->RATA_CEPAT_SHIFT1, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 71");
-            
     }
-    
-    public function deleteMS2($ms2,$total_ms2) {
+
+    public function deleteMS2($ms2, $total_ms2) {
         foreach ($total_ms2 as $row) {
             $query = $this->db->query("delete from nilai where ID_NILAI='$row->ID_NILAI'");
         }
@@ -69,7 +68,7 @@ class m_laporan extends CI_Model {
         }
     }
 
-    public function editMS2($id, $sesuai_premium, $sesuai_solar, $sesuai_pertamax, $cepat_premium, $cepat_solar, $cepat_pertamax, $cepat_shift1_premium, $cepat_shift1_solar, $cepat_shift1_pertamax, $lambat_premium, $lambat_solar, $lambat_pertamax, $tidak_terkirim_premium, $tidak_terkirim_solar, $tidak_terkirim_pertamax,$depot,$tahun,$bulan) {
+    public function editMS2($id, $sesuai_premium, $sesuai_solar, $sesuai_pertamax, $cepat_premium, $cepat_solar, $cepat_pertamax, $cepat_shift1_premium, $cepat_shift1_solar, $cepat_shift1_pertamax, $lambat_premium, $lambat_solar, $lambat_pertamax, $tidak_terkirim_premium, $tidak_terkirim_solar, $tidak_terkirim_pertamax, $depot, $tahun, $bulan) {
         $query = $this->db->query("update ms2 set SESUAI_PREMIUM = '$sesuai_premium',SESUAI_SOLAR='$sesuai_solar', SESUAI_PERTAMAX = '$sesuai_pertamax',CEPAT_PREMIUM = '$cepat_premium',CEPAT_SOLAR='$cepat_solar', CEPAT_PERTAMAX = '$cepat_pertamax',CEPAT_SHIFT1_PREMIUM = '$cepat_shift1_premium',CEPAT_SHIFT1_SOLAR='$cepat_shift1_solar', CEPAT_SHIFT1_PERTAMAX = '$cepat_shift1_pertamax',LAMBAT_PREMIUM = '$lambat_premium',LAMBAT_SOLAR='$lambat_solar', LAMBAT_PERTAMAX = '$lambat_pertamax',TIDAK_TERKIRIM_PREMIUM = '$tidak_terkirim_premium',TIDAK_TERKIRIM_SOLAR='$tidak_terkirim_solar', TIDAK_TERKIRIM_PERTAMAX = '$tidak_terkirim_pertamax' where ID_MS2='$id'");
         $this->SyncRataMS2($depot, $tahun, $bulan);
     }
@@ -81,13 +80,13 @@ class m_laporan extends CI_Model {
             $query = $this->db->query("update log_harian set STATUS_MS2 = 1 where ID_LOG_HARIAN = '" . $ms2['id_log_harian'][$no] . "'");
         }
         $id_log_harian = $ms2['id_log_harian'][0];
-        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('65','$id_log_harian','".$ms2['rata_sesuai']."')");
-        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('66','$id_log_harian','".$ms2['rata_cepat']."')");
-        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('67','$id_log_harian','".$ms2['rata_cepat_shift1']."')");
-        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('68','$id_log_harian','".$ms2['rata_lambat']."')");
-        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('69','$id_log_harian','".$ms2['rata_tidak_terkirim']."')");
-        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('70','$id_log_harian','".$ms2['rata_total_lo']."')");
-        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('71','$id_log_harian','".$ms2['hasil_akhir']."')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('65','$id_log_harian','" . $ms2['rata_sesuai'] . "')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('66','$id_log_harian','" . $ms2['rata_cepat'] . "')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('67','$id_log_harian','" . $ms2['rata_cepat_shift1'] . "')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('68','$id_log_harian','" . $ms2['rata_lambat'] . "')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('69','$id_log_harian','" . $ms2['rata_tidak_terkirim'] . "')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('70','$id_log_harian','" . $ms2['rata_total_lo'] . "')");
+        $query = $this->db->query("insert into nilai(ID_JENIS_PENILAIAN,ID_LOG_HARIAN,NILAI) values('71','$id_log_harian','" . $ms2['hasil_akhir'] . "')");
     }
 
     public function cekInterpolasi($depot, $tahun, $bulan) {
@@ -163,15 +162,15 @@ class m_laporan extends CI_Model {
         $hasil = $query->result();
         $jumlah_data = 0;
         $nilai_data = 0;
-        foreach($hasil as $row){
+        foreach ($hasil as $row) {
             $nilai_data = $nilai_data + $row->PENCAPAIAN;
             $jumlah_data++;
         }
-        $rata2 = round($nilai_data/$jumlah_data, 2);
+        $rata2 = round($nilai_data / $jumlah_data, 2);
         return $rata2;
     }
 
-    public function tambahKPIOperasional($depot,$bulan,$tahun,$id_log_harian,$target1,$bobot1,$realisasi1,$deviasi1,$performace1,$normal1,$weighted1,$target2,$bobot2,$realisasi2,$deviasi2,$performace2,$normal2,$weighted2,$target3,$bobot3,$realisasi3,$deviasi3,$performace3,$normal3,$weighted3,$target4,$bobot4,$realisasi4,$deviasi4,$performace4,$normal4,$weighted4,$target5,$bobot5,$realisasi5,$deviasi5,$performace5,$normal5,$weighted5,$target6,$bobot6,$realisasi6,$deviasi6,$performace6,$normal6,$weighted6,$target7,$bobot7,$realisasi7,$deviasi7,$performace7,$normal7,$weighted7,$target8,$bobot8,$realisasi8,$deviasi8,$performace8,$normal8,$weighted8,$target9,$bobot9,$realisasi9,$deviasi9,$performace9,$normal9,$weighted9,$target10,$bobot10,$realisasi10,$deviasi10,$performace10,$normal10,$weighted10,$total) {
+    public function tambahKPIOperasional($depot, $bulan, $tahun, $id_log_harian, $target1, $bobot1, $realisasi1, $deviasi1, $performace1, $normal1, $weighted1, $target2, $bobot2, $realisasi2, $deviasi2, $performace2, $normal2, $weighted2, $target3, $bobot3, $realisasi3, $deviasi3, $performace3, $normal3, $weighted3, $target4, $bobot4, $realisasi4, $deviasi4, $performace4, $normal4, $weighted4, $target5, $bobot5, $realisasi5, $deviasi5, $performace5, $normal5, $weighted5, $target6, $bobot6, $realisasi6, $deviasi6, $performace6, $normal6, $weighted6, $target7, $bobot7, $realisasi7, $deviasi7, $performace7, $normal7, $weighted7, $target8, $bobot8, $realisasi8, $deviasi8, $performace8, $normal8, $weighted8, $target9, $bobot9, $realisasi9, $deviasi9, $performace9, $normal9, $weighted9, $target10, $bobot10, $realisasi10, $deviasi10, $performace10, $normal10, $weighted10, $total) {
         $query = $this->db->query("insert into kpi_operasional(ID_LOG_HARIAN,ID_JENIS_KPI_OPERASIONAL,TARGET,BOBOT,REALISASI,DEVIASI,PERFORMANCE_SCORE,NORMAL_SCORE,WEIGHTED_SCORE) values('$id_log_harian','1','$target1','$bobot1','$realisasi1','$deviasi1','$performace1','$normal1','$weighted1')");
         $query = $this->db->query("insert into kpi_operasional(ID_LOG_HARIAN,ID_JENIS_KPI_OPERASIONAL,TARGET,BOBOT,REALISASI,DEVIASI,PERFORMANCE_SCORE,NORMAL_SCORE,WEIGHTED_SCORE) values('$id_log_harian','2','$target2','$bobot2','$realisasi2','$deviasi2','$performace2','$normal2','$weighted2')");
         $query = $this->db->query("insert into kpi_operasional(ID_LOG_HARIAN,ID_JENIS_KPI_OPERASIONAL,TARGET,BOBOT,REALISASI,DEVIASI,PERFORMANCE_SCORE,NORMAL_SCORE,WEIGHTED_SCORE) values('$id_log_harian','3','$target3','$bobot3','$realisasi3','$deviasi3','$performace3','$normal3','$weighted3')");
@@ -182,40 +181,172 @@ class m_laporan extends CI_Model {
         $query = $this->db->query("insert into kpi_operasional(ID_LOG_HARIAN,ID_JENIS_KPI_OPERASIONAL,TARGET,BOBOT,REALISASI,DEVIASI,PERFORMANCE_SCORE,NORMAL_SCORE,WEIGHTED_SCORE) values('$id_log_harian','8','$target8','$bobot8','$realisasi8','$deviasi8','$performace8','$normal8','$weighted8')");
         $query = $this->db->query("insert into kpi_operasional(ID_LOG_HARIAN,ID_JENIS_KPI_OPERASIONAL,TARGET,BOBOT,REALISASI,DEVIASI,PERFORMANCE_SCORE,NORMAL_SCORE,WEIGHTED_SCORE) values('$id_log_harian','9','$target9','$bobot9','$realisasi9','$deviasi9','$performace9','$normal9','$weighted9')");
         $query = $this->db->query("insert into kpi_operasional(ID_LOG_HARIAN,ID_JENIS_KPI_OPERASIONAL,TARGET,BOBOT,REALISASI,DEVIASI,PERFORMANCE_SCORE,NORMAL_SCORE,WEIGHTED_SCORE) values('$id_log_harian','10','$target10','$bobot10','$realisasi10','$deviasi10','$performace10','$normal10','$weighted10')");
-        
+
         $query = $this->db->query("insert into nilai(ID_LOG_HARIAN,ID_JENIS_PENILAIAN,NILAI) values('$id_log_harian','72','$total')");
-                
+
         $query = $this->db->query("update log_harian l set l.STATUS_KPI_OPERASIONAL_INTERNAL = 1 where l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun'");
     }
-    
-    public function cetKPIInternal($tahun,$depot){
+
+    public function cetKPIInternal($tahun, $depot) {
         $query = $this->db->query("select SUM(STATUS_KPI_INTERNAL) as STATUS_KPI_INTERNAL from log_harian where ID_DEPOT = '$depot' and  YEAR(TANGGAL_LOG_HARIAN) = '$tahun'");
         $row = $query->row();
         return $row->STATUS_KPI_INTERNAL;
     }
-    
-    public function getKPIInternal($tahun,$depot){
+
+    public function getKPIInternal($tahun, $depot) {
         $query = $this->db->query("select l.ID_LOG_HARIAN, k.ID_KPI_INTERNAL,j.ID_JENIS_KPI_INTERNAL,j.JENIS_KPI_INTERNAL, k.BOBOT,k.TAHUN_BASE,k.TAHUN_STRETCH,k.TW1_BASE,k.TW1_STRETCH,k.TW2_BASE,k.TW2_STRETCH,k.TW3_BASE,k.TW3_STRETCH,k.TW4_BASE,k.TW4_STRETCH from log_harian l, kpi_internal k, jenis_kpi_internal j where l.ID_LOG_HARIAN = k.ID_LOG_HARIAN and k.ID_JENIS_KPI_INTERNAL = j.ID_JENIS_KPI_INTERNAL and l.ID_DEPOT = '$depot' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and j.KELOMPOK = 'DEPOT' ORDER BY j.ID_JENIS_KPI_INTERNAL ASC");
         return $query->result();
     }
-    
-    public function editKPIInternal($id,$bobot,$th_b,$th_s,$tw1_b,$tw1_s,$tw2_b,$tw2_s,$tw3_b,$tw3_s,$tw4_b,$tw4_s){
-        $query = $this->db->query("update kpi_internal set BOBOT='$bobot',TAHUN_BASE='$th_b',TAHUN_STRETCH='$th_s',TW1_BASE='$tw1_b',TW1_STRETCH='$tw1_s',TW2_BASE='$tw2_b',TW2_STRETCH='$tw2_s',TW3_BASE='$tw3_b',TW3_STRETCH='$tw3_s',TW4_BASE='$tw4_b',TW4_STRETCH='$tw4_s' where ID_KPI_INTERNAL='$id'");        
+
+    public function editKPIInternal($id, $bobot, $th_b, $th_s, $tw1_b, $tw1_s, $tw2_b, $tw2_s, $tw3_b, $tw3_s, $tw4_b, $tw4_s) {
+        $query = $this->db->query("update kpi_internal set BOBOT='$bobot',TAHUN_BASE='$th_b',TAHUN_STRETCH='$th_s',TW1_BASE='$tw1_b',TW1_STRETCH='$tw1_s',TW2_BASE='$tw2_b',TW2_STRETCH='$tw2_s',TW3_BASE='$tw3_b',TW3_STRETCH='$tw3_s',TW4_BASE='$tw4_b',TW4_STRETCH='$tw4_s' where ID_KPI_INTERNAL='$id'");
     }
-    
-    public function tambahKPIInternal(){
+
+    public function tambahKPIInternal() {
         
     }
-    
-    
-    
-    /*
-    public function dummy_kinerja_amt($id_kinerja, $id_log_harian, $id_pegawai, $status_tugas, $total_km, $total_kl, $ritase, $pendapatan, $spbu) {
-        $query = $this->db->query("insert into kinerja_amt(ID_KINERJA_AMT,ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,PENDAPATAN,SPBU) values('$id_kinerja','$id_log_harian','$id_pegawai','$status_tugas','$total_km','$total_kl','$ritase','$pendapatan','$spbu')");
+
+    public function getLaporanHarian($depot, $tahun, $bulan) {
+        $query = $this->db->query("select m.ID_MOBIL,m.TRANSPORTIR,m.NOPOL,m.KAPASITAS,
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=1)as 'KM1',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=2)as 'KM2',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=3)as 'KM3',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=4)as 'KM4',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=5)as 'KM5',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=6)as 'KM6',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=7)as 'KM7',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=8)as 'KM8',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=9)as 'KM9',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=10)as 'KM10',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=11)as 'KM11',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=12)as 'KM12',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=13)as 'KM13',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=14)as 'KM14',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=15)as 'KM15',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=16)as 'KM16',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=17)as 'KM17',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=18)as 'KM18',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=19)as 'KM19',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=20)as 'KM20',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=21)as 'KM21',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=22)as 'KM22',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=23)as 'KM23',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=24)as 'KM24',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=25)as 'KM25',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=26)as 'KM26',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=27)as 'KM27',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=28)as 'KM28',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=29)as 'KM29',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=30)as 'KM30',
+(select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=31)as 'KM31',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=1)as 'KL1',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=2)as 'KL2',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=3)as 'KL3',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=4)as 'KL4',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=5)as 'KL5',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=6)as 'KL6',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=7)as 'KL7',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=8)as 'KL8',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=9)as 'KL9',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=10)as 'KL10',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=11)as 'KL11',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=12)as 'KL12',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=13)as 'KL13',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=14)as 'KL14',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=15)as 'KL15',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=16)as 'KL16',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=17)as 'KL17',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=18)as 'KL18',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=19)as 'KL19',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=20)as 'KL20',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=21)as 'KL21',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=22)as 'KL22',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=23)as 'KL23',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=24)as 'KL24',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=25)as 'KL25',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=26)as 'KL26',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=27)as 'KL27',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=28)as 'KL28',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=29)as 'KL29',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=30)as 'KL30',
+(select k.TOTAL_KL_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=31)as 'KL31',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=1)as 'RIT1',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=2)as 'RIT2',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=3)as 'RIT3',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=4)as 'RIT4',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=5)as 'RIT5',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=6)as 'RIT6',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=7)as 'RIT7',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=8)as 'RIT8',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=9)as 'RIT9',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=10)as 'RIT10',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=11)as 'RIT11',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=12)as 'RIT12',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=13)as 'RIT13',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=14)as 'RIT14',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=15)as 'RIT15',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=16)as 'RIT16',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=17)as 'RIT17',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=18)as 'RIT18',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=19)as 'RIT19',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=20)as 'RIT20',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=21)as 'RIT21',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=22)as 'RIT22',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=23)as 'RIT23',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=24)as 'RIT24',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=25)as 'RIT25',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=26)as 'RIT26',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=27)as 'RIT27',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=28)as 'RIT28',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=29)as 'RIT29',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=30)as 'RIT30',
+(select k.RITASE_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=31)as 'RIT31',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=1)as 'OWNUSE1',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=2)as 'OWNUSE2',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=3)as 'OWNUSE3',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=4)as 'OWNUSE4',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=5)as 'OWNUSE5',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=6)as 'OWNUSE6',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=7)as 'OWNUSE7',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=8)as 'OWNUSE8',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=9)as 'OWNUSE9',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=10)as 'OWNUSE10',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=11)as 'OWNUSE11',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=12)as 'OWNUSE12',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=13)as 'OWNUSE13',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=14)as 'OWNUSE14',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=15)as 'OWNUSE15',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=16)as 'OWNUSE16',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=17)as 'OWNUSE17',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=18)as 'OWNUSE18',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=19)as 'OWNUSE19',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=20)as 'OWNUSE20',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=21)as 'OWNUSE21',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=22)as 'OWNUSE22',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=23)as 'OWNUSE23',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=24)as 'OWNUSE24',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=25)as 'OWNUSE25',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=26)as 'OWNUSE26',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=27)as 'OWNUSE27',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=28)as 'OWNUSE28',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=29)as 'OWNUSE29',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=30)as 'OWNUSE30',
+(select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=31)as 'OWNUSE31'   
+from mobil m where m.ID_DEPOT = '$depot' and (select COUNT(*) from kinerja_mt k, log_harian l where k.ID_LOG_HARIAN = l.ID_LOG_HARIAN and k.ID_MOBIL = m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan')>0 order by m.TRANSPORTIR DESC");
+        return $query;
+        /*if ($query->num_rows() == 0) {
+            return false;
+        }else{
+            return $query->result();
+        } */      
     }
 
-    public function dummy_kinerja_mt($id_kinerja, $id_log_harian, $id_mobil, $ritase, $total_km, $total_kl, $ownuse, $premium, $pertamax, $pertamax_plus, $pertamina_dex, $solar, $biosolar) {
-        $query = $this->db->query("insert into kinerja_mt(ID_KINERJA_MT,ID_LOG_HARIAN,ID_MOBIL,RITASE_MT,TOTAL_KM_MT,TOTAL_KL_MT,OWN_USE,PREMIUM,PERTAMAX,PERTAMAX_PLUS,PERTAMINA_DEX,SOLAR,BIO_SOLAR) values('$id_kinerja','$id_log_harian','$id_mobil','$ritase','$total_km','$total_kl','$ownuse','$premium','$pertamax','$pertamax_plus','$pertamina_dex','$solar','$biosolar')");
-    }*/
+    /*
+      public function dummy_kinerja_amt($id_kinerja, $id_log_harian, $id_pegawai, $status_tugas, $total_km, $total_kl, $ritase, $pendapatan, $spbu) {
+      $query = $this->db->query("insert into kinerja_amt(ID_KINERJA_AMT,ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,PENDAPATAN,SPBU) values('$id_kinerja','$id_log_harian','$id_pegawai','$status_tugas','$total_km','$total_kl','$ritase','$pendapatan','$spbu')");
+      }
 
+      public function dummy_kinerja_mt($id_kinerja, $id_log_harian, $id_mobil, $ritase, $total_km, $total_kl, $ownuse, $premium, $pertamax, $pertamax_plus, $pertamina_dex, $solar, $biosolar) {
+      $query = $this->db->query("insert into kinerja_mt(ID_KINERJA_MT,ID_LOG_HARIAN,ID_MOBIL,RITASE_MT,TOTAL_KM_MT,TOTAL_KL_MT,OWN_USE,PREMIUM,PERTAMAX,PERTAMAX_PLUS,PERTAMINA_DEX,SOLAR,BIO_SOLAR) values('$id_kinerja','$id_log_harian','$id_mobil','$ritase','$total_km','$total_kl','$ownuse','$premium','$pertamax','$pertamax_plus','$pertamina_dex','$solar','$biosolar')");
+      } */
 }
