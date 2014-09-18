@@ -43,7 +43,11 @@
                     <section class="panel">
                         <div class="user-heading alt green-bg">
                             <a href="#">
-                                <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO; ?>" alt="<?php echo $row->NAMA_PEGAWAI?>">
+                                <?php if ($row->PHOTO != "") { ?>
+                                    <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO; ?>" alt="<?php echo $row->NAMA_PEGAWAI ?>">
+                                <?php } else { ?>
+                                    <img src="<?php echo base_url() ?>assets/img/photo/default.png" alt="<?php echo $row->NAMA_PEGAWAI ?>">
+                                <?php } ?>
                             </a>
                             <br>
                             <br><br></br><br>
@@ -90,11 +94,11 @@
                                     <p><span>Tempat Lahir </span>: <?php echo $row->TEMPAT_LAHIR ?></p>
                                 </div>
                                 <div class="bio-row">
-                                    <p><span>Tanggal Lahir </span>: <?php echo $row->TANGGAL_LAHIR ?></p>
+                                    <p><span>Tanggal Lahir </span>: <?php echo date("d-M-Y",  strtotime($row->TANGGAL_LAHIR)) ?></p>
                                 </div>
 
                                 <div class="bio-row">
-                                    <p><span>Tanggal Masuk </span>: <?php echo $row->TANGGAL_MASUK ?></p>
+                                    <p><span>Tanggal Masuk </span>: <?php echo date("d-M-Y",  strtotime($row->TANGGAL_MASUK)) ?></p>
                                 </div>
 
                                 <div class="bio-row">
@@ -112,7 +116,7 @@
                                 <div class="row">
                                     <input name="id_pegawai" type="hidden" value="<?php echo $this->session->userdata('id_pegawai') ?>"/>
                                     <div class="bio-row">
-                                        <label for="nip" class="control-label col-lg-4">NIP</label><input type="checkbox"> On Call
+                                        <label for="nip" class="control-label col-lg-4">NIP</label>
                                         <div class="col-lg-6">
                                             <input class=" form-control input-sm m-bot15" id="cnip" name="nip" minlength="2" type="text" value="<?php echo $row->NIP ?>" required />
                                         </div>

@@ -36,7 +36,7 @@ class pengaturan extends CI_Controller {
     }
     
     public function pengaturan_depot() {
-        $data['lv1'] = 9;
+        $data['lv1'] = 10;
         $data['lv2'] = 1;
         
         $depot = $this->session->userdata('id_depot');

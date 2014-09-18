@@ -222,7 +222,7 @@ class m_log_harian extends CI_Model {
     }
     
     public function updateStatusPresensiAMT($depot, $tanggal, $data){
-        $this->db->where('id_depot', $id_depot);
+        $this->db->where('id_depot', $depot);
         $this->db->where('tanggal_log_harian', $tanggal);
         $this->db->update('log_harian',$data);
     }

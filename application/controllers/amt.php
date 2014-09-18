@@ -180,14 +180,15 @@ class amt extends CI_Controller {
         $config['file_name'] = $nip;
 
         $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('userfile')) {
-            $upload = $this->upload->data();
-            $ext = $upload['file_ext'];
-            $photo = $nip . $ext;
-            echo $photo;
-        } else {
-            echo "file upload failed";
+        if (isset($photo)) {
+            if ($this->upload->do_upload('userfile')) {
+                $upload = $this->upload->data();
+                $ext = $upload['file_ext'];
+                $photo = $nip . $ext;
+                echo $photo;
+            } else {
+                echo "file upload failed";
+            }
         }
 
         $id = $this->input->post('id', true);
@@ -204,7 +205,7 @@ class amt extends CI_Controller {
                 'alamat' => $this->input->post('alamat', true),
                 'tempat_lahir' => $this->input->post('tempat_lahir', true),
                 'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
-                'transportir_asal' => $this->input->post('transportir_asal', true),
+                'transportir_asal' => $this->input->post('transportir', true),
                 'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
                 'photo' => $photo
             );
@@ -221,7 +222,7 @@ class amt extends CI_Controller {
                 'alamat' => $this->input->post('alamat', true),
                 'tempat_lahir' => $this->input->post('tempat_lahir', true),
                 'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
-                'transportir_asal' => $this->input->post('transportir_asal', true),
+                'transportir_asal' => $this->input->post('transportir', true),
                 'tanggal_masuk' => $this->input->post('tanggal_masuk', true)
             );
         }
@@ -233,7 +234,7 @@ class amt extends CI_Controller {
             'keyword' => 'EDIT'
         );
         $this->m_log_sistem->insertLog($datalog);
-        $link = base_url() . "amt/detail/" . $id_pegawai;
+        $link = base_url() . "amt/detail/" . $id_pegawai . "/" . date('m') . "/" . date('Y');
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
@@ -523,45 +524,26 @@ class amt extends CI_Controller {
         //loop jadwal
         $j = 0;
         $i = 0;
-        //foreach ($jadwal as $row) {
-        $ketemu = 0;
-        while ($ketemu == 0 && $i < count($jadwal)) {
-            $jumlah_sama = 0;
-            echo $i." -> ";
-            $j = $i;
-            $status = 0;
-            while ($status == 0 && $j < count($kinerja)) {
-                echo $j."<br>";
-                //jika pegawai di jadwal dan kinerja sama
-                echo $jadwal[$i]->ID_PEGAWAI . "  -  " . $kinerja[$j]->ID_PEGAWAI . "<br>";
-                if ($jadwal[$i]->ID_PEGAWAI != $kinerja[$j]->ID_PEGAWAI) {
-                    $jumlah_sama++;
-                    //jika menemukan status_masuk hadir
-                    if ($jadwal[$i]->STATUS_MASUK == 'Hadir') {
-                        //echo $row->NAMA_PEGAWAI;
-                        if ($jadwal[$i]->ALASAN == '') {
-                            echo "masul";
-                            //echo"masuk";
-                            $ketemu = 1;
-                            //$status = 1;
-                            $i++;
-                            $jumlah_kosong++;
-                        } else {
-                            $i++;
-                            echo "masux";
-                        }
-                    }
-                    //echo $jadwal[$i]->NAMA_PEGAWAI;
-                } else {
-                    $i++;
+        $indexi = 0;
+        $indexj = 0;
+        $status = 0;
+        while ($status == 0 && $indexi < count($jadwal) && $indexj < count($kinerja)) {
+            $i = $indexi;
+            $j = $indexj;
+            if ($jadwal[$i]->ID_PEGAWAI == $kinerja[$j]->ID_PEGAWAI) {
+                $indexi++;
+                $indexj++;
+            } else {
+                if ($jadwal[$i]->STATUS_MASUK == "Hadir" && $jadwal[$i]->ALASAN == "") {
                     $status = 1;
+                    $jumlah_kosong++;
                 }
+                $indexi++;
             }
         }
-        echo $ketemu;
+        //echo $ketemu;
 
         if ($jumlah_kosong == 0) {
-            echo "masuk";
             $data = array(
                 'status_presensi_amt' => 1
             );
@@ -571,7 +553,7 @@ class amt extends CI_Controller {
 
         $link = base_url() . "amt/presensi_pertanggal/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        //echo 'window.location.href="' . $link . '"';
+        echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
 
