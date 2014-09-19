@@ -4,7 +4,7 @@
         <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
     </div>
     <!--logo start-->
-    <a href="<?php echo base_url() ?>" class="logo">RMS <span>Patra Niaga</span></a>
+    <a href="<?php echo base_url() ?>" class="logo">OSC<span>RMS</span></a>
     <!--logo end-->
     <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
