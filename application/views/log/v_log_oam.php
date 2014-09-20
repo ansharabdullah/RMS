@@ -24,9 +24,8 @@
                 Tabel Log
             </header>
             <div class="panel-body">
-                <div class="adv-table editable-table ">
+                <div class="adv-table editable-table "  style="overflow-x: scroll">
                     <div class="clearfix">
-
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
                             </button>
