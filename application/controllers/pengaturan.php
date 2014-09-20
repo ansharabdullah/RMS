@@ -27,7 +27,7 @@ class pengaturan extends CI_Controller {
         $data['lv2'] = 1;
         
         $depot = $this->session->userdata('id_depot');
-        $data1['user'] = $this->m_pengaturan->selectAllUserDepot($depot);
+        $data1['user'] = $this->m_pengaturan->selectAllUser();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->navbar($data['lv1'], $data['lv2']);

@@ -90,7 +90,7 @@
                     Tabel Koefisien Performansi Tahun <?php echo $tahun ?><span id="tgl"></span>
                 </header>
                 <div class="panel-body">
-                    <div class="adv-table editable-table ">
+                    <div class="adv-table editable-table "  style="overflow-x: scroll">
 
                         <div class="space15"></div>
                         <table class="table table-bordered">
@@ -113,9 +113,9 @@
                                         <td><?php echo $koefisien[$i * 4]->KELOMPOK_PENILAIAN ?></td>
                                         <td><?php echo $koefisien[$i * 4]->NILAI ?></td>
                                         <td><?php echo $koefisien[$i * 4 + 1]->NILAI ?></td>
-                                        <td><?php echo $koefisien[$i *4 + 2]->NILAI  ?></td>
-                                        <td><?php echo $koefisien[$i *4 + 3]->NILAI  ?></td>
-                                        <td><a onclick="editKoef('<?php echo $i?>','<?php echo $koefisien[$i * 4]->KELOMPOK_PENILAIAN ?>', '<?php echo $koefisien[$i * 4]->NILAI ?>', '<?php echo $koefisien[$i *4 + 1]->NILAI ?>', '<?php echo $koefisien[$i *4 + 2]->NILAI ?>', '<?php echo $koefisien[$i *4  + 3]->NILAI ?>')" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                        <td><?php echo $koefisien[$i * 4 + 2]->NILAI ?></td>
+                                        <td><?php echo $koefisien[$i * 4 + 3]->NILAI ?></td>
+                                        <td><a onclick="editKoef('<?php echo $i ?>', '<?php echo $koefisien[$i * 4]->KELOMPOK_PENILAIAN ?>', '<?php echo $koefisien[$i * 4]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 1]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 2]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 3]->NILAI ?>')" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
                                     </tr>
                                 <?php } ?>
 
@@ -156,7 +156,7 @@
                                     </div>
                                 </div>
                                 <input class=" form-control input-sm m-bot15" id="index" name="index" minlength="1" type="hidden" required />
-                                <input class=" form-control input-sm m-bot15" id="tahun" name="tahun" minlength="1" type="hidden" value="<?php echo $tahun?>" required />
+                                <input class=" form-control input-sm m-bot15" id="tahun" name="tahun" minlength="1" type="hidden" value="<?php echo $tahun ?>" required />
                                 <div class="form-group ">
                                     <label for="cfrm1" class="control-label col-lg-2">Koefisien KM</label>
                                     <div class="col-lg-4">
