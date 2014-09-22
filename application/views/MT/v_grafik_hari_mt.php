@@ -179,9 +179,9 @@ foreach ($grafik as $km) {
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>"></i> Grafik Kinerja Tahunan</a></li>
-                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>/<?php echo $hari ?>"></i> Grafik Kinerja Bulanan</a></li>
-                    <li class="active">Grafik Kinerja Harian</li>
+                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>"></i> Grafik Kinerja Bulanan MT</a></li>
+                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>/<?php echo $hari ?>"></i> Grafik Kinerja Harian MT</a></li>
+                    <li class="active">Grafik Kinerja Detail MT</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>

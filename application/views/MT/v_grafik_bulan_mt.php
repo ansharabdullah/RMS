@@ -6,8 +6,8 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>"></i> Grafik Kinerja Tahunan</a></li>
-                    <li class="active">Grafik Kinerja Bulanan</li>
+                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>"></i> Grafik Kinerja Bulanan MT</a></li>
+                    <li class="active">Grafik Kinerja Harian MT</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>

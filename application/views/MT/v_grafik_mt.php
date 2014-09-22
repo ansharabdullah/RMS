@@ -138,7 +138,7 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-                    <li class="active">Grafik Kinerja Tahunan</li>
+                    <li class="active">Grafik Kinerja Bulanan MT</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>

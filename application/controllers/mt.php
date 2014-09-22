@@ -305,8 +305,62 @@ class Mt extends CI_Controller {
     
 //data MT
     
+ 
     public function data_mt() {
+        
+        
+        $data1['pesan'] = 0;
+	if($this->input->post('simpan')){
+            $depot = $this->session->userdata("id_depot");
 
+                $data2 = array(
+                    'id_depot' => $depot,
+                    'nopol' => $this->input->post('nopol', true),
+                    'kapasitas' => $this->input->post('kapasitas', true),
+                    'produk' => $this->input->post('produk', true),
+                    'transportir' => $this->input->post('transportir', true),
+                    'status_mobil' => $this->input->post('status_mobil', true),
+                    'no_mesin' => $this->input->post('no_mesin', true),
+                    'no_rangka' => $this->input->post('no_rangka', true),
+                    'jenis_kendaraan' => $this->input->post('jenis_kendaraan', true),
+                    'rasio' => $this->input->post('rasio', true),
+                    'jenis_tangki' => $this->input->post('jenis_tangki', true),
+                    'gps' => $this->input->post('gps', true),
+                    'sensor_overfill' => $this->input->post('sensor_overfill', true),
+                    'standar_volume' => $this->input->post('standar_volume', true),
+                    'volume_1' => $this->input->post('volume_1', true),
+                    'kategori_mobil' => $this->input->post('kategori_mobil', true),
+                    'jumlah_segel' => $this->input->post('jumlah_segel', true),
+                    'rk1_komp1' => $this->input->post('rk1_komp1', true),
+                    'rk1_komp2' => $this->input->post('rk1_komp2', true),
+                    'rk1_komp3' => $this->input->post('rk1_komp3', true),
+                    'rk1_komp4' => $this->input->post('rk1_komp4', true),
+                    'rk1_komp5' => $this->input->post('rk1_komp5', true),
+                    'rk1_komp6' => $this->input->post('rk1_komp6', true),
+                    'rk2_komp1' => $this->input->post('rk2_komp1', true),
+                    'rk2_komp2' => $this->input->post('rk2_komp2', true),
+                    'rk2_komp3' => $this->input->post('rk2_komp3', true),
+                    'rk2_komp4' => $this->input->post('rk2_komp4', true),
+                    'rk2_komp5' => $this->input->post('rk2_komp5', true),
+                    'rk2_komp6' => $this->input->post('rk2_komp6', true),
+                     'k_komp1' => $this->input->post('k1_komp1', true),
+                    'k_komp2' => $this->input->post('k1_komp2', true),
+                    'k_komp3' => $this->input->post('k1_komp3', true),
+                    'k_komp4' => $this->input->post('k1_komp4', true),
+                    'k_komp5' => $this->input->post('k1_komp5', true),
+                    'k_komp6' => $this->input->post('k1_komp6', true),
+                );
+
+                $datalog = array(
+                    'keterangan' => 'Tambah Mobil, Nopol : ' . $this->input->post('nopol', true),
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Tambah'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+		$pesan = $this->m_mt->insertMobil($data2);
+                    $data1['pesan'] = 1;
+		}
+        $pesan = $data1['pesan'];
         $data3 = $this->m_mt->Nopol();
         $nopol =array();
         $jumlahbaris=0;
@@ -323,66 +377,9 @@ class Mt extends CI_Controller {
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
-        $this->load->view('mt/v_data_mt', array('mt' => $mt, 'nopolcek' => $nopol, 'jumlahbaris' => $jumlahbaris));
+        $this->load->view('mt/v_data_mt', array('pesan'=>$pesan,'mt' => $mt, 'nopolcek' => $nopol, 'jumlahbaris' => $jumlahbaris));
         $this->footer();
-    }
-    
-    public function tambah_mobil() {
         
-        
-        $depot = $this->session->userdata("id_depot");
-
-        $data = array(
-            'id_depot' => $depot,
-            'nopol' => $this->input->post('nopol', true),
-            'kapasitas' => $this->input->post('kapasitas', true),
-            'produk' => $this->input->post('produk', true),
-            'transportir' => $this->input->post('transportir', true),
-            'status_mobil' => $this->input->post('status_mobil', true),
-            'no_mesin' => $this->input->post('no_mesin', true),
-            'no_rangka' => $this->input->post('no_rangka', true),
-            'jenis_kendaraan' => $this->input->post('jenis_kendaraan', true),
-            'rasio' => $this->input->post('rasio', true),
-            'jenis_tangki' => $this->input->post('jenis_tangki', true),
-            'gps' => $this->input->post('gps', true),
-            'sensor_overfill' => $this->input->post('sensor_overfill', true),
-            'standar_volume' => $this->input->post('standar_volume', true),
-            'volume_1' => $this->input->post('volume_1', true),
-            'kategori_mobil' => $this->input->post('kategori_mobil', true),
-            'jumlah_segel' => $this->input->post('jumlah_segel', true),
-            'rk1_komp1' => $this->input->post('rk1_komp1', true),
-            'rk1_komp2' => $this->input->post('rk1_komp2', true),
-            'rk1_komp3' => $this->input->post('rk1_komp3', true),
-            'rk1_komp4' => $this->input->post('rk1_komp4', true),
-            'rk1_komp5' => $this->input->post('rk1_komp5', true),
-            'rk1_komp6' => $this->input->post('rk1_komp6', true),
-            'rk2_komp1' => $this->input->post('rk2_komp1', true),
-            'rk2_komp2' => $this->input->post('rk2_komp2', true),
-            'rk2_komp3' => $this->input->post('rk2_komp3', true),
-            'rk2_komp4' => $this->input->post('rk2_komp4', true),
-            'rk2_komp5' => $this->input->post('rk2_komp5', true),
-            'rk2_komp6' => $this->input->post('rk2_komp6', true),
-             'k_komp1' => $this->input->post('k1_komp1', true),
-            'k_komp2' => $this->input->post('k1_komp2', true),
-            'k_komp3' => $this->input->post('k1_komp3', true),
-            'k_komp4' => $this->input->post('k1_komp4', true),
-            'k_komp5' => $this->input->post('k1_komp5', true),
-            'k_komp6' => $this->input->post('k1_komp6', true),
-        );
-        
-          $datalog = array(
-                'keterangan' => 'Tambah Mobil, Nopol : ' . $this->input->post('nopol', true),
-                'id_pegawai' => $this->session->userdata("id_pegawai"),
-                'keyword' => 'Tambah'
-            );
-            $this->m_log_sistem->insertLog($datalog);
-        
-
-        $this->m_mt->insertMobil($data);
-        $link = base_url() . "mt/data_mt/";
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
     }
 
 
