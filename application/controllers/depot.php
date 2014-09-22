@@ -237,7 +237,7 @@ class Depot extends CI_Controller {
         $data2['no_bulan'] = date('n',  strtotime($tanggal));
         $data2['hari'] = date('d',strtotime($tanggal));
         $data2['bulan_mt'] = strftime('%B',strtotime($tanggal));
-        $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_detail($depot , '2014-07-03');
+        $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_detail($depot , $tanggal);
         $data2['tahun'] = date('Y',strtotime($tanggal));;
         $data2['tanggal'] = strftime('%d %B %Y',strtotime($tanggal));
 //        $data2['bulan'] = $bulan;
