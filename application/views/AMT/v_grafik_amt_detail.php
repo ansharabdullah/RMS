@@ -137,6 +137,18 @@
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>amt/grafik/<?php echo date('Y')?>"> Grafik Bulanan AMT</a></li>
+                    <li><a href="<?php echo base_url(); ?>amt/grafik_harian/<?php echo date('m')?>/<?php echo date('Y')?>"> Grafik Harian AMT</a></li>
+                    <li class="active">Grafik Detail Harian AMT</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <section class="panel">
                     
                     <header class="panel-heading">

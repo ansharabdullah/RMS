@@ -18,6 +18,18 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>jadwal"> Penjadwalan</a></li>
+                    <li class="active">Import Penjadwalan</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        
         <section class="panel">
         </section>
         <section class="panel" id="tambahJadwal">

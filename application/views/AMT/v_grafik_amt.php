@@ -4,6 +4,17 @@
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li class="active">Grafik Bulanan AMT</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
                         Grafik Bulanan Kinerja AMT
@@ -15,7 +26,7 @@
                         ?>
                         <div class="form-group">
                             <div class="col-lg-3">
-                                <input type="month" name="tahun" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                <input type="year" name="tahun" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
                             </div>
 
                             <div class=" col-lg-2">
