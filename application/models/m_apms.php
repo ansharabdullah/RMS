@@ -12,9 +12,18 @@ class m_apms extends CI_Model {
 		$result = $this->db->insert('apms',$data);
 		return $result;
 	}
+	public function insertKinerjaApms($data){
+		$result = $this->db->insert('kinerja_apms',$data);
+		return $result;
+	}
 	public function detailApms($id_apms)
 	{
 		$data = $this->db->query("select * from apms where ID_APMS = $id_apms");
+        return $data->result();
+	}
+	public function selectKinerja($id_apms)
+	{
+		$data = $this->db->query("select * from kinerja_apms where ID_APMS = $id_apms");
         return $data->result();
 	}
 	public function getIdApms($no_apms)
@@ -33,4 +42,9 @@ class m_apms extends CI_Model {
           $result =$this->db->delete('apms');
 		  return $result;
     }
+	public function getLogHarian($date,$id)
+	{
+		$data = $this->db->query("select ID_LOG_HARIAN from log_harian where TANGGAL_LOG_HARIAN = '$date' and ID_DEPOT = $id");
+        return $data->result();
+	}
 }

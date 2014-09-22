@@ -1,6 +1,6 @@
 <?php
 function DateToIndo($date) { 
-       /*  $BulanIndo = array("Januari", "Februari", "Maret",
+       $BulanIndo = array("Januari", "Februari", "Maret",
                            "April", "Mei", "Juni",
                            "Juli", "Agustus", "September",
                            "Oktober", "November", "Desember");
@@ -9,7 +9,7 @@ function DateToIndo($date) {
         $bulan = substr($date, 5, 2); 
         $tgl   = substr($date, 8, 2); 
         
-        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun; */
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
         return($result);
 }
 
@@ -320,40 +320,39 @@ function DateToIndo($date) {
                                     <th>No. Delivery</th>
                                     <th>Tanggal Delivery</th>
                                     <th>Tanggal Plan GI</th>
-                                    <th>Premium</th>
-                                    <th>Solar</th>
+                                    <th>Bahan Bakar</th>
+                                    <th>Volume (KL)</th>
                                     <th>Nomor Order</th>
                                     <th>Tanggal Order</th>
-                                    <th>Pertamax Plus</th>
-                                    <th>Pertamax Dex</th>
-                                    <th>Solar</th>
-                                    <th>Bio Solar</th>
+                                    <th>Tanggal Pengiriman</th>
+                                    <th>Tanggal Kapal Datang</th>
+                                    <th>Tanggal Kapal Berangkat</th>
+                                    <th>Description</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+								<tr>
                                     <?php $i = 1;
                                
                                 foreach ($kinerja as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo(DateToIndo($row->tanggal_log_harian)); ?></td>
-                                    <td><?php echo $row->total_km_mt; ?></td>
-                                    <td><?php echo $row->total_kl_mt; ?></td>
-                                    <td><?php echo $row->ritase_mt; ?></td>
-                                    <td><?php echo $row->own_use; ?></td>
-                                    <td><?php echo $row->premium; ?></td>
-                                    <td><?php echo $row->pertamax; ?></td>
-                                    <td><?php echo $row->pertamax_plus; ?></td>
-                                    <td><?php echo $row->pertamina_dex; ?></td>
-                                    <td><?php echo $row->solar; ?></td>
-                                    <td><?php echo $row->bio_solar; ?></td>
+                                    <td><?php echo $row->NO_DELIVERY; ?></td>
+                                    <td><?php echo $row->DATE_DELIVERY; ?></td>
+                                    <td><?php echo $row->DATE_PLAN_GI; ?></td>
+                                    <td><?php echo $row->BAHAN_BAKAR; ?></td>
+                                    <td><?php echo $row->JUMLAH; ?></td>
+                                    <td><?php echo $row->ORDER_NUMBER; ?></td>
+                                    <td><?php echo $row->DATE_ORDER; ?></td>
+                                    <td><?php echo $row->PENGIRIMAN_KAPAL; ?></td>
+                                    <td><?php echo $row->DATE_KAPAL_DATANG; ?></td>
+                                    <td><?php echo $row->DATE_KAPAL_BERANGKAT; ?></td>
+                                    <td><?php echo $row->DESCRIPTION; ?></td>
                                     
                                     
-                                   <td>
-                                   <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit kinerja" data-replacement="left" data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus kinerja" data-replacement="left" href="javascript:hapus_kinerja('<?php echo $row->id_kinerja_mt ?>');"><i class="icon-remove"></i></a></td>
-
+                                   <td><a onclick="editKinerja('<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->BAHAN_BAKAR ?>', '<?php echo $row->JUMLAH ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>'), '<?php echo $row->DATE_KAPAL_BERANGKAT ?>'), '<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                   </td>
                                 </tr>
                                 <?php $i++;
                             } ?>
@@ -396,8 +395,8 @@ function DateToIndo($date) {
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="get" action="">
-
+            <form class="cmxform form-horizontal tasi-form" method="post" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
+				<input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -405,70 +404,77 @@ function DateToIndo($date) {
                     </div>
                     <div class="modal-body">
                         <div class="form-group ">
-                            <label for="nip" class="control-label col-lg-2">Tanggal</label>
+                            <label for="NO_DELIVERY" class="control-label col-lg-2">NO. Delivery</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal"  type="date" required />
-                                <span class="help-block">Pilih Tanggal</span>
+                                <input class=" form-control input-sm m-bot15" id="no_delivery" name="no_delivery" type="text" required />
+                                
                             </div>
 
-                            <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
+                            <label for="tgl_delivery" class="control-label col-lg-2">Tanggal Delivery</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_delivery" name="tgl_delivery"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
                             </div>
-
-                        </div>
+						</div>
                         <div class="form-group ">
-                            <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
+                            <label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="kl"  type="number" required />
-                            </div>
-                            <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
+								<select class="form-control input-sm m-bot15" id="bh" name="bh">
+									<option value="Bensin">Bensin
+									</option>
+									<option value="Solar">Solar</option>
+								</select>
+							</div>
+							<label for="jml" class="control-label col-lg-2">Jumlah (KL)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="rit" name="rit"  type="number" required />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="ou"  type="number" required />
-                            </div>
-                            <label for="p" class="control-label col-lg-2">Premium (kl)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="p" name="p"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="jml" name="jml"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label for="per" class="control-label col-lg-2">Pertamax (kl)</label>
+                            <label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Plan GI</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="per" name="per"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_plan_gi" name="tgl_plan_gi"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
                             </div>
-                            <label for="pp" class="control-label col-lg-2">Pertamax Plus (kl)</label>
+							 <label for="nomor_order" class="control-label col-lg-2">Nomor Order</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="pp" name="pp"  type="number" required />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="perdex" class="control-label col-lg-2">Pertamax Dex (kl)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="perdex" name="perdex"  type="number" required />
-                            </div>
-                            <label for="solar" class="control-label col-lg-2">Solar (kl)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="solar" name="solar"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="nomor_order" name="nomor_order"  type="text" required />
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label for="bio" class="control-label col-lg-2">Bio Solar (kl)</label>
+                            <label for="tgl_order" class="control-label col-lg-2">Tanggal Order</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="bio" name="bio"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_order" name="tgl_order"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
                             </div>
-
+							<label for="tgl_kirim" class="control-label col-lg-2">Tanggal Pengiriman</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="tgl_kirim" name="tgl_kirim"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
+                            </div>
                         </div>
-
+						<div class="form-group ">
+                            <label for="tgl_kpl_dtg" class="control-label col-lg-2">Tanggal Kapal Datang</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_dtg" name="tgl_kpl_dtg"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
+                            </div>
+							<label for="tgl_kpl_brkt" class="control-label col-lg-2">Tanggal Kapal Berangkat</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_brkt" name="tgl_kpl_brkt"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
+                            </div>
+                        </div>
+						<div class="form-group ">
+                            <label for="des" class="control-label col-lg-2">Description</label>
+                            <div class="col-lg-10">
+                                <textarea class=" form-control input-sm m-bot15" id="des" name="des" required ></textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                        <input type="submit" class="btn btn-success" name="simpan1" id="simpan1" value="Simpan"/>
                     </div>
                 </div>
             </form>
@@ -477,112 +483,97 @@ function DateToIndo($date) {
 
 
     <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<?php foreach ($detailkinerja as $row) { ?>
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="get" action="">
+            <form class="cmxform form-horizontal tasi-form" method="post" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
+				<input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Atur Kinerja</h4>
                     </div>
-
                     <div class="modal-body">
-
                         <div class="form-group ">
-                            <label for="nip" class="control-label col-lg-2">Tanggal</label>
+                            <label for="NO_DELIVERY" class="control-label col-lg-2">NO. Delivery</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tanggl" name="tanggal"  type="date" required />
-                                <span class="help-block">Pilih Tanggal</span>
-                            </div>
-                            <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="km" name="km"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="no_delivery" name="no_delivery" type="text" required />
+                                
                             </div>
 
-                        </div>
+                            <label for="tgl_delivery" class="control-label col-lg-2">Tanggal Delivery</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="tgl_delivery" name="tgl_delivery"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
+                            </div>
+						</div>
                         <div class="form-group ">
-                            <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
+                            <label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="kl"  type="number" required />
-                            </div>
-                            <label for="rit" class="control-label col-lg-2">Ritase (rit)</label>
+								<select class="form-control input-sm m-bot15" id="bh" name="bh">
+									<option value="Bensin">Bensin
+									</option>
+									<option value="Solar">Solar</option>
+								</select>
+							</div>
+							<label for="jml" class="control-label col-lg-2">Jumlah (KL)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="rit" name="rit"  type="number" required />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="ou"  type="number" required />
-                            </div>
-                            <label for="p" class="control-label col-lg-2">Premium (kl)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="p" name="p"  type="number" required />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="per" class="control-label col-lg-2">Pertamax (kl)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="per" name="per"  type="number" required />
-                            </div>
-                            <label for="pp" class="control-label col-lg-2">Pertamax Plus (kl)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="pp" name="pp"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="jml" name="jml"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label for="perdex" class="control-label col-lg-2">Pertamax Dex (kl)</label>
+                            <label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Plan GI</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="perdex" name="perdex"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_plan_gi" name="tgl_plan_gi"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
                             </div>
-                            <label for="solar" class="control-label col-lg-2">Solar (kl)</label>
+							 <label for="nomor_order" class="control-label col-lg-2">Nomor Order</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="solar" name="solar"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="nomor_order" name="nomor_order"  type="text" required />
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label for="bio" class="control-label col-lg-2">Bio Solar (kl)</label>
+                            <label for="tgl_order" class="control-label col-lg-2">Tanggal Order</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="bio" name="bio"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_order" name="tgl_order"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
                             </div>
-
+							<label for="tgl_kirim" class="control-label col-lg-2">Tanggal Pengiriman</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="tgl_kirim" name="tgl_kirim"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
+                            </div>
+                        </div>
+						<div class="form-group ">
+                            <label for="tgl_kpl_dtg" class="control-label col-lg-2">Tanggal Kapal Datang</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_dtg" name="tgl_kpl_dtg"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
+                            </div>
+							<label for="tgl_kpl_brkt" class="control-label col-lg-2">Tanggal Kapal Berangkat</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_brkt" name="tgl_kpl_brkt"  type="date" required />
+								<span class="help-block">Pilih Tanggal</span>
+                            </div>
+                        </div>
+						<div class="form-group ">
+                            <label for="des" class="control-label col-lg-2">Description</label>
+                            <div class="col-lg-10">
+                                <textarea class=" form-control input-sm m-bot15" id="des" name="des" required ></textarea>
+                            </div>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                        <input type="submit" class="btn btn-success" name="simpan2" id="simpan2" value="Simpan"/>
                     </div>
                 </div>
             </form>
         </div>
+		<?php } ?>
     </div>
 
     <!-- modal -->
-    <div class="modal fade" id="hapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Form Hapus Mobil Tangki</h4>
-                </div>
-                <div class="modal-body">
-
-                    Apakah anda yakin ?
-
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-					<form method="GET" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
-                    <input type="submit" value="Hapus"class="btn btn-danger danger">Hapus</a>
-					</form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
+    
     <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>
 
@@ -595,6 +586,20 @@ function DateToIndo($date) {
         EditableTable.init();
     });
     
+	//kinerja
+	function editKinerja(no_delivery, tgl_delivery, tgl_plan_gi, bh, jml, nomor_order, tgl_order, tgl_kirim,tgl_kpl_dtg,tgl_kpl_brgkt,des) {
+		$("#no_delivery").val(no_delivery);
+		$("#tgl_delivery").val(tgl_delivery);
+		$("#tgl_plan_gi").val(tgl_plan_gi);
+		$("#bh").val(bh);
+		$("#jml").val(jml);
+		$("#nomor_order").val(nomor_order);
+		$("#tgl_order").val(tgl_order);
+		$("#tgl_kirim").val(tgl_kirim);
+		$("#tgl_kpl_dtg").val(tgl_kpl_dtg);
+		$("#tgl_kpl_brkt").val(tgl_kpl_brgkt);
+		$("#des").val(des);
+	}
     function FilterData(par) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
