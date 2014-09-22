@@ -45,6 +45,9 @@ class amt extends CI_Controller {
         $depot = $this->session->userdata('id_depot');
         $data1['grafik'] = $this->m_amt->get_kinerja_amt_hari($depot, $bulan, $tahun, $id_pegawai);
         $data1['tahun'] = $tahun;
+        if($bulan <10){
+             $bulan = "0".$bulan;
+        }
         $data1['bulan'] = $bulan;
         $data1['id_pegawai'] = $id_pegawai;
         $data1['kinerja'] = 0;
@@ -527,6 +530,7 @@ class amt extends CI_Controller {
         $indexi = 0;
         $indexj = 0;
         $status = 0;
+        
         while ($status == 0 && $indexi < count($jadwal) && $indexj < count($kinerja)) {
             $i = $indexi;
             $j = $indexj;

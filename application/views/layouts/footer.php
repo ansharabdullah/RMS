@@ -48,6 +48,25 @@
 <script src="<?php echo base_url(); ?>assets/highcharts-4.0.3/js/highcharts-more.js"></script>
 <script src="<?php echo base_url(); ?>assets/highcharts-4.0.3/js/modules/exporting.js"></script>
 
+
+<!--script for this page-->
+<script src="<?php echo base_url()?>assets/js/jquery.stepy.js"></script>
+
+
+<script>
+
+    //step wizard
+
+    $(function() {
+        $('#default').stepy({
+            backLabel: 'Previous',
+            block: true,
+            nextLabel: 'Next',
+            titleClick: true,
+            titleTarget: '.stepy-tab'
+        });
+    });
+</script>
 <script>
 
     //owl carousel
@@ -68,6 +87,8 @@
     $(function() {
         $('select.styled').customSelect();
     });
+    
+    
 
 </script>
 </body>

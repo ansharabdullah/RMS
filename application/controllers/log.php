@@ -11,20 +11,27 @@ class Log extends CI_Controller {
         $this->load->model('m_depot');
     }
 
-    public function index() {
+    public function index($bulan = 1) {
         $id_depot = $this->session->userdata('id_depot');
+        if ($bulan == 1) {
+            $bulan = date('Y-m');
+        }
+        $tahun = date('Y', strtotime($bulan));
+        $bulan = date('m', strtotime($bulan));
+
         if ($id_depot == -1) {
             $data['lv1'] = 11;
             $data['lv2'] = 1;
             $data2 = menu_oam();
-            $data3['log'] = $this->m_log_sistem->getLogOam();
+
+            $data3['log'] = $this->m_log_sistem->getLogOam($bulan, $tahun);
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu', $data2);
             $this->navbar($data['lv1'], $data['lv2']);
             $this->load->view('log/v_log_oam', $data3);
             $this->load->view('layouts/footer');
         } else {
-            $data2['log'] = $this->m_log_sistem->getAllLog($id_depot);
+            $data2['log'] = $this->m_log_sistem->getAllLog($id_depot, $bulan, $tahun);
             $data['lv1'] = 8;
             $data['lv2'] = 1;
             $this->load->view('layouts/header');
@@ -33,6 +40,11 @@ class Log extends CI_Controller {
             $this->load->view('log/v_log', $data2);
             $this->load->view('layouts/footer');
         }
+    }
+
+    public function pilih_bulan() {
+        $bulan = $this->input->post('bulan', true);
+        redirect("log/index/$bulan");
     }
 
     public function navbar($lv1, $lv2) {

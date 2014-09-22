@@ -17,16 +17,35 @@
 
 <section id="main-content">
     <section class="wrapper">
-
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li class="active">Log Sistem</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Tabel Log
+                Tabel Log Sistem
             </header>
             <div class="panel-body">
                 <div class="adv-table editable-table "  style="overflow-x: scroll">
-                    <div class="clearfix">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>log/pilih_bulan/">
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <input type="month" name="bulan" data-mask="9999" placeholder="bulan" required="required" id="tahunLaporan"  class="form-control"/>
+                            </div>
+                            <div class=" col-lg-2">
+                                <input type="submit" class="btn btn-danger" value="Submit">
+                            </div>
 
+                        </div>
+                    </form>
+                    <div class="clearfix">
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter <i class="icon-angle-down"></i>
                             </button>

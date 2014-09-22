@@ -17,6 +17,14 @@ class m_pengaturan extends CI_Model {
         $query = $this->db->get('depot');
         return $query->result();
     }
+     
+    public function getMaxIdDepot(){
+        $this->db->select('max(id_depot) as id_depot');
+        $this->db->from('depot');
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
     
     public function tambahDepot($data){
         $this->db->insert('depot', $data);

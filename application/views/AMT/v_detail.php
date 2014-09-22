@@ -71,7 +71,7 @@ foreach ($grafik as $ka) {
                 valueSuffix: ''
             },
             legend: {
-                borderWidth: 1
+               enabled:false
             },
             series: [{
                     type: 'spline',
@@ -100,7 +100,17 @@ foreach ($grafik as $ka) {
 
 <section id="main-content">
     <section class="wrapper">
-
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>amt/">Data AMT</a></li>
+                    <li class="active">Detail AMT</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <?php foreach ($amt as $row) { ?>
             <section class="panel">
                 <header class="panel-heading">
@@ -347,7 +357,7 @@ foreach ($grafik as $ka) {
             <section class="panel">
                 <div class="panel-body">
                     <div class="col-lg-12"><header class="panel-heading">
-                            Grafik Harian AMT Bulan <?php echo date("M", strtotime($bulan)) . "-" . $tahun ?>
+                            Grafik Harian AMT Bulan <b><?php echo date("M-Y", strtotime($tahun."-".$bulan)) ?></b>
                         </header>
                         <div class="panel-body" >
                             <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
@@ -386,7 +396,7 @@ foreach ($grafik as $ka) {
                         <!--        //tabel kinerja-->
                         <section class="panel">
                             <header class="panel-heading">
-                                Tabel Kinerja Bulan <?php echo date("M", strtotime($bulan)) . "-" . $tahun ?>
+                                Tabel Kinerja Bulan <b><?php echo date("M-Y", strtotime($tahun."-".$bulan)) ?></b>
                             </header>
                             <div class="panel-body">
                                 <div class="adv-table editable-table "  style="overflow-x: scroll">

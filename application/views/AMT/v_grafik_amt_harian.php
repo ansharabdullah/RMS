@@ -1,6 +1,19 @@
 
 <section id="main-content">
     <section class="wrapper">
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>amt/grafik/<?php echo date('Y')?>"> Grafik Bulanan AMT</a></li>
+                    <li class="active">Grafik Harian AMT</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">

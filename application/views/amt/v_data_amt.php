@@ -2,6 +2,18 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li class="active">AMT</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        
         <?php if ($success ) { ?>
             <div class="alert alert-block alert-success fade in">
                 <strong>Berhasil!</strong> <?php echo $success ?>

@@ -25,30 +25,32 @@ class pengaturan extends CI_Controller {
     public function pengaturan_oam() {
         $data['lv1'] = 9;
         $data['lv2'] = 1;
-        
+
         $depot = $this->session->userdata('id_depot');
         $data1['user'] = $this->m_pengaturan->selectAllUser();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->navbar($data['lv1'], $data['lv2']);
-        $this->load->view('oam/v_pengaturan',$data1);
+        $this->load->view('oam/v_pengaturan', $data1);
         $this->load->view('layouts/footer');
     }
-    
+
     public function pengaturan_depot() {
         $data['lv1'] = 10;
         $data['lv2'] = 1;
-        
+
         $depot = $this->session->userdata('id_depot');
         $data1['depot'] = $this->m_pengaturan->selectAllDepot();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu');
         $this->navbar($data['lv1'], $data['lv2']);
-        $this->load->view('oam/v_pengaturan_depot',$data1);
+        $this->load->view('oam/v_pengaturan_depot', $data1);
         $this->load->view('layouts/footer');
     }
-    
-    public function tambah_depot() {
+
+    public function set_depot() {
+        
+        //insert depot
         $data = array(
             'nama_depot' => $this->input->post('nama_depot', true),
             'alamat_depot' => $this->input->post('alamat_depot', true),
@@ -56,13 +58,38 @@ class pengaturan extends CI_Controller {
         );
         $this->m_pengaturan->tambahDepot($data);
         
+        //get id depot terbesar
+        $q = $this->m_pengaturan->getMaxIdDepot();
+        $depot = $q[0]->id_depot;
+        
+        //insert pegawai
+        $data1 = array(
+            'nama_pegawai' => $this->input->post('nama_pegawai', true),
+            'nip' => $this->input->post('nip', true),
+            'id_depot' => $depot,
+        );
+        $this->m_amt->insertPegawai($data1);
+        
+        //insert ke role_assignment
+        $data = $this->m_amt->getMaxID();
+        foreach ($data as $row) {
+            $id_pegawai = $row->max;
+        }
+        $data2 = array(
+            'email' => $this->input->post('email', true),
+            'id_pegawai' => $id_pegawai,
+            'id_role' => 3,
+            'password' => '81dc9bdb52d04dc20036dbd8313ed055'
+        );
+        $this->m_pengaturan->insertAkun($data2);
+
         $link = base_url() . "pengaturan/pengaturan_depot/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
-    
-     public function ubah_depot() {
+
+    public function ubah_depot() {
         $depot = $this->input->post('id_depot', true);
         $data = array(
             'nama_depot' => $this->input->post('nama_depot', true),
@@ -70,7 +97,7 @@ class pengaturan extends CI_Controller {
             'nama_oh' => $this->input->post('nama_oh', true),
         );
         $this->m_pengaturan->editDepot($data, $depot);
-        
+
         $link = base_url() . "pengaturan/pengaturan_depot/";
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
@@ -105,7 +132,7 @@ class pengaturan extends CI_Controller {
             'nama_oh' => $this->input->post('nama_oh', true),
         );
         $this->m_pengaturan->editDepot($data, $depot);
-        
+
         $link = base_url() . "pengaturan/";
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
@@ -145,7 +172,7 @@ class pengaturan extends CI_Controller {
     public function tambah_akun() {
 
         //insert ke tabel pegawai
-       $depot = $this->session->userdata('id_depot');
+        $depot = $this->session->userdata('id_depot');
         $data1 = array(
             'nama_pegawai' => $this->input->post('nama_pegawai', true),
             'nip' => $this->input->post('nip', true),
@@ -170,6 +197,19 @@ class pengaturan extends CI_Controller {
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
+    }
+
+    public function tambah_depot() {
+        $data['lv1'] = 10;
+        $data['lv2'] = 1;
+
+        $depot = $this->session->userdata('id_depot');
+        $data1['user'] = $this->m_pengaturan->selectAllUser();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu');
+        $this->navbar($data['lv1'], $data['lv2']);
+        $this->load->view('oam/v_tambah_depot', $data1);
+        $this->load->view('layouts/footer');
     }
 
 }
