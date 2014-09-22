@@ -39,7 +39,7 @@ class m_mt extends CI_Model {
     }
     
     public function selectMobil($id_mobil){
-        $data = $this->db->query("select NOPOL,KAPASITAS,PRODUK from mobil where id_mobil=$id_mobil");
+        $data = $this->db->query("select id_mobil,NOPOL,KAPASITAS,PRODUK from mobil where id_mobil=$id_mobil");
         return $data->row();
     }
     

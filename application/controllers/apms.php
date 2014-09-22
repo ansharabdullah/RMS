@@ -92,6 +92,7 @@ class apms extends CI_Controller {
 		
     }	
 	public function detail_apms($id_apms){
+				
 		$data1['pesan'] =0;
 		if($this->input->post('simpan'))
 		{
@@ -114,16 +115,43 @@ class apms extends CI_Controller {
 				
 			}
 		}
+		if($this->input->post('simpan1')=="Simpan")
+			{
+				$id = $this->input->post('id', true);
+				$data = $this->m_apms->getLogHarian(date('Y-m-d'),$this->session->userdata('id_depot'));
+				$log_harian = $data[0]->ID_LOG_HARIAN;
+				$data_1 = array(
+					'ID_APMS' => $id,
+					'ID_LOG_HARIAN' => $log_harian,
+					'NO_DELIVERY' => $this->input->post('no_delivery', true),
+					'DATE_DELIVERY' => $this->input->post('tgl_delivery', true),
+					'DATE_PLAN_GI' => $this->input->post('tgl_plan_gi', true),
+					'BAHAN_BAKAR' => $this->input->post('bh', true),
+					'JUMLAH' => $this->input->post('jml', true),
+					'ORDER_NUMBER' => $this->input->post('nomor_order', true),
+					'DATE_ORDER' => $this->input->post('tgl_order', true),
+					'PENGIRIMAN_KAPAL' => $this->input->post('tgl_kirim', true),
+					'DATE_KAPAL_DATANG' => $this->input->post('tgl_kpl_dtg', true),
+					'DATE_KAPAL_BERANGKAT' => $this->input->post('tgl_kpl_brkt', true),
+					'DESCRIPTION' => $this->input->post('des', true),
+				);
+				$bisa = $this->m_apms->insertKinerjaApms($data_1);
+				$data1['pesan'] = 1;
+				$data1['pesan_text'] = "Data Kinerja Berhasil di Tambah.";
+			}
 		$data['lv1'] = 4;
         $data['lv2'] = 1;
         $data1['apms'] = $this->m_apms->detailApms($id_apms);
 		$data3 = menu_ss();
+		$data1['kinerja'] = $this->m_apms->selectKinerja($id_apms);
         //$data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil,date('Y'));
 		$this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
         $this->load->view('layouts/navbar', $data);
         $this->load->view('apms/v_detail_apms', $data1);
         $this->load->view('layouts/footer');
+		
+		
 	}
 	
     public function edit_apms($id_apms) {

@@ -94,12 +94,13 @@
         });
     });
 </script>
-<section id="main-content">
+<section id="main-content" >
     <section class="wrapper">
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
                 KPI INTERNAL
+                <a href="<?php echo base_url()?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
             </header>
             <div class="panel-body">
                 <div class="row">

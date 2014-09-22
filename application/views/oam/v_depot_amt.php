@@ -74,7 +74,7 @@
                     <div class="panel-body" >
                          <?php
                                 $attr = array("class"=>"cmxform form-horizontal tasi-form");
-                                 echo form_open("depot/amt_tahun/".$id_depot."/".$nama_depot,$attr);
+                                 echo form_open("depot/amt_tahun/".$id_depot,$attr);
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">
@@ -180,7 +180,7 @@
             total_kl.push(<?php echo $ka->total_kl?>);
             ritase.push(<?php echo $ka->ritase?>);
             spbu.push(<?php echo $ka->spbu?>);
-            bulan.push("<?php echo $ka->bulan?>");
+            bulan.push("<?php echo strftime("%B",strtotime($ka->TANGGAL_LOG_HARIAN))?>");
             nomor_bulan.push("<?php echo date("n",strtotime($ka->TANGGAL_LOG_HARIAN))?>");
             <?php
         }
@@ -201,7 +201,7 @@
                    point:{
                       events:{
                         click: function(event) {
-                                window.location = "<?php echo base_url() ?>depot/amt_depot_harian/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+ nomor_bulan[this.x]+"/<?php echo date('Y')?>";
+                                window.location = "<?php echo base_url() ?>depot/amt_depot_harian/<?php echo $id_depot?>/"+ nomor_bulan[this.x]+"/<?php echo $tahun?>";
                             }
                         }
                     }

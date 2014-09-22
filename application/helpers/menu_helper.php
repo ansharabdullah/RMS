@@ -149,6 +149,7 @@ if ( ! function_exists('menu_oam'))
 {
     function menu_oam($var = '')
     {
+        setlocale(LC_ALL, "IND");
         $CI =& get_instance();
          $CI->load->model("m_kinerja");
          $CI->load->model("m_rencana");
@@ -175,7 +176,7 @@ if ( ! function_exists('menu_oam'))
                     }
                }
                
-               array_push($arrNotif,"<b>&nbsp;&nbsp;".date_format(date_create($logHarian[$i]['tanggal']),'d-M-y')."</b>");
+               array_push($arrNotif,"<b>&nbsp;&nbsp;".strftime('%d %B %Y',strtotime($logHarian[$i]['tanggal']))."</b>");
                if($logHarian[$i]['id_depot'] > 0)
                {
                    //cek jadwal

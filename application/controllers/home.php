@@ -51,6 +51,7 @@ class home extends CI_Controller {
     }
 
     public function home_oam() {
+        setlocale(LC_ALL, "IND");
         //if (($this->session->userdata('isLoggedIn')) && (($this->session->userdata('id_role') == 1) || ($this->session->userdata('id_role') == 2) )) {
        $this->load->model('m_kpi');
         $data2['total_mt'] = $this->m_mt->getTotalMt();

@@ -1080,19 +1080,19 @@ class laporan extends CI_Controller {
             $data2['data_kpi'] = $this->m_laporan->getKPIInternal($tahun, $depot);
         }
 
-        $this->header(7, 5);
+        $this->header(7, 3);
         $this->load->view('laporan/v_kpi_internal', $data2);
         $this->footer();
     }
 
     public function tambah_kpi_internal() {
-        $this->header(7, 5);
+        $this->header(7, 3);
         $this->load->view('laporan/v_tambah_kpi_internal');
         $this->footer();
     }
 
     public function edit_kpi_internal() {
-        $this->header(7, 5);
+        $this->header(7, 3);
         $this->load->view('laporan/v_edit_kpi_internal');
         $this->footer();
     }
@@ -1100,22 +1100,31 @@ class laporan extends CI_Controller {
     public function preview_harian() {
         $this->load->model('m_laporan');
         $depot = $this->session->userdata('id_depot');
+        $data2['laporan_ada'] = false;
 
         if (!$this->input->post('cek')) {
-            //redirect('laporan/harian');
+            redirect('laporan/harian');
         } else {
             $bulan_input = $this->input->post('bulan');
+            $pjs = trim($this->input->post('pjs'));
             $tanggal = date("d-m-Y", strtotime($bulan_input));
             $bulan = date("m", strtotime($bulan_input));
             $tahun = date("Y", strtotime($bulan_input));
             $last_day = date('t', strtotime($tanggal));
             $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan);
+            $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);
+            $hasil_rencana_realisasi = $this->m_laporan->getRencanaRealisasi($depot, $tahun, $bulan);
+            $jumlah_data_performansi = $data_performansi->num_rows();
+            $hasil_data_performansi = $data_performansi->result();
+            $data_depot = $this->m_laporan->getInfoDepot($depot);
             $jumlah_data = $data->num_rows();
             $hasil_data = $data->result();
 
             $column_name = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO");
+            $month_name = array("01" => "Januari", "02" => "Februari", "03" => "Maret", "04" => "April", "05" => "Mei", "06" => "Juni", "07" => "Juli", "08" => "Agustus", "09" => "September", "10" => "Oktober", "11" => "November", "12" => "Desember");
 
             if ($jumlah_data > 0) {
+                $data2['laporan_ada'] = true;
                 $this->load->library('PHPExcel/Classes/PHPExcel');
                 $inputFileName = './data_laporan/template/harian.xls';
 
@@ -1127,6 +1136,99 @@ class laporan extends CI_Controller {
                  */
                 $objPHPExcel->setActiveSheetIndexByName('KM');
                 $sheetData = $objPHPExcel->getActiveSheet();
+
+                if ($pjs != "") {
+                    $sheetData->setCellValue('U10', "Pjs SS Pertamina Patra Niaga");
+                    $sheetData->setCellValue('U11', $pjs);
+                } else {
+                    $sheetData->setCellValue('U11', $data_depot->NAMA_PEGAWAI);
+                }
+                $sheetData->setCellValue('A1', "Rekapitulasi KILOMETER Mobil Tangki PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT . " Periode " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AG', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AI', 1);
+                }
+
+                //Untuk laporan harian lokasi
+                $km_total_8 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $km_total_16 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $km_total_24 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $km_total_32 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $km_total_40 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+                $no = $jumlah_data;
+                foreach ($hasil_data as $row) {
+                    $array = (array) $row;
+
+                    $sheetData->insertNewRowBefore(5, 1);
+                    $sheetData->setCellValue('A5', $no);
+                    $sheetData->setCellValue('B5', $array['TRANSPORTIR']);
+                    $sheetData->setCellValue('C5', $array['NOPOL']);
+                    $sheetData->setCellValue('D5', $array['KAPASITAS']);
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($this->input->post('bln' . $i)) {
+                            if ($array['KM' . $i] != "") {
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', $array['KM' . $i]);
+                                if ($array['KAPASITAS'] == '8') {
+                                    $km_total_8[$i - 1] = $km_total_8[$i - 1] + $array['KM' . $i];
+                                } else if ($array['KAPASITAS'] == '16') {
+                                    $km_total_16[$i - 1] = $km_total_16[$i - 1] + $array['KM' . $i];
+                                } else if ($array['KAPASITAS'] == '24') {
+                                    $km_total_24[$i - 1] = $km_total_24[$i - 1] + $array['KM' . $i];
+                                } else if ($array['KAPASITAS'] == '32') {
+                                    $km_total_32[$i - 1] = $km_total_32[$i - 1] + $array['KM' . $i];
+                                } else if ($array['KAPASITAS'] == '40') {
+                                    $km_total_40[$i - 1] = $km_total_40[$i - 1] + $array['KM' . $i];
+                                }
+                            } else {
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                            }
+                        } else {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                        }
+                    }
+
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=SUM(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
+                    $i++;
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 1] . '5)');
+
+
+                    if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
+                        $sheetData->mergeCells('B5:B6');
+                    }
+                    $no--;
+                }
+
+                $objPHPExcel->getActiveSheet()->removeRow(4, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
+
+                for ($i = 1; $i <= $last_day + 2; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=SUM(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 5), '=AVERAGE(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                }
+
+                /*
+                 * KL
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('KL');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                if ($pjs != "") {
+                    $sheetData->setCellValue('U10', "Pjs SS Pertamina Patra Niaga");
+                    $sheetData->setCellValue('U11', $pjs);
+                } else {
+                    $sheetData->setCellValue('U11', $data_depot->NAMA_PEGAWAI);
+                }
+                $sheetData->setCellValue('A1', "Rekapitulasi KILOLITER Mobil Tangki PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT . " Periode " . $month_name[$bulan] . " " . $tahun);
 
                 if ($last_day == 28) {
                     $sheetData->removeColumn('AI', 1);
@@ -1153,7 +1255,7 @@ class laporan extends CI_Controller {
                     for ($i = 1; $i <= $last_day; $i++) {
                         if ($this->input->post('bln' . $i)) {
                             if ($array['KM' . $i] != "") {
-                                $sheetData->setCellValue($column_name[$i + 3] . '5', $array['KM' . $i]);
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', $array['KL' . $i]);
                             } else {
                                 $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
                             }
@@ -1161,12 +1263,12 @@ class laporan extends CI_Controller {
                             $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
                         }
                     }
-                    
+
                     $sheetData->setCellValue($column_name[$i + 3] . '5', '=SUM(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
                     $i++;
                     $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 1] . '5)');
-                
-                    
+
+
                     if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
                         $sheetData->mergeCells('B5:B6');
                     }
@@ -1176,40 +1278,1152 @@ class laporan extends CI_Controller {
                 $objPHPExcel->getActiveSheet()->removeRow(4, 1);
                 $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
 
-                for ($i = 1; $i <= $last_day+2; $i++) {
+                for ($i = 1; $i <= $last_day + 2; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=SUM(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 5), '=AVERAGE(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                }
+
+                /*
+                 * Ritase MT
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Ritase MT');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                $sheetData->setCellValue('A1', "Ritase Mobil Tangki PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT . " Periode " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AG', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AI', 1);
+                }
+
+                $mt_ops8 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_ops16 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_ops24 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_ops32 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_ops40 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+                $mt_off8 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_off16 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_off24 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_off32 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_off40 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+                $mt_opsPatra = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+
+                $no = $jumlah_data;
+                foreach ($hasil_data as $row) {
+                    $array = (array) $row;
+
+                    $sheetData->insertNewRowBefore(5, 1);
+                    $sheetData->setCellValue('A5', $no);
+                    $sheetData->setCellValue('B5', $array['TRANSPORTIR']);
+                    $sheetData->setCellValue('C5', $array['NOPOL']);
+                    $sheetData->setCellValue('D5', $array['KAPASITAS']);
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($this->input->post('bln' . $i)) {
+                            if ($array['KM' . $i] != "") {
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', $array['RIT' . $i]);
+                                if ($array['KAPASITAS'] == '8') {
+                                    $mt_ops8[$i - 1] ++;
+                                } else if ($array['KAPASITAS'] == '16') {
+                                    $mt_ops16[$i - 1] ++;
+                                } else if ($array['KAPASITAS'] == '24') {
+                                    $mt_ops24[$i - 1] ++;
+                                } else if ($array['KAPASITAS'] == '32') {
+                                    $mt_ops32[$i - 1] ++;
+                                } else if ($array['KAPASITAS'] == '40') {
+                                    $mt_ops40[$i - 1] ++;
+                                }
+
+                                if (strpos($array['TRANSPORTIR'], 'PATRA NIAGA') !== false) {
+                                    $mt_opsPatra[$i - 1] ++;
+                                }
+                            } else {
+                                $sheetData->getStyle($column_name[$i + 3] . '5')->getFill()->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID, 'startcolor' => array('rgb' => 'FFFF00')));
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                                if ($array['KAPASITAS'] == '8') {
+                                    $mt_off8[$i - 1] ++;
+                                } else if ($array['KAPASITAS'] == '16') {
+                                    $mt_off16[$i - 1] ++;
+                                } else if ($array['KAPASITAS'] == '24') {
+                                    $mt_off24[$i - 1] ++;
+                                } else if ($array['KAPASITAS'] == '32') {
+                                    $mt_off32[$i - 1] ++;
+                                } else if ($array['KAPASITAS'] == '40') {
+                                    $mt_off40[$i - 1] ++;
+                                }
+                            }
+                        } else {
+                            $sheetData->getStyle($column_name[$i + 3] . '5')->getFill()->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID, 'startcolor' => array('rgb' => 'FFFF00')));
+
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                            if ($array['KAPASITAS'] == '8') {
+                                $mt_off8[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '16') {
+                                $mt_off16[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '24') {
+                                $mt_off24[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '32') {
+                                $mt_off32[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '40') {
+                                $mt_off40[$i - 1] ++;
+                            }
+                        }
+                    }
+
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
+                    $sheetData->setCellValue($column_name[$i + 4] . '5', '=KL!' . $column_name[$i + 3] . ($no + 3));
+                    $sheetData->setCellValue($column_name[$i + 5] . '5', '=COUNTIF(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5;">0")');
+                    $sheetData->setCellValue($column_name[$i + 6] . '5', '=' . $column_name[$i + 4] . '5/' . $column_name[$i + 5] . '4/D5');
+
+
+                    if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
+                        $sheetData->mergeCells('B5:B6');
+                    }
+                    $no--;
+                }
+
+                $objPHPExcel->getActiveSheet()->removeRow(4, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
+
+                $i = 0;
+                for ($i = 1; $i <= $last_day; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=KL!' . $column_name[$i + 3] . ($jumlah_data + 4));
+                }
+
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=AVERAGE(E' . ($jumlah_data + 4) . ':' . $column_name[$i + 2] . ($jumlah_data + 4) . ')');
+                $sheetData->setCellValue($column_name[$i + 4] . ($jumlah_data + 4), '=AVERAGE(' . $column_name[$i + 4] . '4:' . $column_name[$i + 4] . ($jumlah_data + 3) . ')');
+                $sheetData->setCellValue($column_name[$i + 5] . ($jumlah_data + 4), '=AVERAGE(' . $column_name[$i + 5] . '4:' . $column_name[$i + 5] . ($jumlah_data + 3) . ')');
+                $sheetData->setCellValue($column_name[$i + 6] . ($jumlah_data + 4), '=AVERAGE(' . $column_name[$i + 6] . '4:' . $column_name[$i + 6] . ($jumlah_data + 3) . ')');
+
+                $i = 0;
+                for ($i = 1; $i <= $last_day; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 6), $mt_ops8[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 7), $mt_ops16[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 8), $mt_ops24[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 9), $mt_ops32[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 10), $mt_ops40[$i - 1]);
+
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 13), $mt_off8[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 14), $mt_off16[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 15), $mt_off24[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 16), $mt_off32[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 17), $mt_off40[$i - 1]);
+
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 20), $mt_opsPatra[$i - 1]);
+                }
+
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 6), '=AVERAGE(E' . ($jumlah_data + 6) . ':' . $column_name[$i + 2] . ($jumlah_data + 6) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 7), '=AVERAGE(E' . ($jumlah_data + 7) . ':' . $column_name[$i + 2] . ($jumlah_data + 7) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 8), '=AVERAGE(E' . ($jumlah_data + 8) . ':' . $column_name[$i + 2] . ($jumlah_data + 8) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 9), '=AVERAGE(E' . ($jumlah_data + 9) . ':' . $column_name[$i + 2] . ($jumlah_data + 9) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 10), '=AVERAGE(E' . ($jumlah_data + 10) . ':' . $column_name[$i + 2] . ($jumlah_data + 10) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 11), '=AVERAGE(E' . ($jumlah_data + 11) . ':' . $column_name[$i + 2] . ($jumlah_data + 11) . ')');
+
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 13), '=AVERAGE(E' . ($jumlah_data + 13) . ':' . $column_name[$i + 2] . ($jumlah_data + 13) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 14), '=AVERAGE(E' . ($jumlah_data + 14) . ':' . $column_name[$i + 2] . ($jumlah_data + 14) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 15), '=AVERAGE(E' . ($jumlah_data + 15) . ':' . $column_name[$i + 2] . ($jumlah_data + 15) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 16), '=AVERAGE(E' . ($jumlah_data + 16) . ':' . $column_name[$i + 2] . ($jumlah_data + 16) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 17), '=AVERAGE(E' . ($jumlah_data + 17) . ':' . $column_name[$i + 2] . ($jumlah_data + 17) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 18), '=AVERAGE(E' . ($jumlah_data + 18) . ':' . $column_name[$i + 2] . ($jumlah_data + 18) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 19), '=AVERAGE(E' . ($jumlah_data + 19) . ':' . $column_name[$i + 2] . ($jumlah_data + 19) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 20), '=AVERAGE(E' . ($jumlah_data + 20) . ':' . $column_name[$i + 2] . ($jumlah_data + 20) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 21), '=AVERAGE(E' . ($jumlah_data + 21) . ':' . $column_name[$i + 2] . ($jumlah_data + 21) . ')');
+
+
+                /*
+                 * OWNUSE
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Ownuse');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                if ($pjs != "") {
+                    $sheetData->setCellValue('U10', "Pjs SS Pertamina Patra Niaga");
+                    $sheetData->setCellValue('U11', $pjs);
+                } else {
+                    $sheetData->setCellValue('U11', $data_depot->NAMA_PEGAWAI);
+                }
+                $sheetData->setCellValue('A1', "Rekapitulasi OWNUSE Mobil Tangki PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT . " Periode " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AG', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AI', 1);
+                }
+
+                $no = $jumlah_data;
+                foreach ($hasil_data as $row) {
+                    $array = (array) $row;
+
+                    $sheetData->insertNewRowBefore(5, 1);
+                    $sheetData->setCellValue('A5', $no);
+                    $sheetData->setCellValue('B5', $array['TRANSPORTIR']);
+                    $sheetData->setCellValue('C5', $array['NOPOL']);
+                    $sheetData->setCellValue('D5', $array['KAPASITAS']);
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($this->input->post('bln' . $i)) {
+                            if ($array['KM' . $i] != "") {
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', $array['OWNUSE' . $i]);
+                            } else {
+                                $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                            }
+                        } else {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                        }
+                    }
+
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=SUM(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
+                    $i++;
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 1] . '5)');
+
+
+                    if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
+                        $sheetData->mergeCells('B5:B6');
+                    }
+                    $no--;
+                }
+
+                $objPHPExcel->getActiveSheet()->removeRow(4, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
+
+                for ($i = 1; $i <= $last_day + 2; $i++) {
                     $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=SUM(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
                     $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 5), '=AVERAGE(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
                 }
 
 
+                /*
+                 * Performansi
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Performansi');
+                $sheetData = $objPHPExcel->getActiveSheet();
 
 
+                $sheetData->setCellValue('A2', "PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('A3', "Periode " . $month_name[$bulan] . " " . $tahun);
+                $sheetData->setCellValue('A13', "TBBM " . $data_depot->NAMA_DEPOT);
+
+                $byk_amt_kurang = 0;
+                $amt_kurang['nama'] = array();
+                $amt_kurang['hari_kerja'] = array();
+                $amt_kurang['jabatan'] = array();
+                $amt_kurang['klas'] = array();
+
+                //Untuk laporan harian lokasi
+                $jumlah_sopir = 0;
+                $jumlah_kernet = 0;
+                $sopir_ops = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $kernet_ops = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $sopir_tidak_ops = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $kernet_tidak_ops = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 
+                $no = $jumlah_data_performansi;
+                foreach ($hasil_data_performansi as $row) {
+                    $array = (array) $row;
 
 
+                    //Untul laporan harian lokasi 
+                    if ($array['JABATAN'] == "SUPIR") {
+                        $jumlah_sopir++;
+                    } else if ($array['JABATAN'] == "KERNET") {
+                        $jumlah_kernet++;
+                    }
+
+                    $sheetData->insertNewRowBefore(8, 1);
+                    $sheetData->setCellValue('A8', $no);
+                    $sheetData->setCellValue('B8', $array['NAMA_PEGAWAI']);
+                    $sheetData->setCellValue('C8', $array['NIP']);
+                    $sheetData->setCellValue('D8', $array['JABATAN']);
+                    $sheetData->setCellValue('E8', $array['KLASIFIKASI']);
+
+                    $hari_kerja = 0;
+                    $km = 0;
+                    $kl = 0;
+                    $rit = 0;
+                    $spbu = 0;
+                    $rupiah = 0;
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($this->input->post('bln' . $i)) {
+                            if ($array['KM' . $i] != "") {
+                                $km = $km + $array['KM' . $i];
+                            }
+                            if ($array['RIT' . $i] != "") {
+                                $rit = $rit + $array['RIT' . $i];
+                                $hari_kerja++;
+                            }
+                            if ($array['KL' . $i] != "") {
+                                $kl = $kl + $array['KL' . $i];
+                            }
+                            if ($array['SPBU' . $i] != "") {
+                                $spbu = $spbu + $array['SPBU' . $i];
+                            }
+                            if ($array['RUPIAH' . $i] != "") {
+                                $rupiah = $rupiah + $array['RUPIAH' . $i];
+                            }
+
+                            //Untul laporan harian lokasi 
+                            if ($array['JABATAN'] == "SUPIR") {
+                                if ($array['RIT' . $i] != "") {
+                                    $sopir_ops[$i - 1] ++;
+                                } else {
+                                    $sopir_tidak_ops[$i - 1] ++;
+                                }
+                            } else if ($array['JABATAN'] == "KERNET") {
+                                if ($array['RIT' . $i] != "") {
+                                    $kernet_ops[$i - 1] ++;
+                                } else {
+                                    $kernet_tidak_ops[$i - 1] ++;
+                                }
+                            }
+                        }
+                    }
+
+                    $sheetData->setCellValue('F8', $hari_kerja);
+                    $sheetData->setCellValue('G8', $km);
+                    $sheetData->setCellValue('H8', $rit);
+                    $sheetData->setCellValue('I8', $spbu);
+                    $sheetData->setCellValue('J8', $kl);
+                    $sheetData->setCellValue('K8', $rupiah);
+
+                    if ($hari_kerja < 15) {
+                        $byk_amt_kurang++;
+                        $amt_kurang['nama'][] = $array['NAMA_PEGAWAI'];
+                        $amt_kurang['hari_kerja'] [] = $hari_kerja;
+                        $amt_kurang['jabatan'] [] = $array['JABATAN'];
+                        $amt_kurang['klas'] [] = $array['KLASIFIKASI'];
+                    }
+
+                    $no--;
+                }
+
+                $sheetData->setCellValue('F' . ($jumlah_data_performansi + 9), '=SUM(F7:F' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('G' . ($jumlah_data_performansi + 9), '=SUM(G7:G' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('H' . ($jumlah_data_performansi + 9), '=SUM(H7:H' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('I' . ($jumlah_data_performansi + 9), '=SUM(I7:I' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('J' . ($jumlah_data_performansi + 9), '=SUM(J7:J' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('K' . ($jumlah_data_performansi + 9), '=SUM(K7:K' . ($jumlah_data_performansi + 7) . ')');
+
+                $objPHPExcel->getActiveSheet()->removeRow(7, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data_performansi + 7, 1);
+
+                $no = $byk_amt_kurang;
+                for ($i = 0; $i < $byk_amt_kurang; $i++) {
+                    $sheetData->insertNewRowBefore(($jumlah_data_performansi + 23), 1);
+                    $sheetData->setCellValue('A' . ($jumlah_data_performansi + 23), $no);
+                    $sheetData->setCellValue('B' . ($jumlah_data_performansi + 23), $amt_kurang['nama'][$i]);
+                    $sheetData->setCellValue('C' . ($jumlah_data_performansi + 23), $amt_kurang['hari_kerja'] [$i]);
+                    $sheetData->setCellValue('D' . ($jumlah_data_performansi + 23), $amt_kurang['jabatan'] [$i]);
+                    $sheetData->setCellValue('E' . ($jumlah_data_performansi + 23), $amt_kurang['klas'] [$i]);
+                    $no--;
+                }
+                $objPHPExcel->getActiveSheet()->removeRow(($jumlah_data_performansi + 22), 1);
+                $objPHPExcel->getActiveSheet()->removeRow(($jumlah_data_performansi + 22 + $byk_amt_kurang), 1);
+
+                /*
+                 * Laporan Harian Lokasi
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Laporan Harian Lokasi');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                $sheetData->setCellValue('B3', "TBBM " . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('B4', "Bulan " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AI', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AJ', 1);
+                }
+
+                for ($i = 0; $i < $last_day; $i++) {
+                    //1
+                    $sheetData->setCellValue($column_name[$i + 5] . '10', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 6) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 13));
+                    $sheetData->setCellValue($column_name[$i + 5] . '11', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 7) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 14));
+                    $sheetData->setCellValue($column_name[$i + 5] . '12', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 8) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 15));
+                    $sheetData->setCellValue($column_name[$i + 5] . '13', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 9) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 16));
+                    $sheetData->setCellValue($column_name[$i + 5] . '14', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 10) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 17));
+
+                    //3
+                    $sheetData->setCellValue($column_name[$i + 5] . '28', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 6));
+                    $sheetData->setCellValue($column_name[$i + 5] . '29', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 7));
+                    $sheetData->setCellValue($column_name[$i + 5] . '30', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 8));
+                    $sheetData->setCellValue($column_name[$i + 5] . '31', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 9));
+                    $sheetData->setCellValue($column_name[$i + 5] . '32', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 10));
+
+                    //4
+                    if ($hasil_rencana_realisasi) {
+                        //4.b
+                        $sheetData->setCellValue($column_name[$i + 5] . '50', "=KL!" . $column_name[$i + 4] . ($jumlah_data + 4));
+
+                        if ($this->input->post('bln' . ($i + 1))) {
+                            // 4.a
+                            if ($hasil_rencana_realisasi[$i]->R_PREMIUM != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '39', $hasil_rencana_realisasi[$i]->R_PREMIUM);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_BIOSOLAR != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '40', $hasil_rencana_realisasi[$i]->R_BIOSOLAR);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_PERTAMAX != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '41', $hasil_rencana_realisasi[$i]->R_PERTAMAX);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_SOLAR != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '42', $hasil_rencana_realisasi[$i]->R_SOLAR);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_PERTAMAXPLUS != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '43', $hasil_rencana_realisasi[$i]->R_PERTAMAXPLUS);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_PERTAMINADEX != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '44', $hasil_rencana_realisasi[$i]->R_PERTAMINADEX);
+                            }
+
+                            //4.b
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_PREMIUM != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '51', $hasil_rencana_realisasi[$i]->REALISASI_PREMIUM);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_BIO_SOLAR != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '52', $hasil_rencana_realisasi[$i]->REALISASI_BIO_SOLAR);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '53', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_SOLAR != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '54', $hasil_rencana_realisasi[$i]->REALISASI_SOLAR);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX_PLUS != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '55', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX_PLUS);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMINA_DEX != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '56', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMINA_DEX);
+                            }
 
 
+                            //9
+                            $sheetData->setCellValue($column_name[$i + 5] . '98', $hasil_rencana_realisasi[$i]->JUMLAH_ALOKASI_SPBU);
+                        }
+                    }
 
+                    //6
+                    $sheetData->setCellValue($column_name[$i + 5] . '68', $km_total_8[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '69', $km_total_16[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '70', $km_total_24[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '71', $km_total_32[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '72', $km_total_40[$i]);
 
+                    //7
+                    if ($this->input->post('bln' . ($i + 1))) {
+                        $sheetData->setCellValue($column_name[$i + 5] . '77', $jumlah_sopir);
+                        $sheetData->setCellValue($column_name[$i + 5] . '78', $jumlah_kernet);
 
+                        $sheetData->setCellValue($column_name[$i + 5] . '80', $hasil_rencana_realisasi[$i]->JADWAL_DINAS_SUPIR);
+                        $sheetData->setCellValue($column_name[$i + 5] . '81', $hasil_rencana_realisasi[$i]->JADWAL_DINAS_KERNET);
 
+                        $sheetData->setCellValue($column_name[$i + 5] . '83', $sopir_ops[$i]);
+                        $sheetData->setCellValue($column_name[$i + 5] . '84', $kernet_ops[$i]);
+                    }
 
+                    //8
+                    if ($this->input->post('bln' . ($i + 1))) {
+                        $sheetData->setCellValue($column_name[$i + 5] . '94', $hasil_rencana_realisasi[$i]->REALISASI_OWNUSE);
+                    }
+                }
 
+                $j = 0;
+                for ($j = 9; $j <= 105; $j++) {
+                    if ($j != 16 && $j != 18 && $j != 25 && $j != 26 && $j != 33 && $j != 36 && $j != 37 && $j != 61 && $j != 62 && $j != 65 && $j != 66 && $j != 75 && $j != 76 && $j != 79 && $j != 82 && $j != 85 && $j != 88 && $j != 91 && $j != 92 && $j != 96 && $j != 97 && $j != 100 && $j != 101) {
+                        if ($j == 95) {
+                            
+                        } else if ($j == 105) {
+                            $sheetData->setCellValue($column_name[$i + 6] . $j, "=AVERAGE(F" . $j . ":" . $column_name[$i + 4] . $j . ")");
+                        } else {
+                            $sheetData->setCellValue($column_name[$i + 5] . $j, "=SUM(F" . $j . ":" . $column_name[$i + 4] . $j . ")");
+                            $sheetData->setCellValue($column_name[$i + 6] . $j, "=AVERAGE(F" . $j . ":" . $column_name[$i + 4] . $j . ")");
+                        }
+                    }
+                }
 
-
-
-
-
-
-
-
-
+                $nama_file = 'data_laporan/harian/Laporan Harian ' . $data_depot->NAMA_DEPOT . " " . $month_name[$bulan] . " " . $tahun . '.xls';
 
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
                 $objWriter->setPreCalculateFormulas(FALSE);
-                $objWriter->save('./data_laporan/harian/asd.xls');
+                $objWriter->save('./' . $nama_file);
+
+                $data2['nama_file'] = base_url() . $nama_file;
             }
+            $this->header(7, 1);
+            $this->load->view('laporan/v_preview_harian', $data2);
+            $this->footer();
+        }
+    }
+
+    public function preview_bulanan() {
+        $this->load->model('m_laporan');
+        $depot = $this->session->userdata('id_depot');
+        $data2['laporan_ada'] = false;
+
+        if (!$this->input->post('cek')) {
+            redirect('laporan/bulanan');
+        } else {
+            $bulan_input = $this->input->post('bulan');
+            $pjs = trim($this->input->post('pjs'));
+            $tanggal = date("d-m-Y", strtotime($bulan_input));
+            $bulan = date("m", strtotime($bulan_input));
+            $tahun = date("Y", strtotime($bulan_input));
+            $last_day = date('t', strtotime($tanggal));
+            $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan);
+            $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);
+            $hasil_rencana_realisasi = $this->m_laporan->getRencanaRealisasi($depot, $tahun, $bulan);
+            $jumlah_data_performansi = $data_performansi->num_rows();
+            $hasil_data_performansi = $data_performansi->result();
+            $data_depot = $this->m_laporan->getInfoDepot($depot);
+            $jumlah_data = $data->num_rows();
+            $hasil_data = $data->result();
+
+            $column_name = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO");
+            $month_name = array("01" => "Januari", "02" => "Februari", "03" => "Maret", "04" => "April", "05" => "Mei", "06" => "Juni", "07" => "Juli", "08" => "Agustus", "09" => "September", "10" => "Oktober", "11" => "November", "12" => "Desember");
+
+            if ($jumlah_data > 0) {
+                $data2['laporan_ada'] = true;
+                $this->load->library('PHPExcel/Classes/PHPExcel');
+                $inputFileName = './data_laporan/template/bulanan.xls';
+
+                $objReader = PHPExcel_IOFactory::createReader('Excel5');
+                $objPHPExcel = $objReader->load($inputFileName);
+
+                /*
+                 * KM
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('KM');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                if ($pjs != "") {
+                    $sheetData->setCellValue('U10', "Pjs SS Pertamina Patra Niaga");
+                    $sheetData->setCellValue('U11', $pjs);
+                } else {
+                    $sheetData->setCellValue('U11', $data_depot->NAMA_PEGAWAI);
+                }
+                $sheetData->setCellValue('A1', "Rekapitulasi KILOMETER Mobil Tangki PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT . " Periode " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AG', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AI', 1);
+                }
+
+                //Untuk laporan harian lokasi
+                $km_total_8 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $km_total_16 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $km_total_24 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $km_total_32 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $km_total_40 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+                $no = $jumlah_data;
+                foreach ($hasil_data as $row) {
+                    $array = (array) $row;
+
+                    $sheetData->insertNewRowBefore(5, 1);
+                    $sheetData->setCellValue('A5', $no);
+                    $sheetData->setCellValue('B5', $array['TRANSPORTIR']);
+                    $sheetData->setCellValue('C5', $array['NOPOL']);
+                    $sheetData->setCellValue('D5', $array['KAPASITAS']);
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($array['KM' . $i] != "") {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', $array['KM' . $i]);
+                            if ($array['KAPASITAS'] == '8') {
+                                $km_total_8[$i - 1] = $km_total_8[$i - 1] + $array['KM' . $i];
+                            } else if ($array['KAPASITAS'] == '16') {
+                                $km_total_16[$i - 1] = $km_total_16[$i - 1] + $array['KM' . $i];
+                            } else if ($array['KAPASITAS'] == '24') {
+                                $km_total_24[$i - 1] = $km_total_24[$i - 1] + $array['KM' . $i];
+                            } else if ($array['KAPASITAS'] == '32') {
+                                $km_total_32[$i - 1] = $km_total_32[$i - 1] + $array['KM' . $i];
+                            } else if ($array['KAPASITAS'] == '40') {
+                                $km_total_40[$i - 1] = $km_total_40[$i - 1] + $array['KM' . $i];
+                            }
+                        } else {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                        }
+                    }
+
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=SUM(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
+                    $i++;
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 1] . '5)');
+
+
+                    if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
+                        $sheetData->mergeCells('B5:B6');
+                    }
+                    $no--;
+                }
+
+                $objPHPExcel->getActiveSheet()->removeRow(4, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
+
+                for ($i = 1; $i <= $last_day + 2; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=SUM(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 5), '=AVERAGE(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                }
+
+                /*
+                 * KL
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('KL');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                if ($pjs != "") {
+                    $sheetData->setCellValue('U10', "Pjs SS Pertamina Patra Niaga");
+                    $sheetData->setCellValue('U11', $pjs);
+                } else {
+                    $sheetData->setCellValue('U11', $data_depot->NAMA_PEGAWAI);
+                }
+                $sheetData->setCellValue('A1', "Rekapitulasi KILOLITER Mobil Tangki PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT . " Periode " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AG', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AI', 1);
+                }
+
+                $no = $jumlah_data;
+                foreach ($hasil_data as $row) {
+                    $array = (array) $row;
+
+                    $sheetData->insertNewRowBefore(5, 1);
+                    $sheetData->setCellValue('A5', $no);
+                    $sheetData->setCellValue('B5', $array['TRANSPORTIR']);
+                    $sheetData->setCellValue('C5', $array['NOPOL']);
+                    $sheetData->setCellValue('D5', $array['KAPASITAS']);
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($array['KM' . $i] != "") {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', $array['KL' . $i]);
+                        } else {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                        }
+                    }
+
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=SUM(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
+                    $i++;
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 1] . '5)');
+
+
+                    if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
+                        $sheetData->mergeCells('B5:B6');
+                    }
+                    $no--;
+                }
+
+                $objPHPExcel->getActiveSheet()->removeRow(4, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
+
+                for ($i = 1; $i <= $last_day + 2; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=SUM(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 5), '=AVERAGE(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                }
+
+                /*
+                 * Ritase MT
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Ritase MT');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                $sheetData->setCellValue('A1', "Ritase Mobil Tangki PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT . " Periode " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AG', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AI', 1);
+                }
+
+                $mt_ops8 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_ops16 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_ops24 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_ops32 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_ops40 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+                $mt_off8 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_off16 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_off24 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_off32 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $mt_off40 = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+                $mt_opsPatra = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+
+                $no = $jumlah_data;
+                foreach ($hasil_data as $row) {
+                    $array = (array) $row;
+
+                    $sheetData->insertNewRowBefore(5, 1);
+                    $sheetData->setCellValue('A5', $no);
+                    $sheetData->setCellValue('B5', $array['TRANSPORTIR']);
+                    $sheetData->setCellValue('C5', $array['NOPOL']);
+                    $sheetData->setCellValue('D5', $array['KAPASITAS']);
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($array['KM' . $i] != "") {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', $array['RIT' . $i]);
+                            if ($array['KAPASITAS'] == '8') {
+                                $mt_ops8[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '16') {
+                                $mt_ops16[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '24') {
+                                $mt_ops24[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '32') {
+                                $mt_ops32[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '40') {
+                                $mt_ops40[$i - 1] ++;
+                            }
+
+                            if (strpos($array['TRANSPORTIR'], 'PATRA NIAGA') !== false) {
+                                $mt_opsPatra[$i - 1] ++;
+                            }
+                        } else {
+                            $sheetData->getStyle($column_name[$i + 3] . '5')->getFill()->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID, 'startcolor' => array('rgb' => 'FFFF00')));
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                            if ($array['KAPASITAS'] == '8') {
+                                $mt_off8[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '16') {
+                                $mt_off16[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '24') {
+                                $mt_off24[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '32') {
+                                $mt_off32[$i - 1] ++;
+                            } else if ($array['KAPASITAS'] == '40') {
+                                $mt_off40[$i - 1] ++;
+                            }
+                        }
+                    }
+
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
+                    $sheetData->setCellValue($column_name[$i + 4] . '5', '=KL!' . $column_name[$i + 3] . ($no + 3));
+                    $sheetData->setCellValue($column_name[$i + 5] . '5', '=COUNTIF(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5;">0")');
+                    $sheetData->setCellValue($column_name[$i + 6] . '5', '=' . $column_name[$i + 4] . '5/' . $column_name[$i + 5] . '4/D5');
+
+
+                    if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
+                        $sheetData->mergeCells('B5:B6');
+                    }
+                    $no--;
+                }
+
+                $objPHPExcel->getActiveSheet()->removeRow(4, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
+
+                $i = 0;
+                for ($i = 1; $i <= $last_day; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=KL!' . $column_name[$i + 3] . ($jumlah_data + 4));
+                }
+
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=AVERAGE(E' . ($jumlah_data + 4) . ':' . $column_name[$i + 2] . ($jumlah_data + 4) . ')');
+                $sheetData->setCellValue($column_name[$i + 4] . ($jumlah_data + 4), '=AVERAGE(' . $column_name[$i + 4] . '4:' . $column_name[$i + 4] . ($jumlah_data + 3) . ')');
+                $sheetData->setCellValue($column_name[$i + 5] . ($jumlah_data + 4), '=AVERAGE(' . $column_name[$i + 5] . '4:' . $column_name[$i + 5] . ($jumlah_data + 3) . ')');
+                $sheetData->setCellValue($column_name[$i + 6] . ($jumlah_data + 4), '=AVERAGE(' . $column_name[$i + 6] . '4:' . $column_name[$i + 6] . ($jumlah_data + 3) . ')');
+
+                $i = 0;
+                for ($i = 1; $i <= $last_day; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 6), $mt_ops8[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 7), $mt_ops16[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 8), $mt_ops24[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 9), $mt_ops32[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 10), $mt_ops40[$i - 1]);
+
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 13), $mt_off8[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 14), $mt_off16[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 15), $mt_off24[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 16), $mt_off32[$i - 1]);
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 17), $mt_off40[$i - 1]);
+
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 20), $mt_opsPatra[$i - 1]);
+                }
+
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 6), '=AVERAGE(E' . ($jumlah_data + 6) . ':' . $column_name[$i + 2] . ($jumlah_data + 6) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 7), '=AVERAGE(E' . ($jumlah_data + 7) . ':' . $column_name[$i + 2] . ($jumlah_data + 7) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 8), '=AVERAGE(E' . ($jumlah_data + 8) . ':' . $column_name[$i + 2] . ($jumlah_data + 8) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 9), '=AVERAGE(E' . ($jumlah_data + 9) . ':' . $column_name[$i + 2] . ($jumlah_data + 9) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 10), '=AVERAGE(E' . ($jumlah_data + 10) . ':' . $column_name[$i + 2] . ($jumlah_data + 10) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 11), '=AVERAGE(E' . ($jumlah_data + 11) . ':' . $column_name[$i + 2] . ($jumlah_data + 11) . ')');
+
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 13), '=AVERAGE(E' . ($jumlah_data + 13) . ':' . $column_name[$i + 2] . ($jumlah_data + 13) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 14), '=AVERAGE(E' . ($jumlah_data + 14) . ':' . $column_name[$i + 2] . ($jumlah_data + 14) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 15), '=AVERAGE(E' . ($jumlah_data + 15) . ':' . $column_name[$i + 2] . ($jumlah_data + 15) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 16), '=AVERAGE(E' . ($jumlah_data + 16) . ':' . $column_name[$i + 2] . ($jumlah_data + 16) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 17), '=AVERAGE(E' . ($jumlah_data + 17) . ':' . $column_name[$i + 2] . ($jumlah_data + 17) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 18), '=AVERAGE(E' . ($jumlah_data + 18) . ':' . $column_name[$i + 2] . ($jumlah_data + 18) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 19), '=AVERAGE(E' . ($jumlah_data + 19) . ':' . $column_name[$i + 2] . ($jumlah_data + 19) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 20), '=AVERAGE(E' . ($jumlah_data + 20) . ':' . $column_name[$i + 2] . ($jumlah_data + 20) . ')');
+                $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 21), '=AVERAGE(E' . ($jumlah_data + 21) . ':' . $column_name[$i + 2] . ($jumlah_data + 21) . ')');
+
+
+                /*
+                 * OWNUSE
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Ownuse');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                if ($pjs != "") {
+                    $sheetData->setCellValue('U10', "Pjs SS Pertamina Patra Niaga");
+                    $sheetData->setCellValue('U11', $pjs);
+                } else {
+                    $sheetData->setCellValue('U11', $data_depot->NAMA_PEGAWAI);
+                }
+                $sheetData->setCellValue('A1', "Rekapitulasi OWNUSE Mobil Tangki PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT . " Periode " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AG', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AI', 1);
+                }
+
+                $no = $jumlah_data;
+                foreach ($hasil_data as $row) {
+                    $array = (array) $row;
+
+                    $sheetData->insertNewRowBefore(5, 1);
+                    $sheetData->setCellValue('A5', $no);
+                    $sheetData->setCellValue('B5', $array['TRANSPORTIR']);
+                    $sheetData->setCellValue('C5', $array['NOPOL']);
+                    $sheetData->setCellValue('D5', $array['KAPASITAS']);
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($array['KM' . $i] != "") {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', $array['OWNUSE' . $i]);
+                        } else {
+                            $sheetData->setCellValue($column_name[$i + 3] . '5', 0);
+                        }
+                    }
+
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=SUM(' . $column_name[4] . '5:' . $column_name[$i + 2] . '5)');
+                    $i++;
+                    $sheetData->setCellValue($column_name[$i + 3] . '5', '=AVERAGE(' . $column_name[4] . '5:' . $column_name[$i + 1] . '5)');
+
+
+                    if ($array['TRANSPORTIR'] == $sheetData->getCell('B6')->getFormattedValue()) {
+                        $sheetData->mergeCells('B5:B6');
+                    }
+                    $no--;
+                }
+
+                $objPHPExcel->getActiveSheet()->removeRow(4, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data + 4, 1);
+
+                for ($i = 1; $i <= $last_day + 2; $i++) {
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 4), '=SUM(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                    $sheetData->setCellValue($column_name[$i + 3] . ($jumlah_data + 5), '=AVERAGE(' . $column_name[$i + 3] . '4:' . $column_name[$i + 3] . ($jumlah_data + 3) . ')');
+                }
+
+
+                /*
+                 * Performansi
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Performansi');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+
+                $sheetData->setCellValue('A2', "PT. Pertamina Patra Niaga - Terminal BBM " . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('A3', "Periode " . $month_name[$bulan] . " " . $tahun);
+                $sheetData->setCellValue('A13', "TBBM " . $data_depot->NAMA_DEPOT);
+
+                $byk_amt_kurang = 0;
+                $amt_kurang['nama'] = array();
+                $amt_kurang['hari_kerja'] = array();
+                $amt_kurang['jabatan'] = array();
+                $amt_kurang['klas'] = array();
+
+                //Untuk laporan harian lokasi
+                $jumlah_sopir = 0;
+                $jumlah_kernet = 0;
+                $sopir_ops = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $kernet_ops = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $sopir_tidak_ops = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                $kernet_tidak_ops = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+
+                $no = $jumlah_data_performansi;
+                foreach ($hasil_data_performansi as $row) {
+                    $array = (array) $row;
+
+
+                    //Untul laporan harian lokasi 
+                    if ($array['JABATAN'] == "SUPIR") {
+                        $jumlah_sopir++;
+                    } else if ($array['JABATAN'] == "KERNET") {
+                        $jumlah_kernet++;
+                    }
+
+                    $sheetData->insertNewRowBefore(8, 1);
+                    $sheetData->setCellValue('A8', $no);
+                    $sheetData->setCellValue('B8', $array['NAMA_PEGAWAI']);
+                    $sheetData->setCellValue('C8', $array['NIP']);
+                    $sheetData->setCellValue('D8', $array['JABATAN']);
+                    $sheetData->setCellValue('E8', $array['KLASIFIKASI']);
+
+                    $hari_kerja = 0;
+                    $km = 0;
+                    $kl = 0;
+                    $rit = 0;
+                    $spbu = 0;
+                    $rupiah = 0;
+
+                    $i = 0;
+                    for ($i = 1; $i <= $last_day; $i++) {
+                        if ($array['KM' . $i] != "") {
+                            $km = $km + $array['KM' . $i];
+                        }
+                        if ($array['RIT' . $i] != "") {
+                            $rit = $rit + $array['RIT' . $i];
+                            $hari_kerja++;
+                        }
+                        if ($array['KL' . $i] != "") {
+                            $kl = $kl + $array['KL' . $i];
+                        }
+                        if ($array['SPBU' . $i] != "") {
+                            $spbu = $spbu + $array['SPBU' . $i];
+                        }
+                        if ($array['RUPIAH' . $i] != "") {
+                            $rupiah = $rupiah + $array['RUPIAH' . $i];
+                        }
+
+                        //Untul laporan harian lokasi 
+                        if ($array['JABATAN'] == "SUPIR") {
+                            if ($array['RIT' . $i] != "") {
+                                $sopir_ops[$i - 1] ++;
+                            } else {
+                                $sopir_tidak_ops[$i - 1] ++;
+                            }
+                        } else if ($array['JABATAN'] == "KERNET") {
+                            if ($array['RIT' . $i] != "") {
+                                $kernet_ops[$i - 1] ++;
+                            } else {
+                                $kernet_tidak_ops[$i - 1] ++;
+                            }
+                        }
+                    }
+
+                    $sheetData->setCellValue('F8', $hari_kerja);
+                    $sheetData->setCellValue('G8', $km);
+                    $sheetData->setCellValue('H8', $rit);
+                    $sheetData->setCellValue('I8', $spbu);
+                    $sheetData->setCellValue('J8', $kl);
+                    $sheetData->setCellValue('K8', $rupiah);
+
+                    if ($hari_kerja < 15) {
+                        $byk_amt_kurang++;
+                        $amt_kurang['nama'][] = $array['NAMA_PEGAWAI'];
+                        $amt_kurang['hari_kerja'] [] = $hari_kerja;
+                        $amt_kurang['jabatan'] [] = $array['JABATAN'];
+                        $amt_kurang['klas'] [] = $array['KLASIFIKASI'];
+                    }
+
+                    $no--;
+                }
+
+                $sheetData->setCellValue('F' . ($jumlah_data_performansi + 9), '=SUM(F7:F' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('G' . ($jumlah_data_performansi + 9), '=SUM(G7:G' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('H' . ($jumlah_data_performansi + 9), '=SUM(H7:H' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('I' . ($jumlah_data_performansi + 9), '=SUM(I7:I' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('J' . ($jumlah_data_performansi + 9), '=SUM(J7:J' . ($jumlah_data_performansi + 7) . ')');
+                $sheetData->setCellValue('K' . ($jumlah_data_performansi + 9), '=SUM(K7:K' . ($jumlah_data_performansi + 7) . ')');
+
+                $objPHPExcel->getActiveSheet()->removeRow(7, 1);
+                $objPHPExcel->getActiveSheet()->removeRow($jumlah_data_performansi + 7, 1);
+
+                $no = $byk_amt_kurang;
+                for ($i = 0; $i < $byk_amt_kurang; $i++) {
+                    $sheetData->insertNewRowBefore(($jumlah_data_performansi + 23), 1);
+                    $sheetData->setCellValue('A' . ($jumlah_data_performansi + 23), $no);
+                    $sheetData->setCellValue('B' . ($jumlah_data_performansi + 23), $amt_kurang['nama'][$i]);
+                    $sheetData->setCellValue('C' . ($jumlah_data_performansi + 23), $amt_kurang['hari_kerja'] [$i]);
+                    $sheetData->setCellValue('D' . ($jumlah_data_performansi + 23), $amt_kurang['jabatan'] [$i]);
+                    $sheetData->setCellValue('E' . ($jumlah_data_performansi + 23), $amt_kurang['klas'] [$i]);
+                    $no--;
+                }
+                $objPHPExcel->getActiveSheet()->removeRow(($jumlah_data_performansi + 22), 1);
+                $objPHPExcel->getActiveSheet()->removeRow(($jumlah_data_performansi + 22 + $byk_amt_kurang), 1);
+
+                /*
+                 * Laporan Harian Lokasi
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Laporan Harian Lokasi');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                $sheetData->setCellValue('B3', "TBBM " . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('B4', "Bulan " . $month_name[$bulan] . " " . $tahun);
+
+                if ($last_day == 28) {
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AH', 1);
+                    $sheetData->removeColumn('AH', 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeColumn('AI', 1);
+                    $sheetData->removeColumn('AI', 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeColumn('AJ', 1);
+                }
+
+                for ($i = 0; $i < $last_day; $i++) {
+                    //1
+                    $sheetData->setCellValue($column_name[$i + 5] . '10', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 6) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 13));
+                    $sheetData->setCellValue($column_name[$i + 5] . '11', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 7) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 14));
+                    $sheetData->setCellValue($column_name[$i + 5] . '12', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 8) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 15));
+                    $sheetData->setCellValue($column_name[$i + 5] . '13', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 9) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 16));
+                    $sheetData->setCellValue($column_name[$i + 5] . '14', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 10) . "+'Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 17));
+
+                    //3
+                    $sheetData->setCellValue($column_name[$i + 5] . '28', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 6));
+                    $sheetData->setCellValue($column_name[$i + 5] . '29', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 7));
+                    $sheetData->setCellValue($column_name[$i + 5] . '30', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 8));
+                    $sheetData->setCellValue($column_name[$i + 5] . '31', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 9));
+                    $sheetData->setCellValue($column_name[$i + 5] . '32', "='Ritase MT'!" . $column_name[$i + 5] . ($jumlah_data + 10));
+
+                    //4
+                    if ($hasil_rencana_realisasi) {
+                        //4.b
+                        $sheetData->setCellValue($column_name[$i + 5] . '50', "=KL!" . $column_name[$i + 4] . ($jumlah_data + 4));
+
+                        
+                            // 4.a
+                            if ($hasil_rencana_realisasi[$i]->R_PREMIUM != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '39', $hasil_rencana_realisasi[$i]->R_PREMIUM);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_BIOSOLAR != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '40', $hasil_rencana_realisasi[$i]->R_BIOSOLAR);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_PERTAMAX != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '41', $hasil_rencana_realisasi[$i]->R_PERTAMAX);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_SOLAR != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '42', $hasil_rencana_realisasi[$i]->R_SOLAR);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_PERTAMAXPLUS != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '43', $hasil_rencana_realisasi[$i]->R_PERTAMAXPLUS);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_PERTAMINADEX != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '44', $hasil_rencana_realisasi[$i]->R_PERTAMINADEX);
+                            }
+
+                            //4.b
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_PREMIUM != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '51', $hasil_rencana_realisasi[$i]->REALISASI_PREMIUM);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_BIO_SOLAR != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '52', $hasil_rencana_realisasi[$i]->REALISASI_BIO_SOLAR);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '53', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_SOLAR != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '54', $hasil_rencana_realisasi[$i]->REALISASI_SOLAR);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX_PLUS != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '55', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX_PLUS);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMINA_DEX != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '56', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMINA_DEX);
+                            }
+
+
+                            //9
+                            $sheetData->setCellValue($column_name[$i + 5] . '98', $hasil_rencana_realisasi[$i]->JUMLAH_ALOKASI_SPBU);
+                        
+                    }
+
+                    //6
+                    $sheetData->setCellValue($column_name[$i + 5] . '68', $km_total_8[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '69', $km_total_16[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '70', $km_total_24[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '71', $km_total_32[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '72', $km_total_40[$i]);
+
+                    //7
+                    
+                        $sheetData->setCellValue($column_name[$i + 5] . '77', $jumlah_sopir);
+                        $sheetData->setCellValue($column_name[$i + 5] . '78', $jumlah_kernet);
+
+                        $sheetData->setCellValue($column_name[$i + 5] . '80', $hasil_rencana_realisasi[$i]->JADWAL_DINAS_SUPIR);
+                        $sheetData->setCellValue($column_name[$i + 5] . '81', $hasil_rencana_realisasi[$i]->JADWAL_DINAS_KERNET);
+
+                        $sheetData->setCellValue($column_name[$i + 5] . '83', $sopir_ops[$i]);
+                        $sheetData->setCellValue($column_name[$i + 5] . '84', $kernet_ops[$i]);
+                    
+
+                    //8
+                        $sheetData->setCellValue($column_name[$i + 5] . '94', $hasil_rencana_realisasi[$i]->REALISASI_OWNUSE);
+                    
+                }
+
+                $j = 0;
+                for ($j = 9; $j <= 105; $j++) {
+                    if ($j != 16 && $j != 18 && $j != 25 && $j != 26 && $j != 33 && $j != 36 && $j != 37 && $j != 61 && $j != 62 && $j != 65 && $j != 66 && $j != 75 && $j != 76 && $j != 79 && $j != 82 && $j != 85 && $j != 88 && $j != 91 && $j != 92 && $j != 96 && $j != 97 && $j != 100 && $j != 101) {
+                        if ($j == 95) {
+                            
+                        } else if ($j == 105) {
+                            $sheetData->setCellValue($column_name[$i + 6] . $j, "=AVERAGE(F" . $j . ":" . $column_name[$i + 4] . $j . ")");
+                        } else {
+                            $sheetData->setCellValue($column_name[$i + 5] . $j, "=SUM(F" . $j . ":" . $column_name[$i + 4] . $j . ")");
+                            $sheetData->setCellValue($column_name[$i + 6] . $j, "=AVERAGE(F" . $j . ":" . $column_name[$i + 4] . $j . ")");
+                        }
+                    }
+                }
+
+                $nama_file = 'data_laporan/bulanan/Laporan Bulanan ' . $data_depot->NAMA_DEPOT . " " . $month_name[$bulan] . " " . $tahun . '.xls';
+
+                $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+                $objWriter->setPreCalculateFormulas(FALSE);
+                $objWriter->save('./' . $nama_file);
+
+                $data2['nama_file'] = base_url() . $nama_file;
+            }
+            $this->header(7, 1);
+            $this->load->view('laporan/v_preview_bulanan', $data2);
+            $this->footer();
         }
     }
 

@@ -1,6 +1,17 @@
 
 <section id="main-content">
     <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>"></i> Grafik Kinerja Bulanan MT</a></li>
+                    <li class="active">Grafik Kinerja Harian MT</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
@@ -56,6 +67,7 @@
                                 <div class="panel-body">
 
                                         <div class="space15"></div>
+                                        <div class="adv-table editable-table " style="overflow-x: scroll">
                                          <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                             <thead>
                                                 <tr>
@@ -99,6 +111,7 @@
 
                                             </tbody>
                                         </table>
+                                       </div>
                                     </div>
                                 </div>
                             </section>

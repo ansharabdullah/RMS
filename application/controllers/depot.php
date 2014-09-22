@@ -14,6 +14,7 @@ class Depot extends CI_Controller {
         $this->load->model("m_kinerja");
         $this->load->model("m_rencana");
         $this->load->model("m_kpi");
+        setlocale(LC_ALL, "IND");
     }
 
     public function grafik_bulan($id_depot,$tahun) {
@@ -25,6 +26,7 @@ class Depot extends CI_Controller {
         $data3['kpi_bulan'] = $this->m_kpi->nilai_kpi_perbulan($id_depot,$tahun);
         $data3['detail_kpi'] = $this->m_kpi->detail_kpi_perbulan($id_depot,$tahun);
         $data3['tahun'] = $tahun;
+        $data3['nama_depot'] = $this->m_depot->get_nama_depot($id_depot);
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'], $data['lv2']);
@@ -33,7 +35,7 @@ class Depot extends CI_Controller {
     }
     
      public function grafik_apms_bulan($id_depot,$tahun) {
-        $data['lv1'] = $id_depot + 1;
+        $data['lv1'] = 1;
         $data['lv2'] = 1;
         $data2 = menu_oam();
         $data3['id_depot'] = $id_depot;
@@ -63,8 +65,10 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/menu',$data2);
         $data3['bulan'] = $bulan;
         $data3['tahun'] = $tahun;
+        $data3['id_depot'] = $id_depot;
         $data3['depot'] = $this->m_depot->get_depot();
         $data3['kpi'] = $this->m_kpi->performance_kpi_perbulan($id_depot,$bulan,$tahun);
+        $data3['nama_depot'] = $this->m_depot->get_nama_depot($id_depot);
         $this->navbar($data['lv1'], $data['lv2']);
         if ($tipe == 'ms2') {
             $data3['ms2'] = $this->m_kpi->ms2_oam($id_depot,$bulan,$tahun);
@@ -85,13 +89,15 @@ class Depot extends CI_Controller {
       redirect('depot/grafik_hari/' . $tipe.'/'.$id_depot.'/'.$bulan.'/'.$tahun.'/');
     }
 
-    public function amt_tahun($depot,$nama)
+    public function amt_tahun($depot)
     {
        $tahun =  $_POST['tahun'];
-       redirect('depot/amt_depot/'.$depot."/".$nama."/".$tahun);
+       $nama = $this->m_depot->get_nama_depot($depot);
+       redirect('depot/amt_depot/'.$depot."/".$tahun);
     }
     
-    public function amt_depot($depot,$nama,$tahun) {
+    public function amt_depot($depot,$tahun) {
+         $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 1;
         $data2['tahun'] = $tahun;
@@ -111,7 +117,8 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function amt_depot_harian($depot,$nama,$bulan,$tahun) {
+    public function amt_depot_harian($depot,$bulan,$tahun) {
+        $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 1;
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
@@ -129,21 +136,25 @@ class Depot extends CI_Controller {
     }
     
     
-    public function ganti_detail_amt($depot,$nama)
+    public function ganti_detail_amt($depot)
     {
+        $nama = $this->m_depot->get_nama_depot($depot);
         $tanggal = date("Y-m-d",strtotime($_POST['tanggal']));
-        redirect("depot/amt_depot_detail/".$depot."/".$nama."/".$tanggal."/");
+        redirect("depot/amt_depot_detail/".$depot."/".$tanggal."/");
     }
     
-     public function amt_depot_detail($depot,$nama,$tanggal) {
+     public function amt_depot_detail($depot,$tanggal) {
+        $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 1;
+        $data2['amt'] = $this->m_amt->selectAMT($depot);
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
         $data2['id_depot'] = $depot;
         $data2['hari'] = date('d',strtotime($tanggal));
-        $data2['bulan'] = date('F',strtotime($tanggal));
+        $data2['no_bulan'] = date('n',  strtotime($tanggal));
+        $data2['bulan'] = strftime('%B',strtotime($tanggal));
         $data2['tahun'] = date('Y',strtotime($tanggal));;
-        $data2['tanggal'] = date("d F Y",strtotime($tanggal));
+        $data2['tanggal'] = strftime('%d %B %Y',strtotime($tanggal));
         $data2['kinerja'] = $this->m_kinerja->get_kinerja_amt_detail($depot , $tanggal);
         $data3 = menu_oam();
         $this->load->view('layouts/header');
@@ -153,21 +164,24 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function amt_hari($depot,$nama)
+    public function amt_hari($depot)
     {
+       $nama = $this->m_depot->get_nama_depot($depot);
        $tanggal =  $_POST['bulan'];
        $bulan = date('n',strtotime($tanggal));
        $tahun = date('Y',strtotime($tanggal));
-       redirect('depot/amt_depot_harian/'.$depot."/".$nama."/".$bulan."/".$tahun);
+       redirect('depot/amt_depot_harian/'.$depot."/".$bulan."/".$tahun);
     }
     
-    public function mt_tahun($depot,$nama)
+    public function mt_tahun($depot)
     {
+       $nama = $this->m_depot->get_nama_depot($depot);
        $tahun =  $_POST['tahun'];
-       redirect('depot/mt_depot/'.$depot."/".$nama."/".$tahun);
+       redirect('depot/mt_depot/'.$depot."/".$tahun);
     }
     
-    public function mt_depot($depot,$nama,$tahun) {
+    public function mt_depot($depot,$tahun) {
+        $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 2;
         $data2['tahun'] = $tahun;
@@ -188,7 +202,8 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/footer');
     }
     
-    public function mt_depot_harian($depot,$nama,$bulan,$tahun) {
+    public function mt_depot_harian($depot,$bulan,$tahun) {
+        $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 2;
 
@@ -208,20 +223,23 @@ class Depot extends CI_Controller {
     }
     
    
-    public function ganti_detail_mt($depot,$nama)
+    public function ganti_detail_mt($depot)
     {
+        $nama = $this->m_depot->get_nama_depot($depot);
         $tanggal = date("Y-m-d",strtotime($_POST['tanggal']));
-        redirect("depot/mt_depot_detail/".$depot."/".$nama."/".$tanggal."/");
+        redirect("depot/mt_depot_detail/".$depot."/".$tanggal."/");
     }
     
-    public function mt_depot_detail($depot,$nama,$tanggal) {
+    public function mt_depot_detail($depot,$tanggal) {
+        $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 2;
+        $data2['no_bulan'] = date('n',  strtotime($tanggal));
         $data2['hari'] = date('d',strtotime($tanggal));
-        $data2['bulan_mt'] = date('F',strtotime($tanggal));
+        $data2['bulan_mt'] = strftime('%B',strtotime($tanggal));
         $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_detail($depot , '2014-07-03');
         $data2['tahun'] = date('Y',strtotime($tanggal));;
-        $data2['tanggal'] = date("d F Y",strtotime($tanggal));
+        $data2['tanggal'] = strftime('%d %B %Y',strtotime($tanggal));
 //        $data2['bulan'] = $bulan;
 //        $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_hari($depot, $bulan,$tahun);
         $data2['mt'] = $this->m_mt->selectMT($depot);
@@ -236,22 +254,25 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/footer');
     }
     
-    public function mt_hari($depot,$nama)
+    public function mt_hari($depot)
     {
+       $nama = $this->m_depot->get_nama_depot($depot);
        $tanggal =  $_POST['bulan'];
        $bulan = date('n',strtotime($tanggal));
        $tahun = date('Y',strtotime($tanggal));
-       redirect('depot/mt_depot_harian/'.$depot."/".$nama."/".$bulan."/".$tahun);
+       redirect('depot/mt_depot_harian/'.$depot."/".$bulan."/".$tahun);
     }
     
-    public function apms_tahun($depot,$nama)
+    public function apms_tahun($depot)
     {
+       $nama = $this->m_depot->get_nama_depot($depot);
        $tahun =  $_POST['tahun'];
        redirect('depot/apms_depot/'.$depot."/".$nama."/".$tahun);
     }
     
-    public function apms_depot($depot,$nama,$tahun)
+    public function apms_depot($depot,$tahun)
     {
+       $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 5;
         $data2['tahun'] = $tahun;
@@ -266,8 +287,9 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/footer');
     }
     
-    public function apms_hari($depot,$nama)
+    public function apms_hari($depot)
     {
+       $nama = $this->m_depot->get_nama_depot($depot);
        $tanggal =  $_POST['bulan'];
        $bulan = date('n',strtotime($tanggal));
        $tahun = date('Y',strtotime($tanggal));
@@ -275,7 +297,8 @@ class Depot extends CI_Controller {
     }
     
     
-    public function apms_depot_harian($depot,$nama,$bulan,$tahun) {
+    public function apms_depot_harian($depot,$bulan,$tahun) {
+       $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 5;
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
@@ -293,21 +316,23 @@ class Depot extends CI_Controller {
     }
     
     
-    public function ganti_detail_apms($depot,$nama)
+    public function ganti_detail_apms($depot)
     {
+       $nama = $this->m_depot->get_nama_depot($depot);
         $tanggal = date("Y-m-d",strtotime($_POST['tanggal']));
         redirect("depot/apms_depot_detail/".$depot."/".$nama."/".$tanggal."/");
     }
     
     
-     public function apms_depot_detail($depot,$nama,$tanggal) {
+     public function apms_depot_detail($depot,$tanggal) {
+       $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 5;
         $data2['hari'] = date('d',strtotime($tanggal));
-        $data2['bulan_mt'] = date('F',strtotime($tanggal));
+        $data2['bulan_mt'] = strftime('%B',strtotime($tanggal));
         $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_detail($depot , '2014-07-03');
         $data2['tahun'] = date('Y',strtotime($tanggal));;
-        $data2['tanggal'] = date("d F Y",strtotime($tanggal));
+        $data2['tanggal'] = strftime('%d %B %Y',strtotime($tanggal));
         $data2['mt'] = $this->m_mt->selectMT($depot);
         $data2['id_depot'] = $depot;    
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
@@ -317,6 +342,37 @@ class Depot extends CI_Controller {
         $this->load->view('layouts/menu',$data3);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_depot_apms_detail_harian',$data2);
+        $this->load->view('layouts/footer');
+    }
+    
+     public function kpi_internal($depot) {
+        $this->load->model('m_laporan');
+        $tahun = date('Y');
+        $data2['edit_kpi'] = false;
+        $data2['depot'] = $depot;
+        if ($this->input->post('cek')) {
+            $tahun = $this->input->post('tahun');
+        }
+        else
+        {
+            
+            $tahun = date('Y');
+        }
+
+        $data2['tahun_kpi'] = $tahun;
+        $data2['error_kpi'] = $this->m_laporan->cetKPIInternal($tahun, $depot);
+        if ($data2['error_kpi'] >= 365) {
+            $data2['data_kpi'] = $this->m_laporan->getKPIInternal($tahun, $depot);
+        }
+        $data2['nama_depot'] = $this->m_depot->get_nama_depot($depot);
+        $data['lv1'] = $depot + 1;
+        $data['lv2'] = 4;
+        $data3 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data3);
+        $this->navbar($data['lv1'], $data['lv2']);
+
+        $this->load->view('oam/v_kpi_internal_depot', $data2);
         $this->load->view('layouts/footer');
     }
     

@@ -36,7 +36,7 @@ foreach ($volume as $row) {
                 text: 'Grafik Pencapaian Premium'
             },
             subtitle: {
-                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>'
+                text: 'Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>'
             },
             xAxis: [{
                     categories: tanggal
@@ -97,9 +97,21 @@ foreach ($volume as $row) {
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>depot/grafik_bulan/<?php echo $id_depot?>/<?php echo $tahun?>">KPI Bulanan</a></li>
+                    <li class="active">KPI Volume Harian</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        
         <section class="panel">
             <header class="panel-heading">
-                Grafik Rencana Volume vs Realisasi Harian Depot <?php echo $volume[0]->NAMA_DEPOT ?>
+                Grafik Rencana Volume vs Realisasi Harian Depot <?php echo $nama_depot?>
             </header>
             <div class="panel-body" >
                 <?php
@@ -160,7 +172,7 @@ foreach ($volume as $row) {
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Tabel Rencana Volume vs Realisasi Harian Depot <?php echo $volume[0]->NAMA_DEPOT ?> Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>
+                            Tabel Rencana Volume vs Realisasi Harian Depot <?php echo $nama_depot ?> Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>
                         </header>
                         <div class="panel-body">
                             <div class="space15">
@@ -198,7 +210,7 @@ foreach ($volume as $row) {
                                         <tr>
                                             <td style="display:none;"></td>
                                             <td><?php echo ($i + 1) ?></td>
-                                            <td style="white-space: nowrap"><?php echo date('d F Y', strtotime($v->TANGGAL_LOG_HARIAN)) ?></td>
+                                            <td style="white-space: nowrap"><?php echo strftime('%d %B %Y',strtotime($v->TANGGAL_LOG_HARIAN));?></td>
                                             <td><?php echo $v->R_PREMIUM ?></td>
                                             <td><?php echo $v->premium ?></td>
                                             <td><?php echo $v->R_BIOSOLAR ?></td>
@@ -250,7 +262,7 @@ foreach ($volume as $row) {
             },
 
             title: {
-                text: "Nilai KPI DEPOT <?php echo $kpi[0]->NAMA_DEPOT; ?>",
+                text: "Nilai KPI Depot <?php echo $nama_depot; ?>",
                 x: -80
             },
 

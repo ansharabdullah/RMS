@@ -82,6 +82,7 @@
         <section class="panel">
             <header class="panel-heading">
                 KPI OPERASIONAL
+                <a href="<?php echo base_url()?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
             </header>
             <div class="panel-body">
                 <div id="grafik"></div>

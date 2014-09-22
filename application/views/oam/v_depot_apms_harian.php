@@ -55,14 +55,14 @@
                                                 <tr>
                                                     <td style="display:none;"></td>
                                                     <td>1</td>
-                                                    <td>6 <?php echo date("F Y", mktime(0, 0, 0, $bulan, 1, $tahun))?></td>
+                                                    <td>6 <?php echo strftime("%B Y", mktime(0, 0, 0, $bulan, 1, $tahun))?></td>
                                                     <td>321</td>
                                                     <td>168</td>
                                                 </tr>
                                                 <tr>
                                                     <td style="display:none;"></td>
                                                     <td>2</td>
-                                                    <td>20 <?php echo date("F Y", mktime(0, 0, 0, $bulan, 1, $tahun))?></td>
+                                                    <td>20 <?php echo strftime("%B Y", mktime(0, 0, 0, $bulan, 1, $tahun))?></td>
                                                     <td>313</td>
                                                     <td>138</td>
                                                 </tr>
@@ -95,7 +95,7 @@
                 text: 'Grafik Realisasi Penyaluran Harian APMS Depot <?php echo $nama_depot?>'
             },
             subtitle: {
-                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
+                text: 'Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
             },
             plotOptions: {
                 series: {
