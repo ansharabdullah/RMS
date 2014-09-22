@@ -170,6 +170,17 @@ function DateToIndo($date) {
 
 <section id="main-content">
     <section class="wrapper">
+       <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>mt/data_mt">Data Mobil</a></li>
+                    <li class="active">Detail Mobil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
             <?php foreach ($mt as $row) { ?>
 
             <section class="panel">
@@ -678,12 +689,8 @@ function DateToIndo($date) {
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">
-                        <div class="clearfix">
-                            <a class="btn btn-primary" data-toggle="modal" href="#myModal">
-                                Tambah Kinerja <i class="icon-plus"></i>
-                            </a>
-                        </div>
-                        <div class="adv-table editable-table " style="overflow-x: scroll">
+                        
+                        <div class="adv-table editable-table " style="overflow-x: scroll; overflow-y:hidden">
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
                                 <tr>
@@ -737,7 +744,7 @@ function DateToIndo($date) {
                                                     ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo(DateToIndo($row->tanggal_log_harian)); ?></td>
+                                    <td><?php echo date('d M Y',  strtotime($row->tanggal_log_harian)); ?></td>
                                     <td><?php echo $row->total_km_mt; ?></td>
                                     <td><?php echo $row->total_kl_mt; ?></td>
                                     <td><?php echo $row->ritase_mt; ?></td>

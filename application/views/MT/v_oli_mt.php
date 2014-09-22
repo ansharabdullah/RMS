@@ -39,7 +39,18 @@ function DateToIndo($date) {
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
-
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>mt/data_mt">Data Mobil</a></li>
+                    <li><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $dataMobil->id_mobil; ?>/<?php echo date("n")?>/<?php echo date("Y")?>">Detail Mobil</a></li>
+                    <li class="active">Oli Mobil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
 
         <section class="panel">
@@ -191,7 +202,7 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal (km)</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="KM_AWAL" name="KM_AWAL" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="KM_AWAL" name="KM_AWAL" minlength="2" type="number" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -209,7 +220,7 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label for="Total Volume" class="col-lg-2 col-sm-2 control-label">Total Volume (Liter)</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="TOTAL_VOLUME" name="TOTAL_VOLUME" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="TOTAL_VOLUME" name="TOTAL_VOLUME" minlength="2" type="number" required />
                         </div>
                     </div>
                 </div>

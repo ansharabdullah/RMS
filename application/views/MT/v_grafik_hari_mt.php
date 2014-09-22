@@ -174,6 +174,18 @@ foreach ($grafik as $km) {
 
 <section id="main-content">
     <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>"></i> Grafik Kinerja Tahunan</a></li>
+                    <li><a href="<?php echo base_url(); ?>mt/grafik_mt/<?php echo date("Y")?>/<?php echo $hari ?>"></i> Grafik Kinerja Bulanan</a></li>
+                    <li class="active">Grafik Kinerja Harian</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">

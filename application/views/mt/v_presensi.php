@@ -37,6 +37,16 @@ function DateToIndo($date) {
 
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                   <li class="active">Presensi Mobil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <section class="panel">
             <header class="panel-heading">
                 Presensi Mobil Tangki
@@ -81,7 +91,7 @@ function DateToIndo($date) {
                             </div>
                         </div>
                         <div class="space15"></div>
-                        <div class="adv-table editable-table " style="overflow-x: scroll">
+                        <div class="adv-table editable-table " style="overflow-x: scroll; overflow-y:hidden">
                         <table class="table table-striped table-hover table-bordered" id="editable-sample" >
                             <thead>
                                 <tr>
@@ -106,7 +116,7 @@ function DateToIndo($date) {
                                         $text = "<span class='label label-danger'>Absen</span>";
                                         foreach ($kinerja as $row2) {
                                             if ($row->ID_MOBIL == $row2->ID_MOBIL) {
-                                                $text = "Hadir";
+                                                $text = "<span class='label label-success'>Hadir</span>";
                                                 $hadir = "Hadir";
                                                 break;
                                             }
@@ -120,14 +130,14 @@ function DateToIndo($date) {
                                             <td><?php echo $row->PRODUK; ?></td>
                                            <td><?php
                                                 if ($row->STATUS_MASUK == "Hadir") {
-                                                    
+                                                    echo "<span class='label label-success'>";
                                                 } else {
                                                     echo "<span class='label label-danger'>";
                                                 }echo $row->STATUS_MASUK;
                                                 ?></td>
                                            <td><?php echo $text; ?></td>
                                             <td><?php echo $row->ALASAN ?></td>
-                                           <td><?php if ($row->STATUS_MASUK != $text) { ?>
+                                           <td><?php if ($row->STATUS_MASUK != $hadir) { ?>
                                                     <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a>
                                                 <?php }else{ ?>
                                                     <span class='label label-success'>Ok</span>

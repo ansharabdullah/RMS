@@ -39,6 +39,18 @@ function DateToIndo($date) {
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>mt/data_mt">Data Mobil</a></li>
+                    <li><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $dataMobil->id_mobil; ?>/<?php echo date("n")?>/<?php echo date("Y")?>">Detail Mobil</a></li>
+                    <li class="active">Surat Mobil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -158,7 +170,7 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label for="keterangan" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="keterangan" placeholder="Keterangan Surat" name="KETERANGAN_SURAT" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="keterangan" placeholder="Keterangan Surat" name="KETERANGAN_SURAT" type="text" >
                         </div>
                     </div>
 
@@ -204,7 +216,7 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label for="stnk" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT" minlength="2" type="text" required />
+                            <input class=" form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT" minlength="2" type="text" >
                         </div>
                     </div>
 
