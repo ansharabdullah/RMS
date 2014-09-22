@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    
     var mt;
     var kl_mt = new Array();
     var km_mt = new Array();
@@ -8,6 +9,7 @@
     var pertamina_dex = new Array();
     var solar = new Array();
     var bio_solar = new Array();
+    var total_km_mt = new Array();
     var own_use_mt = new Array();
     var ritase_mt = new Array();
     var bulan_mt = new Array();
@@ -16,6 +18,7 @@
         foreach($grafik as $km){
             ?>
                 kl_mt.push(<?php echo $km->total_kl ?>);
+                total_km_mt.push(<?php echo $km->total_km ?>);
                 km_mt.push(<?php echo $km->total_km ?>);
                 premium.push(<?php echo $km->premium ?>);
                 pertamax.push(<?php echo $km->pertamax ?>);
@@ -41,7 +44,7 @@
                 renderTo: 'grafik'
             },
             title: {
-                text: 'Grafik Mobil Tangki',
+                text: 'Grafik Kinerja Jumlah KM Mobil Tangki',
                 x: -20 //center
             },
             subtitle: {
@@ -130,6 +133,16 @@
 
 <section id="main-content">
     <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li class="active">Grafik Kinerja Bulanan MT</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
@@ -144,7 +157,7 @@
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    <input type="number" name="tahun" minlength="4" maxlength="4" min="2010" value="" required="required" id="tahunLaporan"  class="form-control"/>
+                                    <input type="number" name="tahun" minlength="4" max="9999" min="2010" value="" required="required" id="tahunLaporan"  class="form-control"/>
                                 </div>
 
                                 <div class=" col-lg-2">

@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<<<<<<< HEAD
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_laporan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/laporan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/kinerja.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_preview_harian.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_harian.php</file>
+        </group>
+    </open-files>
+=======
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+>>>>>>> cce241dfcb3b1fab110e8bc1a8fc17a7d9be428d
 </project-private>

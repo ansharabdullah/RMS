@@ -20,6 +20,9 @@ class Mt extends CI_Controller {
         $this->load->model("m_pengingat");
         $this->load->model("m_log_sistem");
         $this->load->model("m_rencana_mt");
+        $this->load->model("m_log_harian");
+        $this->load->model("m_penjadwalan");
+        $this->load->model("m_kinerja");
 
     }
 
@@ -46,22 +49,48 @@ class Mt extends CI_Controller {
             $bulan = date("m", strtotime($tanggal));
             $tahun = date("Y", strtotime($tanggal));
             
-            $r_premium = $this->input->post('premium');
-            $r_pertamax = $this->input->post('pertamax');
-            $r_pertamaxplus = $this->input->post('pertamaxplus');
-            $r_pertaminadex = $this->input->post('pertaminadex');
-            $r_solar = $this->input->post('solar');
-            $r_biosolar = $this->input->post('biosolar');
-            $r_own_use = $this->input->post('own_use');
+            $r_premium = $this->input->post('r_premium');
+            $r_pertamax = $this->input->post('r_pertamax');
+            $r_pertamaxplus = $this->input->post('r_pertamaxplus');
+            $r_pertaminadex = $this->input->post('r_pertaminadex');
+            $r_solar = $this->input->post('r_solar');
+            $r_biosolar = $this->input->post('r_biosolar');
+            $r_own_use = $this->input->post('r_own_use');
 
-            $this->m_rencana_mt->editRencana($id_rencana, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
-
+            $data = array(
+                    'r_premium' => $r_premium,
+                    'r_own_use' => $r_own_use,
+                    'r_pertamax' => $r_pertamax,
+                    'r_pertamaxplus' => $r_pertamaxplus,
+                    'r_pertaminadex' => $r_pertaminadex,
+                    'r_solar' => $r_solar,
+                    'r_biosolar' => $r_biosolar
+                );
+                $this->m_rencana_mt->editRencana($data, $id_rencana);
+                
+           $datalog = array(
+            'keterangan' => 'Edit Rencana Mobil tanggal ' .date("d - M - Y", strtotime($tanggal)),
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit Rencana'
+            );
+                $this->m_log_sistem->insertLog($datalog);
+                
             $data2['submit'] = true;
             $data2['edit'] = true;
         } else if ($this->input->post('hapus')) {
+            
+            
+            $datalog = array(
+            'keterangan' => 'Hapus Rencana Mobil bulan ' .date("M - Y", strtotime($tanggal)),
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Hapus Rencana'
+            );
+                $this->m_log_sistem->insertLog($datalog);
+                
             $data2['hapus'] = true;
             $rencana = unserialize($this->input->post('id_rencana'));
             $this->m_rencana_mt->deleteRencana($rencana);
+            
         } else {
             $data2['submit'] = true;
             $tanggal = date('Y-m-d');
@@ -105,82 +134,17 @@ class Mt extends CI_Controller {
                 //rencana ada
                 $data2['rencana'] = $this->m_rencana_mt->getRencana($depot, $tahun, $bulan);
             }
+            
+           
         }
+        
+            
         $data['lv1'] = 3;
         $data['lv2'] = 5;
         $this->header($data);
         $this->load->view('mt/v_rencana',$data2);
         $this->footer();
     }
-    
-      public function edit_rencana() {
-        if (!$this->input->post('submit')) {
-            redirect('mt/rencana');
-        } else {
-            $depot = $this->session->userdata("id_depot");
-            
-            $id_rencana = $this->input->post('id_rencana');
-            $r_premium = $this->input->post('premium');
-            $r_pertamax = $this->input->post('pertamax');
-            $r_pertamaxplus = $this->input->post('pertamaxplus');
-            $r_pertaminadex = $this->input->post('pertaminadex');
-            $r_solar = $this->input->post('solar');
-            $r_biosolar = $this->input->post('biosolar');
-            $r_own_use = $this->input->post('own_use');
-
-            $this->m_rencana_mt->editRencana($id_rencana, $r_premium, $r_pertamax, $r_pertamaxplus, $r_pertaminadex, $r_solar, $r_biosolar,$r_own_use);
-
-            $data2['bln'] = $this->input->post('bln');
-
-            $tanggal = date("d-m-Y", strtotime($this->input->post('bln')));
-            $bulan = date("m", strtotime($this->input->post('bln')));
-            $tahun = date("Y", strtotime($this->input->post('bln')));
-
-            $data2['tahun'] = $tahun;
-            if ($bulan == 1) {
-                $data2['bulan'] = 'Januari';
-            } else if ($bulan == 2) {
-                $data2['bulan'] = 'Februari';
-            } else if ($bulan == 3) {
-                $data2['bulan'] = 'Maret';
-            } else if ($bulan == 4) {
-                $data2['bulan'] = 'April';
-            } else if ($bulan == 5) {
-                $data2['bulan'] = 'Mei';
-            } else if ($bulan == 6) {
-                $data2['bulan'] = 'Juni';
-            } else if ($bulan == 7) {
-                $data2['bulan'] = 'Juli';
-            } else if ($bulan == 8) {
-                $data2['bulan'] = 'Agustus';
-            } else if ($bulan == 9) {
-                $data2['bulan'] = 'September';
-            } else if ($bulan == 10) {
-                $data2['bulan'] = 'Oktober';
-            } else if ($bulan == 11) {
-                $data2['bulan'] = 'November';
-            } else if ($bulan == 12) {
-                $data2['bulan'] = 'Desember';
-            }
-
-            $data2['status_rencana'] = $this->m_rencana_mt->cekRencana($depot, $tahun, $bulan);
-            if ($data2['status_rencana'] == date('t', strtotime($tanggal))) {
-                $data2['rencana'] = $this->m_rencana_mt->getRencana($depot, $tahun, $bulan);
-            }
-
-            $data2['submit'] = true;
-            $data2['hapus'] = false;
-            $data2['edit'] = true;
-            
-            $data['lv1'] = 3;
-            $data['lv2'] = 5;
-            $this->header($data);
-            $this->load->view('mt/v_rencana',$data2);
-            $this->footer();
-         }
-            
-    }
-    
     
     
     public function rencana_import() {
@@ -192,6 +156,7 @@ class Mt extends CI_Controller {
         $data2['klik_upload'] = false;
         $data2['klik_simpan'] = false;
         
+        
         $this->header($data);
         $this->load->view('mt/v_import_rencana',$data2);
         $this->footer();
@@ -202,6 +167,7 @@ class Mt extends CI_Controller {
         $depot = $this->session->userdata("id_depot");
         $data2['klik_upload'] = false;
         $data2['klik_simpan'] = false;
+        
         if ($this->input->post('upload')) {
             $data2['klik_upload'] = true;
             $data2['rencana']['error'] = true;
@@ -293,10 +259,19 @@ class Mt extends CI_Controller {
                     }
                 }
             }
+             
         } else if ($this->input->post('simpan')) {
             $data2['klik_simpan'] = true;
             $rencana = unserialize($this->input->post('data_rencana'));
             $this->m_rencana_mt->simpanRencana($rencana);
+            $datalog = array(
+            'keterangan' => 'Import Rencana Mobil',
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Import'
+            );
+                $this->m_log_sistem->insertLog($datalog);
+             
+        
         }
         
         $data['lv1'] = 3;
@@ -330,8 +305,62 @@ class Mt extends CI_Controller {
     
 //data MT
     
+ 
     public function data_mt() {
+        
+        
+        $data1['pesan'] = 0;
+	if($this->input->post('simpan')){
+            $depot = $this->session->userdata("id_depot");
 
+                $data2 = array(
+                    'id_depot' => $depot,
+                    'nopol' => $this->input->post('nopol', true),
+                    'kapasitas' => $this->input->post('kapasitas', true),
+                    'produk' => $this->input->post('produk', true),
+                    'transportir' => $this->input->post('transportir', true),
+                    'status_mobil' => $this->input->post('status_mobil', true),
+                    'no_mesin' => $this->input->post('no_mesin', true),
+                    'no_rangka' => $this->input->post('no_rangka', true),
+                    'jenis_kendaraan' => $this->input->post('jenis_kendaraan', true),
+                    'rasio' => $this->input->post('rasio', true),
+                    'jenis_tangki' => $this->input->post('jenis_tangki', true),
+                    'gps' => $this->input->post('gps', true),
+                    'sensor_overfill' => $this->input->post('sensor_overfill', true),
+                    'standar_volume' => $this->input->post('standar_volume', true),
+                    'volume_1' => $this->input->post('volume_1', true),
+                    'kategori_mobil' => $this->input->post('kategori_mobil', true),
+                    'jumlah_segel' => $this->input->post('jumlah_segel', true),
+                    'rk1_komp1' => $this->input->post('rk1_komp1', true),
+                    'rk1_komp2' => $this->input->post('rk1_komp2', true),
+                    'rk1_komp3' => $this->input->post('rk1_komp3', true),
+                    'rk1_komp4' => $this->input->post('rk1_komp4', true),
+                    'rk1_komp5' => $this->input->post('rk1_komp5', true),
+                    'rk1_komp6' => $this->input->post('rk1_komp6', true),
+                    'rk2_komp1' => $this->input->post('rk2_komp1', true),
+                    'rk2_komp2' => $this->input->post('rk2_komp2', true),
+                    'rk2_komp3' => $this->input->post('rk2_komp3', true),
+                    'rk2_komp4' => $this->input->post('rk2_komp4', true),
+                    'rk2_komp5' => $this->input->post('rk2_komp5', true),
+                    'rk2_komp6' => $this->input->post('rk2_komp6', true),
+                     'k_komp1' => $this->input->post('k1_komp1', true),
+                    'k_komp2' => $this->input->post('k1_komp2', true),
+                    'k_komp3' => $this->input->post('k1_komp3', true),
+                    'k_komp4' => $this->input->post('k1_komp4', true),
+                    'k_komp5' => $this->input->post('k1_komp5', true),
+                    'k_komp6' => $this->input->post('k1_komp6', true),
+                );
+
+                $datalog = array(
+                    'keterangan' => 'Tambah Mobil, Nopol : ' . $this->input->post('nopol', true),
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Tambah'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+		$pesan = $this->m_mt->insertMobil($data2);
+                    $data1['pesan'] = 1;
+		}
+        $pesan = $data1['pesan'];
         $data3 = $this->m_mt->Nopol();
         $nopol =array();
         $jumlahbaris=0;
@@ -348,58 +377,9 @@ class Mt extends CI_Controller {
         $data['lv1'] = 3;
         $data['lv2'] = 1;
         $this->header($data);
-        $this->load->view('mt/v_data_mt', array('mt' => $mt, 'nopolcek' => $nopol, 'jumlahbaris' => $jumlahbaris));
+        $this->load->view('mt/v_data_mt', array('pesan'=>$pesan,'mt' => $mt, 'nopolcek' => $nopol, 'jumlahbaris' => $jumlahbaris));
         $this->footer();
-    }
-    
-    public function tambah_mobil() {
         
-        
-        $depot = $this->session->userdata("id_depot");
-
-        $data = array(
-            'id_depot' => $depot,
-            'nopol' => $this->input->post('nopol', true),
-            'kapasitas' => $this->input->post('kapasitas', true),
-            'produk' => $this->input->post('produk', true),
-            'transportir' => $this->input->post('transportir', true),
-            'status_mobil' => $this->input->post('status_mobil', true),
-            'no_mesin' => $this->input->post('no_mesin', true),
-            'no_rangka' => $this->input->post('no_rangka', true),
-            'jenis_kendaraan' => $this->input->post('jenis_kendaraan', true),
-            'rasio' => $this->input->post('rasio', true),
-            'jenis_tangki' => $this->input->post('jenis_tangki', true),
-            'gps' => $this->input->post('gps', true),
-            'sensor_overfill' => $this->input->post('sensor_overfill', true),
-            'standar_volume' => $this->input->post('standar_volume', true),
-            'volume_1' => $this->input->post('volume_1', true),
-            'kategori_mobil' => $this->input->post('kategori_mobil', true),
-            'jumlah_segel' => $this->input->post('jumlah_segel', true),
-            'rk1_komp1' => $this->input->post('rk1_komp1', true),
-            'rk1_komp2' => $this->input->post('rk1_komp2', true),
-            'rk1_komp3' => $this->input->post('rk1_komp3', true),
-            'rk1_komp4' => $this->input->post('rk1_komp4', true),
-            'rk1_komp5' => $this->input->post('rk1_komp5', true),
-            'rk1_komp6' => $this->input->post('rk1_komp6', true),
-            'rk2_komp1' => $this->input->post('rk2_komp1', true),
-            'rk2_komp2' => $this->input->post('rk2_komp2', true),
-            'rk2_komp3' => $this->input->post('rk2_komp3', true),
-            'rk2_komp4' => $this->input->post('rk2_komp4', true),
-            'rk2_komp5' => $this->input->post('rk2_komp5', true),
-            'rk2_komp6' => $this->input->post('rk2_komp6', true),
-             'k_komp1' => $this->input->post('k1_komp1', true),
-            'k_komp2' => $this->input->post('k1_komp2', true),
-            'k_komp3' => $this->input->post('k1_komp3', true),
-            'k_komp4' => $this->input->post('k1_komp4', true),
-            'k_komp5' => $this->input->post('k1_komp5', true),
-            'k_komp6' => $this->input->post('k1_komp6', true),
-        );
-
-        $this->m_mt->insertMobil($data);
-        $link = base_url() . "mt/data_mt/";
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
     }
 
 
@@ -419,7 +399,93 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_detail_mt', $data1);
         $this->footer();
     }
+    
+    public function edit_kinerja() {
+        
+        $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
+        $id_mobil = $this->input->post('id_mobil', true);
+        
+        $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+        $bulan = date('n',  strtotime($this->input->post('tanggal_kinerja', true)));
+        
+        $km = $this->input->post('total_km_mt', true);
+        $kl = $this->input->post('total_kl_mt', true);
+        $ritase = $this->input->post('ritase_mt', true);
+        $own_use = $this->input->post('own_use', true);
+        $premium = $this->input->post('premium', true);
+        $pertamax = $this->input->post('pertamax', true);
+        $pertamax_plus = $this->input->post('pertamax_plus', true);
+        $pertamina_dex = $this->input->post('pertamina_dex', true);
+        $solar = $this->input->post('solar', true);
+        $bio_solar = $this->input->post('bio_solar', true);
 
+        $data = array(
+            'premium' => $premium,
+            'total_km_mt' => $km,
+            'total_kl_mt' => $kl,
+            'own_use' => $own_use,
+            'ritase_mt' => $ritase,
+            'pertamax' => $pertamax,
+            'pertamax_plus' => $pertamax_plus,
+            'pertamina_dex' => $pertamina_dex,
+            'solar' => $solar,
+            'bio_solar' => $bio_solar
+        );
+        $this->m_kinerja->editKinerjaMT($data, $id_kinerja_mt);
+
+        $link = base_url() . "mt/detail_mt/" . $id_mobil."/".$bulan."/".$tahun;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+    
+    public function tambah_kinerja() {
+        $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
+        $id_mobil = $this->input->post('id_mobil', true);
+
+       
+        $depot = $this->session->userdata('id_depot');
+        $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+        $bulan = date('n',  strtotime($this->input->post('tanggal_kinerja', true)));
+       
+
+        $km = $this->input->post('total_km_mt', true);
+        $kl = $this->input->post('total_kl_mt', true);
+        $ritase = $this->input->post('ritase_mt', true);
+        $own_use = $this->input->post('own_use', true);
+        $premium = $this->input->post('premium', true);
+        $pertamax = $this->input->post('pertamax', true);
+        $pertamax_plus = $this->input->post('pertamax_plus', true);
+        $pertamina_dex = $this->input->post('pertamina_dex', true);
+        $solar = $this->input->post('solar', true);
+        $bio_solar = $this->input->post('bio_solar', true);
+
+        $tanggal = date ("Y-m-d",strtotime($this->input->post('tanggal_kinerja', true)));
+        $a = $this->m_log_harian->getIdLogHarianTanggal($tanggal, $depot);
+       
+        $id_log_harian = $a[0]->ID_LOG_HARIAN;
+        $data = array(
+            'id_log_harian' => $id_log_harian,
+            'id_mobil' => $id_mobil,
+            'premium' => $premium,
+            'total_km_mt' => $km,
+            'total_kl_mt' => $kl,
+            'own_use' => $own_use,
+            'ritase_mt' => $ritase,
+            'pertamax' => $pertamax,
+            'pertamax_plus' => $pertamax_plus,
+            'pertamina_dex' => $pertamina_dex,
+            'solar' => $solar,
+            'bio_solar' => $bio_solar
+        );
+        
+        $this->m_kinerja->insertKinerjaMT($data, $id_kinerja_mt);
+
+        $link = base_url() . "mt/detail_mt/" . $id_mobil."/".$bulan."/".$tahun;
+        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
 
     public function edit_mobil($id_mobil) {
 
@@ -461,9 +527,17 @@ class Mt extends CI_Controller {
             'k_komp5' => $this->input->post('k1_komp5', true),
             'k_komp6' => $this->input->post('k1_komp6', true),
         );
+        
+        $datalog = array(
+                'keterangan' => 'Edit Data Mobil, Nopol : ' . $this->input->post('nopol', true),
+                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                'keyword' => 'Edit'
+            );
+            $this->m_log_sistem->insertLog($datalog);
+            
         $this->m_mt->editMT($data, $id);
         
-         $link = base_url()."mt/data_mt/";
+         $link = base_url()."mt/detail_mt/".$id."/".date("n")."/". date("Y");
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
@@ -572,7 +646,7 @@ class Mt extends CI_Controller {
                     }
 
                     if (strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "ALUMUNIUM AWEKO" && strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "CARBON STEEL" && strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "STEEL") {
-                        $error = $error . ", Jenis Tangki hanya ALUMUNIUM AWEKO/CARBON STELL/STELL ";
+                        $error = $error . ", Jenis Tangki hanya ALUMUNIUM AWEKO/CARBON STEEL/STEEL ";
                         $e = 1;
                     }
                     if (strtoupper($sheetData->getCell('K' . $no)->getFormattedValue()) != "HAK MILIK" && strtoupper($sheetData->getCell('K' . $no)->getFormattedValue()) != "SEWA" ) {
@@ -662,6 +736,7 @@ class Mt extends CI_Controller {
             }
             $data['error'] = 0;
         }
+      
         unlink($file_target);
         $data['lv1'] = 3;
         $data['lv2'] = 1;
@@ -671,6 +746,23 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_import_mt', $data2);
         $this->load->view('layouts/footer');
         
+    }
+    
+     public function simpan_xls() {
+        $data_mt = unserialize($this->input->post('data_mt'));
+        $this->m_mt->importMobil($data_mt);
+
+        $datalog = array(
+            'keterangan' => 'Import data mobil',
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Import'
+        );
+        $this->m_log_sistem->insertLog($datalog);
+
+        $link = base_url() . "mt/";
+        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
     }
     
 //APAR MT
@@ -691,7 +783,8 @@ class Mt extends CI_Controller {
     public function tambah_apar($id_mobil) {
 
         //$id_mobil = 1;
-
+        
+        $nopol = $this->input->post('nopol', true);
         $data = array(
             'id_mobil' => $id_mobil,
             'ID_JENIS_APAR' => $this->input->post('ID_JENIS_APAR', true),
@@ -701,6 +794,14 @@ class Mt extends CI_Controller {
         );
 
         $this->m_mt->insertApar($data);
+        
+        $datalog = array(
+            'keterangan' => " Tambah data Apar ",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+            );
+                $this->m_log_sistem->insertLog($datalog);
+                
         $link = base_url() . "mt/apar_mt/".$id_mobil;
         
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
@@ -709,6 +810,7 @@ class Mt extends CI_Controller {
     }
     
     public function edit_apar($id,$id_mobil) {
+        
         
         $tanggal_apar = $_POST['TANGGAL_APAR'];
         $id_jenis= $_POST['ID_JENIS_APAR'];
@@ -723,6 +825,13 @@ class Mt extends CI_Controller {
         );
        
         $this->m_mt->editApar($data,$id);
+         
+        $datalog = array(
+            'keterangan' => "Edit data Apar",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+            );
+                $this->m_log_sistem->insertLog($datalog);
         
         $link = base_url()."mt/apar_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
@@ -737,6 +846,13 @@ class Mt extends CI_Controller {
         
         
         $link = base_url()."mt/apar_mt/".$id_mobil;
+         
+        $datalog = array(
+            'keterangan' => "Hapus data Apar",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Hapus'
+            );
+                $this->m_log_sistem->insertLog($datalog);
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
@@ -772,6 +888,12 @@ class Mt extends CI_Controller {
         );
 
         $this->m_mt->insertBan($data);
+        $datalog = array(
+            'keterangan' => "Tambah data Ban",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+            );
+        $this->m_log_sistem->insertLog($datalog);
         $link = base_url() . "mt/ban_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
@@ -795,6 +917,12 @@ class Mt extends CI_Controller {
             );
         
         $this->m_mt->editBan($data, $id);
+        $datalog = array(
+            'keterangan' => "Edit data Ban",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+            );
+        $this->m_log_sistem->insertLog($datalog);
         
          $link = base_url()."mt/ban_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
@@ -806,7 +934,13 @@ class Mt extends CI_Controller {
      public function delete_ban($id_ban,$id_mobil){
          
         $this->m_mt->deleteBan($id_ban);
-       
+        $datalog = array(
+            'keterangan' => "Hapus data Ban",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Hapus'
+            );
+        $this->m_log_sistem->insertLog($datalog);
+        
         $link = base_url()."mt/ban_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
         echo 'window.location.href="' . $link . '"';
@@ -841,7 +975,15 @@ class Mt extends CI_Controller {
         );
 
         $this->m_mt->insertOli($data);
+         $datalog = array(
+            'keterangan' => "Tambah data Oli",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+            );
+        $this->m_log_sistem->insertLog($datalog);
+        
         $link = base_url() . "mt/oli_mt/".$id_mobil;
+        
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
@@ -863,6 +1005,12 @@ class Mt extends CI_Controller {
             );
         
         $this->m_mt->editOli($data, $id);
+         $datalog = array(
+            'keterangan' => "Edit data Oli",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+            );
+        $this->m_log_sistem->insertLog($datalog);
         
          $link = base_url()."mt/oli_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
@@ -874,6 +1022,12 @@ class Mt extends CI_Controller {
     public function delete_oli($id_oli,$id_mobil){
          
         $this->m_mt->deleteOli($id_oli);
+         $datalog = array(
+            'keterangan' => "Hapus data oli",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Hapus'
+            );
+        $this->m_log_sistem->insertLog($datalog);
         
         $link = base_url()."mt/oli_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
@@ -898,8 +1052,6 @@ class Mt extends CI_Controller {
     
     public function tambah_surat($id_mobil) {
 
-        
-
         $data = array(
             'id_mobil' => $id_mobil,
             'ID_JENIS_SURAT' => $this->input->post('ID_JENIS_SURAT', true),
@@ -909,6 +1061,13 @@ class Mt extends CI_Controller {
         );
 
         $this->m_mt->insertSurat($data);
+         $datalog = array(
+            'keterangan' => "Tambah data Surat",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+            );
+        $this->m_log_sistem->insertLog($datalog);
+        
         $link = base_url() . "mt/surat_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
@@ -929,6 +1088,12 @@ class Mt extends CI_Controller {
             );
         
         $this->m_mt->editSurat($data, $id);
+         $datalog = array(
+            'keterangan' => "Edit data Surat",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+            );
+        $this->m_log_sistem->insertLog($datalog);
         
          $link = base_url()."mt/surat_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
@@ -940,7 +1105,12 @@ class Mt extends CI_Controller {
       public function delete_surat($id_surat,$id_mobil){
          
         $this->m_mt->deleteSurat($id_surat);
-        
+         $datalog = array(
+            'keterangan' => "Hapus data Surat",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Hapus'
+            );
+        $this->m_log_sistem->insertLog($datalog);
         
         $link = base_url()."mt/surat_mt/".$id_mobil;
         echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
@@ -999,7 +1169,7 @@ class Mt extends CI_Controller {
     public function mt_tahun($depot)
     {
        $tahun =  $_POST['tahun'];
-       redirect('mt/grafik_mt/'.$depot."/".$tahun);
+       redirect('mt/grafik_mt/'.$tahun);
     }
     
     public function mt_masuk()
@@ -1035,12 +1205,11 @@ class Mt extends CI_Controller {
         $data2['kinerja'] = 0;
         $data2['tanggal'] = 0;
         
-        $this->load->model("m_kinerja");
+        
         $depot = $this->session->userdata('id_depot');
         $tanggal = date('Y-m-d');
 
-        $data2['mobil'] = $this->m_kinerja->getMobil($depot);
-        
+        $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
         $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
         $data2['tanggal'] = $tanggal; 
         $data2['kinerja'] = 0;
@@ -1054,12 +1223,13 @@ class Mt extends CI_Controller {
     public function cek_presensi() {
         $data['lv1'] = 3;
         $data['lv2'] = 3;
+        $this->load->model("m_penjadwalan");
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
         $data2['tanggal'] = $tanggal;
         
         $this->load->model("m_kinerja");
-        $data2['mobil'] = $this->m_kinerja->getMobil($depot);
+        $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);;
         
         $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
         $this->header($data);
@@ -1068,18 +1238,61 @@ class Mt extends CI_Controller {
     }
 
     public function ubah_presensi() {
-        
-        $this->load->model("m_penjadwalan");
         $id_jadwal = $this->input->post('id_jadwal', true);
+        $nip = $this->input->post('nip', true);
         $nopol = $this->input->post('nopol', true);
         $data = array(
             'alasan' => $this->input->post('alasan', true),
-            'keterangan_masuk' => $this->input->post('keterangan_masuk', true)
+            'keterangan' => $this->input->post('keterangan', true)
         );
         $tanggal = $this->input->post('tanggal_log_harian', true);
-
-        $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
         
+         $datalog = array(
+            'keterangan' => "Ubah presensi Nopol : $nopol pada $tanggal",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+        );
+        $this->m_log_sistem->insertLog($datalog);
+        
+        $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
+
+        $depot = $this->session->userdata('id_depot');
+        //cek apakah jadwal dan kinerja sudah sesuai
+        $jadwal = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
+        $kinerja = $this->m_kinerja->getKinerjaPresensiMT($depot, $tanggal);
+
+        $jumlah_kosong = 0;
+        $jumlah_sama = 0;
+        //loop jadwal
+        $j = 0;
+        $i = 0;
+        $indexi = 0;
+        $indexj = 0;
+        $status = 0;
+        while ($status == 0 && $indexi < count($jadwal) && $indexj < count($kinerja)) {
+            $i = $indexi;
+            $j = $indexj;
+            if ($jadwal[$i]->ID_MOBIL == $kinerja[$j]->ID_MOBIL) {
+                $indexi++;
+                $indexj++;
+            } else {
+                if ($jadwal[$i]->STATUS_MASUK == "Hadir" && $jadwal[$i]->ALASAN == "") {
+                    $status = 1;
+                    $jumlah_kosong++;
+                }
+                $indexi++;
+            }
+        }
+        //echo $ketemu;
+
+        if ($jumlah_kosong == 0) {
+            $data = array(
+                'status_presensi_mt' => 1
+            );
+            $this->m_log_harian->updateStatusPresensiMT($depot, $tanggal, $data);
+        }
+
+
         $link = base_url() . "mt/cek_presensi/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
         echo 'window.location.href="' . $link . '"';
@@ -1118,6 +1331,13 @@ class Mt extends CI_Controller {
         );
         
         $this->m_pengingat->editReminderSurat($id,$data);
+        
+         $datalog = array(
+            'keterangan' => "Ubah Reminder Surat ",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         //redirect('mt/reminder');
           echo '<script type="text/javascript">alert("Pengingat surat berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
@@ -1140,6 +1360,12 @@ class Mt extends CI_Controller {
         );
         
         $this->m_pengingat->editReminderOli($id,$data);
+        $datalog = array(
+            'keterangan' => "Ubah Reminder Oli ",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         //redirect('mt/reminder');
           echo '<script type="text/javascript">alert("Pengingat oli berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
@@ -1159,6 +1385,12 @@ class Mt extends CI_Controller {
         );
         
         $this->m_pengingat->editReminderApar($id,$data);
+        $datalog = array(
+            'keterangan' => "Ubah Reminder Apar ",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         //redirect('mt/reminder');
           echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
@@ -1174,6 +1406,12 @@ class Mt extends CI_Controller {
         );
         
         $this->m_pengingat->editReminderBan($id,$data);
+        $datalog = array(
+            'keterangan' => "Ubah Reminder Ban ",
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Edit'
+        );
+        $this->m_log_sistem->insertLog($datalog);
         //redirect('mt/reminder');
           echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';

@@ -20,9 +20,18 @@
 </script>
 <section id="main-content">
     <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                   <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                   <li><a href="<?php echo base_url();?>mt/rencana">Rencana Mobil</a></li>
+                   <li class="active">Import Rencana Mobil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
-
-
 
         <section class="panel">
             <header class="panel-heading">
