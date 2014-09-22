@@ -16,9 +16,9 @@
         <!-- page start-->
         <?php if ($laporan_ada == true) { ?>
             <section class="panel">    
-                <!--
+                
                 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=<?php echo $nama_file; ?>" width="100%" height="600" style="border: none;"></iframe>
-                -->
+                
                 <?php // echo $nama_file; ?>
             </section>
         <?php } else { ?>
