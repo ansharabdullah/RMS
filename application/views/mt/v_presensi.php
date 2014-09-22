@@ -1,3 +1,20 @@
+<?php
+function DateToIndo($date) { 
+        $BulanIndo = array("Januari", "Februari", "Maret",
+                           "April", "Mei", "Juni",
+                           "Juli", "Agustus", "September",
+                           "Oktober", "November", "Desember");
+    
+        $tahun = substr($date, 0, 4); 
+        $bulan = substr($date, 5, 2); 
+        $tgl   = substr($date, 8, 2); 
+        
+        $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+        return($result);
+}
+
+?>
+
 <script type="text/javascript">
     $(document).ready(function() {
        $("#signupForm").submit(function(e) {
@@ -17,8 +34,19 @@
 
 
 
+
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                   <li class="active">Presensi Mobil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <section class="panel">
             <header class="panel-heading">
                 Presensi Mobil Tangki
@@ -46,7 +74,7 @@
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
-                    Tabel Presensi (<?php echo $tanggal ?>)
+                    Tabel Presensi <?php echo DateToIndo($tanggal)?>
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">
@@ -63,7 +91,8 @@
                             </div>
                         </div>
                         <div class="space15"></div>
-                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                        <div class="adv-table editable-table " style="overflow-x: scroll; overflow-y:hidden">
+                        <table class="table table-striped table-hover table-bordered" id="editable-sample" >
                             <thead>
                                 <tr>
                                     <th style="display:none;"></th>
@@ -72,7 +101,9 @@
                                     <th>Kapasitas</th>
                                     <th>Transportir</th>
                                     <th>Produk</th>
+                                    <th>Jadwal</th>
                                     <th>Kehadiran</th>
+                                    <th>Alasan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -80,12 +111,14 @@
 
                                 <?php
                                     $i = 1;
-                                    foreach ($mobil as $row) {
+                                    foreach ($presensi as $row) {
                                         $hadir = "Absen";
+                                        $text = "<span class='label label-danger'>Absen</span>";
                                         foreach ($kinerja as $row2) {
                                             if ($row->ID_MOBIL == $row2->ID_MOBIL) {
+                                                $text = "<span class='label label-success'>Hadir</span>";
                                                 $hadir = "Hadir";
-                                                
+                                                break;
                                             }
                                         }
                                         ?>
@@ -95,16 +128,20 @@
                                             <td><?php echo $row->KAPASITAS; ?></td>
                                             <td><?php echo $row->TRANSPORTIR; ?></td>
                                             <td><?php echo $row->PRODUK; ?></td>
-                                            
-                                            <td><?php
-                                             if ($hadir == "Hadir") {
+                                           <td><?php
+                                                if ($row->STATUS_MASUK == "Hadir") {
                                                     echo "<span class='label label-success'>";
                                                 } else {
                                                     echo "<span class='label label-danger'>";
-                                                }echo $hadir; ?></td>
-                                           
-                                            <td><a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $hadir ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a></td>
-                                        </tr>
+                                                }echo $row->STATUS_MASUK;
+                                                ?></td>
+                                           <td><?php echo $text; ?></td>
+                                            <td><?php echo $row->ALASAN ?></td>
+                                           <td><?php if ($row->STATUS_MASUK != $hadir) { ?>
+                                                    <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a>
+                                                <?php }else{ ?>
+                                                    <span class='label label-success'>Ok</span>
+                                                <?php }?> </td></tr>
                                         <?php
                                         $i++;
                                     }
@@ -112,6 +149,7 @@
 
                             </tbody>
                         </table>
+                     </div>
                     </div>
                 </div>
             </section>
@@ -124,7 +162,7 @@
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Error!</strong> Absen Mobil Tangki tidak ditemukan.
+                    <strong>Error!</strong> Absen Mobil Tangki <strong><?php echo DateToIndo($tanggal)?></strong> tidak ditemukan.
                 </div>
     <?php }
 } ?>
@@ -147,7 +185,7 @@
                 <input type="hidden" name="id_jadwal" id="id_jadwal"/>
                 <input type="hidden" name="tanggal_log_harian" id="tanggal_log_harian"/>
                 <input type="hidden" name="nopol" id="nopol"/>
-                <input type="hidden" name="keterangan_masuk" id="keterangan_masuk1"/>
+                <input type="hidden" name="keterangan" id="keterangan1"/>
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <section class="panel">
@@ -162,7 +200,7 @@
                                 <div class="form-group ">
                                     <label for="cjenis" class="control-label col-lg-4">Kehadiran</label>
                                     <div class="col-lg-8">
-                                        <select class="form-control input-sm m-bot15" id="keterangan_masuk" name="keterangan_masuk">
+                                        <select class="form-control input-sm m-bot15" id="keterangan" name="keterangan" readonly/>
                                             <option value="Hadir">Hadir</option>
                                             <option value="Absen">Absen</option>
                                             <option value="Libur">Libur</option>
@@ -208,12 +246,12 @@
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
     
-   function editPresensi(tanggal, keterangan, alasan, id_jadwal, nip) {
+   function editPresensi(tanggal, keterangan, alasan, id_jadwal, nopol) {
                                             $("#tanggal_log_harian").val(tanggal);
                                             $("#nopol").val(nopol);
                                             $("#tanggal").val(tanggal);
-                                            $("#keterangan_masuk1").val(keterangan);
-                                            $("#keterangan_masuk").val(keterangan);
+                                            $("#keterangan1").val(keterangan);
+                                            $("#keterangan").val(keterangan);
                                             $("#alasan").val(alasan);
                                             $("#id_jadwal").val(id_jadwal);
                                         }

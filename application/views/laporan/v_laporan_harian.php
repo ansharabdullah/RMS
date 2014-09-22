@@ -9,15 +9,15 @@
         }
         $("#blnPilih").val(j);
         settingBulan();
-        
+
         /*
-        $("#commentForm").submit(function(e) {
-            if ($("#commentForm").valid())
-            {
-                $("#laporan_harian").modal('show');
-            }
-            e.preventDefault();
-        });*/
+         $("#commentForm").submit(function(e) {
+         if ($("#commentForm").valid())
+         {
+         $("#laporan_harian").modal('show');
+         }
+         e.preventDefault();
+         });*/
     });
 
     function settingBulan() {
@@ -70,14 +70,27 @@
 
         $("#titleBulan").html(judul);
         for (var i = 0; i < tgl_akhir; i++) {
-            $("#bln" + (i+1)).html((i+1)+ " " +judul);
-            $("#cekbln" + (i+1)).show();
+            $("#bln" + (i + 1)).html((i + 1) + " " + judul);
+            $("#cekbln" + (i + 1)).show();
         }
         for (var i = tgl_akhir; i <= 31; i++) {
-            $("#bln" + (i+1)).html("");
-            $("#cekbln" + (i+1)).hide();
+            $("#bln" + (i + 1)).html("");
+            $("#cekbln" + (i + 1)).hide();
         }
 
+    }
+
+    function cekAll() {
+        var data = document.getElementById('cek_all');
+        var i = 0;
+
+        for (i = 1; i <= 31; i++) {
+            if (data.checked) {
+                document.getElementById("cekbln" + i).checked = true;
+            } else {
+                document.getElementById("cekbln" + i).checked = false;
+            }
+        }
     }
 
 </script>
@@ -93,7 +106,7 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
+
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -107,8 +120,19 @@
                             <input type="month" name="bulan" required="required" id="blnPilih" onchange="settingBulan()" class="form-control"/>
                         </div>
                     </div>
-                    
-                    <table class="table table-bordered table-striped table-condensed">
+                    <div class="form-group" id="tanggal">
+                        <label for="kosong" class="col-lg-2 col-sm-2 control-label"></label>
+                        <div class="col-lg-2 col-sm-2">
+                            <input type="checkbox" id="cek_all" onchange="cekAll()"> Ceklis semua
+                        </div>
+
+                        <label for="PJS" class="col-lg-3 col-sm-2 control-label">Penanggung Jawab Sementara</label>
+                        <div class="col-lg-2 col-sm-2">                            
+                            <input type="text" name="pjs" placeholder="Nama PJS" class="form-control"/>                        
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-striped table-condensed" style="overflow-x: scroll">
                         <thead>
                             <tr>
                                 <th>Ceklis</th>
@@ -224,7 +248,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
                             <input type="submit" name ="cek" style="float: right;" class="btn btn-warning" value="Cek">
@@ -237,12 +261,3 @@
         <!-- page end-->
     </section>
 </section>
-<!--
-<div class="modal fade" id="laporan_harian" role="modal" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width:90%">
-        <div class="modal-content">
-            <iframe src="http://view.officeapps.live.com/op/view.aspx?src=oscrms.com/RMS/assets/file/Hasil Generate.xls" width="100%" height="600" style="border: none;"></iframe>
-        </div>
-    </div>
-</div>
--->
