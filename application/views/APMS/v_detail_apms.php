@@ -302,7 +302,7 @@ function DateToIndo($date) {
 
             <section class="panel">
                 <header class="panel-heading">
-                    Tabel Kinerja MT  
+                    Tabel Kinerja APMS  
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">
@@ -317,13 +317,13 @@ function DateToIndo($date) {
                                 <tr>
                                     <th style="display: none;">-</th>
                                     <th>No.</th>
-                                    <th>Tanggal</th>
-                                    <th>Km</th>
-                                    <th>Kl</th>
-                                    <th>Rit </th>
-                                    <th>Own Use</th>
+                                    <th>No. Delivery</th>
+                                    <th>Tanggal Delivery</th>
+                                    <th>Tanggal Plan GI</th>
                                     <th>Premium</th>
-                                    <th>Pertamax</th>
+                                    <th>Solar</th>
+                                    <th>Nomor Order</th>
+                                    <th>Tanggal Order</th>
                                     <th>Pertamax Plus</th>
                                     <th>Pertamax Dex</th>
                                     <th>Solar</th>

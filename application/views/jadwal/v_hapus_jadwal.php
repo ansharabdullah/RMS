@@ -48,7 +48,7 @@
                 </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
-                        <div class="adv-table editable-table ">
+                        <div class="adv-table editable-table "  style="overflow-x: scroll">
                             <div class="clearfix">
                             </div>
                             <div class="space15"></div>

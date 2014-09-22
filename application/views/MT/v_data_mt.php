@@ -40,6 +40,30 @@ if(status == 1){
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li class="active">Data Mobil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        <?php if ($pesan==1) {  ?>
+            <div class="alert alert-success fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Sukses!</strong> Berhasil Tambah Mobil.
+                    </div>
+        <?php } ?>
+        
+        <?php if ($pesan==2) { ?>
+            <div class="alert alert-block alert-danger fade in">
+                <strong>Error!</strong> 
+            </div>
+        <?php } ?>
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -114,7 +138,7 @@ if(status == 1){
                 <h4 class="modal-title">Tambah MT</h4>
             </div>
             <div class=" form">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/tambah_mobil/">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/data_mt/">
 
                     <div class="modal-body">
                         <div class="col-lg-12">
@@ -385,7 +409,7 @@ if(status == 1){
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" onclick="this.form.reset()" >Batal</button>
-                        <input class="btn btn-success" id="submit" type="submit" value="Simpan"/>
+                        <input class="btn btn-success" id="submit" name="simpan" type="submit" value="Simpan"/>
                     </div>
                 </form>
             </div>
