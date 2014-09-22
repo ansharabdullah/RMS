@@ -22,7 +22,7 @@
     while($j < sizeof($kpi_bulan)) {
         ?>
         nomor_bulan.push(<?php echo date('n',strtotime($kpi_bulan[$j]->tanggal))?>);
-        bulan.push("<?php echo date('F',strtotime($kpi_bulan[$j]->tanggal))?>");
+        bulan.push("<?php echo strftime('%B',strtotime($kpi_bulan[$j]->tanggal))?>");
         pengiriman.push(<?php echo $detail_kpi[$index]->PERFORMANCE_SCORE?>);
         realisasi_pengiriman.push(<?php echo $detail_kpi[$index]->PERFORMANCE_SCORE?>);
         <?php $index++;?>
@@ -55,7 +55,7 @@
                 renderTo:'grafik2'
             },
             title: {
-                text: 'Rencana pengiriman vs realisasi (MS2 Compliance) <?php echo $kpi_bulan[0]->nama_depot?>'
+                text: 'Rencana pengiriman vs realisasi (MS2 Compliance) <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Tahun <?php echo $tahun?>'
@@ -170,7 +170,7 @@
         <!-- page start-->
                 <section class="panel">
                         <header class="panel-heading">
-                            Grafik KPI Bulanan Depot <?php echo $kpi_bulan[0]->nama_depot?>
+                            Grafik KPI Bulanan Depot <?php echo $nama_depot?>
                         </header>
                         <div class="panel-body" >
                             <?php $attr = array("class"=>"cmxform form-horizontal tasi-form");
@@ -228,7 +228,7 @@
             </section>
                 <section class="panel">
                         <header class="panel-heading">
-                            Key Performance Indicator (KPI) Depot <?php echo $kpi_bulan[0]->nama_depot?> (Tahun <?php echo $tahun?>)
+                            Key Performance Indicator (KPI) Depot <?php echo $nama_depot?> (Tahun <?php echo $tahun?>)
                         </header>
                     <div class="panel-body">
                         <div class="space15">
@@ -258,7 +258,7 @@
                                         <tr >
                                             <td rowspan="10" style="display:none;"></td>
                                             <td rowspan="10"><?php echo ($j + 1) ?></td>
-                                            <td rowspan="10"><?php echo date('F',strtotime($kpi_bulan[$j]->tanggal));?></td>
+                                            <td rowspan="10"><?php echo strftime('%B',strtotime($kpi_bulan[$j]->tanggal));?></td>
                                             <td rowspan="10"><?php echo round($kpi_bulan[$j]->total,2)?>%</td>
                                             <td><?php echo $detail_kpi[$index]->JENIS_KPI_OPERASIONAL?></td>
                                             <td><?php echo $detail_kpi[$index]->TARGET?></td>

@@ -22,7 +22,7 @@
     while($j < sizeof($kpi_bulan)) {
         ?>
         nomor_bulan.push(<?php echo date('n',strtotime($kpi_bulan[$j]->tanggal))?>);
-        bulan.push("<?php echo date('F',strtotime($kpi_bulan[$j]->tanggal))?>");
+        bulan.push("<?php echo strftime('%B',strtotime($kpi_bulan[$j]->tanggal))?>");
         pengiriman.push(<?php echo $detail_kpi[$index]->PERFORMANCE_SCORE?>);
         realisasi_pengiriman.push(<?php echo $detail_kpi[$index]->PERFORMANCE_SCORE?>);
         <?php $index++;?>
@@ -258,7 +258,7 @@
                                         <tr >
                                             <td rowspan="10" style="display:none;"></td>
                                             <td rowspan="10"><?php echo ($j + 1) ?></td>
-                                            <td rowspan="10"><?php echo date('F',strtotime($kpi_bulan[$j]->tanggal));?></td>
+                                            <td rowspan="10"><?php echo strftime('%B',strtotime($kpi_bulan[$j]->tanggal));?></td>
                                             <td rowspan="10"><?php echo round($kpi_bulan[$j]->total,2)?>%</td>
                                             <td><?php echo $detail_kpi[$index]->JENIS_KPI_OPERASIONAL?></td>
                                             <td><?php echo $detail_kpi[$index]->TARGET?></td>

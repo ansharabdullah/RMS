@@ -76,7 +76,7 @@
                     <div class="panel-body" >
                          <?php
                                 $attr = array("class"=>"cmxform form-horizontal tasi-form");
-                                 echo form_open("depot/mt_tahun/".$id_depot."/".$nama_depot,$attr);
+                                 echo form_open("depot/mt_tahun/".$id_depot,$attr);
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">
@@ -206,7 +206,7 @@
                 solar.push(<?php echo $km->solar ?>);
                 bio_solar.push(<?php echo $km->bio_solar ?>);
                 own_use_mt.push(<?php echo $km->own_use ?>);
-                 bulan.push("<?php echo $km->bulan?>");
+                 bulan.push("<?php echo strftime("%B",strtotime($km->TANGGAL_LOG_HARIAN))?>");
                 nomor_bulan.push("<?php echo date("n",strtotime($km->TANGGAL_LOG_HARIAN))?>");
             <?php
         }
@@ -228,7 +228,7 @@
                    point:{
                       events:{
                         click: function(event) {
-                                window.location = "<?php echo base_url() ?>depot/mt_depot_harian/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+ nomor_bulan[this.x]+"/<?php echo $tahun?>";
+                                window.location = "<?php echo base_url() ?>depot/mt_depot_harian/<?php echo $id_depot?>/"+ nomor_bulan[this.x]+"/<?php echo $tahun?>";
                             }
                         }
                     }

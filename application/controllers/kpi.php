@@ -91,6 +91,30 @@ class kpi extends CI_Controller {
     }
     
     
+    public function internal()
+    {
+        $data['lv1'] = $this->level1;
+        $data['lv2'] = 2;
+        $data2 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data2);
+        $this->navbar($data['lv1'],$data['lv2']);
+        $this->load->view("oam/v_kpi_internal_oam");
+        $this->load->view('layouts/footer');
+    }
+    
+    public function internal_input()
+    {
+        $data['lv1'] = $this->level1;
+        $data['lv2'] = 2;
+        $data2 = menu_oam();
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/menu',$data2);
+        $this->navbar($data['lv1'],$data['lv2']);
+        $this->load->view("oam/v_input_kpi_internal_oam");
+        $this->load->view('layouts/footer');
+    }
+    
     
     public function navbar($lv1,$lv2)
     {

@@ -15,22 +15,50 @@
     var ritase_mt = new Array();
     var nopol_mt = new Array();
 <?php
-foreach ($grafik as $km) {
-    ?>
-                 
-                    kl_mt.push(<?php echo $km->TOTAL_KL_MT ?>);
-                    km_mt.push(<?php echo $km->TOTAL_KM_MT ?>);
-                    premium.push(<?php echo $km->PREMIUM ?>);
-                    pertamax.push(<?php echo $km->PERTAMAX ?>);
-                    pertamax_plus.push(<?php echo $km->PERTAMAX_PLUS ?>);
-                    pertamina_dex.push(<?php echo $km->PERTAMINA_DEX ?>);
-                    solar.push(<?php echo $km->SOLAR ?>);
-                    bio_solar.push(<?php echo $km->BIO_SOLAR ?>);
-                    own_use_mt.push(<?php echo $km->OWN_USE ?>);
-                    ritase_mt.push(<?php echo $km->RITASE_MT ?>);
-                    nopol_mt.push("<?php echo $km->NOPOL ?>");
-                    
-    <?php
+foreach($mt as $m)
+{
+    $status = 0;
+    foreach ($grafik as $km) {
+        if($m->ID_MOBIL == $km->ID_MOBIL)
+        {
+            $status = 1;
+        ?>
+
+                        kl_mt.push(<?php echo $km->TOTAL_KL_MT ?>);
+                        km_mt.push(<?php echo $km->TOTAL_KM_MT ?>);
+                        premium.push(<?php echo $km->PREMIUM ?>);
+                        pertamax.push(<?php echo $km->PERTAMAX ?>);
+                        pertamax_plus.push(<?php echo $km->PERTAMAX_PLUS ?>);
+                        pertamina_dex.push(<?php echo $km->PERTAMINA_DEX ?>);
+                        solar.push(<?php echo $km->SOLAR ?>);
+                        bio_solar.push(<?php echo $km->BIO_SOLAR ?>);
+                        own_use_mt.push(<?php echo $km->OWN_USE ?>);
+                        ritase_mt.push(<?php echo $km->RITASE_MT ?>);
+                        nopol_mt.push("<?php echo $km->NOPOL ?>");
+
+        <?php
+            break;
+        }
+    }
+    if($status == 0)
+    {
+        ?>
+
+                        kl_mt.push(0);
+                        km_mt.push(0);
+                        premium.push(0);
+                        pertamax.push(0);
+                        pertamax_plus.push(0);
+                        pertamina_dex.push(0);
+                        solar.push(0);
+                        bio_solar.push(0);
+                        own_use_mt.push(0);
+                        ritase_mt.push(0);
+                        nopol_mt.push("<?php echo $m->NOPOL ?>");
+
+        <?php
+        
+    }
 }
 ?>
     
@@ -174,6 +202,18 @@ foreach ($grafik as $km) {
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+         <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>depot/mt_depot/<?php echo $id_depot?>/<?php echo $tahun?>">Kinerja MT Bulanan</a></li>
+                    <li><a href="<?php echo base_url();?>depot/mt_depot_harian/<?php echo $id_depot?>/<?php echo $no_bulan?>/<?php echo $tahun?>">Kinerja MT Harian</a></li>
+                    <li class="active">Detail Kinerja MT Harian</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
@@ -183,7 +223,7 @@ foreach ($grafik as $km) {
                     <div class="panel-body" >
                         <?php
                         $attr = array("class" => "cmxform form-horizontal tasi-form");
-                        echo form_open("depot/ganti_detail_mt/" . $id_depot . "/" . $nama_depot, $attr);
+                        echo form_open("depot/ganti_detail_mt/" . $id_depot , $attr);
                         ?>
                         <div class="form-group">
                             <div class="col-lg-3">
@@ -230,27 +270,59 @@ foreach ($grafik as $km) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i = 1;
-                                    foreach ($grafik as $row) { ?>
-                                    <td style="display:none;"></td>
-                                    <td><?php echo $i ?></td>
-                                    <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
-                                    <td><?php echo $row->KAPASITAS; ?></td>
-                                    <td><?php echo $row->PRODUK; ?></td>
-                                    <td><?php echo $row->TOTAL_KM_MT; ?></td>
-                                    <td><?php echo $row->TOTAL_KL_MT; ?></td>
-                                    <td><?php echo $row->RITASE_MT; ?></td>
-                                    <td><?php echo $row->PREMIUM; ?></td>
-                                    <td><?php echo $row->PERTAMAX; ?></td>
-                                    <td><?php echo $row->PERTAMAX_PLUS; ?></td>
-                                    <td><?php echo $row->PERTAMINA_DEX; ?></td>
-                                    <td><?php echo $row->SOLAR; ?></td>
-                                    <td><?php echo $row->BIO_SOLAR; ?></td>
+                                    <?php 
+                                    $i = 1;
+                                    foreach($mt as $m)
+                                    {
+                                        $status = 0;
+                                        foreach ($grafik as $row) { 
+                                            if($m->ID_MOBIL == $row->ID_MOBIL)
+                                            {
+                                                $status = 1;
+                                                ?>
+                                                <tr>
+                                                <td style="display:none;"></td>
+                                                <td><?php echo $i ?></td>
+                                                <td><?php echo $row->NOPOL; ?></td>
+                                                <td><?php echo $row->KAPASITAS; ?></td>
+                                                <td><?php echo $row->PRODUK; ?></td>
+                                                <td><?php echo $row->TOTAL_KM_MT; ?></td>
+                                                <td><?php echo $row->TOTAL_KL_MT; ?></td>
+                                                <td><?php echo $row->RITASE_MT; ?></td>
+                                                <td><?php echo $row->PREMIUM; ?></td>
+                                                <td><?php echo $row->PERTAMAX; ?></td>
+                                                <td><?php echo $row->PERTAMAX_PLUS; ?></td>
+                                                <td><?php echo $row->PERTAMINA_DEX; ?></td>
+                                                <td><?php echo $row->SOLAR; ?></td>
+                                                <td><?php echo $row->BIO_SOLAR; ?></td>
 
-                                    </tr>
-                                    <?php
-                                    $i++;
-                                }
+                                                </tr>
+                                                <?php
+                                                break;
+                                            }
+                                        }
+                                        if($status == 0)
+                                        {?>
+                                            <tr>
+                                                <td style="display:none;"></td>
+                                                <td><?php echo $i ?></td>
+                                                <td><?php echo $row->NOPOL; ?></td>
+                                                <td><?php echo $m->KAPASITAS; ?></td>
+                                                <td><?php echo $m->PRODUK; ?></td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                         <?php   
+                                        }
+                                        $i++;
+                                    }
                                 ?>
                                 </tbody>
                             </table>

@@ -58,7 +58,7 @@ foreach ($ms2 as $row) {
                 text: 'TOTAL LO'
             },
             subtitle: {
-                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>'
+                text: 'Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>'
             },
             xAxis: [{
                     categories:tanggal
@@ -79,7 +79,7 @@ foreach ($ms2 as $row) {
                 }],
             tooltip: {
                 formatter: function() {
-                    return this.x +' <?php echo date('F', mktime(0, 0, 0, $bulan, 1, $tahun)) . " " . $tahun; ?>' + '<br/>' + this.series.name + " : " + this.y + '%' ;
+                    return this.x +' <?php echo strftime('%B', mktime(0, 0, 0, $bulan, 1, $tahun)) . " " . $tahun; ?>' + '<br/>' + this.series.name + " : " + this.y + '%' ;
                 }
             },
             series: [{
@@ -215,7 +215,7 @@ foreach ($ms2 as $row) {
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Tabel MS2 Complience Bulan <?php echo date('F Y', mktime(0, 0, 0, $bulan, 1, $tahun))?>
+                            Tabel MS2 Complience Bulan <?php echo strftime('%B Y', mktime(0, 0, 0, $bulan, 1, $tahun))?>
                         </header>
                         <div class="panel-body">
                             <div class="adv-table editable-table" style="overflow-x: scroll">

@@ -20,7 +20,9 @@ class m_depot extends CI_Model {
     {
         $query = $this->db->query("select * from depot where ID_DEPOT = $id");
         $data = $query->result();
-        return $data[0]->NAMA_DEPOT;
+        $nama = strtolower($data[0]->NAMA_DEPOT);
+        $nama = ucfirst($nama);
+        return $nama;
     }
 
 }

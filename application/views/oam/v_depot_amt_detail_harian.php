@@ -9,15 +9,40 @@
     var pendapatan = new Array();
     var spbu = new Array();
     <?php
+    foreach($amt as $a)
+    {
+        $status = 0;
         foreach($kinerja as $k)
-        { ?>
-        pegawai.push("<?php echo $k->NAMA_PEGAWAI?>");    
-        km.push(<?php echo $k->TOTAL_KM?>);       
-        kl.push(<?php echo $k->TOTAL_KL?>);       
-        ritase.push(<?php echo $k->RITASE_AMT?>);       
-        pendapatan.push(<?php echo $k->PENDAPATAN?>);       
-        spbu.push(<?php echo $k->SPBU?>);    
-        <?php }
+        { 
+            if($k->ID_PEGAWAI == $a->ID_PEGAWAI)
+            {
+                $status = 1;
+        ?>
+            pegawai.push("<?php echo $a->NAMA_PEGAWAI?>");    
+            km.push(<?php echo $k->TOTAL_KM?>);       
+            kl.push(<?php echo $k->TOTAL_KL?>);       
+            ritase.push(<?php echo $k->RITASE_AMT?>);       
+            pendapatan.push(<?php echo $k->PENDAPATAN?>);       
+            spbu.push(<?php echo $k->SPBU?>);    
+        <?php 
+                break;
+            }
+           
+        }
+        if($status == 0)
+        {
+            ?>
+            pegawai.push("<?php echo $a->NAMA_PEGAWAI?>");    
+            km.push(0);       
+            kl.push(0);       
+            ritase.push(0);       
+            pendapatan.push(0);       
+            spbu.push(0);  
+            <?php
+            
+        }
+    }
+        
     ?>
     $(function() {
         amt = new Highcharts.Chart({ 
@@ -30,7 +55,7 @@
                 x: -20 //center
             },
             subtitle: {
-                text: '<?php echo date('d F Y',strtotime($tanggal))?>',
+                text: '<?php echo $tanggal?>',
                 x: -20
             },
             xAxis: {
@@ -130,6 +155,18 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+         <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>depot/amt_depot/<?php echo $id_depot?>/<?php echo $tahun?>">Kinerja AMT Bulanan</a></li>
+                    <li><a href="<?php echo base_url();?>depot/amt_depot_harian/<?php echo $id_depot?>/<?php echo $no_bulan?>/<?php echo $tahun?>">Kinerja AMT Harian</a></li>
+                    <li class="active">Detail Kinerja AMT Harian</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
@@ -140,7 +177,7 @@
                   <div class="panel-body" >
                         <?php
                         $attr = array("class" => "cmxform form-horizontal tasi-form");
-                        echo form_open("depot/ganti_detail_amt/" . $id_depot . "/" . $nama_depot, $attr);
+                        echo form_open("depot/ganti_detail_amt/" . $id_depot, $attr);
                         ?>
                         <div class="form-group">
                             <div class="col-lg-3">
@@ -172,11 +209,12 @@
                                         <th style="display:none;"></th>
                                         <th>No</th>
                                         <th>NIP</th>
+                                        <th style="white-space: nowrap">No Pekerja</th>
                                         <th>Nama</th>
                                         <th>Jabatan</th>
                                         <th>Klasifikasi</th>
-                                        <th>Tanggal Masuk</th>
-                                        <th>Transportir Asal</th>
+                                        <th  style="white-space: nowrap">Tanggal Masuk</th>
+                                        <th style="white-space: nowrap">Transportir Asal</th>
                                         <th>Alamat</th>
                                         <th>No Telp</th>
                                         <th>KM</th>
@@ -189,27 +227,61 @@
                                 <tbody>
                                     <?php
                                     $i = 0;
-                                    foreach ($kinerja as $k) {
-                                        ?>
-                                        <tr class="">
-                                            <td style="display:none;"></td>
-                                            <td><?php echo ($i + 1) ?></td>
-                                            <td><a href="<?php echo base_url() ?>amt/detail" style ="text-decoration: underline">320519000<?php echo ($i + 1) ?></a></td>
-                                            <td><?php echo $k->NAMA_PEGAWAI ?></td>
-                                            <td><?php echo $k->STATUS_TUGAS ?></td>
-                                            <td><?php echo $k->KLASIFIKASI ?></td>
-                                            <td><?php echo $k->TANGGAL_MASUK ?></td>
-                                            <td><?php echo $k->TRANSPORTIR_ASAL ?></td>
-                                            <td><?php echo $k->ALAMAT ?></td>
-                                            <td><?php echo $k->NO_TELEPON ?></td>
-                                            <td><?php echo $k->TOTAL_KM?></td>
-                                            <td><?php echo $k->TOTAL_KL?></td>
-                                            <td><?php echo $k->RITASE_AMT?></td>
-                                            <td><?php echo $k->PENDAPATAN?></td>
-                                            <td><?php echo $k->SPBU?></td>
-                                        </tr>
-                                        <?php
-                                        $i++;
+                                    foreach($amt as $a)
+                                    {
+                                        $status = 0;
+                                        foreach ($kinerja as $k) {
+                                            if($a->ID_PEGAWAI == $k->ID_PEGAWAI)
+                                            {
+                                                $status = 1;
+                                            ?>
+                                            <tr class="">
+                                                <td style="display:none;"></td>
+                                                <td><?php echo ($i + 1) ?></td>
+                                                <td style="white-space: nowrap"><?php echo $a->NIP?></td>
+                                                <td><?php echo $a->NO_PEKERJA ?></td>
+                                                <td><?php echo $a->NAMA_PEGAWAI ?></td>
+                                                <td><?php echo $k->STATUS_TUGAS ?></td>
+                                                <td><?php echo $a->KLASIFIKASI ?></td>
+                                                <td><?php echo $a->TANGGAL_MASUK ?></td>
+                                                <td><?php echo $a->TRANSPORTIR_ASAL ?></td>
+                                                <td><?php echo $a->ALAMAT ?></td>
+                                                <td><?php echo $a->NO_TELEPON ?></td>
+                                                <td><?php echo $k->TOTAL_KM?></td>
+                                                <td><?php echo $k->TOTAL_KL?></td>
+                                                <td><?php echo $k->RITASE_AMT?></td>
+                                                <td><?php echo $k->PENDAPATAN?></td>
+                                                <td><?php echo $k->SPBU?></td>
+                                            </tr>
+                                            <?php
+                                                break;
+                                            }
+                                        }
+                                        if($status == 0)
+                                        {
+                                            ?>
+                                                <tr class="">
+                                                <td style="display:none;"></td>
+                                                <td><?php echo ($i + 1) ?></td>
+                                                <td><?php echo $a->NIP?></td>
+                                                <td  style="white-space: nowrap"><?php echo $a->NO_PEKERJA ?></td>
+                                                <td><?php echo $a->NAMA_PEGAWAI ?></td>
+                                                <td>-</td>
+                                                <td><?php echo $a->KLASIFIKASI ?></td>
+                                                <td><?php echo $a->TANGGAL_MASUK ?></td>
+                                                <td><?php echo $a->TRANSPORTIR_ASAL ?></td>
+                                                <td><?php echo $a->ALAMAT ?></td>
+                                                <td><?php echo $a->NO_TELEPON ?></td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <?php
+                                            
+                                        }
+                                            $i++;
                                     }
                                     ?>
                                 </tbody>

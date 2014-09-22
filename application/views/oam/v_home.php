@@ -96,7 +96,7 @@
                             </span>
                             <h3>Grafik AMT & MT Perdepot</h3>
                             <span class="rev-combo pull-right" style="background-color:teal;">
-<?php echo date("F Y") ?>
+<?php echo strftime('%B %Y',strtotime(date('F Y'))); ?>
                             </span>
                         </div></a>
                     <div class="panel-body" id="amtMtBody">
@@ -151,7 +151,7 @@
                             </span>
                             <h3>Realisasi dari Rencana</h3>
                             <span class="rev-combo pull-right" style="background-color:#d9534f;">
-<?php echo date("F Y") ?>
+<?php echo strftime('%B %Y',strtotime(date('F Y'))); ?>
                             </span>
                         </div></a>
                     <div class="panel-body" id="rencanaBody">
@@ -415,7 +415,7 @@ if ($kinerja_hari[0]->premium != NULL && $rencana_hari[0]->premium != NULL) {
                             </span>
                             <h3>Grafik KPI</h3>
                             <span class="rev-combo pull-right" style="background-color:steelblue;">
-<?php echo date("F Y") ?>
+<?php echo strftime('%B %Y',strtotime(date('F Y'))); ?>
                             </span>
                         </div></a>
                     <div id="ms2VolumeBody">
@@ -431,7 +431,7 @@ if ($kinerja_hari[0]->premium != NULL && $rencana_hari[0]->premium != NULL) {
                 </section>
             </div>
         </div>
-<?php echo date("F Y") ?>
+<?php echo strftime('%B %Y',strtotime(date('F Y'))); ?>
 
 
     </section>
@@ -753,7 +753,7 @@ for ($i = 0; $i < sizeof($depot); $i++) {
                         point:{
                             events: {
                                 click: function(event) {
-                                    window.location = "<?php echo base_url() ?>depot/amt_depot/"+id_depot_amt[this.series.index]+"/"+this.series.name+"/"+this.category;
+                                    window.location = "<?php echo base_url() ?>depot/amt_depot/"+id_depot_amt[this.series.index]+"/"+this.category;
                                 }
                             }
                         }
@@ -983,7 +983,7 @@ for ($i = 0; $i < sizeof($depot); $i++) {
                         point:{
                             events: {
                                 click: function(event) {
-                                    window.location = "<?php echo base_url() ?>depot/mt_depot/"+id_depot[this.series.index]+"/"+this.series.name+"/"+this.category;
+                                    window.location = "<?php echo base_url() ?>depot/mt_depot/"+id_depot[this.series.index]+"/"+this.category;
                                 }
                             }
                         }

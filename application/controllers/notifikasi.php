@@ -26,6 +26,7 @@ class notifikasi extends CI_Controller {
     }
 
     public function notifikasi_oam() {
+        setlocale(LC_ALL, "IND");
         $data['lv1'] = 1;
         $data['lv2'] = 1;
         $logHarian = $this->m_log_harian->get_log_peringatan_oam();

@@ -9,6 +9,7 @@ class presentasi extends CI_Controller {
         parent::__construct();
         $this->load->model("m_depot");
         $this->load->model("m_kpi");
+        setlocale(LC_ALL, "IND");
     }
 
     public function index() {
@@ -76,9 +77,9 @@ class presentasi extends CI_Controller {
         $slide['depot'] = $this->m_depot->get_depot();
         $slide['nama_depot'] = $this->m_depot->get_nama_depot($depot);
         $slide['bulan'] = array();
-        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan)));
-        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan + 1)));
-        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan + 2)));
+        array_push($slide['bulan'],strftime("%B", mktime(null, null, null, $bulan)));
+        array_push($slide['bulan'],strftime("%B", mktime(null, null, null, $bulan + 1)));
+        array_push($slide['bulan'],strftime("%B", mktime(null, null, null, $bulan + 2)));
         $this->load->view('presentasi/v_header');
         //pilih slide
         switch ($index){
@@ -142,9 +143,9 @@ class presentasi extends CI_Controller {
         </section>";
         $slide['depot'] = $this->m_depot->get_depot();
         $slide['bulan'] = array();
-        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan)));
-        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan + 1)));
-        array_push($slide['bulan'],date("F", mktime(null, null, null, $bulan + 2)));
+        array_push($slide['bulan'],strftime("%B", mktime(null, null, null, $bulan)));
+        array_push($slide['bulan'],strftime("%B", mktime(null, null, null, $bulan + 1)));
+        array_push($slide['bulan'],strftime("%B", mktime(null, null, null, $bulan + 2)));
         $this->load->view('oam/presentasi/v_header');
         //pilih slide
         switch ($index){

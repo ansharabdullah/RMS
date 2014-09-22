@@ -153,7 +153,7 @@
                                 </tbody>
                             </table>
                         </section>
-                        <section class="panel" id="amtWarning">
+<!--                        <section class="panel" id="amtWarning">
                             <header class="panel-heading">
                                 Peringatan AMT
                             </header>
@@ -183,7 +183,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </section>
+                        </section>-->
                         <section class="panel" id="mtWarning">
                             <header class="panel-heading">
                                 Peringatan MT
@@ -227,12 +227,12 @@
                                     MT
                                 </a>
                             </li>
-                            <li id="amtActive">
+<!--                            <li id="amtActive">
                                 <a href="javascript:;" onclick="amtWarning()">
                                     <i class=" icon-user"></i>
                                     AMT
                                 </a>
-                            </li>
+                            </li>-->
                             <li class="last" id="warningActive">
                                 <a href="javascript:;" onclick="warning()">
                                     <i class="icon-bullseye"></i>

@@ -95,7 +95,7 @@
                                  <tr>
                                     <td style="display: none;"></td>
                                     <td><?php echo $i?></td>
-                                    <td><?php echo $m->nama_bulan?></td>
+                                    <td><?php echo $bulan[$i - 1];?></td>
                                     <td><?php echo $m->nilai?></td>
 
                                  </tr>

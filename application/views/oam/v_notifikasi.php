@@ -34,7 +34,7 @@
                                     <div class="panel-body">
                                                 <?php
                                             }
-                                            echo "<br/><b>" . date_format(date_create($logHarian[$i]['tanggal']), 'd-M-y') . "</b><br/><br/>";
+                                            echo "<br/><b>" .strftime('%d %B %Y',strtotime($logHarian[$i]['tanggal'])). "</b><br/><br/>";
                                             
                                             //cek kpi oam
                                             if($logHarian[$i]['id_depot'] < 0)

@@ -2,6 +2,17 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+         <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>depot/mt_depot/<?php echo $id_depot?>/<?php echo $tahun?>">Kinerja MT Bulanan</a></li>
+                    <li class="active">Kinerja MT Harian</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
@@ -11,7 +22,7 @@
                     <div class="panel-body" >
                         <?php
                                 $attr = array("class"=>"cmxform form-horizontal tasi-form");
-                               echo form_open("depot/mt_hari/".$id_depot."/".$nama_depot,$attr);
+                               echo form_open("depot/mt_hari/".$id_depot,$attr);
                             ?>
                             <div class="form-group">
 <!--                                <div class="col-lg-6">
@@ -89,7 +100,7 @@
                                                     <tr class="">
                                                         <td style="display:none;"></td>
                                                         <td><?php echo $i ?></td>
-                                                        <td style="white-space: nowrap"><?php echo date_format(date_create($km->TANGGAL_LOG_HARIAN),'d F Y');?></td>
+                                                        <td style="white-space: nowrap"><?php echo strftime('%d %B %Y',strtotime($km->TANGGAL_LOG_HARIAN));?></td>
                                                         <td><?php echo $km->total_kl ?> KL</td>
                                                         <td><?php echo $km->total_km ?> KM</td>
                                                         <td><?php echo $km->own_use ?></td>
@@ -158,7 +169,7 @@
                 text: 'Grafik Kinerja Harian Jumlah KM Mobil Tangki Depot <?php echo $nama_depot?>'
             },
             subtitle: {
-                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun?>'
+                text: 'Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun?>'
             },
             xAxis: [{
                     categories: tanggal
@@ -183,7 +194,7 @@
                       events:{
                         click: function(event) {
                                var tgl = '<?php echo $tahun."-".$bulan."-";?>'+this.category;
-                                window.location = "<?php echo base_url() ?>depot/mt_depot_detail/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+tgl;
+                                window.location = "<?php echo base_url() ?>depot/mt_depot_detail/<?php echo $id_depot?>/"+tgl;
                             }
                         }
                     }
