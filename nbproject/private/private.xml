@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-<<<<<<< HEAD
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_laporan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/laporan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/kinerja.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_preview_harian.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_laporan_harian.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/layouts/navbar_oam.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_log_harian.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/pengaturan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/log.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_depot.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_pengaturan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/login.php</file>
         </group>
->>>>>>> f942e29c8f0549ad2b4ed30c49db54e2afdc6084
     </open-files>
-=======
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
->>>>>>> cce241dfcb3b1fab110e8bc1a8fc17a7d9be428d
 </project-private>
