@@ -101,7 +101,6 @@ function DateToIndo($date) {
                                     <th>Kapasitas</th>
                                     <th>Transportir</th>
                                     <th>Produk</th>
-                                    <th>Jadwal</th>
                                     <th>Kehadiran</th>
                                     <th>Alasan</th>
                                     <th>Aksi</th>
@@ -128,16 +127,10 @@ function DateToIndo($date) {
                                             <td><?php echo $row->KAPASITAS; ?></td>
                                             <td><?php echo $row->TRANSPORTIR; ?></td>
                                             <td><?php echo $row->PRODUK; ?></td>
-                                           <td><?php
-                                                if ($row->STATUS_MASUK == "Hadir") {
-                                                    echo "<span class='label label-success'>";
-                                                } else {
-                                                    echo "<span class='label label-danger'>";
-                                                }echo $row->STATUS_MASUK;
-                                                ?></td>
+                                          
                                            <td><?php echo $text; ?></td>
                                             <td><?php echo $row->ALASAN ?></td>
-                                           <td><?php if ($row->STATUS_MASUK != $hadir) { ?>
+                                           <td><?php if ($text != "<span class='label label-success'>Hadir</span>") { ?>
                                                     <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a>
                                                 <?php }else{ ?>
                                                     <span class='label label-success'>Ok</span>
