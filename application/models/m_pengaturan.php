@@ -26,6 +26,14 @@ class m_pengaturan extends CI_Model {
         return $query->result();
     }
     
+    public function getCountDepot(){
+        $this->db->select('count(id_depot) as count');
+        $this->db->from('depot');
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
     public function tambahDepot($data){
         $this->db->insert('depot', $data);
     }
@@ -33,6 +41,14 @@ class m_pengaturan extends CI_Model {
     public function editDepot($data, $id) {
         $this->db->where('id_depot', $id);
         $this->db->update('depot',$data);
+    }
+    
+    public function deleteDepot($depot){
+        $this->db->where('id_depot', $depot);
+        $this->db->delete('pegawai');
+        
+        $this->db->where('id_depot',$depot);
+        $this->db->delete('depot');
     }
 
     public function selectAllUser() {

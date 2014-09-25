@@ -9,6 +9,7 @@ class Log extends CI_Controller {
         parent::__construct();
         $this->load->model('m_log_sistem');
         $this->load->model('m_depot');
+        $this->load->model('m_pengaturan');
     }
 
     public function index($bulan = 1) {
@@ -20,7 +21,10 @@ class Log extends CI_Controller {
         $bulan = date('m', strtotime($bulan));
 
         if ($id_depot == -1) {
-            $data['lv1'] = 11;
+
+            $q = $this->m_pengaturan->getCountDepot();
+            $depot = $q[0]->count;
+            $data['lv1'] = $depot + 5;
             $data['lv2'] = 1;
             $data2 = menu_oam();
 

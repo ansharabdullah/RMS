@@ -46,17 +46,19 @@
             </li>
             <?php $level++; ?>
             <li class="sub-menu">
-                <a href="<?php echo base_url() ?>pengaturan/"  <?php if ($lv1 == 9) echo "class='active'" ?>>
+                <a href="<?php echo base_url() ?>pengaturan/"  <?php if ($lv1 == $level) echo "class='active'" ?>>
                     <i class="icon-group"></i><span>Pengaturan User</span>
                 </a>
             </li>
+            <?php $level++; ?>
             <li class="sub-menu">
-                <a href="<?php echo base_url() ?>pengaturan/pengaturan_depot/"  <?php if ($lv1 == 10) echo "class='active'" ?>>
-                    <i class="icon-user"></i><span>Pengaturan Depot</span>
+                <a href="<?php echo base_url() ?>pengaturan/pengaturan_depot/"  <?php if ($lv1 == $level) echo "class='active'" ?>>
+                    <i class="icon-gears"></i><span>Pengaturan Depot</span>
                 </a>
             </li>
+            <?php $level++; ?>
             <li class="sub-menu">
-                <a href="<?php echo base_url() ?>log/"  <?php if ($lv1 == 11) echo "class='active'" ?>>
+                <a href="<?php echo base_url() ?>log/"  <?php if ($lv1 == $level) echo "class='active'" ?>>
                     <i class="icon-list-ul"></i><span>Log Sistem</span>
                 </a>
             </li>
