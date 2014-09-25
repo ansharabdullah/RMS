@@ -16,6 +16,11 @@ class m_apms extends CI_Model {
 		$result = $this->db->insert('kinerja_apms',$data);
 		return $result;
 	}
+	public function editKinerjaApms($data, $id) {
+       $this->db->where('ID_KINERJA_APMS', $id);
+       $result = $this->db->update('kinerja_apms', $data);
+	   return $result;
+    }
 	public function detailApms($id_apms)
 	{
 		$data = $this->db->query("select * from apms where ID_APMS = $id_apms");

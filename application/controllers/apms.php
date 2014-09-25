@@ -14,11 +14,11 @@ class apms extends CI_Controller {
 		
 		//belum make database	
 	    $this->load->model("m_apms");
+        $this->load->model("m_log_sistem");
        /*  
         $this->load->model("m_mt");
         $this->load->model("m_rencana");
         $this->load->model("m_kinerja");
-        $this->load->model("m_log_sistem");
         $this->load->model("m_log_harian");
         $this->load->model("m_peringatan");
         $this->load->model("m_penjadwalan");
@@ -45,6 +45,14 @@ class apms extends CI_Controller {
         );
 		//$pesan = $this->m_apms->insertApms($data5);
 		//$this->pesan = $pesan;
+		
+		$datalog = array(
+            'keterangan' => 'Menambah Data APMS',
+            'id_pegawai' => $this->session->userdata("id_pegawai"),
+            'keyword' => 'Tambah'
+        );
+        $this->m_log_sistem->insertLog($datalog);
+		
 		$link = base_url()."apms/";
 		echo '<script type="text/javascript">';
 		echo 'window.location.href="' . $link . '"';
@@ -68,15 +76,41 @@ class apms extends CI_Controller {
 					'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
 				);
 				$pesan = $this->m_apms->insertApms($data5);
-				$data1['pesan'] = 1;
-				$data1['pesan_text'] = "Selamat Data Berhasil Ditambahkan!";
+				if($pesan)
+				{
+					$data1['pesan'] = 1;
+					$data1['pesan_text'] = "Selamat Data Berhasil Ditambahkan!";
+					$datalog = array(
+						'keterangan' => 'Menambahkan Data APMS',
+						'id_pegawai' => $this->session->userdata("id_pegawai"),
+						'keyword' => 'Tambah'
+					);
+					$this->m_log_sistem->insertLog($datalog);
+				}else{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Ditambahkan!";
+					
+				}
 			}
 			if($this->input->post('simpan')=="Hapus")
 			{
 				$id_apms = $this->input->post('ID_APMS');
 				$pesan = $this->m_apms->deleteApms($id_apms);
-				$data1['pesan'] = 1;
-				$data1['pesan_text'] = "Selamat Data Berhasil Dihapus!";
+				if($pesan)
+				{
+					$data1['pesan'] = 1;
+					$data1['pesan_text'] = "Selamat Data Berhasil Dihapus!";
+					$datalog = array(
+						'keterangan' => 'Menghapus Data APMS',
+						'id_pegawai' => $this->session->userdata("id_pegawai"),
+						'keyword' => 'Hapus'
+					);
+					$this->m_log_sistem->insertLog($datalog);
+				}else
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Dihapus!";
+				}
 			}
 		}
 			$data['lv1'] = 4;
@@ -110,8 +144,19 @@ class apms extends CI_Controller {
 					'SHIP_TO' => $this->input->post('ship_to', true),
 				);
 				$pesan =  $this->m_apms->editApms($data, $id);
-				$data1['pesan'] = 1;
-				$data1['pesan_text'] = "Data Berhasil di Edit.";
+				if($pesan){
+					$data1['pesan'] = 1;
+					$data1['pesan_text'] = "Data Berhasil Diubah.";
+					$datalog = array(
+						'keterangan' => 'Mengedit Data APMS',
+						'id_pegawai' => $this->session->userdata("id_pegawai"),
+						'keyword' => 'edit'
+					);
+					$this->m_log_sistem->insertLog($datalog);
+				}else{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Diubah.";
+				}
 				
 			}
 		}
@@ -136,8 +181,57 @@ class apms extends CI_Controller {
 					'DESCRIPTION' => $this->input->post('des', true),
 				);
 				$bisa = $this->m_apms->insertKinerjaApms($data_1);
-				$data1['pesan'] = 1;
-				$data1['pesan_text'] = "Data Kinerja Berhasil di Tambah.";
+				if($bisa)
+				{
+					$datalog = array(
+						'keterangan' => 'Menghapus Data APMS',
+						'id_pegawai' => $this->session->userdata("id_pegawai"),
+						'keyword' => 'Hapus'
+					);
+					$this->m_log_sistem->insertLog($datalog);
+					$data1['pesan'] = 1;
+					$data1['pesan_text'] = "Data Kinerja Berhasil Ditambahkan.";
+				}else
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Kinerja Tidak Berhasil Ditambahkan.";
+				}
+			}
+			if($this->input->post('simpan2')=="Simpan")
+			{
+				$id = $this->input->post('id', true);
+				$id_kinerja = $this->input->post('id_kinerja_apms', true);
+				$data_1 = array(
+					'ID_APMS' => $id,
+					'ID_LOG_HARIAN' => $this->input->post('id_log', true),
+					'NO_DELIVERY' => $this->input->post('no_delivery1', true),
+					'DATE_DELIVERY' => $this->input->post('tgl_delivery1', true),
+					'DATE_PLAN_GI' => $this->input->post('tgl_plan_gi1', true),
+					'BAHAN_BAKAR' => $this->input->post('bh1', true),
+					'JUMLAH' => $this->input->post('jml1', true),
+					'ORDER_NUMBER' => $this->input->post('nomor_order1', true),
+					'DATE_ORDER' => $this->input->post('tgl_order1', true),
+					'PENGIRIMAN_KAPAL' => $this->input->post('tgl_kirim1', true),
+					'DATE_KAPAL_DATANG' => $this->input->post('tgl_kpl_dtg1', true),
+					'DATE_KAPAL_BERANGKAT' => $this->input->post('tgl_kpl_brkt1', true),
+					'DESCRIPTION' => $this->input->post('des1', true),
+				);
+				$bisa = $this->m_apms->editKinerjaApms($data_1,$id_kinerja);
+				if($bisa)
+				{
+					$datalog = array(
+						'keterangan' => 'Menghapus Data APMS',
+						'id_pegawai' => $this->session->userdata("id_pegawai"),
+						'keyword' => 'Hapus'
+					);
+					$this->m_log_sistem->insertLog($datalog);
+					$data1['pesan'] = 1;
+					$data1['pesan_text'] = "Data Kinerja Berhasil Diubah.";
+				}else
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Kinerja Tidak Berhasil Diubah.";
+				}
 			}
 		$data['lv1'] = 4;
         $data['lv2'] = 1;

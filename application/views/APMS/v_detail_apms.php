@@ -37,117 +37,79 @@ function DateToIndo($date) {
    
 </script>
 <script type="text/javascript">
-   /*  
-    var mt;
-    var kl_mt = new Array();
-    var km_mt = new Array();
-    var total_km_mt = new Array();
-    var premium = new Array();
-    var pertamax = new Array();
-    var pertamax_plus = new Array();
-    var pertamina_dex = new Array();
-    var solar = new Array();
-    var bio_solar = new Array();
-    var own_use_mt = new Array();
-    var ritase_mt = new Array();
-    var hari = new Array();
-    
-     <?php
-        foreach($kinerja as $km){
-            ?>
-             
-                kl_mt.push(<?php echo $km->total_kl_mt ?>);
-                km_mt.push(<?php echo $km->total_km_mt ?>);
-                premium.push(<?php echo $km->premium ?>);
-                pertamax.push(<?php echo $km->pertamax ?>);
-                pertamax_plus.push(<?php echo $km->pertamax_plus ?>);
-                pertamina_dex.push(<?php echo $km->pertamina_dex ?>);
-                solar.push(<?php echo $km->solar ?>);
-                bio_solar.push(<?php echo $km->bio_solar ?>);
-                own_use_mt.push(<?php echo $km->own_use ?>);
-                ritase_mt.push(<?php echo $km->ritase_mt ?>);
-                hari.push(<?php echo $km->hari ?>);
-                
-            <?php
-        }
-    ?>
-    
+    var apms;
+    var hari = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+    var total_premium = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+	var total_solar = new Array(1,7,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+	var total = new Array(2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60);
     $(function() {
-        $('#grafik').highcharts({
+        apms = new Highcharts.Chart({ 
             chart: {
-                type: 'spline'
+                renderTo: 'grafik'
             },
             title: {
-                text: 'Grafik Mobil Tangki',
-                x: -20 //center
+                text: 'Grafik Realisasi Penyaluran Jumlah APMS'
             },
             subtitle: {
-                text: 'Bulan Januari 2014',
-                x: -20
-            },
-            xAxis: {
-                categories: hari
-            },
-            yAxis: {
-                title: {
-                    text: 'Jumlah'
-                },
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-            },
-            tooltip: {
-                valueSuffix: ''
-            },
-            legend: {
-                borderWidth: 1
+                text: 'Hari'
             },
             plotOptions: {
-                series: {
-                    events: {
+                column: {
+                   point:{
+                      events:{
                         click: function(event) {
-                            window.location = "<?php echo base_url() ?>mt/grafik_hari_mt";
+                            }
                         }
                     }
                 }
             },
+            xAxis: [{
+                    categories: hari
+                }],
+            yAxis: [{// Primary yAxis
+                    labels: {
+                        format: '',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Target',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    }
+                }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                enabled : false
+            },
             series: [{
-                    name: 'KM',
-                    data: km_mt
-                }, {
-                    name: 'KL',
-                    data: kl_mt
-                }, {
-                    name: 'Premium',
-                    data: premium
-                }, {
-                    name: 'Pertamax',
-                    data: pertamax
-                }, {
-                    name: 'Pertamax Plus',
-                    data: pertamax_plus
-                }, {
-                    name: 'Pertamina Dex',
-                    data: pertamina_dex
-                }, {
-                    name: 'Solar',
-                    data: solar
-                }, {
-                    name: 'Own Use',
-                    data: own_use_mt
-                }, {
-                    name: 'Bio Solar',
-                    data: bio_solar
-                },
-                {
-                    name: 'Ritase',
-                    data: ritase_mt
-                }]
+                    name: 'jumlah',
+                    type: 'spline',
+                    data: total,
+                    visible : false
+					}]
+                
         });
-    }); */
+    });
     
+    function filterMt(title)
+    {
+        apms.setTitle({text: 'Grafik Realisasi Penyaluran '+title+' APMS'});  
+        //apms.legend.allItems[0].update({name:title});
+        if(title == "Premium"){
+            apms.series[0].setData(total_premium);
+        }else if(title == "Solar"){
+            apms.series[0].setData(total_solar);
+        }
+        
+    }
+	 $(document).ready(function(){
+            apms.series[0].setVisible(true);
+        });
 </script>
 
 <section id="main-content">
@@ -155,12 +117,18 @@ function DateToIndo($date) {
     <section class="wrapper">
 	<?php if ($pesan==1) {  ?>
             <div class="alert alert-block alert-success fade in">
+			<button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
                 <strong>Berhasil! </strong><?php echo $pesan_text;?>
             </div>
         <?php } ?>
         
         <?php if ($pesan==2) { ?>
             <div class="alert alert-block alert-danger fade in">
+				<button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
                 <strong>Error!</strong> 
             </div>
         <?php } ?>
@@ -235,7 +203,7 @@ function DateToIndo($date) {
                                 <div class="bio-row">
                                     <label for="no_apms" class="control-label col-lg-4">NO. APMS</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NO_APMS ?>" id="no_apms" name="no_apms"  type="text" required />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NO_APMS ?>" id="no_apms" name="no_apms"  type="text" readonly />
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -288,16 +256,48 @@ function DateToIndo($date) {
                             <input class="btn btn-success" type="submit" value="Simpan" name="simpan"/>
                         </div>
                     </form>
-
+				</div>
             </section>
   <?php } ?>              
 
-            <section class="panel">
+			<section class="panel">
                 <div class="panel-body">
-                    <div class="col-lg-12">
-                        <div id="grafik"></div>
-                    </div>
-                </div>
+                    <div class="col-lg-12"><header class="panel-heading">
+                            Grafik Bulanan APMS
+                        </header>
+                        <div class="panel-body" >
+                            <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
+                            <?php
+                                //$attr = array("class"=>"cmxform form-horizontal tasi-form");
+                               //echo form_open("apms/apms_bulan/".$id_mobil,$attr);
+                               
+                            ?>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                </div>
+
+                                <div class=" col-lg-2">
+                                    <input type="submit" class="btn btn-danger" value="Submit">
+                                </div>
+
+                            </div>
+                            <?php echo form_close()?>
+							<div class="btn-group pull-right">
+									<button class="btn dropdown-toggle" data-toggle="dropdown">Filter APMS<i class="icon-angle-down"></i>
+									</button>
+									<ul class="dropdown-menu pull-left">
+										<li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
+										<li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
+									</ul>
+							</div>
+                        <br><br><br>
+							<div class="col-lg-12">
+								<div id="grafik"></div>
+							</div>
+						</div>
+					</div>
+				</div>
             </section>
 
             <section class="panel">
@@ -351,7 +351,7 @@ function DateToIndo($date) {
                                     <td><?php echo $row->DESCRIPTION; ?></td>
                                     
                                     
-                                   <td><a onclick="editKinerja('<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->BAHAN_BAKAR ?>', '<?php echo $row->JUMLAH ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>'), '<?php echo $row->DATE_KAPAL_BERANGKAT ?>'), '<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                   <td><a onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->BAHAN_BAKAR ?>', '<?php echo $row->JUMLAH ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                    </td>
                                 </tr>
                                 <?php $i++;
@@ -359,12 +359,8 @@ function DateToIndo($date) {
                             </tbody>
                         </table>
                     </div>
-                </div>
-
-
+                </div>s
             </section>
-
-
             <!-- page end-->
         </section>
     </section>
@@ -382,20 +378,19 @@ function DateToIndo($date) {
 
                 </div>
                     <form method="POST" action="<?php echo base_url() ?>apms/data_apms">
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-					<input type="hidden" value="<?php echo $row->ID_APMS ?>" name="ID_APMS"></input>
-                    <input type="submit" value="Hapus" name="simpan" class="btn btn-danger danger"></input>
-                </div>
+					<div class="modal-footer">
+						<button data-dismiss="modal" class="btn btn-default" type="button">No</button>
+						<input type="hidden" value="<?php echo $row->ID_APMS ?>" name="ID_APMS"></input>
+						<input type="submit" value="Hapus" name="simpan" class="btn btn-danger danger"></input>
+					</div>
 					</form>
             </div>
         </div>
     </div>
-
-
+	
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" method="post" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
+            <form class="cmxform form-horizontal tasi-form" id="mymodalform" method="post" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
 				<input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -403,74 +398,83 @@ function DateToIndo($date) {
                         <h4 class="modal-title">Atur Kinerja</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group ">
-                            <label for="NO_DELIVERY" class="control-label col-lg-2">NO. Delivery</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="no_delivery" name="no_delivery" type="text" required />
-                                
-                            </div>
+						<div class="row">
+                            <div class="col-lg-12">
+                                <section class="panel">
 
-                            <label for="tgl_delivery" class="control-label col-lg-2">Tanggal Delivery</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_delivery" name="tgl_delivery"  type="date" required />
-								<span class="help-block">Pilih Tanggal</span>
-                            </div>
-						</div>
-                        <div class="form-group ">
-                            <label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
-                            <div class="col-lg-4">
-								<select class="form-control input-sm m-bot15" id="bh" name="bh">
-									<option value="Bensin">Bensin
-									</option>
-									<option value="Solar">Solar</option>
-								</select>
+                                    <div class="panel-body">
+										<div class="form-group ">
+											<label for="NO_DELIVERY" class="control-label col-lg-2">No. Delivery</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="no_delivery" name="no_delivery" type="text" required />
+												
+											</div>
+
+											<label for="tgl_delivery" class="control-label col-lg-2">Tanggal Delivery</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="tgl_delivery" name="tgl_delivery"  type="date" required/>
+												<span class="help-block">Pilih Tanggal</span>
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
+											<div class="col-lg-4">
+												<select class="form-control input-sm m-bot15" id="bh" name="bh">
+													<option value="Premium">Premium
+													</option>
+													<option value="Solar">Solar</option>
+												</select>
+											</div>
+											<label for="jml" class="control-label col-lg-2">Jumlah (KL)</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="jml" name="jml"  type="number" required />
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Plan GI</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="tgl_plan_gi" name="tgl_plan_gi"  type="date" required />
+												<span class="help-block">Pilih Tanggal</span>
+											</div>
+											 <label for="nomor_order" class="control-label col-lg-2">Nomor Order</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="nomor_order" name="nomor_order"  type="text" required />
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="tgl_order" class="control-label col-lg-2">Tanggal Order</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="tgl_order" name="tgl_order"  type="date" required />
+												<span class="help-block">Pilih Tanggal</span>
+											</div>
+											<label for="tgl_kirim" class="control-label col-lg-2">Tanggal Pengiriman</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="tgl_kirim" name="tgl_kirim"  type="date" required />
+												<span class="help-block">Pilih Tanggal</span>
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="tgl_kpl_dtg" class="control-label col-lg-2">Tanggal Kapal Datang</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="tgl_kpl_dtg" name="tgl_kpl_dtg"  type="date" required />
+												<span class="help-block">Pilih Tanggal</span>
+											</div>
+											<label for="tgl_kpl_brkt" class="control-label col-lg-2">Tanggal Kapal Berangkat</label>
+											<div class="col-lg-4">
+												<input class=" form-control input-sm m-bot15" id="tgl_kpl_brkt" name="tgl_kpl_brkt"  type="date" required />
+												<span class="help-block">Pilih Tanggal</span>
+											</div>
+										</div>
+										<div class="form-group ">
+											<label for="des" class="control-label col-lg-2">Description</label>
+											<div class="col-lg-10">
+												<textarea class=" form-control input-sm m-bot15" id="des" name="des" required ></textarea>
+											</div>
+										</div>
+									</div>
+								</section>
 							</div>
-							<label for="jml" class="control-label col-lg-2">Jumlah (KL)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="jml" name="jml"  type="number" required />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Plan GI</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_plan_gi" name="tgl_plan_gi"  type="date" required />
-								<span class="help-block">Pilih Tanggal</span>
-                            </div>
-							 <label for="nomor_order" class="control-label col-lg-2">Nomor Order</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="nomor_order" name="nomor_order"  type="text" required />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="tgl_order" class="control-label col-lg-2">Tanggal Order</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_order" name="tgl_order"  type="date" required />
-								<span class="help-block">Pilih Tanggal</span>
-                            </div>
-							<label for="tgl_kirim" class="control-label col-lg-2">Tanggal Pengiriman</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_kirim" name="tgl_kirim"  type="date" required />
-								<span class="help-block">Pilih Tanggal</span>
-                            </div>
-                        </div>
-						<div class="form-group ">
-                            <label for="tgl_kpl_dtg" class="control-label col-lg-2">Tanggal Kapal Datang</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_dtg" name="tgl_kpl_dtg"  type="date" required />
-								<span class="help-block">Pilih Tanggal</span>
-                            </div>
-							<label for="tgl_kpl_brkt" class="control-label col-lg-2">Tanggal Kapal Berangkat</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_brkt" name="tgl_kpl_brkt"  type="date" required />
-								<span class="help-block">Pilih Tanggal</span>
-                            </div>
-                        </div>
-						<div class="form-group ">
-                            <label for="des" class="control-label col-lg-2">Description</label>
-                            <div class="col-lg-10">
-                                <textarea class=" form-control input-sm m-bot15" id="des" name="des" required ></textarea>
-                            </div>
-                        </div>
+						</div>
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
@@ -480,13 +484,10 @@ function DateToIndo($date) {
             </form>
         </div>
     </div>
-
-
+	
     <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<?php foreach ($detailkinerja as $row) { ?>
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" method="post" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
-				<input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
+            <form class="cmxform form-horizontal tasi-form" id="Modalform" method="POST" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -494,71 +495,74 @@ function DateToIndo($date) {
                     </div>
                     <div class="modal-body">
                         <div class="form-group ">
-                            <label for="NO_DELIVERY" class="control-label col-lg-2">NO. Delivery</label>
+							<input id="id_kinerja_apms" name="id_kinerja_apms" type="hidden" value="" />
+							<input id="id_log" name="id_log" type="hidden" value="" />
+							<input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
+                            <label for="NO_DELIVERY" class="control-label col-lg-2">No. Delivery</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="no_delivery" name="no_delivery" type="text" required />
+                                <input class=" form-control input-sm m-bot15" id="no_delivery1" name="no_delivery1" type="text" readonly />
                                 
                             </div>
 
                             <label for="tgl_delivery" class="control-label col-lg-2">Tanggal Delivery</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_delivery" name="tgl_delivery"  type="date" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_delivery1" name="tgl_delivery1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
                             </div>
 						</div>
                         <div class="form-group ">
                             <label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
                             <div class="col-lg-4">
-								<select class="form-control input-sm m-bot15" id="bh" name="bh">
-									<option value="Bensin">Bensin
+								<select class="form-control input-sm m-bot15" id="bh1" name="bh1">
+									<option value="Premium">Premium
 									</option>
 									<option value="Solar">Solar</option>
 								</select>
 							</div>
 							<label for="jml" class="control-label col-lg-2">Jumlah (KL)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="jml" name="jml"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="jml1" name="jml1"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Plan GI</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_plan_gi" name="tgl_plan_gi"  type="date" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_plan_gi1" name="tgl_plan_gi1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
                             </div>
 							 <label for="nomor_order" class="control-label col-lg-2">Nomor Order</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="nomor_order" name="nomor_order"  type="text" required />
+                                <input class=" form-control input-sm m-bot15" id="nomor_order1" name="nomor_order1"  type="text" required />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label for="tgl_order" class="control-label col-lg-2">Tanggal Order</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_order" name="tgl_order"  type="date" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_order1" name="tgl_order1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
                             </div>
 							<label for="tgl_kirim" class="control-label col-lg-2">Tanggal Pengiriman</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_kirim" name="tgl_kirim"  type="date" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_kirim1" name="tgl_kirim1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
                             </div>
                         </div>
 						<div class="form-group ">
                             <label for="tgl_kpl_dtg" class="control-label col-lg-2">Tanggal Kapal Datang</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_dtg" name="tgl_kpl_dtg"  type="date" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_dtg1" name="tgl_kpl_dtg1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
                             </div>
 							<label for="tgl_kpl_brkt" class="control-label col-lg-2">Tanggal Kapal Berangkat</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_brkt" name="tgl_kpl_brkt"  type="date" required />
+                                <input class=" form-control input-sm m-bot15" id="tgl_kpl_brkt1" name="tgl_kpl_brkt1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
                             </div>
                         </div>
 						<div class="form-group ">
                             <label for="des" class="control-label col-lg-2">Description</label>
                             <div class="col-lg-10">
-                                <textarea class=" form-control input-sm m-bot15" id="des" name="des" required ></textarea>
+                                <textarea class=" form-control input-sm m-bot15" id="des1" name="des1" required ></textarea>
                             </div>
                         </div>
                     </div>
@@ -569,7 +573,6 @@ function DateToIndo($date) {
                 </div>
             </form>
         </div>
-		<?php } ?>
     </div>
 
     <!-- modal -->
@@ -582,23 +585,26 @@ function DateToIndo($date) {
 
 <!-- END JAVASCRIPTS -->
 <script>
+
     jQuery(document).ready(function() {
         EditableTable.init();
     });
     
 	//kinerja
-	function editKinerja(no_delivery, tgl_delivery, tgl_plan_gi, bh, jml, nomor_order, tgl_order, tgl_kirim,tgl_kpl_dtg,tgl_kpl_brgkt,des) {
-		$("#no_delivery").val(no_delivery);
-		$("#tgl_delivery").val(tgl_delivery);
-		$("#tgl_plan_gi").val(tgl_plan_gi);
-		$("#bh").val(bh);
-		$("#jml").val(jml);
-		$("#nomor_order").val(nomor_order);
-		$("#tgl_order").val(tgl_order);
-		$("#tgl_kirim").val(tgl_kirim);
-		$("#tgl_kpl_dtg").val(tgl_kpl_dtg);
-		$("#tgl_kpl_brkt").val(tgl_kpl_brgkt);
-		$("#des").val(des);
+	function editKinerja(id_kinerja_apms,id_log_harian,no_delivery, tgl_delivery, tgl_plan_gi, bh, jml, nomor_order, tgl_order, tgl_kirim,tgl_kpl_dtg,tgl_kpl_brgkt,des) {
+		$("#id_log").val(id_log_harian);
+		$("#id_kinerja_apms").val(id_kinerja_apms);
+		$("#no_delivery1").val(no_delivery);
+		$("#tgl_delivery1").val(tgl_delivery);
+		$("#tgl_plan_gi1").val(tgl_plan_gi);
+		$("#bh1").val(bh);
+		$("#jml1").val(jml);
+		$("#nomor_order1").val(nomor_order);
+		$("#tgl_order1").val(tgl_order);
+		$("#tgl_kirim1").val(tgl_kirim);
+		$("#tgl_kpl_dtg1").val(tgl_kpl_dtg);
+		$("#tgl_kpl_brkt1").val(tgl_kpl_brgkt);
+		$("#des1").val(des);
 	}
     function FilterData(par) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
