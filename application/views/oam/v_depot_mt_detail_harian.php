@@ -306,7 +306,7 @@ foreach($mt as $m)
                                             <tr>
                                                 <td style="display:none;"></td>
                                                 <td><?php echo $i ?></td>
-                                                <td><?php echo $row->NOPOL; ?></td>
+                                                <td><?php echo $m->NOPOL; ?></td>
                                                 <td><?php echo $m->KAPASITAS; ?></td>
                                                 <td><?php echo $m->PRODUK; ?></td>
                                                 <td>-</td>

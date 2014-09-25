@@ -26,7 +26,7 @@
                         ?>
                         <div class="form-group">
                             <div class="col-lg-3">
-                                <input type="year" name="tahun" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                <input type="number" maxlength="4" min="2010" max="2030" name="tahun" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
                             </div>
 
                             <div class=" col-lg-2">

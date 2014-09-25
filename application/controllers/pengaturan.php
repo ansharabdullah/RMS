@@ -10,6 +10,7 @@ class pengaturan extends CI_Controller {
         $this->load->model('m_pengaturan');
         $this->load->model('m_amt');
         $this->load->model('m_depot');
+        $this->load->model('m_log_harian');
     }
 
     public function index() {
@@ -23,7 +24,9 @@ class pengaturan extends CI_Controller {
     }
 
     public function pengaturan_oam() {
-        $data['lv1'] = 9;
+        $q = $this->m_pengaturan->getCountDepot();
+        $depot = $q[0]->count;
+        $data['lv1'] = $depot + 3;
         $data['lv2'] = 1;
 
         $depot = $this->session->userdata('id_depot');
@@ -36,7 +39,9 @@ class pengaturan extends CI_Controller {
     }
 
     public function pengaturan_depot() {
-        $data['lv1'] = 10;
+        $q = $this->m_pengaturan->getCountDepot();
+        $depot = $q[0]->count;
+        $data['lv1'] = $depot + 4;
         $data['lv2'] = 1;
 
         $depot = $this->session->userdata('id_depot');
@@ -49,7 +54,7 @@ class pengaturan extends CI_Controller {
     }
 
     public function set_depot() {
-        
+
         //insert depot
         $data = array(
             'nama_depot' => $this->input->post('nama_depot', true),
@@ -57,11 +62,11 @@ class pengaturan extends CI_Controller {
             'nama_oh' => $this->input->post('nama_oh', true),
         );
         $this->m_pengaturan->tambahDepot($data);
-        
+
         //get id depot terbesar
         $q = $this->m_pengaturan->getMaxIdDepot();
         $depot = $q[0]->id_depot;
-        
+
         //insert pegawai
         $data1 = array(
             'nama_pegawai' => $this->input->post('nama_pegawai', true),
@@ -69,9 +74,9 @@ class pengaturan extends CI_Controller {
             'id_depot' => $depot,
         );
         $this->m_amt->insertPegawai($data1);
-        
+
         //insert ke role_assignment
-        $data = $this->m_amt->getMaxID();
+        $data = $this->m_amt->getMaxIDPegawai($depot);
         foreach ($data as $row) {
             $id_pegawai = $row->max;
         }
@@ -82,6 +87,29 @@ class pengaturan extends CI_Controller {
             'password' => '81dc9bdb52d04dc20036dbd8313ed055'
         );
         $this->m_pengaturan->insertAkun($data2);
+
+        //insert log harian
+        $tahun = date('Y');
+        $cek = $this->m_log_harian->cekLog($depot, $tahun);
+        // Set timezone
+        if ($cek[0]->jumlah < 1) {
+            date_default_timezone_set('UTC');
+
+            // Start date
+            $date = date('Y-m-d');
+            // End date
+            $end_date = date('Y') . '-12-31';
+            $i = 0;
+            while (strtotime($date) <= strtotime($end_date)) {
+                $data[$i] = array(
+                    'id_depot' => $depot,
+                    'tanggal_log_harian' => $date
+                );
+                $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+                $i++;
+            }
+            $this->m_log_harian->insertLogHarian($data);
+        }
 
         $link = base_url() . "pengaturan/pengaturan_depot/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
@@ -100,6 +128,15 @@ class pengaturan extends CI_Controller {
 
         $link = base_url() . "pengaturan/pengaturan_depot/";
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+        echo 'window.location.href="' . $link . '"';
+        echo '</script>';
+    }
+
+    public function hapus_depot($id_depot) {
+        $this->m_pengaturan->deleteDepot($id_depot);
+
+        $link = base_url() . "pengaturan/pengaturan_depot/";
+        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
