@@ -136,7 +136,7 @@
                    point:{
                       events:{
                         click: function(event) {
-                                window.location = "<?php echo base_url() ?>depot/apms_depot_harian/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+ nomor_bulan[this.x]+"/<?php echo $tahun?>";
+                                window.location = "<?php echo base_url() ?>depot/apms_depot_harian/<?php echo $id_depot?>/"+ nomor_bulan[this.x]+"/<?php echo $tahun?>";
                             }
                         }
                     }

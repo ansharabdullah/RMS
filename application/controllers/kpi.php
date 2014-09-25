@@ -16,6 +16,9 @@ class kpi extends CI_Controller {
         $this->load->model("m_log_harian");
         $this->load->helper('form');
         $this->level1 = $this->m_depot->get_total_depot() + 2;
+         if(!$this->session->userdata('isLoggedIn') || $this->session->userdata('id_depot') > 0){
+            redirect('login');
+        }
        
     }
 

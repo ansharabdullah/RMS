@@ -660,7 +660,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KM'
+                                }
                             });
                             arrKlAmt.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -675,7 +678,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KL'
+                                }
                             });
                             arrRitaseAmt.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -690,7 +696,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' Rit'
+                                }
                             });
                             arrSpbuAmt.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -705,7 +714,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' SPBU'
+                                }
                             });
                             id_depot_amt.push(<?php echo $depot[$i]->ID_DEPOT ?>);
     <?php
@@ -740,7 +752,7 @@ for ($i = 0; $i < sizeof($depot); $i++) {
                     }
                 },
                 tooltip: {
-                    valueSuffix: ' millions'
+                    valueSuffix: ' KM'
                 },
            
                 plotOptions: {
@@ -816,7 +828,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KM'
+                                }
                             });
                             arrKl.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -831,7 +846,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KL'
+                                }
                             });
                             arrRitase.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -846,7 +864,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' Rit'
+                                }
                             });
                             arrPremium.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -861,7 +882,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KL'
+                                }
                             });
                             arrPertamax.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -876,7 +900,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KL'
+                                }
                             });
                             arrPertamaxPlus.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -891,7 +918,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KL'
+                                }
                             });
                             arrPertamaxDex.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -906,7 +936,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KL'
+                                }
                             });
                             arrSolar.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -921,7 +954,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KL'
+                                }
                             });
                             arrBioSolar.push({
                                 name:'<?php echo $depot[$i]->NAMA_DEPOT ?>',
@@ -936,7 +972,10 @@ for ($i = 0; $i < sizeof($depot); $i++) {
         }
     }
     ?>
-                                ]
+                                ],
+                        tooltip: {
+                            valueSuffix: ' KL'
+                                }
                             });
                             id_depot.push(<?php echo $depot[$i]->ID_DEPOT ?>);
     <?php
@@ -971,7 +1010,7 @@ for ($i = 0; $i < sizeof($depot); $i++) {
                     }
                 },
                 tooltip: {
-                    valueSuffix: ''
+                    valueSuffix: ' KM'
                 },
                 plotOptions: {
                     bar: {

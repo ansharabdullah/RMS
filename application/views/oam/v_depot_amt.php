@@ -138,7 +138,7 @@
                                     <tr class="">
                                         <td style="display:none;"></td>
                                         <td><?php echo $i; ?></td>
-                                        <td><a href="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI; ?>" style ="text-decoration: underline"><?php echo $row->NIP; ?></a></td>
+                                        <td><?php echo $row->NIP; ?></td>
 
                                         <td><?php echo $row->NAMA_PEGAWAI; ?></td>
                                         <td><?php echo $row->JABATAN; ?></td>
@@ -233,7 +233,10 @@
              series: [{
                     name: 'Jumlah',
                     type: 'column',
-                    data: km
+                    data: km,
+                    tooltip:{
+                        valueSuffix:" KM"
+                    }
 
                 }]
         });
@@ -243,17 +246,59 @@
     function filterAmt(title)
     {
         amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' AMT Depot <?php echo $nama_depot?>'});  
-        if(title == "KM"){
-             amt.series[0].setData(total_km);
+        amt.series[0].remove(true);
+       if(title == "KM"){
+             //amt.series[0].setData(total_km);
+             amt.addSeries({
+                    name: 'Jumlah',
+                    type: 'column',
+                    data: total_km,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KM"
+                    }
+
+                }
+             );
         }else if(title == "KL"){
-            amt.series[0].setData(total_kl);
-            
+            //amt.series[0].setData(total_kl);
+            amt.addSeries({
+                    name: 'Jumlah',
+                    type: 'column',
+                    data: total_kl,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Ritase"){
-            amt.series[0].setData(ritase);
-                
+            //amt.series[0].setData(ritase);
+              amt.addSeries({
+                    name: 'Jumlah',
+                    type: 'column',
+                    color : '#7cb5ec' ,
+                    data: ritase,
+                    tooltip:{
+                        valueSuffix:" Rit"
+                    }
+
+                }
+             );  
         }else if(title == "SPBU"){
-            amt.series[0].setData(spbu);
-            
+            //amt.series[0].setData(spbu);
+            amt.addSeries({
+                    name: 'Jumlah',
+                    color : '#7cb5ec' ,
+                    type: 'column',
+                    data: spbu,
+                    tooltip:{
+                        valueSuffix:" SPBU"
+                    }
+
+                }
+             );
         }
         
     }

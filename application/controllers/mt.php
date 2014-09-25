@@ -1237,15 +1237,12 @@ class Mt extends CI_Controller {
         $this->footer();
     }
 
-    public function ubah_presensi() {
-        $id_jadwal = $this->input->post('id_jadwal', true);
-        $nip = $this->input->post('nip', true);
+    public function ubah_presensi($jml_absen,$id_jadwal) {
         $nopol = $this->input->post('nopol', true);
         $data = array(
-            'alasan' => $this->input->post('alasan', true),
-            'keterangan' => $this->input->post('keterangan', true)
+            'alasan_mt' => trim($this->input->post('alasan', true)),
         );
-        $tanggal = $this->input->post('tanggal_log_harian', true);
+        $tanggal = $this->input->post('tanggal', true);
         
          $datalog = array(
             'keterangan' => "Ubah presensi Nopol : $nopol pada $tanggal",
@@ -1260,38 +1257,24 @@ class Mt extends CI_Controller {
         //cek apakah jadwal dan kinerja sudah sesuai
         $jadwal = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
         $kinerja = $this->m_kinerja->getKinerjaPresensiMT($depot, $tanggal);
-
-        $jumlah_kosong = 0;
-        $jumlah_sama = 0;
-        //loop jadwal
-        $j = 0;
-        $i = 0;
-        $indexi = 0;
-        $indexj = 0;
-        $status = 0;
-        while ($status == 0 && $indexi < count($jadwal) && $indexj < count($kinerja)) {
-            $i = $indexi;
-            $j = $indexj;
-            if ($jadwal[$i]->ID_MOBIL == $kinerja[$j]->ID_MOBIL) {
-                $indexi++;
-                $indexj++;
-            } else {
-                if ($jadwal[$i]->STATUS_MASUK == "Hadir" && $jadwal[$i]->ALASAN == "") {
-                    $status = 1;
-                    $jumlah_kosong++;
-                }
-                $indexi++;
-            }
+        
+        if(trim($this->input->post('alasan', true)) != "")
+        {
+            $jml_absen = $jml_absen - 1;
         }
-        //echo $ketemu;
-
-        if ($jumlah_kosong == 0) {
-            $data = array(
-                'status_presensi_mt' => 1
-            );
-            $this->m_log_harian->updateStatusPresensiMT($depot, $tanggal, $data);
+        
+        if($jml_absen <= 0)
+        {
+            $status = 1;
         }
-
+        else
+        {
+            $status = 0;
+        }
+        $data2 = array(
+            'status_presensi_mt' => $status
+        );
+       $this->m_log_harian->updateStatusPresensiMT($depot, $tanggal, $data2);
 
         $link = base_url() . "mt/cek_presensi/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
