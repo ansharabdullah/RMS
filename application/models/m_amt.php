@@ -18,10 +18,14 @@ class m_amt extends CI_Model {
 
     public function getMaxID() {
         $depot = $this->session->userdata('id_depot');
-        ;
         $query = $this->db->query("select max(id_pegawai) max from pegawai where id_depot=$depot");
         return $query->result();
     }
+    public function getMaxIDPegawai($depot) {
+        $query = $this->db->query("select max(id_pegawai) max from pegawai where id_depot=$depot");
+        return $query->result();
+    }
+    
 
     public function editPegawai($data, $id) {
         $this->db->where('id_pegawai', $id);
@@ -31,6 +35,11 @@ class m_amt extends CI_Model {
     public function deletePegawai($id) {
         $this->db->where('id_pegawai', $id);
         $this->db->delete('pegawai');
+    }
+    
+    public function editRA($data,$id){
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('role_assignment', $data);
     }
 
     public function selectAMT($depot) {

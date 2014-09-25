@@ -19,9 +19,9 @@
             </header>
             <div class="panel-body" >
                 <div class="col-lg-12">                    
-                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>laporan/ms2">MS2 Complience</a>
-                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>laporan/frm">Tarif Interpolasi dan FRM</a>
-                    <a type="submit" class="btn btn-success" href="<?php echo base_url() ?>laporan/kpi_operasional">KPI Operasional</a>                    
+                    <a class="btn btn-success" href="<?php echo base_url() ?>laporan/ms2">MS2 Complience</a>
+                    <a class="btn btn-success" href="<?php echo base_url() ?>laporan/frm">Tarif Interpolasi dan FRM</a>
+                    <a class="btn btn-success" href="<?php echo base_url() ?>laporan/kpi_operasional">KPI Operasional</a>                    
                 </div>
             </div>
             <div class="panel-body" >

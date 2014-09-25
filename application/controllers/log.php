@@ -7,8 +7,14 @@ class Log extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('m_log_sistem');
-        $this->load->model('m_depot');
+
+        if ($this->session->userdata('isLoggedIn')) {
+            $this->load->model('m_log_sistem');
+            $this->load->model('m_depot');
+            $this->load->model('m_pengaturan');
+        } else {
+            redirect(base_url());
+        }
     }
 
     public function index($bulan = 1) {
@@ -20,7 +26,10 @@ class Log extends CI_Controller {
         $bulan = date('m', strtotime($bulan));
 
         if ($id_depot == -1) {
-            $data['lv1'] = 11;
+
+            $q = $this->m_pengaturan->getCountDepot();
+            $depot = $q[0]->count;
+            $data['lv1'] = $depot + 5;
             $data['lv2'] = 1;
             $data2 = menu_oam();
 
@@ -32,7 +41,7 @@ class Log extends CI_Controller {
             $this->load->view('layouts/footer');
         } else {
             $data2['log'] = $this->m_log_sistem->getAllLog($id_depot, $bulan, $tahun);
-            $data['lv1'] = 8;
+            $data['lv1'] = 9;
             $data['lv2'] = 1;
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu');

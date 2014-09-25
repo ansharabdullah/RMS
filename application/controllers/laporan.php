@@ -1795,6 +1795,7 @@ class laporan extends CI_Controller {
             $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan);
             $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);
             $hasil_rencana_realisasi = $this->m_laporan->getRencanaRealisasi($depot, $tahun, $bulan);
+            $hasil_kpi_operational = $this->m_laporan->getKPIOperasional($depot, $tahun, $bulan);
             $jumlah_data_performansi = $data_performansi->num_rows();
             $hasil_data_performansi = $data_performansi->result();
             $data_depot = $this->m_laporan->getInfoDepot($depot);
@@ -2328,51 +2329,50 @@ class laporan extends CI_Controller {
                         //4.b
                         $sheetData->setCellValue($column_name[$i + 5] . '50', "=KL!" . $column_name[$i + 4] . ($jumlah_data + 4));
 
-                        
-                            // 4.a
-                            if ($hasil_rencana_realisasi[$i]->R_PREMIUM != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '39', $hasil_rencana_realisasi[$i]->R_PREMIUM);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->R_BIOSOLAR != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '40', $hasil_rencana_realisasi[$i]->R_BIOSOLAR);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->R_PERTAMAX != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '41', $hasil_rencana_realisasi[$i]->R_PERTAMAX);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->R_SOLAR != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '42', $hasil_rencana_realisasi[$i]->R_SOLAR);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->R_PERTAMAXPLUS != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '43', $hasil_rencana_realisasi[$i]->R_PERTAMAXPLUS);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->R_PERTAMINADEX != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '44', $hasil_rencana_realisasi[$i]->R_PERTAMINADEX);
-                            }
 
-                            //4.b
-                            if ($hasil_rencana_realisasi[$i]->REALISASI_PREMIUM != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '51', $hasil_rencana_realisasi[$i]->REALISASI_PREMIUM);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->REALISASI_BIO_SOLAR != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '52', $hasil_rencana_realisasi[$i]->REALISASI_BIO_SOLAR);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '53', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->REALISASI_SOLAR != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '54', $hasil_rencana_realisasi[$i]->REALISASI_SOLAR);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX_PLUS != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '55', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX_PLUS);
-                            }
-                            if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMINA_DEX != "") {
-                                $sheetData->setCellValue($column_name[$i + 5] . '56', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMINA_DEX);
-                            }
+                        // 4.a
+                        if ($hasil_rencana_realisasi[$i]->R_PREMIUM != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '39', $hasil_rencana_realisasi[$i]->R_PREMIUM);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->R_BIOSOLAR != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '40', $hasil_rencana_realisasi[$i]->R_BIOSOLAR);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->R_PERTAMAX != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '41', $hasil_rencana_realisasi[$i]->R_PERTAMAX);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->R_SOLAR != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '42', $hasil_rencana_realisasi[$i]->R_SOLAR);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->R_PERTAMAXPLUS != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '43', $hasil_rencana_realisasi[$i]->R_PERTAMAXPLUS);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->R_PERTAMINADEX != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '44', $hasil_rencana_realisasi[$i]->R_PERTAMINADEX);
+                        }
+
+                        //4.b
+                        if ($hasil_rencana_realisasi[$i]->REALISASI_PREMIUM != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '51', $hasil_rencana_realisasi[$i]->REALISASI_PREMIUM);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->REALISASI_BIO_SOLAR != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '52', $hasil_rencana_realisasi[$i]->REALISASI_BIO_SOLAR);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '53', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->REALISASI_SOLAR != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '54', $hasil_rencana_realisasi[$i]->REALISASI_SOLAR);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX_PLUS != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '55', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMAX_PLUS);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->REALISASI_PERTAMINA_DEX != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '56', $hasil_rencana_realisasi[$i]->REALISASI_PERTAMINA_DEX);
+                        }
 
 
-                            //9
-                            $sheetData->setCellValue($column_name[$i + 5] . '98', $hasil_rencana_realisasi[$i]->JUMLAH_ALOKASI_SPBU);
-                        
+                        //9
+                        $sheetData->setCellValue($column_name[$i + 5] . '98', $hasil_rencana_realisasi[$i]->JUMLAH_ALOKASI_SPBU);
                     }
 
                     //6
@@ -2383,20 +2383,19 @@ class laporan extends CI_Controller {
                     $sheetData->setCellValue($column_name[$i + 5] . '72', $km_total_40[$i]);
 
                     //7
-                    
-                        $sheetData->setCellValue($column_name[$i + 5] . '77', $jumlah_sopir);
-                        $sheetData->setCellValue($column_name[$i + 5] . '78', $jumlah_kernet);
 
-                        $sheetData->setCellValue($column_name[$i + 5] . '80', $hasil_rencana_realisasi[$i]->JADWAL_DINAS_SUPIR);
-                        $sheetData->setCellValue($column_name[$i + 5] . '81', $hasil_rencana_realisasi[$i]->JADWAL_DINAS_KERNET);
+                    $sheetData->setCellValue($column_name[$i + 5] . '77', $jumlah_sopir);
+                    $sheetData->setCellValue($column_name[$i + 5] . '78', $jumlah_kernet);
 
-                        $sheetData->setCellValue($column_name[$i + 5] . '83', $sopir_ops[$i]);
-                        $sheetData->setCellValue($column_name[$i + 5] . '84', $kernet_ops[$i]);
-                    
+                    $sheetData->setCellValue($column_name[$i + 5] . '80', $hasil_rencana_realisasi[$i]->JADWAL_DINAS_SUPIR);
+                    $sheetData->setCellValue($column_name[$i + 5] . '81', $hasil_rencana_realisasi[$i]->JADWAL_DINAS_KERNET);
+
+                    $sheetData->setCellValue($column_name[$i + 5] . '83', $sopir_ops[$i]);
+                    $sheetData->setCellValue($column_name[$i + 5] . '84', $kernet_ops[$i]);
+
 
                     //8
-                        $sheetData->setCellValue($column_name[$i + 5] . '94', $hasil_rencana_realisasi[$i]->REALISASI_OWNUSE);
-                    
+                    $sheetData->setCellValue($column_name[$i + 5] . '94', $hasil_rencana_realisasi[$i]->REALISASI_OWNUSE);
                 }
 
                 $j = 0;
@@ -2413,6 +2412,274 @@ class laporan extends CI_Controller {
                     }
                 }
 
+                /*
+                 * HSSE
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('HSSE');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                $sheetData->setCellValue('A3', "Bulan : " . $month_name[$bulan] . " " . $tahun);
+                $sheetData->setCellValue('A4', "Lokasi : TBBM " . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('B30', "OPERATION HEAD TBBM " . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('B36', $data_depot->NAMA_OH);
+
+                $sheetData->setCellValue('H30', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+                if ($pjs != "") {
+                    $sheetData->setCellValue('H31', "Pjs SITE MANAGER/SITE SUPERVISOR");
+                    $sheetData->setCellValue('H36', $pjs);
+                } else {
+                    $sheetData->setCellValue('H36', $data_depot->NAMA_PEGAWAI);
+                }
+
+                /*
+                 * Volume Plan Vs Realisasi
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('Volume Plan Vs Realisasi');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                $sheetData->setCellValue('B5', "BULAN " . $month_name[$bulan] . " " . $tahun);
+
+                $i = 0;
+                for ($i = 0; $i < $last_day; $i++) {
+                    $sheetData->setCellValue('B' . (9 + $i), ($i + 1) . " " . $month_name[$bulan] . " " . $tahun);
+                }
+
+                if ($pjs != "") {
+                    $sheetData->setCellValue('B45', "Pjs Site Supervisor Fleet BBM");
+                    $sheetData->setCellValue('B46', "TBBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('B53', $pjs);
+                } else {
+                    $sheetData->setCellValue('B46', "TBBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('B53', $data_depot->NAMA_PEGAWAI);
+                }
+
+                $sheetData->setCellValue('I45', "Operation Head TBBM " . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('I46', $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('I53', $data_depot->NAMA_OH);
+
+                if ($last_day == 28) {
+                    $sheetData->removeRow(37, 1);
+                    $sheetData->removeRow(37, 1);
+                    $sheetData->removeRow(37, 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeRow(38, 1);
+                    $sheetData->removeRow(38, 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeRow(39, 1);
+                }
+
+                $sheetData->setCellValue('C' . ($last_day + 9), "=SUM(C9:C" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('D' . ($last_day + 9), "=SUM(D9:D" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('E' . ($last_day + 9), "=SUM(E9:E" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('F' . ($last_day + 9), "=SUM(F9:F" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('G' . ($last_day + 9), "=SUM(G9:G" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('H' . ($last_day + 9), "=SUM(H9:H" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('I' . ($last_day + 9), "=SUM(I9:I" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('J' . ($last_day + 9), "=SUM(J9:J" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('K' . ($last_day + 9), "=AVERAGE(K9:K" . ($last_day + 8) . ")");
+
+                /*
+                 * MS2 Compliance
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('MS2 Compliance');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                $sheetData->setCellValue('A4', "Bulan : " . $month_name[$bulan] . " " . $tahun);
+
+                $sheetData->setCellValue('A44', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+
+                if ($pjs != "") {
+                    $sheetData->setCellValue('A47', "Pjs Site Supervisor TBBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                    $sheetData->setCellValue('B53', $pjs);
+                } else {
+                    $sheetData->setCellValue('A47', "Site Supervisor TBBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                    $sheetData->setCellValue('B53', $data_depot->NAMA_PEGAWAI);
+                }
+
+                $sheetData->setCellValue('O47', "Operation Head " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('O53', $data_depot->NAMA_OH);
+
+
+
+                $i = 0;
+                for ($i = 0; $i < $last_day; $i++) {
+                    $sheetData->setCellValue('B' . (9 + $i), ($i + 1) . " " . $month_name[$bulan] . " " . $tahun);
+                    if ($hasil_rencana_realisasi[$i]->SESUAI_PREMIUM != "") {
+                        $sheetData->setCellValue('C' . (9 + $i), $hasil_rencana_realisasi[$i]->SESUAI_PREMIUM / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->SESUAI_PERTAMAX != "") {
+                        $sheetData->setCellValue('D' . (9 + $i), $hasil_rencana_realisasi[$i]->SESUAI_PERTAMAX / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->SESUAI_SOLAR != "") {
+                        $sheetData->setCellValue('E' . (9 + $i), $hasil_rencana_realisasi[$i]->SESUAI_SOLAR / 100);
+                    }
+
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_PREMIUM != "") {
+                        $sheetData->setCellValue('F' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_PREMIUM / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_PERTAMAX != "") {
+                        $sheetData->setCellValue('G' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_PERTAMAX / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_SOLAR != "") {
+                        $sheetData->setCellValue('H' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_SOLAR / 100);
+                    }
+
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PREMIUM != "") {
+                        $sheetData->setCellValue('I' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PREMIUM / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PERTAMAX != "") {
+                        $sheetData->setCellValue('J' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PERTAMAX / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_SOLAR != "") {
+                        $sheetData->setCellValue('K' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_SOLAR / 100);
+                    }
+
+                    if ($hasil_rencana_realisasi[$i]->LAMBAT_PREMIUM != "") {
+                        $sheetData->setCellValue('L' . (9 + $i), $hasil_rencana_realisasi[$i]->LAMBAT_PREMIUM / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->LAMBAT_PERTAMAX != "") {
+                        $sheetData->setCellValue('M' . (9 + $i), $hasil_rencana_realisasi[$i]->LAMBAT_PERTAMAX / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->LAMBAT_SOLAR != "") {
+                        $sheetData->setCellValue('N' . (9 + $i), $hasil_rencana_realisasi[$i]->LAMBAT_SOLAR / 100);
+                    }
+
+                    if ($hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PREMIUM != "") {
+                        $sheetData->setCellValue('O' . (9 + $i), $hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PREMIUM / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PERTAMAX != "") {
+                        $sheetData->setCellValue('P' . (9 + $i), $hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PERTAMAX / 100);
+                    }
+                    if ($hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_SOLAR != "") {
+                        $sheetData->setCellValue('Q' . (9 + $i), $hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_SOLAR / 100);
+                    }
+                }
+
+                if ($last_day == 28) {
+                    $sheetData->removeRow(37, 1);
+                    $sheetData->removeRow(37, 1);
+                    $sheetData->removeRow(37, 1);
+                } else if ($last_day == 29) {
+                    $sheetData->removeRow(38, 1);
+                    $sheetData->removeRow(38, 1);
+                } else if ($last_day == 30) {
+                    $sheetData->removeRow(39, 1);
+                }
+
+                $sheetData->setCellValue('C' . ($last_day + 9), "=AVERAGE(C9:E" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('F' . ($last_day + 9), "=AVERAGE(F9:H" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('I' . ($last_day + 9), "=AVERAGE(I9:K" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('L' . ($last_day + 9), "=AVERAGE(L9:N" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('O' . ($last_day + 9), "=AVERAGE(O9:Q" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('R' . ($last_day + 9), "=AVERAGE(R9:T" . ($last_day + 8) . ")");
+                $sheetData->setCellValue('C' . ($last_day + 10), "=SUM(C" . ($last_day + 9) . "+F" . ($last_day + 9) . "+I" . ($last_day + 9) . ")");
+
+                /*
+                 * KPI
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('KPI');
+                $sheetData = $objPHPExcel->getActiveSheet();
+
+                $sheetData->setCellValue('B4', "Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('H4', "Bulan " . $month_name[$bulan] . " " . $tahun);
+                /*
+                  $objConditional1 = new PHPExcel_Style_Conditional();
+                  $objConditional1->setConditionType(PHPExcel_Style_Conditional::CONDITION_CELLIS);
+                  $objConditional1->setOperatorType(PHPExcel_Style_Conditional::OPERATOR_LESSTHAN);
+                  $objConditional1->addCondition('0');
+                  //$objConditional1->getStyle()->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_RED);
+                  $objConditional1->getStyle()->getFont()->setBold(true);
+                  $objConditional1->getStyle()->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB("FFFF00FF");
+
+                  //$sheetData->setCellValue('N8', $sheetData->getStyle('N8')->getFill()->getStartColor()->getRGB());
+                  //$sheetData->setCellValue('N9', $sheetData->getStyle('N9')->getFill()->getStartColor()->getRGB());
+                  //$sheetData->setCellValue('N11', $sheetData->getStyle('N11')->getFill()->getStartColor()->getRGB());
+
+                  //$objPHPExcel->getActiveSheet()->getStyle('N13:N16')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF0000');
+
+
+                  $objConditional2 = new PHPExcel_Style_Conditional();
+                  $objConditional2->setConditionType(PHPExcel_Style_Conditional::CONDITION_CELLIS);
+                  $objConditional2->setOperatorType(PHPExcel_Style_Conditional::OPERATOR_GREATERTHANOREQUAL);
+                  $objConditional2->addCondition('0');
+                  //$objConditional2->getStyle()->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_GREEN);
+                  //$objConditional2->getStyle()->getFont()->setBold(true);
+                  $objConditional2->getStyle()->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB("FF808080");
+
+
+                  $conditionalStyles = $objPHPExcel->getActiveSheet()->getStyle('K8')->getConditionalStyles();
+                  array_push($conditionalStyles, $objConditional1);
+                  array_push($conditionalStyles, $objConditional2);
+                  $objPHPExcel->getActiveSheet()->getStyle('K8')->setConditionalStyles($conditionalStyles);
+                 */
+
+                $sheetData->setCellValue('G8', $hasil_kpi_operational[0]->TARGET);
+                $sheetData->setCellValue('I8', $hasil_kpi_operational[0]->REALISASI);
+
+                $sheetData->setCellValue('G9', $hasil_kpi_operational[1]->TARGET);
+                $sheetData->setCellValue('I9', $hasil_kpi_operational[1]->REALISASI);
+
+                $sheetData->setCellValue('G11', $hasil_kpi_operational[2]->TARGET);
+                $sheetData->setCellValue('I11', $hasil_kpi_operational[2]->REALISASI);
+
+                $sheetData->setCellValue('G13', $hasil_kpi_operational[3]->TARGET);
+                $sheetData->setCellValue('I13', $hasil_kpi_operational[3]->REALISASI);
+
+                $sheetData->setCellValue('G14', $hasil_kpi_operational[4]->TARGET);
+                $sheetData->setCellValue('I14', $hasil_kpi_operational[4]->REALISASI);
+
+                $sheetData->setCellValue('G15', $hasil_kpi_operational[5]->TARGET);
+                $sheetData->setCellValue('I15', $hasil_kpi_operational[5]->REALISASI);
+
+                $sheetData->setCellValue('G16', $hasil_kpi_operational[6]->TARGET);
+                $sheetData->setCellValue('I16', $hasil_kpi_operational[6]->REALISASI);
+
+                $sheetData->setCellValue('G18', $hasil_kpi_operational[7]->TARGET);
+                $sheetData->setCellValue('I18', $hasil_kpi_operational[7]->REALISASI);
+
+                $sheetData->setCellValue('G19', $hasil_kpi_operational[8]->TARGET);
+                $sheetData->setCellValue('I19', $hasil_kpi_operational[8]->REALISASI);
+
+                $sheetData->setCellValue('G22', $hasil_kpi_operational[9]->TARGET);
+                $sheetData->setCellValue('I22', $hasil_kpi_operational[9]->REALISASI);
+
+                $sheetData->setCellValue('E27', "=KL!" . $column_name[$last_day + 4] . ($jumlah_data+4) . "*1000");
+                
+                if ($pjs != "") {
+                    $sheetData->setCellValue('C36', "Pjs Site Supervisor TBBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                    $sheetData->setCellValue('C41', $pjs);
+                } else {
+                    $sheetData->setCellValue('C36', "Site Supervisor TBBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                    $sheetData->setCellValue('C41', $data_depot->NAMA_PEGAWAI);
+                }
+
+                $sheetData->setCellValue('H36', "Operation Head TBBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('H41', $data_depot->NAMA_OH);
+                
+                
+                /*
+                 * BA
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('BA');
+                $sheetData = $objPHPExcel->getActiveSheet();
+                
+                $romawi_bln = array("01" => "I", "02" => "II", "03" => "III", "04" => "IV", "05" => "V", "06" => "VI", "07" => "VII", "08" => "VIII", "09" => "IX", "10" => "X", "11" => "XI", "12" => "XII");
+                $hari = array("Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu");
+                $dw = date( "w", strtotime($tahun."-".$bulan."-".$last_day));
+                $sheetData->setCellValue('C2', "NOMOR : ...../...../".$romawi_bln[$bulan]."/".$tahun);
+                $kata = "Pada hari ini ".$hari[$dw]." tanggal ".$last_day." bulan ".$month_name[$bulan]." tahun ".$tahun.", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi pengangkutan/pengiriman BBM/BBK untuk Bulan ".$month_name[$bulan]." ".$tahun." tanggal 1 s/d ".$last_day.", dari  PT PERTAMINA (PERSERO) Region V Terminal BBM ". ucfirst(strtolower($data_depot->NAMA_DEPOT)) ." kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $sheetData->setCellValue('C4', $kata);
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+
                 $nama_file = 'data_laporan/bulanan/Laporan Bulanan ' . $data_depot->NAMA_DEPOT . " " . $month_name[$bulan] . " " . $tahun . '.xls';
 
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
@@ -2421,7 +2688,7 @@ class laporan extends CI_Controller {
 
                 $data2['nama_file'] = base_url() . $nama_file;
             }
-            $this->header(7, 1);
+            $this->header(7, 2);
             $this->load->view('laporan/v_preview_bulanan', $data2);
             $this->footer();
         }

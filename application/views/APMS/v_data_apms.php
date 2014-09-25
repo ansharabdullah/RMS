@@ -4,12 +4,18 @@
         <!-- page start-->
 		<?php if ($pesan==1) {  ?>
             <div class="alert alert-block alert-success fade in">
+				<button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
                 <strong>Berhasil! </strong><?php echo $pesan_text;?> 
             </div>
         <?php } ?>
         
         <?php if ($pesan==2) { ?>
             <div class="alert alert-block alert-danger fade in">
+				<button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
                 <strong>Error!</strong> 
             </div>
         <?php } ?>
@@ -87,6 +93,9 @@
 </section>
 <!-- buat insert apms
 -->
+
+
+
 <div class="modal fade" id="ModalTambahManual" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -166,6 +175,8 @@
         </div>
     </div>
 </div>
+
+    
 <!--script for this page only-->
 <script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
 

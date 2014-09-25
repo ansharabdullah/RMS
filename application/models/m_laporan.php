@@ -519,7 +519,22 @@ from pegawai p where p.ID_DEPOT = '$depot' and (p.JABATAN = 'SUPIR' or p.JABATAN
 (select SUM(k.PERTAMINA_DEX) from kinerja_mt k where k.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as REALISASI_PERTAMINA_DEX,
 (select SUM(k.OWN_USE) from kinerja_mt k where k.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as REALISASI_OWNUSE,
 (select COUNT(*) from jadwal j, pegawai p where j.ID_LOG_HARIAN = l.ID_LOG_HARIAN and j.ID_PEGAWAI = p.ID_PEGAWAI and p.JABATAN = 'SUPIR' and j.STATUS_MASUK='Hadir') as JADWAL_DINAS_SUPIR,
-(select COUNT(*) from jadwal j, pegawai p where j.ID_LOG_HARIAN = l.ID_LOG_HARIAN and j.ID_PEGAWAI = p.ID_PEGAWAI and p.JABATAN = 'KERNET' and j.STATUS_MASUK='Hadir') as JADWAL_DINAS_KERNET
+(select COUNT(*) from jadwal j, pegawai p where j.ID_LOG_HARIAN = l.ID_LOG_HARIAN and j.ID_PEGAWAI = p.ID_PEGAWAI and p.JABATAN = 'KERNET' and j.STATUS_MASUK='Hadir') as JADWAL_DINAS_KERNET,
+(select m.SESUAI_PREMIUM from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as SESUAI_PREMIUM,
+(select m.SESUAI_PERTAMAX from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as SESUAI_PERTAMAX,
+(select m.SESUAI_SOLAR from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as SESUAI_SOLAR,
+(select m.CEPAT_PREMIUM from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as CEPAT_PREMIUM,
+(select m.CEPAT_PERTAMAX from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as CEPAT_PERTAMAX,
+(select m.CEPAT_SOLAR from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as CEPAT_SOLAR,
+(select m.CEPAT_SHIFT1_PREMIUM from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as CEPAT_SHIFT1_PREMIUM,
+(select m.CEPAT_SHIFT1_PERTAMAX from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as CEPAT_SHIFT1_PERTAMAX,
+(select m.CEPAT_SHIFT1_SOLAR from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as CEPAT_SHIFT1_SOLAR,
+(select m.LAMBAT_PREMIUM from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as LAMBAT_PREMIUM,
+(select m.LAMBAT_PERTAMAX from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as LAMBAT_PERTAMAX,
+(select m.LAMBAT_SOLAR from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as LAMBAT_SOLAR,
+(select m.TIDAK_TERKIRIM_PREMIUM from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as TIDAK_TERKIRIM_PREMIUM,
+(select m.TIDAK_TERKIRIM_PERTAMAX from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as TIDAK_TERKIRIM_PERTAMAX,
+(select m.TIDAK_TERKIRIM_SOLAR from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as TIDAK_TERKIRIM_SOLAR
  from log_harian l where MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and l.ID_DEPOT = '$depot' order by l.TANGGAL_LOG_HARIAN");
         return $query->result();
     }
