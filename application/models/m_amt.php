@@ -36,6 +36,11 @@ class m_amt extends CI_Model {
         $this->db->where('id_pegawai', $id);
         $this->db->delete('pegawai');
     }
+    
+    public function editRA($data,$id){
+        $this->db->where('id_pegawai', $id);
+        $this->db->update('role_assignment', $data);
+    }
 
     public function selectAMT($depot) {
         $data = $this->db->query("select * from pegawai where (jabatan='SUPIR' or jabatan='KERNET') and ID_DEPOT=$depot");

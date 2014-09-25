@@ -52,12 +52,12 @@ class m_pengaturan extends CI_Model {
     }
 
     public function selectAllUser() {
-        $query = $this->db->query('SELECT RA.EMAIL, RA.ID_ROLE, RA.PASSWORD, D.NAMA_DEPOT,P.ID_PEGAWAI, RA.ID_ROLE_ASSIGNMENT, P.NAMA_PEGAWAI, P.NIP, P.JABATAN, R.NAMA_ROLE FROM pegawai P, role R, role_assignment RA, depot D WHERE P.ID_PEGAWAI=RA.ID_PEGAWAI AND RA.ID_ROLE=R.ID_ROLE AND RA.ID_ROLE<=3 AND P.ID_DEPOT=D.ID_DEPOT ORDER BY P.ID_DEPOT');
+        $query = $this->db->query('SELECT RA.EMAIL, RA.ID_ROLE, RA.PASSWORD, D.NAMA_DEPOT,P.ID_PEGAWAI, RA.ID_ROLE_ASSIGNMENT, P.NAMA_PEGAWAI, P.NIP, P.JABATAN, R.NAMA_ROLE FROM pegawai P, role R, role_assignment RA, depot D WHERE P.ID_PEGAWAI=RA.ID_PEGAWAI AND RA.ID_ROLE=R.ID_ROLE AND RA.ID_ROLE<=3 AND RA.ID_ROLE<>1 AND P.ID_DEPOT=D.ID_DEPOT ORDER BY P.ID_DEPOT');
         return $query->result();
     }
     
     public function selectAllUserDepot($depot) {
-        $query = $this->db->query("SELECT RA.EMAIL, RA.ID_ROLE, RA.PASSWORD, P.ID_PEGAWAI, RA.ID_ROLE_ASSIGNMENT, P.NAMA_PEGAWAI, P.NIP, P.JABATAN, R.NAMA_ROLE FROM pegawai P, role R, role_assignment RA WHERE P.ID_PEGAWAI=RA.ID_PEGAWAI AND RA.ID_ROLE=R.ID_ROLE AND P.ID_DEPOT=$depot");
+        $query = $this->db->query("SELECT RA.EMAIL, RA.ID_ROLE, RA.PASSWORD, P.ID_PEGAWAI, RA.ID_ROLE_ASSIGNMENT, P.NAMA_PEGAWAI, P.NIP, P.JABATAN, R.NAMA_ROLE FROM pegawai P, role R, role_assignment RA WHERE P.ID_PEGAWAI=RA.ID_PEGAWAI AND RA.ID_ROLE=R.ID_ROLE AND RA.ID_ROLE<>3 AND P.ID_DEPOT=$depot");
         return $query->result();
     }
 
@@ -75,4 +75,10 @@ class m_pengaturan extends CI_Model {
         $this->db->delete('pegawai');
     }
 
+    public function selectRA($id){
+        $this->db->where('id_pegawai',$id);
+        $query = $this->db->get('role_assignment');
+        
+        return $query->result();
+    }
 }
