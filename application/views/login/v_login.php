@@ -7,7 +7,7 @@
                 <input type="email" class="form-control" placeholder="E-Mail" name="email" autofocus>
                 <br />
                 <input type="password" class="form-control" name="password" placeholder="Password">
-                <button class="btn btn-lg btn-login btn-block" type="submit">Masuk</button>
+                <input class="btn btn-lg btn-login btn-block" type="submit" name="submit" value="Masuk"/>
 
                 <a data-toggle="modal" href="#myModal">
                     Tentang OSCRMS

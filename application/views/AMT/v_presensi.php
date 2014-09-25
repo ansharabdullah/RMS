@@ -25,7 +25,7 @@
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
                     <li><a href="<?php echo base_url(); ?>amt/"> AMT</a></li>
-                    <li class="active">Koefisien</li>
+                    <li class="active">Presensi</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -145,7 +145,7 @@
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
                 </button>
-                <strong>Error!</strong> <?php echo "Presensi tanggal $tanggal tidak ditemukan"; ?>
+                <strong>Error!</strong> <?php echo "Presensi tanggal <b>$tanggal</b> tidak ditemukan. Jadwal belum diinputkan."; ?>
             </div>
         <?php } ?>
 

@@ -7,15 +7,22 @@ class amt extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model("m_amt");
-        $this->load->model("m_mt");
-        $this->load->model("m_rencana");
-        $this->load->model("m_kinerja");
-        $this->load->model("m_log_sistem");
-        $this->load->model("m_log_harian");
-        $this->load->model("m_peringatan");
-        $this->load->model("m_penjadwalan");
-        $this->load->helper(array('form', 'url'));
+        if ($this->session->userdata('isLoggedIn')) {
+            if ($this->session->userdata('id_role') <= 2) {
+                redirect(base_url());
+            }
+            $this->load->model("m_amt");
+            $this->load->model("m_mt");
+            $this->load->model("m_rencana");
+            $this->load->model("m_kinerja");
+            $this->load->model("m_log_sistem");
+            $this->load->model("m_log_harian");
+            $this->load->model("m_peringatan");
+            $this->load->model("m_penjadwalan");
+            $this->load->helper(array('form', 'url'));
+        } else {
+            redirect(base_url());
+        }
     }
 
     public function index() {
@@ -45,8 +52,8 @@ class amt extends CI_Controller {
         $depot = $this->session->userdata('id_depot');
         $data1['grafik'] = $this->m_amt->get_kinerja_amt_hari($depot, $bulan, $tahun, $id_pegawai);
         $data1['tahun'] = $tahun;
-        if($bulan <10){
-             $bulan = "0".$bulan;
+        if ($bulan < 10) {
+            $bulan = "0" . $bulan;
         }
         $data1['bulan'] = $bulan;
         $data1['id_pegawai'] = $id_pegawai;
@@ -61,57 +68,61 @@ class amt extends CI_Controller {
     }
 
     public function edit_kinerja() {
-        $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
-        $id_pegawai = $this->input->post('id_pegawai', true);
+        if ($this->session->userdata('id_role') == 5) {
+            redirect(base_url());
+        } else {
+            $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
+            $id_pegawai = $this->input->post('id_pegawai', true);
 
-        $tugas = $this->input->post('status_tugas', true);
-        $k = $this->m_amt->getKlasifikasi($id_pegawai);
-        $klasifikasi = $k[0]->KLASIFIKASI;
-        $depot = $this->session->userdata('id_depot');
-        //$tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
-        $tahun = 2013;
+            $tugas = $this->input->post('status_tugas', true);
+            $k = $this->m_amt->getKlasifikasi($id_pegawai);
+            $klasifikasi = $k[0]->KLASIFIKASI;
+            $depot = $this->session->userdata('id_depot');
+            //$tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+            $tahun = 2013;
 
-        //KM
-        $jenis = "KM";
-        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
-        $koef_km = $a[0]->NILAI;
+            //KM
+            $jenis = "KM";
+            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+            $koef_km = $a[0]->NILAI;
 
-        //KL
-        $jenis = "KL";
-        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
-        $koef_kl = $a[0]->NILAI;
+            //KL
+            $jenis = "KL";
+            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+            $koef_kl = $a[0]->NILAI;
 
-        //RITASE
-        $jenis = "RIT";
-        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
-        $koef_rit = $a[0]->NILAI;
+            //RITASE
+            $jenis = "RIT";
+            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+            $koef_rit = $a[0]->NILAI;
 
-        //SPBU
-        $jenis = "SPBU";
-        $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
-        $koef_spbu = $a[0]->NILAI;
+            //SPBU
+            $jenis = "SPBU";
+            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+            $koef_spbu = $a[0]->NILAI;
 
-        $km = $this->input->post('total_km', true);
-        $kl = $this->input->post('total_kl', true);
-        $ritase = $this->input->post('ritase_amt', true);
-        $spbu = $this->input->post('spbu', true);
+            $km = $this->input->post('total_km', true);
+            $kl = $this->input->post('total_kl', true);
+            $ritase = $this->input->post('ritase_amt', true);
+            $spbu = $this->input->post('spbu', true);
 
-        $pendapatan = ($koef_km * $km) + ($koef_kl * $kl) + ($koef_rit * $ritase) + ($koef_spbu * $spbu);
+            $pendapatan = ($koef_km * $km) + ($koef_kl * $kl) + ($koef_rit * $ritase) + ($koef_spbu * $spbu);
 
-        $data = array(
-            'status_tugas' => $tugas,
-            'total_km' => $km,
-            'total_kl' => $kl,
-            'ritase_amt' => $ritase,
-            'pendapatan' => $pendapatan,
-            'spbu' => $spbu
-        );
-        $this->m_kinerja->editKinerjaAMT($data, $id_kinerja_amt);
+            $data = array(
+                'status_tugas' => $tugas,
+                'total_km' => $km,
+                'total_kl' => $kl,
+                'ritase_amt' => $ritase,
+                'pendapatan' => $pendapatan,
+                'spbu' => $spbu
+            );
+            $this->m_kinerja->editKinerjaAMT($data, $id_kinerja_amt);
 
-        $link = base_url() . "amt/detail/" . $id_pegawai;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
+            $link = base_url() . "amt/detail/" . $id_pegawai;
+            echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+        }
     }
 
     public function tambah_kinerja() {
@@ -174,73 +185,77 @@ class amt extends CI_Controller {
     }
 
     public function edit_pegawai($id_pegawai) {
-        $config['upload_path'] = './assets/img/photo/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = '200';
-        $config['max_width'] = '1024';
-        $config['max_height'] = '768';
-        $nip = $this->input->post('nip', true);
-        $config['file_name'] = $nip;
-
-        $this->load->library('upload', $config);
-        if (isset($photo)) {
-            if ($this->upload->do_upload('userfile')) {
-                $upload = $this->upload->data();
-                $ext = $upload['file_ext'];
-                $photo = $nip . $ext;
-                echo $photo;
-            } else {
-                echo "file upload failed";
-            }
-        }
-
-        $id = $this->input->post('id', true);
-        if (isset($photo)) {
-            $data = array(
-                'nip' => $this->input->post('nip', true),
-                'nama_pegawai' => $this->input->post('nama_pegawai', true),
-                'jabatan' => $this->input->post('jabatan', true),
-                'klasifikasi' => $this->input->post('klasifikasi', true),
-                'status' => $this->input->post('status', true),
-                'no_telepon' => $this->input->post('no_telepon', true),
-                'no_ktp' => $this->input->post('no_ktp', true),
-                'no_sim' => $this->input->post('no_sim', true),
-                'alamat' => $this->input->post('alamat', true),
-                'tempat_lahir' => $this->input->post('tempat_lahir', true),
-                'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
-                'transportir_asal' => $this->input->post('transportir', true),
-                'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
-                'photo' => $photo
-            );
+        if ($this->session->userdata('id_role') == 5) {
+            redirect(base_url());
         } else {
-            $data = array(
-                'nip' => $this->input->post('nip', true),
-                'nama_pegawai' => $this->input->post('nama_pegawai', true),
-                'jabatan' => $this->input->post('jabatan', true),
-                'klasifikasi' => $this->input->post('klasifikasi', true),
-                'status' => $this->input->post('status', true),
-                'no_telepon' => $this->input->post('no_telepon', true),
-                'no_ktp' => $this->input->post('no_ktp', true),
-                'no_sim' => $this->input->post('no_sim', true),
-                'alamat' => $this->input->post('alamat', true),
-                'tempat_lahir' => $this->input->post('tempat_lahir', true),
-                'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
-                'transportir_asal' => $this->input->post('transportir', true),
-                'tanggal_masuk' => $this->input->post('tanggal_masuk', true)
-            );
-        }
+            $config['upload_path'] = './assets/img/photo/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = '200';
+            $config['max_width'] = '1024';
+            $config['max_height'] = '768';
+            $nip = $this->input->post('nip', true);
+            $config['file_name'] = $nip;
 
-        $this->m_amt->editPegawai($data, $id);
-        $datalog = array(
-            'keterangan' => 'Edit Pegawai, NIP : ' . $this->input->post('nip', true),
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'EDIT'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        $link = base_url() . "amt/detail/" . $id_pegawai . "/" . date('m') . "/" . date('Y');
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
+            $this->load->library('upload', $config);
+            if (isset($photo)) {
+                if ($this->upload->do_upload('userfile')) {
+                    $upload = $this->upload->data();
+                    $ext = $upload['file_ext'];
+                    $photo = $nip . $ext;
+                    echo $photo;
+                } else {
+                    echo "file upload failed";
+                }
+            }
+
+            $id = $this->input->post('id', true);
+            if (isset($photo)) {
+                $data = array(
+                    'nip' => $this->input->post('nip', true),
+                    'nama_pegawai' => $this->input->post('nama_pegawai', true),
+                    'jabatan' => $this->input->post('jabatan', true),
+                    'klasifikasi' => $this->input->post('klasifikasi', true),
+                    'status' => $this->input->post('status', true),
+                    'no_telepon' => $this->input->post('no_telepon', true),
+                    'no_ktp' => $this->input->post('no_ktp', true),
+                    'no_sim' => $this->input->post('no_sim', true),
+                    'alamat' => $this->input->post('alamat', true),
+                    'tempat_lahir' => $this->input->post('tempat_lahir', true),
+                    'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
+                    'transportir_asal' => $this->input->post('transportir', true),
+                    'tanggal_masuk' => $this->input->post('tanggal_masuk', true),
+                    'photo' => $photo
+                );
+            } else {
+                $data = array(
+                    'nip' => $this->input->post('nip', true),
+                    'nama_pegawai' => $this->input->post('nama_pegawai', true),
+                    'jabatan' => $this->input->post('jabatan', true),
+                    'klasifikasi' => $this->input->post('klasifikasi', true),
+                    'status' => $this->input->post('status', true),
+                    'no_telepon' => $this->input->post('no_telepon', true),
+                    'no_ktp' => $this->input->post('no_ktp', true),
+                    'no_sim' => $this->input->post('no_sim', true),
+                    'alamat' => $this->input->post('alamat', true),
+                    'tempat_lahir' => $this->input->post('tempat_lahir', true),
+                    'tanggal_lahir' => $this->input->post('tanggal_lahir', true),
+                    'transportir_asal' => $this->input->post('transportir', true),
+                    'tanggal_masuk' => $this->input->post('tanggal_masuk', true)
+                );
+            }
+
+            $this->m_amt->editPegawai($data, $id);
+            $datalog = array(
+                'keterangan' => 'Edit Pegawai, NIP : ' . $this->input->post('nip', true),
+                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                'keyword' => 'EDIT'
+            );
+            $this->m_log_sistem->insertLog($datalog);
+            $link = base_url() . "amt/detail/" . $id_pegawai . "/" . date('m') . "/" . date('Y');
+            echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+        }
     }
 
     public function tambah_pegawai() {
@@ -301,18 +316,22 @@ class amt extends CI_Controller {
     }
 
     public function delete_pegawai($id_pegawai, $nip) {
-        $datalog = array(
-            'keterangan' => 'HAPUS Pegawai, NIP : ' . $this->input->post('nip', true),
-            'id_pegawai' => $nip,
-            'keyword' => 'HAPUS'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        $this->m_amt->deletePegawai($id_pegawai);
+        if ($this->session->userdata('id_role') == 5) {
+            redirect(base_url());
+        } else {
+            $datalog = array(
+                'keterangan' => 'HAPUS Pegawai, NIP : ' . $this->input->post('nip', true),
+                'id_pegawai' => $nip,
+                'keyword' => 'HAPUS'
+            );
+            $this->m_log_sistem->insertLog($datalog);
+            $this->m_amt->deletePegawai($id_pegawai);
 
-        $link = base_url() . "amt/data_amt/";
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
+            $link = base_url() . "amt/data_amt/";
+            echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+        }
     }
 
     public function import_amt() {
@@ -500,6 +519,7 @@ class amt extends CI_Controller {
     }
 
     public function ubah_presensi() {
+
         $id_jadwal = $this->input->post('id_jadwal', true);
         $nip = $this->input->post('nip', true);
         $data = array(
@@ -530,7 +550,7 @@ class amt extends CI_Controller {
         $indexi = 0;
         $indexj = 0;
         $status = 0;
-        
+
         while ($status == 0 && $indexi < count($jadwal) && $indexj < count($kinerja)) {
             $i = $indexi;
             $j = $indexj;
@@ -748,50 +768,54 @@ class amt extends CI_Controller {
     }
 
     public function ubah_koefisien() {
-        $depot = $this->session->userdata("id_depot");
-        $index = $this->input->post('index', true);
-        $tahun = $this->input->post('tahun', true);
+        if ($this->session->userdata('id_role') == 5) {
+            redirect(base_url());
+        } else {
+            $depot = $this->session->userdata("id_depot");
+            $index = $this->input->post('index', true);
+            $tahun = $this->input->post('tahun', true);
 
-        //km
-        $koef = 25 + $index * 4 + 0;
-        $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
-        $id_nilai = $a[0]->ID_NILAI;
-        $data = array(
-            'nilai' => $this->input->post('km', true)
-        );
-        $this->m_amt->editNilaiKoef($data, $id_nilai);
+            //km
+            $koef = 25 + $index * 4 + 0;
+            $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+            $id_nilai = $a[0]->ID_NILAI;
+            $data = array(
+                'nilai' => $this->input->post('km', true)
+            );
+            $this->m_amt->editNilaiKoef($data, $id_nilai);
 
-        //kl
-        $koef = 25 + $index * 4 + 1;
-        $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
-        $id_nilai = $a[0]->ID_NILAI;
-        $data = array(
-            'nilai' => $this->input->post('kl', true)
-        );
-        $this->m_amt->editNilaiKoef($data, $id_nilai);
+            //kl
+            $koef = 25 + $index * 4 + 1;
+            $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+            $id_nilai = $a[0]->ID_NILAI;
+            $data = array(
+                'nilai' => $this->input->post('kl', true)
+            );
+            $this->m_amt->editNilaiKoef($data, $id_nilai);
 
-        //rit
-        $koef = 25 + $index * 4 + 2;
-        $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
-        $id_nilai = $a[0]->ID_NILAI;
-        $data = array(
-            'nilai' => $this->input->post('rit', true)
-        );
-        $this->m_amt->editNilaiKoef($data, $id_nilai);
+            //rit
+            $koef = 25 + $index * 4 + 2;
+            $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+            $id_nilai = $a[0]->ID_NILAI;
+            $data = array(
+                'nilai' => $this->input->post('rit', true)
+            );
+            $this->m_amt->editNilaiKoef($data, $id_nilai);
 
-        //spbu
-        $koef = 25 + $index * 4 + 3;
-        $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
-        $id_nilai = $a[0]->ID_NILAI;
-        $data = array(
-            'nilai' => $this->input->post('spbu', true)
-        );
-        $this->m_amt->editNilaiKoef($data, $id_nilai);
+            //spbu
+            $koef = 25 + $index * 4 + 3;
+            $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+            $id_nilai = $a[0]->ID_NILAI;
+            $data = array(
+                'nilai' => $this->input->post('spbu', true)
+            );
+            $this->m_amt->editNilaiKoef($data, $id_nilai);
 
-        $link = base_url() . "amt/koefisien/";
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
+            $link = base_url() . "amt/koefisien/";
+            echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+        }
     }
 
     //grafik

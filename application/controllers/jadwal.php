@@ -7,11 +7,18 @@ class jadwal extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('m_amt');
-        $this->load->model('m_log_harian');
-        $this->load->model('m_mt');
-        $this->load->model('m_penjadwalan');
-        $this->load->model('m_log_sistem');
+        if ($this->session->userdata('isLoggedIn')) {
+            if ($this->session->userdata('id_role') <= 2) {
+                redirect(base_url());
+            }
+            $this->load->model('m_amt');
+            $this->load->model('m_log_harian');
+            $this->load->model('m_mt');
+            $this->load->model('m_penjadwalan');
+            $this->load->model('m_log_sistem');
+        } else {
+            redirect(base_url());
+        }
     }
 
     public function index() {
@@ -90,14 +97,14 @@ class jadwal extends CI_Controller {
                 $i = 1;
                 $status = 0;
                 $month = $sheetData->getCell('B2')->getFormattedValue();
-                if($month<=10){
-                    $month = "0".$month;
+                if ($month <= 10) {
+                    $month = "0" . $month;
                 }
                 $year = $sheetData->getCell('B1')->getFormattedValue();
-                $bulan = $year. '-' . $month;
+                $bulan = $year . '-' . $month;
                 if ($bulanJadwal == $bulan) {
-                    $bulanDB=$this->m_penjadwalan->cekJadwal($year,$month);
-                    if(sizeof($bulanDB) == 0) {
+                    $bulanDB = $this->m_penjadwalan->cekJadwal($year, $month);
+                    if (sizeof($bulanDB) == 0) {
                         while ($status == 0) {
                             $no = $i + 5;
                             $nip = $this->m_amt->cekNIP($sheetData->getCell('B' . $no)->getFormattedValue());
@@ -159,20 +166,20 @@ class jadwal extends CI_Controller {
                             //loop column
                             $cekbulan = $sheetData->getCell('B2')->getFormattedValue();
                             $cektahun = $sheetData->getCell('B1')->getFormattedValue();
-                            
+
                             //cek jumlah hari dalam satu bulan
-                            if($cekbulan == 1 || $cekbulan == 3 || $cekbulan == 5 || $cekbulan == 7 ||$cekbulan == 8 || $cekbulan == 10 ||$cekbulan == 12){
+                            if ($cekbulan == 1 || $cekbulan == 3 || $cekbulan == 5 || $cekbulan == 7 || $cekbulan == 8 || $cekbulan == 10 || $cekbulan == 12) {
                                 $jumlahHari = 'AK';
-                            }else if($cekbulan == 2){
-                                if(date('L', strtotime($cektahun.'-01-01')) == 1){
+                            } else if ($cekbulan == 2) {
+                                if (date('L', strtotime($cektahun . '-01-01')) == 1) {
                                     $jumlahHari = 'AH';
-                                }else{
+                                } else {
                                     $jumlahHari = 'AI';
                                 }
-                            }else{
+                            } else {
                                 $jumlahHari = 'AJ';
                             }
-                            
+
                             for ($column = 'F'; $column != $jumlahHari; $column++) {
                                 $tanggal = $sheetData->getCell('B1')->getFormattedValue() . '-' . $sheetData->getCell('B2')->getFormattedValue() . '-' . $sheetData->getCell($column . 5)->getFormattedValue();
                                 //cek absen
@@ -247,14 +254,14 @@ class jadwal extends CI_Controller {
         $depot = $this->session->userdata("id_depot");
         $this->m_penjadwalan->importJadwal($data_jadwal);
         $this->m_log_harian->updateStatusJadwal($bulan, $tahun, $depot);
-        
+
         $datalog = array(
             'keterangan' => "Import jadwal bulan $tanggal",
             'id_pegawai' => $this->session->userdata("id_pegawai"),
             'keyword' => 'Tambah'
         );
         $this->m_log_sistem->insertLog($datalog);
-        
+
         $link = base_url() . "jadwal/";
         echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
         echo 'window.location.href="' . $link . '"';
@@ -280,76 +287,93 @@ class jadwal extends CI_Controller {
     }
 
     public function edit_jadwal() {
-        $id_jadwal = $this->input->post('id_jadwal', true);
-        $nip = $this->input->post('nip', true);
-        $data = array(
-            'status_masuk' => $this->input->post('status_masuk', true)
-        );
-        $tanggal = $this->input->post('tanggal_log_harian', true);
-        $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
-        
-        $datalog = array(
-            'keterangan' => "Ubah Jadwal NIP : $nip pada $tanggal",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-        );
-        $this->m_log_sistem->insertLog($datalog);
+        if ($this->session->userdata('id_role') == 5) {
+            redirect(base_url());
+        } else {
+            $id_jadwal = $this->input->post('id_jadwal', true);
+            $nip = $this->input->post('nip', true);
+            $data = array(
+                'status_masuk' => $this->input->post('status_masuk', true)
+            );
+            $tanggal = $this->input->post('tanggal_log_harian', true);
+            $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
 
-        $link = base_url() . "jadwal/lihat_jadwal/?tanggal=$tanggal";
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
-    public function hapus_jadwal(){
-        $data['lv1'] = 6;
-        $data['lv2'] = 1;
-        $data2['jadwal'] = 0;
-        $data3 = menu_ss();
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu', $data3);
+            $datalog = array(
+                'keterangan' => "Ubah Jadwal NIP : $nip pada $tanggal",
+                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                'keyword' => 'Edit'
+            );
+            $this->m_log_sistem->insertLog($datalog);
 
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('jadwal/v_hapus_jadwal',$data2);
-        $this->load->view('layouts/footer');
+            $link = base_url() . "jadwal/lihat_jadwal/?tanggal=$tanggal";
+            echo '<script type="text/javascript">alert("Data berhasil diubah.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+        }
     }
-    
-    public function hapus_jadwal_preview(){
-        $tanggal=$this->input->get('bulan', true);
-        $bulan = date("m", strtotime($tanggal));
-        $tahun = date("Y", strtotime($tanggal));
-        $depot = $this->session->userdata('id_depot');
-        
-        $data2['jadwal'] = $this->m_penjadwalan->getJadwalPerbulan($depot, $bulan, $tahun);
-        $data2['tanggal'] = $tanggal;
-        $data['lv1'] = 6;
-        $data['lv2'] = 1;
-        $data3 = menu_ss();
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu', $data3);
 
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('jadwal/v_hapus_jadwal',$data2);
-        $this->load->view('layouts/footer');
+    public function hapus_jadwal() {
+        if ($this->session->userdata('id_role') == 5) {
+            redirect(base_url());
+        } else {
+            $data['lv1'] = 6;
+            $data['lv2'] = 1;
+            $data2['jadwal'] = 0;
+            $data3 = menu_ss();
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/menu', $data3);
+
+            $this->load->view('layouts/navbar', $data);
+            $this->load->view('jadwal/v_hapus_jadwal', $data2);
+            $this->load->view('layouts/footer');
+        }
     }
-    
-    public function hapus_jadwal_perbulan($tanggal){
-        $bulan = date("m", strtotime($tanggal));
-        $tahun = date("Y", strtotime($tanggal));
-        $depot = $this->session->userdata('id_depot');
-        
-        $this->m_penjadwalan->deleteJadwal($depot, $bulan, $tahun);
-        
-        $datalog = array(
-            'keterangan' => "Menghapus jadwal bulan : $tanggal",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Hapus'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        $link = base_url() . "jadwal/hapus_jadwal/";
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
+
+    public function hapus_jadwal_preview() {
+
+        if ($this->session->userdata('id_role') == 5) {
+            redirect(base_url());
+        } else {
+            $tanggal = $this->input->get('bulan', true);
+            $bulan = date("m", strtotime($tanggal));
+            $tahun = date("Y", strtotime($tanggal));
+            $depot = $this->session->userdata('id_depot');
+
+            $data2['jadwal'] = $this->m_penjadwalan->getJadwalPerbulan($depot, $bulan, $tahun);
+            $data2['tanggal'] = $tanggal;
+            $data['lv1'] = 6;
+            $data['lv2'] = 1;
+            $data3 = menu_ss();
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/menu', $data3);
+
+            $this->load->view('layouts/navbar', $data);
+            $this->load->view('jadwal/v_hapus_jadwal', $data2);
+            $this->load->view('layouts/footer');
+        }
+    }
+
+    public function hapus_jadwal_perbulan($tanggal) {
+        if ($this->session->userdata('id_role') == 5) {
+            redirect(base_url());
+        } else {
+            $bulan = date("m", strtotime($tanggal));
+            $tahun = date("Y", strtotime($tanggal));
+            $depot = $this->session->userdata('id_depot');
+
+            $this->m_penjadwalan->deleteJadwal($depot, $bulan, $tahun);
+
+            $datalog = array(
+                'keterangan' => "Menghapus jadwal bulan : $tanggal",
+                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                'keyword' => 'Hapus'
+            );
+            $this->m_log_sistem->insertLog($datalog);
+            $link = base_url() . "jadwal/hapus_jadwal/";
+            echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
+            echo 'window.location.href="' . $link . '"';
+            echo '</script>';
+        }
     }
 
 }

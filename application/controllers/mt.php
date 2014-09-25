@@ -1285,15 +1285,15 @@ class Mt extends CI_Controller {
     public function reminder() {
         
         $depot = $this->session->userdata("id_depot");
-        $data['lv1'] = 3;
-        $data['lv2'] = 4;
-        //data reminder
         
         $data2['mobil'] = $this->m_pengingat->mobil($depot)->result();
         $data2['apar'] = $this->m_pengingat->getAparReminder($depot)->result();
         $data2['surat'] = $this->m_pengingat->getSuratReminder($depot)->result();
         $data2['ban'] = $this->m_pengingat->getBanReminder($depot)->result();
         $data2['oli'] = $this->m_pengingat->getOliReminder($depot)->result();
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 4;
         $this->header($data);
         $this->load->view('mt/v_pengingat', $data2);
         $this->footer();
@@ -1322,7 +1322,8 @@ class Mt extends CI_Controller {
         );
         $this->m_log_sistem->insertLog($datalog);
         //redirect('mt/reminder');
-          echo '<script type="text/javascript">alert("Pengingat surat berhasil diubah");';
+        
+            echo '<script type="text/javascript">alert("Pengingat surat berhasil diubah");';
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
             echo '</script>';
     }
@@ -1380,11 +1381,20 @@ class Mt extends CI_Controller {
             echo '</script>';
     }
     
-    public function edit_reminder_ban($id)
+    public function edit_reminder_ban()
     {
+        $id= $this->input->post('id_ban');
         $tgl_ganti= $_POST['tgl_ganti'];
+        $posisi= $this->input->post('posisi_ban');
+        $merk = $this->input->post('merk_ban');
+        $seri = $this->input->post('no_seri_ban');
+        $jenis = $this->input->post('jenis_ban');
         $data = array(
             "TANGGAL_GANTI_BAN"=>$tgl_ganti,
+            "POSISI_BAN"=>$posisi,
+            "MERK_BAN"=>$merk,
+            "NO_SERI_BAN"=>$seri,
+            "JENIS_BAN"=>$jenis,
             
         );
         

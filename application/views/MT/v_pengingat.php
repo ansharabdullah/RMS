@@ -128,6 +128,7 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
+         
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -216,25 +217,21 @@
                             <?php
                             $i = 0;
                             
-                            foreach($mobil as $row2){
-                                $color="";
                                 foreach ($ban as $row){
-                                  if($row->ID_MOBIL==$row2->ID_MOBIL){
+                                  
                                     if($row->tanggal_ban <= 7 ) {
-                                    $color = "orange";
-                                } else {
-                                    $color = "transparent";
-                                }
+                                        $color = "orange";
+                                    } else {
+                                        $color = "transparent";
+                                    }
 
-                                }
                                 
-                                }
                                 ?>
                                     <th style="display: none;"></th>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1; ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row2->nopol ?></td>
-                                       
-                                    <td style="background-color: <?php echo $color ?>;"><a data-toggle="modal" href="#modalBan" class="btn btn-success btn-xs" onClick="setBan('<?php echo $row2->nopol ?>')">Cek Ban</a></td>
+                                    <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row->bannopol ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><a onclick="cekreminderban('<?php echo $row->ID_BAN ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->bannopol ?>','<?php echo $row->tanggal_ban ?>','<?php echo $row->tgl_ganti ?>','<?php echo $row->POSISI_BAN ?>','<?php echo $row->MERK_BAN ?>','<?php echo $row->JENIS_BAN ?>','<?php echo $row->NO_SERI_BAN ?>')" data-placement="top" data-toggle="modal" href="#modalBan" class="btn btn-warning btn-xs tooltips" data-original-title="Edit">Cek Ban</i></a>
+                                    
                                 </tr>
                                  <?php
                                 $i++;
@@ -426,7 +423,7 @@
                 <h4 class="modal-title">Edit Ban</h4>
             </div>
             
-                <form class="form-horizontal" role="form" id="form-edit-ban" action="mt/edit_ban" method="POST">
+                <form class="form-horizontal" role="form" id="form-edit-ban" action="edit_reminder_ban" method="POST">
                 <div class="modal-body">
 
 
@@ -444,23 +441,20 @@
                         <th>Tanggal</th>
                         
                     </tr>
-                    <?php
-                    foreach ($ban as $row){
-                  
-                        $color = "";
-                        if ($row->tanggal_ban < 8) {
-                            $color = "style='background-color: orange;'";
-                        }
-                        ?>
-                        <tr id="row-ban-<?php echo $row->POSISI_BAN?>" <?php echo $color ?>>
-                            <td><?php echo $row->POSISI_BAN ?></td>
-                            <td><?php echo $row->tanggal_ban ?></span> hari</td>
+                    <tr>
+                            <td style="background-color: <?php echo $color ?>;"><input class="form-control" type="text" value="" id="posisi_ban" size="16"  name="posisi_ban" required="required" readonly/>
+                            <td style="background-color: <?php echo $color ?>;"><input class="form-control" type="text" value="" id="tanggal_ban" size="16"  name="tanggal_ban" required="required" readonly/>
+                            </td>
+                             <input type="hidden" class=" form-control input-sm m-bot15" id="id_ban" name="id_ban" value="" required/>
+                             <input type="hidden" class=" form-control input-sm m-bot15" id="id_mobil" name="id_mobil" value="" required/>
+                             <input type="hidden" class=" form-control input-sm m-bot15" id="merk_ban" name="merk_ban" value="" required/>
+                               <input type="hidden" class=" form-control input-sm m-bot15" id="jenis_ban" name="jenis_ban" value="" required/>
+                             <input type="hidden" class=" form-control input-sm m-bot15" id="no_seri_ban" name="no_seri_ban" value="" required/>
+                                             
                             <td><input class="form-control" type="date" id="tgl_ganti" size="16" name="tgl_ganti" required="required"/></td>
                              </tr>
-                        <?php
-                    }
-                    
-                    ?>
+                           
+                       
                  </table>
                     <div class="modal-footer">
                             <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
@@ -531,7 +525,7 @@
                     </div>
                     <div class="modal-footer">
                             <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
-                            <button class="btn btn-success" name="submit"  type="submit" >Simpan</button>
+                            <button class="btn btn-success" name="editsurat"  type="submit" >Simpan</button>
 
                         </div>
                 </form>
@@ -721,5 +715,19 @@
         
         }
     
-    
+    function cekreminderban(id_ban,id_mobil,bannopol,tanggal_ban,tgl_ganti,posisi_ban,merk_ban,jenis_ban,no_seri_ban) {
+                                                        $("#id_ban").val(id_ban);
+                                                        $("#id_mobil").val(id_mobil);
+                                                        $("#bannopol").val(bannopol);
+                                                        $("#tanggal_ban").val(tanggal_ban);
+                                                        $("#tgl_ganti").val(tgl_ganti);
+                                                        $("#posisi_ban").val(posisi_ban);
+                                                        $("#merk_ban").val(merk_ban);
+                                                        $("#jenis_ban").val(jenis_ban);
+                                                        $("#no_seri_ban").val(no_seri_ban);
+
+
+                                                    }
+</script>
+
     </script>
