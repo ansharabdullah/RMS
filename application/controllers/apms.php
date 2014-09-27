@@ -184,7 +184,7 @@ class apms extends CI_Controller {
 				if($bisa)
 				{
 					$datalog = array(
-						'keterangan' => 'Menghapus Data APMS',
+						'keterangan' => 'Menambah Data Kinerja APMS',
 						'id_pegawai' => $this->session->userdata("id_pegawai"),
 						'keyword' => 'Hapus'
 					);
@@ -220,7 +220,7 @@ class apms extends CI_Controller {
 				if($bisa)
 				{
 					$datalog = array(
-						'keterangan' => 'Menghapus Data APMS',
+						'keterangan' => 'Mengedit Data Kinerja APMS',
 						'id_pegawai' => $this->session->userdata("id_pegawai"),
 						'keyword' => 'Hapus'
 					);
