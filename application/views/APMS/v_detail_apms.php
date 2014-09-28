@@ -38,10 +38,71 @@ function DateToIndo($date) {
 </script>
 <script type="text/javascript">
     var apms;
-    var hari = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
-    var total_premium = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
-	var total_solar = new Array(1,7,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
-	var total = new Array(2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60);
+    var hari = new Array();
+    var premium = new Array();
+    var solar = new Array();
+	var total = new Array();
+	
+	<?php
+		$i =1;
+		$status =0;
+		$tampung =0;
+		while($i<=30)
+		{ 	
+			?>
+			hari.push(<?php echo $i; ?>);
+			<?php
+			$status = 0;
+			foreach($grafix as $isi)
+			{
+				if($isi->hari == $i)
+				{
+					if($isi->BAHAN_BAKAR == 'Premium')
+					{
+						$status = 1;
+						$tampung = $isi->jumlah;
+					}
+				}
+			}
+			if($status == 1)
+			{
+				?> premium.push(<?php echo $tampung ?>); <?php
+			}
+			else
+			{
+				?> premium.push(0); <?php
+			}
+			$status=0;
+			foreach($grafix as $isi)
+			{
+				if($isi->hari == $i)
+				{
+					if($isi->BAHAN_BAKAR == 'Solar')
+					{
+						$status = 2;
+						$tampung = $isi->jumlah;
+					}
+				}
+			}
+			if($status == 2)
+			{
+				?> solar.push(<?php echo $tampung ?>); <?php
+			}
+			else
+			{	
+				?> solar.push(0); <?php
+			}
+			
+			
+			$i = $i + 1;
+		}
+	?>
+	
+	
+	
+	//var premium = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+	//var total_solar = new Array(1,7,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+	//var total = new Array(2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60);
     $(function() {
         apms = new Highcharts.Chart({ 
             chart: {
@@ -51,7 +112,7 @@ function DateToIndo($date) {
                 text: 'Grafik Realisasi Penyaluran Jumlah APMS'
             },
             subtitle: {
-                text: 'Hari'
+                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun ?>'
             },
             plotOptions: {
                 column: {
@@ -74,7 +135,7 @@ function DateToIndo($date) {
                         }
                     },
                     title: {
-                        text: 'Target',
+                        text: 'Realisasi (KL)',
                         style: {
                             color: Highcharts.getOptions().colors[1]
                         }
@@ -89,21 +150,21 @@ function DateToIndo($date) {
             series: [{
                     name: 'jumlah',
                     type: 'spline',
-                    data: total,
+                    data: premium,
                     visible : false
 					}]
                 
         });
     });
     
-    function filterMt(title)
+    function filterAPMS(title)
     {
         apms.setTitle({text: 'Grafik Realisasi Penyaluran '+title+' APMS'});  
         //apms.legend.allItems[0].update({name:title});
         if(title == "Premium"){
-            apms.series[0].setData(total_premium);
+            apms.series[0].setData(premium);
         }else if(title == "Solar"){
-            apms.series[0].setData(total_solar);
+            apms.series[0].setData(solar);
         }
         
     }
@@ -287,8 +348,8 @@ function DateToIndo($date) {
 									<button class="btn dropdown-toggle" data-toggle="dropdown">Filter APMS<i class="icon-angle-down"></i>
 									</button>
 									<ul class="dropdown-menu pull-left">
-										<li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
-										<li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
+										<li><a style="cursor: pointer" onclick="filterAPMS('Premium')">Premium</a></li>
+										<li><a style="cursor: pointer" onclick="filterAPMS('Solar')">Solar</a></li>
 									</ul>
 							</div>
                         <br><br><br>

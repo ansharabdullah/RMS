@@ -125,7 +125,7 @@ class apms extends CI_Controller {
 			$this->load->view('layouts/footer');
 		
     }	
-	public function detail_apms($id_apms){
+	public function detail_apms($id_apms,$bulan,$tahun){
 				
 		$data1['pesan'] =0;
 		if($this->input->post('simpan'))
@@ -235,9 +235,12 @@ class apms extends CI_Controller {
 			}
 		$data['lv1'] = 4;
         $data['lv2'] = 1;
+		$data1['tahun'] = $tahun;
+        $data1['bulan'] = $bulan;
         $data1['apms'] = $this->m_apms->detailApms($id_apms);
 		$data3 = menu_ss();
-		$data1['kinerja'] = $this->m_apms->selectKinerja($id_apms);
+		$data1['kinerja'] = $this->m_apms->selectKinerja($id_apms,$bulan,$tahun);
+		$data1['grafix'] = $this->m_apms->selectKinerjaGrafix($id_apms,$bulan,$tahun);
         //$data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil,date('Y'));
 		$this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
