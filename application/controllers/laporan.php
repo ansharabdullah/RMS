@@ -1131,6 +1131,16 @@ class laporan extends CI_Controller {
                 $objReader = PHPExcel_IOFactory::createReader('Excel5');
                 $objPHPExcel = $objReader->load($inputFileName);
 
+                // Set document properties
+                $objPHPExcel->getProperties()->setCreator("Firman Fiqri Firdaus")
+                        ->setLastModifiedBy("Firman Fiqri Firdaus")
+                        ->setTitle("Laporan Harian")
+                        ->setSubject("Laporan Harian")
+                        ->setDescription("Laporan Harian")
+                        ->setKeywords("Laporan Harian")
+                        ->setCategory("Laporan Harian");
+
+
                 /*
                  * KM
                  */
@@ -1786,6 +1796,8 @@ class laporan extends CI_Controller {
         if (!$this->input->post('cek')) {
             redirect('laporan/bulanan');
         } else {
+            ini_set('max_execution_time', 300);
+
             $bulan_input = $this->input->post('bulan');
             $pjs = trim($this->input->post('pjs'));
             $tanggal = date("d-m-Y", strtotime($bulan_input));
@@ -2643,8 +2655,8 @@ class laporan extends CI_Controller {
                 $sheetData->setCellValue('G22', $hasil_kpi_operational[9]->TARGET);
                 $sheetData->setCellValue('I22', $hasil_kpi_operational[9]->REALISASI);
 
-                $sheetData->setCellValue('E27', "=KL!" . $column_name[$last_day + 4] . ($jumlah_data+4) . "*1000");
-                
+                $sheetData->setCellValue('E27', "=KL!" . $column_name[$last_day + 4] . ($jumlah_data + 4) . "*1000");
+
                 if ($pjs != "") {
                     $sheetData->setCellValue('C36', "Pjs Site Supervisor TBBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                     $sheetData->setCellValue('C41', $pjs);
@@ -2655,29 +2667,29 @@ class laporan extends CI_Controller {
 
                 $sheetData->setCellValue('H36', "Operation Head TBBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                 $sheetData->setCellValue('H41', $data_depot->NAMA_OH);
-                
-                
+
+
                 /*
                  * BA
                  */
                 $objPHPExcel->setActiveSheetIndexByName('BA');
                 $sheetData = $objPHPExcel->getActiveSheet();
-                
+
                 $romawi_bln = array("01" => "I", "02" => "II", "03" => "III", "04" => "IV", "05" => "V", "06" => "VI", "07" => "VII", "08" => "VIII", "09" => "IX", "10" => "X", "11" => "XI", "12" => "XII");
-                $hari = array("Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu");
-                $dw = date( "w", strtotime($tahun."-".$bulan."-".$last_day));
-                $sheetData->setCellValue('C2', "NOMOR : ...../...../".$romawi_bln[$bulan]."/".$tahun);
-                $kata = "Pada hari ini ".$hari[$dw]." tanggal ".$last_day." bulan ".$month_name[$bulan]." tahun ".$tahun.", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi pengangkutan/pengiriman BBM/BBK untuk Bulan ".$month_name[$bulan]." ".$tahun." tanggal 1 s/d ".$last_day.", dari  PT PERTAMINA (PERSERO) Region V Terminal BBM ". ucfirst(strtolower($data_depot->NAMA_DEPOT)) ." kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+                $dw = date("w", strtotime($tahun . "-" . $bulan . "-" . $last_day));
+                $sheetData->setCellValue('C2', "NOMOR : ...../...../" . $romawi_bln[$bulan] . "/" . $tahun);
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi pengangkutan/pengiriman BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region V Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
                 $sheetData->setCellValue('C4', $kata);
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
+
 
 
                 $nama_file = 'data_laporan/bulanan/Laporan Bulanan ' . $data_depot->NAMA_DEPOT . " " . $month_name[$bulan] . " " . $tahun . '.xls';
@@ -2824,6 +2836,14 @@ class laporan extends CI_Controller {
          */
 
         echo "berhasil";
+    }
+
+    function coba() {
+        $this->header(7, 2);
+        $data2['laporan_ada'] = true;
+
+        $this->load->view('laporan/v_preview_bulanan', $data2);
+        $this->footer();
     }
 
 }
