@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        $("#signupForm").submit(function(e) {
+    $(document).ready(function () {
+        $("#signupForm").submit(function (e) {
             var isvalidate = $("#signupForm").valid();
             if (isvalidate)
             {
@@ -24,7 +24,23 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
+        <?php if ($feedback) { ?>
+            <?php if ($feedback == 1) { ?>
+                <div class="alert alert-block alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Berhasil!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } else if ($feedback == 2) { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
         <section class="panel" id="LihatJadwal">
             <header class="panel-heading">
                 Lihat Jadwal
@@ -54,7 +70,7 @@
         <?php if ($jadwal) { ?>
             <section class="panel" id="tabelJadwal">
                 <header class="panel-heading">
-                    Jadwal (<?php echo $tanggal; ?>)
+                    Jadwal (<?php echo date("d-M-Y", strtotime($tanggal)); ?>)
                 </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
@@ -117,7 +133,7 @@
                                 <h4 class="modal-title">Edit Jadwal</h4>
                             </div>
                             <div class=" form">
-                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>jadwal/edit_jadwal/">
+                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>jadwal/penjadwalan/<?php echo $tanggal?>">
 
                                     <div class="modal-body">
                                         <div class="form-group">
@@ -147,8 +163,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button data-dismiss="modal"  name="tutup" class="btn btn-default" type="button">Tutup</button>
-                                        <input class="btn btn-success" name="submit"  type="submit" value="Simpan">
-
+                                        <input class="btn btn-success" name="edit_jadwal" type="submit" value="Simpan">
                                     </div>
                                 </form>
                             </div>
@@ -157,7 +172,7 @@
                 </div>
             </section>
 
-        <?php
+            <?php
         } else {
             if ($tanggal) {
                 ?>
@@ -165,10 +180,11 @@
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Error!</strong> Jadwal tidak ditemukan.
+                    <strong>Error!</strong> Jadwal tanggal <b><?php echo date("d-M-Y", strtotime($tanggal)) ?></b> tidak ditemukan.
                 </div>
-    <?php }
-} ?>
+            <?php }
+        }
+        ?>
     </section>
 </section>
 
@@ -178,7 +194,7 @@
 <!-- END JAVASCRIPTS -->
 <script>
 
-                                                    jQuery(document).ready(function() {
+                                                    jQuery(document).ready(function () {
                                                         EditableTable.init();
                                                     });
 
