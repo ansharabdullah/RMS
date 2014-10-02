@@ -57,6 +57,18 @@
 
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>kinerja">Kinerja</a></li>
+                    <li class="active">Input Manual</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
@@ -98,8 +110,16 @@
                         <strong>Error!</strong> Koefisien performansi untuk tahun yang dipilih tidak ditemukan.
                     </div>
                 <?php } ?>
+                <?php if ($error_tanggal == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error!</strong> Tanggal yang dipilih melebihi hari ini.
+                    </div>
+                <?php } ?>
 
-                <?php if ($error_id_log_harian == false && $error_id_kinerja_amt == false && $error_koefisien == false) { ?>
+                <?php if ($error_id_log_harian == false && $error_id_kinerja_amt == false && $error_koefisien == false && $error_tanggal == false) { ?>
                     <div class="alert alert-success fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
@@ -124,7 +144,15 @@
                         <strong>Error!</strong> Kinerja MT untuk tanggal yang dipilih telah diinput, tidak dapat input dua kali.
                     </div>
                 <?php } ?>
-                <?php if ($error_id_log_harian == false && $error_id_kinerja_mt == false) { ?>
+                <?php if ($error_tanggal == true) { ?>
+                    <div class="alert alert-block alert-danger fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Error!</strong> Tanggal yang dipilih melebihi hari ini.
+                    </div>
+                <?php } ?>
+                <?php if ($error_id_log_harian == false && $error_id_kinerja_mt == false&& $error_tanggal == false) { ?>
                     <div class="alert alert-success fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>

@@ -355,6 +355,8 @@
                         </div>
                         <div class="modal-body">
                             Yakin Hapus  MS2 Complience <strong><?php echo $bulan . ' ' . $tahun; ?></strong> ?
+                            <input type="hidden" required="required" id="blnms2" name="blnms2" value= "<?php echo $blnms2;?>" class="form-control"  placeholder="Tanggal">
+                            <input type="hidden" required="required" class="form-control" name="nama_blnms2" value="<?php echo $bulan . " " .$tahun; ?>">
                             <input type="hidden" required="required" class="form-control" name="id_ms2" value="<?php echo htmlentities(serialize($ms2)); ?>">
                             <input type="hidden" required="required" class="form-control" name="total_ms2" value="<?php echo htmlentities(serialize($total_ms2)); ?>">
                         </div>

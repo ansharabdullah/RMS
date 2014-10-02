@@ -2,7 +2,7 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
@@ -13,18 +13,25 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
-        <?php if ($success ) { ?>
-            <div class="alert alert-block alert-success fade in">
-                <strong>Berhasil!</strong> <?php echo $success ?>
-            </div>
+
+        <?php if ($feedback) { ?>
+            <?php if ($feedback == 1) { ?>
+                <div class="alert alert-block alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Berhasil!</strong> <?php echo $pesan ?>
+                </div>
+            <?php }else if ($feedback == 2) { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } ?>
         <?php } ?>
-        
-        <?php if ($error) { ?>
-            <div class="alert alert-block alert-danger fade in">
-                <strong>Error!</strong> <?php echo $error ?>
-            </div>
-        <?php } ?>
+
         <section class="panel">
             <header class="panel-heading">
                 Data Crew AMT
@@ -70,13 +77,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1;
+                            <?php
+                            $i = 1;
                             foreach ($amt as $row) {
                                 ?>
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><a href="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI; ?>/<?php echo date("n")?>/<?php echo date("Y")?>" style ="text-decoration: underline"><?php echo $row->NIP; ?></a></td>
+                                    <td><a href="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI; ?>/<?php echo date("n") ?>/<?php echo date("Y") ?>" style ="text-decoration: underline"><?php echo $row->NIP; ?></a></td>
 
                                     <td><?php echo $row->NAMA_PEGAWAI; ?></td>
                                     <td><?php echo $row->JABATAN; ?></td>
@@ -86,8 +94,9 @@
                                     <td><?php echo $row->NO_TELEPON; ?></td>
                                     <td><span class="label label-success"><?php echo $row->STATUS; ?>.</span></td>
                                 </tr>
-    <?php $i++;
-} ?>
+                                <?php $i++;
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -105,7 +114,7 @@
                 <h4 class="modal-title">Tambah AMT</h4>
             </div>
             <div class=" form">
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/tambah_pegawai/">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/data_amt/">
 
                     <div class="modal-body">
 
@@ -256,7 +265,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="reset" data-dismiss="modal" class="btn btn-default" value="Batal">
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                        <input class="btn btn-success" name="insert" type="submit" value="Simpan"/>
                     </div>
                 </form>
             </div>
@@ -269,7 +278,7 @@
 
 <!-- END JAVASCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         EditableTable.init();
     });
 

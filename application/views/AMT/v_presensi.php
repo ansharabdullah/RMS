@@ -30,13 +30,29 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
+        <?php if ($feedback) { ?>
+            <?php if ($feedback == 1) { ?>
+                <div class="alert alert-block alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Berhasil!</strong> <?php echo $pesan ?>
+                </div>
+            <?php }else if ($feedback == 2) { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
         <section class="panel">
             <header class="panel-heading">
                 Presensi Awak Mobil Tangki
             </header>
             <div class="panel-body" >
-                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="GET" action="<?php echo base_url() ?>amt/presensi_pertanggal/">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/presensi_pertanggal/">
                     <div class="form-group">
                         <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
                         <div class="col-lg-10">
@@ -58,7 +74,7 @@
             <div id="filePreview">
                 <section class="panel">
                     <header class="panel-heading">
-                        Tabel Presensi (<?php echo date('d-M-Y',  strtotime($tanggal)) ?>)
+                        Tabel Presensi (<b><?php echo date('d-M-Y',  strtotime($tanggal)) ?></b>)
                     </header>
                     <div class="panel-body">
                         <div class="adv-table editable-table " style="overflow-x: scroll">
@@ -140,12 +156,14 @@
                     </div>
                 </section>
             </div>
-        <?php }else{?>
+        <?php }else{
+            $a = date('d-M-Y', strtotime($tanggal));
+            ?>
             <div class="alert alert-block alert-danger fade in">
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
                 </button>
-                <strong>Error!</strong> <?php echo "Presensi tanggal <b>$tanggal</b> tidak ditemukan. Jadwal belum diinputkan."; ?>
+                <strong>Error!</strong> <?php echo "Presensi tanggal <b>$a</b> tidak ditemukan. Jadwal belum diinputkan."; ?>
             </div>
         <?php } ?>
 
@@ -169,7 +187,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Presensi Crew Awak Mobil Tangki</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>amt/ubah_presensi/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>amt/presensi/<?php echo $tanggal?>">
                 <input type="hidden" name="id_jadwal" id="id_jadwal"/>
                 <input type="hidden" name="tanggal_log_harian" id="tanggal_log_harian"/>
                 <input type="hidden" name="nip" id="nip"/>
@@ -211,7 +229,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                    <input class="btn btn-success" type="submit" name="edit_presensi" value="Simpan"/>
                 </div>
             </form>
         </div>

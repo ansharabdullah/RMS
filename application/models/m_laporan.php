@@ -5,6 +5,10 @@ class m_laporan extends CI_Model {
     function __construct() {
         parent::__construct();
     }
+    
+    public function InsertLogSistem($id_pegawai,$keterangan,$keyword){
+        $query = $this->db->query("insert into log_sistem(ID_PEGAWAI,KETERANGAN,KEYWORD) values('$id_pegawai','$keterangan','$keyword')");            
+    }
 
     public function getIdLogHarian($depot, $tahun, $bulan, $hari) {
         $query = $this->db->query("select l.ID_LOG_HARIAN from log_harian l where l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and DAY(l.TANGGAL_LOG_HARIAN) = '$hari'");
@@ -56,8 +60,15 @@ class m_laporan extends CI_Model {
 
         $nilai = round($data->RATA_SESUAI, 2) + round($data->RATA_CEPAT, 2) + round($data->RATA_CEPAT_SHIFT1, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 71");
+        
+        
     }
 
+    public function SyncKPIOperasional($depot, $tahun, $bulan) {
+        
+        
+    }
+    
     public function deleteMS2($ms2, $total_ms2) {
         foreach ($total_ms2 as $row) {
             $query = $this->db->query("delete from nilai where ID_NILAI='$row->ID_NILAI'");
