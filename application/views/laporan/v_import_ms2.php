@@ -328,6 +328,7 @@
                         <div class="panel-body">
                             <form class="cmxform form-horizontal tasi-form" id="signupForm1" action="<?php echo base_url() ?>laporan/import_ms2" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" required="required" id="data_ms2" class="form-control" name="data_ms2" value="<?php echo htmlentities(serialize($ms2)); ?>">
+                                <input type="hidden" required="required" class="form-control" name="nama_bulan" value="<?php echo $nama_bulan; ?>">
 
                                 <div class="form-group">
                                     <div class="col-lg-12 col-sm-6">
