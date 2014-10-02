@@ -43,10 +43,9 @@
                 </a>
                 <ul class="sub">
                     <li <?php if ($lv2 == 1 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url()?>apms/data_apms" >Data APMS</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Grafik</a></li>
-                    <li <?php if ($lv2 == 3 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Presensi</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/grafik_apms/<?php echo date("Y")?>" >Grafik</a></li>
+                    <li <?php if ($lv2 == 3 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/rencana_apms/<?php echo date("Y")?>/<?php echo date("n")?>" >Rencana</a></li>
                     <li <?php if ($lv2 == 4 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Reminder</a></li>
-                    <li <?php if ($lv2 == 5 && $lv1 == 4) echo "class='active'" ?>><a  href="#">Rencana</a></li>
                 </ul>
             </li>
             

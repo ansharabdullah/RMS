@@ -15,9 +15,9 @@ class apms extends CI_Controller {
 		//belum make database	
 	    $this->load->model("m_apms");
         $this->load->model("m_log_sistem");
-       /*  
         $this->load->model("m_mt");
-        $this->load->model("m_rencana");
+        $this->load->model("m_rencana_apms");
+       /*  
         $this->load->model("m_kinerja");
         $this->load->model("m_log_harian");
         $this->load->model("m_peringatan");
@@ -236,6 +236,7 @@ class apms extends CI_Controller {
 		$data['lv1'] = 4;
         $data['lv2'] = 1;
 		$data1['tahun'] = $tahun;
+		$data1['id_apms'] = $id_apms;
         $data1['bulan'] = $bulan;
         $data1['apms'] = $this->m_apms->detailApms($id_apms);
 		$data3 = menu_ss();
@@ -280,5 +281,110 @@ class apms extends CI_Controller {
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
+	public function grafik_apms($tahun) {
+
+        $depot = $this->session->userdata("id_depot");
+        
+        $data1['tahun'] = $tahun;
+        $data1['depot'] = $depot;
+        $data1['grafik'] = $this->m_apms->get_grafik_tahun($depot, $tahun);
+        $data3 = menu_ss();
+        $data['lv1'] = 4;
+        $data['lv2'] = 2;
+        $this->load->view('layouts/header');
+		$this->load->view('layouts/menu', $data3);
+		$this->load->view('layouts/navbar', $data);
+        //var_dump($tahun);
+		$this->load->view('apms/v_grafik_apms',$data1);
+        $this->load->view('layouts/footer');
+    }
+	public function grafik_bulan_apms($bulan,$tahun) {
+
+        $depot = $this->session->userdata("id_depot");
+        
+        $data1['tahun'] = $tahun;
+        $data1['bulan'] = $bulan;
+        $data1['depot'] = $depot;
+        $data1['grafik'] = $this->m_apms->get_grafik_bulan($depot,$bulan,$tahun);
+        $data3 = menu_ss();
+        $data['lv1'] = 4;
+        $data['lv2'] = 2;
+        $this->load->view('layouts/header');
+		$this->load->view('layouts/menu', $data3);
+		$this->load->view('layouts/navbar', $data);
+        //var_dump($data1['grafik']);
+		$this->load->view('apms/v_grafik_bulan_apms',$data1);
+        $this->load->view('layouts/footer');
+    }
+	public function grafik_hari_apms($bulan,$hari,$tahun) {
+        
+        
+        $depot = $this->session->userdata("id_depot");
+        $data1['bulan'] = $bulan;
+        $data1['tahun'] = $tahun;
+        $data1['hari'] = $hari;
+        $data1['grafik'] = $this->m_apms->get_grafik_harian($depot ,$bulan,$hari,$tahun); 
+
+        $data3 = menu_ss();		
+        $data['lv1'] = 4;
+        $data['lv2'] = 2;
+        $this->load->view('layouts/header');
+		$this->load->view('layouts/menu', $data3);
+		$this->load->view('layouts/navbar', $data);
+        //var_dump($data1['grafik']);
+		$this->load->view('apms/v_grafik_hari_apms',$data1);
+        $this->load->view('layouts/footer');
+    }
 	
+	
+    public function apms_tahun($depot)
+    {
+       $tahun =  $_POST['tahun'];
+       redirect('apms/grafik_apms/'.$tahun);
+    }
+	public function apms_masuk($id_apms)
+    {
+       $tanggal =  $_POST['bulan'];
+       $bulan =  date('n',strtotime($tanggal));
+       $tahun =  date('Y',strtotime($tanggal));
+       redirect('apms/detail_apms/'.$id_apms."/".$bulan."/".$tahun);
+    }
+		public function apms_grafik_masuk()
+    {
+       $tanggal =  $_POST['bulan'];
+       $bulan =  date('n',strtotime($tanggal));
+       $tahun =  date('Y',strtotime($tanggal));
+       redirect('apms/grafik_bulan_apms/'.$bulan."/".$tahun);
+    }
+	public function apms_grafik_hari()
+    {
+       $tanggal =  $_POST['tanggal'];
+       $hari =  date('d',strtotime($tanggal));
+       $bulan =  date('n',strtotime($tanggal));
+       $tahun =  date('Y',strtotime($tanggal));
+       redirect('apms/grafik_hari_apms/'.$bulan."/".$hari."/".$tahun);
+    }
+	
+	public function rencana_apms($tahun,$bulan) {
+		$data1['submit'] = false;
+        $data1['hapus'] = false;
+        $data1['edit'] = false;
+        $data1['bulan'] = $bulan;
+        $data1['tahun'] = $tahun;
+		
+			$data['lv1'] = 4;
+			$data['lv2'] = 3;
+			$depot = $this->session->userdata('id_depot');
+			$data1['apms'] = $this->m_rencana_apms->selectRencanaApms($depot,$tahun,$bulan);
+			$data1['STATUS_RENCANA'] = $this->m_rencana_apms->cekRencana($depot,$bulan,$tahun);
+			
+			//echo $data1['STATUS_RENCANA'];
+			$data3 = menu_ss();
+			$this->load->view('layouts/header');
+			$this->load->view('layouts/menu', $data3);
+			$this->load->view('layouts/navbar', $data);
+			$this->load->view('apms/v_rencana_apms', $data1);
+			$this->load->view('layouts/footer');
+		
+    }	
 }
