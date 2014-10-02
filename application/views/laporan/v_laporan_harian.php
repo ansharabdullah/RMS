@@ -1,12 +1,13 @@
 <script type="text/javascript">
+    
+    
     $(document).ready(function() {
-        var d = new Date();
-        var j;
-        if (d.getMonth() < 10) {
-            j = d.getFullYear() + "-0" + (d.getMonth() + 1);
-        } else {
-            j = d.getFullYear() + "-" + (d.getMonth() + 1);
-        }
+        <?php 
+        $tahun_sekarang = date('Y-m');
+        ?>
+        
+        var j = "<?php echo $tahun_sekarang;?>";  
+        
         $("#blnPilih").val(j);
         settingBulan();
 

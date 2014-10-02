@@ -15,6 +15,9 @@ class Depot extends CI_Controller {
         $this->load->model("m_rencana");
         $this->load->model("m_kpi");
         setlocale(LC_ALL, "IND");
+        if(!$this->session->userdata('isLoggedIn') || $this->session->userdata('id_depot') > 0){
+            redirect('login');
+        }
     }
 
     public function grafik_bulan($id_depot,$tahun) {
@@ -278,7 +281,6 @@ class Depot extends CI_Controller {
         $data2['tahun'] = $tahun;
         $data2['id_depot'] = $depot;    
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
-        
         $data3 = menu_oam();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data3);

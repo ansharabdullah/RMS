@@ -56,7 +56,6 @@ class kinerja extends CI_Controller {
             $data_kinerja['ID_LOG_HARIAN'] = $this->m_kinerja->getIdLogHarian($depot, $tanggalSIOD);
             $data_kinerja['STATUS_INPUT_HARIAN'] = $this->m_kinerja->cekStatusLogHarian($depot, $tanggalSIOD);
 
-
             $fileSIOD = $_FILES['fileSIOD'];
 
             $dir = './assets/file/';
@@ -552,9 +551,10 @@ class kinerja extends CI_Controller {
             } else {
                 $data_kinerja['error_simpan'] = false;
                 $this->m_kinerja->insert_siod($depot, $data_kinerja);
+                $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Import kinerja dari SIOD tanggal ' . $data_kinerja['TANGGAL']['tanggal'], 'Tambah');
             }
             $data_kinerja['submit'] = false;
-            $data_kinerja['simpan'] = true;            
+            $data_kinerja['simpan'] = true;
         }
 
         $this->header(5, 1);
@@ -562,70 +562,23 @@ class kinerja extends CI_Controller {
         $this->footer();
     }
 
-    public function hapus() {
-        $depot = $this->session->userdata('id_depot');;
-
-        $this->load->model('m_kinerja');
-
-        $data2['klik_hapus'] = false;
-        $data2['klik_cek'] = false;
-        $data2['status_hapus'] = false;
-
-        if ($this->input->post('submit')) {
-            $data2['klik_hapus'] = true;
-            $tanggal_hapus = date("d-m-Y", strtotime($this->input->post('tanggal_hapus')));
-
-            $cek = $this->m_kinerja->cekStatusLogHarian($depot, $tanggal_hapus);
-
-            if ($cek != 0) {
-                $id = $this->m_kinerja->getIdLogHarian($depot, $tanggal_hapus);
-                $this->m_kinerja->hapus_kinerja_siod($id);
-                $data2['status_hapus'] = true;
-                // insert log sistem
-            }
-        } else if ($this->input->post('cek')) {
-            $data2['klik_cek'] = true;
-            $data2['tanggal_cek'] = $this->input->post('tanggal_cek');
-            $data2['tanggal'] = date("d-m-Y", strtotime($data2['tanggal_cek']));
-
-            $id = $this->m_kinerja->getIdLogHarian($depot, $data2['tanggal']);
-            if ($id != -1) {//data ada
-                $cek = $this->m_kinerja->cekStatusLogHarian($depot, $data2['tanggal']);
-                if ($cek == 1) {
-                    $data2['status_hapus'] = true;
-                    //get jumlah spbu
-                    $data2 ['alokasi_spbu'] = $this->m_kinerja->getAlokasiSPBU($id);
-                    //get kinerja mt
-                    $data2 ['kinerja_mt'] = $this->m_kinerja->getKinerjaMT($id);
-                    ;
-                    //get kinerja amt
-                    $data2 ['kinerja_amt'] = $this->m_kinerja->getKinerjaAMT($id);
-                } else {
-                    $data2['status_hapus'] = false;
-                }
-            }
-        }
-
-        $this->header(5, 1);
-        $this->load->view('kinerja/v_hapus_kinerja_siod', $data2);
-        $this->footer();
-    }
-
     public function manual() {
-        $depot = $this->session->userdata('id_depot');;
+        $depot = $this->session->userdata('id_depot');
+
         $this->load->model('m_kinerja');
         $data2['AMT'] = $this->m_kinerja->getPegawai($depot);
         $data2['MT'] = $this->m_kinerja->getMobil($depot);
         $data2['KLIK_SIMPAN'] = false;
         //var_dump($data2);
 
-       $this->header(5, 1);
+        $this->header(5, 1);
         $this->load->view('kinerja/v_kinerja_manual', $data2);
         $this->footer();
     }
 
     public function simpan_manual() {
-        $depot = $this->session->userdata('id_depot');;
+        $depot = $this->session->userdata('id_depot');
+
         $this->load->model('m_kinerja');
 
         if ($this->input->post('submit_pegawai')) {
@@ -636,8 +589,11 @@ class kinerja extends CI_Controller {
             $data2['error_id_log_harian'] = false;
             $data2['error_id_kinerja_amt'] = false;
             $data2['error_koefisien'] = false;
+            $data2['error_tanggal'] = false;
 
             $id_pegawai = $this->input->post('id_pegawai');
+            $nip_pegawai = $this->input->post('nip_pegawai');
+            $nama_pegawai = $this->input->post('nama_pegawai');
             $klas_pegawai = $this->input->post('klas_pegawai');
             $status_tugas = $this->input->post('status_tugas');
             $tanggal = date("d-m-Y", strtotime($this->input->post('tgl')));
@@ -645,7 +601,7 @@ class kinerja extends CI_Controller {
             $kl_pegawai = $this->input->post('kl_pegawai');
             $rit_pegawai = $this->input->post('rit_pegawai');
             $spbu_pegawai = $this->input->post('spbu_pegawai');
-
+            $tanggal_sekarang = date("d-m-Y");
             //cek dulu id log harian
             $id_log_harian = $this->m_kinerja->getIdLogHarian($depot, $tanggal);
             if ($id_log_harian != -1) {
@@ -657,9 +613,14 @@ class kinerja extends CI_Controller {
                     if ($koefisien['error'] == true) {
                         $data2['error_koefisien'] = true;
                     } else {
-                        // berhasil tinggal input
-                        $pendapatan = ($km_pegawai * $koefisien['km']) + ($kl_pegawai * $koefisien['kl']) + ($rit_pegawai * $koefisien['rit']) + ($spbu_pegawai * $koefisien['spbu']);
-                        $this->m_kinerja->insertManualKinerjaAMT($id_log_harian, $id_pegawai, $status_tugas, $km_pegawai, $kl_pegawai, $rit_pegawai, $spbu_pegawai, $pendapatan);
+                        if ($tanggal > $tanggal_sekarang) {
+                            $data2['error_tanggal'] = true;
+                        } else {
+                            // berhasil tinggal input
+                            $pendapatan = ($km_pegawai * $koefisien['km']) + ($kl_pegawai * $koefisien['kl']) + ($rit_pegawai * $koefisien['rit']) + ($spbu_pegawai * $koefisien['spbu']);
+                            $this->m_kinerja->insertManualKinerjaAMT($id_log_harian, $id_pegawai, $status_tugas, $km_pegawai, $kl_pegawai, $rit_pegawai, $spbu_pegawai, $pendapatan);
+                            $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah kinerja ' . $nama_pegawai . ' dengan nip ' . $nip_pegawai . ' secara manual untuk tanggal ' . $tanggal, 'Tambah');
+                        }
                     }
                 } else {
                     $data2['error_id_kinerja_amt'] = true;
@@ -686,8 +647,10 @@ class kinerja extends CI_Controller {
 
             $data2['error_id_log_harian'] = false;
             $data2['error_id_kinerja_mt'] = false;
+            $data2['error_tanggal'] = false;
 
             $id_mobil = $this->input->post('id_mobil');
+            $nopol_mobil = $this->input->post('nopol_mobil');
             $tanggal = date("d-m-Y", strtotime($this->input->post('tgl_mobil')));
             $km_mobil = $this->input->post('km_mobil');
             $kl_mobil = $this->input->post('kl_mobil');
@@ -699,14 +662,19 @@ class kinerja extends CI_Controller {
             $pertaminadex_mobil = $this->input->post('pertaminadex_mobil');
             $solar_mobil = $this->input->post('solar_mobil');
             $biosolar_mobil = $this->input->post('biosolar_mobil');
-
+            $tanggal_sekarang = date("d-m-Y");
             //cek dulu id log harian
             $id_log_harian = $this->m_kinerja->getIdLogHarian($depot, $tanggal);
             if ($id_log_harian != -1) {
                 //cek kinerja mt jika sudah di input
                 $id_kinerja = $this->m_kinerja->getIdKinerjaMT($id_log_harian, $id_mobil);
                 if ($id_kinerja == 0) {
-                    $this->m_kinerja->insertManualKinerjaMT($id_log_harian, $id_mobil, $km_mobil, $kl_mobil, $rit_mobil, $ou_mobil, $premium_mobil, $pertamax_mobil, $pertamaxplus_mobil, $pertaminadex_mobil, $solar_mobil, $biosolar_mobil);
+                    if ($tanggal > $tanggal_sekarang) {
+                        $data2['error_tanggal'] = true;
+                    } else {
+                        $this->m_kinerja->insertManualKinerjaMT($id_log_harian, $id_mobil, $km_mobil, $kl_mobil, $rit_mobil, $ou_mobil, $premium_mobil, $pertamax_mobil, $pertamaxplus_mobil, $pertaminadex_mobil, $solar_mobil, $biosolar_mobil);
+                        $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah kinerja mobil tangki ' . $nopol_mobil . ' secara manual untuk tanggal ' . $tanggal, 'Tambah');
+                    }
                 } else {
                     $data2['error_id_kinerja_mt'] = true;
                 }
@@ -718,10 +686,101 @@ class kinerja extends CI_Controller {
             $data2['MT'] = $this->m_kinerja->getMobil($depot);
             $this->header(5, 1);
             $this->load->view('kinerja/v_kinerja_manual', $data2);
-           $this->footer();
+            $this->footer();
         } else {
             redirect('kinerja/manual');
         }
     }
 
+    public function cek() {
+        $depot = $this->session->userdata('id_depot');
+
+        $this->load->model('m_kinerja');
+
+        $data2['klik_hapus'] = false;
+        $data2['klik_cek'] = false;
+        $data2['status_hapus'] = false;
+        $data2['edit_kinerja_amt'] = false;
+        $data2['edit_kinerja_mt'] = false;
+        
+        $data2['klik_cek'] = true;
+        $data2['tanggal_cek'] = date("Y-m-d");
+        $data2['tanggal'] = date("d-m-Y", strtotime($data2['tanggal_cek']));
+
+        if ($this->input->post('hapus')) {
+            $data2['klik_hapus'] = true;
+            $tanggal_hapus = date("d-m-Y", strtotime($this->input->post('tanggal_hapus')));
+
+            $cek = $this->m_kinerja->cekStatusLogHarian($depot, $tanggal_hapus);
+
+            if ($cek != 0) {
+                $id = $this->m_kinerja->getIdLogHarian($depot, $tanggal_hapus);
+                $this->m_kinerja->hapus_kinerja_siod($id);
+                $data2['status_hapus'] = true;
+                $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Hapus kinerja dari SIOD tanggal ' . $tanggal_hapus, 'Hapus');
+            }
+        } else if ($this->input->post('cek')) {
+            $data2['tanggal_cek'] = $this->input->post('tanggal_cek');
+            $data2['tanggal'] = date("d-m-Y", strtotime($data2['tanggal_cek']));
+        }else if($this->input->post('editKinerjaAMT')){
+            $data2['tanggal_cek'] = $this->input->post('tanggal_cek');
+            $data2['tanggal'] = date("d-m-Y", strtotime($data2['tanggal_cek']));
+            $tahun =  date("Y", strtotime($data2['tanggal_cek']));
+            $id_kinerja_amt = $this->input->post('id_kinerja_amt');
+            $nama_pegawai = $this->input->post('nama_amt');
+            $nip_pegawai = $this->input->post('nip_amt');
+            $status_tugas = $this->input->post('status_tugas_amt');
+            $km_amt = $this->input->post('km_amt');
+            $kl_amt = $this->input->post('kl_amt');
+            $rit_amt = $this->input->post('rit_amt');
+            $spbu_amt = $this->input->post('spbu_amt');
+            $klas = $this->input->post('klas_amt');
+            $koef = $this->m_kinerja->getKoefisien($tahun, $depot, $status_tugas." ".$klas);
+            $pendapatan = floor(($km_amt*$koef['km'])+($kl_amt*$koef['kl'])+($rit_amt*$koef['rit'])+($spbu_amt*$koef['spbu']));
+            
+            $this->m_kinerja->setKinerjaAMT($id_kinerja_amt,$status_tugas,$km_amt,$kl_amt,$rit_amt,$spbu_amt,$pendapatan);
+            $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Edit kinerja ' . $nama_pegawai . ' dengan nip ' . $nip_pegawai . ' untuk tanggal ' . $data2['tanggal'], 'Edit');
+            $data2['edit_kinerja_amt'] = true;
+        }else if($this->input->post('editKinerjaMT')){
+            $data2['tanggal_cek'] = $this->input->post('tanggal_cek');
+            $data2['tanggal'] = date("d-m-Y", strtotime($data2['tanggal_cek']));
+            $id_kinerja_mt = $this->input->post('id_kinerja_mt');
+            $nopol_mt = $this->input->post('nopol_mt');
+            $rit_mt = $this->input->post('rit_mt');
+            $km_mt = $this->input->post('km_mt');
+            $kl_mt = $this->input->post('kl_mt');
+            $ou_mt = $this->input->post('ou_mt');
+            $premium_mt = $this->input->post('premium_mt');
+            $pertamax_mt = $this->input->post('pertamax_mt');
+            $pertamaxplus_mt = $this->input->post('pertamaxplus_mt');
+            $biosolar_mt = $this->input->post('biosolar_mt');
+            $pertaminadex_mt = $this->input->post('pertaminadex_mt');
+            $solar_mt = $this->input->post('solar_mt');
+            
+            
+            $this->m_kinerja->setKinerjaMT($id_kinerja_mt,$rit_mt,$km_mt,$kl_mt,$ou_mt,$premium_mt,$pertamax_mt,$pertamaxplus_mt,$pertaminadex_mt,$solar_mt,$biosolar_mt);
+            $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Edit kinerja MT dengan nopol ' . $nopol_mt . ' untuk tanggal ' . $data2['tanggal'], 'Edit');
+            $data2['edit_kinerja_mt'] = true;
+        }       
+
+        $id = $this->m_kinerja->getIdLogHarian($depot, $data2['tanggal']);
+        if ($id != -1) {//data ada
+            $cek = $this->m_kinerja->cekStatusLogHarian($depot, $data2['tanggal']);
+            if ($cek == 1) {
+                $data2['status_hapus'] = true;
+                //get jumlah spbu
+                $data2 ['alokasi_spbu'] = $this->m_kinerja->getAlokasiSPBU($id);
+                //get kinerja mt
+                $data2 ['kinerja_mt'] = $this->m_kinerja->getKinerjaMT($id);
+                //get kinerja amt
+                $data2 ['kinerja_amt'] = $this->m_kinerja->getKinerjaAMT($id);
+            } else {
+                $data2['status_hapus'] = false;
+            }
+        }
+
+        $this->header(5, 1);
+        $this->load->view('kinerja/v_cek_kinerja_siod', $data2);
+        $this->footer();
+    }
 }

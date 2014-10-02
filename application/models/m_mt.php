@@ -143,7 +143,7 @@ class m_mt extends CI_Model {
     
     //kinerja MT
     public function selectKinerjaMT($id_mobil,$depot,$bulan,$tahun){
-        $data = $this->db->query("select (DAY(l.TANGGAL_LOG_HARIAN ))as hari,k.id_kinerja_mt,k.total_km_mt,k.ritase_mt,k.total_kl_mt,k.own_use,k.premium,k.pertamax,k.pertamax_plus,k.pertamina_dex,k.solar,k.bio_solar,l.id_log_harian,l.tanggal_log_harian,m.id_mobil,m.nopol,k.premium from kinerja_mt k,mobil m,log_harian l 
+        $data = $this->db->query("select (DAY(l.TANGGAL_LOG_HARIAN ))as hari,k.id_kinerja_mt,k.total_km_mt,k.ritase_mt,k.total_kl_mt,k.own_use,k.premium,k.pertamax,k.pertamax_plus,k.pertamina_dex,k.solar,k.bio_solar,l.id_log_harian,l.tanggal_log_harian,m.id_mobil,m.nopol,k.premium from kinerja_mt k,mobil m,log_harian l
                                   where k.id_log_harian=l.id_log_harian and k.id_mobil=m.id_mobil and m.id_mobil=$id_mobil and m.id_depot=$depot and MONTH(l.TANGGAL_LOG_HARIAN) = $bulan and YEAR(l.TANGGAL_LOG_HARIAN) = $tahun
                                   group by l.TANGGAL_LOG_HARIAN order by l.TANGGAL_LOG_HARIAN asc");
         return $data->result();

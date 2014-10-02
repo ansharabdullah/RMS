@@ -74,7 +74,7 @@
                                 foreach ($apms as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-									<td><a href="<?php echo base_url()?>apms/detail_apms/<?php echo $row->ID_APMS; ?>" style ="text-decoration: underline"><?php echo $row->NO_APMS; ?></a></td>
+									<td><a href="<?php echo base_url()?>apms/detail_apms/<?php echo $row->ID_APMS; ?>/<?php echo date("n")?>/<?php echo date("Y")?>" style ="text-decoration: underline"><?php echo $row->NO_APMS; ?></a></td>
                                     <td><?php echo $row->NAMA_PENGUSAHA; ?></td>
                                     <td><?php echo $row->ALAMAT; ?></td>
                                     <td><?php echo $row->NAMA_TRANSPORTIR; ?></td>

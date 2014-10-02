@@ -10,12 +10,15 @@ class presentasi extends CI_Controller {
         $this->load->model("m_depot");
         $this->load->model("m_kpi");
         setlocale(LC_ALL, "IND");
+         if(!$this->session->userdata('isLoggedIn')){
+            redirect('login');
+        }
     }
 
     public function index() {
         if($this->session->userdata('id_depot') < 0 )
         {
-            $data['lv1'] = 8;
+            $data['lv1'] = $this->m_depot->get_total_depot() + 3;
             $data['lv2'] = 1;
             $this->load->view('layouts/header');
             $data2 = menu_oam();
@@ -129,7 +132,7 @@ class presentasi extends CI_Controller {
     public function slide_oam($index,$bulan)
     {
         
-         $data['lv1'] = 8;
+        $data['lv1'] = $this->m_depot->get_total_depot() + 3;
         $data['lv2'] = 1;
         $data2 = menu_oam();
         $this->load->view('layouts/header');

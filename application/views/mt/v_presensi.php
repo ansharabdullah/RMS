@@ -70,7 +70,7 @@ function DateToIndo($date) {
             </div>
         </section>
         
-  <?php if ($kinerja) { ?>      
+  <?php if ($presensi) { ?>      
         <div id="filePreview">
             <section class="panel">
                 <header class="panel-heading">
@@ -110,6 +110,7 @@ function DateToIndo($date) {
 
                                 <?php
                                     $i = 1;
+                                    $jml_absen = 0;
                                     foreach ($presensi as $row) {
                                         $hadir = "Absen";
                                         $text = "<span class='label label-danger'>Absen</span>";
@@ -127,12 +128,16 @@ function DateToIndo($date) {
                                             <td><?php echo $row->KAPASITAS; ?></td>
                                             <td><?php echo $row->TRANSPORTIR; ?></td>
                                             <td><?php echo $row->PRODUK; ?></td>
-                                          
                                            <td><?php echo $text; ?></td>
-                                            <td><?php echo $row->ALASAN ?></td>
-                                           <td><?php if ($text != "<span class='label label-success'>Hadir</span>") { ?>
-                                                    <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NOPOL ?>')"><i class="icon-pencil"></i></a>
-                                                <?php }else{ ?>
+                                            <td><?php echo $row->ALASAN_MT ?></td>
+                                           <td><?php if ($hadir != "Hadir") { ?>
+                                                    <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>',  '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NOPOL ?>','<?php echo $row->ALASAN_MT ?>')"><i class="icon-pencil"></i></a>
+                                                <?php 
+                                                    if(trim($row->ALASAN_MT) == "")
+                                                    {
+                                                        $jml_absen++;
+                                                    }
+                                                }else{ ?>
                                                     <span class='label label-success'>Ok</span>
                                                 <?php }?> </td></tr>
                                         <?php
@@ -155,7 +160,7 @@ function DateToIndo($date) {
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Error!</strong> Absen Mobil Tangki <strong><?php echo DateToIndo($tanggal)?></strong> tidak ditemukan.
+                    <strong>Error!</strong> Absen Mobil Tangki <strong><?php echo DateToIndo($tanggal)?></strong> tidak ditemukan dan jadwal belum diinput.
                 </div>
     <?php }
 } ?>
@@ -174,39 +179,27 @@ function DateToIndo($date) {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Presensi Mobil Tangki</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url() ?>mt/ubah_presensi/">
-                <input type="hidden" name="id_jadwal" id="id_jadwal"/>
-                <input type="hidden" name="tanggal_log_harian" id="tanggal_log_harian"/>
-                <input type="hidden" name="nopol" id="nopol"/>
-                <input type="hidden" name="keterangan" id="keterangan1"/>
+            <form class="cmxform form-horizontal tasi-form" id="formPresensi" method="post" action="<?php echo base_url() ?>mt/ubah_presensi/">
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <section class="panel">
                             <div class="panel-body">
                                 <div class="form-group ">                                            
-                                    <label for="ctglberlaku" class="control-label col-lg-4">Tanggal</label>
+                                    <label for="ctglberlaku" class="control-label col-lg-4">Tanggal Presensi</label>
                                     <div class="col-lg-8">
                                         <input class=" form-control input-sm m-bot15" id="tanggal" name="tanggal" size="16" type="date" value="" required readonly/>
-                                        <span class="help-block">Pilih tanggal</span>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label for="cjenis" class="control-label col-lg-4">Kehadiran</label>
+                                    <label for="cjenis" class="control-label col-lg-4">NOPOL</label>
                                     <div class="col-lg-8">
-                                        <select class="form-control input-sm m-bot15" id="keterangan" name="keterangan" readonly/>
-                                            <option value="Hadir">Hadir</option>
-                                            <option value="Absen">Absen</option>
-                                            <option value="Libur">Libur</option>
-                                            <option value="Sakit">Sakit</option>
-                                            <option value="Ijin">Ijin</option>
-                                            <option value="Alfa">Alfa</option>
-                                        </select>
+                                        <input class=" form-control input-sm m-bot15" type="text" name="nopol" id="nopol" readonly="readonly"/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label for="alasan" class="control-label col-lg-4">Alasan</label>
                                     <div class="col-lg-8">
-                                        <textarea class=" form-control input-sm m-bot15" id="alasan" name="alasan" minlength="2" type="text" required ></textarea>
+                                        <textarea class=" form-control input-sm m-bot15" required="required" id="alasan" name="alasan" minlength="2" type="text" required ></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -239,14 +232,11 @@ function DateToIndo($date) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
     
-   function editPresensi(tanggal, keterangan, alasan, id_jadwal, nopol) {
-                                            $("#tanggal_log_harian").val(tanggal);
-                                            $("#nopol").val(nopol);
-                                            $("#tanggal").val(tanggal);
-                                            $("#keterangan1").val(keterangan);
-                                            $("#keterangan").val(keterangan);
-                                            $("#alasan").val(alasan);
-                                            $("#id_jadwal").val(id_jadwal);
-                                        }
+   function editPresensi(tanggal, id_jadwal, nopol,alasan) {
+        $("#nopol").val(nopol);
+        $("#tanggal").val(tanggal);
+        $("#alasan").val(alasan);
+        $("#formPresensi").attr('action', '<?php echo base_url() ?>mt/ubah_presensi/<?php echo $jml_absen;?>/'+id_jadwal);
+    }
 		  
 </script>

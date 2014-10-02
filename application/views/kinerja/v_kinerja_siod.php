@@ -25,14 +25,26 @@
 </script>
 <section id="main-content">
     <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>kinerja">Kinerja</a></li>
+                    <li class="active">Import SIOD</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        
+        
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
                 Input Kinerja dari SIOD
                 <div style="float:right;">
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
-                    <a  data-placement="left" href="<?php echo base_url() ?>kinerja/hapus" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Kinerja SIOD"><i class="icon-minus"></i></a>
-
+                    <a  data-placement="left" href="<?php echo base_url() ?>kinerja/cek" class="btn btn-warning btn-xs tooltips" data-original-title="Cek Kinerja SIOD"><i class="icon-check-sign"></i></a>
                     <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>downloads/format_oscrms_siod.xlsx"><i class="icon-download-alt"></i></a>
                 </div>
             </header>

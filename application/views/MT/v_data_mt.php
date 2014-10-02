@@ -97,7 +97,6 @@ if(status == 1){
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="">
                                 <?php $i = 1;
                                 foreach ($mt as $row) { ?>
                                     <td style="display:none;"></td>
