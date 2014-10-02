@@ -65,12 +65,11 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <div class="panel-body">
-                                <div id="grafik"></div>
+                                <div id="grafik" style="height:300px;"></div>
                             </div>
                         </section>
                     </div>
                 </div>
-                <br/><br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -113,8 +112,8 @@
                         </table>
                     </center>
                 </div>
+        <?php echo $paging ?>
             </div>
         </section>
-        <?php echo $paging ?>
     </section>
 </section>

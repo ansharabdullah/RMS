@@ -56,7 +56,7 @@
                 <a href="<?php echo base_url()?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
             </header>
             <div class="panel-body">
-                <div id="grafik"></div>
+                <div id="grafik" style="height:300px;"></div>
                 <br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>

@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/pengaturan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_pengaturan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/pengaturan/v_pengaturan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_presensi.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
+=======
             <file>file:/C:/xampp/htdocs/RMS/application/views/kinerja/v_cek_kinerja_siod.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/controllers/kinerja.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/views/kinerja/v_kinerja_siod.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/models/m_kinerja.php</file>
+>>>>>>> c128bcce77241d16f347659ba02abace738c13be
         </group>
     </open-files>
 </project-private>

@@ -25,7 +25,54 @@ class jadwal extends CI_Controller {
         $this->penjadwalan();
     }
 
-    public function penjadwalan() {
+    public function penjadwalan($tanggal = 0) {
+        $data2['feedback'] = 0;
+        $data2['pesan'] = 0;
+
+        if ($this->input->post("edit_jadwal", true)) {
+            if ($this->session->userdata('id_role') == 5) {
+                redirect(base_url());
+            } else {
+                $id_jadwal = $this->input->post('id_jadwal', true);
+                $nip = $this->input->post('nip', true);
+                $data = array(
+                    'status_masuk' => $this->input->post('status_masuk', true)
+                );
+                $tanggal = $this->input->post('tanggal_log_harian', true);
+                $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
+
+                $datalog = array(
+                    'keterangan' => "Ubah Jadwal NIP : $nip pada $tanggal",
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Edit'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+
+                $data2['feedback'] = 1;
+                $data2['pesan'] = "Data berhasil diubah.";
+            }
+        } else if ($this->input->post("delete_jadwal", true)) {
+            if ($this->session->userdata('id_role') == 5) {
+                redirect(base_url());
+            } else {
+                $bulan = date("m", strtotime($tanggal));
+                $tahun = date("Y", strtotime($tanggal));
+                $depot = $this->session->userdata('id_depot');
+
+                $this->m_penjadwalan->deleteJadwal($depot, $bulan, $tahun);
+
+                $datalog = array(
+                    'keterangan' => "Menghapus jadwal bulan : $tanggal",
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Hapus'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+                
+                $data2['feedback'] = 1;
+                $data2['pesan'] = "Data berhasil dihapus.";
+            }
+        }
+
         $data['lv1'] = 6;
         $data['lv2'] = 1;
         $data2['jadwal'] = 0;
@@ -33,7 +80,8 @@ class jadwal extends CI_Controller {
 
         $data3 = menu_ss();
         $depot = $this->session->userdata('id_depot');
-        $tanggal = date('Y-m-d');
+        if ($tanggal == 0)
+            $tanggal = date('Y-m-d');
 
         $data2['jadwal'] = $this->m_penjadwalan->getJadwal($depot, $tanggal);
         $data2['tanggal'] = $tanggal;
@@ -269,21 +317,9 @@ class jadwal extends CI_Controller {
     }
 
     public function lihat_jadwal() {
-
-        $data['lv1'] = 6;
-        $data['lv2'] = 1;
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
-
-        $data2['jadwal'] = $this->m_penjadwalan->getJadwal($depot, $tanggal);
-        $data2['tanggal'] = $tanggal;
-        $data3 = menu_ss();
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu', $data3);
-
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('jadwal/v_jadwal', $data2);
-        $this->load->view('layouts/footer');
+        redirect(base_url() . "jadwal/penjadwalan/" . $tanggal);
     }
 
     public function edit_jadwal() {

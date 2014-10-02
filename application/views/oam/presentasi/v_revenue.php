@@ -76,21 +76,21 @@
                 }
             },
             series: [{
-                name: 'Januari',
-                data: [49132,69174,551468,865535],
-                color:'#FF002B'
+                    name: 'Januari',
+                    data: [49132,69174,551468,865535],
+                    color:'#FF002B'
 
-            }, {
-                name: 'Februari',
-                data: [46053,61552,513797,850069],
-                color:'#2C88D4'
+                }, {
+                    name: 'Februari',
+                    data: [46053,61552,513797,850069],
+                    color:'#2C88D4'
 
-            }, {
-                name: 'Maret',
-                data: [51273,69847,620478,846500],
-                color:'#23C906'
+                }, {
+                    name: 'Maret',
+                    data: [51273,69847,620478,846500],
+                    color:'#23C906'
 
-            }]
+                }]
         });
     });
 </script>
@@ -100,27 +100,26 @@
         <section class="panel">
             <header class="panel-heading">
                 KPI INTERNAL
-                <a href="<?php echo base_url()?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
+                <a href="<?php echo base_url() ?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
             </header>
             <div class="panel-body">
                 <div class="row">
-                   
+
                     <div class="col-lg-4">
                         <section class="panel">
                             <div class="panel-body">
-                                <div id="grafik"></div>
+                                <div id="grafik" style="height:300px;"></div>
                             </div>
                         </section>
                     </div>
                     <div class="col-lg-8">
                         <section class="panel">
                             <div class="panel-body">
-                                <div id="grafik2"></div>
+                                <div id="grafik2" style="height:300px;"></div>
                             </div>
                         </section>
                     </div>
                 </div>
-                <br/><br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -167,8 +166,8 @@
                         </table>
                     </center>
                 </div>
+                <?php echo $paging ?>
             </div>
         </section>
-        <?php echo $paging ?>
     </section>
 </section>

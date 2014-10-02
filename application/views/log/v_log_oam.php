@@ -21,7 +21,7 @@
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Tabel Log
+                Tabel Log Sistem Bulan <b><?php echo date('M-Y',  strtotime($bulan))?></b>
             </header>
             <div class="panel-body">
                 <div class="adv-table editable-table "  style="overflow-x: scroll">
@@ -70,7 +70,7 @@
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $row->TANGGAL_LOG ?></td>
+                                    <td><?php echo date('d-M-Y h:i:s', strtotime($row->TANGGAL_LOG)) ?></td>
                                     <td><?php echo $row->NAMA_DEPOT ?></td>
                                     <td><?php echo $row->NAMA_PEGAWAI ?></td>
                                     <td><?php echo $row->JABATAN ?></td>
