@@ -2,6 +2,7 @@
     var arrBulan = new Array();
     var arrDepot = new Array();
     var series = new Array();
+    var target = new Array();
     var data;
     <?php
         foreach($bulan as $b)
@@ -35,6 +36,12 @@
             
         }
     ?>
+        series.push({
+            name: 'Target',
+            data: [100,100,100],
+            color: 'red'
+        });
+        
     $(function () {
         $('#grafik').highcharts({
             chart:{
@@ -60,8 +67,9 @@
                 plotLines: [{
                     value: 0,
                     width: 1,
-                    color: '#808080'
-                }]
+                    color: '#808080',
+                    label:{text:'Target'}
+                }] 
             },
             tooltip: {
                 valueSuffix: ''
@@ -85,7 +93,7 @@
                 <a href="<?php echo base_url()?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
             </header>
             <div class="panel-body">
-                <div id="grafik"></div>
+                <div id="grafik"  style="height:300px;"></div>
                 <br/><br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
@@ -132,8 +140,8 @@
                         </table>
                     </center>
                 </div>
+        <?php echo $paging?>
             </div>
         </section>
-        <?php echo $paging?>
     </section>
 </section>

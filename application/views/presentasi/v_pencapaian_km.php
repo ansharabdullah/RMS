@@ -53,7 +53,7 @@
                 <div class="row">
                    
                     <div class="col-lg-12">
-                                <div id="grafik"></div>
+                                <div id="grafik" style="height:300px;"></div>
                     </div>
                 </div>
                 <br/>

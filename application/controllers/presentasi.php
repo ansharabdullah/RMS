@@ -44,7 +44,7 @@ class presentasi extends CI_Controller {
     public function set_slide()
     {
         $bulan = $_POST['bulan'];
-        redirect("presentasi/slide/1/".$bulan);
+        redirect("presentasi/slide/0/".$bulan);
         
     }
     
@@ -71,7 +71,6 @@ class presentasi extends CI_Controller {
         //$this->navbar($data['lv1'],$data['lv2']);
         $before = anchor("presentasi/slide/".($index - 1)."/".$bulan,"<button class='btn btn-danger'><i class='icon-long-arrow-left'></i> kembali</button>");
         $next = anchor("presentasi/slide/".($index + 1)."/".$bulan,"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-right'></i></button>");
-        if($index == 1){ $before = ""; }
         if($index == 11){ $next = ""; }
         $slide['paging'] = " <section class='panel'>
             <div class='panel-body'>".$before." ".$next."
@@ -86,6 +85,10 @@ class presentasi extends CI_Controller {
         $this->load->view('presentasi/v_header');
         //pilih slide
         switch ($index){
+            case 0:
+                $slide['url'] = base_url()."presentasi/slide/1/".$bulan;
+                $this->load->view('presentasi/v_opening',$slide);
+                break;
             case 1:
                 $slide['kpi'] = $this->m_kpi->kpi_triwulan_depot($bulan,$depot);
                 $this->load->view('presentasi/v_kpi_operasional',$slide);
@@ -126,7 +129,10 @@ class presentasi extends CI_Controller {
                 $this->load->view('presentasi/v_kendala',$slide);
                 break;
         }
-        $this->load->view('layouts/footer');
+        if($index > 0)
+        {
+             $this->load->view('layouts/footer');
+        }
     }
     
     public function slide_oam($index,$bulan)
@@ -138,8 +144,10 @@ class presentasi extends CI_Controller {
         $this->load->view('layouts/header');
         //$this->load->view('layouts/menu',$data2);
         //$this->navbar($data['lv1'],$data['lv2']);
-        $next = anchor("presentasi/slide/".($index - 1)."/".$bulan,"<button class='btn btn-danger'><i class='icon-long-arrow-left'></i> kembali</button>");
-        $before = anchor("presentasi/slide/".($index + 1)."/".$bulan,"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-right'></i></button>");
+        $before = anchor("presentasi/slide/".($index - 1)."/".$bulan,"<button class='btn btn-danger'><i class='icon-long-arrow-left'></i> kembali</button>");
+        $next = anchor("presentasi/slide/".($index + 1)."/".$bulan,"<button class='btn btn-danger' style='float:right;'>selanjutnya <i class='icon-long-arrow-right'></i></button>");
+        
+        if($index == 11){ $next = ""; }
         $slide['paging'] = " <section class='panel'>
             <div class='panel-body'>".$before." ".$next."
             </div>
@@ -152,6 +160,10 @@ class presentasi extends CI_Controller {
         $this->load->view('oam/presentasi/v_header');
         //pilih slide
         switch ($index){
+            case 0:
+                $slide['url'] = base_url()."presentasi/slide/1/".$bulan;
+                $this->load->view('oam/presentasi/v_opening',$slide);
+                break;
             case 1:
                 $slide['kpi'] = $this->m_kpi->kpi_triwulan($bulan);
                 $this->load->view('oam/presentasi/v_kpi_operasional',$slide);
@@ -192,7 +204,10 @@ class presentasi extends CI_Controller {
                 $this->load->view('oam/presentasi/v_kendala',$slide);
                 break;
         }
-        $this->load->view('layouts/footer');
+        if($index > 0)
+        {
+             $this->load->view('layouts/footer');
+        }
     }
     
     public function navbar($lv1,$lv2)

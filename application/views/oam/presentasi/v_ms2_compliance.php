@@ -35,6 +35,11 @@
             
         }
     ?>
+        series.push({
+            name: 'Target',
+            data: [100,100,100],
+            color: 'red'
+        });
     $(function () {
         $('#grafik').highcharts({
             chart:{
@@ -84,7 +89,7 @@
                 <a href="<?php echo base_url()?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
             </header>
             <div class="panel-body">
-                <div id="grafik"></div>
+                <div id="grafik"  style="height:300px;"></div>
                 <br/><br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
@@ -131,8 +136,8 @@
                         </table>
                     </center>
                 </div>
+        <?php echo $paging?>
             </div>
         </section>
-        <?php echo $paging?>
     </section>
 </section>

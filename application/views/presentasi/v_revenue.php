@@ -12,8 +12,9 @@
             },
             xAxis: {
                 categories: [
-                    'OAM RKAP',
-                    'Fuel Ritel Realisasi'
+                    'Base',
+                    'Fuel Ritel Realisasi',
+                    'Stretch',
                 ]
             },
             yAxis: {
@@ -35,7 +36,7 @@
             },
             series: [{
                     name: 'Revenue',
-                    data: [195352,459479]
+                    data: [195352,459479,212432]
 
                 }]
         });
@@ -103,10 +104,10 @@
                 <div class="row">
                    
                     <div class="col-lg-4">
-                                <div id="grafik"></div>
+                                <div id="grafik" style="height:300px;"></div>
                     </div>
                     <div class="col-lg-8">
-                                <div id="grafik2"></div>
+                                <div id="grafik2"  style="height:300px;"></div>
                     </div>
                 </div>
                 <br/>
