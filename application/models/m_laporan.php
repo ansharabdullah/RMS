@@ -5,9 +5,9 @@ class m_laporan extends CI_Model {
     function __construct() {
         parent::__construct();
     }
-    
-    public function InsertLogSistem($id_pegawai,$keterangan,$keyword){
-        $query = $this->db->query("insert into log_sistem(ID_PEGAWAI,KETERANGAN,KEYWORD) values('$id_pegawai','$keterangan','$keyword')");            
+
+    public function InsertLogSistem($id_pegawai, $keterangan, $keyword) {
+        $query = $this->db->query("insert into log_sistem(ID_PEGAWAI,KETERANGAN,KEYWORD) values('$id_pegawai','$keterangan','$keyword')");
     }
 
     public function getIdLogHarian($depot, $tahun, $bulan, $hari) {
@@ -60,15 +60,117 @@ class m_laporan extends CI_Model {
 
         $nilai = round($data->RATA_SESUAI, 2) + round($data->RATA_CEPAT, 2) + round($data->RATA_CEPAT_SHIFT1, 2);
         $query = $this->db->query("update nilai n, log_harian l set n.NILAI = '$nilai' where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT ='$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) ='$tahun' and n.ID_JENIS_PENILAIAN = 71");
-        
-        
     }
 
     public function SyncKPIOperasional($depot, $tahun, $bulan) {
-        
-        
+        //Total MS2
+        $query = $this->db->query("select l.TANGGAL_LOG_HARIAN,n.ID_NILAI,n.NILAI from log_harian l, nilai n where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and n.ID_JENIS_PENILAIAN = 71");
+        $ms2_total = 0;
+        if ($query->num_rows() > 0) {
+            $data = $query->result();
+            $ms2_total = $data[0]->NILAI;
+        } else {
+            $ms2_total = 0;
+        }
+
+        //Total Realisasi
+        $query = $this->db->query("select l.ID_LOG_HARIAN,l.TANGGAL_LOG_HARIAN,
+                SUM(k.PREMIUM) as PREMIUM,r.R_PREMIUM,
+                SUM(k.PERTAMAX)as PERTAMAX,r.R_PERTAMAX,
+                SUM(k.SOLAR)as SOLAR,r.R_SOLAR,
+                SUM(k.PERTAMAX_PLUS) as PERTAMAX_PLUS,r.R_PERTAMAXPLUS,
+                SUM(k.PERTAMINA_DEX) as PERTAMIA_DEX,r.R_PERTAMINADEX,
+                SUM(k.BIO_SOLAR) as BIO_SOLAR,r.R_BIOSOLAR,
+                (SUM(k.PREMIUM)+SUM(k.PERTAMAX)+SUM(k.SOLAR)+SUM(k.PERTAMAX_PLUS)+SUM(k.PERTAMINA_DEX)+SUM(k.BIO_SOLAR))as TOTAL_REALISASI,
+                (r.R_PREMIUM+r.R_PERTAMAX+r.R_SOLAR+r.R_PERTAMAXPLUS+r.R_PERTAMINADEX+r.R_BIOSOLAR)as TOTAL_RENCANA,
+                ((SUM(k.PREMIUM)+SUM(k.PERTAMAX)+SUM(k.SOLAR)+SUM(k.PERTAMAX_PLUS)+SUM(k.PERTAMINA_DEX)+SUM(k.BIO_SOLAR))/(r.R_PREMIUM+r.R_PERTAMAX+r.R_SOLAR+r.R_PERTAMAXPLUS+r.R_PERTAMINADEX+r.R_BIOSOLAR)*100)as PENCAPAIAN 
+                from log_harian l, kinerja_mt k,rencana r where l.ID_LOG_HARIAN = k.ID_LOG_HARIAN and l.ID_LOG_HARIAN=r.ID_LOG_HARIAN and  l.ID_DEPOT='$depot' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' GROUP BY l.TANGGAL_LOG_HARIAN");
+
+        $hasil = $query->result();
+        $jumlah_data = 0;
+        $nilai_data = 0;
+        foreach ($hasil as $row) {
+            $nilai_data = $nilai_data + $row->PENCAPAIAN;
+            $jumlah_data++;
+        }
+        $realisasi_rata2 = round($nilai_data / $jumlah_data, 2);
+
+        // Nilai Total KPI       
+        $query = $this->db->query("select l.TANGGAL_LOG_HARIAN,n.ID_NILAI,n.NILAI from log_harian l, nilai n where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and n.ID_JENIS_PENILAIAN = 72");
+        $data = $query->result();
+        $kpi_total_id = $data[0]->ID_NILAI;
+        $kpi_total_nilai = $data[0]->NILAI;
+
+        //KPI
+        $query = $this->db->query("select l.TANGGAL_LOG_HARIAN,k.ID_KPI_OPERASIONAL, k.ID_JENIS_KPI_OPERASIONAL ,k.BOBOT ,k.TARGET,k.REALISASI,k.WEIGHTED_SCORE from log_harian l, kpi_operasional k where l.ID_LOG_HARIAN = k.ID_LOG_HARIAN and l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' order by k.ID_JENIS_KPI_OPERASIONAL ASC");
+        $data = $query->result();
+        if ($query->num_rows() == 10) {
+            //KPI 1
+            $kpi_id = $data[0]->ID_KPI_OPERASIONAL;
+            $kpi_target = $data[0]->TARGET;
+            $kpi_bobot = $data[0]->BOBOT;
+            $kpi_realisasi = $data[0]->REALISASI;
+
+            $id_kpi1 = $kpi_id;
+            $kpitarget1 = $kpi_target;
+            $bobot1 = $kpi_bobot / 100;
+            $kpirealisasi1 = $ms2_total; // ganti realisasi kpi dengan total ms2 baru
+            $deviasi1 = round($kpirealisasi1 - $kpitarget1, 2);
+            $performance_score1 = round($kpirealisasi1 / $kpitarget1 * 100, 2);
+            $normal_score1 = 0;
+            if ($performance_score1 < 0) {
+                $normal_score1 = 0.00;
+            } else if ($performance_score1 > 120) {
+                $normal_score1 = 120.00;
+            } else {
+                $normal_score1 = $performance_score1;
+            } $weighted_score1 = round($normal_score1 * $bobot1, 2);
+            $this->editKPIOperasional($id_kpi1, $kpitarget1, $kpirealisasi1, $deviasi1, $performance_score1, $normal_score1, $weighted_score1);
+
+            //KPI 2
+            $kpi_id = $data[1]->ID_KPI_OPERASIONAL;
+            $kpi_target = $data[1]->TARGET;
+            $kpi_bobot = $data[1]->BOBOT;
+            $kpi_realisasi = $data[1]->REALISASI;
+
+            $id_kpi2 = $kpi_id;
+            $kpitarget2 = $kpi_target;
+            $bobot2 = $kpi_bobot / 100;
+            $kpirealisasi2 = $realisasi_rata2;
+            $deviasi2 = round($kpirealisasi2 - $kpitarget2, 2);
+            $performance_score2 = round($kpirealisasi2 / $kpitarget2 * 100, 2);
+            $normal_score2 = 0;
+            if ($performance_score2 < 0) {
+                $normal_score2 = 0.00;
+            } else if ($performance_score2 > 120) {
+                $normal_score2 = 120.00;
+            } else {
+                $normal_score2 = $performance_score2;
+            } $weighted_score2 = round($normal_score2 * $bobot2, 2);
+            $this->editKPIOperasional($id_kpi2, $kpitarget2, $kpirealisasi2, $deviasi2, $performance_score2, $normal_score2, $weighted_score2);
+
+            //KPI 3
+            $weighted_score3 = $data[2]->WEIGHTED_SCORE;
+            //KPI 4
+            $weighted_score4 = $data[3]->WEIGHTED_SCORE;
+            //KPI 5
+            $weighted_score5 = $data[4]->WEIGHTED_SCORE;
+            //KPI 6
+            $weighted_score6 = $data[5]->WEIGHTED_SCORE;
+            //KPI 7
+            $weighted_score7 = $data[6]->WEIGHTED_SCORE;
+            //KPI 8
+            $weighted_score8 = $data[7]->WEIGHTED_SCORE;
+            //KPI 9
+            $weighted_score9 = $data[8]->WEIGHTED_SCORE;
+            //KPI 10
+            $weighted_score10 = $data[9]->WEIGHTED_SCORE;
+            //KPI TOTAL
+            $total_kpi = $weighted_score1 + $weighted_score2 + $weighted_score3 + $weighted_score4 + $weighted_score5 + $weighted_score6 + $weighted_score7 + $weighted_score8 + $weighted_score9 + $weighted_score10;
+            $query = $this->db->query("update nilai set NILAI = '$total_kpi' where ID_NILAI = '$kpi_total_id'");
+        }
     }
-    
+
     public function deleteMS2($ms2, $total_ms2) {
         foreach ($total_ms2 as $row) {
             $query = $this->db->query("delete from nilai where ID_NILAI='$row->ID_NILAI'");
@@ -217,11 +319,11 @@ class m_laporan extends CI_Model {
         
     }
 
-    public function getInfoDepot($depot){
+    public function getInfoDepot($depot) {
         $query = $this->db->query("select * from depot d, pegawai p, role_assignment r where d.ID_DEPOT = p.ID_DEPOT and p.ID_PEGAWAI = r.ID_PEGAWAI and d.ID_DEPOT = '$depot' and r.ID_ROLE = 3");
-        return $query->row();        
+        return $query->row();
     }
-    
+
     public function getLaporanHarian($depot, $tahun, $bulan) {
         $query = $this->db->query("select m.ID_MOBIL,m.TRANSPORTIR,m.NOPOL,m.KAPASITAS,
 (select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=1)as 'KM1',
@@ -349,9 +451,9 @@ class m_laporan extends CI_Model {
 (select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=30)as 'OWNUSE30',
 (select k.OWN_USE from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=31)as 'OWNUSE31'   
 from mobil m where m.ID_DEPOT = '$depot' and (select COUNT(*) from kinerja_mt k, log_harian l where k.ID_LOG_HARIAN = l.ID_LOG_HARIAN and k.ID_MOBIL = m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan')>0 order by m.TRANSPORTIR DESC");
-        return $query;   
+        return $query;
     }
-    
+
     public function getPerformansiHarian($depot, $tahun, $bulan) {
         $query = $this->db->query("select p.NAMA_PEGAWAI,p.NIP,p.JABATAN,p.KLASIFIKASI,
 (select k.TOTAL_KM from kinerja_amt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_PEGAWAI=p.ID_PEGAWAI and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=1)as 'KM1',
@@ -510,10 +612,10 @@ from mobil m where m.ID_DEPOT = '$depot' and (select COUNT(*) from kinerja_mt k,
 (select k.PENDAPATAN from kinerja_amt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_PEGAWAI=p.ID_PEGAWAI and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=30)as 'RUPIAH30',
 (select k.PENDAPATAN from kinerja_amt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_PEGAWAI=p.ID_PEGAWAI and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=31)as 'RUPIAH31'
 from pegawai p where p.ID_DEPOT = '$depot' and (p.JABATAN = 'SUPIR' or p.JABATAN = 'KERNET') and (select COUNT(*) from kinerja_amt k, log_harian l where k.ID_LOG_HARIAN = l.ID_LOG_HARIAN and k.ID_PEGAWAI = p.ID_PEGAWAI and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan')>0 order by p.NAMA_PEGAWAI DESC");
-        return $query;   
+        return $query;
     }
-    
-    function getRencanaRealisasi($depot,$tahun,$bulan) {
+
+    function getRencanaRealisasi($depot, $tahun, $bulan) {
         $query = $this->db->query("select l.TANGGAL_LOG_HARIAN,l.JUMLAH_ALOKASI_SPBU,
 (select r.R_PREMIUM from rencana r where r.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as R_PREMIUM,
 (select r.R_PERTAMAX from rencana r where r.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as R_PERTAMAX,

@@ -110,9 +110,9 @@ class laporan extends CI_Controller {
             $tanggalms2 = $this->input->post('blnms2');
             $bulan = date("m", strtotime($tanggalms2));
             $tahun = date("Y", strtotime($tanggalms2));
+            $this->m_laporan->deleteMS2($ms2, $total_ms2);
             $this->m_laporan->SyncKPIOperasional($depot, $tahun, $bulan);
             $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Hapus MS2 Complience bulan ' . $nama_bln, 'Hapus');
-            $this->m_laporan->deleteMS2($ms2, $total_ms2);
         } else {
             $data2['submit'] = true;
             $tanggalms2 = date('Y-m-d');
@@ -159,7 +159,7 @@ class laporan extends CI_Controller {
             }
         }
 
-        $this->header(7, 4);
+        $this->header(7, 2);
         $this->load->view('laporan/v_ms2', $data2);
         $this->footer();
     }
@@ -353,11 +353,12 @@ class laporan extends CI_Controller {
                 $this->m_laporan->simpanMS2($ms2);
                 $nama_bulan = $this->input->post('nama_bulan');
                 $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Import MS2 Complience bulan ' . $nama_bulan, 'Tambah');
+                $this->m_laporan->SyncKPIOperasional($depot, date("Y", strtotime($ms2['blnms2'])), date("m", strtotime($ms2['blnms2'])));
             } else {
                 $data2['simpan_error'] = true;
             }
         }
-        $this->header(7, 4);
+        $this->header(7, 2);
         $this->load->view('laporan/v_import_ms2', $data2);
         $this->footer();
     }
@@ -452,7 +453,7 @@ class laporan extends CI_Controller {
             } else if (date("m", strtotime($bln_frm)) == 12) {
                 $nama_bulan = 'Desember ' . date("Y", strtotime($bln_frm));
             }
-            
+
             if ($data2['id_log_frm1'] == -1) { // id tidak ditemukan
                 $data2['status_id'] = false;
             } else {
@@ -825,7 +826,8 @@ class laporan extends CI_Controller {
             $weighted_score10 = 0;
             $this->m_laporan->editKPIOperasional($id_kpi10, $kpitarget10, $kpirealisasi10, $deviasi10, $performance_score10, $normal_score10, $weighted_score10);
 
-
+            $this->m_laporan->SyncKPIOperasional($depot, $tahun, $bulan);
+            $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Edit KPI Operasional bulan ' . $data2['kpi']['nama_bulan'], 'Edit');
 
             if ($this->m_laporan->cekKPIOperasional($depot, $tahun, $bulan) != 0) {
                 $data2['kpi']['error'] = false;
@@ -1111,9 +1113,56 @@ class laporan extends CI_Controller {
                 $total_kpi = $weighted_score1 + $weighted_score2 + $weighted_score3 + $weighted_score4 + $weighted_score5 + $weighted_score6 + $weighted_score7 + $weighted_score8 + $weighted_score9 + $weighted_score10;
 
                 $this->m_laporan->tambahKPIOperasional($depot, $bulan, $tahun, $id_log_harian, $kpitarget1, $bobot1, $kpirealisasi1, $deviasi1, $performance_score1, $normal_score1, $weighted_score1, $kpitarget2, $bobot2, $kpirealisasi2, $deviasi2, $performance_score2, $normal_score2, $weighted_score2, $kpitarget3, $bobot3, $kpirealisasi3, $deviasi3, $performance_score3, $normal_score3, $weighted_score3, $kpitarget4, $bobot4, $kpirealisasi4, $deviasi4, $performance_score4, $normal_score4, $weighted_score4, $kpitarget5, $bobot5, $kpirealisasi5, $deviasi5, $performance_score5, $normal_score5, $weighted_score5, $kpitarget6, $bobot6, $kpirealisasi6, $deviasi6, $performance_score6, $normal_score6, $weighted_score6, $kpitarget7, $bobot7, $kpirealisasi7, $deviasi7, $performance_score7, $normal_score7, $weighted_score7, $kpitarget8, $bobot8, $kpirealisasi8, $deviasi8, $performance_score8, $normal_score8, $weighted_score8, $kpitarget9, $bobot9, $kpirealisasi9, $deviasi9, $performance_score9, $normal_score9, $weighted_score9, $kpitarget10, $bobot10, $kpirealisasi10, $deviasi10, $performance_score10, $normal_score10, $weighted_score10, $total_kpi);
+
+                $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah KPI Operasional bulan ' . $data2['kpi']['nama_bulan'], 'Tambah');
+            }
+        }else{
+            $data2['klik_cek'] = true;
+
+            $bln_kpi = date('Y-m');
+            $bulan = date("m", strtotime($bln_kpi));
+            $tahun = date("Y", strtotime($bln_kpi));
+
+            $data2['kpi'] ['bln_kpi'] = $bln_kpi;
+            if ($bulan == 1) {
+                $data2['kpi']['nama_bulan'] = 'Januari ' . $tahun;
+            } else if ($bulan == 2) {
+                $data2['kpi']['nama_bulan'] = 'Februari ' . $tahun;
+            } else if ($bulan == 3) {
+                $data2['kpi']['nama_bulan'] = 'Maret ' . $tahun;
+            } else if ($bulan == 4) {
+                $data2['kpi']['nama_bulan'] = 'April ' . $tahun;
+            } else if ($bulan == 5) {
+                $data2['kpi']['nama_bulan'] = 'Mei ' . $tahun;
+            } else if ($bulan == 6) {
+                $data2['kpi']['nama_bulan'] = 'Juni ' . $tahun;
+            } else if ($bulan == 7) {
+                $data2['kpi']['nama_bulan'] = 'Juli ' . $tahun;
+            } else if ($bulan == 8) {
+                $data2['kpi']['nama_bulan'] = 'Agustus ' . $tahun;
+            } else if ($bulan == 9) {
+                $data2['kpi']['nama_bulan'] = 'September ' . $tahun;
+            } else if ($bulan == 10) {
+                $data2['kpi']['nama_bulan'] = 'Oktober ' . $tahun;
+            } else if ($bulan == 11) {
+                $data2['kpi']['nama_bulan'] = 'November ' . $tahun;
+            } else if ($bulan == 12) {
+                $data2['kpi']['nama_bulan'] = 'Desember ' . $tahun;
+            }
+
+            if ($this->m_laporan->cekKPIOperasional($depot, $tahun, $bulan) != 0) {
+                $data2['kpi']['error'] = false;
+                $data2['kpi']['data'] = $this->m_laporan->getKPIOperasional($depot, $tahun, $bulan);
+            } else {
+                $data2['kpi']['error'] = true;
             }
         }
-        $this->header(7, 4);
+
+
+
+
+
+        $this->header(7, 2);
         $this->load->view('laporan/v_kpi_operasional', $data2);
         $this->footer();
     }
