@@ -11,11 +11,14 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Tahun 2014',
-                x: -20
+                text: 'Tahun <?php echo $tahun?>'
             },
             xAxis: {
-                categories: ['Januari','Februari','Maret']
+                categories: [
+                    '<?php echo $bulan[0]?>',
+                    '<?php echo $bulan[1]?>',
+                    '<?php echo $bulan[2]?>'
+                ]
             },
             yAxis: {
                 title: {
@@ -38,7 +41,7 @@
             },
             series: [{
                     name: '<?php echo $nama_depot?>',
-                    data: [96,83,89]
+                    data: [<?php echo $data[0]?>,<?php echo $data[1]?>,<?php echo $data[2]?>]
                
                 },   {
                     name: 'target',
@@ -71,23 +74,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                               <tr>
                                     <td style="display: none;"></td>
                                     <td>1</td>
-                                    <td>Januari</td>
-                                    <td>96 %</td>
-                                </tr> 
+                                    <td><?php echo $bulan[0]?></td>
+                                    <td><?php echo $data[0]?></td>
+                                </tr>
                                 <tr>
                                     <td style="display: none;"></td>
                                     <td>2</td>
-                                    <td>Februari</td>
-                                    <td>83 %</td>
+                                    <td><?php echo $bulan[1]?></td>
+                                    <td><?php echo $data[1]?></td>
                                 </tr>
                                 <tr>
                                     <td style="display: none;"></td>
                                     <td>3</td>
-                                    <td>Maret</td>
-                                    <td>89 %</td>
+                                    <td><?php echo $bulan[2]?></td>
+                                    <td><?php echo $data[2]?></td>
                                 </tr>
                             </tbody>
                         </table>

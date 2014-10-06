@@ -1,4 +1,59 @@
 <script type="text/javascript">
+    var data1 = new Array();
+    var data2 = new Array();
+    var data3 = new Array();
+    var depot = new Array();
+<?php
+foreach ($depot as $d) {
+    $status = 0;
+    ?>
+        depot.push("<?php echo $d->NAMA_DEPOT?>");
+    <?php
+    foreach ($data as $dt) {
+        if ($dt->ID_DEPOT == $d->ID_DEPOT) {
+            if ($triwulan == 1) {
+                ?>
+                                    data1.push(<?php echo $dt->REALISASI_TW1_BULAN1 ?>);
+                                    data2.push(<?php echo $dt->REALISASI_TW1_BULAN2 ?>);
+                                    data3.push(<?php echo $dt->REALISASI_TW1_BULAN3 ?>);
+                <?php
+            } else if ($triwulan == 2) {
+                ?>
+                                    data1.push(<?php echo $dt->REALISASI_TW2_BULAN1 ?>);
+                                    data2.push(<?php echo $dt->REALISASI_TW2_BULAN2 ?>);
+                                    data3.push(<?php echo $dt->REALISASI_TW2_BULAN3 ?>);
+                                                                        
+                <?php
+            } else if ($triwulan == 3) {
+                ?>
+                                    data1.push(<?php echo $dt->REALISASI_TW3_BULAN1 ?>);
+                                    data2.push(<?php echo $dt->REALISASI_TW3_BULAN2 ?>);
+                                    data3.push(<?php echo $dt->REALISASI_TW3_BULAN3 ?>);
+                                                                        
+                <?php
+            } else if ($triwulan == 4) {
+                ?>
+                                    data1.push(<?php echo $dt->REALISASI_TW4_BULAN1 ?>);
+                                    data2.push(<?php echo $dt->REALISASI_TW4_BULAN2 ?>);
+                                    data3.push(<?php echo $dt->REALISASI_TW4_BULAN3 ?>);
+                                                                        
+                <?php
+            }
+            $status = 1;
+            break;
+        }
+    }
+    if ($status == 0) {
+        ?>
+                    data1.push(0);
+                    data2.push(0);
+                    data3.push(0);
+        <?php
+    }
+    
+    
+}
+?>
     $(function () {
         $('#grafik').highcharts({
             chart: {
@@ -8,24 +63,20 @@
                 text: 'Pencapaian KM'
             },
             subtitle: {
-                text: 'Tahun 2014'
+                text: 'Tahun <?php echo $tahun?>'
             },
             xAxis: {
-                categories: [
-                    'Januari',
-                    'Februari',
-                    'Maret'
-                ]
+                categories: depot
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: ''
+                    text: 'KM'
                 }
             },
             tooltip: {
                 shared: true,
-                useHTML: true
+                valueSuffix: ' KM'
             },
             plotOptions: {
                 column: {
@@ -33,18 +84,18 @@
                 }
             },
             series: [{
-                name: 'Baturaja',
-                data: [185.07,190.55,214.35],
+                name: '<?php echo $bulan[0]?>',
+                data: data1,
                 color:'#FF002B'
 
             }, {
-                name: 'Lahat',
-                data: [238.66,191.13,161.07],
+                name: '<?php echo $bulan[1]?>',
+                data: data2,
                 color:'#2C88D4'
 
             }, {
-                name: 'Panjang',
-                data: [305.14,333.51,332.82],
+                name: '<?php echo $bulan[2]?>',
+                data: data3,
                 color:'#23C906'
 
             }]
@@ -70,7 +121,47 @@
                         </section>
                     </div>
                 </div>
-                <div class="adv-table editable-table " id="tabel-apar">
+                <?php
+                $kpi = array();
+                $nama_depot = array();
+                foreach ($depot as $d) {
+                    array_push($nama_depot, $d->NAMA_DEPOT);
+                    $status = 0;
+                    $depot = array();
+                    foreach ($data as $dt) {
+                        if ($dt->ID_DEPOT == $d->ID_DEPOT) {
+                            if ($triwulan == 1) {
+                                array_push($depot, $dt->REALISASI_TW1_BULAN1);
+                                array_push($depot, $dt->REALISASI_TW1_BULAN2);
+                                array_push($depot, $dt->REALISASI_TW1_BULAN3);
+                            } else if ($triwulan == 2) {
+                                array_push($depot, $dt->REALISASI_TW2_BULAN1);
+                                array_push($depot, $dt->REALISASI_TW2_BULAN2);
+                                array_push($depot, $dt->REALISASI_TW2_BULAN3);
+                            } else if ($triwulan == 3) {
+                                array_push($depot, $dt->REALISASI_TW3_BULAN1);
+                                array_push($depot, $dt->REALISASI_TW3_BULAN2);
+                                array_push($depot, $dt->REALISASI_TW3_BULAN3);
+                            } else if ($triwulan == 4) {
+                                array_push($depot, $dt->REALISASI_TW4_BULAN1);
+                                array_push($depot, $dt->REALISASI_TW4_BULAN2);
+                                array_push($depot, $dt->REALISASI_TW4_BULAN3);
+                            }
+                            $status = 1;
+                            break;
+                        }
+                    }
+                    if ($status == 0) {
+
+                        array_push($depot, 0);
+                        array_push($depot, 0);
+                        array_push($depot, 0);
+                    }
+                    array_push($kpi,$depot);
+                }
+                ?>
+
+                <div class="adv-table editable-table ">
                     <center>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
@@ -78,36 +169,36 @@
                                     <th style="display: none;"></th>
                                     <th>No.</th>
                                     <th>Bulan</th>
-                                    <th>Panjang</th>
-                                    <th>Lahat</th>
-                                    <th>Baturaja</th>
+                                    <?php
+                                        foreach($nama_depot as $d)
+                                        {
+                                            echo "<th>".$d."</th>";
+                                        }
+                                    ?>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>1</td>
-                                    <td>Januari</td>
-                                    <td>185,07</td>
-                                    <td>190,55</td>
-                                    <td>214,35</td>
-                                </tr> 
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>2</td>
-                                    <td>Februari</td>
-                                    <td>238,66</td>
-                                    <td>191,13</td>
-                                    <td>161,07</td>
-                                </tr>
-                                <tr>
-                                    <td style="display: none;"></td>
-                                    <td>3</td>
-                                    <td>Maret</td>
-                                    <td>305,14</td>
-                                    <td>333,51</td>
-                                    <td>332,82</td>
-                                </tr>
+                                <?php
+                                    $no = 0;
+                                    foreach($bulan as $b)
+                                    {
+                                        ?>
+                                        <tr>
+                                            <td style="display: none;"></td>
+                                            <td><?php echo ($no + 1) ?></td>
+                                            <td><?php echo $b ?></td>
+                                            <?php
+                                                foreach($kpi as $k)
+                                                {
+                                                    echo "<td>".$k[$no]."</td>";
+                                                    
+                                                }
+                                            ?>
+                                        </tr> 
+                                        <?php
+                                        $no++;
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </center>

@@ -1,4 +1,22 @@
 <script type="text/javascript">
+    var series = new Array();
+     <?php
+        foreach($data as $d)
+        {
+    ?>   
+            
+            series.push({
+                name:'<?php echo $d[0]?>',
+                data:[<?php echo $d[1][0]?>,<?php echo $d[1][1]?>,<?php echo $d[1][1]?>]
+            });
+    <?php  
+        }
+    ?>
+        series.push({
+            name: 'target',
+            data: [100,100,100],
+            color: 'red'
+        });
     $(function () {
         $('#grafik').highcharts({
             chart:{
@@ -11,11 +29,11 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Tahun 2014',
+                text: 'Tahun <?php echo $tahun?>',
                 x: -20
             },
             xAxis: {
-                categories: ['Januari','Februari','Maret']
+                categories: ['<?php echo $bulan[0]?>','<?php echo $bulan[1]?>','<?php echo $bulan[2]?>']
             },
             yAxis: {
                 title: {
@@ -36,20 +54,7 @@
                 verticalAlign: 'middle',
                 borderWidth: 0
             },
-            series: [{
-                    name: 'Baturaja',
-                    data: [96,83,89]
-                },   {
-                    name: 'Lahat',
-                    data: [74,74,75]
-                }, {
-                    name: 'Panjang',
-                    data: [97,102,101]
-                },   {
-                    name: 'target',
-                    data: [100,100,100],
-                    color: 'red'
-                }]
+            series: series
         });
     });
 </script>
@@ -71,35 +76,28 @@
                                     <th style="display: none;"></th>
                                     <th>No.</th>
                                     <th>Wilayah</th>
-                                    <th>Januari</th>
-                                    <th>Februari</th>
-                                    <th>Maret</th>
+                                    <th><?php echo $bulan[0]?></th>
+                                    <th><?php echo $bulan[1]?></th>
+                                    <th><?php echo $bulan[2]?></th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <td style="display: none;"></td>
-                                <td>1</td>
-                                <td>Lahat</td>
-                                <td>96%</td>
-                                <td>83%</td>
-                                <td>89%</td>
-                            </tr>
-                            <tr>
-                                <td style="display: none;"></td>
-                                <td>2</td>
-                                <td>Baturaja</td>
-                                <td>74%</td>
-                                <td>74%</td>
-                                <td>75%</td>
-                            </tr>
-                            <tr>
-                                <td style="display: none;"></td>
-                                <td>3</td>
-                                <td>Panjang</td>
-                                <td>97%</td>
-                                <td>102%</td>
-                                <td>101%</td>
-                            </tr>
+                            <?php
+                            $i = 0;
+                                foreach($data as $d)
+                                {
+                            ?>   
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td><?php echo ($i + 1)?></td>
+                                        <td><?php echo $d[0] ?></td>
+                                        <td><?php echo $d[1][0] ?></td>
+                                        <td><?php echo $d[1][1] ?></td>
+                                        <td><?php echo $d[1][2] ?></td>
+                                    </tr>
+                            <?php  
+                                    $i++;
+                                }
+                            ?>
                             </tbody>
                         </table>
                     </center>

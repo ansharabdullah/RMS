@@ -129,9 +129,8 @@ class m_kpi extends CI_Model {
         return $query->result();
     }
     
-    public function realisasi_volume_triwulan($bulan)
+    public function realisasi_volume_triwulan($tahun,$bulan)
     {
-        $tahun = date('Y');
         $akhir = $bulan + 3;
         $query = $this->db->query("select kp.ID_KPI_OPERASIONAL,kp.TARGET,
                                     kp.REALISASI,kp.DEVIASI,kp.PERFORMANCE_SCORE as nilai,kp.NORMAL_SCORE,
@@ -165,9 +164,8 @@ class m_kpi extends CI_Model {
         return $query->result();
     }
     
-     public function realisasi_ms2_triwulan($bulan)
+     public function realisasi_ms2_triwulan($tahun,$bulan)
     {
-        $tahun = date('Y');
         $akhir = $bulan + 3;
         $query = $this->db->query("select kp.ID_KPI_OPERASIONAL,kp.TARGET,
                                     kp.REALISASI,kp.DEVIASI,kp.PERFORMANCE_SCORE as nilai,kp.NORMAL_SCORE,
@@ -201,9 +199,8 @@ class m_kpi extends CI_Model {
         return $query->result();
     }
     
-    public function kpi_triwulan($bulan)
+    public function kpi_triwulan($tahun,$bulan)
     {
-        $tahun = date('Y');
         $akhir = $bulan + 3;
         $query = $this->db->query("select d.ID_DEPOT , n.ID_NILAI,d.NAMA_DEPOT, MONTHNAME(lh.TANGGAL_LOG_HARIAN) as nama_bulan, 
                                     MONTH(lh.TANGGAL_LOG_HARIAN) as bulan, n.NILAI as nilai 

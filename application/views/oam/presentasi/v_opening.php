@@ -14,7 +14,7 @@
             <br/><br/><br/>FLEET MANAGEMENT FUEL RETAIL<br/>
             DIREKTORAT OPERASI<br/>
             OPERATION AREA MANAGER (OAM) V<br/>
-            TRIWULAN TAHUN <?php echo date('Y')?>
+            TRIWULAN <?php echo $triwulan?> TAHUN <?php echo date('Y')?>
         </div>
         <div style="height:20%">
             <div style="float: right;padding-right: 20px;">

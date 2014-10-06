@@ -20,7 +20,7 @@
                  if($m->ID_DEPOT == $d->ID_DEPOT)
                  {
                      ?>
-                         data.push(<?php echo $m->nilai?>);
+                         data.push(<?php echo round($m->nilai,2);?>);
                      <?php
                      
                  }
@@ -51,7 +51,7 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Tahun <?php echo date('Y')?>',
+                text: 'Tahun <?php echo $tahun?>',
                 x: -20
             },
             xAxis: {
@@ -68,7 +68,7 @@
                 }]
             },
             tooltip: {
-                valueSuffix: ''
+                valueSuffix: '%'
             },
             legend: {
                 layout: 'vertical',
@@ -120,9 +120,8 @@
                                                     if($m->ID_DEPOT == $d->ID_DEPOT)
                                                     {
                                                         ?>
-                                                            <td><?php echo $m->nilai?></td>
+                                                            <td><?php echo round($m->nilai,2);?></td>
                                                         <?php
-                                                        
                                                     }
                                                     
                                                 }

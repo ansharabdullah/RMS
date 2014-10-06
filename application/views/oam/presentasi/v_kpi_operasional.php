@@ -54,7 +54,7 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Tahun <?php echo date('Y')?>',
+                text: 'Tahun <?php echo $tahun?>',
                 x: -20
             },
             xAxis: {
@@ -72,7 +72,7 @@
                 }] 
             },
             tooltip: {
-                valueSuffix: ''
+                valueSuffix: '%'
             },
             legend: {
                 layout: 'vertical',
