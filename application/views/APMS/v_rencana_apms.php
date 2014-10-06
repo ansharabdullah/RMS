@@ -75,16 +75,11 @@ function DateToIndo($date) {
         <section class="panel" id="LihatJadwal">
             <header class="panel-heading">
                 Lihat Rencana
-				<div style="float:right;">
-                   <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahManual">
-                            Tambah Rencana <i class="icon-plus"></i>
-                    </a>
-                </div>
             </header>
             <div class="panel-body" >
                 
                 <div class="clearfix">
-                    <form class="cmxform form-horizontal tasi-form" id ="signupForm" method="POST" action="<?php echo base_url() ?>mt/rencana/">
+                    <form class="cmxform form-horizontal tasi-form" id ="signupForm" method="POST" action="<?php echo base_url() ?>apms/rencana/">
                         <div class="form-group" style="margin-top: 20px;">
                             <label for="tanggalSIOD" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                             <div class="col-lg-10">
@@ -100,21 +95,58 @@ function DateToIndo($date) {
                 </div>
             </div>
         </section>
-                    <div class="alert alert-success fade in">
-                        <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                        </button>
-                        <strong>Sukses!</strong> Berhasil edit Rencana.
-                    </div>
+                    	<?php if ($pesan==1) {  ?>
+							<div class="alert alert-block alert-success fade in">
+							<button data-dismiss="alert" class="close close-sm" type="button">
+											<i class="icon-remove"></i>
+										</button>
+								<strong>Berhasil! </strong><?php echo $pesan_text;?>
+							</div>
+						<?php } ?>
                 <section class="panel">
                     <header class="panel-heading">
                         Tabel Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong>
-                    <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalHapusRencana" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Rencana"><i class="icon-remove"></i></a>
                 </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
                         <div class="adv-table editable-table " style="overflow-x: scroll">
                             <div class="clearfix">
+				<?php
+				foreach($STATUS_RENCANA as $ka)
+				{
+					if($ka->STATUS_KUOTA_APMS==0)
+					{
+					?>
+				 <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Peringatan!</strong> Rencana bulan <strong><?php echo $bulan . ' ' . $tahun; ?></strong> belum diisi!
+                </div>
+				
+				<div style="float:left;">
+                   <a class="btn btn-primary" data-toggle="modal" href="#AddModalRencana">
+                            Tambah Rencana <i class="icon-plus"></i>
+                    </a>
+                </div>
+					<?php
+					}
+					else
+					{
+					
+					?>
+				
+				
+				<div style="float:right;">
+                    <a class="btn btn-warning" data-toggle="modal" href="#ModalEDIT"><i class="icon-pencil"></i> Edit</a> 
+
+                    <a class="btn btn-danger" data-toggle="modal" href="#ModalHapusRencana"><i class="icon-eraser"></i> Hapus</a>
+                </div>
+					<?php
+					
+					}
+				}
+				?>
                             </div>
                             <div class="space15"></div>
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -122,10 +154,10 @@ function DateToIndo($date) {
                                     <tr>
                                         <th style="display: none;">-</th>
                                         <th>No.</th>
-                                        <th>Tanggal</th>
+                                        <th>No. APMS</th>
                                         <th>Premium</th>
                                         <th>Solar</th>
-                                        <th>Aksi</th>
+                                        <!--<th>Aksi</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -136,12 +168,12 @@ function DateToIndo($date) {
                                         <tr class="">
                                             <th style="display: none;"></th>
                                             <td><?php echo $i ?></td>
-                                             <td><?php echo $row->TANGGAL?></td>
+                                             <td><?php echo $row->NO_APMS?></td>
                                             <td><?php echo $row->K_PREMIUM ?></td>
                                             <td><?php echo $row->K_SOLAR ?></td>
-                                            <td>
-<a onclick="cekRencana('<?php echo $row->TANGGAL?>','<?php echo $row->K_PREMIUM ?>','<?php echo $row->K_SOLAR ?>','<?php echo $row->ID_RENCANA_APMS ?>')" data-placement="top" data-toggle="modal" href="#ModalRencana" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                        </td>
+                                           <!-- <td>
+<a onclick="cekRencana('<?php //echo $row->TANGGAL?>','<?php //echo $row->K_PREMIUM ?>','<?php //echo $row->K_SOLAR ?>','<?php //echo $row->ID_RENCANA_APMS ?>')" data-placement="top" data-toggle="modal" href="#ModalRencana" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                        </td> -->
                                         </tr>
 
                                         <?php
@@ -155,18 +187,6 @@ function DateToIndo($date) {
                 </div>
             </section>
 
-                <div class="alert alert-block alert-danger fade in">
-                    <button data-dismiss="alert" class="close close-sm" type="button">
-                        <i class="icon-remove"></i>
-                    </button>
-                    <strong>Peringatan!</strong> Rencana bulan <strong><?php echo $bulan . ' ' . $tahun; ?></strong> belum diimport.
-                </div>
-            <div class="alert alert-success fade in">
-                <button data-dismiss="alert" class="close close-sm" type="button">
-                    <i class="icon-remove"></i>
-                </button>
-                <strong>Sukses!</strong> Berhasil hapus Rencana.
-            </div>
     </section>
 </section>
 
@@ -175,7 +195,7 @@ function DateToIndo($date) {
         <div class="modal fade" id="AddModalRencana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/rencana">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>apms/rencana_apms/<?php echo $tahun;?>/<?php echo $bulan;?>">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Tambah Rencana</h4>
@@ -186,32 +206,44 @@ function DateToIndo($date) {
                                     <div class="panel-body">
 
                                         <div class="form-group "> 
-                                            <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+                                            <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="" placeholder="Tanggal "required readonly/>
+                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="<?php echo $bulan.' '.$tahun;?>" placeholder="Tanggal "required readonly/>
                                             </div>
-                                            <input type="hidden" class=" form-control input-sm m-bot15" id="id_rencana" name="id_rencana" value="" required/>
-                                            <input type="hidden" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bulan; ?>" required/>
                                        
                                         </div>
-                                        <div class="form-group">
-                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
-                                            <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="r_premium" name="r_premium"  type="number" required />
-                                            </div>
-                                           <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Solar</label>
-                                            <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="solar" name="solar"  type="number" required />
-                                            </div>
-                                            
-										</div>
+										
+										<?php
+										$k=0;
+											foreach($no_apms as $no){
+											
+										?>
+                                            <input type="hidden" class=" form-control input-sm m-bot15" name="<?php echo 'I_'.$k; ?>" value="<?php echo $no->ID_APMS; ?>"/>
+											<div class="form-group">
+												<label for="nomesin" class="col-lg-8 col-sm-8 control-label"><?php echo 'APMS '.$no->NO_APMS ?></label>
+											</div>
+											<div class="form-group">
+												<label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
+												<div class="col-lg-4">
+													<input class=" form-control input-sm m-bot15" id="<?php echo 'P_'.$k ?>" name="<?php echo 'P_'.$k ?>"  type="number" required />
+												</div>
+											   <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Solar</label>
+												<div class="col-lg-4">
+													<input class=" form-control input-sm m-bot15" id="<?php echo 'R_'.$k ?>" name="<?php echo 'R_'.$k ?>"  type="number" required />
+												</div>	
+											</div>
+										<?php
+										$k++;
+											}
+										?>
+											
                                       </div>
                                 </section>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
-                            <input class="btn btn-success" type="submit" name="edit" value="Simpan"/>
+                            <input class="btn btn-success" type="submit" name="simpan" value="Simpan"/>
                         </div>
                     </form>
                 </div>
@@ -219,10 +251,10 @@ function DateToIndo($date) {
         </div>
 
                 <!-- modal edit ms2-->
-        <div class="modal fade" id="ModalRencana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="ModalEDIT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/rencana">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>apms/rencana_apms/<?php echo $tahun;?>/<?php echo $bulan;?>">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Ubah Rencana</h4>
@@ -231,27 +263,38 @@ function DateToIndo($date) {
                             <div class="col-lg-12">
                                 <section class="panel">
                                     <div class="panel-body">
-
-                                        <div class="form-group "> 
-                                            <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Tanggal</label>
+										 <div class="form-group "> 
+                                            <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="" placeholder="Tanggal "required readonly/>
+                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="<?php echo $bulan.' '.$tahun;?>" placeholder="Tanggal "required readonly/>
                                             </div>
-                                            <input type="hidden" class=" form-control input-sm m-bot15" id="id_rencana" name="id_rencana" value="" required/>
-                                            <input type="hidden" class=" form-control input-sm m-bot15" name="bln" value="<?php echo $bulan; ?>" required/>
                                        
                                         </div>
-                                        <div class="form-group">
-                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
-                                            <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="r_premium" name="r_premium"  type="number" required />
-                                            </div>
-                                           <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Solar</label>
-                                            <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="solar" name="solar"  type="number" required />
-                                            </div>
-                                            
-										</div>
+										
+										<?php
+										$k=0;
+											foreach($apms as $no){
+											
+										?>
+                                            <input type="hidden" class=" form-control input-sm m-bot15" name="<?php echo 'I_'.$k; ?>" value="<?php echo $no->ID_RENCANA_APMS; ?>"/>
+											<div class="form-group">
+												<label for="nomesin" class="col-lg-8 col-sm-8 control-label"><?php echo 'APMS '.$no->NO_APMS ?></label>
+											</div>
+											<div class="form-group">
+												<label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
+												<div class="col-lg-4">
+													<input class=" form-control input-sm m-bot15" id="<?php echo 'P_'.$k ?>" name="<?php echo 'P_'.$k ?>"  type="number" value="<?php echo $no->K_PREMIUM ?>" required />
+												</div>
+											   <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Solar</label>
+												<div class="col-lg-4">
+													<input class=" form-control input-sm m-bot15" id="<?php echo 'R_'.$k ?>" name="<?php echo 'R_'.$k ?>"  type="number" value="<?php echo $no->K_SOLAR ?>" required />
+												</div>	
+											</div>
+										<?php
+										$k++;
+											}
+										?>
+                                        
                                       </div>
                                 </section>
                             </div>
@@ -268,18 +311,25 @@ function DateToIndo($date) {
         <div class="modal fade" id="ModalHapusRencana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>mt/hapus_rencana/">
+                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>apms/rencana_apms/<?php echo $tahun;?>/<?php echo $bulan;?>">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Konfirmasi Hapus Rencana</h4>
+                            <h4 class="modal-title">Konfirmasi Hapus Rencana APMS</h4>
                         </div>
                         <div class="modal-body">
                             Yakin Hapus Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong> ?
-                            <input type="hidden" required="required" id="id_rencana" class="form-control" name="id_rencana" value="<?php echo htmlentities(serialize($rencana)); ?>">
+							<?php
+							foreach($STATUS_RENCANA as $ka)
+							{
+							?>
+                            <input type="hidden" required="required" id="id_rencana" class="form-control" name="id_rencana" value="<?php echo $ka->ID_LOG_HARIAN?>">
+							<?php
+							}
+							?>
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
-                            <input class="btn btn-danger" type="submit" name="submit" value="Hapus"/>
+                            <input class="btn btn-danger" type="submit" name="hapus" value="Simpan"/>
                         </div>
                     </form>
                 </div>

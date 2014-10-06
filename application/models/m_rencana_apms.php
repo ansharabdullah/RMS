@@ -7,16 +7,45 @@ class m_rencana_apms extends CI_Model {
     }
 
     function selectRencanaApms($depot,$tahun,$bulan) {
-        $data = $this->db->query("SELECT R.ID_APMS, K.NO_APMS,L.ID_LOG_HARIAN, R.ID_RENCANA_APMS,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%M-%Y')as TANGGAL,R.K_PREMIUM,R.K_SOLAR from rencana_apms R, log_harian L, apms K where R.ID_LOG_HARIAN = L.ID_LOG_HARIAN and R.ID_APMS = K.ID_APMS and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
+        $data = $this->db->query("SELECT R.ID_APMS, K.NO_APMS ,L.ID_LOG_HARIAN, R.ID_RENCANA_APMS,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%M-%Y')as TANGGAL,R.K_PREMIUM,R.K_SOLAR from rencana_apms R, log_harian L, apms K where R.ID_LOG_HARIAN = L.ID_LOG_HARIAN and R.ID_APMS = K.ID_APMS and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
+        
         return $data->result();
     }
 	
-	  public function cekRencana($depot, $tahun, $bulan) {
-        $query = $this->db->query("select STATUS_KUOTA_APMS from log_harian where ID_DEPOT =  1 and  TANGGAL_LOG_HARIAN = '2014-09-01'");
-        $hasil = $query->row();
-        $hasil = $hasil->STATUS_KUOTA_APMS;
-		return $hasil;
+	
+	  public function cekRencana($depot, $bulan, $tahun) {
+        $query = $this->db->query("select STATUS_KUOTA_APMS, ID_LOG_HARIAN from log_harian where ID_DEPOT =  $depot and   YEAR(TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(TANGGAL_LOG_HARIAN) = '$bulan' and day(TANGGAL_LOG_HARIAN) = '1'");
+       
+		return $query->result();
     }
+	 public function insertRencanaAPMS($data) {
+        for($i=0;$i<count($data);$i++)
+		{
+			$result = $this->db->insert('rencana_apms',$data[$i]);
+		}
+		return $result;
+	}
+	
+	public function editRencanaAPMS($data,$data_id) {
+        for($i=0;$i<count($data);$i++)
+		{
+			//var_dump($data[$i]);
+			$this->db->where('ID_RENCANA_APMS', $data_id[$i]);
+			$result = $this->db->update('rencana_apms', $data[$i]);
+			
+		}
+		return $result;
+	}
+		public function deleteRencanaAPMS($id) {
+        $this->db->where('ID_LOG_HARIAN', $id);
+          $result =$this->db->delete('rencana_apms');
+		  return $result;
+	}
+	
+	public function jumlah_total($id_log){
+		$total = $this->db->query("select (sum(K_SOLAR) + sum(K_PREMIUM)) as jumlah from rencana_apms where ID_LOG_HARIAN = $id_log");
+		return $total->row();
+	}
 /* 
    public function editRencana($data, $id) {
         $this->db->where('id_rencana', $id);

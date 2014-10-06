@@ -7,7 +7,17 @@ class m_apms extends CI_Model {
         $data = $this->db->query("select * from apms where ID_DEPOT = $depot");
         return $data->result();
     }
-	//insert
+	public function selectnoApms($depot) {
+        $data = $this->db->query("select NO_APMS, ID_APMS from apms where ID_DEPOT = $depot");
+		//var_dump ($data->result());
+        return $data->result();
+    }
+	
+	public function countnoApms($depot) {
+        $data = $this->db->query("select count(NO_APMS) as jumlah from apms where ID_DEPOT = $depot");
+		//var_dump ($data->row());
+        return $data->row();
+    }
 	public function insertApms($data){
 		$result = $this->db->insert('apms',$data);
 		return $result;
@@ -82,5 +92,16 @@ class m_apms extends CI_Model {
                                     and l.ID_DEPOT = $depot");
 		//var_dump($bulan);
         return $query->result();
-    }	
+    }
+	public function get_jumlah($id_depot,$tahun,$bulan)
+	{
+		$query = $this->db->query("select (sum(SOLAR) + sum(PREMIUM)) as jumlah from kinerja_apms k, log_harian lh where k.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and YEAR(lh.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(lh.TANGGAL_LOG_HARIAN) = '$bulan' and lh.ID_DEPOT = $id_depot");
+		return $query->row();
+	}
+	
+	public function insertnilaiApms($data){
+		$result = $this->db->insert('nilai',$data);
+		return $result;
+	}
+	
 }
