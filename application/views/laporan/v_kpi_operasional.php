@@ -6,16 +6,17 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-                    <li><a href="<?php echo base_url();?>laporan/bulanan">Laporan Bulanan</a></li>
+                    <li><a href="<?php echo base_url(); ?>laporan/bulanan">Laporan Bulanan</a></li>
                     <li class="active">KPI Operasional</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
+
         <section class="panel">
             <header class="panel-heading">
-                KPI Operasional Depot
+                KPI Operasional Depot               
+
                 <a style="float:right;" data-placement="left" href="#ModalTambah" data-toggle="modal" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah"> Tambah Data <i class="icon-plus"></i></a>
             </header>
             <div class="panel-body" >
@@ -102,7 +103,12 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Tabel KPI Operasional <strong><?php echo $kpi['nama_bulan'] ?></strong>
-                        <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit KPI</a>
+                        
+                        <form style="float:right;" class="cmxform form-horizontal tasi-form" method="post" action="<?php echo base_url(); ?>laporan/kpi_operasional">
+                            <input class=" form-control input-sm m-bot15" name="bln_kpi" min="0" type="hidden" value="<?php echo $kpi['bln_kpi']; ?>" placeholder="Tahun" required readonly/>
+                            <input type="submit"  name="sinkron" data-placement="top" class="btn btn-primary btn-xs tooltips" data-original-title="Sinkronisasi Data" value="Sinkronisasi">
+                            <a data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit KPI</a>
+                        </form> 
                     </header>
                     <div class="panel-body" style="overflow-x: scroll">
                         <table class="table table-bordered">
