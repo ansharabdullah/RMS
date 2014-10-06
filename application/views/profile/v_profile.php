@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#EditProfile").hide();
         $("#EditPass").hide();
     });
@@ -35,7 +35,28 @@
 
 <section id="main-content">
     <section class="wrapper">
-
+        <ul class="breadcrumb">
+            <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+            <li class="active">Profile</li>
+        </ul>
+        
+        <?php if ($feedback) { ?>
+            <?php if ($feedback == 1) { ?>
+                <div class="alert alert-block alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Berhasil!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } else if ($feedback == 2) { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
         <!-- page start-->
         <div class="row">
             <aside class="profile-nav col-lg-3 alt green-border">
@@ -94,11 +115,11 @@
                                     <p><span>Tempat Lahir </span>: <?php echo $row->TEMPAT_LAHIR ?></p>
                                 </div>
                                 <div class="bio-row">
-                                    <p><span>Tanggal Lahir </span>: <?php echo date("d-M-Y",  strtotime($row->TANGGAL_LAHIR)) ?></p>
+                                    <p><span>Tanggal Lahir </span>: <?php echo date("d-M-Y", strtotime($row->TANGGAL_LAHIR)) ?></p>
                                 </div>
 
                                 <div class="bio-row">
-                                    <p><span>Tanggal Masuk </span>: <?php echo date("d-M-Y",  strtotime($row->TANGGAL_MASUK)) ?></p>
+                                    <p><span>Tanggal Masuk </span>: <?php echo date("d-M-Y", strtotime($row->TANGGAL_MASUK)) ?></p>
                                 </div>
 
                                 <div class="bio-row">
@@ -109,7 +130,7 @@
 
 
                         <div class="panel-body bio-graph-info" id="EditProfile">
-                            <form enctype="multipart/form-data" class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>user/edit_pegawai/">
+                            <form enctype="multipart/form-data" class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>user/index/">
 
                                 <h1>Edit Profile Pengguna</h1>
 
@@ -228,7 +249,7 @@
                                     </div>
                                     <div class="bio-row">
                                         <div class="col-lg-10">
-                                            <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
+                                            <input style="float:right;" name="edit_profile" class="btn btn-success" type="submit" value="Simpan"/>    
                                         </div>
 
                                     </div>
@@ -240,7 +261,7 @@
 
 
                         <div class="panel-body bio-graph-info" id="EditPass">
-                            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>user/ubah_password/">
+                            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>user/index/">
 
                                 <h1>Edit Password</h1>
 
@@ -271,7 +292,7 @@
                                     <div class="row"></div>   
                                     <div class="bio-row">
                                         <div class="col-lg-12">
-                                            <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
+                                            <input style="float:right;" name="ubah_password" class="btn btn-success" type="submit" value="Simpan"/>    
                                         </div>
 
                                     </div>
@@ -351,7 +372,7 @@
 
 <!-- END JAVASCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         EditableTable.init();
     });
 

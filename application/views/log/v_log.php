@@ -82,7 +82,15 @@
                                     <td><?php echo $row->NAMA_PEGAWAI ?></td>
                                     <td><?php echo $row->JABATAN ?></td>
                                     <td><?php echo $row->KETERANGAN ?></td>
-                                    <td><span class="label label-success"><?php echo $row->KEYWORD ?></span></td>
+                                    <td>
+                                    <?php if(strtoupper($row->KEYWORD) == "TAMBAH"){ ?>
+                                        <span class="label label-success"><?php echo strtoupper($row->KEYWORD) ?></span></td>
+                                    <?php }else if(strtoupper($row->KEYWORD) == "EDIT"){ ?>
+                                        <span class="label label-warning"><?php echo strtoupper($row->KEYWORD) ?></span></td>
+                                    <?php }else if(strtoupper($row->KEYWORD) == "HAPUS"){?>
+                                        <span class="label label-danger"><?php echo strtoupper($row->KEYWORD) ?></span></td>
+                                    <?php }?>
+                                            
                                 </tr>
                                 <?php
                                 $i++;

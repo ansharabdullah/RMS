@@ -45,8 +45,9 @@ class Log extends CI_Controller {
             $data3['log'] = $this->m_log_sistem->getAllLog($id_depot, $bulan, $tahun);
             $data['lv1'] = 9;
             $data['lv2'] = 1;
+            $data1 = menu_ss();
             $this->load->view('layouts/header');
-            $this->load->view('layouts/menu');
+            $this->load->view('layouts/menu',$data1);
             $this->load->view('layouts/navbar', $data);
             $this->load->view('log/v_log', $data3);
             $this->load->view('layouts/footer');

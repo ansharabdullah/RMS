@@ -939,10 +939,82 @@ class amt extends CI_Controller {
         echo '</script>';
     }
 
-    public function koefisien() {
+    public function koefisien($tahun = 0) {
+        if ($tahun == 0) {
+            $tahun = date('Y');
+        }
+        $data2['pesan'] = 0;
+        $data2['feedback'] = 0;
+        if ($this->input->post('cek_koefisien', true)) {
+            $tahun = $this->input->get('tahun', true);
+        } else if ($this->input->post('import_koefisien', true)) {
+            $data_koef = unserialize($this->input->post('data'));
+            $this->m_amt->importKoefisien($data_koef);
+
+            $datalog = array(
+                'keterangan' => 'Import Koefisien',
+                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                'keyword' => 'Tambah'
+            );
+            $this->m_log_sistem->insertLog($datalog);
+
+            $pesan = "Data berhasil ditambahkan.";
+            $data2['pesan'] = $pesan;
+            $data2['feedback'] = 1;
+        } else if ($this->input->post('edit_koefisien', true)) {
+            $depot = $this->session->userdata("id_depot");
+            $index = $this->input->post('index', true);
+            $tahun = $this->input->post('tahun', true);
+
+//km
+            $koef = 25 + $index * 4 + 0;
+            $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+            $id_nilai = $a[0]->ID_NILAI;
+            $data = array(
+                'nilai' => $this->input->post('km', true)
+            );
+            $this->m_amt->editNilaiKoef($data, $id_nilai);
+
+//kl
+            $koef = 25 + $index * 4 + 1;
+            $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+            $id_nilai = $a[0]->ID_NILAI;
+            $data = array(
+                'nilai' => $this->input->post('kl', true)
+            );
+            $this->m_amt->editNilaiKoef($data, $id_nilai);
+
+//rit
+            $koef = 25 + $index * 4 + 2;
+            $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+            $id_nilai = $a[0]->ID_NILAI;
+            $data = array(
+                'nilai' => $this->input->post('rit', true)
+            );
+            $this->m_amt->editNilaiKoef($data, $id_nilai);
+
+//spbu
+            $koef = 25 + $index * 4 + 3;
+            $a = $this->m_amt->getIDNilaiKoef($depot, $tahun, $koef);
+            $id_nilai = $a[0]->ID_NILAI;
+            $data = array(
+                'nilai' => $this->input->post('spbu', true)
+            );
+            $this->m_amt->editNilaiKoef($data, $id_nilai);
+
+            $pesan = "Data berhasil diubah.";
+            $data2['pesan'] = $pesan;
+            $data2['feedback'] = 1;
+        } else if ($this->input->post('delete_koefisien', true)) {
+
+
+            $pesan = "Data berhasil dihapus.";
+            $data2['pesan'] = $pesan;
+            $data2['feedback'] = 1;
+        }
+
         $data['lv1'] = 2;
         $data['lv2'] = 4;
-        $tahun = date('Y');
         $depot = $this->session->userdata("id_depot");
         $data2['koefisien'] = $this->m_amt->getKoefisien($depot, $tahun);
         $data2['tahun'] = $tahun;
@@ -955,18 +1027,8 @@ class amt extends CI_Controller {
     }
 
     public function cek_koefisien() {
-        $data['lv1'] = 2;
-        $data['lv2'] = 4;
         $tahun = $this->input->get('tahun', true);
-        $depot = $this->session->userdata("id_depot");
-        $data2['tahun'] = $tahun;
-        $data2['koefisien'] = $this->m_amt->getKoefisien($depot, $tahun);
-        $data3 = menu_ss();
-        $this->load->view('layouts/header');
-        $this->load->view('layouts/menu', $data3);
-        $this->load->view('layouts/navbar', $data);
-        $this->load->view('amt/v_koefisien', $data2);
-        $this->load->view('layouts/footer');
+        redirect('amt/koefisien/'.$tahun);
     }
 
     public function import_koefisien() {
@@ -1029,7 +1091,7 @@ class amt extends CI_Controller {
                     while ($status == 0) {
                         $no = $i + 2;
                         $error = "Error : ";
-                        if (!$sheetData->getCell('B3')->getFormattedValue() && !$sheetData->getCell('C3')->getFormattedValue() && !$sheetData->getCell('D3')->getFormattedValue() && !$sheetData->getCell('E3')->getFormattedValue() && !$sheetData->getCell('F3')->getFormattedValue() && !$sheetData->getCell('G3')->getFormattedValue() && !$sheetData->getCell('H3')->getFormattedValue() && !$sheetData->getCell('I3')->getFormattedValue() && !$sheetData->getCell('J3')->getFormattedValue() && !$sheetData->getCell('K3')->getFormattedValue() && !$sheetData->getCell('L3')->getFormattedValue() && !$sheetData->getCell('M3')->getFormattedValue() && !$sheetData->getCell('N3')->getFormattedValue()) {
+                        if (!$sheetData->getCell('B3')->getFormattedValue() && !$sheetData->getCell('C3')->getFormattedValue() && !$sheetData->getCell('D3')->getFormattedValue() && !$sheetData->getCell('E3')->getFormattedValue() && !$sheetData->getCell('F3')->getFormattedValue()) {
                             $status = 1;
                             $data['amt'] = 0;
                             break;
@@ -1043,7 +1105,7 @@ class amt extends CI_Controller {
                             $e = 0;
                         }
 
-                        if ($i >= $sheetData->getHighestRow() - 3) {
+                        if ($i >= $sheetData->getHighestRow()) {
                             $status = 1;
                             break;
                         }
@@ -1061,9 +1123,9 @@ class amt extends CI_Controller {
                         //koefisien KL
                         $data2['koefisien'][($i * 4) + 1] = array(
                             'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
-                            'id_jenis_penilaian' => 26 + ($i * 4),
+                            'id_jenis_penilaian' => 25 + ($i * 4 + 1),
                             'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                            'nilai' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('D' . $no)->getFormattedValue(),
                             'status_error' => $error,
                             'error' => $e
                         );
@@ -1071,9 +1133,9 @@ class amt extends CI_Controller {
                         //koefisien Ritase
                         $data2['koefisien'][($i * 4) + 2] = array(
                             'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
-                            'id_jenis_penilaian' => 27 + ($i * 4),
+                            'id_jenis_penilaian' => 25 + ($i * 4  + 2),
                             'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                            'nilai' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('E' . $no)->getFormattedValue(),
                             'status_error' => $error,
                             'error' => $e
                         );
@@ -1081,14 +1143,15 @@ class amt extends CI_Controller {
                         //koefisien SPBU
                         $data2['koefisien'][($i * 4) + 3] = array(
                             'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
-                            'id_jenis_penilaian' => 28 + ($i * 4),
+                            'id_jenis_penilaian' => 25 + ($i * 4 + 3),
                             'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                            'nilai' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('F' . $no)->getFormattedValue(),
                             'status_error' => $error,
                             'error' => $e
                         );
+                        
                         $i++;
-                        if (!$sheetData->getCell('B' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('C' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('D' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('E' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('F' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('G' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('H' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('I' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('J' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('K' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('L' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('M' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('N' . ($no + 1))->getFormattedValue()) {
+                        if (!$sheetData->getCell('B' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('C' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('D' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('E' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('F' . ($no + 1))->getFormattedValue()) {
                             $status = 1;
                         }
                     }

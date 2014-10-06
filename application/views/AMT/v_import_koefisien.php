@@ -1,7 +1,7 @@
 
 <section id="main-content">
     <section class="wrapper">
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
@@ -14,11 +14,11 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
+
         <section class="panel" id="cekkoefisien">        
             <header class="panel-heading">
                 Tambah Koefisien Performansi
-                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" href="<?php echo base_url()?>downloads/format_oscrms_koefisien.xlsx"><i class="icon-download-alt"></i></a>
+                <a style="float:right;" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>downloads/format_oscrms_koefisien.xlsx"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" id="tambahJadwal">
                 <div class="clearfix" >
@@ -79,10 +79,10 @@
                                     <tr class="">
                                         <td><?php echo ($i + 1) ?></td>
                                         <td><?php echo $koefisien[$i * 4]['jenis_jabatan'] ?></td>
-                                        <td><?php echo $koefisien[$i]['nilai'] ?></td>
-                                        <td><?php echo $koefisien[$i + 1]['nilai'] ?></td>
-                                        <td><?php echo $koefisien[$i + 2]['nilai'] ?></td>
-                                        <td><?php echo $koefisien[$i + 3]['nilai'] ?></td>
+                                        <td><?php echo $koefisien[$i * 4 + 0]['nilai'] ?></td>
+                                        <td><?php echo $koefisien[$i * 4 + 1]['nilai'] ?></td>
+                                        <td><?php echo $koefisien[$i * 4 + 2]['nilai'] ?></td>
+                                        <td><?php echo $koefisien[$i * 4 + 3]['nilai'] ?></td>
                                         <td>
                                             <?php
                                             if ($koefisien[$i * 4]['status_error'] != "Sukses") {
@@ -111,7 +111,7 @@
                         ?>
                     </div><br />
 
-                    <form method="POST" action="<?php echo base_url() ?>amt/simpan_koefisien/" enctype="multipart/form-data">
+                    <form method="POST" action="<?php echo base_url() ?>amt/koefisien/" enctype="multipart/form-data">
                         <?php if ($e != 0) { ?>
                             <div class="col-lg-11">
                                 <div class="alert alert-block alert-danger fade in">
@@ -121,7 +121,7 @@
                         <?php } else { ?>
                             <input type="hidden" required="required" id="data" class="form-control" name="data" value="<?php echo htmlentities(serialize($data)); ?>">
                         <?php } ?>
-                        <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit" <?php if ($e != 0) echo "disabled='true'" ?>> 
+                        <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="import_koefisien" <?php if ($e != 0) echo "disabled='true'" ?>> 
                     </form>
                 </div>  
             </section>
