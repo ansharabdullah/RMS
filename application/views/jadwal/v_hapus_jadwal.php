@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        $("#signupForm").submit(function(e) {
+    $(document).ready(function () {
+        $("#signupForm").submit(function (e) {
             var isvalidate = $("#signupForm").valid();
             if (isvalidate)
             {
@@ -14,7 +14,7 @@
 </script>
 <section id="main-content">
     <section class="wrapper">
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
@@ -26,7 +26,7 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
+
         <section class="panel" id="LihatJadwal">
             <header class="panel-heading">
                 Hapus Jadwal
@@ -57,7 +57,7 @@
         <?php if ($jadwal) { ?>
             <section class="panel" id="tabelJadwal">
                 <header class="panel-heading">
-                    Hapus Jadwal (<?php echo date("M-Y", strtotime($tanggal)); ?>)
+                    Hapus Jadwal (<b><?php echo date("M-Y", strtotime($tanggal)); ?></b>)
                 </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
@@ -106,7 +106,12 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a style="float:right;" href="<?php echo base_url() ?>jadwal/hapus_jadwal_perbulan/<?php echo $tanggal ?>" data-placement="left" class="btn btn-danger btn-sm tooltips" data-original-title="Hapus jadwal bulan ini"><i class="icon-remove"></i> Hapus</a>
+                        <br />
+
+                        <form method="POST" action="<?php echo base_url() ?>jadwal/penjadwalan/">
+                            <input name="bulan"  type="hidden" value="<?php echo $tanggal ?>">
+                            <input style="float:right" data-placement="left" class="btn btn-danger btn-sm tooltips" name="delete_jadwal" data-original-title="Hapus jadwal bulan ini" type="submit" value="Hapus">
+                        </form>
                     </div>
                 </div>
                 <!-- Modal -->
@@ -167,7 +172,7 @@
 <!-- END JAVASCRIPTS -->
 <script>
 
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         EditableTable.init();
     });
 

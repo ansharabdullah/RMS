@@ -35,7 +35,7 @@
                 </a>
                 <ul class="sub">
                     <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>kpi/operasional"  >Operasional</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>kpi/internal">Internal</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>kpi/internal/2014">Internal</a></li>
                 </ul>
             </li>
             <?php $level++; ?>

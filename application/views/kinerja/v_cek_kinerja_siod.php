@@ -433,8 +433,8 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <div class="panel-body">
-                                <input type="text" required="required" name="tanggal_cek" value="<?php echo $tanggal_cek; ?>" class="form-control">
-                                <input type="text" required="required" id="id_kinerja_mt" name="id_kinerja_mt" class="form-control">
+                                <input type="hidden" required="required" name="tanggal_cek" value="<?php echo $tanggal_cek; ?>" class="form-control">
+                                <input type="hidden" required="required" id="id_kinerja_mt" name="id_kinerja_mt" class="form-control">
 
                                 <div class="form-group "> 
                                     <div class="col-lg-6">

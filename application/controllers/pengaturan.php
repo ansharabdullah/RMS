@@ -19,11 +19,38 @@ class pengaturan extends CI_Controller {
 
     public function index() {
         if (($this->session->userdata('id_role') <= 2)) {
-            $this->pengaturan_oam();
+            if($this->input->post('edit_depot', true)){
+                
+            }else if($this->input->post('edit_user', true)){
+                
+            }else if($this->input->post('tambah_user', true)){
+                
+            }
+            $q = $this->m_pengaturan->getCountDepot();
+            $depot = $q[0]->count;
+            $data['lv1'] = $depot + 3;
+            $data['lv2'] = 1;
+
+            $depot = $this->session->userdata('id_depot');
+            $data1['user'] = $this->m_pengaturan->selectAllUser();
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/menu');
+            $this->navbar($data['lv1'], $data['lv2']);
+            $this->load->view('oam/v_pengaturan', $data1);
+            $this->load->view('layouts/footer');
         } else if (($this->session->userdata('id_role') >= 3)) {
-            $this->pengaturan_ss();
+            $data['lv1'] = 10;
+            $data['lv2'] = 1;
+            $depot = $this->session->userdata('id_depot');
+            $data1['user'] = $this->m_pengaturan->selectAllUserDepot($depot);
+            $data1['depot'] = $this->m_pengaturan->selectDepot($depot);
+            $this->load->view('layouts/header');
+            $this->load->view('layouts/menu');
+            $this->load->view('layouts/navbar', $data);
+            $this->load->view('pengaturan/v_pengaturan', $data1);
+            $this->load->view('layouts/footer');
         } else {
-            redirect(base_url() . "login/");
+            redirect(base_url());
         }
     }
 
@@ -96,7 +123,7 @@ class pengaturan extends CI_Controller {
                 'email' => $this->input->post('email', true),
                 'id_pegawai' => $id_pegawai,
                 'id_role' => 3,
-                'password' => '81dc9bdb52d04dc20036dbd8313ed055'
+                'password' => md5($this->input->post('email', true))
             );
             $this->m_pengaturan->insertAkun($data2);
 
@@ -108,7 +135,7 @@ class pengaturan extends CI_Controller {
                 date_default_timezone_set('UTC');
 
                 // Start date
-                $date = date('Y-m-d');
+                $date = date('Y-m') . "-01";
                 // End date
                 $end_date = date('Y') . '-12-31';
                 $i = 0;
@@ -293,14 +320,14 @@ class pengaturan extends CI_Controller {
     }
 
     public function reset_password($id) {
-        
+
         $a = $this->m_pengaturan->selectRA($id);
         $email = $a[0]->EMAIL;
         $data2 = array(
             'password' => md5($email)
         );
         $this->m_amt->editRA($data2, $id);
-        
+
         $link = base_url() . "pengaturan/";
         echo '<script type="text/javascript">alert("Password berhasil di reset.");';
         echo 'window.location.href="' . $link . '"';

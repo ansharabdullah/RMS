@@ -100,7 +100,7 @@
         <?php if ($koefisien) { ?>
             <section class="panel" id="PreviewCekKoefisien">
                 <header class="panel-heading">
-                    Tabel Koefisien Performansi Tahun <?php echo $tahun ?><span id="tgl"></span>
+                    Tabel Koefisien Performansi Tahun <b><?php echo $tahun ?></b><span id="tgl"></span>
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table "  style="overflow-x: scroll">

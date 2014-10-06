@@ -110,9 +110,9 @@ class laporan extends CI_Controller {
             $tanggalms2 = $this->input->post('blnms2');
             $bulan = date("m", strtotime($tanggalms2));
             $tahun = date("Y", strtotime($tanggalms2));
+            $this->m_laporan->deleteMS2($ms2, $total_ms2);
             $this->m_laporan->SyncKPIOperasional($depot, $tahun, $bulan);
             $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Hapus MS2 Complience bulan ' . $nama_bln, 'Hapus');
-            $this->m_laporan->deleteMS2($ms2, $total_ms2);
         } else {
             $data2['submit'] = true;
             $tanggalms2 = date('Y-m-d');
@@ -159,7 +159,7 @@ class laporan extends CI_Controller {
             }
         }
 
-        $this->header(7, 4);
+        $this->header(7, 2);
         $this->load->view('laporan/v_ms2', $data2);
         $this->footer();
     }
@@ -353,11 +353,12 @@ class laporan extends CI_Controller {
                 $this->m_laporan->simpanMS2($ms2);
                 $nama_bulan = $this->input->post('nama_bulan');
                 $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Import MS2 Complience bulan ' . $nama_bulan, 'Tambah');
+                $this->m_laporan->SyncKPIOperasional($depot, date("Y", strtotime($ms2['blnms2'])), date("m", strtotime($ms2['blnms2'])));
             } else {
                 $data2['simpan_error'] = true;
             }
         }
-        $this->header(7, 4);
+        $this->header(7, 2);
         $this->load->view('laporan/v_import_ms2', $data2);
         $this->footer();
     }
@@ -452,7 +453,7 @@ class laporan extends CI_Controller {
             } else if (date("m", strtotime($bln_frm)) == 12) {
                 $nama_bulan = 'Desember ' . date("Y", strtotime($bln_frm));
             }
-            
+
             if ($data2['id_log_frm1'] == -1) { // id tidak ditemukan
                 $data2['status_id'] = false;
             } else {
@@ -563,6 +564,49 @@ class laporan extends CI_Controller {
             } else {
                 $data2['kpi']['error'] = true;
             }
+        }else if($this->input->post('sinkron')){
+            $data2['klik_cek'] = true;
+
+            $bln_kpi = $this->input->post('bln_kpi');
+            $bulan = date("m", strtotime($bln_kpi));
+            $tahun = date("Y", strtotime($bln_kpi));
+
+            $this->m_laporan->SyncKPIOperasional($depot, $tahun, $bulan);
+            
+            $data2['kpi'] ['bln_kpi'] = $bln_kpi;
+            if ($bulan == 1) {
+                $data2['kpi']['nama_bulan'] = 'Januari ' . $tahun;
+            } else if ($bulan == 2) {
+                $data2['kpi']['nama_bulan'] = 'Februari ' . $tahun;
+            } else if ($bulan == 3) {
+                $data2['kpi']['nama_bulan'] = 'Maret ' . $tahun;
+            } else if ($bulan == 4) {
+                $data2['kpi']['nama_bulan'] = 'April ' . $tahun;
+            } else if ($bulan == 5) {
+                $data2['kpi']['nama_bulan'] = 'Mei ' . $tahun;
+            } else if ($bulan == 6) {
+                $data2['kpi']['nama_bulan'] = 'Juni ' . $tahun;
+            } else if ($bulan == 7) {
+                $data2['kpi']['nama_bulan'] = 'Juli ' . $tahun;
+            } else if ($bulan == 8) {
+                $data2['kpi']['nama_bulan'] = 'Agustus ' . $tahun;
+            } else if ($bulan == 9) {
+                $data2['kpi']['nama_bulan'] = 'September ' . $tahun;
+            } else if ($bulan == 10) {
+                $data2['kpi']['nama_bulan'] = 'Oktober ' . $tahun;
+            } else if ($bulan == 11) {
+                $data2['kpi']['nama_bulan'] = 'November ' . $tahun;
+            } else if ($bulan == 12) {
+                $data2['kpi']['nama_bulan'] = 'Desember ' . $tahun;
+            }
+
+            if ($this->m_laporan->cekKPIOperasional($depot, $tahun, $bulan) != 0) {
+                $data2['kpi']['error'] = false;
+                $data2['kpi']['data'] = $this->m_laporan->getKPIOperasional($depot, $tahun, $bulan);
+            } else {
+                $data2['kpi']['error'] = true;
+            }
+            
         } else if ($this->input->post('edit')) {
             $data2['klik_edit'] = true;
             $data2['klik_cek'] = true;
@@ -825,7 +869,8 @@ class laporan extends CI_Controller {
             $weighted_score10 = 0;
             $this->m_laporan->editKPIOperasional($id_kpi10, $kpitarget10, $kpirealisasi10, $deviasi10, $performance_score10, $normal_score10, $weighted_score10);
 
-
+            $this->m_laporan->SyncKPIOperasional($depot, $tahun, $bulan);
+            $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Edit KPI Operasional bulan ' . $data2['kpi']['nama_bulan'], 'Edit');
 
             if ($this->m_laporan->cekKPIOperasional($depot, $tahun, $bulan) != 0) {
                 $data2['kpi']['error'] = false;
@@ -1111,9 +1156,56 @@ class laporan extends CI_Controller {
                 $total_kpi = $weighted_score1 + $weighted_score2 + $weighted_score3 + $weighted_score4 + $weighted_score5 + $weighted_score6 + $weighted_score7 + $weighted_score8 + $weighted_score9 + $weighted_score10;
 
                 $this->m_laporan->tambahKPIOperasional($depot, $bulan, $tahun, $id_log_harian, $kpitarget1, $bobot1, $kpirealisasi1, $deviasi1, $performance_score1, $normal_score1, $weighted_score1, $kpitarget2, $bobot2, $kpirealisasi2, $deviasi2, $performance_score2, $normal_score2, $weighted_score2, $kpitarget3, $bobot3, $kpirealisasi3, $deviasi3, $performance_score3, $normal_score3, $weighted_score3, $kpitarget4, $bobot4, $kpirealisasi4, $deviasi4, $performance_score4, $normal_score4, $weighted_score4, $kpitarget5, $bobot5, $kpirealisasi5, $deviasi5, $performance_score5, $normal_score5, $weighted_score5, $kpitarget6, $bobot6, $kpirealisasi6, $deviasi6, $performance_score6, $normal_score6, $weighted_score6, $kpitarget7, $bobot7, $kpirealisasi7, $deviasi7, $performance_score7, $normal_score7, $weighted_score7, $kpitarget8, $bobot8, $kpirealisasi8, $deviasi8, $performance_score8, $normal_score8, $weighted_score8, $kpitarget9, $bobot9, $kpirealisasi9, $deviasi9, $performance_score9, $normal_score9, $weighted_score9, $kpitarget10, $bobot10, $kpirealisasi10, $deviasi10, $performance_score10, $normal_score10, $weighted_score10, $total_kpi);
+
+                $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah KPI Operasional bulan ' . $data2['kpi']['nama_bulan'], 'Tambah');
+            }
+        } else {
+            $data2['klik_cek'] = true;
+
+            $bln_kpi = date('Y-m');
+            $bulan = date("m", strtotime($bln_kpi));
+            $tahun = date("Y", strtotime($bln_kpi));
+
+            $data2['kpi'] ['bln_kpi'] = $bln_kpi;
+            if ($bulan == 1) {
+                $data2['kpi']['nama_bulan'] = 'Januari ' . $tahun;
+            } else if ($bulan == 2) {
+                $data2['kpi']['nama_bulan'] = 'Februari ' . $tahun;
+            } else if ($bulan == 3) {
+                $data2['kpi']['nama_bulan'] = 'Maret ' . $tahun;
+            } else if ($bulan == 4) {
+                $data2['kpi']['nama_bulan'] = 'April ' . $tahun;
+            } else if ($bulan == 5) {
+                $data2['kpi']['nama_bulan'] = 'Mei ' . $tahun;
+            } else if ($bulan == 6) {
+                $data2['kpi']['nama_bulan'] = 'Juni ' . $tahun;
+            } else if ($bulan == 7) {
+                $data2['kpi']['nama_bulan'] = 'Juli ' . $tahun;
+            } else if ($bulan == 8) {
+                $data2['kpi']['nama_bulan'] = 'Agustus ' . $tahun;
+            } else if ($bulan == 9) {
+                $data2['kpi']['nama_bulan'] = 'September ' . $tahun;
+            } else if ($bulan == 10) {
+                $data2['kpi']['nama_bulan'] = 'Oktober ' . $tahun;
+            } else if ($bulan == 11) {
+                $data2['kpi']['nama_bulan'] = 'November ' . $tahun;
+            } else if ($bulan == 12) {
+                $data2['kpi']['nama_bulan'] = 'Desember ' . $tahun;
+            }
+
+            if ($this->m_laporan->cekKPIOperasional($depot, $tahun, $bulan) != 0) {
+                $data2['kpi']['error'] = false;
+                $data2['kpi']['data'] = $this->m_laporan->getKPIOperasional($depot, $tahun, $bulan);
+            } else {
+                $data2['kpi']['error'] = true;
             }
         }
-        $this->header(7, 4);
+
+
+
+
+
+        $this->header(7, 2);
         $this->load->view('laporan/v_kpi_operasional', $data2);
         $this->footer();
     }
@@ -1122,32 +1214,64 @@ class laporan extends CI_Controller {
         $this->load->model('m_laporan');
         $depot = $this->session->userdata('id_depot');
         $tahun = date('Y');
+        $bulan = date('m');
+        $jenis = 'Triwulan I';
+        if ($bulan <= 12) {
+            $jenis = 'Triwulan IV';
+        } else if ($bulan <= 9) {
+            $jenis = 'Triwulan III';
+        } else if ($bulan <= 6) {
+            $jenis = 'Triwulan II';
+        } else if ($bulan <= 3) {
+            $jenis = 'Triwulan I';
+        }
+
         $data2['edit_kpi'] = false;
 
         if ($this->input->post('cek')) {
             $tahun = $this->input->post('tahun');
-        }if ($this->input->post('edit')) {
+            $jenis = $this->input->post('jenis');
+        } else if ($this->input->post('edit_triwulan')) {
             $tahun = $this->input->post('tahun');
+            $jenis = $this->input->post('jenis');
             $id = $this->input->post('id_kpi_internal');
-            $bobot = $this->input->post('bobot_kpi');
-            $tahun_base = $this->input->post('tahun_base');
-            $tahun_stretch = $this->input->post('tahun_stretch');
-            $tw1_base = $this->input->post('tw1_base');
-            $tw1_stretch = $this->input->post('tw1_stretch');
-            $tw2_base = $this->input->post('tw2_base');
-            $tw2_stretch = $this->input->post('tw2_stretch');
-            $tw3_base = $this->input->post('tw3_base');
-            $tw3_stretch = $this->input->post('tw3_stretch');
-            $tw4_base = $this->input->post('tw4_base');
-            $tw4_stretch = $this->input->post('tw4_stretch');
-            $this->m_laporan->editKPIInternal($id, $bobot, $tahun_base, $tahun_stretch, $tw1_base, $tw1_stretch, $tw2_base, $tw2_stretch, $tw3_base, $tw3_stretch, $tw4_base, $tw4_stretch);
-
+            $edit_bobot = $this->input->post('edit_bobot');
+            $edit_base = $this->input->post('edit_base');
+            $edit_stretch = $this->input->post('edit_stretch');
+            $edit_bulan1 = $this->input->post('edit_bulan1');
+            $edit_bulan2 = $this->input->post('edit_bulan2');
+            $edit_bulan3 = $this->input->post('edit_bulan3');
+            $this->m_laporan->editKPIInternal($id, $jenis, $edit_bobot, $edit_base, $edit_stretch, $edit_bulan1, $edit_bulan2, $edit_bulan3);
+            $this->m_laporan->SyncKPIInternal($depot, $tahun);
+            $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Ubah KPI Internal ' . $jenis . ' tahun ' . $tahun, 'Edit');
             $data2['edit_kpi'] = true;
+        } else if ($this->input->post('sinkron')) {
+            $tahun = $this->input->post('tahun');
+            $jenis = $this->input->post('jenis');
+            $this->m_laporan->SyncKPIInternal($depot, $tahun);
         }
 
         $data2['tahun_kpi'] = $tahun;
-        $data2['error_kpi'] = $this->m_laporan->cetKPIInternal($tahun, $depot);
-        if ($data2['error_kpi'] >= 365) {
+        $data2['jenis_kpi'] = $jenis;
+
+        $bulan_awal = 1;
+        $bulan_akhir = 3;
+        if ($jenis == "Triwulan I") {
+            $bulan_awal = 1;
+            $bulan_akhir = 3;
+        } else if ($jenis == "Triwulan II") {
+            $bulan_awal = 4;
+            $bulan_akhir = 6;
+        } else if ($jenis == "Triwulan III") {
+            $bulan_awal = 7;
+            $bulan_akhir = 9;
+        } else if ($jenis == "Triwulan IV") {
+            $bulan_awal = 10;
+            $bulan_akhir = 12;
+        }
+
+        $data2['status_ada_kpi'] = $this->m_laporan->cetKPIInternal($tahun, $depot, $bulan_awal, $bulan_akhir);
+        if ($data2['status_ada_kpi'] > 0) {
             $data2['data_kpi'] = $this->m_laporan->getKPIInternal($tahun, $depot);
         }
 
@@ -1157,14 +1281,62 @@ class laporan extends CI_Controller {
     }
 
     public function tambah_kpi_internal() {
-        $this->header(7, 3);
-        $this->load->view('laporan/v_tambah_kpi_internal');
-        $this->footer();
-    }
+        $depot = $this->session->userdata('id_depot');
+        $this->load->model('m_laporan');
 
-    public function edit_kpi_internal() {
+        $data2['status_tambah'] = false;
+        $data2['status_ada'] = true;
+
+
+        if ($this->input->post('tambah')) {
+            
+            $tahun = $this->input->post('tahun');
+            $jenis = $this->input->post('jenis');
+            
+            $data2['tahun_kpi'] = $tahun;
+            $data2['jenis_kpi'] = $jenis;
+            
+            $bulan_awal = 1;
+            $bulan_akhir = 3;
+            if ($jenis == "Triwulan I") {
+                $bulan_awal = 1;
+                $bulan_akhir = 3;
+            } else if ($jenis == "Triwulan II") {
+                $bulan_awal = 4;
+                $bulan_akhir = 6;
+            } else if ($jenis == "Triwulan III") {
+                $bulan_awal = 7;
+                $bulan_akhir = 9;
+            } else if ($jenis == "Triwulan IV") {
+                $bulan_awal = 10;
+                $bulan_akhir = 12;
+            }
+
+            $data2['status_ada_kpi'] = $this->m_laporan->cetKPIInternal($tahun, $depot, $bulan_awal, $bulan_akhir);
+            if ($data2['status_ada_kpi'] == 0) {
+                $data2['status_ada'] = false;
+                $id_log_harian = $this->m_laporan->getIdLogHarian($depot, $tahun, 1, 1);
+                                
+                //input disini
+                $i = 35;
+                for ($i = 35; $i <= 77; $i++) {
+                    $id_jenis = $this->input->post('id_index_'.$i);
+                    $bobot = $this->input->post('bobot_index_'.$i);
+                    $base = $this->input->post('base_index_'.$i);
+                    $stretch = $this->input->post('stretch_index_'.$i);
+                    $bulan1 = $this->input->post('bulan1_index_'.$i);
+                    $bulan2 = $this->input->post('bulan3_index_'.$i);
+                    $bulan3 = $this->input->post('bulan3_index_'.$i);
+                    $this->m_laporan->tambahKPIInternal($id_log_harian,$id_jenis,$bobot,$base,$stretch,$bulan1,$bulan2,$bulan3,$jenis);
+                }
+                $this->m_laporan->setStatusKPIInternal($depot,$tahun,$bulan_awal,$bulan_akhir);
+                $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah KPI Internal ' . $jenis . ' tahun ' . $tahun, 'Tambah');                
+            }
+            $data2['status_tambah'] = true;
+        }
+
         $this->header(7, 3);
-        $this->load->view('laporan/v_edit_kpi_internal');
+        $this->load->view('laporan/v_tambah_kpi_internal', $data2);
         $this->footer();
     }
 
@@ -1867,8 +2039,6 @@ class laporan extends CI_Controller {
         if (!$this->input->post('cek')) {
             redirect('laporan/bulanan');
         } else {
-            ini_set('max_execution_time', 300);
-
             $bulan_input = $this->input->post('bulan');
             $pjs = trim($this->input->post('pjs'));
             $tanggal = date("d-m-Y", strtotime($bulan_input));

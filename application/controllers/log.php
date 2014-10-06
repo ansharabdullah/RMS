@@ -22,6 +22,8 @@ class Log extends CI_Controller {
         if ($bulan == 1) {
             $bulan = date('Y-m');
         }
+        $a = $bulan;
+        $data3['bulan'] = $a;
         $tahun = date('Y', strtotime($bulan));
         $bulan = date('m', strtotime($bulan));
 
@@ -40,13 +42,13 @@ class Log extends CI_Controller {
             $this->load->view('log/v_log_oam', $data3);
             $this->load->view('layouts/footer');
         } else {
-            $data2['log'] = $this->m_log_sistem->getAllLog($id_depot, $bulan, $tahun);
+            $data3['log'] = $this->m_log_sistem->getAllLog($id_depot, $bulan, $tahun);
             $data['lv1'] = 9;
             $data['lv2'] = 1;
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu');
             $this->load->view('layouts/navbar', $data);
-            $this->load->view('log/v_log', $data2);
+            $this->load->view('log/v_log', $data3);
             $this->load->view('layouts/footer');
         }
     }
