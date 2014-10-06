@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/xampp/htdocs/RMS/application/models/m_laporan.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/controllers/laporan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_kpi_internal.php</file>
         </group>
     </open-files>
 </project-private>
