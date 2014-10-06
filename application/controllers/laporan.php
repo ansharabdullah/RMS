@@ -564,6 +564,49 @@ class laporan extends CI_Controller {
             } else {
                 $data2['kpi']['error'] = true;
             }
+        }else if($this->input->post('sinkron')){
+            $data2['klik_cek'] = true;
+
+            $bln_kpi = $this->input->post('bln_kpi');
+            $bulan = date("m", strtotime($bln_kpi));
+            $tahun = date("Y", strtotime($bln_kpi));
+
+            $this->m_laporan->SyncKPIOperasional($depot, $tahun, $bulan);
+            
+            $data2['kpi'] ['bln_kpi'] = $bln_kpi;
+            if ($bulan == 1) {
+                $data2['kpi']['nama_bulan'] = 'Januari ' . $tahun;
+            } else if ($bulan == 2) {
+                $data2['kpi']['nama_bulan'] = 'Februari ' . $tahun;
+            } else if ($bulan == 3) {
+                $data2['kpi']['nama_bulan'] = 'Maret ' . $tahun;
+            } else if ($bulan == 4) {
+                $data2['kpi']['nama_bulan'] = 'April ' . $tahun;
+            } else if ($bulan == 5) {
+                $data2['kpi']['nama_bulan'] = 'Mei ' . $tahun;
+            } else if ($bulan == 6) {
+                $data2['kpi']['nama_bulan'] = 'Juni ' . $tahun;
+            } else if ($bulan == 7) {
+                $data2['kpi']['nama_bulan'] = 'Juli ' . $tahun;
+            } else if ($bulan == 8) {
+                $data2['kpi']['nama_bulan'] = 'Agustus ' . $tahun;
+            } else if ($bulan == 9) {
+                $data2['kpi']['nama_bulan'] = 'September ' . $tahun;
+            } else if ($bulan == 10) {
+                $data2['kpi']['nama_bulan'] = 'Oktober ' . $tahun;
+            } else if ($bulan == 11) {
+                $data2['kpi']['nama_bulan'] = 'November ' . $tahun;
+            } else if ($bulan == 12) {
+                $data2['kpi']['nama_bulan'] = 'Desember ' . $tahun;
+            }
+
+            if ($this->m_laporan->cekKPIOperasional($depot, $tahun, $bulan) != 0) {
+                $data2['kpi']['error'] = false;
+                $data2['kpi']['data'] = $this->m_laporan->getKPIOperasional($depot, $tahun, $bulan);
+            } else {
+                $data2['kpi']['error'] = true;
+            }
+            
         } else if ($this->input->post('edit')) {
             $data2['klik_edit'] = true;
             $data2['klik_cek'] = true;
@@ -1200,7 +1243,7 @@ class laporan extends CI_Controller {
             $edit_bulan3 = $this->input->post('edit_bulan3');
             $this->m_laporan->editKPIInternal($id, $jenis, $edit_bobot, $edit_base, $edit_stretch, $edit_bulan1, $edit_bulan2, $edit_bulan3);
             $this->m_laporan->SyncKPIInternal($depot, $tahun);
-            $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah KPI Internal bulan ' . $jenis . ' tahun ' . $tahun, 'Edit');
+            $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Ubah KPI Internal ' . $jenis . ' tahun ' . $tahun, 'Edit');
             $data2['edit_kpi'] = true;
         } else if ($this->input->post('sinkron')) {
             $tahun = $this->input->post('tahun');
@@ -1246,6 +1289,7 @@ class laporan extends CI_Controller {
 
 
         if ($this->input->post('tambah')) {
+            
             $tahun = $this->input->post('tahun');
             $jenis = $this->input->post('jenis');
             
@@ -1283,9 +1327,10 @@ class laporan extends CI_Controller {
                     $bulan1 = $this->input->post('bulan1_index_'.$i);
                     $bulan2 = $this->input->post('bulan3_index_'.$i);
                     $bulan3 = $this->input->post('bulan3_index_'.$i);
-                    
                     $this->m_laporan->tambahKPIInternal($id_log_harian,$id_jenis,$bobot,$base,$stretch,$bulan1,$bulan2,$bulan3,$jenis);
                 }
+                $this->m_laporan->setStatusKPIInternal($depot,$tahun,$bulan_awal,$bulan_akhir);
+                $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah KPI Internal ' . $jenis . ' tahun ' . $tahun, 'Tambah');                
             }
             $data2['status_tambah'] = true;
         }

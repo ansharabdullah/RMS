@@ -61,7 +61,7 @@
                 Tambah KPI Internal Depot
             </header>
             <div class="panel-body">
-                <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="">
+                <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url();?>laporan/tambah_kpi_internal">
                     <div class="form-group">
                         <label for="tahun" class="col-lg-2 col-sm-2 control-label">Tahun</label>
                         <div class="col-lg-10 col-sm-6">
@@ -390,7 +390,7 @@
                                         <td>Triwulan</td>
 
                                         <td>
-                                            <input type="hidden" min="0" value="40" name="id_index_47" required="required" class="form-control"/>
+                                            <input type="hidden" min="0" value="47" name="id_index_47" required="required" class="form-control"/>
                                             <input type="number" min="0" value="0" name="bobot_index_47" required="required" class="form-control"/>
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_47" required="required" class="form-control"/></td>
@@ -406,7 +406,7 @@
                                         <td>Triwulan</td>
 
                                         <td>
-                                            <input type="hidden" min="0" value="40" name="id_index_48" required="required" class="form-control"/>
+                                            <input type="hidden" min="0" value="48" name="id_index_48" required="required" class="form-control"/>
                                             <input type="number" min="0" value="0" name="bobot_index_48" required="required" class="form-control"/>
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_48" required="required" class="form-control"/></td>
@@ -422,7 +422,7 @@
                                         <td>Triwulan</td>
 
                                         <td>
-                                            <input type="hidden" min="0" value="40" name="id_index_49" required="required" class="form-control"/>
+                                            <input type="hidden" min="0" value="49" name="id_index_49" required="required" class="form-control"/>
                                             <input type="number" min="0" value="0" name="bobot_index_49" required="required" class="form-control"/>
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_49" required="required" class="form-control"/></td>
@@ -1014,7 +1014,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-12">
-                                <button type="submit" name="tambah" style="float: right;" class="btn btn-primary">Simpan</button>
+                                <input type="submit" name="tambah" style="float: right;" class="btn btn-primary" value="Simpan">
                             </div>
                         </div>
                     </div>
