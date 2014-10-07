@@ -24,7 +24,7 @@ class m_depot extends CI_Model {
         $nama = ucfirst($nama);
         return $nama;
     }
-
+    
 }
 
 ?>
