@@ -718,15 +718,18 @@ function DateToIndo($date) {
                                             $i = 1;
 
                                             $jumlah = 0;
-                                            if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
+                                            $bulansekarang = date('Y') . "-" . date('m');
+                                             if ($bulansekarang == date('Y-m',strtotime($tahun . "-" . $bulan))) {
+                                                $jumlah = date('d');
+                                             }else if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
                                                 $jumlah = 31;
                                             } else if ($bulan == 4 || $bulan == 6 || $bulan == 9 || $bulan == 11) {
                                                 $jumlah = 30;
                                             } else if ($bulan == 2) {
-                                                $jumlah = 29;
+                                                $jumlah = 28;
                                                 //jika kabisat
                                                 if (date('L', strtotime($tahun . '-01-01'))) {
-                                                    $jumlah = 28;
+                                                    $jumlah = 29;
                                                 }
                                             }
 

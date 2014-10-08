@@ -68,7 +68,7 @@
                 valueSuffix: ''
             },
             legend: {
-                borderWidth: 1
+               enabled: false
             },
             plotOptions: {
                column: {
@@ -96,8 +96,7 @@
     
     function filterMt(title)
     {
-        mt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Mobil Tangki'});  
-        mt.legend.allItems[0].update({name:title});
+        mt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Mobil Tangki'});
         if(title == "KM"){
              mt.series[0].setData(total_km_mt);
         }

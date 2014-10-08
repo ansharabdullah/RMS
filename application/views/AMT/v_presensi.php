@@ -119,10 +119,10 @@
                                                 }echo $row->STATUS_MASUK;
                                                 ?></td>
                                             <td><?php echo $text; ?></td>
-                                            <td><?php echo $row->ALASAN ?></td>
+                                            <td><?php echo $row->ALASAN_MT ?></td>
                                             <td>
                                                 <?php if ($row->STATUS_MASUK != $hadir) { ?>
-                                                    <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a>
+                                                    <a data-placement="top" data-toggle="modal" href="#ModalPresensi" class="btn btn-warning btn-xs tooltips" data-original-title="Edit" onclick="editPresensi('<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $hadir ?>', '<?php echo $row->ALASAN_MT ?>', '<?php echo $row->ID_JADWAL ?>', '<?php echo $row->NIP ?>')"><i class="icon-pencil"></i></a>
                                                 <?php }else{ ?>
                                                     <span class='label label-success'>Ok</span>
                                                 <?php }?>
