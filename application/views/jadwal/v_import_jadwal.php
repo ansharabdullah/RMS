@@ -133,7 +133,7 @@
                                 ?>
                             </tbody>
                         </table>
-                        <form method="POST" action="<?php echo base_url() ?>jadwal/simpan_xls/" enctype="multipart/form-data">
+                        <form method="POST" action="<?php echo base_url() ?>jadwal/penjadwalan/" enctype="multipart/form-data">
                             <?php if ($e != 0) { ?>
                                 <div class="col-lg-11">
                                     <div class="alert alert-block alert-danger fade in">
@@ -144,7 +144,7 @@
                                 <input type="hidden" required="required" id="data_amt" class="form-control" name="data_jadwal" value="<?php echo htmlentities(serialize($data)); ?>">
                                 <input type="hidden" name="tanggal" value="<?php echo $tanggal?>">
                             <?php } ?>
-                            <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="submit" <?php if ($e != 0) echo "disabled='true'" ?>> 
+                            <input type="submit" style="float: right;" class="btn btn-success" value="Simpan" name="import_jadwal" <?php if ($e != 0) echo "disabled='true'" ?>> 
                         </form>
                     </div>
                 </div>

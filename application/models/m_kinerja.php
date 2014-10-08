@@ -5,6 +5,10 @@ class m_kinerja extends CI_Model {
     function __construct() {
         parent::__construct();
     }
+    
+    public function InsertLogSistem($id_pegawai,$keterangan,$keyword){
+        $query = $this->db->query("insert into log_sistem(ID_PEGAWAI,KETERANGAN,KEYWORD) values('$id_pegawai','$keterangan','$keyword')");            
+    }
 
     public function getIdPegawai($nip, $depot) {
         $query = $this->db->query("select id_pegawai from pegawai where NIP = '$nip' and id_depot = '$depot'");
@@ -168,13 +172,20 @@ class m_kinerja extends CI_Model {
     }
 
     public function getKinerjaAMT($id_log_harian) {
-        $query = $this->db->query("select p.NIP,p.NAMA_PEGAWAI,p.JABATAN,p.KLASIFIKASI,k.STATUS_TUGAS,k.TOTAL_KM,k.TOTAL_KL,k.RITASE_AMT,k.SPBU,k.PENDAPATAN from kinerja_amt k, pegawai p where k.ID_PEGAWAI = p.ID_PEGAWAI and k.ID_LOG_HARIAN = '$id_log_harian'");
+        $query = $this->db->query("select k.ID_KINERJA_AMT,p.NIP,p.NAMA_PEGAWAI,p.JABATAN,p.KLASIFIKASI,k.STATUS_TUGAS,k.TOTAL_KM,k.TOTAL_KL,k.RITASE_AMT,k.SPBU,k.PENDAPATAN from kinerja_amt k, pegawai p where k.ID_PEGAWAI = p.ID_PEGAWAI and k.ID_LOG_HARIAN = '$id_log_harian'");
         return $query->result();
+    }
+    
+    public function setKinerjaAMT($id_kinerja_amt,$status_tugas,$km,$kl,$rit,$spbu,$pendapatan) {
+        $query = $this->db->query("update kinerja_amt k set k.STATUS_TUGAS = '$status_tugas', k.TOTAL_KM = '$km', k.TOTAL_KL = '$kl', k.RITASE_AMT = '$rit', k.PENDAPATAN = '$pendapatan', k.SPBU = '$spbu' where k.ID_KINERJA_AMT = '$id_kinerja_amt'");
     }
 
     public function getKinerjaMT($id_log_harian) {
-        $query = $this->db->query("select m.NOPOL, m.TRANSPORTIR, m.KAPASITAS,k.RITASE_MT,k.TOTAL_KM_MT,k.TOTAL_KL_MT,k.OWN_USE,k.PREMIUM,k.PERTAMAX,k.PERTAMAX_PLUS,k.BIO_SOLAR,k.PERTAMINA_DEX,k.SOLAR  from kinerja_mt k,mobil m where k.ID_MOBIL = m.ID_MOBIL and ID_LOG_HARIAN = '$id_log_harian'");
+        $query = $this->db->query("select k.ID_KINERJA_MT, m.NOPOL, m.TRANSPORTIR, m.KAPASITAS,k.RITASE_MT,k.TOTAL_KM_MT,k.TOTAL_KL_MT,k.OWN_USE,k.PREMIUM,k.PERTAMAX,k.PERTAMAX_PLUS,k.BIO_SOLAR,k.PERTAMINA_DEX,k.SOLAR  from kinerja_mt k,mobil m where k.ID_MOBIL = m.ID_MOBIL and ID_LOG_HARIAN = '$id_log_harian'");
         return $query->result();
+    }
+    public function setKinerjaMT($id_kinerja_mt,$rit_mt,$km_mt,$kl_mt,$ou_mt,$premium_mt,$pertamax_mt,$pertamaxplus_mt,$pertaminadex_mt,$solar_mt,$biosolar_mt) {
+        $query = $this->db->query("update kinerja_mt k set k.RITASE_MT = '$rit_mt', k.TOTAL_KM_MT = '$km_mt', k.TOTAL_KL_MT = '$kl_mt', k.OWN_USE = '$ou_mt', k.PREMIUM = '$premium_mt', k.PERTAMAX = '$pertamax_mt', k.PERTAMAX_PLUS = '$pertamaxplus_mt', k.PERTAMINA_DEX = '$pertaminadex_mt', k.SOLAR = '$solar_mt', k.BIO_SOLAR = '$biosolar_mt' where k.ID_KINERJA_MT = '$id_kinerja_mt'");
     }
 
     /* DASHBOARD --- RENISA */

@@ -261,8 +261,21 @@ class m_log_harian extends CI_Model {
         return $data->result();
     }
     
-    
-
+    public function getIdLogHarianTanggal1($now,$depot)
+	{
+		$this->db->where('tanggal_log_harian', $now);
+        $this->db->where('id_depot', $depot);
+        $data = $this->db->get('log_harian');
+        return $data->result();
+	}
+	public function updateKoutaLog($now)
+	{
+		$this->db->query("update log_harian set STATUS_KUOTA_APMS=1 where ID_LOG_HARIAN=$now");
+	}
+	public function updateKoutaLogHapus($now)
+	{
+		$this->db->query("update log_harian set STATUS_KUOTA_APMS=0 where ID_LOG_HARIAN=$now");
+	}
 }
 
 ?>

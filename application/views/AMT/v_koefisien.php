@@ -1,7 +1,7 @@
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $("#commentForm").submit(function(e) {
+        $("#commentForm").submit(function (e) {
             var isvalidate = $("#commentForm").valid();
             if (isvalidate)
             {
@@ -12,7 +12,7 @@
             e.preventDefault();
         });
 
-        $("#signupForm").submit(function(e) {
+        $("#signupForm").submit(function (e) {
             var isvalidate = $("#signupForm").valid();
             if (isvalidate)
             {
@@ -59,7 +59,7 @@
 
 <section id="main-content">
     <section class="wrapper">
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
@@ -71,7 +71,25 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
+
+        <?php if ($feedback) { ?>
+            <?php if ($feedback == 1) { ?>
+                <div class="alert alert-block alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Berhasil!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } else if ($feedback == 2) { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
+
         <section class="panel" id="cekkoefisien">
             <header class="panel-heading">
                 Cek Koefisien Performansi   
@@ -100,7 +118,7 @@
         <?php if ($koefisien) { ?>
             <section class="panel" id="PreviewCekKoefisien">
                 <header class="panel-heading">
-                    Tabel Koefisien Performansi Tahun <?php echo $tahun ?><span id="tgl"></span>
+                    Tabel Koefisien Performansi Tahun <b><?php echo $tahun ?></b><span id="tgl"></span>
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table "  style="overflow-x: scroll">
@@ -157,7 +175,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Edit Data</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="POST" action="<?php echo base_url(); ?>amt/ubah_koefisien/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="POST" action="<?php echo base_url(); ?>amt/koefisien/">
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <section class="panel">
@@ -197,7 +215,7 @@
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                    <input class="btn btn-success" name="edit_koefisien" type="submit" value="Simpan"/>
                 </div>
             </form>
         </div>

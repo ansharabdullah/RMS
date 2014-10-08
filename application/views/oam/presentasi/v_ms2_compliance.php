@@ -20,7 +20,7 @@
                  if($m->ID_DEPOT == $d->ID_DEPOT)
                  {
                      ?>
-                         data.push(<?php echo $m->nilai?>);
+                         data.push(<?php echo round($m->nilai,2);?>);
                      <?php
                      
                  }
@@ -35,6 +35,11 @@
             
         }
     ?>
+        series.push({
+            name: 'Target',
+            data: [100,100,100],
+            color: 'red'
+        });
     $(function () {
         $('#grafik').highcharts({
             chart:{
@@ -46,7 +51,7 @@
                 x: -20 //center
             },
             subtitle: {
-                text: 'Tahun <?php echo date('Y')?>',
+                text: 'Tahun <?php echo $tahun?>',
                 x: -20
             },
             xAxis: {
@@ -63,7 +68,7 @@
                 }]
             },
             tooltip: {
-                valueSuffix: ''
+                valueSuffix: '%'
             },
             legend: {
                 layout: 'vertical',
@@ -84,7 +89,7 @@
                 <a href="<?php echo base_url()?>presentasi"><button style="float: right" class="btn-danger"><i class="icon-remove"></i></button></a>
             </header>
             <div class="panel-body">
-                <div id="grafik"></div>
+                <div id="grafik"  style="height:300px;"></div>
                 <br/><br/>
                 <div class="adv-table editable-table " id="tabel-apar">
                     <center>
@@ -115,9 +120,8 @@
                                                     if($m->ID_DEPOT == $d->ID_DEPOT)
                                                     {
                                                         ?>
-                                                            <td><?php echo $m->nilai?></td>
+                                                            <td><?php echo round($m->nilai,2);?></td>
                                                         <?php
-                                                        
                                                     }
                                                     
                                                 }
@@ -131,8 +135,8 @@
                         </table>
                     </center>
                 </div>
+        <?php echo $paging?>
             </div>
         </section>
-        <?php echo $paging?>
     </section>
 </section>

@@ -8,7 +8,7 @@
         <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
         <link rel="shortcut icon" href="img/favicon.png">
 
-        <title>RMS PT.PATRA NIAGA</title>
+        <title>OSCRMS PT.PATRA NIAGA</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">RMS<span> Patra Niaga</span></a>
+                        <a class="navbar-brand" href="index.html">OSCRMS<span> Patra Niaga</span></a>
                     </div>
                 </div>
             </div>
@@ -246,13 +246,13 @@
             <div class="row">
                 <!--feature start-->
                 <div class="text-center feature-head">
-                    <h1> <b>RMS (Report Management System)</b> <br/>PT.PERTAMINA PATRA NIAGA</h1>
+                    <h1> <b>OSCRMS (One Single Click Report Management System)</b> <br/>PT.PERTAMINA PATRA NIAGA</h1>
                     <br/><br/>
                     <center>
                         <div style="text-align: justify;width: 80%;">
 
-                            <p>Selamat datang di RMS (Report Management System) merupakan sistem pengelolaan kinerja crew awak mobil tangki dan mobil tangki untuk depot-depot 
-                                PT  Pertamina Patra Niaga wilayah Jawa Bagian Tengah dan DIY  berbasis website dimana pada akhirnya
+                            <p>Selamat datang di OSCRMS (One Single Click Report Management System) merupakan sistem pengelolaan kinerja crew awak mobil tangki dan mobil tangki untuk depot-depot 
+                                PT  Pertamina Patra Niaga wilayah Jawa Bagian Timur berbasis website dimana pada akhirnya
                                 keluaran dari sistem berupa laporan serta tampilan grafik.</p>
                         </div>
                     </center>

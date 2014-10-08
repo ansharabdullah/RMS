@@ -1,6 +1,6 @@
 <script type="text/javascript">
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#EditProfile").hide();
     });
 
@@ -38,7 +38,7 @@ foreach ($grafik as $ka) {
     <?php
 }
 ?>
-    $(function() {
+    $(function () {
         amt = new Highcharts.Chart({
             chart: {
                 renderTo: 'grafik'
@@ -71,7 +71,7 @@ foreach ($grafik as $ka) {
                 valueSuffix: ''
             },
             legend: {
-               enabled:false
+                enabled: false
             },
             series: [{
                     type: 'spline',
@@ -111,6 +111,25 @@ foreach ($grafik as $ka) {
                 <!--breadcrumbs end -->
             </div>
         </div>
+        
+        <?php if ($feedback) { ?>
+            <?php if ($feedback == 1) { ?>
+                <div class="alert alert-block alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Berhasil!</strong> <?php echo $pesan ?>
+                </div>
+            <?php }else if ($feedback == 2) { ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> <?php echo $pesan ?>
+                </div>
+            <?php } ?>
+        <?php } ?>
+        
         <?php foreach ($amt as $row) { ?>
             <section class="panel">
                 <header class="panel-heading">
@@ -205,7 +224,7 @@ foreach ($grafik as $ka) {
 
 
                         <div class="panel-body bio-graph-info" id="EditProfile">
-                            <form enctype="multipart/form-data" class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/edit_pegawai/<?php echo $row->ID_PEGAWAI ?>" >
+                            <form enctype="multipart/form-data" class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?>" >
                                 <input type="hidden" name="id" value="<?php echo $row->ID_PEGAWAI ?>">
                                 <h1>Edit Profile Awak Mobil Tangki</h1>
 
@@ -338,7 +357,7 @@ foreach ($grafik as $ka) {
                                     </div>
                                     <div class="bio-row">
                                         <div class="col-lg-10">
-                                            <input style="float:right;" class="btn btn-success" type="submit" value="Simpan"/>    
+                                            <input style="float:right;" class="btn btn-success" type="submit" name="edit_profile" value="Simpan"/>    
                                         </div>
 
                                     </div>
@@ -357,7 +376,7 @@ foreach ($grafik as $ka) {
             <section class="panel">
                 <div class="panel-body">
                     <div class="col-lg-12"><header class="panel-heading">
-                            Grafik Harian AMT Bulan <b><?php echo date("M-Y", strtotime($tahun."-".$bulan)) ?></b>
+                            Grafik Harian AMT Bulan <b><?php echo date("M-Y", strtotime($tahun . "-" . $bulan)) ?></b>
                         </header>
                         <div class="panel-body" >
                             <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
@@ -396,7 +415,7 @@ foreach ($grafik as $ka) {
                         <!--        //tabel kinerja-->
                         <section class="panel">
                             <header class="panel-heading">
-                                Tabel Kinerja Bulan <b><?php echo date("M-Y", strtotime($tahun."-".$bulan)) ?></b>
+                                Tabel Kinerja Bulan <b><?php echo date("M-Y", strtotime($tahun . "-" . $bulan)) ?></b>
                             </header>
                             <div class="panel-body">
                                 <div class="adv-table editable-table "  style="overflow-x: scroll">
@@ -435,17 +454,17 @@ foreach ($grafik as $ka) {
 
                                             $jumlah = 0;
                                             $bulansekarang = date('Y') . "-" . date('m');
-                                            if ($bulansekarang == date('Y-m',strtotime($tahun . "-" . $bulan))) {
+                                            if ($bulansekarang == date('Y-m', strtotime($tahun . "-" . $bulan))) {
                                                 $jumlah = date('d');
                                             } else if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
                                                 $jumlah = 31;
                                             } else if ($bulan == 4 || $bulan == 6 || $bulan == 9 || $bulan == 11) {
                                                 $jumlah = 30;
                                             } else if ($bulan == 2) {
-                                                $jumlah = 29;
+                                                $jumlah = 28;
                                                 //jika kabisat
                                                 if (date('L', strtotime($tahun . '-01-01'))) {
-                                                    $jumlah = 28;
+                                                    $jumlah = 29;
                                                 }
                                             }
 
@@ -549,7 +568,7 @@ foreach ($grafik as $ka) {
                                                         <a href="javascript:hapusPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>','<?php echo $row->ID_PEGAWAI ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
                                                     </td>
                                                 </tr>
-                                            <?php } ?>
+                                            <?php $i++;} ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -567,7 +586,7 @@ foreach ($grafik as $ka) {
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">Peringatan</h4>
                                     </div>
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>peringatan/tambah_peringatan/">
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?>">
                                         <div class="modal-body">
                                             <div class="col-lg-12">
                                                 <section class="panel">
@@ -618,7 +637,7 @@ foreach ($grafik as $ka) {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                                            <input class="btn btn-success" type="submit" name="add_peringatan" value="Simpan"/>
                                         </div>
                                     </form>
                                 </div>
@@ -633,7 +652,7 @@ foreach ($grafik as $ka) {
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">Peringatan</h4>
                                     </div>
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>peringatan/edit_peringatan/">
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?>">
                                         <div class="modal-body">
                                             <div class="col-lg-12">
                                                 <section class="panel">
@@ -683,7 +702,7 @@ foreach ($grafik as $ka) {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                                            <input class="btn btn-success" type="submit" name="edit_peringatan" value="Simpan"/>
                                         </div>
                                     </form>
                                 </div>
@@ -703,8 +722,13 @@ foreach ($grafik as $ka) {
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                                        <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
+                                        <form action="<?php echo base_url() ?>amt/data_amt/" method="POST">
+                                            <input type="hidden" name="id_pegawai" id="h_id_pegawai" value=""/>
+                                            <input type="hidden" name="nip" id="h_nip" value=""/>
+                                            <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                            <input type="Submit" class="btn btn-danger danger" name="delete" value="Hapus"/>
+                                            <!--<a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>-->
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -724,8 +748,11 @@ foreach ($grafik as $ka) {
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                                        <a href="#" onclick="ok_peringatan()" class="btn btn-danger danger">Hapus</a>
+                                        <form method="POST" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?>">
+                                            <input type="hidden" name="id_log_peringatan" id="did_log_peringatan"/>
+                                            <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                            <input type="submit" name="delete_peringatan" class="btn btn-danger danger" value="Hapus">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -740,7 +767,7 @@ foreach ($grafik as $ka) {
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">Edit Kinerja</h4>
                                     </div>
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/edit_kinerja/">
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI?>">
                                         <div class="modal-body">
                                             <div class="col-lg-12">
                                                 <section class="panel">
@@ -792,7 +819,7 @@ foreach ($grafik as $ka) {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                                            <input class="btn btn-success" type="submit" name="edit_kinerja" value="Simpan"/>
                                         </div>
                                     </form>
                                 </div>
@@ -806,7 +833,7 @@ foreach ($grafik as $ka) {
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">Edit Kinerja</h4>
                                     </div>
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/tambah_kinerja/">
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI?>">
                                         <div class="modal-body">
                                             <div class="col-lg-12">
                                                 <section class="panel">
@@ -858,7 +885,7 @@ foreach ($grafik as $ka) {
                                         </div>
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                                            <input class="btn btn-success" type="submit" name="add_kinerja" value="Simpan"/>
                                         </div>
                                     </form>
                                 </div>
@@ -892,85 +919,88 @@ foreach ($grafik as $ka) {
 
                     <!-- END JAVASCRIPTS -->
                     <script>
-                                        jQuery(document).ready(function() {
-                                            EditableTable.init();
-                                        });
+                                                jQuery(document).ready(function () {
+                                                    EditableTable.init();
+                                                });
 
-                                        function FilterData(par) {
-                                            jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
-                                            jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
-                                        }
+                                                function FilterData(par) {
+                                                    jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+                                                    jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+                                                }
 
-                                        //pegawai
-                                        var globalId;
-                                        var globalId2;
-                                        $('#modalHapus').on('show', function() {
+                                                //pegawai
+                                                var globalId;
+                                                var globalId2;
+                                                $('#modalHapus').on('show', function () {
 
-                                        });
+                                                });
 
-                                        function hapus(id, id2) {
-                                            globalId = id;
-                                            globalId2 = id2;
-                                            $('#modalHapus').data('id', id).modal('show');
-                                        }
+                                                function hapus(id, id2) {
+                                                    globalId = id;
+                                                    globalId2 = id2;
+                                                    $("#h_id_pegawai").val(globalId);
+                                                    $("#h_nip").val(globalId2);
+                                                    $('#modalHapus').data('id', id).modal('show');
+                                                }
 
-                                        function ok()
-                                        {
-                                            $('#modalHapus').modal('hide');
-                                            var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId + "/" + globalId2;
-                                            window.location.href = url;
-                                        }
+                                                function ok()
+                                                {
+                                                    $('#modalHapus').modal('hide');
+                                                    var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId + "/" + globalId2;
+                                                    window.location.href = url;
+                                                }
 
-                                        //kinerja
-                                        function editKinerja(status_tugas, id_pegawai, id_kinerja, tanggal, km, kl, ritase, spbu) {
-                                            $("#status_tugas").val(status_tugas);
-                                            $("#id_pegawai").val(id_pegawai);
-                                            $("#id_kinerja").val(id_kinerja);
-                                            $("#tanggal_kinerja").val(tanggal);
-                                            $("#km").val(km);
-                                            $("#kl").val(kl);
-                                            $("#rit").val(ritase);
-                                            $("#spbu").val(spbu);
-                                        }
+                                                //kinerja
+                                                function editKinerja(status_tugas, id_pegawai, id_kinerja, tanggal, km, kl, ritase, spbu) {
+                                                    $("#status_tugas").val(status_tugas);
+                                                    $("#id_pegawai").val(id_pegawai);
+                                                    $("#id_kinerja").val(id_kinerja);
+                                                    $("#tanggal_kinerja").val(tanggal);
+                                                    $("#km").val(km);
+                                                    $("#kl").val(kl);
+                                                    $("#rit").val(ritase);
+                                                    $("#spbu").val(spbu);
+                                                }
 
-                                        function tambahKinerja(tanggal, id_pegawai) {
-                                            $("#tstatus_tugas").val("");
-                                            $("#tid_pegawai").val(id_pegawai);
-                                            $("#tid_kinerja").val("");
-                                            $("#ttanggal_kinerja").val(tanggal);
-                                            $("#tkm").val("");
-                                            $("#tkl").val("");
-                                            $("#trit").val("");
-                                            $("#tspbu").val("");
-                                        }
+                                                function tambahKinerja(tanggal, id_pegawai) {
+                                                    $("#tstatus_tugas").val("");
+                                                    $("#tid_pegawai").val(id_pegawai);
+                                                    $("#tid_kinerja").val("");
+                                                    $("#ttanggal_kinerja").val(tanggal);
+                                                    $("#tkm").val("");
+                                                    $("#tkl").val("");
+                                                    $("#trit").val("");
+                                                    $("#tspbu").val("");
+                                                }
 
-                                        //peringatan
-                                        var id_peringatan;
-                                        var id_pegawai;
-                                        $('#modalHapus').on('show', function() {
+                                                //peringatan
+                                                var id_peringatan;
+                                                var id_pegawai;
+                                                $('#modalHapus').on('show', function () {
 
-                                        });
+                                                });
 
-                                        function hapusPeringatan(id, id2) {
-                                            id_peringatan = id;
-                                            id_pegawai = id2;
-                                            $('#modalHapusPeringatan').data('id', id).modal('show');
-                                        }
+                                                function hapusPeringatan(id, id2) {
+                                                    id_peringatan = id;
+                                                    id_pegawai = id2;
+                                                    $("#did_log_peringatan").val(id_peringatan);
+                                                    $('#modalHapusPeringatan').data('id', id).modal('show');
+                                                }
 
-                                        function ok_peringatan()
-                                        {
-                                            $('#modalHapusPeringatan').modal('hide');
-                                            var url = "<?php echo base_url(); ?>" + "peringatan/delete_peringatan/" + id_peringatan + "/" + id_pegawai;
-                                            window.location.href = url;
-                                        }
+                                                function ok_peringatan()
+                                                {
+                                                    $('#modalHapusPeringatan').modal('hide');
+                                                    var url = "<?php echo base_url(); ?>" + "peringatan/delete_peringatan/" + id_peringatan + "/" + id_pegawai;
+                                                    window.location.href = url;
+                                                }
 
-                                        function editPeringatan(id_log_peringatan, id_pegawai, peringatan_pegawai, jenis_peringatan, tanggal_berlaku, tanggal_berakhir) {
-                                            $("#eid_log_peringatan").val(id_log_peringatan);
-                                            $("#eid_pegawai").val(id_pegawai);
-                                            $("#ejenis_peringatan").val(jenis_peringatan);
-                                            $("#eperingatan_pegawai").html(peringatan_pegawai);
-                                            $("#etanggal_berlaku").val(tanggal_berlaku);
-                                            $("#etanggal_berakhir").val(tanggal_berakhir);
-                                        }
+                                                function editPeringatan(id_log_peringatan, id_pegawai, peringatan_pegawai, jenis_peringatan, tanggal_berlaku, tanggal_berakhir) {
+                                                    $("#eid_log_peringatan").val(id_log_peringatan);
+                                                    $("#eid_pegawai").val(id_pegawai);
+                                                    $("#ejenis_peringatan").val(jenis_peringatan);
+                                                    $("#eperingatan_pegawai").html(peringatan_pegawai);
+                                                    $("#etanggal_berlaku").val(tanggal_berlaku);
+                                                    $("#etanggal_berakhir").val(tanggal_berakhir);
+                                                }
 
                     </script>

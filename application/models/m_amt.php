@@ -61,6 +61,14 @@ class m_amt extends CI_Model {
         $data = $this->db->query("select * from pegawai where nip='$nip'");
         return $data->result();
     }
+    
+    public function getNIP($id){
+        $this->db->where('id_pegawai',$id);
+        $this->db->select('nip');
+        $this->db->from('pegawai');
+        $data = $this->db->get();
+        return $data->row();
+    }
 
     //koefisien
     public function getKoefisien($depot, $tahun) {
@@ -131,6 +139,41 @@ class m_amt extends CI_Model {
                                     and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun 
                                     group by lh.TANGGAL_LOG_HARIAN order by tanggal asc");
         return $query->result();
+    }
+    
+    //persentase
+    public function get_persentase_kehadiran($id_depot,$tahun,$bulan){
+        
+        
+        $persentasi = array();
+        for($i = 0 ; $i < 3; $i++){
+                //kinerja
+                $query = $this->db->query("select count(*)as jumlah , p.id_depot from 
+                                            kinerja_amt ka, pegawai p, log_harian l
+                                            where p.ID_PEGAWAI=ka.ID_PEGAWAI  and p.id_depot = $id_depot 
+                                            and l.ID_LOG_HARIAN=ka.ID_LOG_HARIAN and month(l.TANGGAL_LOG_HARIAN)=$bulan and year(l.TANGGAL_LOG_HARIAN)=$tahun 
+                                            group by p.ID_DEPOT");
+                $kinerja = $query->result();
+                //jadwal
+                $query = $this->db->query("select count(*) as jumlah, l.id_depot
+                                            from jadwal j, log_harian l
+                                            where j.ID_LOG_HARIAN=l.ID_LOG_HARIAN  and l.id_depot = $id_depot
+                                            and month(l.TANGGAL_LOG_HARIAN)=$bulan and year(l.TANGGAL_LOG_HARIAN)=$tahun 
+                                            group by l.ID_DEPOT");
+                $jadwal = $query->result();
+                if(sizeof($kinerja) > 0 && sizeof($jadwal))
+                {
+                    array_push($persentasi,($kinerja[0]->jumlah / $jadwal[0]->jumlah) * 100);
+                }
+                else
+                {
+                    array_push($persentasi,0);
+                }
+            $bulan++;
+        }
+        
+        return $persentasi;
+        
     }
 
     

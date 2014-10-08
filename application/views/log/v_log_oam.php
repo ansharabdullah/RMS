@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#EditProfile").hide();
         $("#EditPass").hide();
     });
@@ -17,11 +17,14 @@
 
 <section id="main-content">
     <section class="wrapper">
-
+        <ul class="breadcrumb">
+            <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+            <li class="active"> Log Sistem</li>
+        </ul>
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Tabel Log
+                Tabel Log Sistem Bulan <b><?php echo date('M-Y', strtotime($bulan)) ?></b>
             </header>
             <div class="panel-body">
                 <div class="adv-table editable-table "  style="overflow-x: scroll">
@@ -70,17 +73,24 @@
                                 <tr class="">
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $row->TANGGAL_LOG ?></td>
+                                    <td><?php echo date('d-M-Y h:i:s', strtotime($row->TANGGAL_LOG)) ?></td>
                                     <td><?php echo $row->NAMA_DEPOT ?></td>
                                     <td><?php echo $row->NAMA_PEGAWAI ?></td>
                                     <td><?php echo $row->JABATAN ?></td>
                                     <td><?php echo $row->KETERANGAN ?></td>
-                                    <td><span class="label label-success"><?php echo $row->KEYWORD ?></span></td>
-                                </tr>
-                                <?php
-                                $i++;
-                            }
-                            ?>
+                                    <td>
+                                        <?php if (strtoupper($row->KEYWORD) == "TAMBAH") { ?>
+                                            <span class="label label-success"><?php echo strtoupper($row->KEYWORD) ?></span></td>
+                                    <?php } else if (strtoupper($row->KEYWORD) == "EDIT") { ?>
+                                <span class="label label-warning"><?php echo strtoupper($row->KEYWORD) ?></span></td>
+                            <?php } else if (strtoupper($row->KEYWORD) == "HAPUS") { ?>
+                                <span class="label label-danger"><?php echo strtoupper($row->KEYWORD) ?></span></td>
+                            <?php } ?>
+                            </tr>
+                            <?php
+                            $i++;
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -97,7 +107,7 @@
 
 <!-- END JAVASCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         EditableTable.init();
     });
 

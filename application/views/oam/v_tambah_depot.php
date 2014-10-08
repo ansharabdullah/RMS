@@ -3,6 +3,11 @@
 <section id="main-content">
     <section class="wrapper site-min-height">
         <!-- page start-->
+        <ul class="breadcrumb">
+            <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+            <li><a href="<?php echo base_url(); ?>pengaturan/pengaturan_depot/"> Pengaturan Depot</a></li>
+            <li class="active">Tambah Depot</li>
+        </ul>
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
@@ -23,8 +28,8 @@
                                 </li>
                             </ul>
                         </div>
-                        
-                        <form class="cmxform form-horizontal tasi-form" id="default" method="POST" action="<?php echo base_url()?>pengaturan/set_depot/">
+
+                        <form class="cmxform form-horizontal tasi-form" id="default" method="POST" action="<?php echo base_url() ?>pengaturan/pengaturan_depot/">
                             <fieldset title="Data Depot" class="step" id="default-step-0">
                                 <legend> </legend>
                                 <div class="form-group">
@@ -68,8 +73,8 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            
-                            <input type="submit" class="finish btn btn-danger" value="Finish"/>
+
+                            <input type="submit" class="finish btn btn-danger" value="Finish" name="add_depot"/>
                         </form>
                     </div>
                 </section>

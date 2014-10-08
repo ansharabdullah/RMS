@@ -43,10 +43,9 @@
                 </a>
                 <ul class="sub">
                     <li <?php if ($lv2 == 1 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url()?>apms/data_apms" >Data APMS</a></li>
-                    <li <?php if ($lv2 == 2 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Grafik</a></li>
-                    <li <?php if ($lv2 == 3 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Presensi</a></li>
-                    <li <?php if ($lv2 == 4 && $lv1 == 4) echo "class='active'" ?>><a  href="#" >Reminder</a></li>
-                    <li <?php if ($lv2 == 5 && $lv1 == 4) echo "class='active'" ?>><a  href="#">Rencana</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/grafik_apms/<?php echo date("Y")?>" >Grafik</a></li>
+                    <li <?php if ($lv2 == 3 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/rencana_apms/<?php echo date("Y")?>/<?php echo date("m")?>" >Rencana</a></li>
+                    <li <?php if ($lv2 == 4 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/kpi_apms/<?php echo date("Y")?>/<?php echo date("m")?>" >KPI</a></li>
                 </ul>
             </li>
             
@@ -69,9 +68,9 @@
                 </a>
                 <ul class="sub">
                     <li <?php if ($lv2 == 1 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/harian">Harian</a></li>
-                    <li <?php if ($lv2 == 4 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/bulanan">Bulanan</a></li>
-                    <li <?php if ($lv2 == 5 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/triwulan">Triwulan</a></li>
-                    <li <?php if ($lv2 == 6 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/tahunan">Tahunan</a></li>
+                    <li <?php if ($lv2 == 2 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/bulanan">Bulanan</a></li>
+                    <li <?php if ($lv2 == 3 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/triwulan">Triwulan</a></li>
+                    <li <?php if ($lv2 == 4 && $lv1 == 7) echo "class='active'" ?>><a  href="<?php echo base_url() ?>laporan/tahunan">Tahunan</a></li>
                 </ul>
             </li>
             <li>

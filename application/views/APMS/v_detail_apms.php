@@ -38,20 +38,83 @@ function DateToIndo($date) {
 </script>
 <script type="text/javascript">
     var apms;
-    var hari = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
-    var total_premium = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
-	var total_solar = new Array(1,7,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
-	var total = new Array(2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60);
+    var hari = new Array();
+    var premium = new Array();
+    var premium1 = new Array();
+    var solar = new Array();
+	var total = new Array();
+	
+    <?php
+	$status=0;
+	$tampung=0;
+	$jumlah = 0;
+	$bulansekarang = $tahun . "-" . $bulan;
+	if ($bulansekarang == date('Y-m',strtotime($tahun . "-" . $bulan))) {
+		$jumlah = date('d');
+	} else if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
+		$jumlah = 31;
+	} else if ($bulan == 4 || $bulan == 6 || $bulan == 9 || $bulan == 11) {
+		$jumlah = 30;
+	} else if ($bulan == 2) {
+		$jumlah = 28;
+		//jika kabisat
+		if (date('L', strtotime($tahun . '-01-01'))) {
+			$jumlah = 29;
+		}
+	}
+	
+	
+	for($i=1;$i<=$jumlah;$i++)
+	{
+		$prem=0;
+		$sol=0;
+		$status=0;
+		$k=0;
+		?>
+		hari.push(<?php echo $i; ?>);
+        <?php
+		foreach($grafix as $isi){
+				if($isi->hari == $i) 
+				{ 
+					$status =1;
+					$prem = $isi->premium;
+					$sol = $isi->solar;
+				}
+				$k++;
+		}
+		if($status==1&&$k!=0)
+		{
+					 ?> 
+					 premium.push(<?php echo $prem; ?>); 
+					 premium1.push(<?php echo $prem; ?>); 
+					 solar.push(<?php echo $sol; ?>);
+					 <?php
+		}else if($status==0&&$k!=0)
+		{
+					 ?> 
+					 premium.push(0); 
+					 premium1.push(0); 
+					 solar.push(0);
+					 <?php
+		}
+	}
+    ?>
+	
+	
+	
+	//var premium = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+	//var total_solar = new Array(1,7,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+	//var total = new Array(2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60);
     $(function() {
         apms = new Highcharts.Chart({ 
             chart: {
                 renderTo: 'grafik'
             },
             title: {
-                text: 'Grafik Realisasi Penyaluran Jumlah APMS'
+                text: 'Grafik Realisasi Penyaluran Jumlah Premium APMS'
             },
             subtitle: {
-                text: 'Hari'
+                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun ?>'
             },
             plotOptions: {
                 column: {
@@ -74,7 +137,7 @@ function DateToIndo($date) {
                         }
                     },
                     title: {
-                        text: 'Target',
+                        text: 'Realisasi (KL)',
                         style: {
                             color: Highcharts.getOptions().colors[1]
                         }
@@ -89,25 +152,25 @@ function DateToIndo($date) {
             series: [{
                     name: 'jumlah',
                     type: 'spline',
-                    data: total,
+                    data: premium,
                     visible : false
 					}]
                 
         });
     });
     
-    function filterMt(title)
+    function filterAPMS(title)
     {
-        apms.setTitle({text: 'Grafik Realisasi Penyaluran '+title+' APMS'});  
+        apms.setTitle({text: 'Grafik Realisasi Penyaluran Jumlah '+title+' APMS'});  
         //apms.legend.allItems[0].update({name:title});
         if(title == "Premium"){
-            apms.series[0].setData(total_premium);
+            apms.series[0].setData(premium1);
         }else if(title == "Solar"){
-            apms.series[0].setData(total_solar);
+            apms.series[0].setData(solar);
         }
-        
+
     }
-	 $(document).ready(function(){
+            	 $(document).ready(function(){
             apms.series[0].setVisible(true);
         });
 </script>
@@ -153,6 +216,7 @@ function DateToIndo($date) {
 
                     <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_APMS ?>');"><i class="icon-eraser"></i> Hapus</a>
 
+				
                 </header>
                 <div class="panel-body bio-graph-primary" >
                     <div class="panel-body">
@@ -266,15 +330,14 @@ function DateToIndo($date) {
                             Grafik Bulanan APMS
                         </header>
                         <div class="panel-body" >
-                            <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
                             <?php
-                                //$attr = array("class"=>"cmxform form-horizontal tasi-form");
-                               //echo form_open("apms/apms_bulan/".$id_mobil,$attr);
+                                $attr = array("class"=>"cmxform form-horizontal tasi-form");
+                               echo form_open("apms/apms_masuk/".$id_apms,$attr);
                                
                             ?>
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    <input type="month" name="bulan" data-mask="9999" placeholder="Tahun" required="required" id="tahunLaporan"  class="form-control"/>
+                                    <input type="month" name="bulan" data-mask="9999" placeholder="Tahun Bulan" required="required" id="tahunLaporan"  class="form-control"/>
                                 </div>
 
                                 <div class=" col-lg-2">
@@ -287,8 +350,8 @@ function DateToIndo($date) {
 									<button class="btn dropdown-toggle" data-toggle="dropdown">Filter APMS<i class="icon-angle-down"></i>
 									</button>
 									<ul class="dropdown-menu pull-left">
-										<li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
-										<li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
+										<li><a style="cursor: pointer" onclick="filterAPMS('Premium')">Premium</a></li>
+										<li><a style="cursor: pointer" onclick="filterAPMS('Solar')">Solar</a></li>
 									</ul>
 							</div>
                         <br><br><br>
@@ -332,7 +395,6 @@ function DateToIndo($date) {
                                 </tr>
                             </thead>
                             <tbody>
-								<tr>
                                     <?php $i = 1;
                                
                                 foreach ($kinerja as $row) { ?>
@@ -341,8 +403,8 @@ function DateToIndo($date) {
                                     <td><?php echo $row->NO_DELIVERY; ?></td>
                                     <td><?php echo $row->DATE_DELIVERY; ?></td>
                                     <td><?php echo $row->DATE_PLAN_GI; ?></td>
-                                    <td><?php echo $row->BAHAN_BAKAR; ?></td>
-                                    <td><?php echo $row->JUMLAH; ?></td>
+                                    <td><?php echo $row->SOLAR; ?></td>
+                                    <td><?php echo $row->PREMIUM; ?></td>
                                     <td><?php echo $row->ORDER_NUMBER; ?></td>
                                     <td><?php echo $row->DATE_ORDER; ?></td>
                                     <td><?php echo $row->PENGIRIMAN_KAPAL; ?></td>
@@ -351,7 +413,7 @@ function DateToIndo($date) {
                                     <td><?php echo $row->DESCRIPTION; ?></td>
                                     
                                     
-                                   <td><a onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->BAHAN_BAKAR ?>', '<?php echo $row->JUMLAH ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                   <td><a onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->SOLAR ?>', '<?php echo $row->PREMIUM ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                    </td>
                                 </tr>
                                 <?php $i++;
@@ -642,5 +704,8 @@ function DateToIndo($date) {
  
     }
 
-    
+
+		    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
 </script>
