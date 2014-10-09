@@ -42,9 +42,17 @@
                 </form>
             </div>
         </section>
+		<?php
+		$status=0;
+		foreach($status_kpi as $z){
+			$status = $z->STATUS_KPI_APMS;
+		}
+		if($status!=0){
+		
+		?>
 		                <section class="panel">
                     <header class="panel-heading">
-                        Tabel KPI APMS <strong><?php echo "Bulan" ?></strong>
+                        Tabel KPI APMS <strong><?php echo $nama_bulan." ".$tahun ?></strong>
                         <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit KPI</a>
                     </header>
                     <div class="panel-body" style="overflow-x: scroll">
@@ -102,7 +110,16 @@
 										<?php echo $row->REALISASI; ?>
 										</td>
 										<td>
-										<?php echo $row->REALISASI-$row->TARGET; ?>
+										<?php
+										if($row->ID_JENIS_KPI_APMS<5)
+										{
+											echo $row->REALISASI-$row->TARGET; 
+										}else
+										{
+											echo $row->TARGET-$row->REALISASI; 
+										}
+										
+										?>
 										</td>
 										<td>
 										<?php echo $row->SCORE; ?>
@@ -141,7 +158,23 @@
                 </section>
 	</section>
 </section>
-		
+		<?php
+		}
+		else
+		{
+			?>
+			
+			<div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> Data KPI Operasional tidak ditemukan.
+                </div>
+			
+			
+			<?php
+		}
+		?>
 
 <div class="modal fade" id="ModalTambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -259,7 +292,7 @@
                     <div class="form-group ">                                            
                         <label for="bln_kpi" class="control-label col-lg-4">Bulan</label>
                         <div class="col-lg-8">
-                            <input class=" form-control input-sm m-bot15" name="bln_kpi" type="month" value="<?php  echo $tahun.'-'.$bulan;?>" readonly/>
+                            <input class=" form-control input-sm m-bot15" name="bln_kpi" type="month" value="<?php  echo $nama_bulan.' '.$tahun;?>" readonly/>
                             <span class="help-block">Pilih bulan</span>
                         </div>
                     </div>

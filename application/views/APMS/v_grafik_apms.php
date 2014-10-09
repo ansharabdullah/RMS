@@ -3,36 +3,68 @@
     var premium = new Array();
     var premium1 = new Array();
     var solar = new Array();
+    var k_premium = new Array();
+    var k_premium1 = new Array();
+    var k_solar = new Array();
     var bulan_mt = new Array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember','Januari');
     var nomor_bulan = new Array(1,2,3,4,5,6,7,8,9,10,11,12);
     <?php
 	$status=0;
 	$tampung=0;
-	for($i=1;$i<13;$i++)
+	$k = $grafik_max->no_bulan;
+	for($i=1;$i<=$k;$i++)
 	{
-		$tampung=0;
+		$tampung_solar=0;
+		$tampung_premium=0;
 		$status=0;
         foreach($grafik as $isi){
 				if($isi->no_bulan == $i)
 				{ 
-					 ?> 
 					 $status = 1;
-					 premium.push(<?php echo $isi->premium ?>); 
-					 premium1.push(<?php echo $isi->premium ?>); 
-					 solar.push(<?php echo $isi->solar ?>);
-					 <?php
+					 $tampung_solar = $isi->solar;
+					 $tampung_premium = $isi->premium;
 				}
-				else
-				{
-					if($status==0)
-					{
-					 ?> 
-					 premium.push(0); 
-					 premium1.push(0); 
-					 solar.push(0);
-					 <?php
-					}
+		}
+		if($status==0)
+		{
+		 ?>
+		 premium.push(0); 
+		 premium1.push(0); 
+		 solar.push(0);
+		 <?php
+		}else
+		{
+		 ?> 
+		 premium.push(<?php echo $tampung_premium ?>); 
+		 premium1.push(<?php echo $tampung_premium ?>); 
+		 solar.push(<?php echo $tampung_solar ?>);
+		 <?php
+		}
+		$tampung_solar=0;
+		$tampung_premium=0;
+		$status=0;
+        foreach($grafik_kuota as $isi){
+				if($isi->no_bulan == $i)
+				{ 
+					 $status = 1;
+					 $tampung_solar = $isi->k_solar;
+					 $tampung_premium = $isi->k_premium;
 				}
+		}
+		if($status==0)
+		{
+		 ?>
+		 k_premium.push(0); 
+		 k_premium1.push(0); 
+		 k_solar.push(0);
+		 <?php
+		}else
+		{
+		 ?> 
+		 k_premium.push(<?php echo $tampung_premium ?>); 
+		 k_premium1.push(<?php echo $tampung_premium ?>); 
+		 k_solar.push(<?php echo $tampung_solar ?>);
+		 <?php
 		}
 	}
     ?>
@@ -67,7 +99,7 @@
                 valueSuffix: ''
             },
             legend: {
-                enabled: false
+                enabled: true
             },
             plotOptions: {
                column: {
@@ -84,23 +116,29 @@
                 }
             },
             series: [{
-                    
-                    name: 'Jumlah',
+                    name: 'Premium',
                     type: 'column',
                     data: premium
 
+                },{
+                    name: 'Alokasi Premium',
+                    type: 'line',
+                    data: k_premium
                 }]
         });
     });
     
     function filterMt(title)
     {
-        apms.setTitle({text: 'Grafik Kinerja Bulanan Jumlah'+title+' APMS'});  
-        //apms.legend.allItems[0].update({name:title});
+        apms.setTitle({text: 'Grafik Kinerja Bulanan Jumlah '+title+' APMS'});  
+        apms.legend.allItems[0].update({name:title});
+        apms.legend.allItems[1].update({name:'Alokasi '+title});
        if(title == "Premium"){
             apms.series[0].setData(premium1);
+            apms.series[1].setData(k_premium1);
         }else if(title == "Solar"){
             apms.series[0].setData(solar);
+            apms.series[1].setData(k_solar);
             
         }
     }
@@ -168,11 +206,20 @@
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
+                                        <tr>
                                         <th style="display:none;"></th>
-                                        <th>No</th>
-                                        <th>Bulan</th>
-                                        <th>Premium (KL)</th>
-                                        <th>Solar (KL)</th>
+                                        <th rowspan="2">No.</th> 
+                                        <th rowspan="2">Bulan</th>
+                                        <th colspan="2">Premium</th>
+                                        <th colspan="2">Solar</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="display:none;"></th>
+                                        <th>Alokasi</th>
+                                        <th>Total pengiriman</th>
+                                        <th>Alokasi</th>
+                                        <th>Total pengiriman</th>
+                                    </tr>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -181,8 +228,72 @@
                                     foreach ($grafik as $row) {?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i ?></td>
-                                    <td><?php echo $row->bulan; ?></td>
+                                    <td><?php  
+										if ($row->no_bulan == '01') {
+											$nama_bulan = 'Januari';
+										} else if ($row->no_bulan == '02') {
+											$nama_bulan = 'Februari';
+										} else if ($row->no_bulan == '03') {
+											$nama_bulan = 'Maret';
+										} else if ($row->no_bulan == '04') {
+											$nama_bulan = 'April';
+										} else if ($row->no_bulan == '05') {
+											$nama_bulan = 'Mei';
+										} else if ($row->no_bulan == '06') {
+											$nama_bulan = 'Juni';
+										} else if ($row->no_bulan == '07') {
+											$nama_bulan = 'Juli';
+										} else if ($row->no_bulan == '08') {
+											$nama_bulan = 'Agustus';
+										} else if ($row->no_bulan == '09') {
+											$nama_bulan = 'September';
+										} else if ($row->no_bulan == '10') {
+											$nama_bulan = 'Oktober';
+										} else if ($row->no_bulan == '11') {
+											$nama_bulan = 'November';
+										} else if ($row->no_bulan == '12') {
+											$nama_bulan = 'Desember';
+										}
+										echo $nama_bulan;
+										
+									?></td>
+									<td>
+										<?php 
+											$stat=0;
+											foreach($grafik_kuota as $kuota)
+											{
+												if($kuota->no_bulan == $row->no_bulan)
+												{
+													$stat=1;
+													echo $kuota->k_premium;
+												}
+											}
+											if($stat==0)
+											{
+												echo "0";
+											}
+										?>
+									</td>
                                     <td><?php echo $row->premium; ?></td>
+									<td>
+										<?php
+										$stat = 0;										
+										foreach($grafik_kuota as $kuota)
+											{
+												if($kuota->no_bulan == $row->no_bulan)
+												{
+													$stat =1;
+													echo $kuota->k_solar;
+												}
+											}
+											
+											if($stat==0)
+											{
+												echo "0";
+											}
+										?>
+									
+									</td>
                                     <td><?php echo $row->solar; ?></td>
                                     </tr>
                                     <?php

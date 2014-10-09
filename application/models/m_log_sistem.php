@@ -22,6 +22,7 @@ class m_log_sistem extends CI_Model {
 
     public function getLog($id_pegawai) {
         $this->db->where('id_pegawai', $id_pegawai);
+        $this->db->order_by('tanggal_log', 'desc');
         $query = $this->db->get('log_sistem');
         return $query->result();
     }

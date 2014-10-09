@@ -644,6 +644,10 @@ class Mt extends CI_Controller {
                         $error = $error . ", Klasifikasi harus SOLAR/PERTAMAX/PREMIUM/DLL ";
                         $e = 1;
                     }
+                    if ($sheetData->getCell('H' . $no)->getFormattedValue() == "") {
+                        $error = $error . "Transportir tidak boleh kosong";
+                        $e = 1;
+                    }
 
                     if (strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "ALUMUNIUM AWEKO" && strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "CARBON STEEL" && strtoupper($sheetData->getCell('J' . $no)->getFormattedValue()) != "STEEL") {
                         $error = $error . ", Jenis Tangki hanya ALUMUNIUM AWEKO/CARBON STEEL/STEEL ";
@@ -1258,7 +1262,7 @@ class Mt extends CI_Controller {
         $jadwal = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);
         $kinerja = $this->m_kinerja->getKinerjaPresensiMT($depot, $tanggal);
         
-        if(trim($this->input->post('alasan', true)) != "")
+        if(trim($this->input->post('alasan_mt', true)) != "")
         {
             $jml_absen = $jml_absen - 1;
         }

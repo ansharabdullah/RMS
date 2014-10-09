@@ -322,7 +322,16 @@ class amt extends CI_Controller {
                 );
 
                 $this->m_peringatan->insertPeringatan($data);
-
+                
+                $a = $this->m_amt->getNIP($id_pegawai);
+                $nip = $a->nip;
+                $datalog = array(
+                    'keterangan' => 'Tambah peringatan, NIP : ' . $nip,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Tambah'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+                
                 $pesan = "Data berhasil ditambahkan.";
                 $data1['pesan'] = $pesan;
                 $data1['feedback'] = 1;
@@ -339,9 +348,17 @@ class amt extends CI_Controller {
                 );
                 $id_pegawai = $this->input->post('id_pegawai', true);
                 $id_log_peringatan = $this->input->post('id_log_peringatan', true);
-
                 $this->m_peringatan->updatePeringatan($data, $id_log_peringatan);
 
+                $a = $this->m_amt->getNIP($id_pegawai);
+                $nip = $a->nip;
+                $datalog = array(
+                    'keterangan' => 'Ubah peringatan, NIP : ' . $nip,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Edit'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+                
                 $pesan = "Data berhasil diubah.";
                 $data1['pesan'] = $pesan;
                 $data1['feedback'] = 1;
@@ -352,7 +369,16 @@ class amt extends CI_Controller {
             if ($this->session->userdata('id_role') >= 3 && $this->session->userdata('id_role') != 5) {
                 $id_log_peringatan = $this->input->post('id_log_peringatan', true);
                 $this->m_peringatan->deletePeringatan($id_log_peringatan);
-
+                
+                $a = $this->m_amt->getNIP($id_pegawai);
+                $nip = $a->nip;
+                $datalog = array(
+                    'keterangan' => 'Hapus peringatan, NIP : ' . $nip,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Hapus'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+                
                 $pesan = "Data berhasil dihapus.";
                 $data1['pesan'] = $pesan;
                 $data1['feedback'] = 1;
@@ -442,8 +468,8 @@ class amt extends CI_Controller {
                 $k = $this->m_amt->getKlasifikasi($id_pegawai);
                 $klasifikasi = $k[0]->KLASIFIKASI;
                 $depot = $this->session->userdata('id_depot');
-//$tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
-                $tahun = 2013;
+$tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+                //$tahun = 2013;
 
 //KM
                 $jenis = "KM";
@@ -481,7 +507,15 @@ class amt extends CI_Controller {
                     'spbu' => $spbu
                 );
                 $this->m_kinerja->editKinerjaAMT($data, $id_kinerja_amt);
-
+                
+                $a = $this->m_amt->getNIP($id_pegawai);
+                $nip = $a->nip;
+                $datalog = array(
+                    'keterangan' => 'Ubah data kinerja, NIP : ' . $nip.' tanggal : '.$this->input->post('tanggal_kinerja', true),
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Edit'
+                );
+                $this->m_log_sistem->insertLog($datalog);
 
                 $pesan = "Data berhasil diubah.";
                 $data1['pesan'] = $pesan;
@@ -495,8 +529,8 @@ class amt extends CI_Controller {
             $k = $this->m_amt->getKlasifikasi($id_pegawai);
             $klasifikasi = $k[0]->KLASIFIKASI;
             $depot = $this->session->userdata('id_depot');
-//$tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
-            $tahun = 2013;
+            $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+            //$tahun = 2013;
 
 //KM
             $jenis = "KM";
@@ -539,7 +573,16 @@ class amt extends CI_Controller {
                 'spbu' => $spbu
             );
             $this->m_kinerja->insertKinerjaAMT($data, $id_kinerja_amt);
-
+            
+            $a = $this->m_amt->getNIP($id_pegawai);
+                $nip = $a->nip;
+                $datalog = array(
+                    'keterangan' => 'Ubah data kinerja NIP : ' . $nip.' tanggal : '.$this->input->post('tanggal_kinerja', true),
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Tambah'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+            
             $pesan = "Data berhasil ditambahkan.";
             $data1['pesan'] = $pesan;
             $data1['feedback'] = 1;
@@ -882,14 +925,14 @@ class amt extends CI_Controller {
         $nip = $this->input->post('nip', true);
         $data = array(
             'alasan' => $this->input->post('alasan', true),
-            'keterangan_masuk' => $this->input->post('keterangan_masuk', true)
+            'keterangan_masuk' => $this->input->post('keterangan', true)
         );
         $tanggal = $this->input->post('tanggal_log_harian', true);
 
         $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
 
         $datalog = array(
-            'keterangan' => "Ubah presensi NIP : $nip pada $tanggal",
+            'keterangan_masuk' => "Ubah presensi NIP : $nip pada $tanggal",
             'id_pegawai' => $this->session->userdata("id_pegawai"),
             'keyword' => 'Edit'
         );

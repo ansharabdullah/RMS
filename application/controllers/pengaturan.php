@@ -12,6 +12,7 @@ class pengaturan extends CI_Controller {
             $this->load->model('m_amt');
             $this->load->model('m_depot');
             $this->load->model('m_log_harian');
+            $this->load->model('m_log_sistem');
         } else {
             redirect(base_url());
         }
@@ -30,6 +31,15 @@ class pengaturan extends CI_Controller {
                     'nama_oh' => $this->input->post('nama_oh', true),
                 );
                 $this->m_pengaturan->editDepot($data, $depot);
+
+                $namadepot = $this->m_depot->get_nama_depot($depot);
+                $datalog = array(
+                    'keterangan' => 'Ubah data depot ' . $namadepot,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Edit'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+
                 $pesan = "Data berhasil diubah.";
                 $data1['feedback'] = 1;
                 $data1['pesan'] = $pesan;
@@ -39,16 +49,27 @@ class pengaturan extends CI_Controller {
                 } else {
                     $id_pegawai = $this->input->post('id_pegawai', true);
                     $id_role_assignment = $this->input->post('id_role_assignment', true);
+
                     $data1 = array(
                         'nama_pegawai' => $this->input->post('nama_pegawai', true),
                         'nip' => $this->input->post('nip', true),
                     );
                     $this->m_amt->editPegawai($data1, $id_pegawai);
+
                     $data2 = array(
                         'email' => $this->input->post('email', true),
                         'id_role' => $this->input->post('id_role', true),
                     );
                     $this->m_amt->editRA($data2, $id_pegawai);
+
+                    $a = $this->m_amt->getNIP($id_pegawai);
+                    $nip = $a->nip;
+                    $datalog = array(
+                        'keterangan' => 'Ubah data pegawai, NIP : ' . $nip,
+                        'id_pegawai' => $this->session->userdata("id_pegawai"),
+                        'keyword' => 'Edit'
+                    );
+                    $this->m_log_sistem->insertLog($datalog);
 
                     $pesan = "Data berhasil diubah.";
                     $data1['feedback'] = 1;
@@ -77,6 +98,13 @@ class pengaturan extends CI_Controller {
                 );
                 $this->m_pengaturan->insertAkun($data2);
 
+                $nip = $this->input->post('nip', true);
+                $datalog = array(
+                    'keterangan' => 'Tambah data pegawai, NIP : ' . $nip,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Tambah'
+                );
+                $this->m_log_sistem->insertLog($datalog);
 
                 $pesan = "Data berhasil ditambah.";
                 $data1['feedback'] = 1;
@@ -86,6 +114,16 @@ class pengaturan extends CI_Controller {
                     redirect(base_url());
                 } else {
                     $id_user = $this->input->post('id_pegawai', true);
+
+                    $a = $this->m_amt->getNIP($id_user);
+                    $nip = $a->nip;
+                    $datalog = array(
+                        'keterangan' => 'Hapus data pegawai, NIP : ' . $nip,
+                        'id_pegawai' => $this->session->userdata("id_pegawai"),
+                        'keyword' => 'Hapus'
+                    );
+                    $this->m_log_sistem->insertLog($datalog);
+                    
                     $this->m_amt->deletePegawai($id_user);
                     $this->m_pengaturan->deleteAkun($id_user);
 
@@ -99,31 +137,36 @@ class pengaturan extends CI_Controller {
             $depot = $q[0]->count;
             $data['lv1'] = $depot + 3;
             $data['lv2'] = 1;
-            
+
             $data3 = menu_oam();
             $depot = $this->session->userdata('id_depot');
             $data1['user'] = $this->m_pengaturan->selectAllUser();
             $this->load->view('layouts/header');
-            $this->load->view('layouts/menu',$data3);
+            $this->load->view('layouts/menu', $data3);
             $this->navbar($data['lv1'], $data['lv2']);
             $this->load->view('oam/v_pengaturan', $data1);
             $this->load->view('layouts/footer');
-            
         } else if (($this->session->userdata('id_role') >= 3)) {
             if ($this->input->post('edit_depot', true)) {
-                if (($this->session->userdata('id_role') <= 2)) {
-                    $depot = $this->input->post('id_depot', true);
-                    $data = array(
-                        'nama_depot' => $this->input->post('nama_depot', true),
-                        'alamat_depot' => $this->input->post('alamat_depot', true),
-                        'nama_oh' => $this->input->post('nama_oh', true),
-                    );
-                    $this->m_pengaturan->editDepot($data, $depot);
+                $depot = $this->input->post('id_depot', true);
+                $data = array(
+                    'nama_depot' => $this->input->post('nama_depot', true),
+                    'alamat_depot' => $this->input->post('alamat_depot', true),
+                    'nama_oh' => $this->input->post('nama_oh', true),
+                );
+                $this->m_pengaturan->editDepot($data, $depot);
 
-                    $pesan = "Data berhasil diubah.";
-                    $data1['feedback'] = 1;
-                    $data1['pesan'] = $pesan;
-                }
+                $namadepot = $this->m_depot->get_nama_depot($depot);
+                $datalog = array(
+                    'keterangan' => 'Ubah data depot ' . $namadepot,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Edit'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+
+                $pesan = "Data berhasil diubah.";
+                $data1['feedback'] = 1;
+                $data1['pesan'] = $pesan;
             } else if ($this->input->post('edit_user', true)) {
                 if (($this->session->userdata('id_role') == 5)) {
                     redirect(base_url());
@@ -134,12 +177,22 @@ class pengaturan extends CI_Controller {
                         'nama_pegawai' => $this->input->post('nama_pegawai', true),
                         'nip' => $this->input->post('nip', true),
                     );
+
                     $this->m_amt->editPegawai($data1, $id_pegawai);
                     $data2 = array(
                         'email' => $this->input->post('email', true),
                         'id_role' => $this->input->post('id_role', true),
                     );
                     $this->m_amt->editRA($data2, $id_pegawai);
+
+                    $a = $this->m_amt->getNIP($id_pegawai);
+                    $nip = $a->nip;
+                    $datalog = array(
+                        'keterangan' => 'Ubah data pegawai, NIP : ' . $nip,
+                        'id_pegawai' => $this->session->userdata("id_pegawai"),
+                        'keyword' => 'Edit'
+                    );
+                    $this->m_log_sistem->insertLog($datalog);
 
                     $pesan = "Data berhasil diubah.";
                     $data1['feedback'] = 1;
@@ -168,6 +221,13 @@ class pengaturan extends CI_Controller {
                 );
                 $this->m_pengaturan->insertAkun($data2);
 
+                $nip = $this->input->post('nip', true);
+                $datalog = array(
+                    'keterangan' => 'Tambah data pegawai, NIP : ' . $nip,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Tambah'
+                );
+                $this->m_log_sistem->insertLog($datalog);
 
                 $pesan = "Data berhasil ditambah.";
                 $data1['feedback'] = 1;
@@ -177,6 +237,15 @@ class pengaturan extends CI_Controller {
                     redirect(base_url());
                 } else {
                     $id_user = $this->input->post('id_pegawai', true);
+
+                    $a = $this->m_amt->getNIP($id_user);
+                    $nip = $a->nip;
+                    $datalog = array(
+                        'keterangan' => 'Hapus data pegawai, NIP : ' . $nip,
+                        'id_pegawai' => $this->session->userdata("id_pegawai"),
+                        'keyword' => 'Hapus'
+                    );
+                    $this->m_log_sistem->insertLog($datalog);
                     $this->m_amt->deletePegawai($id_user);
                     $this->m_pengaturan->deleteAkun($id_user);
 
@@ -193,6 +262,15 @@ class pengaturan extends CI_Controller {
                     'password' => md5($email)
                 );
                 $this->m_amt->editRA($data2, $id);
+
+                $a = $this->m_amt->getNIP($id);
+                $nip = $a->nip;
+                $datalog = array(
+                    'keterangan' => 'Reset Password, NIP : ' . $nip,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Edit'
+                );
+                $this->m_log_sistem->insertLog($datalog);
 
                 $pesan = "Password berhasil di reset.";
                 $data1['feedback'] = 1;
@@ -246,7 +324,15 @@ class pengaturan extends CI_Controller {
                     'nama_oh' => $this->input->post('nama_oh', true),
                 );
                 $this->m_pengaturan->tambahDepot($data);
-
+                
+                $namadepot = $this->input->post('nama_depot', true);
+                $datalog = array(
+                    'keterangan' => 'Tambah data depot ' . $namadepot,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Tambah'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+                
                 //get id depot terbesar
                 $q = $this->m_pengaturan->getMaxIdDepot();
                 $depot = $q[0]->id_depot;
@@ -258,6 +344,14 @@ class pengaturan extends CI_Controller {
                     'id_depot' => $depot,
                 );
                 $this->m_amt->insertPegawai($data1);
+                
+                $nip = $this->input->post('nip', true);
+                $datalog = array(
+                    'keterangan' => 'Tambah data pegawai, NIP ' . $nip,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Tambah'
+                );
+                $this->m_log_sistem->insertLog($datalog);
 
                 //insert ke role_assignment
                 $data = $this->m_amt->getMaxIDPegawai($depot);
@@ -285,18 +379,18 @@ class pengaturan extends CI_Controller {
                     $end_date = date('Y') . '-12-31';
                     $i = 0;
                     while (strtotime($date) <= strtotime($end_date)) {
-                        $data[$i] = array(
+                        $data3[$i] = array(
                             'id_depot' => $depot,
                             'tanggal_log_harian' => $date
                         );
                         $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
                         $i++;
                     }
-                    $this->m_log_harian->insertLogHarian($data);
+                }
+                    $this->m_log_harian->insertLogHarian($data3);
                     $pesan = "Data berhasil ditambah.";
                     $data1['feedback'] = 1;
                     $data1['pesan'] = $pesan;
-                }
             } else if ($this->input->post('edit_depot', true)) {
                 $depot = $this->input->post('id_depot', true);
                 $data = array(
@@ -306,11 +400,28 @@ class pengaturan extends CI_Controller {
                 );
                 $this->m_pengaturan->editDepot($data, $depot);
 
+                $namadepot = $this->m_depot->get_nama_depot($depot);
+                $datalog = array(
+                    'keterangan' => 'Ubah data depot ' . $namadepot,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Edit'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+                
                 $pesan = "Data berhasil diubah.";
                 $data1['feedback'] = 1;
                 $data1['pesan'] = $pesan;
             } else if ($this->input->post('delete_depot', true)) {
                 $id_depot = $this->input->post('id_depot', true);
+                
+                $namadepot = $this->m_depot->get_nama_depot($id_depot);
+                $datalog = array(
+                    'keterangan' => 'Hapus data depot ' . $namadepot,
+                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                    'keyword' => 'Hapus'
+                );
+                $this->m_log_sistem->insertLog($datalog);
+                
                 $this->m_pengaturan->deleteDepot($id_depot);
 
                 $pesan = "Data berhasil dihapus.";
@@ -327,7 +438,7 @@ class pengaturan extends CI_Controller {
             $depot = $this->session->userdata('id_depot');
             $data1['depot'] = $this->m_pengaturan->selectAllDepot();
             $this->load->view('layouts/header');
-            $this->load->view('layouts/menu',$data3);
+            $this->load->view('layouts/menu', $data3);
             $this->navbar($data['lv1'], $data['lv2']);
             $this->load->view('oam/v_pengaturan_depot', $data1);
             $this->load->view('layouts/footer');
