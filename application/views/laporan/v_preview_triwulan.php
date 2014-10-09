@@ -6,7 +6,7 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-                    <li><a href="<?php echo base_url(); ?>laporan/bulanan">Laporan Bulanan</a></li>
+                    <li><a href="<?php echo base_url(); ?>laporan/triwulan">Laporan Triwulan</a></li>
                     <li class="active">Preview</li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -17,9 +17,8 @@
         <?php if ($laporan_ada == true) { ?>
             <section class="panel">    
                 <iframe src="https://sheet.zoho.com/view.do?url=<?php echo $nama_file; ?>" width="100%" height="600" style="border: none;"></iframe>
-                
                 <!--
-                <iframe src="http://view.officeapps.live.com/op/view.aspx?src=http://oscrms.com/RMS/data_laporan/template/harian.xls" width="100%" height="600" style="border: none;"></iframe>
+                <iframe src="http://view.officeapps.live.com/op/view.aspx?src=<?php echo $nama_file; ?>" width="100%" height="600" style="border: none;"></iframe>
                 -->
                 <?php // echo $nama_file; ?>
             </section>
@@ -28,7 +27,7 @@
                 <button data-dismiss="alert" class="close close-sm" type="button">
                     <i class="icon-remove"></i>
                 </button>
-                <strong>Error!</strong> Laporan gagal dibuat karena data input kinerja tidak ditemukan.
+                <strong>Error!</strong> Laporan gagal dibuat karena data tidak ditemukan.
             </div>
         <?php } ?>
 
