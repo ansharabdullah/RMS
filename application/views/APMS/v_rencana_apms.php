@@ -105,7 +105,7 @@ function DateToIndo($date) {
 						<?php } ?>
                 <section class="panel">
                     <header class="panel-heading">
-                        Tabel Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong>
+                        Tabel Rencana <strong>Bulan <?php echo $nama_bulan . ' ' . $tahun; ?></strong>
                 </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
@@ -121,7 +121,7 @@ function DateToIndo($date) {
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Peringatan!</strong> Rencana bulan <strong><?php echo $bulan . ' ' . $tahun; ?></strong> belum diisi!
+                    <strong>Peringatan!</strong> Rencana bulan <strong><?php echo $nama_bulan . ' ' . $tahun; ?></strong> belum diisi!
                 </div>
 				
 				<div style="float:left;">

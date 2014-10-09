@@ -290,6 +290,10 @@ class m_log_harian extends CI_Model {
 	{
 		$this->db->query("update log_harian set STATUS_KUOTA_APMS=0 where ID_LOG_HARIAN=$now");
 	}
+	public function updateStatusKPIAPMS($depot,$tahun,$bulan)
+	{
+		$this->db->query("update log_harian set STATUS_KPI_APMS=1 where ID_DEPOT = $depot and YEAR(TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(TANGGAL_LOG_HARIAN) = '$bulan'");
+	}
 }
 
 ?>

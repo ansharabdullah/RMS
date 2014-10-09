@@ -61,6 +61,14 @@ class m_amt extends CI_Model {
         $data = $this->db->query("select * from pegawai where nip='$nip'");
         return $data->result();
     }
+    
+    public function getNIP($id){
+        $this->db->where('id_pegawai',$id);
+        $this->db->select('nip');
+        $this->db->from('pegawai');
+        $data = $this->db->get();
+        return $data->row();
+    }
 
     //koefisien
     public function getKoefisien($depot, $tahun) {

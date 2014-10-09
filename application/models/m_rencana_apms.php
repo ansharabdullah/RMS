@@ -46,6 +46,12 @@ class m_rencana_apms extends CI_Model {
 		$total = $this->db->query("select (sum(K_SOLAR) + sum(K_PREMIUM)) as jumlah from rencana_apms where ID_LOG_HARIAN = $id_log");
 		return $total->row();
 	}
+	
+	public function get_grafik_tahun_kuota($depot,$tahun)
+	{
+		$hasil = $this->db->query("select (DAY(l.TANGGAL_LOG_HARIAN )) as hari,(sum(k.K_SOLAR)) as k_solar,(sum(k.K_PREMIUM)) as k_premium, MONTHNAME(STR_TO_DATE(MONTH(l.TANGGAL_LOG_HARIAN),'%m')) as bulan,MONTH(l.TANGGAL_LOG_HARIAN) as no_bulan from rencana_apms k,log_harian l where  k.ID_LOG_HARIAN = l.ID_LOG_HARIAN and l.id_depot = $depot and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' group by MONTH(l.TANGGAL_LOG_HARIAN) order by no_bulan asc");
+		return $hasil->result();
+	}
 /* 
    public function editRencana($data, $id) {
         $this->db->where('id_rencana', $id);
