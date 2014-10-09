@@ -128,8 +128,10 @@ class apms extends CI_Controller {
 	public function detail_apms($id_apms,$bulan,$tahun){
 				
 		$data1['pesan'] =0;
+		
 		if($this->input->post('simpan'))
 		{
+			
 			if($this->input->post('simpan')=="Simpan")
 			{
 				$id = $this->input->post('id', true);
@@ -180,8 +182,8 @@ class apms extends CI_Controller {
 					'ID_APMS' => $id,
 					'ID_LOG_HARIAN' => $log_harian,
 					'NO_DELIVERY' => $this->input->post('no_delivery', true),
-					'DATE_DELIVERY' => $this->input->post('tgl_delivery', true),
-					'DATE_PLAN_GI' => $this->input->post('tgl_plan_gi', true),
+					'DATE_DELIVERY' => $this->input->post('tgl_plan_gi', true),
+					'DATE_PLAN_GI' => $this->input->post('tgl_delivery', true),
 					'PREMIUM' => $this->input->post('bh', true),
 					'SOLAR' => $solar,
 					'PREMIUM' => $premium,
@@ -213,25 +215,26 @@ class apms extends CI_Controller {
 			{
 				$id = $this->input->post('id', true);
 				$id_kinerja = $this->input->post('id_kinerja_apms', true);
-				if($this->input->post('bh', true) == "Premium")
+
+				if($this->input->post('bh1', true) == "Premium")
 				{
 					$solar = 0;
-					$premium = $this->input->post('jml', true);
+					$premium = $this->input->post('jml1', true);
 				}
-				else if($this->input->post('bh', true) == "Solar")
+				else if($this->input->post('bh1', true) == "Solar")
 				{
 					$premium = 0;
-					$solar = $this->input->post('jml', true);
+					$solar = $this->input->post('jml1', true);
 					
 				}
 				$data_1 = array(
 					'ID_APMS' => $id,
 					'ID_LOG_HARIAN' => $this->input->post('id_log', true),
 					'NO_DELIVERY' => $this->input->post('no_delivery1', true),
-					'DATE_DELIVERY' => $this->input->post('tgl_delivery1', true),
-					'DATE_PLAN_GI' => $this->input->post('tgl_plan_gi1', true),
-					'PREMIUM' => $solar,
-					'SOLAR' => $premium,
+					'DATE_DELIVERY' => $this->input->post('tgl_plan_gi1', true),
+					'DATE_PLAN_GI' => $this->input->post('tgl_delivery1', true),
+					'PREMIUM' => $premium,
+					'SOLAR' => $solar,
 					'ORDER_NUMBER' => $this->input->post('nomor_order1', true),
 					'DATE_ORDER' => $this->input->post('tgl_order1', true),
 					'PENGIRIMAN_KAPAL' => $this->input->post('tgl_kirim1', true),
@@ -245,7 +248,7 @@ class apms extends CI_Controller {
 					$datalog = array(
 						'keterangan' => 'Mengedit Data Kinerja APMS',
 						'id_pegawai' => $this->session->userdata("id_pegawai"),
-						'keyword' => 'Hapus'
+						'keyword' => 'Edit'
 					);
 					$this->m_log_sistem->insertLog($datalog);
 					$data1['pesan'] = 1;
@@ -256,6 +259,28 @@ class apms extends CI_Controller {
 					$data1['pesan_text'] = "Data Kinerja Tidak Berhasil Diubah.";
 				}
 			}
+			if($this->input->post('hapuskinerja')=="Hapus")
+			{
+				$id = $this->input->post('ID_KINERJA');
+				
+				$pesan = $this->m_apms->deleteKinerjaApms($id);
+				if($pesan)
+				{
+					$data1['pesan'] = 1;
+					$data1['pesan_text'] = "Selamat Data Kinerja APMS Berhasil Dihapus!";
+					$datalog = array(
+						'keterangan' => 'Menghapus Data Kinerja APMS',
+						'id_pegawai' => $this->session->userdata("id_pegawai"),
+						'keyword' => 'Hapus'
+					);
+					$this->m_log_sistem->insertLog($datalog);
+				}else
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Dihapus!";
+				}
+			}
+		
 		$data['lv1'] = 4;
         $data['lv2'] = 1;
 		$data1['tahun'] = $tahun;
@@ -936,25 +961,14 @@ class apms extends CI_Controller {
 			}
 		}else if($this->input->post('edit')=="Simpan")
 		{
-				$tanggal_log = $this->input->post('bln_kpi');
-				$bulan = date("m", strtotime($tanggal_log));
-				$tahun = date("Y", strtotime($tanggal_log));
-				$jumlah_nilai = 0;
-				$bobot = 5;
-				$tanggal_log = date($tanggal_log.'-1');
-				$id_log = $this->m_log_harian->getIdLogHarianTanggal($tanggal_log,$depot);
-				//var_dump($tanggal_log);
-				$id_log_h='';
-				foreach($id_log as $l)
-				{
-					$id_log_h = $l->ID_LOG_HARIAN;
-				}
-				
-				
 				$target = $this->input->post('kpitarget1', true);
 				$realisasi = $this->input->post('kpirealisasi1', true);
 				$id = $this->input->post('idkpi1', true);
+				$tanggal_log =  $this->input->post('bln_kpi', true);
+				$bulan =  date('m',strtotime($tanggal_log));
+				$tahun =  date('Y',strtotime($tanggal_log));
 				
+				$bobot = 5;
 				$deviasi =  $realisasi - $target;
 				$score =  (1 - ($deviasi/$target))*100;
 				if($score < 80)
@@ -970,13 +984,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 1,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1007,13 +1019,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 2,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1044,13 +1054,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 3,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1080,13 +1088,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 5,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1124,13 +1130,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 6,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1167,13 +1171,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 7,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1210,13 +1212,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 8,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1253,13 +1253,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 9,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,

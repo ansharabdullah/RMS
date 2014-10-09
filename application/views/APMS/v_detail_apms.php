@@ -144,7 +144,8 @@ function DateToIndo($date) {
                     }
                 }],
             tooltip: {
-                shared: true
+                shared: true,
+				valueSuffix: ' KL' 
             },
             legend: {
                 enabled : false
@@ -214,7 +215,7 @@ function DateToIndo($date) {
                     </div>
                     <a class="btn btn-warning" onclick="ShowEdit()" ><i class="icon-pencil"></i> Edit</a> 
 
-                    <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_APMS ?>');"><i class="icon-eraser"></i> Hapus</a>
+                    <a class="btn btn-danger" data-original-title="Hapus" data-placement="top" onclick="hapus('<?php echo $row->ID_APMS?>','<?php echo $row->NO_APMS?>')" data-toggle="modal" href="#ModalHapus"><i class="icon-eraser"></i> Hapus</a>
 
 				
                 </header>
@@ -367,21 +368,21 @@ function DateToIndo($date) {
                     Tabel Kinerja APMS  
                 </header>
                 <div class="panel-body">
-                    <div class="adv-table editable-table ">
                         <div class="clearfix">
                             <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                                 Tambah Kinerja <i class="icon-plus"></i>
                             </a>
                         </div>
-
-                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
+						<br>
+                     <div class="adv-table editable-table " style="overflow-x: scroll">
+						<table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
                                 <tr>
                                     <th style="display: none;">-</th>
                                     <th>No.</th>
-                                    <th>No. Delivery</th>
-                                    <th>Tanggal Delivery</th>
                                     <th>Tanggal Plan GI</th>
+                                    <th>No. LO</th>
+                                    <th>Tanggal Delivery</th>
                                     <th>Premium</th>
                                     <th>Solar</th>
                                     <th>Nomor Order</th>
@@ -390,7 +391,7 @@ function DateToIndo($date) {
                                     <th>Tanggal Kapal Datang</th>
                                     <th>Tanggal Kapal Berangkat</th>
                                     <th>Description</th>
-                                    <th>Aksi</th>
+                                    <th colspan='2' >Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -399,21 +400,23 @@ function DateToIndo($date) {
                                 foreach ($kinerja as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
+                                    <td><?php echo date('d-m-Y',strtotime($row->DATE_PLAN_GI)); ?></td>
                                     <td><?php echo $row->NO_DELIVERY; ?></td>
-                                    <td><?php echo $row->DATE_DELIVERY; ?></td>
-                                    <td><?php echo $row->DATE_PLAN_GI; ?></td>
+                                    <td><?php echo date('d-m-Y',strtotime($row->DATE_DELIVERY)); ?></td>
                                     <td><?php echo $row->PREMIUM; ?></td>
                                     <td><?php echo $row->SOLAR; ?></td>
                                     <td><?php echo $row->ORDER_NUMBER; ?></td>
-                                    <td><?php echo $row->DATE_ORDER; ?></td>
-                                    <td><?php echo $row->PENGIRIMAN_KAPAL; ?></td>
-                                    <td><?php echo $row->DATE_KAPAL_DATANG; ?></td>
-                                    <td><?php echo $row->DATE_KAPAL_BERANGKAT; ?></td>
+                                    <td><?php echo date('d-m-Y',strtotime($row->DATE_ORDER)); ?></td>
+                                    <td><?php echo date('d-m-Y',strtotime($row->PENGIRIMAN_KAPAL)); ?></td>
+                                    <td><?php echo date('d-m-Y',strtotime($row->DATE_KAPAL_DATANG)); ?></td>
+                                    <td><?php echo date('d-m-Y',strtotime($row->DATE_KAPAL_BERANGKAT)); ?></td>
                                     <td><?php echo $row->DESCRIPTION; ?></td>
                                     
 
                                     
                                    <td><a onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->PREMIUM ?>', '<?php echo $row->SOLAR ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+								   </td>
+								   <td><a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusKinerja('<?php echo $row->ID_KINERJA_APMS?>','<?php echo $row->NO_DELIVERY?>')" data-toggle="modal" href="#ModalHapusKinerja"><i class="icon-remove"></i></a>
                                    </td>
                                 </tr>
                                 <?php $i++;
@@ -436,16 +439,39 @@ function DateToIndo($date) {
                 </div>
                 <div class="modal-body">
 
-                    Apakah anda yakin ?
+                    Apakah anda yakin akan menghapus APMS dengan NO APMS = <span id="NO_APMS"></span> ?
 
                 </div>
                     <form method="POST" action="<?php echo base_url() ?>apms/data_apms">
 					<div class="modal-footer">
-						<button data-dismiss="modal" class="btn btn-default" type="button">No</button>
+						<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
 						<input type="hidden" value="<?php echo $row->ID_APMS ?>" name="ID_APMS"></input>
 						<input type="submit" value="Hapus" name="simpan" class="btn btn-danger danger"></input>
 					</div>
 					</form>
+            </div>
+        </div>
+    </div>
+	
+	<div class="modal fade" id="ModalHapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Hapus Kinerja APMS</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form method="POST" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $id_apms.'/'.$bulan.'/'.$tahun ?>">
+                    Apakah anda yakin akan menghapus data kinerja APMS dengan NO LO = <span id="ID_NO" name="ID_NO"></span> ?
+					<div class="modal-footer">
+						<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+						<input type="hidden" value="" name="ID_KINERJA" id="ID_KINERJA"></input>
+						<input type="submit" value="Hapus" name="hapuskinerja" class="btn btn-danger danger"></input>
+					</div>
+					</form>
+
+                </div>
             </div>
         </div>
     </div>
@@ -472,7 +498,7 @@ function DateToIndo($date) {
 												
 											</div>
 
-											<label for="tgl_delivery" class="control-label col-lg-2">Tanggal Delivery</label>
+											<label for="tgl_delivery" class="control-label col-lg-2">Tanggal Plan GI</label>
 											<div class="col-lg-4">
 												<input class=" form-control input-sm m-bot15" id="tgl_delivery" name="tgl_delivery"  type="date" required/>
 												<span class="help-block">Pilih Tanggal</span>
@@ -493,7 +519,7 @@ function DateToIndo($date) {
 											</div>
 										</div>
 										<div class="form-group ">
-											<label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Plan GI</label>
+											<label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Delivery</label>
 											<div class="col-lg-4">
 												<input class=" form-control input-sm m-bot15" id="tgl_plan_gi" name="tgl_plan_gi"  type="date" required />
 												<span class="help-block">Pilih Tanggal</span>
@@ -566,7 +592,7 @@ function DateToIndo($date) {
                                 
                             </div>
 
-                            <label for="tgl_delivery" class="control-label col-lg-2">Tanggal Delivery</label>
+                            <label for="tgl_delivery" class="control-label col-lg-2">Tanggal Plan_GI</label>
                             <div class="col-lg-4">
                                 <input class=" form-control input-sm m-bot15" id="tgl_delivery1" name="tgl_delivery1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
@@ -575,7 +601,7 @@ function DateToIndo($date) {
                         <div class="form-group ">
                             <label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
                             <div class="col-lg-4">
-								<select class="form-control input-sm m-bot15" id="bh" name="bh">
+								<select class="form-control input-sm m-bot15" id="bh1" name="bh1">
 									<option value="Premium">Premium</option>
 									<option value="Solar">Solar</option>
 								</select>
@@ -586,7 +612,7 @@ function DateToIndo($date) {
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Plan GI</label>
+                            <label for="tgl_plan_gi1" class="control-label col-lg-2">Tanggal Delivery</label>
                             <div class="col-lg-4">
                                 <input class=" form-control input-sm m-bot15" id="tgl_plan_gi1" name="tgl_plan_gi1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
@@ -653,7 +679,7 @@ function DateToIndo($date) {
     
 	//kinerja
 	function editKinerja(id_kinerja_apms,id_log_harian,no_delivery, tgl_delivery, tgl_plan_gi, bh, jml, nomor_order, tgl_order, tgl_kirim,tgl_kpl_dtg,tgl_kpl_brgkt,des) {
-		alert(jml);
+
 		$("#id_log").val(id_log_harian);
 		$("#id_kinerja_apms").val(id_kinerja_apms);
 		$("#no_delivery1").val(no_delivery);
@@ -661,12 +687,12 @@ function DateToIndo($date) {
 		$("#tgl_plan_gi1").val(tgl_plan_gi);
 		if(bh==0)
 		{
-			$("#bh").val('Solar');
+			$("#bh1").val('Solar');
 			$("#jml1").val(jml);
 		}
 		else
 		{
-			$("#bh").val('Premium');
+			$("#bh1").val('Premium');
 			$("#jml1").val(bh);
 		}
 		$("#nomor_order1").val(nomor_order);
@@ -681,39 +707,14 @@ function DateToIndo($date) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
     
-    var globalId;
-    $('#ModalHapus').on('show', function() {
-
-    });
-
-    function hapus(id) {
-        globalId = id;
-        $('#ModalHapus').data('id', id).modal('show');
- 
+    function hapus(id,no) {
+        $('#ID_APMS').val(id);
+        $('#NO_APMS').html(no);
+    }
+	
+	function hapusKinerja(id,no) {
+        $('#ID_KINERJA').val(id);
+        $('#ID_NO').html(no);
     }
 
-    function ok()
-    {
-        var url = "<?php echo base_url(); ?>" + "apms/delete_apms/" + globalId;
-        window.location.href = url;
-    }
-    
-    
-    var global;
-    var globalMobil;
-    $('#hapusKinerja').on('show', function() {
-
-    });
-
-    function hapus_kinerja(id,id_mobil) {
-        global = id;
-        globalMobil=id_mobil;
-        $('#hapusKinerja').data('id', id).modal('show');
- 
-    }
-
-
-		    jQuery(document).ready(function() {
-        EditableTable.init();
-    });
 </script>
