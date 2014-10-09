@@ -170,8 +170,11 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label for="keterangan" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="keterangan" placeholder="Keterangan Surat" name="KETERANGAN_SURAT" type="text" >
-                        </div>
+                             <select class="form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT">
+                                <option value="Aktif">Aktif</option>
+                                <option value="Tidak Aktif">Tidak Aktif</option>
+                                
+                            </select></div>
                     </div>
 
                 </div>
@@ -216,8 +219,11 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label for="stnk" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                            <input class=" form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT" minlength="2" type="text" >
-                        </div>
+                            <select class="form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT">
+                                <option <?php if($row->KETERANGAN_SURAT == "Aktif")echo "selected"?> value="Aktif">Aktif</option>
+                                <option <?php if($row->KETERANGAN_SURAT == "Tidak Aktif")echo "selected"?> value="Tidak Aktif">Tidak Aktif</option>
+                                
+                            </select> </div>
                     </div>
 
                 </div>

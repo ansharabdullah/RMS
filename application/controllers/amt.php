@@ -925,14 +925,14 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
         $nip = $this->input->post('nip', true);
         $data = array(
             'alasan' => $this->input->post('alasan', true),
-            'keterangan_masuk' => $this->input->post('keterangan_masuk', true)
+            'keterangan_masuk' => $this->input->post('keterangan', true)
         );
         $tanggal = $this->input->post('tanggal_log_harian', true);
 
         $this->m_penjadwalan->updateJadwal($data, $id_jadwal);
 
         $datalog = array(
-            'keterangan' => "Ubah presensi NIP : $nip pada $tanggal",
+            'keterangan_masuk' => "Ubah presensi NIP : $nip pada $tanggal",
             'id_pegawai' => $this->session->userdata("id_pegawai"),
             'keyword' => 'Edit'
         );

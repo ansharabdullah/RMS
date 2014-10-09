@@ -94,14 +94,21 @@
                                     <th style="display: none;">-</th>
                                     <th>No.</th>
                                     <th>Nopol</th>
-                                    <th>Transportir</th>
+                                    <th>No Rangka</th>
+                                    <th>No Mesin</th>
                                     <th>Kapasitas</th>
                                     <th>Produk</th>
-                                    <th>Kategori</th>
+                                    <th>Jenis Kendaraan</th>
+                                    <th>Transportir</th>
+                                    <th>Rasio</th>
                                     <th>Jenis Tangki</th>
-                                    <th>Nomor Rangka</th>
-                                    <th>Nomor Mesin</th>
-                                   
+                                    <th>Status Mobil</th>
+                                    <th>GPS</th>
+                                    <th>Sensor Overfill</th>
+                                    <th>Standar Volume</th>
+                                    <th>Volume 1</th>
+                                    <th>Kategori Mobil</th>
+                                    <th>Jumlah Segel</th>
                                     <th>Status</th>
 
                                     </tr>
@@ -116,13 +123,22 @@
                                             <th style="display: none;"></th>
                                             <td><?php echo ($i + 1) ?></td>
                                             <td><?php echo $mt[$i]['nopol'] ?></td>
-                                            <td><?php echo $mt[$i]['transportir'] ?></td>
-                                            <td><?php echo $mt[$i]['kapasitas'] ?></td>
-                                            <td><?php echo $mt[$i]['produk'] ?></td>
-                                            <td><?php echo $mt[$i]['kategori_mobil'] ?></td>
-                                            <td><?php echo $mt[$i]['jenis_tangki'] ?></td>
                                             <td><?php echo $mt[$i]['no_rangka'] ?></td>
                                             <td><?php echo $mt[$i]['no_mesin'] ?></td>
+                                            <td><?php echo $mt[$i]['kapasitas'] ?></td>
+                                            <td><?php echo $mt[$i]['produk'] ?></td>
+                                            <td><?php echo $mt[$i]['jenis_kendaraan'] ?></td>
+                                            <td><?php echo $mt[$i]['transportir'] ?></td>
+                                            <td><?php echo $mt[$i]['rasio'] ?></td>
+                                            <td><?php echo $mt[$i]['jenis_tangki'] ?></td>
+                                            <td><?php echo $mt[$i]['status_mobil'] ?></td>
+                                            <td><?php echo $mt[$i]['gps'] ?></td>
+                                            <td><?php echo $mt[$i]['sensor_overfill'] ?></td>
+                                            <td><?php echo $mt[$i]['standar_volume'] ?></td>
+                                            <td><?php echo $mt[$i]['volume_1'] ?></td>
+                                            <td><?php echo $mt[$i]['kategori_mobil'] ?></td>
+                                            <td><?php echo $mt[$i]['standar_volume'] ?></td>
+                                            
                                             
                                             <td><?php
                                                 if ($mt[$i]['error']) {
@@ -179,7 +195,8 @@
                         </div>
                         
                         <form method="POST" action="<?php echo base_url() ?>mt/simpan_xls/" enctype="multipart/form-data">
-                            <?php if ($e != 0) { ?>
+                           <br>
+                                 <?php if ($e != 0) { ?>
                                     <div class="col-lg-11">
                                         <div class="alert alert-block alert-danger fade in">
                                             <strong>Error!</strong> Anda harus memperbaiki file excell sesuai dengan format yang telah disediakan agar dapat menyimpan ke database.

@@ -131,9 +131,6 @@
                                                 <input class=" form-control input-sm m-bot15" id="cnip" name="nip" minlength="2" type="text" required />
                                             </div>
 
-                                            <div class="col-lg-4">
-                                                <input type="checkbox"> On Call
-                                            </div>
                                         </div>
 
                                         <div class="form-group ">
