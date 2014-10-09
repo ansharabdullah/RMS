@@ -93,7 +93,10 @@ class m_laporan extends CI_Model {
             $nilai_data = $nilai_data + $row->PENCAPAIAN;
             $jumlah_data++;
         }
-        $realisasi_rata2 = round($nilai_data / $jumlah_data, 2);
+        $realisasi_rata2 = 0;
+        if($jumlah_data>0){
+            $realisasi_rata2 = round($nilai_data / $jumlah_data, 2);
+        }
 
         // Nilai Total KPI       
         $query = $this->db->query("select l.TANGGAL_LOG_HARIAN,n.ID_NILAI,n.NILAI from log_harian l, nilai n where l.ID_LOG_HARIAN = n.ID_LOG_HARIAN and l.ID_DEPOT = '$depot' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and n.ID_JENIS_PENILAIAN = 72");
@@ -285,6 +288,18 @@ class m_laporan extends CI_Model {
         $rata2 = round($nilai_data / $jumlah_data, 2);
         return $rata2;
     }
+    
+    public function getTotalKL($depot, $tahun, $bulan) {
+        $query = $this->db->query("select l.ID_LOG_HARIAN,l.TANGGAL_LOG_HARIAN, SUM(k.TOTAL_KL_MT) as KL from log_harian l, kinerja_mt k where l.ID_LOG_HARIAN = k.ID_LOG_HARIAN and  l.ID_DEPOT='$depot' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' GROUP BY l.TANGGAL_LOG_HARIAN");
+
+        $hasil = $query->result();
+        $kl = 0;
+        
+        foreach ($hasil as $row) {
+            $kl = $kl + ($row->KL*1000);
+        }
+        return $kl;
+    }
 
     public function tambahKPIOperasional($depot, $bulan, $tahun, $id_log_harian, $target1, $bobot1, $realisasi1, $deviasi1, $performace1, $normal1, $weighted1, $target2, $bobot2, $realisasi2, $deviasi2, $performace2, $normal2, $weighted2, $target3, $bobot3, $realisasi3, $deviasi3, $performace3, $normal3, $weighted3, $target4, $bobot4, $realisasi4, $deviasi4, $performace4, $normal4, $weighted4, $target5, $bobot5, $realisasi5, $deviasi5, $performace5, $normal5, $weighted5, $target6, $bobot6, $realisasi6, $deviasi6, $performace6, $normal6, $weighted6, $target7, $bobot7, $realisasi7, $deviasi7, $performace7, $normal7, $weighted7, $target8, $bobot8, $realisasi8, $deviasi8, $performace8, $normal8, $weighted8, $target9, $bobot9, $realisasi9, $deviasi9, $performace9, $normal9, $weighted9, $target10, $bobot10, $realisasi10, $deviasi10, $performace10, $normal10, $weighted10, $total) {
         $query = $this->db->query("insert into kpi_operasional(ID_LOG_HARIAN,ID_JENIS_KPI_OPERASIONAL,TARGET,BOBOT,REALISASI,DEVIASI,PERFORMANCE_SCORE,NORMAL_SCORE,WEIGHTED_SCORE) values('$id_log_harian','1','$target1','$bobot1','$realisasi1','$deviasi1','$performace1','$normal1','$weighted1')");
@@ -370,7 +385,12 @@ class m_laporan extends CI_Model {
         $query = $this->db->query("select * from depot d, pegawai p, role_assignment r where d.ID_DEPOT = p.ID_DEPOT and p.ID_PEGAWAI = r.ID_PEGAWAI and d.ID_DEPOT = '$depot' and r.ID_ROLE = 3");
         return $query->row();
     }
-
+    
+    public function getInfoOAM() {
+        $query = $this->db->query("select * from depot d, pegawai p, role_assignment r where d.ID_DEPOT = p.ID_DEPOT and p.ID_PEGAWAI = r.ID_PEGAWAI and d.ID_DEPOT = -1 and r.ID_ROLE = 1");
+        return $query->row();
+    }
+    
     public function getLaporanHarian($depot, $tahun, $bulan) {
         $query = $this->db->query("select m.ID_MOBIL,m.TRANSPORTIR,m.NOPOL,m.KAPASITAS,
 (select k.TOTAL_KM_MT from kinerja_mt k,log_harian l where k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and k.ID_MOBIL=m.ID_MOBIL and YEAR(l.TANGGAL_LOG_HARIAN)='$tahun' and MONTH(l.TANGGAL_LOG_HARIAN)='$bulan' and DAY(l.TANGGAL_LOG_HARIAN)=1)as 'KM1',
