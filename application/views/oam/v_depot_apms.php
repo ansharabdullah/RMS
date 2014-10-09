@@ -32,8 +32,8 @@
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Filter APMS<i class="icon-angle-down"></i>
                             </button>
                             <ul class="dropdown-menu pull-left">
-                                <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
-                                <li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
+                                <li><a style="cursor: pointer" onclick="filterApms('Premium')">Premium</a></li>
+                                <li><a style="cursor: pointer" onclick="filterApms('Solar')">Solar</a></li>
                             </ul>
                         </div>
                         <br/><br/><br/>
@@ -163,7 +163,7 @@
                 shared: true
             },
             legend: {
-                enabled : false
+                enabled : true
             },
             series: [{
                     name: 'Premium',
@@ -178,10 +178,11 @@
         });
     });
     
-    function filterMt(title)
+    function filterApms(title)
     {
         apms.setTitle({text: 'Grafik Realisasi Penyaluran '+title+' APMS Depot <?php echo $nama_depot?>'});  
-        //apms.legend.allItems[0].update({name:title});
+        apms.legend.allItems[0].update({name:title}); 
+        apms.legend.allItems[1].update({name:'Alokasi '+ title});
         if(title == "Premium"){
             apms.series[0].setData(premium);
             apms.series[1].setData(total_alokasi_premium);

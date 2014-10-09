@@ -111,6 +111,7 @@ class presentasi extends CI_Controller {
                 break;
             case 4:
                 $slide['data'] = $this->m_internal->get_kpi_internal_depot($log_harian,35,$depot);
+                $slide['apms'] = $this->m_internal->get_kpi_internal_depot($log_harian,35,$depot);
                 $this->load->view('presentasi/v_revenue',$slide);
                 break;
             case 5:

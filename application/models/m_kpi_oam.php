@@ -34,8 +34,9 @@ class m_kpi_oam extends CI_Model {
    
    public function get_kpi_internal_depot($log_harian,$indikator)
    {
-       $query = $this->db->query("select * from kpi_internal k, log_harian l,depot d 
+       $query = $this->db->query("select * from kpi_internal k, log_harian l,depot d,jenis_kpi_internal jk 
            where d.ID_DEPOT = l.ID_DEPOT 
+           and jk.ID_JENIS_KPI_INTERNAL = k.ID_JENIS_KPI_INTERNAL
            and l.ID_LOG_HARIAN = k.ID_LOG_HARIAN 
            and l.TANGGAL_LOG_HARIAN = '$log_harian'
            and k.ID_JENIS_KPI_INTERNAL = $indikator");

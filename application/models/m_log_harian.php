@@ -80,6 +80,13 @@ class m_log_harian extends CI_Model {
                     $set['jadwal'] = 0;
                     $set['notifikasi'] = 1;
                 }
+                
+                //cek kuota apms
+                if($dt->STATUS_KUOTA_APMS == 0)
+                {
+                    $set['kuota_apms'] = 0;
+                    $set['notifikasi'] = 1;
+                }
             }
             if ($dt->STATUS_INPUT_KINERJA == 0) {
                 $set['input_kinerja'] = 0;
@@ -176,6 +183,13 @@ class m_log_harian extends CI_Model {
                     //cek status penjadwalan
                     if ($dt->STATUS_PENJADWALAN == 0) {
                         $set['jadwal'] = 0;
+                        $set['notifikasi'] = 1;
+                    }
+                    
+                    //cek kuota apms
+                    if($dt->STATUS_KUOTA_APMS == 0)
+                    {
+                        $set['kuota_apms'] = 0;
                         $set['notifikasi'] = 1;
                     }
                 }

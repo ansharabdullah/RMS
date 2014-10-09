@@ -4,26 +4,13 @@
         <!-- page start-->
         <section class="panel"> 
             <header class="panel-heading">
-                Tambah KPI Internal OAM
+                Edit KPI Internal OAM Tahun <?php echo $tahun?> Triwulan <?php echo $triwulan?>
             </header>
             <div class="panel-body">
                 <?php
                     $attr = array("class"=>"cmxform form-horizontal tasi-form");
-                     echo form_open("kpi/insert_internal/");
+                     echo form_open("kpi/update_internal/".$tahun."/".$no_triwulan);
                 ?>
-                    <label for="bulanLaporan" class="col-lg-1 col-sm-1 control-label">Tahun</label>
-                    <div class="col-lg-2">
-                        <input type="number" name="tahun" minlength="4" maxlength="4" min="2010" value="<?php echo date('Y') ?>" required="required" id="tahunLaporan"  class="form-control"/>
-                    </div>
-                    <label for="bulanLaporan" class="col-lg-1 col-sm-1 control-label">Triwulan</label>
-                    <div class="col-lg-3">
-                        <select name="triwulan" id="select_triwulan" class="form-control" onchange="changeTriwulan()"> 
-                            <option value="1"> Triwulan I </option>
-                            <option value="2"> Triwulan II </option>
-                            <option value="3"> Triwulan III </option>
-                            <option value="4"> Triwulan IV </option>
-                        </select>
-                    </div><br/><br/><br/>
                     <table class="table table-striped table-hover table-bordered">
                         <thead>
                             <tr>
@@ -46,15 +33,15 @@
                         <tbody>
                             <tr>
                                 <td colspan="6"><b>1. Revenue</b></td>
-                                <td><input type="number" name="rkap_revenue" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[sizeof($kpi) - 4][3]?>" type="number" name="rkap_revenue" required="required" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td>Revenue Fleet Management</td> 
                                 <td>USD</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot1" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base1" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[0][0]?>" type="number" name="bobot1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[0][1]?>" type="number" name="base1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[0][2]?>" type="number" name="stretch1" required="required" class="form-control"/></td>
 <!--                                <td><input type="number" name="realisasi_1_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_1_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_1_3" required="required" class="form-control"/></td>-->
@@ -64,9 +51,9 @@
                                 <td>Terminal Storage Management</td> 
                                 <td>USD</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot2" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base2" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch2" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[1][0]?>" type="number" name="bobot2" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[1][1]?>" type="number" name="base2" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[1][2]?>" type="number" name="stretch2" required="required" class="form-control"/></td>
 <!--                                <td><input type="number" name="realisasi_2_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_2_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_2_3" required="required" class="form-control"/></td>-->
@@ -74,16 +61,16 @@
                             </tr>
                             <tr>
                                 <td colspan="6"><b>2. Laba Usaha</b></td>
-                                <td><input name="rkap_laba_usaha" type="number" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[sizeof($kpi) - 3][3]?>"  name="rkap_laba_usaha" type="number" required="required" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td>Laba Usaha Fleet Management</td> 
                                 <td>USD</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot3" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base3" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch3" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_3_1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[2][0]?>" type="number" name="bobot3" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[2][1]?>" type="number" name="base3" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[2][2]?>" type="number" name="stretch3" required="required" class="form-control"/></td>
+<!--                                   <td><input type="number" name="realisasi_3_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_3_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_3_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -92,9 +79,9 @@
                                 <td>Laba Usaha Terminal Storage</td> 
                                 <td>USD</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot4" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base4" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch4" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[3][0]?>"  type="number" name="bobot4" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[3][1]?>"  type="number" name="base4" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[3][2]?>"  type="number" name="stretch4" required="required" class="form-control"/></td>
 <!--                                <td><input type="number" name="realisasi_4_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_4_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_4_3" required="required" class="form-control"/></td>-->
@@ -102,16 +89,16 @@
                             </tr>
                             <tr>
                                 <td colspan="6"><b>3. Cost Effectiveness</b></td>
-                                <td><input name="rkap_cost_liter" type="number" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[sizeof($kpi) - 2][3]?>"   name="rkap_cost_liter" type="number" required="required" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td>Cost/liter Fleet Management</td> 
                                 <td>USD/KL</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot5" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base5" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch5" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_5_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[4][0]?>"  type="number" name="bobot5" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[4][1]?>"  type="number" name="base5" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[4][2]?>"  type="number" name="stretch5" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_5_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_5_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_5_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -120,10 +107,10 @@
                                 <td>Cost/liter Terminal Storage</td> 
                                 <td>USD/KL</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot6" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base6" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch6" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_6_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[5][0]?>"  type="number" name="bobot6" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[5][1]?>"  type="number" name="base6" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[5][2]?>"  type="number" name="stretch6" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_6_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_6_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_6_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -132,10 +119,10 @@
                                 <td><b>4. Collection Period</b></td> 
                                 <td>by date</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot7" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base7" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch7" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_7_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[6][0]?>"  type="number" name="bobot7" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[6][1]?>"  type="number" name="base7" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[6][2]?>"  type="number" name="stretch7" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_7_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_7_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_7_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -147,10 +134,10 @@
                                 <td>Total Loss</td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot8" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base8" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch8" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_8_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[7][0]?>"  type="number" name="bobot8" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[7][1]?>"  type="number" name="base8" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[7][2]?>"  type="number" name="stretch8" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_8_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_8_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_8_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -159,10 +146,10 @@
                                 <td>Discharge Loss</td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot9" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base9" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch9" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_9_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[8][0]?>"  type="number" name="bobot9" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[8][1]?>"  type="number" name="base9" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[8][2]?>"  type="number" name="stretch9" required="required" class="form-control"/></td>
+<!--                                  <td><input type="number" name="realisasi_9_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_9_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_9_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -171,25 +158,25 @@
                                 <td>Working Loss</td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot10" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base10" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch10" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_10_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[9][0]?>"  type="number" name="bobot10" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[9][1]?>"  type="number" name="base10" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[9][2]?>"  type="number" name="stretch10" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_10_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_10_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_10_3" required="required" class="form-control"/></td>-->
                                 <td></td>
                             </tr> <tr>
                                 <td colspan="6"><b>6. Volume Thruput BBM</b></td>
-                                <td><input name="rkap_thruput" type="number" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[sizeof($kpi) - 1][3]?>"   name="rkap_thruput" type="number" required="required" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td>Fleet Management (BBM/BBK)</td> 
                                 <td>KL</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot11" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base11" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch11" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_11_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[10][0]?>"  type="number" name="bobot11" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[10][1]?>"  type="number" name="base11" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[10][2]?>"  type="number" name="stretch11" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_11_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_11_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_11_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -198,10 +185,10 @@
                                 <td>Terminal Storage</td> 
                                 <td>KL</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot12" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base12" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch12" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_12_1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[11][0]?>"  type="number" name="bobot12" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[11][1]?>"  type="number" name="base12" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[11][2]?>"  type="number" name="stretch12" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_12_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_12_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_12_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -213,10 +200,10 @@
                                 <td>Fuel Retail Fleet Management (BBM/BBK)</td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot13" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base13" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch13" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_13_1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[12][0]?>"  type="number" name="bobot13" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[12][1]?>"  type="number" name="base13" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[12][2]?>"  type="number" name="stretch13" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_13_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_13_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_13_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -225,10 +212,10 @@
                                 <td>Fuel Retail Fleet Management (APMS)</td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot14" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base14" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch14" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_14_1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[13][0]?>"  type="number" name="bobot14" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[13][1]?>"  type="number" name="base14" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[13][2]?>"  type="number" name="stretch14" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_14_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_14_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_14_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -237,10 +224,10 @@
                                 <td>Gas & Aviation</td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot15" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base15" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch15" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_15_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[14][0]?>"  type="number" name="bobot15" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[14][1]?>"  type="number" name="base15" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[14][2]?>"  type="number" name="stretch15" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_15_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_15_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_15_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -255,10 +242,10 @@
                                 <td>- Mobil Tangki Kelola</td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot16" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base16" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch16" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_16_1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[15][0]?>"  type="number" name="bobot16" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[15][1]?>"  type="number" name="base16" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[15][2]?>"  type="number" name="stretch16" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_16_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_16_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_16_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -267,10 +254,10 @@
                                 <td>- Mobil Tangki Milik</td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot17" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base17" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch17" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_17_1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[16][0]?>"  type="number" name="bobot17" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[16][1]?>"  type="number" name="base17" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[16][2]?>"  type="number" name="stretch17" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_17_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_17_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_17_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -279,10 +266,10 @@
                                 <td>b. Terminal Storage (BBM/Depot)</td> 
                                 <td>kasus</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot18" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base18" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch18" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_18_1" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[17][0]?>"  type="number" name="bobot18" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[17][1]?>"  type="number" name="base18" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[17][2]?>"  type="number" name="stretch18" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_18_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_18_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_18_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -291,10 +278,10 @@
                                 <td><b>9. Progress Pelaksaan Pekerjaan (BD/Non BD)<b/></td> 
                                 <td>%</td>
                                 <td>Monthly</td>
-                                <td><input type="number" name="bobot19" required="required" class="form-control"/></td>
-                                <td><input type="number" name="base19" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch19" required="required" class="form-control"/></td>
-<!--                                <td><input type="number" name="realisasi_19_1" required="required" class="form-control"/></td>
+                                 <td><input value="<?php echo $kpi[18][0]?>"  type="number" name="bobot19" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[18][1]?>"  type="number" name="base19" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[18][2]?>"  type="number" name="stretch19" required="required" class="form-control"/></td>
+<!--                                 <td><input type="number" name="realisasi_19_1" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_19_2" required="required" class="form-control"/></td>
                                 <td><input type="number" name="realisasi_19_3" required="required" class="form-control"/></td>-->
                                 <td></td>
@@ -307,8 +294,8 @@
                                 <td>Ratio</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base20" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch20" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[19][1]?>" type="number" name="base20" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[19][2]?>"  type="number" name="stretch20" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -316,8 +303,8 @@
                                 <td>Cases</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base21" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch21" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[20][1]?>"  type="number" name="base21" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[20][2]?>"  type="number" name="stretch21" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -325,8 +312,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base22" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch22" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[21][1]?>"  type="number" name="base22" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[21][2]?>"  type="number" name="stretch22" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -334,8 +321,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base23" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch23" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[22][1]?>"  type="number" name="base23" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[22][2]?>"  type="number" name="stretch23" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -346,8 +333,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base24" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch24" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[23][1]?>"  type="number" name="base24" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[23][2]?>"  type="number" name="stretch24" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -355,8 +342,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base25" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch25" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[24][1]?>"  type="number" name="base25" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[24][2]?>"  type="number" name="stretch25" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -364,8 +351,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base26" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch26" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[25][1]?>"  type="number" name="base26" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[25][2]?>"  type="number" name="stretch26" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -373,8 +360,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base27" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch27" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[26][1]?>"  type="number" name="base27" required="required" class="form-control"/></td>
+                                <td><input  value="<?php echo $kpi[26][2]?>"  type="number" name="stretch27" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -382,8 +369,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base28" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch28" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[27][1]?>"  type="number" name="base28" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[27][2]?>"  type="number" name="stretch28" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -391,8 +378,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base29" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch29" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[28][1]?>"  type="number" name="base29" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[28][2]?>"  type="number" name="stretch29" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -400,8 +387,8 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base30" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch30" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[29][1]?>"  type="number" name="base30" required="required" class="form-control"/></td>
+                                <td><input value="<?php echo $kpi[29][2]?>"  type="number" name="stretch30" required="required" class="form-control"/></td>
                                 <td></td>
                             </tr>
 
