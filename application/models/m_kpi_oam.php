@@ -39,7 +39,8 @@ class m_kpi_oam extends CI_Model {
            and jk.ID_JENIS_KPI_INTERNAL = k.ID_JENIS_KPI_INTERNAL
            and l.ID_LOG_HARIAN = k.ID_LOG_HARIAN 
            and l.TANGGAL_LOG_HARIAN = '$log_harian'
-           and k.ID_JENIS_KPI_INTERNAL = $indikator");
+           and k.ID_JENIS_KPI_INTERNAL = $indikator
+               order by l.ID_DEPOT ASC");
        
        return $query->result();
    }
