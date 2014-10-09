@@ -434,7 +434,7 @@ class apms extends CI_Controller {
 					'keyword' => 'Edit'
 				);
 				$this->m_log_sistem->insertLog($datalog);
-				$this->m_log_harian->updateKoutaLog($id_log_h);
+				$this->m_log_harian->updateKoutaLog($depot,$tahun,$bulan);
 				$data1['pesan'] = 1;
 				$data1['pesan_text'] = "Data Rencana APMS Berhasil Ditambah.";
 			}else
@@ -484,7 +484,7 @@ class apms extends CI_Controller {
 					'keyword' => 'Hapus'
 				);
 				$this->m_log_sistem->insertLog($datalog);
-				$this->m_log_harian->updateKoutaLogHapus($id);
+				$this->m_log_harian->updateKoutaLogHapus($depot,$tahun,$bulan);
 				$data1['pesan'] = 1;
 				$data1['pesan_text'] = "Data Rencana APMS Berhasil Dihapus.";
 			}else
