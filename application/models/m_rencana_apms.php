@@ -15,7 +15,6 @@ class m_rencana_apms extends CI_Model {
 	
 	  public function cekRencana($depot, $bulan, $tahun) {
         $query = $this->db->query("select STATUS_KUOTA_APMS, ID_LOG_HARIAN from log_harian where ID_DEPOT =  $depot and   YEAR(TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(TANGGAL_LOG_HARIAN) = '$bulan' and day(TANGGAL_LOG_HARIAN) = '1'");
-       
 		return $query->result();
     }
 	 public function insertRencanaAPMS($data) {
