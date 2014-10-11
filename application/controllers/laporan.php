@@ -564,7 +564,7 @@ class laporan extends CI_Controller {
             } else {
                 $data2['kpi']['error'] = true;
             }
-        }else if($this->input->post('sinkron')){
+        } else if ($this->input->post('sinkron')) {
             $data2['klik_cek'] = true;
 
             $bln_kpi = $this->input->post('bln_kpi');
@@ -572,7 +572,7 @@ class laporan extends CI_Controller {
             $tahun = date("Y", strtotime($bln_kpi));
 
             $this->m_laporan->SyncKPIOperasional($depot, $tahun, $bulan);
-            
+
             $data2['kpi'] ['bln_kpi'] = $bln_kpi;
             if ($bulan == 1) {
                 $data2['kpi']['nama_bulan'] = 'Januari ' . $tahun;
@@ -606,7 +606,6 @@ class laporan extends CI_Controller {
             } else {
                 $data2['kpi']['error'] = true;
             }
-            
         } else if ($this->input->post('edit')) {
             $data2['klik_edit'] = true;
             $data2['klik_cek'] = true;
@@ -1289,13 +1288,13 @@ class laporan extends CI_Controller {
 
 
         if ($this->input->post('tambah')) {
-            
+
             $tahun = $this->input->post('tahun');
             $jenis = $this->input->post('jenis');
-            
+
             $data2['tahun_kpi'] = $tahun;
             $data2['jenis_kpi'] = $jenis;
-            
+
             $bulan_awal = 1;
             $bulan_akhir = 3;
             if ($jenis == "Triwulan I") {
@@ -1316,21 +1315,21 @@ class laporan extends CI_Controller {
             if ($data2['status_ada_kpi'] == 0) {
                 $data2['status_ada'] = false;
                 $id_log_harian = $this->m_laporan->getIdLogHarian($depot, $tahun, 1, 1);
-                                
+
                 //input disini
                 $i = 35;
                 for ($i = 35; $i <= 77; $i++) {
-                    $id_jenis = $this->input->post('id_index_'.$i);
-                    $bobot = $this->input->post('bobot_index_'.$i);
-                    $base = $this->input->post('base_index_'.$i);
-                    $stretch = $this->input->post('stretch_index_'.$i);
-                    $bulan1 = $this->input->post('bulan1_index_'.$i);
-                    $bulan2 = $this->input->post('bulan3_index_'.$i);
-                    $bulan3 = $this->input->post('bulan3_index_'.$i);
-                    $this->m_laporan->tambahKPIInternal($id_log_harian,$id_jenis,$bobot,$base,$stretch,$bulan1,$bulan2,$bulan3,$jenis);
+                    $id_jenis = $this->input->post('id_index_' . $i);
+                    $bobot = $this->input->post('bobot_index_' . $i);
+                    $base = $this->input->post('base_index_' . $i);
+                    $stretch = $this->input->post('stretch_index_' . $i);
+                    $bulan1 = $this->input->post('bulan1_index_' . $i);
+                    $bulan2 = $this->input->post('bulan3_index_' . $i);
+                    $bulan3 = $this->input->post('bulan3_index_' . $i);
+                    $this->m_laporan->tambahKPIInternal($id_log_harian, $id_jenis, $bobot, $base, $stretch, $bulan1, $bulan2, $bulan3, $jenis);
                 }
-                $this->m_laporan->setStatusKPIInternal($depot,$tahun,$bulan_awal,$bulan_akhir);
-                $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah KPI Internal ' . $jenis . ' tahun ' . $tahun, 'Tambah');                
+                $this->m_laporan->setStatusKPIInternal($depot, $tahun, $bulan_awal, $bulan_akhir);
+                $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah KPI Internal ' . $jenis . ' tahun ' . $tahun, 'Tambah');
             }
             $data2['status_tambah'] = true;
         }
@@ -2945,6 +2944,381 @@ class laporan extends CI_Controller {
             $this->load->view('laporan/v_preview_bulanan', $data2);
             $this->footer();
         }
+    }
+
+    public function preview_triwulan() {
+        $this->load->model('m_laporan');
+        $depot = $this->session->userdata('id_depot');
+        $data2['laporan_ada'] = false;
+
+        if (!$this->input->post('cek')) {
+            redirect('laporan/triwulan');
+        } else {
+            $tahun = $this->input->post('tahun');
+            $jenis = $this->input->post('jenis');
+            $bulan_awal = 1;
+            $bulan_akhir = 3;
+            $tw = 'TW1';
+            if ($jenis == "Triwulan II") {
+                $bulan_awal = 4;
+                $bulan_akhir = 6;
+                $tw = 'TW2';
+            } else if ($jenis == "Triwulan III") {
+                $bulan_awal = 7;
+                $bulan_akhir = 9;
+                $tw = 'TW3';
+            } else if ($jenis == "Triwulan IV") {
+                $bulan_awal = 10;
+                $bulan_akhir = 12;
+                $tw = 'TW4';
+            }
+            
+            $month_name = array(1 => "Januari", 2 => "Februari", 3 => "Maret", 4 => "April", 5 => "Mei", 6 => "Juni", 7 => "Juli", 8 => "Agustus", 9 => "September", 10 => "Oktober", 11 => "November", 12 => "Desember");
+
+
+            $cek_ada = $this->m_laporan->cetKPIInternal($tahun, $depot, $bulan_awal, $bulan_akhir);
+            if ($cek_ada > 0) {
+                $data2['laporan_ada'] = true;
+                $data_kpi_internal = $this->m_laporan->getKPIInternal($tahun, $depot);
+                $data_depot = $this->m_laporan->getInfoDepot($depot);
+                $data_oam = $this->m_laporan->getInfoOAM();
+
+                $this->load->library('PHPExcel/Classes/PHPExcel');
+                $inputFileName = './data_laporan/template/triwulan.xls';
+
+                $objReader = PHPExcel_IOFactory::createReader('Excel5');
+                $objPHPExcel = $objReader->load($inputFileName);
+
+                // Set document properties
+                $objPHPExcel->getProperties()->setCreator("OSCRMS")
+                        ->setLastModifiedBy("OSCRMS")
+                        ->setTitle("Laporan Triwulan")
+                        ->setSubject("Laporan Triwulan")
+                        ->setDescription("Laporan Triwulan")
+                        ->setKeywords("Laporan Triwulan")
+                        ->setCategory("Laporan Triwulan");
+
+                /*
+                 * KPI Internal Depot
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('KPI Internal Depot');
+                $sheetData = $objPHPExcel->getActiveSheet();
+                $sheetData->setTitle('KPI Internal ' . $data_depot->NAMA_DEPOT);
+
+                $sheetData->setCellValue('C4', $tahun);
+                $sheetData->setCellValue('C5', 'Site Supervisor TBBM ' . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('C6', $month_name[$bulan_awal] . ' - ' . $month_name[$bulan_akhir] . ' ' . $tahun);
+                $sheetData->setCellValue('H9', $jenis);
+                $sheetData->setCellValue('J9', $jenis);
+                $sheetData->setCellValue('J10', $month_name[$bulan_awal]);
+                $sheetData->setCellValue('K10', $month_name[$bulan_awal + 1]);
+                $sheetData->setCellValue('L10', $month_name[$bulan_awal + 2]);
+
+                $index = 13;
+
+                foreach ($data_kpi_internal as $row) {
+                    $array = (array) $row;
+                    if ($index < 62) {
+                        $sheetData->setCellValue('G' . $index, $array['BOBOT']);
+                        $sheetData->setCellValue('H' . $index, $array[$tw . '_BASE']);
+                        $sheetData->setCellValue('I' . $index, $array[$tw . '_STRETCH']);
+                        $sheetData->setCellValue('J' . $index, $array['REALISASI_' . $tw . '_BULAN1']);
+                        $sheetData->setCellValue('K' . $index, $array['REALISASI_' . $tw . '_BULAN2']);
+                        $sheetData->setCellValue('L' . $index, $array['REALISASI_' . $tw . '_BULAN3']);
+                    } else if ($index == 65) {
+                        $sheetData->setCellValue('H' . $index, 'WTP');
+                        $sheetData->setCellValue('I' . $index, '--');
+                    } else if ($index == 66) {
+                        $sheetData->setCellValue('H' . $index, $array[$tw . '_BASE'] . '/green');
+                        $sheetData->setCellValue('I' . $index, '--');
+                    } else if ($index == 72) {
+                        $sheetData->setCellValue('H' . $index, $array[$tw . '_BASE']);
+                        $sheetData->setCellValue('I' . $index, $array[$tw . '_STRETCH']);
+                    } else {
+                        $sheetData->setCellValue('H' . $index, $array[$tw . '_BASE']);
+                        $sheetData->setCellValue('I' . $index, '--');
+                    }
+
+                    if ($index == 14 || $index == 18 || $index == 38 || $index == 41 || $index == 44 || $index == 58 || $index == 60) {
+                        $index+=2;
+                    } else if ($index == 23 || $index == 28 || $index == 34 || $index == 48 || $index == 55) {
+                        $index+=3;
+                    } else {
+                        $index++;
+                    }
+                }
+
+                $sheetData->setCellValue('J77', 'Site Supervisor TBBM ' . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('J82', $data_depot->NAMA_PEGAWAI);
+                
+                $sheetData->setCellValue('G77', 'Operation Manager Area '. AREA_OAM_ROMAWI);
+                $sheetData->setCellValue('G82', $data_oam->NAMA_PEGAWAI);
+
+                $t = 0;
+                for ($t = 0; $t < 3; $t++) {
+                    $bulan_cek = $bulan_awal + $t;
+                    /*
+                     * KPI Internal Depot tiga bulan
+                     */
+
+                    $cek_kpi_operasional = $this->m_laporan->cekKPIOperasional($depot, $tahun, $bulan_cek);
+                    if ($cek_kpi_operasional != 0) {
+                        $objPHPExcel->setActiveSheetIndexByName('KPI Operasional Bulan '.($t+1));
+                        $sheetData = $objPHPExcel->getActiveSheet();
+                        $sheetData->setTitle('KPI Operasional ' . $month_name[$bulan_cek]);
+
+                        $data_kpi_operasional = $this->m_laporan->getKPIOperasional($depot, $tahun, $bulan_cek);
+                        $total_kl = $this->m_laporan->getTotalKL($depot, $tahun, $bulan_cek);
+                        
+                        $sheetData->setCellValue('B4', 'Terminal BBM ' . $data_depot->NAMA_DEPOT);
+                        $sheetData->setCellValue('H4', 'Bulan ' . $month_name[$bulan_cek] . ' ' . $tahun);
+                        
+                        $index = 8;                        
+                        foreach($data_kpi_operasional as $row){
+                            $sheetData->setCellValue('G'.$index, $row->TARGET);
+                            $sheetData->setCellValue('I'.$index, $row->REALISASI);
+                            $index++;
+                            if($index == 10 || $index == 12 || $index == 17){
+                                $index++;
+                            }else if($index == 19){
+                                $index++;
+                                $index++;
+                            }
+                        }
+                        
+                        $sheetData->setCellValue('E27', $total_kl);
+                        $sheetData->setCellValue('C36', 'Site Supervisor TBBM '. $data_depot->NAMA_DEPOT);
+                        $sheetData->setCellValue('H36', 'Operation Head TBBM '. $data_depot->NAMA_DEPOT);
+                        $sheetData->setCellValue('C41', $data_depot->NAMA_PEGAWAI);
+                        $sheetData->setCellValue('H41', $data_depot->NAMA_OH);
+                        
+                    } else {
+                        // Hapus Sheet
+                        $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI Operasional Bulan '.($t+1)));
+                        $objPHPExcel->removeSheetByIndex($sheetIndex);
+                    }
+                }
+                
+                // Sheet yang ditampilkan pertama
+                $objPHPExcel->setActiveSheetIndexByName('KPI Internal ' . $data_depot->NAMA_DEPOT);
+                
+                
+                $nama_file = 'data_laporan/triwulan/Laporan ' . $jenis . ' ' . $data_depot->NAMA_DEPOT . ' ' . $tahun . '.xls';
+
+                $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+                $objWriter->setPreCalculateFormulas(FALSE);
+                $objWriter->save('./' . $nama_file);
+
+                $data2['nama_file'] = base_url() . $nama_file;
+            }
+        }
+
+        $this->header(7, 3);
+        $this->load->view('laporan/v_preview_triwulan', $data2);
+        $this->footer();
+    }
+
+    public function preview_tahunan() {
+        $this->load->model('m_laporan');
+        $depot = $this->session->userdata('id_depot');
+        $data2['laporan_ada'] = false;
+
+        if (!$this->input->post('cek')) {
+            redirect('laporan/tahunan');
+        } else {
+            $tahun = $this->input->post('tahun');
+            $bulan_awal = 1;
+            $bulan_akhir = 12;
+            
+            $month_name = array(1 => "Januari", 2 => "Februari", 3 => "Maret", 4 => "April", 5 => "Mei", 6 => "Juni", 7 => "Juli", 8 => "Agustus", 9 => "September", 10 => "Oktober", 11 => "November", 12 => "Desember");
+
+
+            $cek_ada = $this->m_laporan->cetKPIInternal($tahun, $depot, $bulan_awal, $bulan_akhir);
+            if ($cek_ada > 0) {
+                $data2['laporan_ada'] = true;
+                $data_kpi_internal = $this->m_laporan->getKPIInternal($tahun, $depot);
+                $data_depot = $this->m_laporan->getInfoDepot($depot);
+                $data_oam = $this->m_laporan->getInfoOAM();
+
+                $this->load->library('PHPExcel/Classes/PHPExcel');
+                $inputFileName = './data_laporan/template/tahunan.xls';
+
+                $objReader = PHPExcel_IOFactory::createReader('Excel5');
+                $objPHPExcel = $objReader->load($inputFileName);
+
+                // Set document properties
+                $objPHPExcel->getProperties()->setCreator("OSCRMS")
+                        ->setLastModifiedBy("OSCRMS")
+                        ->setTitle("Laporan Tahunan")
+                        ->setSubject("Laporan Tahunan")
+                        ->setDescription("Laporan Tahunan")
+                        ->setKeywords("Laporan Tahunan")
+                        ->setCategory("Laporan Tahunan");
+
+                /*
+                 * KPI Internal Depot
+                 */
+                $objPHPExcel->setActiveSheetIndexByName('KPI Internal Depot');
+                $sheetData = $objPHPExcel->getActiveSheet();
+                $sheetData->setTitle('KPI Internal ' . $data_depot->NAMA_DEPOT);
+
+                $sheetData->setCellValue('C4', $tahun);
+                $sheetData->setCellValue('C5', 'Site Supervisor TBBM ' . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('C6', $month_name[$bulan_awal] . ' - ' . $month_name[$bulan_akhir] . ' ' . $tahun);
+                $sheetData->setCellValue('H9', 'KPI '. $tahun);
+                
+
+                $index = 13;
+
+                foreach ($data_kpi_internal as $row) {
+                    $array = (array) $row;
+                    if ($index < 62) {
+                        $sheetData->setCellValue('G' . $index, $array['BOBOT']);
+                        $sheetData->setCellValue('H' . $index, $array['TAHUN_BASE']);
+                        $sheetData->setCellValue('I' . $index, $array['TAHUN_STRETCH']);
+                        $sheetData->setCellValue('J' . $index, $array['TW1_BASE']);
+                        $sheetData->setCellValue('K' . $index, $array['TW1_STRETCH']);
+                        $sheetData->setCellValue('L' . $index, $array['REALISASI_TW1_BULAN1']);
+                        $sheetData->setCellValue('M' . $index, $array['REALISASI_TW1_BULAN2']);
+                        $sheetData->setCellValue('N' . $index, $array['REALISASI_TW1_BULAN3']);
+                        $sheetData->setCellValue('O' . $index, $array['TW2_BASE']);
+                        $sheetData->setCellValue('P' . $index, $array['TW2_STRETCH']);
+                        $sheetData->setCellValue('Q' . $index, $array['REALISASI_TW2_BULAN1']);
+                        $sheetData->setCellValue('R' . $index, $array['REALISASI_TW2_BULAN2']);
+                        $sheetData->setCellValue('S' . $index, $array['REALISASI_TW2_BULAN3']);
+                        $sheetData->setCellValue('T' . $index, $array['TW3_BASE']);
+                        $sheetData->setCellValue('U' . $index, $array['TW3_STRETCH']);
+                        $sheetData->setCellValue('V' . $index, $array['REALISASI_TW3_BULAN1']);
+                        $sheetData->setCellValue('W' . $index, $array['REALISASI_TW3_BULAN2']);
+                        $sheetData->setCellValue('X' . $index, $array['REALISASI_TW3_BULAN3']);
+                        $sheetData->setCellValue('Y' . $index, $array['TW4_BASE']);
+                        $sheetData->setCellValue('Z' . $index, $array['TW4_STRETCH']);
+                        $sheetData->setCellValue('AA' . $index, $array['REALISASI_TW4_BULAN1']);
+                        $sheetData->setCellValue('AB' . $index, $array['REALISASI_TW4_BULAN2']);
+                        $sheetData->setCellValue('AC' . $index, $array['REALISASI_TW4_BULAN3']);
+                    } else if ($index == 65) {
+                        $sheetData->setCellValue('H' . $index, 'WTP');
+                        $sheetData->setCellValue('I' . $index, '--');
+                        $sheetData->setCellValue('J' . $index, 'WTP');
+                        $sheetData->setCellValue('K' . $index, '--');
+                        $sheetData->setCellValue('O' . $index, 'WTP');
+                        $sheetData->setCellValue('P' . $index, '--');
+                        $sheetData->setCellValue('T' . $index, 'WTP');
+                        $sheetData->setCellValue('U' . $index, '--');
+                        $sheetData->setCellValue('Y' . $index, 'WTP');
+                        $sheetData->setCellValue('Z' . $index, '--');
+                    } else if ($index == 66) {
+                        $sheetData->setCellValue('H' . $index, $array['TAHUN_BASE'] . '/green');
+                        $sheetData->setCellValue('I' . $index, '--');
+                        $sheetData->setCellValue('J' . $index, $array['TW1_BASE'] . '/green');
+                        $sheetData->setCellValue('K' . $index, '--');
+                        $sheetData->setCellValue('O' . $index, $array['TW2_BASE'] . '/green');
+                        $sheetData->setCellValue('P' . $index, '--');
+                        $sheetData->setCellValue('T' . $index, $array['TW3_BASE'] . '/green');
+                        $sheetData->setCellValue('U' . $index, '--');
+                        $sheetData->setCellValue('Y' . $index, $array['TW4_BASE'] . '/green');
+                        $sheetData->setCellValue('Z' . $index, '--');
+                    } else if ($index == 72) {
+                        $sheetData->setCellValue('H' . $index, $array['TAHUN_BASE']);
+                        $sheetData->setCellValue('I' . $index, $array['TAHUN_STRETCH']);
+                        $sheetData->setCellValue('J' . $index, $array['TW1_BASE']);
+                        $sheetData->setCellValue('K' . $index, $array['TW1_STRETCH']);
+                        $sheetData->setCellValue('O' . $index, $array['TW2_BASE']);
+                        $sheetData->setCellValue('P' . $index, $array['TW2_STRETCH']);
+                        $sheetData->setCellValue('T' . $index, $array['TW3_BASE']);
+                        $sheetData->setCellValue('U' . $index, $array['TW3_STRETCH']);
+                        $sheetData->setCellValue('Y' . $index, $array['TW4_BASE']);
+                        $sheetData->setCellValue('Z' . $index, $array['TW4_STRETCH']);
+                    } else {
+                        $sheetData->setCellValue('H' . $index, $array['TAHUN_BASE']);
+                        $sheetData->setCellValue('I' . $index, '--');
+                        $sheetData->setCellValue('J' . $index, $array['TW1_BASE']);
+                        $sheetData->setCellValue('K' . $index, '--');
+                        $sheetData->setCellValue('O' . $index, $array['TW2_BASE']);
+                        $sheetData->setCellValue('P' . $index, '--');
+                        $sheetData->setCellValue('T' . $index, $array['TW3_BASE']);
+                        $sheetData->setCellValue('U' . $index, '--');
+                        $sheetData->setCellValue('Y' . $index, $array['TW4_BASE']);
+                        $sheetData->setCellValue('Z' . $index, '--');
+                    }
+
+                    if ($index == 14 || $index == 18 || $index == 38 || $index == 41 || $index == 44 || $index == 58 || $index == 60) {
+                        $index+=2;
+                    } else if ($index == 23 || $index == 28 || $index == 34 || $index == 48 || $index == 55) {
+                        $index+=3;
+                    } else {
+                        $index++;
+                    }
+                }
+
+                $sheetData->setCellValue('J77', 'Site Supervisor TBBM ' . $data_depot->NAMA_DEPOT);
+                $sheetData->setCellValue('J82', $data_depot->NAMA_PEGAWAI);
+                
+                $sheetData->setCellValue('G77', 'Operation Manager Area '. AREA_OAM_ROMAWI);
+                $sheetData->setCellValue('G82', $data_oam->NAMA_PEGAWAI);
+
+                $t = 0;
+                for ($t = 0; $t < 12; $t++) {
+                    $bulan_cek = $bulan_awal + $t;
+                    /*
+                     * KPI Internal Depot tiga bulan
+                     */
+
+                    $cek_kpi_operasional = $this->m_laporan->cekKPIOperasional($depot, $tahun, $bulan_cek);
+                    if ($cek_kpi_operasional != 0) {
+                        $objPHPExcel->setActiveSheetIndexByName('KPI Operasional Bulan '.($t+1));
+                        $sheetData = $objPHPExcel->getActiveSheet();
+                        $sheetData->setTitle('KPI Operasional ' . $month_name[$bulan_cek]);
+
+                        $data_kpi_operasional = $this->m_laporan->getKPIOperasional($depot, $tahun, $bulan_cek);
+                        $total_kl = $this->m_laporan->getTotalKL($depot, $tahun, $bulan_cek);
+                        
+                        $sheetData->setCellValue('B4', 'Terminal BBM ' . $data_depot->NAMA_DEPOT);
+                        $sheetData->setCellValue('H4', 'Bulan ' . $month_name[$bulan_cek] . ' ' . $tahun);
+                        
+                        $index = 8;                        
+                        foreach($data_kpi_operasional as $row){
+                            $sheetData->setCellValue('G'.$index, $row->TARGET);
+                            $sheetData->setCellValue('I'.$index, $row->REALISASI);
+                            $index++;
+                            if($index == 10 || $index == 12 || $index == 17){
+                                $index++;
+                            }else if($index == 19){
+                                $index++;
+                                $index++;
+                            }
+                        }
+                        
+                        $sheetData->setCellValue('E27', $total_kl);
+                        $sheetData->setCellValue('C36', 'Site Supervisor TBBM '. $data_depot->NAMA_DEPOT);
+                        $sheetData->setCellValue('H36', 'Operation Head TBBM '. $data_depot->NAMA_DEPOT);
+                        $sheetData->setCellValue('C41', $data_depot->NAMA_PEGAWAI);
+                        $sheetData->setCellValue('H41', $data_depot->NAMA_OH);
+                        
+                    } else {
+                        // Hapus Sheet
+                        $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI Operasional Bulan '.($t+1)));
+                        $objPHPExcel->removeSheetByIndex($sheetIndex);
+                    }
+                }
+                
+                // Sheet yang ditampilkan pertama
+                $objPHPExcel->setActiveSheetIndexByName('KPI Internal ' . $data_depot->NAMA_DEPOT);
+                
+                
+                $nama_file = 'data_laporan/tahunan/Laporan Tahunan ' . $data_depot->NAMA_DEPOT . ' ' . $tahun . '.xls';
+
+                $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+                $objWriter->setPreCalculateFormulas(FALSE);
+                $objWriter->save('./' . $nama_file);
+
+                $data2['nama_file'] = base_url() . $nama_file;
+            }
+        }
+
+        $this->header(7, 4);
+        $this->load->view('laporan/v_preview_tahunan', $data2);
+        $this->footer();
     }
 
     public function dummy_kinerja() {

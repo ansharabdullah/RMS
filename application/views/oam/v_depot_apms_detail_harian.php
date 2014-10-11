@@ -1,8 +1,43 @@
 <script type="text/javascript">
+    var start = 0;
+    var limit = 5;
     var apms;
-    var premium = new Array(88,144,89);
-    var solar = new Array(88,56,24);
-    var nama = new Array("Husein Kadir (56.611.01)","Salahoddin (56.611.02)","M.Iksan (56.694.01)");
+    var premium = new Array();
+    var solar = new Array();
+    var nama = new Array();
+<?php
+	$tampung_premium;
+	$tampung_solar;
+	foreach ($nama_apms as $apms) {
+		$status=0;
+		?>
+		nama.push("<?php echo $apms->NAMA_PENGUSAHA.' '.str_replace('.','',$apms->NO_APMS) ?>");
+		<?php
+		foreach ($grafik as $km) {
+			if($apms->NO_APMS == $km->NO_APMS)
+			{
+				$status=1;
+				$tampung_premium=$km->premium;
+				$tampung_solar=$km->solar;
+			}
+		}
+		if($status==1)
+		{
+			?>
+			premium.push(<?php echo $tampung_premium ?>);
+			solar.push(<?php echo $tampung_solar  ?>);
+			<?php
+		}
+		else
+		{
+			?>
+			premium.push(0);
+			solar.push(0);
+			<?php
+		}
+	}
+?>
+    //var nama = new Array("Husein Kadir (56.611.01)","Salahoddin (56.611.02)","M.Iksan (56.694.01)");
     $(function() {
         apms = new Highcharts.Chart({ 
             chart: {
@@ -14,7 +49,7 @@
                 x: -20 //center
             },
             subtitle: {
-                text: '<?php echo $tanggal ?>',
+                text: '<?php echo $hari.' '.$nama_bulan.' '.$tahun ?>',
                 x: -20
             },
             xAxis: {
@@ -57,9 +92,55 @@
                 }]
         });
     });
-
+	
+        $(document).ready(function(){
+            $("#sebelum").hide();
+            if(nama.length < limit)
+            {
+                $("#selanjutnya").hide();
+            }
+			setData();
+            apms.series[0].setVisible(true);
+        });
     
     
+        function sebelumOnClick()
+        {
+            $("#sebelum").show();
+            start -=limit;
+            if(start - limit < 0)
+            {
+                start = 0;
+                $("#sebelum").hide();
+            }
+            else
+            {
+                start = start - limit;
+            }
+            $("#selanjutnya").show();
+            setData();
+        }
+    
+        function selanjutnyaOnClick()
+        {
+            $("#selanjutnya").show();
+            start += limit;
+            if(start + limit >= nama.length)
+            {
+                $("#selanjutnya").hide();
+            }
+            $("#sebelum").show();
+            
+            setData();
+        }
+    
+        function setData()
+        {
+            
+            apms.xAxis[0].setCategories(nama.slice(start,start + limit));
+            apms.series[0].setData(premium.slice(start,start + limit));
+            apms.series[1].setData(solar.slice(start,start + limit));
+		}
 </script>
 
 <section id="main-content">
@@ -101,51 +182,57 @@
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>
                                     <tr>
-                                        <th rowspan="2" style="display:none;"></th>
-                                        <th rowspan="2">No</th>
-                                        <th rowspan="2">No.APMS</th>
-                                        <th rowspan="2">Nama Pengusaha</th>
-                                        <th colspan="2">Premium</th>
-                                        <th colspan="2">Solar</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Alokasi APMS perBulan (KL)</td>
-                                        <td>Realisasi</td>
-                                        <td>Alokasi APMS perBulan (KL)</td>
-                                        <td>Realisasi</td>
+                                        <th style="display:none;"></th>
+                                        <th>No</th>
+                                        <th>ID APMS</th>
+                                        <th>Nama Pengusaha</th>
+                                        <th>Premium (KL)</th>
+                                        <th>Solar (KL)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td style="display: none;"></td>
-                                        <td>1</td>
-                                        <td>56.611.01</td>
-                                        <td>Husein Kadir</td>
-                                        <td>184</td>
-                                        <td>88</td>
-                                        <td>200</td>
-                                        <td>88</td>
+                                    <?php $i = 1;
+                                    foreach ($nama_apms as $row) { ?>
+                                    <td style="display:none;"></td>
+                                    <td><?php echo $i ?></td>
+                                    <td><?php echo $row->NO_APMS; ?></td>
+									<td><?php echo $row->NAMA_PENGUSAHA ?></td>
+                                    <td><?php 
+										$stat=0;
+										foreach ($grafik as $km) {
+											if($row->NO_APMS == $km->NO_APMS)
+											{
+												$stat=1;
+												echo $km->premium; 
+											}
+										}
+										if($stat==0)
+										{
+											echo "0";
+										}
+										?>
+									</td>
+                                    <td><?php 
+										$stat=0;
+										foreach ($grafik as $km) {
+											if($row->NO_APMS == $km->NO_APMS)
+											{
+												$stat=1;
+												echo $km->solar; 
+											}
+										}
+										
+										if($stat==0)
+										{
+											echo "0";
+										}
+										?>
+										</td>
                                     </tr>
-                                    <tr>
-                                        <td style="display: none;"></td>
-                                        <td>2</td>
-                                        <td>56.611.02</td>
-                                        <td>Salahoddin</td>
-                                        <td>144</td>
-                                        <td>144</td>
-                                        <td>56</td>
-                                        <td>56</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="display: none;"></td>
-                                        <td>3</td>
-                                        <td>56.694.01</td>
-                                        <td>M.Iksan</td>
-                                        <td>306</td>
-                                        <td>89</td>
-                                        <td>50</td>
-                                        <td>24</td>
-                                    </tr>
+                                    <?php
+                                    $i++;
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>

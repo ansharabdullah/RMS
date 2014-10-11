@@ -1,11 +1,12 @@
 <script type="text/javascript">
     
-    var rkap;
+    var rkap = 0;
     var realisasi_laba = 0;
     var data1 = new Array();
     var data2 = new Array();
     var data3 = new Array();
     var depot = new Array();
+    
 <?php
 foreach ($depot as $d) {
     $status = 0;
@@ -69,8 +70,9 @@ foreach ($depot as $d) {
     
 }
 ?>
+    
     <?php
-    if ($triwulan == 1) {
+    if ($triwulan == 1 && sizeof($rkap) > 0) {
                 ?>
                 rkap = <?php echo $rkap[0]->RKAP_OAM_TW1 ?>;
                 <?php
@@ -261,7 +263,7 @@ foreach ($depot as $d) {
                                             echo "<th>".$d."</th>";
                                         }
                                     ?>
-                                    <th>APMS</th>
+<!--                                    <th>APMS</th>-->
                                 </tr>
                             </thead>
                             <tbody>

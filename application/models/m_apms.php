@@ -13,6 +13,10 @@ class m_apms extends CI_Model {
         return $data->result();
     }
 	
+	public function selectApms($depot) {
+		$data = $this->db->query("select ID_APMS, NO_APMS,NAMA_PENGUSAHA from apms  where ID_DEPOT = $depot");
+        return $data->result();
+	}
 	public function countnoApms($depot) {
         $data = $this->db->query("select count(NO_APMS) as jumlah from apms where ID_DEPOT = $depot");
 		//var_dump ($data->row());
@@ -75,6 +79,11 @@ class m_apms extends CI_Model {
 		//var_dump($tahun,$depot);
         return $query->result();
 	}
+	public function get_max_bulan($depot,$tahun)
+	{
+		$query = $this->db->query("select (MAX(MONTH(l.TANGGAL_LOG_HARIAN))) as no_bulan from kinerja_apms k,log_harian l where  k.ID_LOG_HARIAN = l.ID_LOG_HARIAN and l.id_depot = $depot and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun'");
+		return $query->row();
+	}
 	public function get_grafik_bulan($depot,$bulan,$tahun) {
         $query = $this->db->query("select l.TANGGAL_LOG_HARIAN,(DAY(l.TANGGAL_LOG_HARIAN ))as hari,sum(k.PREMIUM) as premium,sum(k.SOLAR) as solar
                                     from kinerja_apms k, log_harian l 
@@ -85,7 +94,7 @@ class m_apms extends CI_Model {
         return $query->result();
     }
 	public function get_grafik_harian($depot,$bulan,$hari,$tahun) {
-		$query = $this->db->query("select a.NO_APMS,sum(k.PREMIUM) as premium,sum(k.SOLAR) as solar from kinerja_apms k,log_harian l,apms a  
+		$query = $this->db->query("select a.ID_APMS, a.NO_APMS,sum(k.PREMIUM) as premium,sum(k.SOLAR) as solar from kinerja_apms k,log_harian l,apms a  
                                     where a.ID_APMS = k.ID_APMS
                                     and k.ID_LOG_HARIAN = l.ID_LOG_HARIAN 
                                     and DAY(l.TANGGAL_LOG_HARIAN) = '$hari' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' 

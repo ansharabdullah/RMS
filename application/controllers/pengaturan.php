@@ -379,7 +379,7 @@ class pengaturan extends CI_Controller {
                     $end_date = date('Y') . '-12-31';
                     $i = 0;
                     while (strtotime($date) <= strtotime($end_date)) {
-                        $data[$i] = array(
+                        $data3[$i] = array(
                             'id_depot' => $depot,
                             'tanggal_log_harian' => $date
                         );
@@ -387,7 +387,7 @@ class pengaturan extends CI_Controller {
                         $i++;
                     }
                 }
-                    $this->m_log_harian->insertLogHarian($data);
+                    $this->m_log_harian->insertLogHarian($data3);
                     $pesan = "Data berhasil ditambah.";
                     $data1['feedback'] = 1;
                     $data1['pesan'] = $pesan;

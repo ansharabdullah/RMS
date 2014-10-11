@@ -132,6 +132,17 @@ if ( ! function_exists('menu_ss'))
                                             </a>");
                      $set['keterangan'] = $set['keterangan']. "<a href='".base_url()."ba/berita_acara'>Berita Acara belum dibuat.</a><br/>";
                 }
+                
+                 //cek kuota apms
+                if ($logHarian[$i]['kuota_apms'] == 0) {
+                    $totalNotif++;
+                    array_push($arrNotif, "<a href='".base_url()."ba/berita_acara'>
+                                            <span class='label label-warning'><i class='icon-check'></i></span>
+                                          Kuota APMS belum diisi.
+                                            </a>");
+                     $set['keterangan'] = $set['keterangan']. "<a href='".base_url()."apms/rencana_apms'>Kuota APMS belum diisi.</a><br/>";
+                }
+                
               if($logHarian[$i]['bulan'] == date('n') && $logHarian[$i]['tahun'] == date('Y')) array_push($arrPeringatan,$set);
            }
         }
@@ -272,6 +283,15 @@ if ( ! function_exists('menu_oam'))
                         array_push($arrNotif, "<a href='#'>
                                                 <span class='label label-warning'><i class='icon-check'></i></span>
                                               Berita Acara belum dibuat.
+                                                </a>");
+                     }
+                     
+                     //cek ba
+                    if ($logHarian[$i]['kuota_apms'] == 0) {
+                        $totalNotif++;
+                        array_push($arrNotif, "<a href='#'>
+                                                <span class='label label-warning'><i class='icon-check'></i></span>
+                                              Kuota APMS belum diisi.
                                                 </a>");
                      }
                }

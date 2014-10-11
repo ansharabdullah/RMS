@@ -114,7 +114,7 @@ function DateToIndo($date) {
                 text: 'Grafik Realisasi Penyaluran Jumlah Premium APMS'
             },
             subtitle: {
-                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun ?>'
+                text: 'Bulan <?php echo $nama_bulan;?> Tahun <?php echo $tahun ?>'
             },
             plotOptions: {
                 column: {
@@ -362,7 +362,6 @@ function DateToIndo($date) {
 					</div>
 				</div>
             </section>
-
             <section class="panel">
                 <header class="panel-heading">
                     Tabel Kinerja APMS  
@@ -383,8 +382,8 @@ function DateToIndo($date) {
                                     <th>No. Delivery</th>
                                     <th>Tanggal Delivery</th>
                                     <th>Tanggal Plan GI</th>
-                                    <th>Bahan Bakar</th>
-                                    <th>Volume (KL)</th>
+                                    <th>Premium</th>
+                                    <th>Solar</th>
                                     <th>Nomor Order</th>
                                     <th>Tanggal Order</th>
                                     <th>Tanggal Pengiriman</th>
@@ -403,8 +402,8 @@ function DateToIndo($date) {
                                     <td><?php echo $row->NO_DELIVERY; ?></td>
                                     <td><?php echo $row->DATE_DELIVERY; ?></td>
                                     <td><?php echo $row->DATE_PLAN_GI; ?></td>
-                                    <td><?php echo $row->SOLAR; ?></td>
                                     <td><?php echo $row->PREMIUM; ?></td>
+                                    <td><?php echo $row->SOLAR; ?></td>
                                     <td><?php echo $row->ORDER_NUMBER; ?></td>
                                     <td><?php echo $row->DATE_ORDER; ?></td>
                                     <td><?php echo $row->PENGIRIMAN_KAPAL; ?></td>
@@ -412,8 +411,9 @@ function DateToIndo($date) {
                                     <td><?php echo $row->DATE_KAPAL_BERANGKAT; ?></td>
                                     <td><?php echo $row->DESCRIPTION; ?></td>
                                     
+
                                     
-                                   <td><a onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->SOLAR ?>', '<?php echo $row->PREMIUM ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                   <td><a onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->PREMIUM ?>', '<?php echo $row->SOLAR ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                    </td>
                                 </tr>
                                 <?php $i++;
@@ -421,7 +421,7 @@ function DateToIndo($date) {
                             </tbody>
                         </table>
                     </div>
-                </div>s
+                </div>
             </section>
             <!-- page end-->
         </section>
@@ -452,7 +452,7 @@ function DateToIndo($date) {
 	
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="mymodalform" method="post" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
+            <form class="cmxform form-horizontal tasi-form" id="mymodalform" method="post" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS.'/'.$bulan.'/'.$tahun?>">
 				<input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -549,7 +549,7 @@ function DateToIndo($date) {
 	
     <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="Modalform" method="POST" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
+            <form class="cmxform form-horizontal tasi-form" id="Modalform" method="POST" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS.'/'.$bulan.'/'.$tahun?>">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -575,9 +575,8 @@ function DateToIndo($date) {
                         <div class="form-group ">
                             <label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
                             <div class="col-lg-4">
-								<select class="form-control input-sm m-bot15" id="bh1" name="bh1">
-									<option value="Premium">Premium
-									</option>
+								<select class="form-control input-sm m-bot15" id="bh" name="bh">
+									<option value="Premium">Premium</option>
 									<option value="Solar">Solar</option>
 								</select>
 							</div>
@@ -654,13 +653,22 @@ function DateToIndo($date) {
     
 	//kinerja
 	function editKinerja(id_kinerja_apms,id_log_harian,no_delivery, tgl_delivery, tgl_plan_gi, bh, jml, nomor_order, tgl_order, tgl_kirim,tgl_kpl_dtg,tgl_kpl_brgkt,des) {
+		alert(jml);
 		$("#id_log").val(id_log_harian);
 		$("#id_kinerja_apms").val(id_kinerja_apms);
 		$("#no_delivery1").val(no_delivery);
 		$("#tgl_delivery1").val(tgl_delivery);
 		$("#tgl_plan_gi1").val(tgl_plan_gi);
-		$("#bh1").val(bh);
-		$("#jml1").val(jml);
+		if(bh==0)
+		{
+			$("#bh").val('Solar');
+			$("#jml1").val(jml);
+		}
+		else
+		{
+			$("#bh").val('Premium');
+			$("#jml1").val(bh);
+		}
 		$("#nomor_order1").val(nomor_order);
 		$("#tgl_order1").val(tgl_order);
 		$("#tgl_kirim1").val(tgl_kirim);

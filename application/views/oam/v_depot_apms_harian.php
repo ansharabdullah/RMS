@@ -41,31 +41,33 @@
                                 <div class="panel-body">
 
                                         <div class="space15"></div>
-                                        <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                                       <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                             <thead>
                                                 <tr>
                                                     <th style="display:none;"></th>
                                                     <th >No</th>
                                                     <th >Tanggal</th>
-                                                    <th >Jumlah Premium</th>
-                                                    <th >Jumlah Solar</th>
+                                                    <th >Premium (KL)</th>
+                                                    <th >Solar (KL)</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td style="display:none;"></td>
-                                                    <td>1</td>
-                                                    <td>6 <?php echo strftime("%B Y", mktime(0, 0, 0, $bulan, 1, $tahun))?></td>
-                                                    <td>321</td>
-                                                    <td>168</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="display:none;"></td>
-                                                    <td>2</td>
-                                                    <td>20 <?php echo strftime("%B Y", mktime(0, 0, 0, $bulan, 1, $tahun))?></td>
-                                                    <td>313</td>
-                                                    <td>138</td>
-                                                </tr>
+                                                <?php
+                                                $i = 1;
+                                                foreach ($grafik as $km) {
+                                                    ?>
+                                                    <tr class="">
+                                                        <td style="display:none;"></td>
+                                                        <td><?php echo $i ?></td>
+                                                        <td style="white-space: nowrap"><?php echo $km->hari.' '.$nama_bulan.' '.$tahun;?></td>
+                                                        <td><?php echo $km->premium ?></td>
+                                                        <td><?php echo $km->solar ?></td>
+                                                    </tr>
+                                                    <?php
+                                                    $i++;
+                                                }
+                                                ?>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -81,36 +83,81 @@
 </section>
 
 <script type="text/javascript">
+        var apms;
+    var hari = new Array();
+    var solar = new Array();
+    var premium = new Array();
+    var premium1 = new Array();
     
-    var tanggal = new Array(6,20);
-    var apms;
-    var premium = new Array(321,313);
-    var solar = new Array(168,138);
+    <?php
+	$status=0;
+	$tampung=0;
+	
+	$jumlah = 0;
+	$bulansekarang = $tahun . "-" . $bulan;
+	if ($bulansekarang == date('Y-m',strtotime($tahun . "-" . $bulan))) {
+		$jumlah = date('d');
+	} else if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
+		$jumlah = 31;
+	} else if ($bulan == 4 || $bulan == 6 || $bulan == 9 || $bulan == 11) {
+		$jumlah = 30;
+	} else if ($bulan == 2) {
+		$jumlah = 28;
+		//jika kabisat
+		if (date('L', strtotime($tahun . '-01-01'))) {
+			$jumlah = 29;
+		}
+	}
+
+	for($i=1;$i<=$jumlah;$i++)
+	{
+		$prem=0;
+		$sol=0;
+		$status=0;
+		$k=0
+		?>
+		hari.push(<?php echo $i; ?>);
+        <?php
+		foreach($grafik as $isi){
+				if($isi->hari == $i) 
+				{ 
+					$status =1;
+					$prem = $isi->premium;
+					$sol = $isi->solar;
+				}
+				$k++;
+		}
+		if($status==1 && $k!=0)
+		{
+					 ?> 
+					 premium.push(<?php echo $prem; ?>); 
+					 premium1.push(<?php echo $prem; ?>); 
+					 solar.push(<?php echo $sol; ?>);
+					 <?php
+		}
+		else if($status == 0 && $k!=0)
+		{
+					 ?> 
+					 premium1.push(0); 
+					 premium.push(0); 
+					 solar.push(0);
+					 <?php
+		}
+	}
+    ?>
     $(function() {
-       apms = new Highcharts.Chart({ 
+        apms = new Highcharts.Chart({ 
             chart: {
                 renderTo:'grafik'
             },
             title: {
-                text: 'Grafik Realisasi Penyaluran Harian APMS Depot <?php echo $nama_depot?>'
+                text: 'Grafik Kinerja Harian Jumlah Premium APMS'
             },
             subtitle: {
-                text: 'Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
-            },
-            plotOptions: {
-                series: {
-                   point:{
-                      events:{
-                        click: function(event) {
-                               var tgl = '<?php echo $tahun."-".$bulan."-";?>'+this.category;
-                                window.location = "<?php echo base_url() ?>depot/apms_depot_detail/<?php echo $id_depot?>/<?php echo $nama_depot?>/"+tgl;
-                            }
-                        }
-                    }
-                }
+                text: 'Bulan <?php echo $nama_bulan ?> Tahun <?php echo $tahun ?>'
             },
             xAxis: [{
-                    categories: tanggal
+                    categories: hari
                 }],
             yAxis: [{// Primary yAxis
                     labels: {
@@ -120,30 +167,57 @@
                         }
                     },
                     title: {
-                        text: 'Jumlah',
+                        text: 'Total',
                         style: {
                             color: Highcharts.getOptions().colors[1]
                         }
                     }
                 }],
+            plotOptions: {
+                  series: {
+                    cursor:'pointer',
+                    point:{
+                      events:{
+                        click: function(event) {
+                            if(this.y!=0)
+                            {
+                                    var tanggal = hari[this.x] + '-<?php echo $bulan?>-<?php echo $tahun?>';
+                                    window.location = "<?php echo base_url() ?>depot/apms_depot_detail/<?php echo $id_depot?>/"+tanggal;
+                            }
+                         }
+                        }
+                    }
+                }
+            },
+
             tooltip: {
                 shared: true
             },
             legend: {
-               enabled:false
+                enabled:true
             },
             series: [{
-                    type: 'column',
+                    type: 'spline',
                     name: 'Premium',
-                     data: premium
-                },{
-                    type: 'column',
-                    name: 'Solar',
-                     data: solar
+                    data: premium
                 }]
         });
     });
     
+    
+    function filterAPMS(title)
+    {
+        apms.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' APMS'});  
+        if(title == "Premium"){
+             apms.series[0].setData(premium1);
+			 apms.legend.allItems[0].update({name:title});
+        }
+        else if(title == "Solar"){
+            apms.series[0].setData(solar);
+			apms.legend.allItems[0].update({name:title});
+        }
+        
+    }
 </script>
 
 

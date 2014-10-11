@@ -80,6 +80,13 @@ class m_log_harian extends CI_Model {
                     $set['jadwal'] = 0;
                     $set['notifikasi'] = 1;
                 }
+                
+                //cek kuota apms
+                if($dt->STATUS_KUOTA_APMS == 0)
+                {
+                    $set['kuota_apms'] = 0;
+                    $set['notifikasi'] = 1;
+                }
             }
             if ($dt->STATUS_INPUT_KINERJA == 0) {
                 $set['input_kinerja'] = 0;
@@ -178,6 +185,13 @@ class m_log_harian extends CI_Model {
                         $set['jadwal'] = 0;
                         $set['notifikasi'] = 1;
                     }
+                    
+                    //cek kuota apms
+                    if($dt->STATUS_KUOTA_APMS == 0)
+                    {
+                        $set['kuota_apms'] = 0;
+                        $set['notifikasi'] = 1;
+                    }
                 }
                 else
                 {
@@ -268,13 +282,17 @@ class m_log_harian extends CI_Model {
         $data = $this->db->get('log_harian');
         return $data->result();
 	}
-	public function updateKoutaLog($now)
+	public function updateKoutaLog($depot,$tahun,$bulan)
 	{
-		$this->db->query("update log_harian set STATUS_KUOTA_APMS=1 where ID_LOG_HARIAN=$now");
+		$this->db->query("update log_harian set STATUS_KUOTA_APMS=1 where ID_DEPOT = $depot and YEAR(TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(TANGGAL_LOG_HARIAN) = '$bulan'");
 	}
-	public function updateKoutaLogHapus($now)
+	public function updateKoutaLogHapus($depot,$tahun,$bulan)
 	{
-		$this->db->query("update log_harian set STATUS_KUOTA_APMS=0 where ID_LOG_HARIAN=$now");
+		$this->db->query("update log_harian set STATUS_KUOTA_APMS=0 where ID_DEPOT = $depot and YEAR(TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(TANGGAL_LOG_HARIAN) = '$bulan'");
+	}
+	public function updateStatusKPIAPMS($depot,$tahun,$bulan)
+	{
+		$this->db->query("update log_harian set STATUS_KPI_APMS=1 where ID_DEPOT = $depot and YEAR(TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(TANGGAL_LOG_HARIAN) = '$bulan'");
 	}
 }
 
