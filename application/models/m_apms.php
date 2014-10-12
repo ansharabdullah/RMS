@@ -12,7 +12,90 @@ class m_apms extends CI_Model {
 		//var_dump ($data->result());
         return $data->result();
     }
-	
+	public function periksaApms($depot,$id_apms,$ship_to) {
+		$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and NO_APMS = '$id_apms'");
+		$hasil = $data->row();
+		if($hasil->jumlah > 0)
+		{
+			$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and SHIP_TO = '$ship_to'");
+			$hasil = $data->row();
+			if($hasil->jumlah>0)
+			{
+				return 3;
+			}else
+			{
+				return 1;
+			}
+		}
+		else
+		{
+			$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and SHIP_TO = '$ship_to'");
+			$hasil = $data->row();
+			if($hasil->jumlah>0)
+			{
+				return 2;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		
+	}
+	public function periksaeditApms($depot,$no_apms,$ship_to,$id_apms) {
+		$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and NO_APMS = '$no_apms' and ID_APMS != $id_apms");
+		$hasil = $data->row();
+		if($hasil->jumlah > 0)
+		{
+			$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and SHIP_TO = '$ship_to' and ID_APMS != $id_apms");
+			$hasil = $data->row();
+			if($hasil->jumlah>1)
+			{
+				return 3;
+			}else
+			{
+				return 1;
+			}
+		}
+		else
+		{
+			$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and SHIP_TO = '$ship_to' and ID_APMS != $id_apms");
+			$hasil = $data->row();
+			if($hasil->jumlah>0)
+			{
+				return 2;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		
+	}
+	public function periksaKinerjaApms($depot,$id_log,$no_delivery) {
+		$data = $this->db->query("select count(i.ID_KINERJA_APMS) as jumlah from kinerja_apms i, log_harian l where i.ID_LOG_HARIAN = l.ID_LOG_HARIAN and l.ID_DEPOT = $depot and i.NO_DELIVERY = $no_delivery");
+		$hasil = $data->row();
+		if($hasil->jumlah>0)
+		{
+			return 1;
+		}else
+		{
+			return 0;
+		}
+		
+	}
+	public function periksaeditKinerjaApms($depot,$id_log,$no_delivery,$id_kinerja) {
+		$data = $this->db->query("select count(i.ID_KINERJA_APMS) as jumlah from kinerja_apms i, log_harian l where i.ID_LOG_HARIAN = l.ID_LOG_HARIAN and l.ID_DEPOT = $depot and i.NO_DELIVERY = $no_delivery");
+		$hasil = $data->row();
+		if($hasil->jumlah>0)
+		{
+			return 1;
+		}else
+		{
+			return 0;
+		}
+		
+	}
 	public function selectApms($depot) {
 		$data = $this->db->query("select ID_APMS, NO_APMS,NAMA_PENGUSAHA from apms  where ID_DEPOT = $depot");
         return $data->result();

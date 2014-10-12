@@ -193,7 +193,7 @@ function DateToIndo($date) {
 				<button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
                         </button>
-                <strong>Error!</strong> 
+                <strong>Error!</strong> <?php echo $pesan_text;?>
             </div>
         <?php } ?>
             <?php foreach ($apms as $row) { ?>
@@ -261,14 +261,14 @@ function DateToIndo($date) {
                     Edit APMS
                 </header>
                 <div class="panel-body bio-graph-primary" >
-                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS?>">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>apms/detail_apms/<?php echo $row->ID_APMS.'/'.$bulan.'/'.$tahun?>">
                         <div class="panel-body">
                             <input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                             <div class="row">
                                 <div class="bio-row">
                                     <label for="no_apms" class="control-label col-lg-4">NO. APMS</label>
                                     <div class="col-lg-6">
-                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NO_APMS ?>" id="no_apms" name="no_apms"  type="text" readonly />
+                                        <input class=" form-control input-sm m-bot15" value="<?php echo $row->NO_APMS ?>" id="no_apms" name="no_apms"  type="text"/>
                                     </div>
                                 </div>
                                 <div class="bio-row">
@@ -588,7 +588,7 @@ function DateToIndo($date) {
 							<input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                             <label for="NO_DELIVERY" class="control-label col-lg-2">No. Delivery</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="no_delivery1" name="no_delivery1" type="text" readonly />
+                                <input class=" form-control input-sm m-bot15" id="no_delivery1" name="no_delivery1" type="text" />
                                 
                             </div>
 
