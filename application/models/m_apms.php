@@ -12,7 +12,90 @@ class m_apms extends CI_Model {
 		//var_dump ($data->result());
         return $data->result();
     }
-	
+	public function periksaApms($depot,$id_apms,$ship_to) {
+		$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and NO_APMS = '$id_apms'");
+		$hasil = $data->row();
+		if($hasil->jumlah > 0)
+		{
+			$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and SHIP_TO = '$ship_to'");
+			$hasil = $data->row();
+			if($hasil->jumlah>0)
+			{
+				return 3;
+			}else
+			{
+				return 1;
+			}
+		}
+		else
+		{
+			$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and SHIP_TO = '$ship_to'");
+			$hasil = $data->row();
+			if($hasil->jumlah>0)
+			{
+				return 2;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		
+	}
+	public function periksaeditApms($depot,$no_apms,$ship_to,$id_apms) {
+		$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and NO_APMS = '$no_apms' and ID_APMS != $id_apms");
+		$hasil = $data->row();
+		if($hasil->jumlah > 0)
+		{
+			$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and SHIP_TO = '$ship_to' and ID_APMS != $id_apms");
+			$hasil = $data->row();
+			if($hasil->jumlah>1)
+			{
+				return 3;
+			}else
+			{
+				return 1;
+			}
+		}
+		else
+		{
+			$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and SHIP_TO = '$ship_to' and ID_APMS != $id_apms");
+			$hasil = $data->row();
+			if($hasil->jumlah>0)
+			{
+				return 2;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		
+	}
+	public function periksaKinerjaApms($depot,$id_log,$no_delivery) {
+		$data = $this->db->query("select count(i.ID_KINERJA_APMS) as jumlah from kinerja_apms i, log_harian l where i.ID_LOG_HARIAN = l.ID_LOG_HARIAN and l.ID_DEPOT = $depot and i.NO_DELIVERY = $no_delivery");
+		$hasil = $data->row();
+		if($hasil->jumlah>0)
+		{
+			return 1;
+		}else
+		{
+			return 0;
+		}
+		
+	}
+	public function periksaeditKinerjaApms($depot,$id_log,$no_delivery,$id_kinerja) {
+		$data = $this->db->query("select count(i.ID_KINERJA_APMS) as jumlah from kinerja_apms i, log_harian l where i.ID_LOG_HARIAN = l.ID_LOG_HARIAN and l.ID_DEPOT = $depot and i.NO_DELIVERY = $no_delivery");
+		$hasil = $data->row();
+		if($hasil->jumlah>0)
+		{
+			return 1;
+		}else
+		{
+			return 0;
+		}
+		
+	}
 	public function selectApms($depot) {
 		$data = $this->db->query("select ID_APMS, NO_APMS,NAMA_PENGUSAHA from apms  where ID_DEPOT = $depot");
         return $data->result();
@@ -44,7 +127,7 @@ class m_apms extends CI_Model {
 	{
 		$data = $this->db->query("select (DAY(l.TANGGAL_LOG_HARIAN ))as hari,k.ID_KINERJA_APMS,k.ID_LOG_HARIAN,k.ID_APMS,k.NO_DELIVERY,k.DATE_DELIVERY,k.DATE_PLAN_GI,k.SOLAR,k.PREMIUM,k.ORDER_NUMBER,k.DATE_ORDER,k.PENGIRIMAN_KAPAL,k.DATE_KAPAL_DATANG,k.DATE_KAPAL_BERANGKAT,k.DESCRIPTION from kinerja_apms k,log_harian l
                                   where k.ID_LOG_HARIAN = l.ID_LOG_HARIAN and k.ID_APMS = $id_apms and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' 
-                                  order by l.TANGGAL_LOG_HARIAN asc");
+                                  order by k.DATE_PLAN_GI asc");
         return $data->result();
 	}
 	public function selectKinerjaGrafix($id_apms,$bulan,$tahun)
@@ -62,7 +145,11 @@ class m_apms extends CI_Model {
        $result = $this->db->update('apms', $data);
 	   return $result;
     }
-
+    public function deleteKinerjaApms($id) {
+        $this->db->where('ID_KINERJA_APMS', $id);
+          $result =$this->db->delete('kinerja_apms');
+		  return $result;
+    }
     public function deleteApms($id) {
         $this->db->where('ID_APMS', $id);
           $result =$this->db->delete('apms');
