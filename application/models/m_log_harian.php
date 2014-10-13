@@ -8,8 +8,9 @@ class m_log_harian extends CI_Model {
 
         //ambil semua tanggal di log harian
         $query = $this->db->query("select *,MONTH(TANGGAL_LOG_HARIAN) as bulan, DAY(TANGGAL_LOG_HARIAN) as tanggal,YEAR(TANGGAL_LOG_HARIAN) as tahun 
-                                    from log_harian 
-                                    where tanggal_log_harian <= CURDATE() and id_depot = $id_depot 
+                                    from log_harian ,depot
+                                    where tanggal_log_harian <= CURDATE() and log_harian.id_depot = $id_depot 
+                                    and log_harian.id_depot = depot.id_depot
                                     and  (status_input_kinerja = 0 or status_ms2 = 0 or status_interpolasi = 0 
                                     or status_kpi_operasional_internal = 0 or status_kpi_internal = 0 or status_penjadwalan = 0
                                     or generate_ba = 0 or status_koefisien = 0 or status_presensi_amt = 0 or status_presensi_mt = 0 or status_rencana = 0) 
@@ -35,6 +36,8 @@ class m_log_harian extends CI_Model {
             $set['presensi_mt'] = 1;
             $set['rencana'] = 1;
             $set['notifikasi'] = 0;
+            $set['kpi_apms'] = 1;
+            $set['kuota_apms'] = 1;
             if ($dt->tanggal == 1) {
                 //cek rencana
                 if($dt->STATUS_RENCANA == 0)
@@ -80,12 +83,21 @@ class m_log_harian extends CI_Model {
                     $set['jadwal'] = 0;
                     $set['notifikasi'] = 1;
                 }
-                
-                //cek kuota apms
-                if($dt->STATUS_KUOTA_APMS == 0)
+                if($dt->STATUS_APMS == 1)
                 {
-                    $set['kuota_apms'] = 0;
-                    $set['notifikasi'] = 1;
+                    //cek kuota apms
+                    if($dt->STATUS_KUOTA_APMS == 0)
+                    {
+                        $set['kuota_apms'] = 0;
+                        $set['notifikasi'] = 1;
+                    }
+
+                    //cek kpi apms
+                    if($dt->STATUS_KPI_APMS == 0)
+                    {
+                        $set['kpi_apms'] = 0;
+                        $set['notifikasi'] = 1;
+                    }
                 }
             }
             if ($dt->STATUS_INPUT_KINERJA == 0) {
@@ -138,6 +150,8 @@ class m_log_harian extends CI_Model {
             $set['rencana'] = 1;
             $set['notifikasi'] = 0;
             $set['kpi_oam'] = 1;
+            $set['kpi_apms'] = 1;
+            $set['kuota_apms'] = 1;
             if ($dt->tanggal == 1) {
                 if($dt->ID_DEPOT > 0)
                 {
@@ -186,11 +200,21 @@ class m_log_harian extends CI_Model {
                         $set['notifikasi'] = 1;
                     }
                     
-                    //cek kuota apms
-                    if($dt->STATUS_KUOTA_APMS == 0)
+                    if($dt->STATUS_APMS == 1)
                     {
-                        $set['kuota_apms'] = 0;
-                        $set['notifikasi'] = 1;
+                        //cek kuota apms
+                        if($dt->STATUS_KUOTA_APMS == 0)
+                        {
+                            $set['kuota_apms'] = 0;
+                            $set['notifikasi'] = 1;
+                        }  
+
+                        //cek kpi apms
+                        if($dt->STATUS_KPI_APMS == 0)
+                        {
+                            $set['kpi_apms'] = 0;
+                            $set['notifikasi'] = 1;
+                        }
                     }
                 }
                 else

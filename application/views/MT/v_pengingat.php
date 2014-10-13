@@ -15,7 +15,7 @@
                  ?>
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_APAR?>";
-                 ap['id_mobil'] = "<?php echo $a->ID_MOBIL?>";
+                 ap['id_m'] = "<?php echo $a->ID_MOBIL?>";
                  ap['nopol'] = "<?php echo $a->NOPOL?>";
                  ap['tgl_apar'] = "<?php echo $a->tgl_apar?>";
                  ap['apar'] = "<?php echo $a->apar?>";
@@ -45,6 +45,7 @@
                  ?>
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_SURAT?>";
+                 ap['id_mobil'] = "<?php echo $a->ID_MOBIL?>";
                  ap['suratnopol'] = "<?php echo $a->suratnopol?>";
                  ap['ID_JENIS_SURAT'] = "<?php echo $a->ID_JENIS_SURAT?>";
                  ap['tgl_akhir_surat'] = "<?php echo $a->tanggal_akhir_surat?>";
@@ -74,6 +75,7 @@
                          
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_BAN?>";
+                 ap['id_b'] = "<?php echo $a->ID_MOBIL?>";
                  ap['bannopol'] = "<?php echo $a->bannopol?>";
                  ap['tgl_ban'] = "<?php echo $a->tgl_ban?>";
                  ap['tgl_ganti'] = "<?php echo $a->tgl_ganti?>";
@@ -102,6 +104,7 @@
                  ?>
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_OLI?>";
+                 ap['id_o'] = "<?php echo $a->ID_MOBIL?>";
                  ap['olinopol'] = "<?php echo $a->olinopol?>";
                  ap['tgl_oli'] = "<?php echo $a->tgl_oli?>";
                  ap['tanggal_ganti_oli'] = "<?php echo $a->tanggal_ganti_oli?>";
@@ -188,7 +191,7 @@
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_APAR ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->apar; ?> hari</td>
                                         
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" data-toggle="modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" onclick="setDetail('<?php echo $i ?>')"><i class="icon-pencil"></i></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#myModal" data-toggle="modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" onclick="setDetail(<?php echo $i ?>)"><i class="icon-pencil"></i></a></td>
                                         </tr>
                                     <?php
                                 $i++;
@@ -287,7 +290,7 @@
                                     </td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->tanggal_akhir_surat; ?> hari</div></a></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_SURAT ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat" data-toggle="modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" onclick="setDetailSurat('<?php echo $i ?>')"><i class="icon-pencil"></i></a></td>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat" data-toggle="modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit Surat" onclick="setDetailSurat('<?php echo $i ?>')"><i class="icon-pencil"></i></a></td>
                                         
                                         
                                         
@@ -383,7 +386,8 @@
                             </select>
                         </div>
                     </div>
-                   
+                   <input type="hidden" class="form-control"  id="id_m"  name="id_mobil_apar" placeholder="Jenis Apar">
+                        
                     <div class="form-group">
                         <label class="col-lg-3 col-sm-2 control-label">Tanggal Apar</label><hr/>
                     </div>
@@ -436,7 +440,7 @@
                             <input type="text" class="form-control"  id="bannopol" readonly="readonly" name="bannopol" placeholder="Nopol">
                         </div>
                     </div>
-                
+                 <input type="hidden" class="form-control"  id="id_mobil"  name="id_mobil_ban" placeholder="">
                 <table class="table table-bordered" >
                     <tr>
                         <th>Ban</th>
@@ -501,7 +505,8 @@
                             </select>
                         </div>
                     </div>
-                        <input type="text" class="form-control"  id="ID_MOBIL" readonly="readonly" name="ID_MOBIL" placeholder="Jenis Apar">
+                        <input type="hidden" class="form-control"  id="id_mobil_2"  name="id_mobil" placeholder="Jenis Apar">
+                        <input type="hidden" class="form-control"  id="id"  name="id" placeholder="Jenis Apar">
                             
                         <div class="form-group">
                             <label class="col-lg-12 col-sm-2 control-label">TANGGAL BERAKHIR SURAT</label><hr/>
@@ -556,10 +561,11 @@
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
                             <div class="col-lg-10">
                                
-                                <input type="text" class="form-control"  value ="" id="olinopol" readonly="readonly" name="olinopol" placeholder="Nopol">
+                                <input type="hidden" class="form-control"  value ="" id="olinopol" readonly="readonly" name="olinopol" placeholder="Nopol">
                             
                             </div>
                         </div>
+                        <input type="text" class="form-control"  id="id_o"  name="id_mobil_oli" placeholder="Jenis Apar">
                         <div class="form-group">
                             <label for="nopol" class="col-lg-2 col-sm-2 control-label">KM AWAL</label>
                             <div class="col-lg-10">
@@ -634,6 +640,7 @@
 //            highlight = ".peringatan" + row;
             var action = "<?php echo base_url()?>mt/edit_reminder_apar/"+apar[index]['id'];
             
+            $("#id_m").val(apar[index]['id_m']);
             $("#tgl").val("");
             $("#nopol").val(apar[index]['nopol']);
             $("#tgl_apar").val(apar[index]['tgl_apar']);
@@ -650,9 +657,12 @@
         function setDetailSurat(index){
             
             var action = "<?php echo base_url()?>mt/edit_reminder_surat/"+surat[index]['id'];
+            
+            
+            $("#id").val(surat[index]['id']);
             $("#tgl").val("");
             $("#suratnopol").val(surat[index]['suratnopol']);
-            $("#ID_MOBIL").val(surat[index]['ID_MOBIL']);
+            $("#id_mobil_2").val(surat[index]['id_mobil']);
             $("#ID_JENIS_SURAT").val(surat[index]['ID_JENIS_SURAT']);
             $("#tgl_surat").val(surat[index]['tgl_surat']);
             $("#hari_surat").val(surat[index]['tgl_akhir_surat'] + " hari");
@@ -665,6 +675,7 @@
             
             var action = "<?php echo base_url()?>mt/edit_reminder_oli/"+oli[index]['id'];
             $("#tgl").val("");
+            $("#id_o").val(oli[index]['id_o']);
             $("#olinopol").val(oli[index]['olinopol']);
             $("#KM_AWAL").val(oli[index]['KM_AWAL']);
             $("#MERK_OLI").val(oli[index]['MERK_OLI']);
@@ -721,7 +732,7 @@
         
         }
     
-    function cekreminderban(id_ban,id_mobil,bannopol,tanggal_ban,tgl_ganti,posisi_ban,merk_ban,jenis_ban,no_seri_ban) {
+        function cekreminderban(id_ban,id_mobil,bannopol,tanggal_ban,tgl_ganti,posisi_ban,merk_ban,jenis_ban,no_seri_ban) {
                                                         $("#id_ban").val(id_ban);
                                                         $("#id_mobil").val(id_mobil);
                                                         $("#bannopol").val(bannopol);
@@ -731,8 +742,6 @@
                                                         $("#merk_ban").val(merk_ban);
                                                         $("#jenis_ban").val(jenis_ban);
                                                         $("#no_seri_ban").val(no_seri_ban);
-
-
                                                     }
 </script>
 

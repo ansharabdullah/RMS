@@ -11,6 +11,14 @@ class m_mt extends CI_Model {
         }
     }
     
+     public function getNopol($id){
+        $this->db->where('id_mobil',$id);
+        $this->db->select('nopol');
+        $this->db->from('mobil');
+        $data = $this->db->get();
+        return $data->row();
+    }
+    
     //Data Mobil Tangki
     public function insertMobil($data) {
         $this->db->insert('mobil', $data);
@@ -121,7 +129,7 @@ class m_mt extends CI_Model {
 
     //Data Surat
     public function selectSurat($id_mobil) {
-        $data = $this->db->query("select s.ID_SURAT,m.nopol,m.kapasitas,m.produk,s.TANGGAL_AKHIR_SURAT,s.KETERANGAN_SURAT,j.ID_JENIS_SURAT from mobil m, surat s,jenis_surat j where j.id_jenis_surat=s.id_jenis_surat and s.id_mobil=m.id_mobil and m.id_mobil = $id_mobil and (m.kapasitas='8' or m.kapasitas='16' or m.kapasitas='24' or m.kapasitas='32')");
+        $data = $this->db->query("select s.ID_SURAT,m.nopol,m.kapasitas,m.produk,s.TANGGAL_AKHIR_SURAT,s.KETERANGAN_SURAT,j.ID_JENIS_SURAT from mobil m, surat s,jenis_surat j where j.id_jenis_surat=s.id_jenis_surat and s.id_mobil=m.id_mobil and m.id_mobil = $id_mobil and (m.kapasitas='8' or m.kapasitas='16' or m.kapasitas='24' or m.kapasitas='32') order by s.TANGGAL_AKHIR_SURAT DESC");
         return $data->result();
     }
     

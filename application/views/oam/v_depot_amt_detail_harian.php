@@ -113,16 +113,12 @@
     
     function sebelumOnClick()
     {
-        $("#sebelum").show();
-        start -=limit;
-        if(start - limit < 0)
+       $("#sebelum").show();
+        start = start-limit;
+        if(start <= 0)
         {
             start = 0;
             $("#sebelum").hide();
-        }
-        else
-        {
-            start = start - limit;
         }
         $("#selanjutnya").show();
         setData();
@@ -142,13 +138,26 @@
     
     function setData()
     {
-       
+       var hide_arr = new Array();
+        var i;
+        for(i = 0 ; i < 5 ; i++)
+        {
+            if(amt.series[i].visible == false)
+            {
+                hide_arr.push(i);
+            }
+             amt.series[i].setVisible(true);
+        }
         amt.xAxis[0].setCategories(pegawai.slice(start,start + limit));
         amt.series[0].setData(km.slice(start,start + limit));
         amt.series[1].setData(kl.slice(start,start + limit));
         amt.series[2].setData(ritase.slice(start,start + limit));
         amt.series[3].setData(pendapatan.slice(start,start + limit));
         amt.series[4].setData(spbu.slice(start,start + limit));
+        for(i = 0 ; i < hide_arr.length ; i++)
+        {
+             amt.series[hide_arr[i]].setVisible(false);
+        }
     }
 </script>
 

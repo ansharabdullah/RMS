@@ -7,12 +7,8 @@ class login extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        if (!$this->session->userdata('isLoggedIn')) {
-            $this->load->model('m_user');
-            $this->load->model('m_log_harian');
-        } else {
-            redirect(base_url());
-        }
+        $this->load->model('m_user');
+        $this->load->model('m_log_harian');
     }
 
     public function index() {
@@ -20,8 +16,12 @@ class login extends CI_Controller {
     }
 
     public function login() {
-        $this->load->view('layouts/header');
-        $this->load->view('login/v_login');
+        if (!$this->session->userdata('isLoggedIn')) {
+            $this->load->view('layouts/header');
+            $this->load->view('login/v_login');
+        } else {
+            redirect(base_url());
+        }
     }
 
     public function validate_login() {
@@ -88,10 +88,14 @@ class login extends CI_Controller {
     }
 
     public function logout() {
-        $this->session->sess_destroy();
-        echo '<script type="text/javascript">alert("Terimakasih!");';
-        echo 'window.location.href="' . base_url() . '";';
-        echo '</script>';
+        if ($this->session->userdata('isLoggedIn')) {
+            $this->session->sess_destroy();
+            echo '<script type="text/javascript">alert("Terimakasih!");';
+            echo 'window.location.href="' . base_url() . '";';
+            echo '</script>';
+        }else{
+            redirect(base_url());
+        }
     }
 
 }

@@ -13,7 +13,7 @@
     var bio_solar = new Array();
     var own_use_mt = new Array();
     var ritase_mt = new Array();
-    var nopol_mt = new Array();
+    var nopol_mt = new Array(); 
 <?php
 foreach($mt as $m)
 {
@@ -26,6 +26,7 @@ foreach($mt as $m)
 
                         kl_mt.push(<?php echo $km->TOTAL_KL_MT ?>);
                         km_mt.push(<?php echo $km->TOTAL_KM_MT ?>);
+                        total_km_mt.push(<?php echo $km->TOTAL_KM_MT ?>);
                         premium.push(<?php echo $km->PREMIUM ?>);
                         pertamax.push(<?php echo $km->PERTAMAX ?>);
                         pertamax_plus.push(<?php echo $km->PERTAMAX_PLUS ?>);
@@ -46,6 +47,7 @@ foreach($mt as $m)
 
                         kl_mt.push(0);
                         km_mt.push(0);
+                        total_km_mt.push(0);
                         premium.push(0);
                         pertamax.push(0);
                         pertamax_plus.push(0);
@@ -96,7 +98,7 @@ foreach($mt as $m)
                 legend: {
                     borderWidth: 1
                 },
-                series: [{
+                 series: [{
                         name: 'KM',
                         data: km_mt.slice(start,start + limit),
                         visible: false
@@ -142,7 +144,8 @@ foreach($mt as $m)
         });
 
     
-        $(document).ready(function(){
+    
+       $(document).ready(function(){
             $("#sebelum").hide();
             if(nopol_mt.length < limit)
             {
@@ -156,15 +159,11 @@ foreach($mt as $m)
         function sebelumOnClick()
         {
             $("#sebelum").show();
-            start -=limit;
-            if(start - limit < 0)
+            start = start-limit;
+            if(start <= 0)
             {
                 start = 0;
                 $("#sebelum").hide();
-            }
-            else
-            {
-                start = start - limit;
             }
             $("#selanjutnya").show();
             setData();
@@ -179,12 +178,22 @@ foreach($mt as $m)
                 $("#selanjutnya").hide();
             }
             $("#sebelum").show();
+            
             setData();
         }
     
         function setData()
         {
-           
+            var hide_arr = new Array();
+            var i;
+            for(i = 0 ; i < 10 ; i++)
+            {
+                if( mt.series[i].visible == false)
+                {
+                    hide_arr.push(i);
+                }
+                 mt.series[i].setVisible(true);
+            }
             mt.xAxis[0].setCategories(nopol_mt.slice(start,start + limit));
             mt.series[0].setData(km_mt.slice(start,start + limit));
             mt.series[1].setData(kl_mt.slice(start,start + limit));
@@ -196,6 +205,11 @@ foreach($mt as $m)
             mt.series[7].setData(own_use_mt.slice(start,start + limit));
             mt.series[8].setData(bio_solar.slice(start,start + limit));
             mt.series[9].setData(ritase_mt.slice(start,start + limit));
+            for(i = 0 ; i < hide_arr.length ; i++)
+            {
+                 mt.series[hide_arr[i]].setVisible(false);
+            }
+            
         }
 </script>
 
@@ -247,7 +261,6 @@ foreach($mt as $m)
                         Tabel Kinerja Mobil Tangki <?php echo $tanggal ?>
                     </header>
                     <div class="panel-body">
-
                         <div class="adv-table editable-table " >
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
                                 <thead>

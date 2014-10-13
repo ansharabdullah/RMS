@@ -295,7 +295,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[19][1]?>" type="text" name="base20" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[19][2]?>"  type="text" name="stretch20" required="required" class="form-control"/></td>
+<!--                                <td><input value="<?php //echo $kpi[19][2]?>"  type="text" name="stretch20" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -304,7 +305,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[20][1]?>"  type="text" name="base21" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[20][2]?>"  type="text" name="stretch21" required="required" class="form-control"/></td>
+<!--                                <td><input value="<?php //echo $kpi[20][2]?>"  type="text" name="stretch21" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -313,7 +315,7 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[21][1]?>"  type="text" name="base22" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[21][2]?>"  type="text" name="stretch22" required="required" class="form-control"/></td>
+<!--                                <td><input value="<?php// echo $kpi[21][2]?>"  type="text" name="stretch22" required="required" class="form-control"/></td>-->
                                 <td></td>
                             </tr>
                             <tr>
@@ -321,8 +323,10 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input value="<?php echo $kpi[22][1]?>"  type="text" name="base23" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[22][2]?>"  type="text" name="stretch23" required="required" class="form-control"/></td>
+                                <td>WTP</td>
+                                <td></td>
+<!--                                <td><input value="<?php //echo $kpi[22][1]?>"  type="text" name="base23" required="required" class="form-control"/></td>-->
+<!--                                <td><input value="<?php //echo $kpi[22][2]?>"  type="text" name="stretch23" required="required" class="form-control"/></td>-->
                                 <td></td>
                             </tr>
                             <tr>
@@ -334,7 +338,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[23][1]?>"  type="text" name="base24" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[23][2]?>"  type="text" name="stretch24" required="required" class="form-control"/></td>
+<!--                                <td><input value="<?php //echo $kpi[23][2]?>"  type="text" name="stretch24" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -343,7 +348,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[24][1]?>"  type="text" name="base25" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[24][2]?>"  type="text" name="stretch25" required="required" class="form-control"/></td>
+<!--                                <td><input value="<?php //echo $kpi[24][2]?>"  type="text" name="stretch25" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -352,7 +358,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[25][1]?>"  type="text" name="base26" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[25][2]?>"  type="text" name="stretch26" required="required" class="form-control"/></td>
+<!--                                <td><input value="<?php //echo $kpi[25][2]?>"  type="text" name="stretch26" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -361,7 +368,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[26][1]?>"  type="text" name="base27" required="required" class="form-control"/></td>
-                                <td><input  value="<?php echo $kpi[26][2]?>"  type="text" name="stretch27" required="required" class="form-control"/></td>
+<!--                                <td><input  value="<?php //echo $kpi[26][2]?>"  type="text" name="stretch27" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -370,7 +378,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[27][1]?>"  type="text" name="base28" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[27][2]?>"  type="text" name="stretch28" required="required" class="form-control"/></td>
+<!--                                <td><input value="<?php //echo $kpi[27][2]?>"  type="text" name="stretch28" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -379,7 +388,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input value="<?php echo $kpi[28][1]?>"  type="text" name="base29" required="required" class="form-control"/></td>
-                                <td><input value="<?php echo $kpi[28][2]?>"  type="text" name="stretch29" required="required" class="form-control"/></td>
+<!--                                <td><input value="<?php// echo $kpi[28][2]?>"  type="text" name="stretch29" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>

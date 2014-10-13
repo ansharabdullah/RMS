@@ -127,6 +127,22 @@
                                                       Berita Acara belum dibuat.
                                                         <br/><br/>";
                                                 }
+                                                
+                                                 //cek kuota apms
+                                                if ($logHarian[$i]['kuota_apms'] == 0) {
+
+                                                    echo "<span class='label label-warning'><i class='icon-check'></i></span>
+                                                      Kuota APMS belum diisi.
+                                                        <br/><br/>";
+                                                }
+                                                
+                                                 //cek kpi apms ba
+                                                if ($logHarian[$i]['kpi_apms'] == 0) {
+
+                                                    echo "<span class='label label-warning'><i class='icon-check'></i></span>
+                                                      KPI APMS belum diisi.
+                                                        <br/><br/>";
+                                                }
                                             }
                                             if ($i == sizeof($logHarian)-1 || $id_depot != $logHarian[$i + 1]['id_depot']) {
                                         ?>

@@ -114,13 +114,14 @@ function DateToIndo($date) {
                                     foreach ($presensi as $row) {
                                         $hadir = "Absen";
                                         $text = "<span class='label label-danger'>Absen</span>";
-                                        foreach ($kinerja as $row2) {
-                                            if ($row->ID_MOBIL == $row2->ID_MOBIL) {
-                                                $text = "<span class='label label-success'>Hadir</span>";
-                                                $hadir = "Hadir";
-                                                break;
+                                        
+                                            foreach ($kinerja as $row2) {
+                                                if ($row->ID_MOBIL == $row2->ID_MOBIL) {
+                                                    $text = "<span class='label label-success'>Hadir</span>";
+                                                    $hadir = "Hadir";
+                                                    break;
+                                                }
                                             }
-                                        }
                                         ?>
                                             <td style="display:none;"></td>
                                             <td><?php echo $i; ?></td>

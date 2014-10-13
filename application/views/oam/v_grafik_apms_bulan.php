@@ -1,20 +1,75 @@
 <script type="text/javascript">
     var activeIndex = 1;
     //10 indikator KPI (nilai performansi)
-    var laporan_pembayaran = new Array(110,100,110,120);
-    var pembayaran = new Array(110,100,110,120);
-    var penyaluran = new Array(95,100,90,100);
-    var kehandalan = new Array(85,95,90,100);
-    var realisasi_penyaluran = new Array(93,95,100,120);
-    var progres_pembayaran = new Array(120,110,120,115);
-    var transportir = new Array(120,110,100,120);
-    var customer_apms = new Array(90,100,110,100);
-    var pelanggaran = new Array(100,90,95,100);
-    var accidents = new Array(100,90,100,100);
-    var bulan = new Array("Januari","Februari","Maret","April");
-    var nomor_bulan = new Array(1,2,3,4);
+    var laporan_pembayaran = new Array();
+    var pembayaran = new Array();
+    var penyaluran = new Array();
+    var kehandalan = new Array();
+    var realisasi_penyaluran = new Array();
+    var progres_pembayaran = new Array();
+    var transportir = new Array();
+    var customer_apms = new Array();
+    var pelanggaran = new Array();
+    var accidents = new Array();
+    var bulan = new Array();
+    var nomor_bulan = new Array();
 //    realisasi_pengiriman = pengiriman;
-
+<?php
+    $j = 0;
+    $index = 0;
+    for($i = 1 ; $i < date('n') ; $i++)
+    {
+        ?>
+        nomor_bulan.push(<?php echo $i ?>);
+        bulan.push("<?php echo strftime('%B',strtotime($tahun.'-'.$i.'-01'))?>");
+        <?php
+        $status = 0;
+        if($j < sizeof($kpi_bulan))
+        {
+            if($i == date('n',strtotime($kpi_bulan[$j]->tanggal))) {
+            ?>
+                laporan_pembayaran.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                pembayaran.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+                penyaluran.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+                kehandalan.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+                realisasi_penyaluran.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+                progres_pembayaran.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+                transportir.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+                customer_apms.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+                pelanggaran.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+                accidents.push(<?php echo $detail_kpi[$index]->NORMAL_SCORE?>);
+                <?php $index++;?>
+            <?php
+            $j++;
+            $status = 1;
+            }
+        }
+        if($status == 0)
+        {
+            ?>
+                laporan_pembayaran.push(0);
+                pembayaran.push(0);
+                penyaluran.push(0);
+                kehandalan.push(0);
+                realisasi_penyaluran.push(0);
+                progres_pembayaran.push(0);
+                transportir.push(0);
+                customer_apms.push(0);
+                pelanggaran.push(0);
+                accidents.push(0);
+            <?php
+            
+        }
+    }
+?>
     var kpi;
     $(function() {
          kpi = new Highcharts.Chart({ 
@@ -22,7 +77,7 @@
                 renderTo:'grafik2'
             },
             title: {
-                text: 'Laporan progres pembayaran ongkos angkut <?php echo $kpi_bulan[0]->nama_depot?>'
+                text: 'Laporan progres pembayaran ongkos angkut <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Tahun <?php echo $tahun?>'
@@ -40,7 +95,7 @@
                             click: function(event) {
                                if(activeIndex == 2)
                                 {
-                                    window.location = "<?php echo base_url() ?>depot/apms_depot_harian/<?php echo $id_depot?>/<?php echo $kpi_bulan[0]->nama_depot?>/"+nomor_bulan[this.x]+"/<?php echo $tahun?>";
+                                    window.location = "<?php echo base_url() ?>depot/apms_depot_harian/<?php echo $id_depot?>/"+nomor_bulan[this.x]+"/<?php echo $tahun?>";
                                 
                                 }
                             }
@@ -87,7 +142,7 @@
     
     function filter(title,index){
         activeIndex = index;
-        kpi.setTitle({text: title+' Depot 1'});
+        kpi.setTitle({text: title+' Depot <?php echo $nama_depot?>'});
         switch (index) {
             case 1:
                 kpi.series[0].setData(pembayaran);break;
@@ -115,11 +170,11 @@
         <!-- page start-->
                 <section class="panel">
                         <header class="panel-heading">
-                            Grafik KPI APMS Bulanan Depot <?php echo $kpi_bulan[0]->nama_depot?>
+                            Grafik KPI APMS Bulanan Depot <?php echo $nama_depot?>
                         </header>
                         <div class="panel-body" >
                             <?php $attr = array("class"=>"cmxform form-horizontal tasi-form");
-                                echo form_open("depot/changeGrafikBulan/",$attr);
+                                echo form_open("depot/changeGrafikApmsBulan/",$attr);
                             ?>
 
                                 <div class="form-group">
@@ -172,7 +227,7 @@
             </section>
                 <section class="panel">
                         <header class="panel-heading">
-                            Key Performance Indicator (KPI) Depot <?php echo $kpi_bulan[0]->nama_depot?> (Tahun <?php echo $tahun?>)
+                            Key Performance Indicator (KPI) Depot <?php echo $nama_depot?> (Tahun <?php echo $tahun?>)
                         </header>
                     <div class="panel-body">
                         <div class="space15">
@@ -189,46 +244,36 @@
                                     </tr>
                                 </thead>
                             <tbody>
-                                <tr>
-                                    <td rowspan="9" style="display:none;"></td>
-                                    <td rowspan="9">1</td>
-                                    <td rowspan="9">Januari</td>
-                                    <td rowspan="9">103 %</td>
-                                    <td>Laporan progres pembayaran ongkos angkut</td>
-                                    <td>102 %</td>
-                                </tr>
-                                <tr>
-                                    <td>Laporan realisasi penyaluran VS LO Planing</td>
-                                    <td>101 %</td>
-                                </tr>
-                                <tr>
-                                    <td>Laporan Kehandalan & Ketersediaan Alat angkut</td>
-                                    <td>100 %</td>
-                                </tr>
-                                <tr>
-                                    <td>Realisasi penyaluran VS Alokasi</td>
-                                    <td>102 %</td>
-                                </tr>
-                                <tr>
-                                    <td>Progress Pembayaran Ongkos Angkut Transportir</td>
-                                    <td>102 %</td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Transportir APMS</td>
-                                    <td>100 %</td>
-                                </tr>
-                                <tr>
-                                    <td>Customer  APMS</td>
-                                    <td>97 %</td>
-                                </tr>
-                                <tr>
-                                    <td>Pelanggaran atas Integritas Kinerja</td>
-                                    <td>101 %</td>
-                                </tr>
-                                <tr>
-                                    <td>Number of Accidents</td>
-                                    <td>100 %</td>
-                                </tr>
+                                <?php
+                                    $j = 0;
+                                    $index = 0;
+                                    $bulan ="";
+                                    while($j < sizeof($kpi_bulan)) {
+                                        ?>
+                                        <tr >
+                                            <td rowspan="10" style="display:none;"></td>
+                                            <td rowspan="10"><?php echo ($j + 1) ?></td>
+                                            <td rowspan="10"><?php echo strftime('%B',strtotime($kpi_bulan[$j]->tanggal));?></td>
+                                            <td rowspan="10"><?php echo round($kpi_bulan[$j]->total,2)?>%</td>
+                                            <td><?php echo $detail_kpi[$index]->JENIS_KPI_APMS?></td>
+                                            <td><?php echo $detail_kpi[$index]->NORMAL_SCORE?></td>
+                                        </tr>
+                                        <?php
+                                            $index++;
+                                            $temp = $index;
+                                            for($i = $index ; $i < ($temp + 8);$i++)
+                                            {
+                                                ?>
+                                                <tr >
+                                                    <td><?php echo $detail_kpi[$i]->JENIS_KPI_APMS?></td>
+                                                    <td><?php echo $detail_kpi[$index]->NORMAL_SCORE?></td>
+                                                </tr>
+                                                <?php
+                                                $index++;
+                                            }
+                                        $j++;
+                                    }
+                                    ?>
                             </tbody>
                         </table>
                     </div>

@@ -8,6 +8,11 @@ class m_depot extends CI_Model {
         return $query->result();
     }
     
+     public function get_depot_apms() {
+        $query = $this->db->query("select * from depot where ID_DEPOT > 0 and STATUS_APMS = 1");
+        return $query->result();
+    }
+    
     public function get_total_depot()
     {
         $query = $this->db->query("select * from depot where ID_DEPOT > 0");

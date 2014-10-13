@@ -121,35 +121,33 @@
                             <thead>
                                 <tr>
                                     <th style="display:none;"></th>
-                                    <th>No</th>
-                                    <th>NIP</th>
-                                    <th>Nama</th>
-                                    <th>Jabatan</th>
-                                    <th>Klasifikasi</th>
-                                    <th>Tanggal Masuk</th>
-                                    <th>Transportir Asal</th>
-                                    <th>No Telp</th>
-                                    <th>Status</th>
+                                    <th >No</th>
+                                    <th >Tanggal</th>
+                                    <th >Jumlah KM</th>
+                                    <th >Jumlah KL</th>
+                                    <th >Jumlah Ritase</th>
+                                    <th >Jumlah SPBU</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1;
-                                foreach ($amt as $row) { ?>
+                                <?php
+                                $i = 1;
+                                foreach ($kinerja_amt as $ka) {
+                                    ?>
                                     <tr class="">
                                         <td style="display:none;"></td>
-                                        <td><?php echo $i; ?></td>
-                                        <td><?php echo $row->NIP; ?></td>
-
-                                        <td><?php echo $row->NAMA_PEGAWAI; ?></td>
-                                        <td><?php echo $row->JABATAN; ?></td>
-                                        <td><?php echo $row->KLASIFIKASI; ?></td>
-                                        <td><?php echo $row->TANGGAL_MASUK; ?></td>
-                                        <td><?php echo $row->TRANSPORTIR_ASAL; ?></td>
-                                        <td><?php echo $row->NO_TELEPON; ?></td>
-                                        <td><span class="label label-success"><?php echo $row->STATUS; ?>.</span></td>
+                                        <td><?php echo $i ?></td>
+                                        <td style="white-space: nowrap"><?php echo strftime('%B',strtotime($ka->TANGGAL_LOG_HARIAN));?></td>
+                                       <td><?php echo $ka->total_km ?> KM</td>
+                                         <td><?php echo $ka->total_kl ?> KL</td>
+                                        <td><?php echo $ka->ritase ?> Rit</td>
+                                        <td><?php echo $ka->spbu ?> </td>
                                     </tr>
-                                    <?php $i++;
-                                } ?>
+                                    <?php
+                                    $i++;
+                                }
+                                ?>
+
                             </tbody>
                         </table>
                     </div>
