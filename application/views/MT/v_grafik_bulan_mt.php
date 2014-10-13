@@ -208,7 +208,10 @@
             series: [{
                     type: 'spline',
                     name: 'Jumlah',
-                    data: km_mt
+                    data: km_mt,
+                     tooltip:{
+                        valueSuffix:" KM"
+                    }
                 }]
         });
     });
@@ -216,33 +219,126 @@
     
     function filterMt(title)
     {
-        mt.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' Mobil Tangki'});  
+        mt.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' Mobil Tangki'});
+         mt.series[0].remove(true);
         if(title == "KM"){
-             mt.series[0].setData(total_km_mt);
+             //mt.series[0].setData(total_km_mt);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: total_km_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KM"
+                    }
+
+                }
+             );
         }
         else if(title == "KL"){
-            mt.series[0].setData(kl_mt);
-            
+            //mt.series[0].setData(kl_mt);
+            mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: kl_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Own Use"){
-            mt.series[0].setData(own_use_mt);
-                
+            //mt.series[0].setData(own_use_mt);
+              mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: own_use_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );  
         }else if(title == "Premium"){
-            mt.series[0].setData(premium);
-            
+            //mt.series[0].setData(premium);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: premium,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Pertamax"){
-            mt.series[0].setData(pertamax);
-            
+            //mt.series[0].setData(pertamax);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: pertamax,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Pertamax Plus") {
-            mt.series[0].setData(pertamax_plus);
-            
+           // mt.series[0].setData(pertamax_plus);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: pertamax_plus,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Pertamax Dex") {
-            mt.series[0].setData(pertamina_dex);
-            
+            //mt.series[0].setData(pertamina_dex);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: pertamina_dex,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Solar"){
-            mt.series[0].setData(solar);
-            
+            //mt.series[0].setData(solar);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: solar,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Bio Solar"){
-            mt.series[0].setData(bio_solar);
+            //mt.series[0].setData(bio_solar);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: bio_solar,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         } 
         
     }

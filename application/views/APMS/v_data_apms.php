@@ -69,7 +69,7 @@
                             </tr>
                         </thead>
                         <tbody>
-							<tr class="">
+							
                                 <?php $i = 1;
                                 foreach ($apms as $row) { ?>
                                     <td style="display:none;"></td>

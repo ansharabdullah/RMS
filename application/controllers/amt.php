@@ -105,6 +105,7 @@ class amt extends CI_Controller {
                     'id_pegawai' => $nip,
                     'keyword' => 'HAPUS'
                 );
+                $this->m_kinerja->deleteKinerjaAMTPegawai($id_pegawai);
                 $this->m_amt->deletePegawai($id_pegawai);
                 $this->m_log_sistem->insertLog($datalog);
 
@@ -284,6 +285,7 @@ class amt extends CI_Controller {
                 'keyword' => 'HAPUS'
             );
             $this->m_log_sistem->insertLog($datalog);
+            $this->m_kinerja->deleteKinerjaAMTPegawai($id_pegawai);
             $this->m_amt->deletePegawai($id_pegawai);
 
             $link = base_url() . "amt/data_amt/";
@@ -322,7 +324,7 @@ class amt extends CI_Controller {
                 );
 
                 $this->m_peringatan->insertPeringatan($data);
-                
+
                 $a = $this->m_amt->getNIP($id_pegawai);
                 $nip = $a->nip;
                 $datalog = array(
@@ -331,7 +333,7 @@ class amt extends CI_Controller {
                     'keyword' => 'Tambah'
                 );
                 $this->m_log_sistem->insertLog($datalog);
-                
+
                 $pesan = "Data berhasil ditambahkan.";
                 $data1['pesan'] = $pesan;
                 $data1['feedback'] = 1;
@@ -358,7 +360,7 @@ class amt extends CI_Controller {
                     'keyword' => 'Edit'
                 );
                 $this->m_log_sistem->insertLog($datalog);
-                
+
                 $pesan = "Data berhasil diubah.";
                 $data1['pesan'] = $pesan;
                 $data1['feedback'] = 1;
@@ -369,7 +371,7 @@ class amt extends CI_Controller {
             if ($this->session->userdata('id_role') >= 3 && $this->session->userdata('id_role') != 5) {
                 $id_log_peringatan = $this->input->post('id_log_peringatan', true);
                 $this->m_peringatan->deletePeringatan($id_log_peringatan);
-                
+
                 $a = $this->m_amt->getNIP($id_pegawai);
                 $nip = $a->nip;
                 $datalog = array(
@@ -378,7 +380,7 @@ class amt extends CI_Controller {
                     'keyword' => 'Hapus'
                 );
                 $this->m_log_sistem->insertLog($datalog);
-                
+
                 $pesan = "Data berhasil dihapus.";
                 $data1['pesan'] = $pesan;
                 $data1['feedback'] = 1;
@@ -468,9 +470,8 @@ class amt extends CI_Controller {
                 $k = $this->m_amt->getKlasifikasi($id_pegawai);
                 $klasifikasi = $k[0]->KLASIFIKASI;
                 $depot = $this->session->userdata('id_depot');
-$tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+                $tahun = date('Y', strtotime($this->input->post('tanggal_kinerja', true)));
                 //$tahun = 2013;
-
 //KM
                 $jenis = "KM";
                 $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
@@ -507,11 +508,11 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
                     'spbu' => $spbu
                 );
                 $this->m_kinerja->editKinerjaAMT($data, $id_kinerja_amt);
-                
+
                 $a = $this->m_amt->getNIP($id_pegawai);
                 $nip = $a->nip;
                 $datalog = array(
-                    'keterangan' => 'Ubah data kinerja, NIP : ' . $nip.' tanggal : '.$this->input->post('tanggal_kinerja', true),
+                    'keterangan' => 'Ubah data kinerja, NIP : ' . $nip . ' tanggal : ' . $this->input->post('tanggal_kinerja', true),
                     'id_pegawai' => $this->session->userdata("id_pegawai"),
                     'keyword' => 'Edit'
                 );
@@ -529,9 +530,8 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
             $k = $this->m_amt->getKlasifikasi($id_pegawai);
             $klasifikasi = $k[0]->KLASIFIKASI;
             $depot = $this->session->userdata('id_depot');
-            $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+            $tahun = date('Y', strtotime($this->input->post('tanggal_kinerja', true)));
             //$tahun = 2013;
-
 //KM
             $jenis = "KM";
             $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
@@ -573,19 +573,31 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
                 'spbu' => $spbu
             );
             $this->m_kinerja->insertKinerjaAMT($data, $id_kinerja_amt);
-            
+
             $a = $this->m_amt->getNIP($id_pegawai);
-                $nip = $a->nip;
-                $datalog = array(
-                    'keterangan' => 'Ubah data kinerja NIP : ' . $nip.' tanggal : '.$this->input->post('tanggal_kinerja', true),
-                    'id_pegawai' => $this->session->userdata("id_pegawai"),
-                    'keyword' => 'Tambah'
-                );
-                $this->m_log_sistem->insertLog($datalog);
-            
+            $nip = $a->nip;
+            $datalog = array(
+                'keterangan' => 'Tambah data kinerja NIP : ' . $nip . ' tanggal : ' . $this->input->post('tanggal_kinerja', true),
+                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                'keyword' => 'Tambah'
+            );
+            $this->m_log_sistem->insertLog($datalog);
+
             $pesan = "Data berhasil ditambahkan.";
             $data1['pesan'] = $pesan;
             $data1['feedback'] = 1;
+        } else if ($this->input->post('delete_kinerja', true)) {
+            $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
+            $this->m_kinerja->deleteKinerjaAMT($id_kinerja_amt);
+
+            $a = $this->m_amt->getNIP($id_pegawai);
+            $nip = $a->nip;
+            $datalog = array(
+                'keterangan' => 'Hapus data kinerja NIP : ' . $nip . ' tanggal : ' . $this->input->post('dtanggal', true),
+                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                'keyword' => 'Tambah'
+            );
+            $this->m_log_sistem->insertLog($datalog);
         }
 
         $depot = $this->session->userdata('id_depot');
@@ -1071,7 +1083,7 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
 
     public function cek_koefisien() {
         $tahun = $this->input->get('tahun', true);
-        redirect('amt/koefisien/'.$tahun);
+        redirect('amt/koefisien/' . $tahun);
     }
 
     public function import_koefisien() {
@@ -1176,7 +1188,7 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
                         //koefisien Ritase
                         $data2['koefisien'][($i * 4) + 2] = array(
                             'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
-                            'id_jenis_penilaian' => 25 + ($i * 4  + 2),
+                            'id_jenis_penilaian' => 25 + ($i * 4 + 2),
                             'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
                             'nilai' => $sheetData->getCell('E' . $no)->getFormattedValue(),
                             'status_error' => $error,
@@ -1192,7 +1204,7 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
                             'status_error' => $error,
                             'error' => $e
                         );
-                        
+
                         $i++;
                         if (!$sheetData->getCell('B' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('C' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('D' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('E' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('F' . ($no + 1))->getFormattedValue()) {
                             $status = 1;
@@ -1337,7 +1349,7 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
         $data2['hari'] = date('d', strtotime($tanggal));
         $data2['bulan'] = date('F', strtotime($tanggal));
         $data2['tahun'] = date('Y', strtotime($tanggal));
-        
+
         $data2['amt'] = $this->m_amt->selectAMT($depot);
         $data2['tanggal'] = date("d F Y", strtotime($tanggal));
         $data2['kinerja'] = $this->m_kinerja->get_kinerja_amt_detail($depot, $tanggal);

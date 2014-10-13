@@ -35,6 +35,9 @@ function DateToIndo($date) {
             data['r_solar'] = "<?php echo $a->R_SOLAR ?>";
             data['r_biosolar'] = "<?php echo $a->R_BIO_SOLAR ?>";
             data['r_own_use'] = "<?php echo $a->R_OWN_USE ?>";
+            data['miss'] = "<?php echo $a->MISS ?>";
+            data['tambahan'] = "<?php echo $a->TAMBAHAN ?>";
+            data['pembatalan'] = "<?php echo $a->PEMBATALAN ?>";
 
             
 
@@ -56,6 +59,9 @@ function DateToIndo($date) {
         $("#pertaminadex").val(rencana[index]['r_pertaminadex']);
         $("#biosolar").val(rencana[index]['r_biosolar']);
         $("#own_use").val(rencana[index]['r_own_use']);
+        $("#miss").val(rencana[index]['miss']);
+        $("#tambahan").val(rencana[index]['tambahan']);
+        $("#pembatalan").val(rencana[index]['pembatalan']);
 
 
     }
@@ -133,6 +139,9 @@ function DateToIndo($date) {
                                         <th>Solar</th>
                                         <th>Bio Solar</th>
                                         <th>Own Use</th>
+                                        <th>Miss (Tidak Terkirim Hari Sebelumnya)</th>
+                                        <th>Tambahan/HO/HI</th>
+                                        <th>Pembatalan/Cancel</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -152,8 +161,12 @@ function DateToIndo($date) {
                                             <td><?php echo $row->R_SOLAR ?></td>
                                             <td><?php echo $row->R_BIOSOLAR ?></td>
                                             <td><?php echo $row->R_OWN_USE ?></td>
+                                            <td><?php echo $row->MISS ?></td>
+                                            <td><?php echo $row->TAMBAHAN ?></td>
+                                            <td><?php echo $row->PEMBATALAN ?></td>
+                                            
                                             <td>
-                                                <a onclick="cekRencana('<?php echo $row->ID_RENCANA ?>','<?php echo (DateToIndo($row->TANGGAL_LOG_HARIAN)) ?>','<?php echo $row->R_PREMIUM ?>','<?php echo $row->R_PERTAMAX ?>','<?php echo $row->R_PERTAMAXPLUS ?>','<?php echo $row->R_PERTAMINADEX ?>','<?php echo $row->R_SOLAR ?>','<?php echo $row->R_BIOSOLAR ?>','<?php echo $row->R_OWN_USE ?>')" data-placement="top" data-toggle="modal" href="#ModalRencana" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                <a onclick="cekRencana('<?php echo $row->ID_RENCANA ?>','<?php echo (DateToIndo($row->TANGGAL_LOG_HARIAN)) ?>','<?php echo $row->R_PREMIUM ?>','<?php echo $row->R_PERTAMAX ?>','<?php echo $row->R_PERTAMAXPLUS ?>','<?php echo $row->R_PERTAMINADEX ?>','<?php echo $row->R_SOLAR ?>','<?php echo $row->R_BIOSOLAR ?>','<?php echo $row->R_OWN_USE ?>','<?php echo $row->MISS ?>','<?php echo $row->TAMBAHAN ?>','<?php echo $row->PEMBATALAN ?>')" data-placement="top" data-toggle="modal" href="#ModalRencana" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                         </td>
                                         </tr>
 
@@ -248,6 +261,21 @@ function DateToIndo($date) {
                                             <div class="col-lg-4">
                                                 <input class=" form-control input-sm m-bot15" id="r_own_use" name="r_own_use"  type="number" required />
                                             </div>
+                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Miss (Tidak Terkirim)</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="miss" name="miss"  type="number" required />
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Tambahan / HI / HO</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="tambahan" name="tambahan"  type="number" required />
+                                            </div>
+                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Pembatalan / Cancel</label>
+                                            <div class="col-lg-4">
+                                                <input class=" form-control input-sm m-bot15" id="pembatalan" name="pembatalan"  type="number" required />
+                                            </div>
                                            
                                         </div>
                                         
@@ -301,7 +329,7 @@ function DateToIndo($date) {
    EditableTable.init();
       });
    
-function cekRencana(id_rencana, tanggal, r_premium, r_pertamax,r_pertamaxplus,r_pertaminadex,r_solar,r_biosolar,r_own_use) {
+function cekRencana(id_rencana, tanggal, r_premium, r_pertamax,r_pertamaxplus,r_pertaminadex,r_solar,r_biosolar,r_own_use,miss,tambahan,pembatalan) {
                                                         $("#id_rencana").val(id_rencana);
                                                         $("#tanggal_log_harian").val(tanggal);
                                                         $("#r_pertamax").val(r_pertamax);
@@ -311,5 +339,8 @@ function cekRencana(id_rencana, tanggal, r_premium, r_pertamax,r_pertamaxplus,r_
                                                         $("#r_solar").val(r_solar);
                                                         $("#r_biosolar").val(r_biosolar);
                                                         $("#r_own_use").val(r_own_use);
+                                                        $("#miss").val(miss);
+                                                        $("#tambahan").val(tambahan);
+                                                        $("#pembatalan").val(pembatalan);
                                                     }
 </script>
