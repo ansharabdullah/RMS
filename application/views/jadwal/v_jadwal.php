@@ -7,8 +7,9 @@
             {
                 $("#tgl").html($("#tglForm").val());
                 document.getElementById("commentForm").submit();
+            } else {
+                e.preventDefault();
             }
-            e.preventDefault();
         });
     });
 </script>
@@ -133,7 +134,7 @@
                                 <h4 class="modal-title">Edit Jadwal</h4>
                             </div>
                             <div class=" form">
-                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>jadwal/penjadwalan/<?php echo $tanggal?>">
+                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>jadwal/penjadwalan/<?php echo $tanggal ?>">
 
                                     <div class="modal-body">
                                         <div class="form-group">
@@ -182,7 +183,8 @@
                     </button>
                     <strong>Error!</strong> Jadwal tanggal <b><?php echo date("d-M-Y", strtotime($tanggal)) ?></b> tidak ditemukan.
                 </div>
-            <?php }
+            <?php
+            }
         }
         ?>
     </section>
@@ -194,16 +196,16 @@
 <!-- END JAVASCRIPTS -->
 <script>
 
-                                                    jQuery(document).ready(function () {
-                                                        EditableTable.init();
-                                                    });
+                                            jQuery(document).ready(function () {
+                                                EditableTable.init();
+                                            });
 
-                                                    function editJadwal(id_jadwal, tanggal, nama_pegawai, status, nip) {
-                                                        $("#nip").val(nip);
-                                                        $("#id_jadwal").val(id_jadwal);
-                                                        $("#tanggal_log_harian").val(tanggal);
-                                                        $("#tanggal_log_harian1").val(tanggal);
-                                                        $("#nama_pegawai").val(nama_pegawai);
-                                                        $("#status_masuk").val(status);
-                                                    }
+                                            function editJadwal(id_jadwal, tanggal, nama_pegawai, status, nip) {
+                                                $("#nip").val(nip);
+                                                $("#id_jadwal").val(id_jadwal);
+                                                $("#tanggal_log_harian").val(tanggal);
+                                                $("#tanggal_log_harian1").val(tanggal);
+                                                $("#nama_pegawai").val(nama_pegawai);
+                                                $("#status_masuk").val(status);
+                                            }
 </script>

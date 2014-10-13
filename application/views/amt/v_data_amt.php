@@ -203,7 +203,7 @@
 
                                             <label for="ctransportir" class="control-label col-lg-2">Transportir Asal</label>
                                             <div class="col-lg-4">
-                                                <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir_asal" minlength="2" type="text" />
+                                                <input class=" form-control input-sm m-bot15" id="ctransportir" name="transportir_asal" minlength="2" type="text" required/>
                                             </div>
                                         </div>
 

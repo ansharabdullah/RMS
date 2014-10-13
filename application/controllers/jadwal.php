@@ -28,7 +28,6 @@ class jadwal extends CI_Controller {
     public function penjadwalan($tanggal = 0) {
         $data2['feedback'] = 0;
         $data2['pesan'] = 0;
-
         if ($this->input->post("edit_jadwal", true)) {
             if ($this->session->userdata('id_role') == 5) {
                 redirect(base_url());
@@ -82,7 +81,7 @@ class jadwal extends CI_Controller {
             $this->m_log_harian->updateStatusJadwal($bulan, $tahun, $depot);
 
             $datalog = array(
-                'keterangan' => "Import jadwal bulan $tanggal",
+                'keterangan' => "Import jadwal bulan $tahun-$bulan",
                 'id_pegawai' => $this->session->userdata("id_pegawai"),
                 'keyword' => 'Tambah'
             );
@@ -339,6 +338,7 @@ class jadwal extends CI_Controller {
     public function lihat_jadwal() {
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
+        echo $tanggal;
         redirect(base_url() . "jadwal/penjadwalan/" . $tanggal);
     }
 

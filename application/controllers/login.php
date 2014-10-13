@@ -7,8 +7,12 @@ class login extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('m_user');
-        $this->load->model('m_log_harian');
+        if (!$this->session->userdata('isLoggedIn')) {
+            $this->load->model('m_user');
+            $this->load->model('m_log_harian');
+        } else {
+            redirect(base_url());
+        }
     }
 
     public function index() {
@@ -21,7 +25,7 @@ class login extends CI_Controller {
     }
 
     public function validate_login() {
-        if($this->input->post('submit') ){
+        if ($this->input->post('submit')) {
             $email = $this->input->post('email');
             $password = md5($this->input->post('password'));
             $login = $this->m_user->validate_login($email, $password);
@@ -78,7 +82,7 @@ class login extends CI_Controller {
                 echo 'window.location.href="' . $link . '"';
                 echo '</script>';
             }
-        }else{
+        } else {
             redirect(base_url());
         }
     }

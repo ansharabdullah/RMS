@@ -5,9 +5,9 @@ class m_kinerja extends CI_Model {
     function __construct() {
         parent::__construct();
     }
-    
-    public function InsertLogSistem($id_pegawai,$keterangan,$keyword){
-        $query = $this->db->query("insert into log_sistem(ID_PEGAWAI,KETERANGAN,KEYWORD) values('$id_pegawai','$keterangan','$keyword')");            
+
+    public function InsertLogSistem($id_pegawai, $keterangan, $keyword) {
+        $query = $this->db->query("insert into log_sistem(ID_PEGAWAI,KETERANGAN,KEYWORD) values('$id_pegawai','$keterangan','$keyword')");
     }
 
     public function getIdPegawai($nip, $depot) {
@@ -175,8 +175,8 @@ class m_kinerja extends CI_Model {
         $query = $this->db->query("select k.ID_KINERJA_AMT,p.NIP,p.NAMA_PEGAWAI,p.JABATAN,p.KLASIFIKASI,k.STATUS_TUGAS,k.TOTAL_KM,k.TOTAL_KL,k.RITASE_AMT,k.SPBU,k.PENDAPATAN from kinerja_amt k, pegawai p where k.ID_PEGAWAI = p.ID_PEGAWAI and k.ID_LOG_HARIAN = '$id_log_harian'");
         return $query->result();
     }
-    
-    public function setKinerjaAMT($id_kinerja_amt,$status_tugas,$km,$kl,$rit,$spbu,$pendapatan) {
+
+    public function setKinerjaAMT($id_kinerja_amt, $status_tugas, $km, $kl, $rit, $spbu, $pendapatan) {
         $query = $this->db->query("update kinerja_amt k set k.STATUS_TUGAS = '$status_tugas', k.TOTAL_KM = '$km', k.TOTAL_KL = '$kl', k.RITASE_AMT = '$rit', k.PENDAPATAN = '$pendapatan', k.SPBU = '$spbu' where k.ID_KINERJA_AMT = '$id_kinerja_amt'");
     }
 
@@ -184,7 +184,8 @@ class m_kinerja extends CI_Model {
         $query = $this->db->query("select k.ID_KINERJA_MT, m.NOPOL, m.TRANSPORTIR, m.KAPASITAS,k.RITASE_MT,k.TOTAL_KM_MT,k.TOTAL_KL_MT,k.OWN_USE,k.PREMIUM,k.PERTAMAX,k.PERTAMAX_PLUS,k.BIO_SOLAR,k.PERTAMINA_DEX,k.SOLAR  from kinerja_mt k,mobil m where k.ID_MOBIL = m.ID_MOBIL and ID_LOG_HARIAN = '$id_log_harian'");
         return $query->result();
     }
-    public function setKinerjaMT($id_kinerja_mt,$rit_mt,$km_mt,$kl_mt,$ou_mt,$premium_mt,$pertamax_mt,$pertamaxplus_mt,$pertaminadex_mt,$solar_mt,$biosolar_mt) {
+
+    public function setKinerjaMT($id_kinerja_mt, $rit_mt, $km_mt, $kl_mt, $ou_mt, $premium_mt, $pertamax_mt, $pertamaxplus_mt, $pertaminadex_mt, $solar_mt, $biosolar_mt) {
         $query = $this->db->query("update kinerja_mt k set k.RITASE_MT = '$rit_mt', k.TOTAL_KM_MT = '$km_mt', k.TOTAL_KL_MT = '$kl_mt', k.OWN_USE = '$ou_mt', k.PREMIUM = '$premium_mt', k.PERTAMAX = '$pertamax_mt', k.PERTAMAX_PLUS = '$pertamaxplus_mt', k.PERTAMINA_DEX = '$pertaminadex_mt', k.SOLAR = '$solar_mt', k.BIO_SOLAR = '$biosolar_mt' where k.ID_KINERJA_MT = '$id_kinerja_mt'");
     }
 
@@ -388,7 +389,7 @@ class m_kinerja extends CI_Model {
         return $query->result();
     }
 
-    public function getKinerjaPresensi($depot,$tanggal) {
+    public function getKinerjaPresensi($depot, $tanggal) {
         $data = $this->db->query("select p.ID_PEGAWAI, l.ID_LOG_HARIAN, k.ID_KINERJA_AMT from pegawai p, log_harian l, kinerja_amt k where p.ID_PEGAWAI=k.ID_PEGAWAI and k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and l.tanggal_log_harian='$tanggal' and l.id_depot='$depot'");
         return $data->result();
     }
@@ -397,23 +398,34 @@ class m_kinerja extends CI_Model {
         $data = $this->db->query("select m.ID_MOBIL, l.ID_LOG_HARIAN,l.TANGGAL_LOG_HARIAN, k.ID_KINERJA_MT from mobil m, log_harian l, kinerja_mt k where m.ID_MOBIL=k.ID_MOBIL and k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and m.id_depot='$depot' and l.tanggal_log_harian='$tanggal'");
         return $data->result();
     }
-    
+
     //detail amt
     public function editKinerjaAMT($data, $id) {
         $this->db->where('id_kinerja_amt', $id);
         $this->db->update('kinerja_amt', $data);
     }
-    
-    public function insertKinerjaAMT($data){
+
+    public function insertKinerjaAMT($data) {
         $this->db->insert('kinerja_amt', $data);
     }
+
+    public function deleteKinerjaAMT($id) {
+        $this->db->where('id_kinerja_amt', $id);
+        $this->db->delete('kinerja_amt');
+    }
+    
+    public function deleteKinerjaAMTPegawai($id){
+        $this->db->where('id_pegawai', $id);
+        $this->db->delete('kinerja_amt');
+    }
+
     //detail MT
-     public function editKinerjaMT($data, $id) {
+    public function editKinerjaMT($data, $id) {
         $this->db->where('id_kinerja_mt', $id);
         $this->db->update('kinerja_mt', $data);
     }
-    
-    public function insertKinerjaMT($data){
+
+    public function insertKinerjaMT($data) {
         $this->db->insert('kinerja_mt', $data);
     }
 
