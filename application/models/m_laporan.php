@@ -989,7 +989,7 @@ from pegawai p where p.ID_DEPOT = '$depot' and (p.JABATAN = 'SUPIR' or p.JABATAN
         return $query;
     }
 
-    function getRencanaRealisasi($depot, $tahun, $bulan) {
+    public function getRencanaRealisasi($depot, $tahun, $bulan) {
         $query = $this->db->query("select l.TANGGAL_LOG_HARIAN,l.JUMLAH_ALOKASI_SPBU,
 (select r.R_PREMIUM from rencana r where r.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as R_PREMIUM,
 (select r.R_PERTAMAX from rencana r where r.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as R_PERTAMAX,
@@ -1021,8 +1021,21 @@ from pegawai p where p.ID_DEPOT = '$depot' and (p.JABATAN = 'SUPIR' or p.JABATAN
 (select m.LAMBAT_SOLAR from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as LAMBAT_SOLAR,
 (select m.TIDAK_TERKIRIM_PREMIUM from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as TIDAK_TERKIRIM_PREMIUM,
 (select m.TIDAK_TERKIRIM_PERTAMAX from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as TIDAK_TERKIRIM_PERTAMAX,
-(select m.TIDAK_TERKIRIM_SOLAR from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as TIDAK_TERKIRIM_SOLAR
+(select m.TIDAK_TERKIRIM_SOLAR from ms2 m where m.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as TIDAK_TERKIRIM_SOLAR,
+(select r.MISS from rencana r where r.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as R_MISS,
+(select r.TAMBAHAN from rencana r where r.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as R_TAMBAHAN,
+(select r.PEMBATALAN from rencana r where r.ID_LOG_HARIAN = l.ID_LOG_HARIAN) as R_PEMBATALAN
  from log_harian l where MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and l.ID_DEPOT = '$depot' order by l.TANGGAL_LOG_HARIAN");
+        return $query->result();
+    }
+    
+    public function getJadwalAMT($depot, $tahun, $bulan){
+        $query = $this->db->query("select l.TANGGAL_LOG_HARIAN,
+(select count(*) from kinerja_amt k, pegawai p where k.ID_LOG_HARIAN = l.ID_LOG_HARIAN and p.ID_PEGAWAI = k.ID_PEGAWAI and upper(p.JABATAN) = 'SUPIR') as JUMLAH_HADIR_SUPIR,
+(select count(*) from kinerja_amt k, pegawai p where k.ID_LOG_HARIAN = l.ID_LOG_HARIAN and p.ID_PEGAWAI = k.ID_PEGAWAI and upper(p.JABATAN) = 'KERNET') as JUMLAH_HADIR_KERNET,
+(select count(*) from jadwal j, pegawai p where j.ID_LOG_HARIAN = l.ID_LOG_HARIAN and UPPER(j.STATUS_MASUK) = 'HADIR' and p.ID_PEGAWAI = j.ID_PEGAWAI and upper(p.JABATAN) = 'SUPIR') as JADWAL_DINAS_SUPIR,
+(select count(*) from jadwal j, pegawai p where j.ID_LOG_HARIAN = l.ID_LOG_HARIAN and UPPER(j.STATUS_MASUK) = 'HADIR' and p.ID_PEGAWAI = j.ID_PEGAWAI and upper(p.JABATAN) = 'KERNET') as JADWAL_DINAS_KERNET
+from log_harian l where MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and l.ID_DEPOT = '$depot' order by l.TANGGAL_LOG_HARIAN");
         return $query->result();
     }
 
