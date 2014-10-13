@@ -7,7 +7,7 @@ class m_rencana_mt extends CI_Model {
     }
 
     function getRencana($depot,$tahun,$bulan) {
-        $data = $this->db->query("SELECT L.ID_LOG_HARIAN, R.ID_RENCANA,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y')as TANGGAL,R.R_PREMIUM,R.R_PERTAMAX,R.R_PERTAMAXPLUS,R.R_PERTAMINADEX,R.R_SOLAR,R.R_BIOSOLAR,R.R_OWN_USE,L.TANGGAL_LOG_HARIAN from rencana R, log_harian L where R.id_log_harian=L.id_log_harian and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
+        $data = $this->db->query("SELECT L.ID_LOG_HARIAN, R.ID_RENCANA,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y')as TANGGAL,R.R_PREMIUM,R.R_PERTAMAX,R.R_PERTAMAXPLUS,R.R_PERTAMINADEX,R.R_SOLAR,R.R_BIOSOLAR,R.R_OWN_USE,R.MISS,R.TAMBAHAN,R.PEMBATALAN,L.TANGGAL_LOG_HARIAN from rencana R, log_harian L where R.id_log_harian=L.id_log_harian and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
         return $data->result();
     }
 
@@ -53,7 +53,7 @@ class m_rencana_mt extends CI_Model {
    public function simpanRencana($rencana) {
         $no = 0;
         for ($no = 0; $no < $rencana['jumlah']; $no++) {
-            $query = $this->db->query("insert into rencana(ID_LOG_HARIAN,r_premium,r_pertamax,r_pertamaxplus,r_pertaminadex,r_solar,r_biosolar,r_own_use)values('" . $rencana ['id_log_harian'][$no] . "','" . $rencana['r_premium'][$no] . "','" . $rencana['r_pertamax'][$no] . "','" . $rencana['r_pertamaxplus'][$no] . "','" . $rencana['r_pertaminadex'][$no] . "','" . $rencana['r_solar'][$no] . "','" . $rencana['r_biosolar'][$no] ."','" . $rencana['r_own_use'][$no] . "')");
+            $query = $this->db->query("insert into rencana(ID_LOG_HARIAN,r_premium,r_pertamax,r_pertamaxplus,r_pertaminadex,r_solar,r_biosolar,r_own_use,miss,tambahan,pembatalan)values('" . $rencana ['id_log_harian'][$no] . "','" . $rencana['r_premium'][$no] . "','" . $rencana['r_pertamax'][$no] . "','" . $rencana['r_pertamaxplus'][$no] . "','" . $rencana['r_pertaminadex'][$no] . "','" . $rencana['r_solar'][$no] . "','" . $rencana['r_biosolar'][$no] ."','" . $rencana['r_own_use'][$no] . "','" . $rencana['miss'][$no] . "','" . $rencana['tambahan'][$no] . "','" . $rencana['pembatalan'][$no] . "')");
             $query = $this->db->query("update log_harian set STATUS_RENCANA = 1 where ID_LOG_HARIAN = '" . $rencana['id_log_harian'][$no] . "'");
         }
     }

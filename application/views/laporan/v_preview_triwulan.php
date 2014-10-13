@@ -15,7 +15,11 @@
 
         <!-- page start-->
         <?php if ($laporan_ada == true) { ?>
-            <section class="panel">    
+            <section class="panel">
+                <div class="panel-heading">
+                    Preview Laporan Triwulan
+                    <a style="float: right;" class="btn btn-xs btn-success tooltips" data-original-title="Download File" data-placement="left" href="<?php echo $nama_file; ?>">Download File <i class="icon-download-alt"></i></a>
+                </div>
                 <iframe src="https://sheet.zoho.com/view.do?url=<?php echo $nama_file; ?>" width="100%" height="600" style="border: none;"></iframe>
                 <!--
                 <iframe src="http://view.officeapps.live.com/op/view.aspx?src=<?php echo $nama_file; ?>" width="100%" height="600" style="border: none;"></iframe>

@@ -437,9 +437,9 @@
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_47" required="required" class="form-control"/></td>
                                         <td><input type="number" min="0" value="0" name="stretch_index_47" required="required" class="form-control"/></td>
-                                        <td id="61"><input type="number" min="0" value="0" name="bulan1_index_47" required="required" class="form-control"/></td>
-                                        <td id="62"><input type="number" min="0" value="0" name="bulan2_index_47" required="required" class="form-control"/></td>
-                                        <td id="63"><input type="number" min="0" value="0" name="bulan3_index_47" required="required" class="form-control"/></td>
+                                        <td id="61"><input type="hidden" min="0" value="0" name="bulan1_index_47" required="required" class="form-control"/></td>
+                                        <td id="62"><input type="hidden" min="0" value="0" name="bulan2_index_47" required="required" class="form-control"/></td>
+                                        <td id="63"><input type="hidden" min="0" value="0" name="bulan3_index_47" required="required" class="form-control"/></td>
                                     </tr>
                                     <tr>
                                         <td>- Fuel Retail (SPBU/SPDN)</td>
@@ -453,9 +453,9 @@
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_48" required="required" class="form-control"/></td>
                                         <td><input type="number" min="0" value="0" name="stretch_index_48" required="required" class="form-control"/></td>
-                                        <td id="64"><input type="number" min="0" value="0" name="bulan1_index_48" required="required" class="form-control"/></td>
-                                        <td id="65"><input type="number" min="0" value="0" name="bulan2_index_48" required="required" class="form-control"/></td>
-                                        <td id="66"><input type="number" min="0" value="0" name="bulan3_index_48" required="required" class="form-control"/></td>
+                                        <td id="64"><input type="hidden" min="0" value="0" name="bulan1_index_48" required="required" class="form-control"/></td>
+                                        <td id="65"><input type="hidden" min="0" value="0" name="bulan2_index_48" required="required" class="form-control"/></td>
+                                        <td id="66"><input type="hidden" min="0" value="0" name="bulan3_index_48" required="required" class="form-control"/></td>
                                     </tr>
                                     <tr>
                                         <td>- Gas & Aviation (SPBE)</td>
@@ -526,9 +526,9 @@
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_51" required="required" class="form-control"/></td>
                                         <td><input type="number" min="0" value="0" name="stretch_index_51" required="required" class="form-control"/></td>
-                                        <td id="79"><input type="number" min="0" value="0" name="bulan1_index_51" required="required" class="form-control"/></td>
-                                        <td id="80"><input type="number" min="0" value="0" name="bulan2_index_51" required="required" class="form-control"/></td>
-                                        <td id="81"><input type="number" min="0" value="0" name="bulan3_index_51" required="required" class="form-control"/></td>
+                                        <td id="79"><input type="hidden" min="0" value="0" name="bulan1_index_51" required="required" class="form-control"/></td>
+                                        <td id="80"><input type="hidden" min="0" value="0" name="bulan2_index_51" required="required" class="form-control"/></td>
+                                        <td id="81"><input type="hidden" min="0" value="0" name="bulan3_index_51" required="required" class="form-control"/></td>
                                     </tr>
                                     <tr>
                                         <td>- Gas & Aviation (SPBE)</td>
@@ -570,9 +570,9 @@
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_53" required="required" class="form-control"/></td>
                                         <td><input type="number" min="0" value="0" name="stretch_index_53" required="required" class="form-control"/></td>
-                                        <td id="88"><input type="number" min="0" value="0" name="bulan1_index_53" required="required" class="form-control"/></td>
-                                        <td id="89"><input type="number" min="0" value="0" name="bulan2_index_53" required="required" class="form-control"/></td>
-                                        <td id="90"><input type="number" min="0" value="0" name="bulan3_index_53" required="required" class="form-control"/></td>
+                                        <td id="88"><input type="hidden" min="0" value="0" name="bulan1_index_53" required="required" class="form-control"/></td>
+                                        <td id="89"><input type="hidden" min="0" value="0" name="bulan2_index_53" required="required" class="form-control"/></td>
+                                        <td id="90"><input type="hidden" min="0" value="0" name="bulan3_index_53" required="required" class="form-control"/></td>
                                     </tr>
                                     <tr>
                                         <td>- Gas & Aviation (SPBE)</td>
@@ -614,9 +614,9 @@
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_55" required="required" class="form-control"/></td>
                                         <td><input type="number" min="0" value="0" name="stretch_index_55" required="required" class="form-control"/></td>
-                                        <td id="97"><input type="number" min="0" value="0" name="bulan1_index_55" required="required" class="form-control"/></td>
-                                        <td id="98"><input type="number" min="0" value="0" name="bulan2_index_55" required="required" class="form-control"/></td>
-                                        <td id="99"><input type="number" min="0" value="0" name="bulan3_index_55" required="required" class="form-control"/></td>
+                                        <td id="97"><input type="hidden" min="0" value="0" name="bulan1_index_55" required="required" class="form-control"/></td>
+                                        <td id="98"><input type="hidden" min="0" value="0" name="bulan2_index_55" required="required" class="form-control"/></td>
+                                        <td id="99"><input type="hidden" min="0" value="0" name="bulan3_index_55" required="required" class="form-control"/></td>
                                     </tr>
 
                                     <tr>
@@ -749,9 +749,9 @@
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_61" required="required" class="form-control"/></td>
                                         <td><input type="number" min="0" value="0" name="stretch_index_61" required="required" class="form-control"/></td>
-                                        <td id="124"><input type="number" min="0" value="0" name="bulan1_index_61" required="required" class="form-control"/></td>
-                                        <td id="125"><input type="number" min="0" value="0" name="bulan2_index_61" required="required" class="form-control"/></td>
-                                        <td id="126"><input type="number" min="0" value="0" name="bulan3_index_61" required="required" class="form-control"/></td>
+                                        <td id="124"><input type="hidden" min="0" value="0" name="bulan1_index_61" required="required" class="form-control"/></td>
+                                        <td id="125"><input type="hidden" min="0" value="0" name="bulan2_index_61" required="required" class="form-control"/></td>
+                                        <td id="126"><input type="hidden" min="0" value="0" name="bulan3_index_61" required="required" class="form-control"/></td>
                                     </tr>
 
                                     <tr>
@@ -766,9 +766,9 @@
                                         </td>
                                         <td><input type="number" min="0" value="0" name="base_index_62" required="required" class="form-control"/></td>
                                         <td><input type="number" min="0" value="0" name="stretch_index_62" required="required" class="form-control"/></td>
-                                        <td id="127"><input type="number" min="0" value="0" name="bulan1_index_62" required="required" class="form-control"/></td>
-                                        <td id="128"><input type="number" min="0" value="0" name="bulan2_index_62" required="required" class="form-control"/></td>
-                                        <td id="129"><input type="number" min="0" value="0" name="bulan3_index_62" required="required" class="form-control"/></td>
+                                        <td id="127"><input type="hidden" min="0" value="0" name="bulan1_index_62" required="required" class="form-control"/></td>
+                                        <td id="128"><input type="hidden" min="0" value="0" name="bulan2_index_62" required="required" class="form-control"/></td>
+                                        <td id="129"><input type="hidden" min="0" value="0" name="bulan3_index_62" required="required" class="form-control"/></td>
                                     </tr>
 
                                     <tr>

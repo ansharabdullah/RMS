@@ -15,6 +15,7 @@
                  ?>
                  ap = new Array();
                  ap['id'] = "<?php echo $a->ID_APAR?>";
+                 ap['id_mobil'] = "<?php echo $a->ID_MOBIL?>";
                  ap['nopol'] = "<?php echo $a->NOPOL?>";
                  ap['tgl_apar'] = "<?php echo $a->tgl_apar?>";
                  ap['apar'] = "<?php echo $a->apar?>";
@@ -171,7 +172,7 @@
                             $i = 0;
                             foreach ($apar as $row) {
                                 $color = "";
-                                if ($row->STATUS_APAR== "0"){
+                               
                                     if($row->apar <= 7)
                                     {
                                         $color = "style='background-color: orange;'";
@@ -191,7 +192,7 @@
                                         </tr>
                                     <?php
                                 $i++;
-                                }
+                                
                             }
                             ?>
                         </tbody>
@@ -266,7 +267,7 @@
 //                          
                             $i = 0;
                             foreach ($surat as $row) {
-                                if ($row->KETERANGAN_SURAT== "Aktif"){
+                              
                                 $color = "";
                                 
                                     if($row->tanggal_akhir_surat <= 7 )
@@ -276,6 +277,7 @@
                                     ?>
                                     
                                         <th style="display: none;"></th>
+                                        
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $i + 1; ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><span id="nopol<?php echo $i ?>"><?php echo $row->suratnopol; ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php if($row->ID_JENIS_SURAT == "1")echo 'STNK'?>
@@ -288,10 +290,11 @@
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a href="#modalSurat" data-toggle="modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" onclick="setDetailSurat('<?php echo $i ?>')"><i class="icon-pencil"></i></a></td>
                                         
                                         
+                                        
                                         </tr>
                                     <?php
                                 $i++;
-                                }
+                                
                                 
                             }
                             ?>
@@ -498,6 +501,8 @@
                             </select>
                         </div>
                     </div>
+                        <input type="text" class="form-control"  id="ID_MOBIL" readonly="readonly" name="ID_MOBIL" placeholder="Jenis Apar">
+                            
                         <div class="form-group">
                             <label class="col-lg-12 col-sm-2 control-label">TANGGAL BERAKHIR SURAT</label><hr/>
                         </div>
@@ -647,6 +652,7 @@
             var action = "<?php echo base_url()?>mt/edit_reminder_surat/"+surat[index]['id'];
             $("#tgl").val("");
             $("#suratnopol").val(surat[index]['suratnopol']);
+            $("#ID_MOBIL").val(surat[index]['ID_MOBIL']);
             $("#ID_JENIS_SURAT").val(surat[index]['ID_JENIS_SURAT']);
             $("#tgl_surat").val(surat[index]['tgl_surat']);
             $("#hari_surat").val(surat[index]['tgl_akhir_surat'] + " hari");
