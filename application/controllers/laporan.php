@@ -3043,11 +3043,20 @@ class laporan extends CI_Controller {
                 }                
                 
                 
+                // Bagian APMS
                 if($data_depot->STATUS_APMS == 1){
                     
                 }else{
-                    //$sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI Operasional Bulan ' . ($t + 1)));
-                    //$objPHPExcel->removeSheetByIndex($sheetIndex);
+                    $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Realisasi Volume APMS'));
+                    $objPHPExcel->removeSheetByIndex($sheetIndex);
+                    $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Biaya Angkutan APMS'));
+                    $objPHPExcel->removeSheetByIndex($sheetIndex);
+                    $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Realisasi Penyaluran APMS'));
+                    $objPHPExcel->removeSheetByIndex($sheetIndex);
+                    $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Daya Pengiriman APMS'));
+                    $objPHPExcel->removeSheetByIndex($sheetIndex);
+                    $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI APMS'));
+                    $objPHPExcel->removeSheetByIndex($sheetIndex);
                 }
                 
                 
