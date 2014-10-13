@@ -55,7 +55,7 @@
                         <div id="filePreview">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    Tabel Kinerja APMS <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> <?php echo $tahun ?>
+                                    Tabel Kinerja APMS Bulan <?php echo $nama_bulan ?> <?php echo $tahun ?>
                                 </header>
                                 <div class="panel-body">
 
@@ -79,7 +79,7 @@
                                                     <tr class="">
                                                         <td style="display:none;"></td>
                                                         <td><?php echo $i ?></td>
-                                                        <td style="white-space: nowrap"><?php echo date_format(date_create($km->TANGGAL_LOG_HARIAN),'d F Y');?></td>
+                                                        <td style="white-space: nowrap"><?php echo $km->hari.' '.$nama_bulan.' '.$tahun;?></td>
                                                         <td><?php echo $km->premium ?></td>
                                                         <td><?php echo $km->solar ?></td>
                                                     </tr>
@@ -175,7 +175,7 @@
                 text: 'Grafik Kinerja Harian Jumlah Premium APMS'
             },
             subtitle: {
-                text: 'Bulan <?php echo date("F", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun ?>'
+                text: 'Bulan <?php echo $nama_bulan ?> Tahun <?php echo $tahun ?>'
             },
             xAxis: [{
                     categories: hari
@@ -200,10 +200,10 @@
                     point:{
                       events:{
                         click: function(event) {
-                            
-                            
-                         window.location = "<?php echo base_url() ?>apms/grafik_hari_apms/"+ <?php echo $bulan?>+"/"+ hari[this.x]+"/<?php echo $tahun?>";
-                            
+							if(this.y!=0)
+							{
+								window.location = "<?php echo base_url() ?>apms/grafik_hari_apms/"+ <?php echo $bulan?>+"/"+ hari[this.x]+"/<?php echo $tahun?>";
+							}
                          }
                         }
                     }
@@ -214,11 +214,11 @@
                 shared: true
             },
             legend: {
-                enabled:false
+                enabled:true
             },
             series: [{
                     type: 'spline',
-                    name: 'Jumlah',
+                    name: 'Premium',
                     data: premium
                 }]
         });
@@ -230,10 +230,11 @@
         apms.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' APMS'});  
         if(title == "Premium"){
              apms.series[0].setData(premium1);
+			 apms.legend.allItems[0].update({name:title});
         }
         else if(title == "Solar"){
             apms.series[0].setData(solar);
-            
+			apms.legend.allItems[0].update({name:title});
         }
         
     }

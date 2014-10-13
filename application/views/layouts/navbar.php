@@ -45,7 +45,7 @@
                     <li <?php if ($lv2 == 1 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url()?>apms/data_apms" >Data APMS</a></li>
                     <li <?php if ($lv2 == 2 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/grafik_apms/<?php echo date("Y")?>" >Grafik</a></li>
                     <li <?php if ($lv2 == 3 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/rencana_apms/<?php echo date("Y")?>/<?php echo date("m")?>" >Rencana</a></li>
-                    <li <?php if ($lv2 == 4 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/kpi_apms/<?php echo date("Y")?>/<?php echo date("m")?>" >KPI</a></li>
+                    <li <?php if ($lv2 == 4 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/kpi_apms" >KPI APMS</a></li>
                 </ul>
             </li>
             

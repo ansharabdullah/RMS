@@ -13,6 +13,8 @@ class Depot extends CI_Controller {
         $this->load->model("m_depot");
         $this->load->model("m_kinerja");
         $this->load->model("m_rencana");
+        $this->load->model("m_rencana_apms");
+        $this->load->model("m_apms");
         $this->load->model("m_kpi");
         setlocale(LC_ALL, "IND");
         if(!$this->session->userdata('isLoggedIn') || $this->session->userdata('id_depot') > 0){
@@ -268,9 +270,8 @@ class Depot extends CI_Controller {
     
     public function apms_tahun($depot)
     {
-       $nama = $this->m_depot->get_nama_depot($depot);
        $tahun =  $_POST['tahun'];
-       redirect('depot/apms_depot/'.$depot."/".$nama."/".$tahun);
+       redirect('depot/apms_depot/'.$depot."/".$tahun);
     }
     
     public function apms_depot($depot,$tahun)
@@ -281,6 +282,10 @@ class Depot extends CI_Controller {
         $data2['tahun'] = $tahun;
         $data2['id_depot'] = $depot;    
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $data2['depot'] = $depot;
+        $data2['grafik'] = $this->m_apms->get_grafik_tahun($depot, $tahun);
+        $data2['grafik_max'] = $this->m_apms->get_max_bulan($depot, $tahun);
+        $data2['grafik_kuota'] = $this->m_rencana_apms->get_grafik_tahun_kuota($depot, $tahun);
         $data3 = menu_oam();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data3);
@@ -291,11 +296,10 @@ class Depot extends CI_Controller {
     
     public function apms_hari($depot)
     {
-       $nama = $this->m_depot->get_nama_depot($depot);
        $tanggal =  $_POST['bulan'];
        $bulan = date('n',strtotime($tanggal));
        $tahun = date('Y',strtotime($tanggal));
-       redirect('depot/apms_depot_harian/'.$depot."/".$nama."/".$bulan."/".$tahun);
+       redirect('depot/apms_depot_harian/'.$depot."/".$bulan."/".$tahun);
     }
     
     
@@ -308,7 +312,8 @@ class Depot extends CI_Controller {
         $data2['id_depot'] = $depot;
         $data2['tahun'] = $tahun;
         $data2['bulan'] = $bulan;
-
+        $data2['grafik'] = $this->m_apms->get_grafik_bulan($depot,$bulan,$tahun);
+        $data2['nama_bulan'] = strftime('%B',strtotime($tahun."-".$bulan."-01"));
         $data3 = menu_oam();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data3);
@@ -330,15 +335,19 @@ class Depot extends CI_Controller {
        $nama = $this->m_depot->get_nama_depot($depot);
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 5;
-        $data2['hari'] = date('d',strtotime($tanggal));
-        $data2['bulan_mt'] = strftime('%B',strtotime($tanggal));
-        $data2['grafik'] = $this->m_kinerja->get_kinerja_mt_detail($depot , '2014-07-03');
-        $data2['tahun'] = date('Y',strtotime($tanggal));;
+        $hari = date('d',strtotime($tanggal));
+        $bulan = date('n',strtotime($tanggal));
+        $tahun =  date('Y',strtotime($tanggal));
+        $data2['hari'] = $hari;
+        $data2['bulan_apms'] = strftime('%B',strtotime($tanggal));
+        $data2['tahun'] = $tahun;
         $data2['tanggal'] = strftime('%d %B %Y',strtotime($tanggal));
         $data2['mt'] = $this->m_mt->selectMT($depot);
         $data2['id_depot'] = $depot;    
         $data2['nama_depot'] = str_replace('%20', ' ', $nama);
-        
+        $data2['nama_bulan'] = strftime('%B',strtotime($tanggal));
+        $data2['grafik'] = $this->m_apms->get_grafik_harian($depot ,$bulan,$hari,$tahun); 
+        $data2['nama_apms'] = $this->m_apms->selectApms($depot);
         $data3 = menu_oam();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data3);

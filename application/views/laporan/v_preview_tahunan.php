@@ -6,7 +6,7 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-                    <li><a href="<?php echo base_url(); ?>laporan/bulanan">Laporan Bulanan</a></li>
+                    <li><a href="<?php echo base_url(); ?>laporan/tahunan">Laporan Tahunan</a></li>
                     <li class="active">Preview</li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -15,7 +15,7 @@
 
         <!-- page start-->
         <?php if ($laporan_ada == true) { ?>
-            <section class="panel">    
+            <section class="panel">   
                 <iframe src="https://sheet.zoho.com/view.do?url=<?php echo $nama_file; ?>" width="100%" height="600" style="border: none;"></iframe>
                 
                 <!--

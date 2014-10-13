@@ -322,6 +322,7 @@ class pengaturan extends CI_Controller {
                     'nama_depot' => $this->input->post('nama_depot', true),
                     'alamat_depot' => $this->input->post('alamat_depot', true),
                     'nama_oh' => $this->input->post('nama_oh', true),
+                    'status_apms' => $this->input->post('status_apms', true),
                 );
                 $this->m_pengaturan->tambahDepot($data);
                 
@@ -397,6 +398,7 @@ class pengaturan extends CI_Controller {
                     'nama_depot' => $this->input->post('nama_depot', true),
                     'alamat_depot' => $this->input->post('alamat_depot', true),
                     'nama_oh' => $this->input->post('nama_oh', true),
+                    'status_apms' => $this->input->post('status_apms', true),
                 );
                 $this->m_pengaturan->editDepot($data, $depot);
 

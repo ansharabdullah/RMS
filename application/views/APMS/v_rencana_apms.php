@@ -105,7 +105,7 @@ function DateToIndo($date) {
 						<?php } ?>
                 <section class="panel">
                     <header class="panel-heading">
-                        Tabel Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong>
+                        Tabel Rencana <strong>Bulan <?php echo $nama_bulan . ' ' . $tahun; ?></strong>
                 </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
@@ -121,7 +121,7 @@ function DateToIndo($date) {
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Peringatan!</strong> Rencana bulan <strong><?php echo $bulan . ' ' . $tahun; ?></strong> belum diisi!
+                    <strong>Peringatan!</strong> Rencana bulan <strong><?php echo $nama_bulan . ' ' . $tahun; ?></strong> belum diisi!
                 </div>
 				
 				<div style="float:left;">
@@ -208,7 +208,7 @@ function DateToIndo($date) {
                                         <div class="form-group "> 
                                             <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="<?php echo $bulan.' '.$tahun;?>" placeholder="Tanggal "required readonly/>
+                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="<?php echo $nama_bulan.' '.$tahun;?>" placeholder="Tanggal "required readonly/>
                                             </div>
                                        
                                         </div>
@@ -266,7 +266,7 @@ function DateToIndo($date) {
 										 <div class="form-group "> 
                                             <label for="tanggal" class="col-lg-2 col-sm-2 control-label">Bulan</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="<?php echo $bulan.' '.$tahun;?>" placeholder="Tanggal "required readonly/>
+                                                <input type="text" class=" form-control input-sm m-bot15" id="tanggal_log_harian" name="tanggal_log_harian" value="<?php echo $nama_bulan.' '.$tahun;?>" placeholder="Tanggal "required readonly/>
                                             </div>
                                        
                                         </div>
