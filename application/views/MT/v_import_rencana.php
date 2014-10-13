@@ -85,6 +85,9 @@
                                             <th>Solar</th>
                                             <th>Bio Solar</th>
                                             <th>Own Use</th>
+                                            <th>Miss (Tidak Terkirim)</th>
+                                            <th>Tambahan/HO/HI</th>
+                                            <th>Pembatalan/Cancel</th>
                                         </tr>
                                         </thead>
                                     <tbody>
@@ -166,7 +169,30 @@
                                                 <?php } else { ?>
                                                     <td><?php echo $rencana['r_own_use'][$no]; ?></td>
                                                 <?php } ?>
-
+                                                 <?php
+                                                if ($rencana['miss'][$no] == -1) {
+                                                    $simpan = false;
+                                                    ?>
+                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php } else { ?>
+                                                    <td><?php echo $rencana['miss'][$no]; ?></td>
+                                                <?php } ?>
+                                                 <?php
+                                                if ($rencana['tambahan'][$no] == -1) {
+                                                    $simpan = false;
+                                                    ?>
+                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Ketika data kosong,isi dengan angka 0">ERROR</span></td>
+                                                <?php } else { ?>
+                                                    <td><?php echo $rencana['tambahan'][$no]; ?></td>
+                                                <?php } ?>
+                                                <?php
+                                                if ($rencana['pembatalan'][$no] == -1) {
+                                                    $simpan = false;
+                                                    ?>
+                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data kosong (Isi dengan angka 0)">ERROR</span></td>
+                                                <?php } else { ?>
+                                                    <td><?php echo $rencana['pembatalan'][$no]; ?></td>
+                                                <?php } ?>
                                                
                                             </tr>
                                         <?php } ?>

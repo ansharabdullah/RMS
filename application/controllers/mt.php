@@ -56,6 +56,9 @@ class Mt extends CI_Controller {
             $r_solar = $this->input->post('r_solar');
             $r_biosolar = $this->input->post('r_biosolar');
             $r_own_use = $this->input->post('r_own_use');
+            $miss = $this->input->post('miss');
+            $tambahan = $this->input->post('tambahan');
+            $pembatalan = $this->input->post('pembatalan');
 
             $data = array(
                     'r_premium' => $r_premium,
@@ -64,7 +67,11 @@ class Mt extends CI_Controller {
                     'r_pertamaxplus' => $r_pertamaxplus,
                     'r_pertaminadex' => $r_pertaminadex,
                     'r_solar' => $r_solar,
-                    'r_biosolar' => $r_biosolar
+                    'r_biosolar' => $r_biosolar,
+                    'miss' => $miss,
+                    'tambahan' => $tambahan,
+                    'pembatalan' => $pembatalan
+                
                 );
                 $this->m_rencana_mt->editRencana($data, $id_rencana);
                 
@@ -255,6 +262,10 @@ class Mt extends CI_Controller {
                             $data2['rencana']['r_pertaminadex'][] = is_numeric($sheetData->getCell('F' . ($row_baca + $i))->getValue())? ($sheetData->getCell('F' . ($row_baca + $i))->getValue() * 1) : -1;
                             $data2['rencana']['r_biosolar'][] = is_numeric($sheetData->getCell('G' . ($row_baca + $i))->getValue())? ($sheetData->getCell('G' . ($row_baca + $i))->getValue() * 1) : -1;
                             $data2['rencana']['r_own_use'][] = is_numeric($sheetData->getCell('H' . ($row_baca + $i))->getValue())? ($sheetData->getCell('H' . ($row_baca + $i))->getValue() * 1) : -1;
+                            
+                            $data2['rencana']['miss'][] = is_numeric($sheetData->getCell('I' . ($row_baca + $i))->getValue())? ($sheetData->getCell('I' . ($row_baca + $i))->getValue() * 1) : -1;
+                            $data2['rencana']['tambahan'][] = is_numeric($sheetData->getCell('J' . ($row_baca + $i))->getValue())? ($sheetData->getCell('J' . ($row_baca + $i))->getValue() * 1) : -1;
+                            $data2['rencana']['pembatalan'][] = is_numeric($sheetData->getCell('K' . ($row_baca + $i))->getValue())? ($sheetData->getCell('K' . ($row_baca + $i))->getValue() * 1) : -1;
                         }
                     }
                 }
@@ -1310,10 +1321,12 @@ class Mt extends CI_Controller {
         $akhir_surat = $_POST['tgl_surat'];
         $id_jenis = $_POST['ID_JENIS_SURAT'];
         $keterangan = $_POST['KETERANGAN_SURAT'];
+        $id_mobil = $_POST['ID_MOBIL'];
         
         $data = array(
             "TANGGAL_AKHIR_SURAT"=>$akhir_surat,
             "ID_JENIS_SURAT"=>$id_jenis,
+            "ID_MOBIL"=>$id_mobil,
             "KETERANGAN_SURAT"=>$keterangan
         );
         

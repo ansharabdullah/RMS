@@ -24,10 +24,11 @@ class m_pengingat extends CI_Model {
     
     public function getSuratReminder($depot)
     {
-        $query = $this->db->query("select a.ID_SURAT,m.NOPOL as suratnopol,a.KETERANGAN_SURAT,j.ID_JENIS_SURAT,DATEDIFF(a.TANGGAL_AKHIR_SURAT,now()) as tanggal_akhir_surat,
+        $query = $this->db->query("select a.ID_SURAT,a.ID_MOBIL,m.NOPOL as suratnopol,a.KETERANGAN_SURAT,j.ID_JENIS_SURAT,DATEDIFF(a.TANGGAL_AKHIR_SURAT,now()) as tanggal_akhir_surat,
                             a.TANGGAL_AKHIR_SURAT as tgl_surat
                           from surat a,jenis_surat j, mobil m, depot d 
-                          where j.id_jenis_surat=a.id_jenis_surat 
+                          where TANGGAL_AKHIR_SURAT IN (select MAX(TANGGAL_AKHIR_SURAT)from surat group by ID_MOBIL)
+                          and j.id_jenis_surat=a.id_jenis_surat 
                           and m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
                           and d.ID_DEPOT = $depot ");
@@ -46,7 +47,8 @@ class m_pengingat extends CI_Model {
         $query = $this->db->query("select m.ID_MOBIL,a.ID_BAN,m.NOPOL as bannopol,a.POSISI_BAN,a.MERK_BAN,a.NO_SERI_BAN,a.JENIS_BAN,DATEDIFF(a.TANGGAL_GANTI_BAN,now()) as tanggal_ban,
                             a.TANGGAL_GANTI_BAN as tgl_ganti
                           from ban a, mobil m, depot d 
-                          where m.ID_MOBIL = a.ID_MOBIL 
+                          where TANGGAL_GANTI_BAN IN (select MAX(TANGGAL_GANTI_BAN)from ban group by ID_MOBIL)
+                          and m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
                           and d.ID_DEPOT = $depot ");
         return $query;
@@ -69,7 +71,8 @@ class m_pengingat extends CI_Model {
         $query = $this->db->query("select a.ID_OLI,m.NOPOL as olinopol,a.KM_AWAL,a.MERK_OLI,a.TOTAL_VOLUME,DATEDIFF(a.TANGGAL_GANTI_OLI,now()) as tanggal_ganti_oli,
                             a.TANGGAL_GANTI_OLI as tgl_oli
                           from oli a, mobil m, depot d 
-                          where m.ID_MOBIL = a.ID_MOBIL 
+                          where TANGGAL_GANTI_OLI IN (select MAX(TANGGAL_GANTI_OLI)from oli group by ID_MOBIL)
+                          and m.ID_MOBIL = a.ID_MOBIL 
                           and m.ID_DEPOT = d.ID_DEPOT 
                           and d.ID_DEPOT = $depot ");
         return $query;
