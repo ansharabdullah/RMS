@@ -1285,7 +1285,6 @@ class laporan extends CI_Controller {
         $data2['status_tambah'] = false;
         $data2['status_ada'] = true;
 
-
         if ($this->input->post('tambah')) {
 
             $tahun = $this->input->post('tahun');
