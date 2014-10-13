@@ -50,6 +50,13 @@
                                         <input type="text" class="form-control" name="nama_oh" placeholder="Username" required>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Status APMS</label>
+                                    <div class="col-lg-10">
+                                        <input name="status_apms" id="radio-01" value="1" type="radio" /> Ada &nbsp;&nbsp;&nbsp;
+                                        <input name="status_apms" id="radio-02" value="0" type="radio" checked /> Tidak Ada
+                                    </div>
+                                </div>
 
                             </fieldset>
                             <fieldset title="Data SS" class="step" id="default-step-1" >

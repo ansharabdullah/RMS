@@ -211,7 +211,8 @@
             },
 
             tooltip: {
-                shared: true
+                shared: true,
+				valueSuffix: ' KL'
             },
             legend: {
                 enabled:true

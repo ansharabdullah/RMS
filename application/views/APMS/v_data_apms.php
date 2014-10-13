@@ -16,7 +16,7 @@
 				<button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
                         </button>
-                <strong>Error!</strong> 
+                <strong>Error!</strong> <?php echo $pesan_text;?> 
             </div>
         <?php } ?>
 		<div class="row">
