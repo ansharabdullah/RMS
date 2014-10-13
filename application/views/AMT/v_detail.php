@@ -138,8 +138,9 @@ foreach ($grafik as $ka) {
                 <div class="panel-body">
                     <a class="btn btn-warning" data-toggle="modal" href="#ModalPeringatan"><i class="icon-warning-sign"></i> Peringatan</a>
 
-                    <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_PEGAWAI ?>','<?php echo $row->NIP ?>');"><i class="icon-eraser"></i> Hapus</a>
-
+                    <?php if ($this->session->userdata('id_role') != 5) { ?>
+                        <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_PEGAWAI ?>','<?php echo $row->NIP ?>');"><i class="icon-eraser"></i> Hapus</a>
+                    <?php } ?>
 
                 </div>
             </section>
@@ -164,8 +165,9 @@ foreach ($grafik as $ka) {
 
                         <ul class="nav nav-pills nav-stacked">
                             <li id="btnProf" class="active"><a href="javascript:ShowProfile();"> <i class="icon-user" ></i> Profile</a></li>
-                            <li id="btnEdit"><a href="javascript:EditProfile();" > <i class="icon-edit"></i> Edit profile</a></li>
-
+                            <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                <li id="btnEdit"><a href="javascript:EditProfile();" > <i class="icon-edit"></i> Edit profile</a></li>
+                            <?php } ?>
                         </ul>
 
                     </section>
@@ -221,7 +223,6 @@ foreach ($grafik as $ka) {
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="panel-body bio-graph-info" id="EditProfile">
                             <form enctype="multipart/form-data" class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?>" >
@@ -493,8 +494,10 @@ foreach ($grafik as $ka) {
                                                         <td><?php echo $row->status_tugas ?></td>
                                                         <td><span class="label label-success">Hadir</span></td>
                                                         <td>
-                                                            <a onclick="editKinerja('<?php echo $row->status_tugas ?>', '<?php echo $id_pegawai ?>', '<?php echo $row->ID_KINERJA_AMT ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->total_km ?>', '<?php echo $row->total_kl ?>', '<?php echo $row->ritase ?>', '<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                                            <a href="javascript:hapusKinerja('<?php echo $row->ID_KINERJA_AMT ?>','<?php echo $row->TANGGAL_LOG_HARIAN ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                                            <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                                                <a onclick="editKinerja('<?php echo $row->status_tugas ?>', '<?php echo $id_pegawai ?>', '<?php echo $row->ID_KINERJA_AMT ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->total_km ?>', '<?php echo $row->total_kl ?>', '<?php echo $row->ritase ?>', '<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                                <a href="javascript:hapusKinerja('<?php echo $row->ID_KINERJA_AMT ?>','<?php echo $row->TANGGAL_LOG_HARIAN ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                                            <?php } ?>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -519,7 +522,9 @@ foreach ($grafik as $ka) {
                                                         <td>-</td>
                                                         <td><span class="label label-danger">Absen</span></td>
                                                         <td>
-                                                            <a onclick="tambahKinerja('<?php echo $tanggal ?>', '<?php echo $id_pegawai ?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                            <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                                                <a onclick="tambahKinerja('<?php echo $tanggal ?>', '<?php echo $id_pegawai ?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                            <?php } ?>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -565,12 +570,16 @@ foreach ($grafik as $ka) {
                                                     <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_BERLAKU)) ?></td>
                                                     <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_BERAKHIR)) ?></td>
                                                     <td>
-                                                        <a onclick="editPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>', '<?php echo $row->ID_PEGAWAI ?>', '<?php echo $row->PERINGATAN_PEGAWAI ?>', '<?php echo $row->JENIS_PERINGATAN ?>', '<?php echo $row->TANGGAL_BERLAKU ?>', '<?php echo $row->TANGGAL_BERAKHIR ?>')" data-placement="top" data-toggle="modal" href="#ModalEditPeringatan" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                                        <a href="javascript:hapusPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>','<?php echo $row->ID_PEGAWAI ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                                        <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                                            <a onclick="editPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>', '<?php echo $row->ID_PEGAWAI ?>', '<?php echo $row->PERINGATAN_PEGAWAI ?>', '<?php echo $row->JENIS_PERINGATAN ?>', '<?php echo $row->TANGGAL_BERLAKU ?>', '<?php echo $row->TANGGAL_BERAKHIR ?>')" data-placement="top" data-toggle="modal" href="#ModalEditPeringatan" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                            <a href="javascript:hapusPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>','<?php echo $row->ID_PEGAWAI ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                                        <?php } ?>
                                                     </td>
                                                 </tr>
-                                                <?php $i++;
-                                            } ?>
+                                                <?php
+                                                $i++;
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -625,7 +634,7 @@ foreach ($grafik as $ka) {
 
                                                         <?php foreach ($amt as $row) { ?>
                                                             <input name="id_pegawai" size="16" type="hidden" value="<?php echo $row->ID_PEGAWAI ?>" required/>
-    <?php } ?>
+                                                        <?php } ?>
                                                         <div class="form-group ">
                                                             <label for="calasan" class="control-label col-lg-4">Alasan</label>
                                                             <div class="col-lg-8">
@@ -759,7 +768,7 @@ foreach ($grafik as $ka) {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!--modal hapus kinerja-->
                         <div class="modal fade" id="modalHapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -940,113 +949,113 @@ foreach ($grafik as $ka) {
                             </div>
                         </div>
 
-<?php } ?>
+                    <?php } ?>
                     <!--script for this page only-->
                     <script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
 
                     <!-- END JAVASCRIPTS -->
                     <script>
-                                                    jQuery(document).ready(function () {
-                                                        EditableTable.init();
-                                                    });
+                                                            jQuery(document).ready(function () {
+                                                                EditableTable.init();
+                                                            });
 
-                                                    function FilterData(par) {
-                                                        jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
-                                                        jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
-                                                    }
+                                                            function FilterData(par) {
+                                                                jQuery('#editable-sample_wrapper .dataTables_filter input').val(par);
+                                                                jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
+                                                            }
 
-                                                    //pegawai
-                                                    var globalId;
-                                                    var globalId2;
-                                                    $('#modalHapus').on('show', function () {
+                                                            //pegawai
+                                                            var globalId;
+                                                            var globalId2;
+                                                            $('#modalHapus').on('show', function () {
 
-                                                    });
+                                                            });
 
-                                                    function hapus(id, id2) {
-                                                        globalId = id;
-                                                        globalId2 = id2;
-                                                        $("#h_id_pegawai").val(globalId);
-                                                        $("#h_nip").val(globalId2);
-                                                        $('#modalHapus').data('id', id).modal('show');
-                                                    }
+                                                            function hapus(id, id2) {
+                                                                globalId = id;
+                                                                globalId2 = id2;
+                                                                $("#h_id_pegawai").val(globalId);
+                                                                $("#h_nip").val(globalId2);
+                                                                $('#modalHapus').data('id', id).modal('show');
+                                                            }
 
-                                                    function ok()
-                                                    {
-                                                        $('#modalHapus').modal('hide');
-                                                        var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId + "/" + globalId2;
-                                                        window.location.href = url;
-                                                    }
+                                                            function ok()
+                                                            {
+                                                                $('#modalHapus').modal('hide');
+                                                                var url = "<?php echo base_url(); ?>" + "amt/delete_pegawai/" + globalId + "/" + globalId2;
+                                                                window.location.href = url;
+                                                            }
 
-                                                    //kinerja
-                                                    function editKinerja(status_tugas, id_pegawai, id_kinerja, tanggal, km, kl, ritase, spbu) {
-                                                        $("#status_tugas").val(status_tugas);
-                                                        $("#id_pegawai").val(id_pegawai);
-                                                        $("#id_kinerja").val(id_kinerja);
-                                                        $("#tanggal_kinerja").val(tanggal);
-                                                        $("#km").val(km);
-                                                        $("#kl").val(kl);
-                                                        $("#rit").val(ritase);
-                                                        $("#spbu").val(spbu);
-                                                    }
+                                                            //kinerja
+                                                            function editKinerja(status_tugas, id_pegawai, id_kinerja, tanggal, km, kl, ritase, spbu) {
+                                                                $("#status_tugas").val(status_tugas);
+                                                                $("#id_pegawai").val(id_pegawai);
+                                                                $("#id_kinerja").val(id_kinerja);
+                                                                $("#tanggal_kinerja").val(tanggal);
+                                                                $("#km").val(km);
+                                                                $("#kl").val(kl);
+                                                                $("#rit").val(ritase);
+                                                                $("#spbu").val(spbu);
+                                                            }
 
-                                                    function tambahKinerja(tanggal, id_pegawai) {
-                                                        $("#tstatus_tugas").val("");
-                                                        $("#tid_pegawai").val(id_pegawai);
-                                                        $("#tid_kinerja").val("");
-                                                        $("#ttanggal_kinerja").val(tanggal);
-                                                        $("#tkm").val("");
-                                                        $("#tkl").val("");
-                                                        $("#trit").val("");
-                                                        $("#tspbu").val("");
-                                                    }
-                                                    
-                                                    var id_kinerja;
-                                                    $('#modalHapus').on('show', function () {
+                                                            function tambahKinerja(tanggal, id_pegawai) {
+                                                                $("#tstatus_tugas").val("");
+                                                                $("#tid_pegawai").val(id_pegawai);
+                                                                $("#tid_kinerja").val("");
+                                                                $("#ttanggal_kinerja").val(tanggal);
+                                                                $("#tkm").val("");
+                                                                $("#tkl").val("");
+                                                                $("#trit").val("");
+                                                                $("#tspbu").val("");
+                                                            }
 
-                                                    });
+                                                            var id_kinerja;
+                                                            $('#modalHapus').on('show', function () {
 
-                                                    function hapusKinerja(id,tanggal) {
-                                                        id_kinerja = id;
-                                                        $("#did_kinerja").val(id_kinerja);
-                                                        $("#dtanggal").val(tanggal);
-                                                        $('#modalHapusKinerja').data('id', id).modal('show');
-                                                    }
+                                                            });
 
-                                                    function ok_kinerja()
-                                                    {
-                                                        $('#modalKinerja').modal('hide');
-                                                        var url = "<?php echo base_url(); ?>" + "amt/delete_kinerja/" + id_kinerja;
-                                                        window.location.href = url;
-                                                    }
+                                                            function hapusKinerja(id, tanggal) {
+                                                                id_kinerja = id;
+                                                                $("#did_kinerja").val(id_kinerja);
+                                                                $("#dtanggal").val(tanggal);
+                                                                $('#modalHapusKinerja').data('id', id).modal('show');
+                                                            }
 
-                                                    //peringatan
-                                                    var id_peringatan;
-                                                    var id_pegawai;
-                                                    $('#modalHapus').on('show', function () {
+                                                            function ok_kinerja()
+                                                            {
+                                                                $('#modalKinerja').modal('hide');
+                                                                var url = "<?php echo base_url(); ?>" + "amt/delete_kinerja/" + id_kinerja;
+                                                                window.location.href = url;
+                                                            }
 
-                                                    });
+                                                            //peringatan
+                                                            var id_peringatan;
+                                                            var id_pegawai;
+                                                            $('#modalHapus').on('show', function () {
 
-                                                    function hapusPeringatan(id, id2) {
-                                                        id_peringatan = id;
-                                                        id_pegawai = id2;
-                                                        $("#did_log_peringatan").val(id_peringatan);
-                                                        $('#modalHapusPeringatan').data('id', id).modal('show');
-                                                    }
+                                                            });
 
-                                                    function ok_peringatan()
-                                                    {
-                                                        $('#modalHapusPeringatan').modal('hide');
-                                                        var url = "<?php echo base_url(); ?>" + "peringatan/delete_peringatan/" + id_peringatan + "/" + id_pegawai;
-                                                        window.location.href = url;
-                                                    }
+                                                            function hapusPeringatan(id, id2) {
+                                                                id_peringatan = id;
+                                                                id_pegawai = id2;
+                                                                $("#did_log_peringatan").val(id_peringatan);
+                                                                $('#modalHapusPeringatan').data('id', id).modal('show');
+                                                            }
 
-                                                    function editPeringatan(id_log_peringatan, id_pegawai, peringatan_pegawai, jenis_peringatan, tanggal_berlaku, tanggal_berakhir) {
-                                                        $("#eid_log_peringatan").val(id_log_peringatan);
-                                                        $("#eid_pegawai").val(id_pegawai);
-                                                        $("#ejenis_peringatan").val(jenis_peringatan);
-                                                        $("#eperingatan_pegawai").html(peringatan_pegawai);
-                                                        $("#etanggal_berlaku").val(tanggal_berlaku);
-                                                        $("#etanggal_berakhir").val(tanggal_berakhir);
-                                                    }
+                                                            function ok_peringatan()
+                                                            {
+                                                                $('#modalHapusPeringatan').modal('hide');
+                                                                var url = "<?php echo base_url(); ?>" + "peringatan/delete_peringatan/" + id_peringatan + "/" + id_pegawai;
+                                                                window.location.href = url;
+                                                            }
+
+                                                            function editPeringatan(id_log_peringatan, id_pegawai, peringatan_pegawai, jenis_peringatan, tanggal_berlaku, tanggal_berakhir) {
+                                                                $("#eid_log_peringatan").val(id_log_peringatan);
+                                                                $("#eid_pegawai").val(id_pegawai);
+                                                                $("#ejenis_peringatan").val(jenis_peringatan);
+                                                                $("#eperingatan_pegawai").html(peringatan_pegawai);
+                                                                $("#etanggal_berlaku").val(tanggal_berlaku);
+                                                                $("#etanggal_berakhir").val(tanggal_berakhir);
+                                                            }
 
                     </script>
