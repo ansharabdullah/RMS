@@ -24,6 +24,10 @@ class m_rencana_apms extends CI_Model {
 		}
 		return $result;
 	}
+	public function insertRencanaAPMS0($data) {
+		$result = $this->db->insert('rencana_apms',$data);
+		return $result;
+	}
 	
 	public function editRencanaAPMS($data,$data_id) {
         for($i=0;$i<count($data);$i++)
