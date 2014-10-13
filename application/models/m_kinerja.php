@@ -418,6 +418,11 @@ class m_kinerja extends CI_Model {
         $this->db->where('id_pegawai', $id);
         $this->db->delete('kinerja_amt');
     }
+    
+    public function deleteKinerjaMTMobil($id){
+        $this->db->where('id_mobil', $id);
+        $this->db->delete('kinerja_mt');
+    }
 
     //detail MT
     public function editKinerjaMT($data, $id) {

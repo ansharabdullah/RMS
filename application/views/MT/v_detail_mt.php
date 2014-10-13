@@ -195,6 +195,7 @@ function DateToIndo($date) {
 
 
             <!-- page start-->
+            
 
             <section class="panel" id="ShowProfile">
                 <header class="panel-heading">
@@ -360,7 +361,7 @@ function DateToIndo($date) {
                     Edit MT  
                 </header>
                 <div class="panel-body bio-graph-primary" >
-                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/edit_mobil/<?php echo $row->ID_MOBIL ?>/<?php echo $bulan ?>/<?php echo $tahun ?>">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/detail/<?php echo $row->ID_MOBIL ?>">
                         <div class="panel-body">
                             <input type="hidden" name="id" value="<?php echo $row->ID_MOBIL?>">
                             <div class="row">
@@ -914,7 +915,7 @@ function DateToIndo($date) {
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                        <input class="btn btn-success" name="edit_profil" type="submit" value="Simpan"/>
                     </div>
                 </div>
             </form>
