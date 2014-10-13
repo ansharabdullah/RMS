@@ -27,7 +27,8 @@ class m_penjadwalan extends CI_Model {
     }
 
     public function cekJadwal($tahun,$bulan) {
-        $data = $this->db->query("select * from jadwal j, log_harian l where j.id_log_harian=l.id_log_harian and month(l.TANGGAL_LOG_HARIAN)='$bulan' and year(l.TANGGAL_LOG_HARIAN)='$tahun'");
+        $id_depot = $this->session->userdata('id_depot');
+        $data = $this->db->query("select * from jadwal j, log_harian l where j.id_log_harian=l.id_log_harian and month(l.TANGGAL_LOG_HARIAN)='$bulan' and year(l.TANGGAL_LOG_HARIAN)='$tahun' and l.id_depot=$id_depot");
         return $data->result();
     }
     
