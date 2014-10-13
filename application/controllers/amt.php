@@ -1283,14 +1283,13 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
     }
 
 //grafik
-    public function amt_depot($depot, $nama, $tahun) {
+    public function amt_depot($depot, $tahun) {
 
         $data['lv1'] = 2;
         $data['lv2'] = 2;
         $data2['tahun'] = $tahun;
         $data2['total_mt'] = $this->m_mt->getTotalMtByDepot($depot);
         $data2['total_amt'] = $this->m_amt->getTotalAMtByDepot($depot);
-        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
         $data2['rencana_bulan'] = $this->m_rencana->get_rencana_bulan($depot, date("n"), date("Y"));
         $data2['kinerja_bulan'] = $this->m_kinerja->get_kinerja_bulan($depot, date("n"), date("Y"));
         $data2['amt'] = $this->m_amt->selectAMT($depot);
@@ -1338,7 +1337,8 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
         $data2['hari'] = date('d', strtotime($tanggal));
         $data2['bulan'] = date('F', strtotime($tanggal));
         $data2['tahun'] = date('Y', strtotime($tanggal));
-        ;
+        
+        $data2['amt'] = $this->m_amt->selectAMT($depot);
         $data2['tanggal'] = date("d F Y", strtotime($tanggal));
         $data2['kinerja'] = $this->m_kinerja->get_kinerja_amt_detail($depot, $tanggal);
 
@@ -1357,17 +1357,16 @@ $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
         redirect('amt/detail/' . $id_pegawai . "/" . $bulan . "/" . $tahun);
     }
 
-    public function amt_hari($depot, $nama) {
+    public function amt_hari() {
         $tanggal = $_POST['bulan'];
         $bulan = date('n', strtotime($tanggal));
         $tahun = date('Y', strtotime($tanggal));
-        redirect('amt/grafik_harian/' . $depot . "/" . $nama . "/" . $bulan . "/" . $tahun);
+        redirect('amt/grafik_harian/' . $bulan . "/" . $tahun);
     }
 
     public function grafik($tahun) {
         $depot = $this->session->userdata("id_depot");
-        $nama = 'TEGAL';
-        $this->amt_depot($depot, $nama, $tahun);
+        $this->amt_depot($depot, $tahun);
 //        $data['lv1'] = 2;
 //        $data['lv2'] = 2;
 //        $data3 = menu_ss();

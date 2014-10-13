@@ -64,32 +64,49 @@ class apms extends CI_Controller {
 			if($this->input->post('simpan')=="Simpan")
 			{
 				$depot = $this->session->userdata("id_depot");
-				$data5 = array(
-					'NO_APMS' => $this->input->post('no_apms', true),
-					'ID_DEPOT'=> $depot,
-					'SHIP_TO' => $this->input->post('ship_to', true),
-					'NAMA_PENGUSAHA' => $this->input->post('nama_pengusaha', true),
-					'SUPPLY_POINT' => $this->input->post('supply_point', true),
-					'ALAMAT' => $this->input->post('alamat', true),
-					'NAMA_TRANSPORTIR' => $this->input->post('nama_transportir', true),
-					'NO_PERJANJIAN' => $this->input->post('no_perjanjian', true),
-					'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
-				);
-				$pesan = $this->m_apms->insertApms($data5);
-				if($pesan)
-				{
-					$data1['pesan'] = 1;
-					$data1['pesan_text'] = "Selamat Data Berhasil Ditambahkan!";
-					$datalog = array(
-						'keterangan' => 'Menambahkan Data APMS',
-						'id_pegawai' => $this->session->userdata("id_pegawai"),
-						'keyword' => 'Tambah'
+				$cek = $this->m_apms->periksaApms($depot,$this->input->post('no_apms', true),$this->input->post('ship_to', true));
+				if($cek == 0){
+					$data5 = array(
+						'NO_APMS' => $this->input->post('no_apms', true),
+						'ID_DEPOT'=> $depot,
+						'SHIP_TO' => $this->input->post('ship_to', true),
+						'NAMA_PENGUSAHA' => $this->input->post('nama_pengusaha', true),
+						'SUPPLY_POINT' => $this->input->post('supply_point', true),
+						'ALAMAT' => $this->input->post('alamat', true),
+						'NAMA_TRANSPORTIR' => $this->input->post('nama_transportir', true),
+						'NO_PERJANJIAN' => $this->input->post('no_perjanjian', true),
+						'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
 					);
-					$this->m_log_sistem->insertLog($datalog);
-				}else{
+					$pesan = $this->m_apms->insertApms($data5);
+					if($pesan)
+					{
+						$data1['pesan'] = 1;
+						$data1['pesan_text'] = "Selamat Data Berhasil Ditambahkan!";
+						$datalog = array(
+							'keterangan' => 'Menambahkan Data APMS',
+							'id_pegawai' => $this->session->userdata("id_pegawai"),
+							'keyword' => 'Tambah'
+						);
+						$this->m_log_sistem->insertLog($datalog);
+					}else{
+						$data1['pesan'] = 2;
+						$data1['pesan_text'] = "Data Tidak Berhasil Ditambahkan!";
+						
+					}
+				}else if($cek == 1)
+				{
 					$data1['pesan'] = 2;
-					$data1['pesan_text'] = "Data Tidak Berhasil Ditambahkan!";
-					
+					$data1['pesan_text'] = "Data Tidak Berhasil Ditambahkan! NO APMS sudah ada. Periksa kembali inputan Anda!";
+				}
+				else if($cek == 2)
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Ditambahkan! Data Ship-To Unik,Tidak ada lebih dari satu APMS yang memiliki 2 Ship-to yang sama . Periksa kembali inputan Anda!";
+				}
+				else if($cek == 3)
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Ditambahkan! NO APMS sudah ada dan Data Ship-To Unik,Tidak ada lebih dari satu APMS yang memiliki 2 Ship-to yang sama . Periksa kembali inputan Anda!";
 				}
 			}
 			if($this->input->post('simpan')=="Hapus")
@@ -128,134 +145,192 @@ class apms extends CI_Controller {
 	public function detail_apms($id_apms,$bulan,$tahun){
 				
 		$data1['pesan'] =0;
+		
 		if($this->input->post('simpan'))
 		{
+			
 			if($this->input->post('simpan')=="Simpan")
 			{
+				$depot = $this->session->userdata("id_depot");
 				$id = $this->input->post('id', true);
-				$data = array(
-					'NO_APMS' => $this->input->post('no_apms', true),
-					'NAMA_PENGUSAHA' => $this->input->post('nama_pengusaha', true),
-					'SUPPLY_POINT' => $this->input->post('supply_point', true),
-					'ALAMAT' => $this->input->post('alamat', true),
-					'NAMA_TRANSPORTIR' => $this->input->post('nama_transportir', true),
-					'NO_PERJANJIAN' => $this->input->post('no_perjanjian', true),
-					'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
-					'SHIP_TO' => $this->input->post('ship_to', true),
-				);
-				$pesan =  $this->m_apms->editApms($data, $id);
-				if($pesan){
-					$data1['pesan'] = 1;
-					$data1['pesan_text'] = "Data Berhasil Diubah.";
-					$datalog = array(
-						'keterangan' => 'Mengedit Data APMS',
-						'id_pegawai' => $this->session->userdata("id_pegawai"),
-						'keyword' => 'edit'
+				$cek = $this->m_apms->periksaeditApms($depot,$this->input->post('no_apms', true),$this->input->post('ship_to', true),$id);
+				if($cek == 0){
+					$data = array(
+						'NO_APMS' => $this->input->post('no_apms', true),
+						'NAMA_PENGUSAHA' => $this->input->post('nama_pengusaha', true),
+						'SUPPLY_POINT' => $this->input->post('supply_point', true),
+						'ALAMAT' => $this->input->post('alamat', true),
+						'NAMA_TRANSPORTIR' => $this->input->post('nama_transportir', true),
+						'NO_PERJANJIAN' => $this->input->post('no_perjanjian', true),
+						'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
+						'SHIP_TO' => $this->input->post('ship_to', true),
 					);
-					$this->m_log_sistem->insertLog($datalog);
-				}else{
+					$pesan =  $this->m_apms->editApms($data, $id);
+					if($pesan){
+						$data1['pesan'] = 1;
+						$data1['pesan_text'] = "Data Berhasil Diubah.";
+						$datalog = array(
+							'keterangan' => 'Mengedit Data APMS',
+							'id_pegawai' => $this->session->userdata("id_pegawai"),
+							'keyword' => 'edit'
+						);
+						$this->m_log_sistem->insertLog($datalog);
+					}else{
+						$data1['pesan'] = 2;
+						$data1['pesan_text'] = "Data Tidak Berhasil Diubah.";
+					}
+				}else if($cek == 1)
+				{
 					$data1['pesan'] = 2;
-					$data1['pesan_text'] = "Data Tidak Berhasil Diubah.";
+					$data1['pesan_text'] = "Data Tidak Berhasil Diubah! NO APMS sudah ada. Periksa kembali inputan Anda!";
 				}
-				
+				else if($cek == 2)
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Diubah! Data Ship-To Unik,Tidak ada lebih dari satu APMS yang memiliki 2 Ship-to yang sama . Periksa kembali inputan Anda!";
+				}
+				else if($cek == 3)
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Diubah! NO APMS sudah ada dan Data Ship-To Unik,Tidak ada lebih dari satu APMS yang memiliki 2 Ship-to yang sama . Periksa kembali inputan Anda!";
+				}
 			}
 		}
 		if($this->input->post('simpan1')=="Simpan")
 			{
-				$id = $this->input->post('id', true);
-				$data = $this->m_apms->getLogHarian( $this->input->post('tgl_delivery', true),$this->session->userdata('id_depot'));
-				$log_harian = $data[0]->ID_LOG_HARIAN;
-				if($this->input->post('bh', true) == "Premium")
+					$id = $this->input->post('id', true);
+					$data = $this->m_apms->getLogHarian( $this->input->post('tgl_delivery', true),$this->session->userdata('id_depot'));
+					$log_harian = $data[0]->ID_LOG_HARIAN;
+				
+				$cek = $this->m_apms->periksaKinerjaApms($this->session->userdata('id_depot'),$log_harian,$this->input->post('no_delivery', true));
+				if($cek == 0)
 				{
-					$solar = 0;
-					$premium = $this->input->post('jml', true);
-				}
-				else
-				{
-					$premium = 0;
-					$solar = $this->input->post('jml', true);
-					
-				}
-				$data_1 = array(
-					'ID_APMS' => $id,
-					'ID_LOG_HARIAN' => $log_harian,
-					'NO_DELIVERY' => $this->input->post('no_delivery', true),
-					'DATE_DELIVERY' => $this->input->post('tgl_delivery', true),
-					'DATE_PLAN_GI' => $this->input->post('tgl_plan_gi', true),
-					'PREMIUM' => $this->input->post('bh', true),
-					'SOLAR' => $solar,
-					'PREMIUM' => $premium,
-					'ORDER_NUMBER' => $this->input->post('nomor_order', true),
-					'DATE_ORDER' => $this->input->post('tgl_order', true),
-					'PENGIRIMAN_KAPAL' => $this->input->post('tgl_kirim', true),
-					'DATE_KAPAL_DATANG' => $this->input->post('tgl_kpl_dtg', true),
-					'DATE_KAPAL_BERANGKAT' => $this->input->post('tgl_kpl_brkt', true),
-					'DESCRIPTION' => $this->input->post('des', true),
-				);
-				$bisa = $this->m_apms->insertKinerjaApms($data_1);
-				if($bisa)
-				{
-					$datalog = array(
-						'keterangan' => 'Menambah Data Kinerja APMS',
-						'id_pegawai' => $this->session->userdata("id_pegawai"),
-						'keyword' => 'Hapus'
+					if($this->input->post('bh', true) == "Premium")
+					{
+						$solar = 0;
+						$premium = $this->input->post('jml', true);
+					}
+					else
+					{
+						$premium = 0;
+						$solar = $this->input->post('jml', true);
+						
+					}
+					$data_1 = array(
+						'ID_APMS' => $id,
+						'ID_LOG_HARIAN' => $log_harian,
+						'NO_DELIVERY' => $this->input->post('no_delivery', true),
+						'DATE_DELIVERY' => $this->input->post('tgl_plan_gi', true),
+						'DATE_PLAN_GI' => $this->input->post('tgl_delivery', true),
+						'PREMIUM' => $this->input->post('bh', true),
+						'SOLAR' => $solar,
+						'PREMIUM' => $premium,
+						'ORDER_NUMBER' => $this->input->post('nomor_order', true),
+						'DATE_ORDER' => $this->input->post('tgl_order', true),
+						'PENGIRIMAN_KAPAL' => $this->input->post('tgl_kirim', true),
+						'DATE_KAPAL_DATANG' => $this->input->post('tgl_kpl_dtg', true),
+						'DATE_KAPAL_BERANGKAT' => $this->input->post('tgl_kpl_brkt', true),
+						'DESCRIPTION' => $this->input->post('des', true),
 					);
-					$this->m_log_sistem->insertLog($datalog);
-					$data1['pesan'] = 1;
-					$data1['pesan_text'] = "Data Kinerja Berhasil Ditambahkan.";
-				}else
+					$bisa = $this->m_apms->insertKinerjaApms($data_1);
+					if($bisa)
+					{
+						$datalog = array(
+							'keterangan' => 'Menambah Data Kinerja APMS',
+							'id_pegawai' => $this->session->userdata("id_pegawai"),
+							'keyword' => 'Hapus'
+						);
+						$this->m_log_sistem->insertLog($datalog);
+						$data1['pesan'] = 1;
+						$data1['pesan_text'] = "Data Kinerja Berhasil Ditambahkan.";
+					}else
+					{
+						$data1['pesan'] = 2;
+						$data1['pesan_text'] = "Data Kinerja Tidak Berhasil Ditambahkan.";
+					}
+				}else 
 				{
 					$data1['pesan'] = 2;
-					$data1['pesan_text'] = "Data Kinerja Tidak Berhasil Ditambahkan.";
+					$data1['pesan_text'] = "Data Kinerja Tidak Berhasil Ditambahkan. No Delivery yang anda inputkan sudah ada";
 				}
 			}
 			if($this->input->post('simpan2')=="Simpan")
 			{
 				$id = $this->input->post('id', true);
 				$id_kinerja = $this->input->post('id_kinerja_apms', true);
-				if($this->input->post('bh', true) == "Premium")
+				$cek = $this->m_apms->periksaeditKinerjaApms($this->session->userdata('id_depot'),$this->input->post('id_log', true),$this->input->post('no_delivery1', true),$id_kinerja);
+				if($cek ==0)
 				{
-					$solar = 0;
-					$premium = $this->input->post('jml', true);
+					if($this->input->post('bh1', true) == "Premium")
+					{
+						$solar = 0;
+						$premium = $this->input->post('jml1', true);
+					}
+					else if($this->input->post('bh1', true) == "Solar")
+					{
+						$premium = 0;
+						$solar = $this->input->post('jml1', true);
+						
+					}
+					$data_1 = array(
+						'ID_APMS' => $id,
+						'ID_LOG_HARIAN' => $this->input->post('id_log', true),
+						'NO_DELIVERY' => $this->input->post('no_delivery1', true),
+						'DATE_DELIVERY' => $this->input->post('tgl_plan_gi1', true),
+						'DATE_PLAN_GI' => $this->input->post('tgl_delivery1', true),
+						'PREMIUM' => $premium,
+						'SOLAR' => $solar,
+						'ORDER_NUMBER' => $this->input->post('nomor_order1', true),
+						'DATE_ORDER' => $this->input->post('tgl_order1', true),
+						'PENGIRIMAN_KAPAL' => $this->input->post('tgl_kirim1', true),
+						'DATE_KAPAL_DATANG' => $this->input->post('tgl_kpl_dtg1', true),
+						'DATE_KAPAL_BERANGKAT' => $this->input->post('tgl_kpl_brkt1', true),
+						'DESCRIPTION' => $this->input->post('des1', true),
+					);
+					$bisa = $this->m_apms->editKinerjaApms($data_1,$id_kinerja);
+					if($bisa)
+					{
+						$datalog = array(
+							'keterangan' => 'Mengedit Data Kinerja APMS',
+							'id_pegawai' => $this->session->userdata("id_pegawai"),
+							'keyword' => 'Edit'
+						);
+						$this->m_log_sistem->insertLog($datalog);
+						$data1['pesan'] = 1;
+						$data1['pesan_text'] = "Data Kinerja Berhasil Diubah.";
+					}else
+					{
+						$data1['pesan'] = 2;
+						$data1['pesan_text'] = "Data Kinerja Tidak Berhasil Diubah.";
+					}
+				}else
+				{
+					$data1['pesan'] = 2;
+					$data1['pesan_text'] = "Data Tidak Berhasil Diubah! Data Nomor LO Unik,Tidak ada lebih dari satu Kinerja yang memiliki Nomor LO yang sama . Periksa kembali inputan Anda!";
 				}
-				else if($this->input->post('bh', true) == "Solar")
+			}
+			if($this->input->post('hapuskinerja')=="Hapus")
+			{
+				$id = $this->input->post('ID_KINERJA');
+				
+				$pesan = $this->m_apms->deleteKinerjaApms($id);
+				if($pesan)
 				{
-					$premium = 0;
-					$solar = $this->input->post('jml', true);
-					
-				}
-				$data_1 = array(
-					'ID_APMS' => $id,
-					'ID_LOG_HARIAN' => $this->input->post('id_log', true),
-					'NO_DELIVERY' => $this->input->post('no_delivery1', true),
-					'DATE_DELIVERY' => $this->input->post('tgl_delivery1', true),
-					'DATE_PLAN_GI' => $this->input->post('tgl_plan_gi1', true),
-					'PREMIUM' => $solar,
-					'SOLAR' => $premium,
-					'ORDER_NUMBER' => $this->input->post('nomor_order1', true),
-					'DATE_ORDER' => $this->input->post('tgl_order1', true),
-					'PENGIRIMAN_KAPAL' => $this->input->post('tgl_kirim1', true),
-					'DATE_KAPAL_DATANG' => $this->input->post('tgl_kpl_dtg1', true),
-					'DATE_KAPAL_BERANGKAT' => $this->input->post('tgl_kpl_brkt1', true),
-					'DESCRIPTION' => $this->input->post('des1', true),
-				);
-				$bisa = $this->m_apms->editKinerjaApms($data_1,$id_kinerja);
-				if($bisa)
-				{
+					$data1['pesan'] = 1;
+					$data1['pesan_text'] = "Selamat Data Kinerja APMS Berhasil Dihapus!";
 					$datalog = array(
-						'keterangan' => 'Mengedit Data Kinerja APMS',
+						'keterangan' => 'Menghapus Data Kinerja APMS',
 						'id_pegawai' => $this->session->userdata("id_pegawai"),
 						'keyword' => 'Hapus'
 					);
 					$this->m_log_sistem->insertLog($datalog);
-					$data1['pesan'] = 1;
-					$data1['pesan_text'] = "Data Kinerja Berhasil Diubah.";
 				}else
 				{
 					$data1['pesan'] = 2;
-					$data1['pesan_text'] = "Data Kinerja Tidak Berhasil Diubah.";
+					$data1['pesan_text'] = "Data Tidak Berhasil Dihapus!";
 				}
 			}
+		
 		$data['lv1'] = 4;
         $data['lv2'] = 1;
 		$data1['tahun'] = $tahun;
@@ -936,25 +1011,14 @@ class apms extends CI_Controller {
 			}
 		}else if($this->input->post('edit')=="Simpan")
 		{
-				$tanggal_log = $this->input->post('bln_kpi');
-				$bulan = date("m", strtotime($tanggal_log));
-				$tahun = date("Y", strtotime($tanggal_log));
-				$jumlah_nilai = 0;
-				$bobot = 5;
-				$tanggal_log = date($tanggal_log.'-1');
-				$id_log = $this->m_log_harian->getIdLogHarianTanggal($tanggal_log,$depot);
-				//var_dump($tanggal_log);
-				$id_log_h='';
-				foreach($id_log as $l)
-				{
-					$id_log_h = $l->ID_LOG_HARIAN;
-				}
-				
-				
 				$target = $this->input->post('kpitarget1', true);
 				$realisasi = $this->input->post('kpirealisasi1', true);
 				$id = $this->input->post('idkpi1', true);
+				$tanggal_log =  $this->input->post('bln_kpi', true);
+				$bulan =  date('m',strtotime($tanggal_log));
+				$tahun =  date('Y',strtotime($tanggal_log));
 				
+				$bobot = 5;
 				$deviasi =  $realisasi - $target;
 				$score =  (1 - ($deviasi/$target))*100;
 				if($score < 80)
@@ -970,13 +1034,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 1,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1007,13 +1069,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 2,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1044,13 +1104,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 3,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1080,13 +1138,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 5,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1124,13 +1180,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 6,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1167,13 +1221,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 7,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1210,13 +1262,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 8,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
@@ -1253,13 +1303,11 @@ class apms extends CI_Controller {
 					$normal_score = $score;
 				}
 				$nilai = $normal_score * $bobot / 100;
-				$jumlah_nilai = $jumlah_nilai + $nilai;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
 				
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 9,
-					'ID_LOG_HARIAN' => $id_log_h,
 					'BOBOT' => $bobot,
 					'TARGET' => $target,
 					'REALISASI' => $realisasi,
