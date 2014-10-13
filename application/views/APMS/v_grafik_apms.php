@@ -11,7 +11,13 @@
     <?php
 	$status=0;
 	$tampung=0;
-	$k = $grafik_max->no_bulan;
+	if($tahun == date('Y'))
+	{
+		$k = date('n');
+	}else
+	{
+		$k = 12;
+	}
 	for($i=1;$i<=$k;$i++)
 	{
 		$tampung_solar=0;
@@ -96,7 +102,7 @@
                     }]
             },
             tooltip: {
-                valueSuffix: ''
+                valueSuffix: ' KL'
             },
             legend: {
                 enabled: true

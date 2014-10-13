@@ -1285,7 +1285,6 @@ class laporan extends CI_Controller {
         $data2['status_tambah'] = false;
         $data2['status_ada'] = true;
 
-
         if ($this->input->post('tambah')) {
 
             $tahun = $this->input->post('tahun');
@@ -1359,15 +1358,15 @@ class laporan extends CI_Controller {
             $bulan = date("m", strtotime($bulan_input));
             $tahun = date("Y", strtotime($bulan_input));
             $last_day = date('t', strtotime($tanggal));
-            $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan);
-            $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);
+            $data_depot = $this->m_laporan->getInfoDepot($depot);
             $hasil_rencana_realisasi = $this->m_laporan->getRencanaRealisasi($depot, $tahun, $bulan);
+            $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);// RITASE, KM, KL, SPBU untuk AMT
             $jumlah_data_performansi = $data_performansi->num_rows();
             $hasil_data_performansi = $data_performansi->result();
-            $data_depot = $this->m_laporan->getInfoDepot($depot);
+            $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan); // Ritase, KM, KL, OU untuk MT
             $jumlah_data = $data->num_rows();
             $hasil_data = $data->result();
-
+            
             $column_name = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO");
             $month_name = array("01" => "Januari", "02" => "Februari", "03" => "Maret", "04" => "April", "05" => "Mei", "06" => "Juni", "07" => "Juli", "08" => "Agustus", "09" => "September", "10" => "Oktober", "11" => "November", "12" => "Desember");
 
@@ -1795,8 +1794,7 @@ class laporan extends CI_Controller {
                 $no = $jumlah_data_performansi;
                 foreach ($hasil_data_performansi as $row) {
                     $array = (array) $row;
-
-
+                    
                     //Untul laporan harian lokasi 
                     if ($array['JABATAN'] == "SUPIR") {
                         $jumlah_sopir++;
@@ -1956,6 +1954,15 @@ class laporan extends CI_Controller {
                             if ($hasil_rencana_realisasi[$i]->R_PERTAMINADEX != "") {
                                 $sheetData->setCellValue($column_name[$i + 5] . '44', $hasil_rencana_realisasi[$i]->R_PERTAMINADEX);
                             }
+                            if ($hasil_rencana_realisasi[$i]->R_MISS != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '45', $hasil_rencana_realisasi[$i]->R_MISS);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_TAMBAHAN != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '46', $hasil_rencana_realisasi[$i]->R_TAMBAHAN);
+                            }
+                            if ($hasil_rencana_realisasi[$i]->R_PEMBATALAN != "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . '47', $hasil_rencana_realisasi[$i]->R_PEMBATALAN);
+                            }
 
                             //4.b
                             if ($hasil_rencana_realisasi[$i]->REALISASI_PREMIUM != "") {
@@ -1980,6 +1987,7 @@ class laporan extends CI_Controller {
 
                             //9
                             $sheetData->setCellValue($column_name[$i + 5] . '98', $hasil_rencana_realisasi[$i]->JUMLAH_ALOKASI_SPBU);
+                            $sheetData->setCellValue($column_name[$i + 5] . '99', 0);
                         }
                     }
 
@@ -2050,15 +2058,16 @@ class laporan extends CI_Controller {
             $bulan = date("m", strtotime($bulan_input));
             $tahun = date("Y", strtotime($bulan_input));
             $last_day = date('t', strtotime($tanggal));
-            $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan);
-            $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);
             $hasil_rencana_realisasi = $this->m_laporan->getRencanaRealisasi($depot, $tahun, $bulan);
             $hasil_kpi_operational = $this->m_laporan->getKPIOperasional($depot, $tahun, $bulan);
+            $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);
             $jumlah_data_performansi = $data_performansi->num_rows();
             $hasil_data_performansi = $data_performansi->result();
             $data_depot = $this->m_laporan->getInfoDepot($depot);
+            $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan);
             $jumlah_data = $data->num_rows();
             $hasil_data = $data->result();
+            $interpolasi = $this->m_laporan->getInterpolasi($depot, $tahun, $bulan);
 
             $column_name = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO");
             $month_name = array("01" => "Januari", "02" => "Februari", "03" => "Maret", "04" => "April", "05" => "Mei", "06" => "Juni", "07" => "Juli", "08" => "Agustus", "09" => "September", "10" => "Oktober", "11" => "November", "12" => "Desember");
@@ -2607,6 +2616,15 @@ class laporan extends CI_Controller {
                         if ($hasil_rencana_realisasi[$i]->R_PERTAMINADEX != "") {
                             $sheetData->setCellValue($column_name[$i + 5] . '44', $hasil_rencana_realisasi[$i]->R_PERTAMINADEX);
                         }
+                        if ($hasil_rencana_realisasi[$i]->R_MISS != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '45', $hasil_rencana_realisasi[$i]->R_MISS);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->R_TAMBAHAN != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '46', $hasil_rencana_realisasi[$i]->R_TAMBAHAN);
+                        }
+                        if ($hasil_rencana_realisasi[$i]->R_PEMBATALAN != "") {
+                            $sheetData->setCellValue($column_name[$i + 5] . '47', $hasil_rencana_realisasi[$i]->R_PEMBATALAN);
+                        }
 
                         //4.b
                         if ($hasil_rencana_realisasi[$i]->REALISASI_PREMIUM != "") {
@@ -2631,6 +2649,7 @@ class laporan extends CI_Controller {
 
                         //9
                         $sheetData->setCellValue($column_name[$i + 5] . '98', $hasil_rencana_realisasi[$i]->JUMLAH_ALOKASI_SPBU);
+                        $sheetData->setCellValue($column_name[$i + 5] . '99', 0);
                     }
 
                     //6
@@ -2925,19 +2944,116 @@ class laporan extends CI_Controller {
                 $hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
                 $dw = date("w", strtotime($tahun . "-" . $bulan . "-" . $last_day));
                 $sheetData->setCellValue('C2', "NOMOR : ...../...../" . $romawi_bln[$bulan] . "/" . $tahun);
-                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi pengangkutan/pengiriman BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region V Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi pengangkutan/pengiriman BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D ". AREA_OAM_ROMAWI ." Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
                 $sheetData->setCellValue('C4', $kata);
 
+                $sheetData->setCellValue('C11', "01 - 14 ".$month_name[$bulan]." ".$tahun);
+                $sheetData->setCellValue('C12', "15 - ".$last_day. " ".$month_name[$bulan]." ".$tahun);
+                $sheetData->setCellValue('E11', $interpolasi[0]->NILAI);
+                $sheetData->setCellValue('E12', $interpolasi[1]->NILAI);
+                $sheetData->setCellValue('F11', $interpolasi[2]->NILAI);
+                $sheetData->setCellValue('F12', $interpolasi[3]->NILAI);
+                $sheetData->setCellValue('G11', "=SUM(KL!E".($jumlah_data+4).":R".($jumlah_data+4).")*1000");
+                $sheetData->setCellValue('G12', "=SUM(KL!S".($jumlah_data+4).":".$column_name[$last_day + 3].($jumlah_data+4).")*1000");
 
+                $sheetData->setCellValue('C26', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('H26', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('C34', $data_depot->NAMA_OH);
+                
+                if ($pjs != "") {
+                    $sheetData->setCellValue('H25', "Pjs Site Supervisor Fleet TBBM");
+                    $sheetData->setCellValue('H34', $pjs);
+                } else {
+                    $sheetData->setCellValue('H25', "Site Supervisor Fleet TBBM");
+                    $sheetData->setCellValue('H34', $data_depot->NAMA_PEGAWAI);
+                }
 
+                $sheetData->setCellValue('C39', "Per Tanggal 1 - ".$last_day." Berdasarkan Good Issue");
+                $sheetData->setCellValue('C40', "Lokasi Depot ".ucfirst(strtolower($data_depot->NAMA_DEPOT))." Bulan ".$month_name[$bulan]." ".$tahun);
+                
+                $sheetData->setCellValue('C80', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('G80', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                
+                if ($pjs != "") {
+                    $sheetData->setCellValue('G79', "Pjs Site Supervisor Fleet TBBM");
+                    $sheetData->setCellValue('G86', $pjs);
+                } else {
+                    $sheetData->setCellValue('G79', "Site Supervisor Fleet TBBM");
+                    $sheetData->setCellValue('G86', $data_depot->NAMA_PEGAWAI);
+                }
 
-
-
-
-
-
-
-
+                $sheetData->setCellValue('C88', "TERMINAL BBM ".strtoupper($data_depot->NAMA_DEPOT));
+                
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi penyerahan produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D ". AREA_OAM_ROMAWI ." Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $sheetData->setCellValue('C91', $kata);
+                
+                $sheetData->setCellValue('D97', "Terminal BBM ".ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('F97', $month_name[$bulan]." ".$tahun);
+                
+                $sheetData->setCellValue('C118', "TERMINAL BBM ".strtoupper($data_depot->NAMA_DEPOT));
+                
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA menyatakan bahwa realisasi penyelesaian perkerjaan 100% bulanan penyaluran produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D ". AREA_OAM_ROMAWI ." Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $sheetData->setCellValue('C120', $kata);
+                $sheetData->setCellValue('C141', "S & D Region Manager ". AREA_OAM_ROMAWI);
+                
+                $sheetData->setCellValue('C150', "TERMINAL BBM ".strtoupper($data_depot->NAMA_DEPOT));
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA menyatakan bahwa realisasi penyerahan produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D ". AREA_OAM_ROMAWI ." Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $sheetData->setCellValue('C153', $kata);
+                
+                $sheetData->setCellValue('D159', "Terminal BBM ".ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('F159', $month_name[$bulan]." ".$tahun);
+                
+                
+                $sheetData->setCellValue('C172', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('H172', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('C178', $data_depot->NAMA_OH);
+                
+                if ($pjs != "") {
+                    $sheetData->setCellValue('H171', "Pjs Site Supervisor Fleet TBBM");
+                    $sheetData->setCellValue('H178', $pjs);
+                } else {
+                    $sheetData->setCellValue('H171', "Site Supervisor Fleet TBBM");
+                    $sheetData->setCellValue('H178', $data_depot->NAMA_PEGAWAI);
+                }
+                
+                if ($last_day == 28) {
+                    $sheetData->removeRow(73, 1);
+                    $sheetData->removeRow(72, 1);
+                    $sheetData->removeRow(71, 1);
+                    $sheetData->setCellValue('E73', "=SUM(E43:E70)");
+                    $sheetData->setCellValue('F73', "=SUM(F43:F70)");
+                    $sheetData->setCellValue('G73', "=SUM(G43:G70)");
+                    $sheetData->setCellValue('H73', "=SUM(H43:H70)");
+                    $sheetData->setCellValue('I73', "=SUM(I43:I70)");
+                } else if ($last_day == 29) {
+                    $sheetData->removeRow(73, 1);
+                    $sheetData->removeRow(72, 1);
+                    $sheetData->setCellValue('E73', "=SUM(E43:E71)");
+                    $sheetData->setCellValue('F73', "=SUM(F43:F71)");
+                    $sheetData->setCellValue('G73', "=SUM(G43:G71)");
+                    $sheetData->setCellValue('H73', "=SUM(H43:H71)");
+                    $sheetData->setCellValue('I73', "=SUM(I43:I71)");
+                } else if ($last_day == 30) {
+                    $sheetData->removeRow(73, 1);
+                    $sheetData->setCellValue('E73', "=SUM(E43:E72)");
+                    $sheetData->setCellValue('F73', "=SUM(F43:F72)");
+                    $sheetData->setCellValue('G73', "=SUM(G43:G72)");
+                    $sheetData->setCellValue('H73', "=SUM(H43:H72)");
+                    $sheetData->setCellValue('I73', "=SUM(I43:I72)");
+                }                
+                
+                
+                if($data_depot->STATUS_APMS == 1){
+                    
+                }else{
+                    //$sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI Operasional Bulan ' . ($t + 1)));
+                    //$objPHPExcel->removeSheetByIndex($sheetIndex);
+                }
+                
+                
+                
+                
+                
                 $nama_file = 'data_laporan/bulanan/Laporan Bulanan ' . $data_depot->NAMA_DEPOT . " " . $month_name[$bulan] . " " . $tahun . '.xls';
 
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');

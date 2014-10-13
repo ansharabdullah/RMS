@@ -16,12 +16,16 @@ class login extends CI_Controller {
     }
 
     public function login() {
-        $this->load->view('layouts/header');
-        $this->load->view('login/v_login');
+        if (!$this->session->userdata('isLoggedIn')) {
+            $this->load->view('layouts/header');
+            $this->load->view('login/v_login');
+        } else {
+            redirect(base_url());
+        }
     }
 
     public function validate_login() {
-        if($this->input->post('submit') ){
+        if ($this->input->post('submit')) {
             $email = $this->input->post('email');
             $password = md5($this->input->post('password'));
             $login = $this->m_user->validate_login($email, $password);
@@ -78,16 +82,20 @@ class login extends CI_Controller {
                 echo 'window.location.href="' . $link . '"';
                 echo '</script>';
             }
-        }else{
+        } else {
             redirect(base_url());
         }
     }
 
     public function logout() {
-        $this->session->sess_destroy();
-        echo '<script type="text/javascript">alert("Terimakasih!");';
-        echo 'window.location.href="' . base_url() . '";';
-        echo '</script>';
+        if ($this->session->userdata('isLoggedIn')) {
+            $this->session->sess_destroy();
+            echo '<script type="text/javascript">alert("Terimakasih!");';
+            echo 'window.location.href="' . base_url() . '";';
+            echo '</script>';
+        }else{
+            redirect(base_url());
+        }
     }
 
 }

@@ -146,7 +146,11 @@
                                         <td><?php echo $koefisien[$i * 4 + 1]->NILAI ?></td>
                                         <td><?php echo $koefisien[$i * 4 + 2]->NILAI ?></td>
                                         <td><?php echo $koefisien[$i * 4 + 3]->NILAI ?></td>
-                                        <td><a onclick="editKoef('<?php echo $i ?>', '<?php echo $koefisien[$i * 4]->KELOMPOK_PENILAIAN ?>', '<?php echo $koefisien[$i * 4]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 1]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 2]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 3]->NILAI ?>')" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a></td>
+                                        <td>
+                                            <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                            <a onclick="editKoef('<?php echo $i ?>', '<?php echo $koefisien[$i * 4]->KELOMPOK_PENILAIAN ?>', '<?php echo $koefisien[$i * 4]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 1]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 2]->NILAI ?>', '<?php echo $koefisien[$i * 4 + 3]->NILAI ?>')" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                            <?php } ?>
+                                        </td>
                                     </tr>
                                 <?php } ?>
 

@@ -78,7 +78,7 @@
                 }
             },
             tooltip: {
-                valueSuffix: ''
+                valueSuffix: ' KL' 
             },
             legend: {
                 borderWidth: 1

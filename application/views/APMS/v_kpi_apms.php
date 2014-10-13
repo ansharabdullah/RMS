@@ -292,7 +292,8 @@
                     <div class="form-group ">                                            
                         <label for="bln_kpi" class="control-label col-lg-4">Bulan</label>
                         <div class="col-lg-8">
-                            <input class=" form-control input-sm m-bot15" name="bln_kpi" type="month" value="<?php  echo $nama_bulan.' '.$tahun;?>" readonly/>
+                            <input class=" form-control input-sm m-bot15" name="bln_kpi1" type="month" value="<?php  echo $nama_bulan.' '.$tahun;?>" readonly/>
+                            <input type="hidden" name="bln_kpi" type="month" value="<?php  echo $tahun.'-'.$bulan;?>"/>
                             <span class="help-block">Pilih bulan</span>
                         </div>
                     </div>

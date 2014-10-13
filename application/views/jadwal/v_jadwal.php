@@ -7,8 +7,9 @@
             {
                 $("#tgl").html($("#tglForm").val());
                 document.getElementById("commentForm").submit();
+            } else {
+                e.preventDefault();
             }
-            e.preventDefault();
         });
     });
 </script>
@@ -45,7 +46,9 @@
             <header class="panel-heading">
                 Lihat Jadwal
                 <div style="float:right;">
-                    <a  data-placement="left" href="<?php echo base_url() ?>jadwal/hapus_jadwal/" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Jadwal"><i class="icon-minus"></i></a>
+                    <?php if ($this->session->userdata('id_role') != 5) { ?>
+                        <a  data-placement="left" href="<?php echo base_url() ?>jadwal/hapus_jadwal/" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Jadwal"><i class="icon-minus"></i></a>
+                    <?php } ?>
                     <a  data-placement="left" href="<?php echo base_url() ?>jadwal/import_penjadwalan/" class="btn btn-primary btn-xs tooltips" data-original-title="Import Jadwal"><i class="icon-plus"></i></a>
                 </div>
             </header>
@@ -110,8 +113,9 @@
                                                 }
                                                 ?></td>
                                             <td>
-                                                <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal" onclick="editJadwal('<?php echo $row->ID_JADWAL ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->NAMA_PEGAWAI ?>', '<?php echo $row->STATUS_MASUK ?>', '<?php echo $row->NIP ?>')"><span  class="btn btn-warning btn-xs tooltips" data-original-title="Ganti Jadwal" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
-
+                                                <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                                    <div  style="width: 70px;"> <a data-toggle="modal" href="#myModal" onclick="editJadwal('<?php echo $row->ID_JADWAL ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->NAMA_PEGAWAI ?>', '<?php echo $row->STATUS_MASUK ?>', '<?php echo $row->NIP ?>')"><span  class="btn btn-warning btn-xs tooltips" data-original-title="Ganti Jadwal" data-placement="left" style="float:left"><i class="icon-pencil"></i></span> </a>
+                                                    <?php } ?>
                                             </td>
                                         </tr>
 
@@ -133,7 +137,7 @@
                                 <h4 class="modal-title">Edit Jadwal</h4>
                             </div>
                             <div class=" form">
-                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>jadwal/penjadwalan/<?php echo $tanggal?>">
+                                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="post" action="<?php echo base_url() ?>jadwal/penjadwalan/<?php echo $tanggal ?>">
 
                                     <div class="modal-body">
                                         <div class="form-group">
@@ -182,7 +186,8 @@
                     </button>
                     <strong>Error!</strong> Jadwal tanggal <b><?php echo date("d-M-Y", strtotime($tanggal)) ?></b> tidak ditemukan.
                 </div>
-            <?php }
+                <?php
+            }
         }
         ?>
     </section>
