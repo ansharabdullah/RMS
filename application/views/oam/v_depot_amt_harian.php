@@ -92,8 +92,8 @@
                                                         <td style="display:none;"></td>
                                                         <td><?php echo $i ?></td>
                                                         <td style="white-space: nowrap"><?php echo strftime('%d %B %Y',strtotime($ka->TANGGAL_LOG_HARIAN));?></td>
-                                                        <td><?php echo $ka->total_kl ?> KL</td>
                                                         <td><?php echo $ka->total_km ?> KM</td>
+                                                        <td><?php echo $ka->total_kl ?> KL</td>
                                                         <td><?php echo $ka->ritase ?> Rit</td>
                                                         <td><?php echo $ka->spbu ?> </td>
                                                     </tr>

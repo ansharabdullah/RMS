@@ -485,52 +485,52 @@ class kpi extends CI_Controller {
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 19, $data);
         $data = array(
-            $stretch => $_POST['stretch20'],
+            //$stretch => $_POST['stretch20'],
             $base => $_POST['base20'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 20, $data);
         $data = array(
-            $stretch => $_POST['stretch21'],
+            //$stretch => $_POST['stretch21'],
             $base => $_POST['base21'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 21, $data);
         $data = array(
-            $stretch => $_POST['stretch22'],
+            //$stretch => $_POST['stretch22'],
             $base => $_POST['base22'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 22, $data);
+//        $data = array(
+//            //$stretch => $_POST['stretch23'],
+//            $base => $_POST['base23'],
+//        );
+//        $this->m_kpi_oam->update_kpi_internal($id_log_harian, 23, $data);
         $data = array(
-            $stretch => $_POST['stretch23'],
-            $base => $_POST['base23'],
-        );
-        $this->m_kpi_oam->update_kpi_internal($id_log_harian, 23, $data);
-        $data = array(
-            $stretch => $_POST['stretch24'],
+            //$stretch => $_POST['stretch24'],
             $base => $_POST['base24'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 24, $data);
         $data = array(
-            $stretch => $_POST['stretch25'],
+//            $stretch => $_POST['stretch25'],
             $base => $_POST['base25'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 25, $data);
         $data = array(
-            $stretch => $_POST['stretch26'],
+//            $stretch => $_POST['stretch26'],
             $base => $_POST['base26'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 26, $data);
         $data = array(
-            $stretch => $_POST['stretch27'],
+//            $stretch => $_POST['stretch27'],
             $base => $_POST['base27'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 27, $data);
         $data = array(
-            $stretch => $_POST['stretch28'],
+//            $stretch => $_POST['stretch28'],
             $base => $_POST['base28'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 28, $data);
         $data = array(
-            $stretch => $_POST['stretch29'],
+//            $stretch => $_POST['stretch29'],
             $base => $_POST['base29'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 29, $data);
@@ -778,52 +778,52 @@ class kpi extends CI_Controller {
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 19, $data);
         $data = array(
-            $stretch => $_POST['stretch20'],
+//            $stretch => $_POST['stretch20'],
             $base => $_POST['base20'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 20, $data);
         $data = array(
-            $stretch => $_POST['stretch21'],
+//            $stretch => $_POST['stretch21'],
             $base => $_POST['base21'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 21, $data);
         $data = array(
-            $stretch => $_POST['stretch22'],
+//            $stretch => $_POST['stretch22'],
             $base => $_POST['base22'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 22, $data);
+//        $data = array(
+////            $stretch => $_POST['stretch23'],
+//            $base => $_POST['base23'],
+//        );
+//        $this->m_kpi_oam->update_kpi_internal($id_log_harian, 23, $data);
         $data = array(
-            $stretch => $_POST['stretch23'],
-            $base => $_POST['base23'],
-        );
-        $this->m_kpi_oam->update_kpi_internal($id_log_harian, 23, $data);
-        $data = array(
-            $stretch => $_POST['stretch24'],
+//            $stretch => $_POST['stretch24'],
             $base => $_POST['base24'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 24, $data);
         $data = array(
-            $stretch => $_POST['stretch25'],
+//            $stretch => $_POST['stretch25'],
             $base => $_POST['base25'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 25, $data);
         $data = array(
-            $stretch => $_POST['stretch26'],
+//            $stretch => $_POST['stretch26'],
             $base => $_POST['base26'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 26, $data);
         $data = array(
-            $stretch => $_POST['stretch27'],
+//            $stretch => $_POST['stretch27'],
             $base => $_POST['base27'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 27, $data);
         $data = array(
-            $stretch => $_POST['stretch28'],
+//            $stretch => $_POST['stretch28'],
             $base => $_POST['base28'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 28, $data);
         $data = array(
-            $stretch => $_POST['stretch29'],
+//            $stretch => $_POST['stretch29'],
             $base => $_POST['base29'],
         );
         $this->m_kpi_oam->update_kpi_internal($id_log_harian, 29, $data);

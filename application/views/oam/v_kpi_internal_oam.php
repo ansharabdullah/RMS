@@ -335,7 +335,7 @@
                                     <td>Ratio</td>
                                     <td></td>
                                     <td><?php echo $kpi[19]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[19]->TW1_STRETCH ?></td>
+                                    <td><?php //echo $kpi[19]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -347,7 +347,7 @@
                                     <td>Cases</td>
                                     <td></td>
                                     <td><?php echo $kpi[20]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[20]->TW1_STRETCH ?></td>
+                                    <td><?php //echo $kpi[20]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -359,7 +359,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[21]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[21]->TW1_STRETCH ?></td>
+                                    <td><?php //echo $kpi[21]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -370,8 +370,8 @@
                                     <td>4. External Audit Option</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[22]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[22]->TW1_STRETCH ?></td>
+                                    <td>WTP</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -385,8 +385,8 @@
                                     <td>1. Proper PPN</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[23]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[23]->TW1_STRETCH ?></td>
+                                    <td><?php echo $kpi[23]->TW1_BASE ?>/green</td>
+                                    <td><?php //echo $kpi[23]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -398,7 +398,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[24]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[24]->TW1_STRETCH ?></td>
+                                    <td><?php //echo $kpi[24]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -410,7 +410,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[25]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[25]->TW1_STRETCH ?></td>
+                                    <td><?php //echo $kpi[25]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -422,7 +422,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[26]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[26]->TW1_STRETCH ?></td>
+                                    <td><?php //echo $kpi[26]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -434,7 +434,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[27]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[27]->TW1_STRETCH ?></td>
+                                    <td><?php //echo $kpi[27]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -446,7 +446,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[28]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[28]->TW1_STRETCH ?></td>
+                                    <td><?php //echo $kpi[28]->TW1_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -760,7 +760,7 @@
                                     <td>Ratio</td>
                                     <td></td>
                                     <td><?php echo $kpi[19]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[19]->TW2_STRETCH ?></td>
+                                    <td><?php //echo $kpi[19]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -772,7 +772,7 @@
                                     <td>Cases</td>
                                     <td></td>
                                     <td><?php echo $kpi[20]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[20]->TW2_STRETCH ?></td>
+                                    <td><?php //echo $kpi[20]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -784,7 +784,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[21]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[21]->TW2_STRETCH ?></td>
+                                    <td><?php //echo $kpi[21]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -795,8 +795,8 @@
                                     <td>4. External Audit Option</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[22]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[22]->TW2_STRETCH ?></td>
+                                    <td>WTP</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -810,8 +810,8 @@
                                     <td>1. Proper PPN</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[23]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[23]->TW2_STRETCH ?></td>
+                                    <td><?php echo $kpi[23]->TW2_BASE ?>/green</td>
+                                    <td><?php //echo $kpi[23]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -823,7 +823,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[24]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[24]->TW2_STRETCH ?></td>
+                                    <td><?php //echo $kpi[24]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -835,7 +835,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[25]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[25]->TW2_STRETCH ?></td>
+                                    <td><?php //echo $kpi[25]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -847,7 +847,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[26]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[26]->TW2_STRETCH ?></td>
+                                    <td><?php //echo $kpi[26]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -859,7 +859,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[27]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[27]->TW2_STRETCH ?></td>
+                                    <td><?php //echo $kpi[27]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -871,7 +871,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[28]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[28]->TW2_STRETCH ?></td>
+                                    <td><?php //echo $kpi[28]->TW2_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1183,7 +1183,7 @@
                                     <td>1. TRIR Patra Niaga</td>
                                     <td>Ratio</td>
                                     <td><?php echo $kpi[19]->BOBOT ?></td>
-                                    <td><?php echo $kpi[19]->TW3_BASE ?></td>
+                                    <td><?php //echo $kpi[19]->TW3_BASE ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1195,7 +1195,7 @@
                                     <td>2. NOA Patra Niaga</td>
                                     <td>Cases</td>
                                     <td><?php echo $kpi[20]->BOBOT ?></td>
-                                    <td><?php echo $kpi[20]->TW3_BASE ?></td>
+                                    <td><?php //echo $kpi[20]->TW3_BASE ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1207,7 +1207,7 @@
                                     <td>3. GCG compliance</td>
                                     <td>%</td>
                                     <td><?php echo $kpi[21]->BOBOT ?></td>
-                                    <td><?php echo $kpi[21]->TW3_BASE ?></td>
+                                    <td><?php //echo $kpi[21]->TW3_BASE ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1218,60 +1218,9 @@
                                 <tr>
                                     <td>4. External Audit Option</td>
                                     <td>%</td>
-                                    <td><?php echo $kpi[22]->BOBOT ?></td>
-                                    <td><?php echo $kpi[22]->TW3_BASE ?></td>
                                     <td></td>
+                                    <td>WTP</td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="10"><b>Other Operational Metrics</b></td>
-                                </tr>
-                                <tr>
-                                    <td>1. TRIR Patra Niaga</td>
-                                    <td>Ratio</td>
-                                    <td></td>
-                                    <td><?php echo $kpi[19]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[19]->TW3_STRETCH ?></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>2. NOA Patra Niaga</td>
-                                    <td>Cases</td>
-                                    <td></td>
-                                    <td><?php echo $kpi[20]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[20]->TW3_STRETCH ?></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3. GCG compliance</td>
-                                    <td>%</td>
-                                    <td></td>
-                                    <td><?php echo $kpi[21]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[21]->TW3_STRETCH ?></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>4. External Audit Option</td>
-                                    <td>%</td>
-                                    <td></td>
-                                    <td><?php echo $kpi[22]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[22]->TW3_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1285,8 +1234,8 @@
                                     <td>1. Proper PPN</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[23]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[23]->TW3_STRETCH ?></td>
+                                    <td><?php echo $kpi[23]->TW3_BASE ?>/green</td>
+                                    <td><?php // echo $kpi[23]->TW3_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1298,7 +1247,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[24]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[24]->TW3_STRETCH ?></td>
+                                    <td><?php //echo $kpi[24]->TW3_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1310,7 +1259,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[25]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[25]->TW3_STRETCH ?></td>
+                                    <td><?php //echo $kpi[25]->TW3_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1322,7 +1271,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[26]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[26]->TW3_STRETCH ?></td>
+                                    <td><?php //echo $kpi[26]->TW3_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1334,7 +1283,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[27]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[27]->TW3_STRETCH ?></td>
+                                    <td><?php //echo $kpi[27]->TW3_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1346,7 +1295,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[28]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[28]->TW3_STRETCH ?></td>
+                                    <td><?php //echo $kpi[28]->TW3_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1659,7 +1608,7 @@
                                     <td>Ratio</td>
                                     <td></td>
                                     <td><?php echo $kpi[19]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[19]->TW4_STRETCH ?></td>
+                                    <td><?php //echo $kpi[19]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1671,7 +1620,7 @@
                                     <td>Cases</td>
                                     <td></td>
                                     <td><?php echo $kpi[20]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[20]->TW4_STRETCH ?></td>
+                                    <td><?php //echo $kpi[20]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1683,7 +1632,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[21]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[21]->TW4_STRETCH ?></td>
+                                    <td><?php //echo $kpi[21]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1694,8 +1643,8 @@
                                     <td>4. External Audit Option</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[22]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[22]->TW4_STRETCH ?></td>
+                                    <td>WTP</td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1709,8 +1658,8 @@
                                     <td>1. Proper PPN</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[23]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[23]->TW4_STRETCH ?></td>
+                                    <td><?php echo $kpi[23]->TW4_BASE ?>/green</td>
+                                    <td><?php //echo $kpi[23]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1722,7 +1671,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[24]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[24]->TW4_STRETCH ?></td>
+                                    <td><?php //echo $kpi[24]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1734,7 +1683,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[25]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[25]->TW4_STRETCH ?></td>
+                                    <td><?php //echo $kpi[25]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1746,7 +1695,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[26]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[26]->TW4_STRETCH ?></td>
+                                    <td><?php //echo $kpi[26]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1758,7 +1707,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[27]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[27]->TW4_STRETCH ?></td>
+                                    <td><?php //echo $kpi[27]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1770,7 +1719,7 @@
                                     <td>%</td>
                                     <td></td>
                                     <td><?php echo $kpi[28]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[28]->TW4_STRETCH ?></td>
+                                    <td><?php //echo $kpi[28]->TW4_STRETCH ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

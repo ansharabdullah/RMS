@@ -54,7 +54,7 @@
                                 <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Pertamax Plus')">Pertamax Plus</a></li>
-                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Dex')">Pertamax Dex</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamina Dex')">Pertamina Dex</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
                             </ul>
@@ -87,7 +87,7 @@
                                                     <th >Premium</th>
                                                     <th >Pertamax</th>
                                                     <th >Pertamax Plus</th>
-                                                    <th >Pertamax Dex</th>
+                                                    <th >Pertamina Dex</th>
                                                     <th >Solar</th>
                                                     <th >Bio Solar</th>
                                                 </tr>
@@ -101,15 +101,15 @@
                                                         <td style="display:none;"></td>
                                                         <td><?php echo $i ?></td>
                                                         <td style="white-space: nowrap"><?php echo strftime('%d %B %Y',strtotime($km->TANGGAL_LOG_HARIAN));?></td>
-                                                        <td><?php echo $km->total_kl ?> KL</td>
-                                                        <td><?php echo $km->total_km ?> KM</td>
-                                                        <td><?php echo $km->own_use ?></td>
-                                                        <td><?php echo $km->premium ?></td>
-                                                        <td><?php echo $km->pertamax ?></td>
-                                                        <td><?php echo $km->pertamax_plus ?></td>
-                                                        <td><?php echo $km->pertamina_dex ?></td>
-                                                        <td><?php echo $km->solar ?></td>
-                                                        <td><?php echo $km->bio_solar ?></td>
+                                                         <td><?php echo $km->total_km ?> KM</td>
+                                                         <td><?php echo $km->total_kl ?> KL</td>
+                                                        <td><?php echo $km->own_use ?> KL</td>
+                                                        <td><?php echo $km->premium ?> KL</td>
+                                                        <td><?php echo $km->pertamax ?> KL</td>
+                                                        <td><?php echo $km->pertamax_plus ?> KL</td>
+                                                        <td><?php echo $km->pertamina_dex ?> KL</td>
+                                                        <td><?php echo $km->solar ?> KL</td>
+                                                        <td><?php echo $km->bio_solar ?> KL</td>
                                                     </tr>
                                                     <?php
                                                     $i++;
@@ -236,7 +236,7 @@
         }else if(title == "Pertamax Plus") {
             mt.series[0].setData(pertamax_plus);
             
-        }else if(title == "Pertamax Dex") {
+        }else if(title == "Pertamina Dex") {
             mt.series[0].setData(pertamina_dex);
             
         }else if(title == "Solar"){

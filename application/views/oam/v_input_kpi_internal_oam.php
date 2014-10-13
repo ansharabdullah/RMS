@@ -308,7 +308,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base20" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch20" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch20" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -317,7 +318,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base21" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch21" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch21" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -326,7 +328,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base22" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch22" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch22" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -334,8 +337,10 @@
                                 <td>%</td>
                                 <td></td>
                                 <td></td>
-                                <td><input type="number" name="base23" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch23" required="required" class="form-control"/></td>
+                                <td>WTP</td>
+                                <td></td>
+<!--                                <td><input type="number" name="base23" required="required" class="form-control"/></td>-->
+<!--                                <td><input type="number" name="stretch23" required="required" class="form-control"/></td>-->
                                 <td></td>
                             </tr>
                             <tr>
@@ -347,7 +352,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base24" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch24" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch24" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -356,7 +362,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base25" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch25" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch25" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -365,7 +372,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base26" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch26" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch26" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -374,7 +382,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base27" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch27" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch27" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -383,7 +392,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base28" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch28" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch28" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -392,7 +402,8 @@
                                 <td></td>
                                 <td></td>
                                 <td><input type="number" name="base29" required="required" class="form-control"/></td>
-                                <td><input type="number" name="stretch29" required="required" class="form-control"/></td>
+<!--                                <td><input type="number" name="stretch29" required="required" class="form-control"/></td>-->
+                                <td></td>
                                 <td></td>
                             </tr>
                             <tr>

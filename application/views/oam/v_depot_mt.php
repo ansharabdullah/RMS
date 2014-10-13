@@ -100,7 +100,7 @@
                                 <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Pertamax Plus')">Pertamax Plus</a></li>
-                                <li><a style="cursor: pointer" onclick="filterMt('Pertamax Dex')">Pertamax Dex</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Pertamina Dex')">Pertamina Dex</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Solar')">Solar</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Bio Solar')">Bio Solar</a></li>
                             </ul>
@@ -122,46 +122,48 @@
                         <div class="adv-table editable-table " style="overflow-x: scroll" >
                             <div class="space15"></div>
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                                <thead>
-                                    <tr>
-                                        <th style="display:none;"></th>
-                                        <th >No.</th> 
-                                        <th>Nopol</th>
-                                        <th>Transpotir</th>
-                                        <th>Kapasitas</th>
-                                        <th>Produk</th>
-                                        <th>No Mesin</th>
-                                        <th>No Rangka</th>
-                                        <th>Jenis Tangki</th>
-                                        <th>Status</th>
-                                        <th>GPS</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="">
-                                        <?php $i = 1;
-                                        foreach ($mt as $row) { ?>
-                                            <td style="display:none;"></td>
-                                            <td><?php echo $i; ?></td>
-                                            <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
-
-                                            <td><?php echo $row->TRANSPORTIR; ?></td>
-                                            <td><?php echo $row->KAPASITAS; ?></td>
-                                            <td><?php echo $row->PRODUK; ?></td>
-                                            <td><?php echo $row->NO_MESIN; ?></td>
-                                            <td><?php echo $row->NO_RANGKA; ?></td>
-                                            <td><?php echo $row->JENIS_TANGKI; ?></td>
-                                            <td><?php echo $row->STATUS_MOBIL; ?></td>
-                                            <td><?php echo $row->GPS; ?></td>
-
-
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;"></th>
+                                            <th >No</th>
+                                            <th >Tanggal</th>
+                                            <th >Jumlah KM</th>
+                                            <th >Jumlah KL</th>
+                                            <th >Own Use</th>
+                                            <th >Premium</th>
+                                            <th >Pertamax</th>
+                                            <th >Pertamax Plus</th>
+                                            <th >Pertamina Dex</th>
+                                            <th >Solar</th>
+                                            <th >Bio Solar</th>
                                         </tr>
-                                        <?php $i++;
-                                    } ?>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $i = 1;
+                                        foreach ($kinerja_mt as $km) {
+                                            ?>
+                                            <tr class="">
+                                                <td style="display:none;"></td>
+                                                <td><?php echo $i ?></td>
+                                                <td style="white-space: nowrap"><?php echo strftime('%B',strtotime($km->TANGGAL_LOG_HARIAN));?></td>
+                                               <td><?php echo $km->total_km ?> KM</td>
+                                                 <td><?php echo $km->total_kl ?> KL</td>
+                                                <td><?php echo $km->own_use ?> KL</td>
+                                                <td><?php echo $km->premium ?> KL</td>
+                                                <td><?php echo $km->pertamax ?> KL</td>
+                                                <td><?php echo $km->pertamax_plus ?> KL</td>
+                                                <td><?php echo $km->pertamina_dex ?> KL</td>
+                                                <td><?php echo $km->solar ?> KL</td>
+                                                <td><?php echo $km->bio_solar ?> KL</td>
+                                            </tr>
+                                            <?php
+                                            $i++;
+                                        }
+                                        ?>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
                         </div>
                     </div>
                 </section>
@@ -354,7 +356,7 @@
 
                 }
              );
-        }else if(title == "Pertamax Dex") {
+        }else if(title == "Pertamina Dex") {
             //mt.series[0].setData(pertamina_dex);
              mt.addSeries({
                     name: 'Jumlah',

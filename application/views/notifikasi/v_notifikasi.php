@@ -100,11 +100,28 @@
                                 //cek ba
                                 if ($logHarian[$i]['ba'] == 0) {
 
-                                    echo "<a href='".base_url()."ba/berita_acara'>
+                                    echo "<a href='".base_url()."laporan/bulanan'>
                                         <span class='label label-warning'><i class='icon-check'></i></span>
                                       Berita Acara belum dibuat.
                                         </a><br/><br/>";
                                 }
+                                
+                                  //cek kuota apms
+                                if ($logHarian[$i]['kuota_apms'] == 0) {
+                                     echo "<a href='".base_url()."apms/rencana_apms'>
+                                        <span class='label label-warning'><i class='icon-check'></i></span>
+                                      Kuota APMS belum diisi.
+                                        </a><br/><br/>";
+                                }
+
+                                    //cek kpi apms
+                                if ($logHarian[$i]['kpi_apms'] == 0) {
+                                      echo "<a href='".base_url()."apms/kpi_apms'>
+                                        <span class='label label-warning'><i class='icon-check'></i></span>
+                                      KPI APMS belum diisi.
+                                        </a><br/><br/>";
+                                }
+
                                 ?>
                             </div>
                         </section>

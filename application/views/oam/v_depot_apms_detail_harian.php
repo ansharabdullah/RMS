@@ -148,6 +148,17 @@
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>depot/apms_depot_harian/<?php echo $id_depot?>/<?php echo $no_bulan?>/<?php echo $tahun?>">Kinerja AMT Bulanan</a></li>
+                    <li class="active">Kinerja APMS Harian</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
                         Grafik Detail Realisasi Penyaluran APMS Harian Depot <?php echo $nama_depot ?>

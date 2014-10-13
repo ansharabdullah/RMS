@@ -229,5 +229,30 @@ class m_kpi extends CI_Model {
         return $query->result();
         
     }
+    
+    
+    /*****KPI APMS******/
+    
+     public function nilai_kpi_apms_perbulan($id_depot,$tahun) {
+        $query = $this->db->query("select d.NAMA_DEPOT as nama_depot, sum(kp.FINAL_SCORE) as total, MONTH(lh.TANGGAL_LOG_HARIAN) as bulan ,
+                                    lh.TANGGAL_LOG_HARIAN as tanggal    
+                                    from kpi_apms kp, log_harian lh, depot d 
+                                    where lh.ID_LOG_HARIAN = kp.ID_LOG_HARIAN and d.ID_DEPOT = lh.ID_DEPOT
+                                    and lh.ID_DEPOT = $id_depot and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun
+                                    group by bulan order by bulan asc");
+        
+        return $query->result();
+    }
+    
+    public function get_kpi_apms_bulanan($id_depot,$tahun)
+    {
+        $query = $this->db->query("select * from kpi_apms ka,jenis_kpi_apms jk,log_harian lh 
+                                    where jk.ID_JENIS_KPI_APMS = ka.ID_JENIS_KPI_APMS 
+                                    and lh.ID_LOG_HARIAN = ka.ID_LOG_HARIAN
+                                    and year(lh.TANGGAL_LOG_HARIAN) = $tahun 
+                                    and lh.ID_DEPOT = $id_depot 
+                                    order by month(lh.TANGGAL_LOG_HARIAN),ka.ID_JENIS_KPI_APMS asc");
+        return $query->result();
+    }
 
 }

@@ -44,17 +44,23 @@ class Depot extends CI_Controller {
         $data['lv2'] = 1;
         $data2 = menu_oam();
         $data3['id_depot'] = $id_depot;
-        $data3['depot'] = $this->m_depot->get_depot();
-        $data3['kpi_bulan'] = $this->m_kpi->nilai_kpi_perbulan($id_depot,$tahun);
-        $data3['detail_kpi'] = $this->m_kpi->detail_kpi_perbulan($id_depot,$tahun);
+        $data3['depot'] = $this->m_depot->get_depot_apms();
+        $data3['nama_depot'] = $this->m_depot->get_nama_depot($id_depot);
         $data3['tahun'] = $tahun;
+        $data3['detail_kpi'] = $this->m_kpi->get_kpi_apms_bulanan($id_depot,$tahun);
+        $data3['kpi_bulan'] = $this->m_kpi->nilai_kpi_apms_perbulan($id_depot,$tahun);
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data2);
         $this->navbar($data['lv1'], $data['lv2']);
         $this->load->view('oam/v_grafik_apms_bulan',$data3);
         $this->load->view('layouts/footer');
     }
-
+    public function changeGrafikApmsBulan() {
+        $index = $_POST['indikator'];
+        $tahun = $_POST['tahun'];
+        $depot = $_POST['depot'];
+        redirect('depot/grafik_apms_bulan/' . $depot.'/'.$tahun);
+    }
     public function changeGrafikBulan() {
         $index = $_POST['indikator'];
         $tahun = $_POST['tahun'];
@@ -348,6 +354,7 @@ class Depot extends CI_Controller {
         $data2['nama_bulan'] = strftime('%B',strtotime($tanggal));
         $data2['grafik'] = $this->m_apms->get_grafik_harian($depot ,$bulan,$hari,$tahun); 
         $data2['nama_apms'] = $this->m_apms->selectApms($depot);
+        $data2['no_bulan'] = $bulan;
         $data3 = menu_oam();
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu',$data3);
@@ -357,25 +364,71 @@ class Depot extends CI_Controller {
     }
     
      public function kpi_internal($depot) {
-        $this->load->model('m_laporan');
+         $this->load->model('m_laporan');
         $tahun = date('Y');
+        $bulan = date('m');
+        $jenis = 'Triwulan I';
+        if ($bulan <= 12) {
+            $jenis = 'Triwulan IV';
+        } else if ($bulan <= 9) {
+            $jenis = 'Triwulan III';
+        } else if ($bulan <= 6) {
+            $jenis = 'Triwulan II';
+        } else if ($bulan <= 3) {
+            $jenis = 'Triwulan I';
+        }
+
         $data2['edit_kpi'] = false;
-        $data2['depot'] = $depot;
+
         if ($this->input->post('cek')) {
             $tahun = $this->input->post('tahun');
-        }
-        else
-        {
-            
-            $tahun = date('Y');
+            $jenis = $this->input->post('jenis');
+        } else if ($this->input->post('edit_triwulan')) {
+            $tahun = $this->input->post('tahun');
+            $jenis = $this->input->post('jenis');
+            $id = $this->input->post('id_kpi_internal');
+            $edit_bobot = $this->input->post('edit_bobot');
+            $edit_base = $this->input->post('edit_base');
+            $edit_stretch = $this->input->post('edit_stretch');
+            $edit_bulan1 = $this->input->post('edit_bulan1');
+            $edit_bulan2 = $this->input->post('edit_bulan2');
+            $edit_bulan3 = $this->input->post('edit_bulan3');
+            $this->m_laporan->editKPIInternal($id, $jenis, $edit_bobot, $edit_base, $edit_stretch, $edit_bulan1, $edit_bulan2, $edit_bulan3);
+            $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Ubah KPI Internal ' . $jenis . ' ' . $tahun, 'Edit');
+            $data2['edit_kpi'] = true;
+        } else if ($this->input->post('sinkron')) {
+            $tahun = $this->input->post('tahun');
+            $jenis = $this->input->post('jenis');
+            $this->m_laporan->SyncKPIInternal($depot, $tahun,$jenis);
         }
 
         $data2['tahun_kpi'] = $tahun;
-        $data2['error_kpi'] = $this->m_laporan->cetKPIInternal($tahun, $depot);
-        if ($data2['error_kpi'] >= 365) {
+        $data2['jenis_kpi'] = $jenis;
+
+        $bulan_awal = 1;
+        $bulan_akhir = 1;
+        if ($jenis == "Triwulan I") {
+            $bulan_awal = 1;
+            $bulan_akhir = 3;
+        } else if ($jenis == "Triwulan II") {
+            $bulan_awal = 4;
+            $bulan_akhir = 6;
+        } else if ($jenis == "Triwulan III") {
+            $bulan_awal = 7;
+            $bulan_akhir = 9;
+        } else if ($jenis == "Triwulan IV") {
+            $bulan_awal = 10;
+            $bulan_akhir = 12;
+        }
+
+        $data2['status_ada_kpi'] = $this->m_laporan->cetKPIInternal($tahun, $depot, $bulan_awal, $bulan_akhir);
+        if ($data2['status_ada_kpi'] > 0) {
             $data2['data_kpi'] = $this->m_laporan->getKPIInternal($tahun, $depot);
         }
-        $data2['nama_depot'] = $this->m_depot->get_nama_depot($depot);
+        $nama = $this->m_depot->get_nama_depot($depot);
+        $data2['nama_depot'] = str_replace('%20', ' ', $nama);
+        $data2['id_depot'] = $depot;
+
         $data['lv1'] = $depot + 1;
         $data['lv2'] = 4;
         $data3 = menu_oam();

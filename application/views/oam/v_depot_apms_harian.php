@@ -4,6 +4,16 @@
         <!-- page start-->
         <div class="row">
             <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url();?>depot/apms_depot/<?php echo $id_depot?>/<?php echo $tahun?>">Kinerja APMS Bulanan</a></li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
                         Grafik Harian AMT Depot <?php echo $nama_depot?>
