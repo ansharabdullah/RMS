@@ -84,7 +84,6 @@ class apms extends CI_Controller {
 					foreach($a as $k)
 					{
 						$cek1 = $k->STATUS_KUOTA_APMS;
-						echo $cek1;
 					}
 					$id_apms = $this->m_apms->getID_APMS($this->input->post('no_apms', true),$depot); 
 					$id_ap = 0;
