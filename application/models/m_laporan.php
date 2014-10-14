@@ -1038,7 +1038,21 @@ from pegawai p where p.ID_DEPOT = '$depot' and (p.JABATAN = 'SUPIR' or p.JABATAN
 from log_harian l where MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and l.ID_DEPOT = '$depot' order by l.TANGGAL_LOG_HARIAN");
         return $query->result();
     }
-
+	public function getLaporanRealisasiAPMS($depot,$tahun,$bulan)
+	{
+		$result = $this->db->query("select b.NO_DELIVERY, b.DESCRIPTION, a.SHIP_TO,a.NO_APMS,a.NAMA_PENGUSAHA,b.DATE_PLAN_GI,b.SOLAR,b.PREMIUM from apms a, kinerja_apms b, log_harian i where b.ID_APMS = a.ID_APMS and i.ID_LOG_HARIAN = b.ID_LOG_HARIAN and i.ID_DEPOT = $depot and MONTH(i.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(i.TANGGAL_LOG_HARIAN) = '$tahun' order By a.NAMA_PENGUSAHA ASC, PREMIUM DESC, DATE_PLAN_GI ASC");
+		return $result->result();
+	}
+	public function getAPMS($depot,$tahun,$bulan)
+	{
+		$data = $this->db->query("select a.NO_APMS from apms a, kinerja_apms b, log_harian i where b.ID_APMS = a.ID_APMS and i.ID_LOG_HARIAN = b.ID_LOG_HARIAN and i.ID_DEPOT = $depot and MONTH(i.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(i.TANGGAL_LOG_HARIAN) = '$tahun' group by a.NO_APMS order By a.NAMA_PENGUSAHA ASC, PREMIUM DESC, DATE_PLAN_GI ASC");
+        return $data->result();
+	}
+	public function getRealisasiBiayaAPMS($depot,$tahun,$bulan)
+	{
+		$data = $this->db->query("select a.NO_APMS,a.NAMA_PENGUSAHA,a.SUPPLY_POINT,a.ALAMAT,a.NAMA_TRANSPORTIR,a.NO_PERJANJIAN,a.TARIF_PATRA_NIAGA,sum(b.SOLAR) as SOLAR,sum(b.PREMIUM) as PREMIUM from apms a, kinerja_apms b, log_harian i where b.ID_APMS = a.ID_APMS and i.ID_LOG_HARIAN = b.ID_LOG_HARIAN and i.ID_DEPOT = $depot and MONTH(i.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(i.TANGGAL_LOG_HARIAN) = '$tahun' group by a.ID_APMS order By a.NAMA_PENGUSAHA ASC, PREMIUM DESC, DATE_PLAN_GI ASC");
+        return $data->result();
+	}
     /*
       public function dummy_kinerja_amt($id_kinerja, $id_log_harian, $id_pegawai, $status_tugas, $total_km, $total_kl, $ritase, $pendapatan, $spbu) {
       $query = $this->db->query("insert into kinerja_amt(ID_KINERJA_AMT,ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,PENDAPATAN,SPBU) values('$id_kinerja','$id_log_harian','$id_pegawai','$status_tugas','$total_km','$total_kl','$ritase','$pendapatan','$spbu')");
