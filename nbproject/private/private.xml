@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 0704882c4d832191774260ff1a242b82cb1fe9f0
->>>>>>> 130f83a00e24f6bfdc628e4332c010451a926855
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/pengaturan.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_data_amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/jadwal/v_jadwal.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/oam/v_pengaturan_depot.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_kinerja.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_detail.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/login.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/oam/v_tambah_depot.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/controllers/jadwal.php</file>
-=======
             <file>file:/C:/xampp/htdocs/RMS/application/models/m_laporan.php</file>
             <file>file:/C:/xampp/htdocs/RMS/application/controllers/laporan.php</file>
-<<<<<<< HEAD
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_preview_harian.php</file>
-=======
             <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_kpi_internal.php</file>
-            <file>file:/C:/xampp/htdocs/RMS/application/views/laporan/v_tambah_kpi_internal.php</file>
->>>>>>> 0704882c4d832191774260ff1a242b82cb1fe9f0
->>>>>>> 130f83a00e24f6bfdc628e4332c010451a926855
         </group>
     </open-files>
->>>>>>> 0e0537136915f57518b235d5f0a126aa3668a4aa
 </project-private>

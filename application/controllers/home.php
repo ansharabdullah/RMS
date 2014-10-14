@@ -14,6 +14,7 @@ class home extends CI_Controller {
         $this->load->model("m_log_harian");
         $this->load->model("m_depot");
         $this->load->model("m_notifikasi");
+        $this->load->model("m_kpi");
     }
 
     public function index() {
@@ -59,7 +60,6 @@ class home extends CI_Controller {
         } else {
             setlocale(LC_ALL, "IND");
             //if (($this->session->userdata('isLoggedIn')) && (($this->session->userdata('id_role') == 1) || ($this->session->userdata('id_role') == 2) )) {
-            $this->load->model('m_kpi');
             $data2['total_mt'] = $this->m_mt->getTotalMt();
             $data2['total_amt'] = $this->m_amt->getTotalAMt();
             $data2['rencana_bulan'] = $this->m_rencana->get_rencana_bulan_oam(date("n"), date("Y"));
@@ -72,6 +72,9 @@ class home extends CI_Controller {
             $data2['kinerja_mt'] = $this->m_kinerja->get_kinerja_mt_tahun_oam();
             $data2['kinerja_amt'] = $this->m_kinerja->get_kinerja_amt_tahun_oam();
             $data2['depot'] = $this->m_depot->get_depot();
+            $data2['kpi_apms'] = $this->m_kpi->get_kpi_apms_tahunan();
+            $data2['depot_apms'] = $this->m_depot->get_depot_apms();
+            $data2['tahun_arr'] = array(date('Y')-2,date('Y')-1,date('Y'));
             $data3 = menu_oam();
             $this->load->view('layouts/header');
             $this->load->view('layouts/menu', $data3);

@@ -30,6 +30,8 @@ class m_depot extends CI_Model {
         return $nama;
     }
     
+    
+   
 }
 
 ?>

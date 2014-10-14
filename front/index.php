@@ -282,14 +282,14 @@
                     </div>
                     <div class="col-lg-5 col-sm-5">
                     </div>
-                    <div class="col-lg-3 col-sm-3 col-lg-offset-1">
+<!--                    <div class="col-lg-3 col-sm-3 col-lg-offset-1">
                         <h1>KONEKSI</h1>
                         <ul class=" list-unstyled">
                             <li><a href="http://www.pertamina.com/" target="blank"><img src="img/logo-pertamina.png" width="150"/></a></li>
                             <hr/>
                             <li><a href="http://www.pertaminapatraniaga.com/" target="blank"><img src="img/logo-patraniaga.png" width="150"/></a></li>
                         </ul>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </footer>
