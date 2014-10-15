@@ -129,9 +129,9 @@ function DateToIndo($date) {
                                     <td><?php echo $row->MERK_OLI; ?></td>
                                     <td><?php echo $row->TOTAL_VOLUME; ?></td>
                                    <td>
-                                    <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Oli" href="#ModalEditOli"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Oli" href="javascript:hapus('<?php echo $row->ID_OLI ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
-                                </td>
+                                    <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Oli" href="#ModalEditOli"  data-toggle="modal"  onclick="cekoli('<?php echo $row->ID_OLI ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->MERK_OLI ?>','<?php echo $row->KM_AWAL ?>','<?php echo $row->TANGGAL_GANTI_OLI ?>','<?php echo $row->TOTAL_VOLUME ?>')"><i class="icon-pencil"></i></a>
+                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusoli('<?php echo $row->ID_OLI?>')" data-toggle="modal" href="#HapusOli"><i class="icon-remove"></i></a>
+                                       </td>
                                 </tr>
                                 <?php $i++;
                                 $j++;
@@ -200,15 +200,17 @@ function DateToIndo($date) {
 <!-- Modal -->
 <div class="modal fade" id="ModalEditOli" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Form Edit Oli</h4>
-            </div>
-            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="" >
-                <div class="modal-body">
+       <div class="modal-content">
+            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="<?php echo base_url()?>mt/oli_mt/<?php echo $id_mobil; ?>">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Form Edit Oli</h4>
+                </div>
+            <div class="modal-body">
                     <!-- form tambah-->
-
+                         <input class=" form-control input-sm m-bot15" id="ID_OLI" name="ID_OLI"  type="hidden" required />
+                        <input class=" form-control input-sm m-bot15" id="ID_MOBIL" name="ID_MOBIL" type="hidden" required />
+                        
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="kmawal">KM Awal (km)</label>
                         <div class="col-lg-10">
@@ -236,7 +238,7 @@ function DateToIndo($date) {
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                    <input class="btn btn-success" name="oli" type="submit" value="Simpan"/>
                 </div>
             </form> 
         </div>
@@ -253,12 +255,14 @@ function DateToIndo($date) {
             </div>
             <div class="modal-body">
 
-                Apakah anda yakin ?
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
+                <form method="POST" action="<?php echo base_url() ?>mt/oli_mt/<?php echo $id_mobil?>">
+                    Apakah anda yakin ?
+					<div class="modal-footer">
+						<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+						<input type="hidden" value="" name="ID_OLI2" id="ID_OLI2"></input>
+						<input type="submit" value="Hapus" name="deleteoli" class="btn btn-danger danger"></input>
+					</div>
+					</form>
             </div>
         </div>
     </div>
@@ -316,5 +320,16 @@ function DateToIndo($date) {
             $("#form-edit").attr("action",action ); 
            
         }
+         function hapusoli(id) {
+        $('#ID_OLI2').val(id);
+    }
+        function cekoli(id_oli, id_mobil, merk_oli, km_awal, tanggal_ganti_oli,total_volume) {
+                                                                $("#ID_OLI").val(id_oli);
+                                                                $("#ID_MOBIL").val(id_mobil);
+                                                                $("#MERK_OLI").val(merk_oli);
+                                                                $("#KM_AWAL").val(km_awal);
+                                                                $("#TANGGAL_GANTI_OLI").val(tanggal_ganti_oli);
+                                                                $("#TOTAL_VOLUME").val(total_volume);
+                                                            }
     
 </script>

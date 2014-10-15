@@ -14,7 +14,13 @@ function DateToIndo($date) {
 }
 
 ?>
-
+<script>
+    var apar = new Array();
+    $(document).ready(function(){
+       
+        
+    });
+</script>
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
@@ -24,7 +30,7 @@ function DateToIndo($date) {
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
                     <li><a href="<?php echo base_url();?>mt/data_mt">Data Mobil</a></li>
-                    <li><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $dataMobil->id_mobil; ?>/<?php echo date("n")?>/<?php echo date("Y")?>">Detail Mobil</a></li>
+                    <li><a href="<?php echo base_url() ?>mt/detail/<?php echo $dataMobil->id_mobil; ?>/<?php echo date("n")?>/<?php echo date("Y")?>">Detail Mobil</a></li>
                     <li class="active">Apar Mobil</li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -110,8 +116,8 @@ function DateToIndo($date) {
                                     
                                        <td> 
                                       
-                                        <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" href="#ModalEditApar"  data-toggle="modal"  onclick="setapar('<?php echo $row->ID_APAR ?>','<?php echo $row->ID_JENIS_APAR ?>','<?php echo $row->TANGGAL_APAR ?>','<?php echo $row->KETERANGAN_APAR ?>')"><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" href="#ModalHapusApar"onclick="hapusSurat('<?php echo $row->ID_APAR; ?>')"><i class="icon-remove"></i></a>
+                                        <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" href="#ModalEditApar"  data-toggle="modal"  onclick="setapar('<?php echo $row->ID_APAR ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->ID_JENIS_APAR ?>','<?php echo $row->TANGGAL_APAR ?>','<?php echo $row->KETERANGAN_APAR ?>')"><i class="icon-pencil"></i></a>
+                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" href="#ModalHapusApar" data-placement="top" data-toggle="modal" onclick="hapusapar('<?php echo $row->ID_APAR; ?>')"><i class="icon-remove"></i></a>
                                        
                                     </td>
 
@@ -183,17 +189,17 @@ function DateToIndo($date) {
 <div class="modal fade" id="ModalEditApar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="<?php echo base_url()?>mt/apar_mt/<?php echo $id_mobil; ?>" >
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Form Edit APAR</h4>
             </div>
-            
-            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="<?php echo base_url()?>mt/apar_mt/<?php echo $id_mobil; ?>" >
                 <div class="modal-body">
                     <!-- form edit-->
                     
                     <div class="form-group">
                         <input class=" form-control input-sm m-bot15" id="ID_APAR" name="ID_APAR"  type="hidden" required />
+                       <input class=" form-control input-sm m-bot15" id="ID_MOBIL" name="ID_MOBIL"  type="hidden" required />
                        
                          <label class="col-sm-2 control-label col-lg-2" for="apar">Jenis Apar</label>
                         <div class="col-lg-10">
@@ -219,10 +225,12 @@ function DateToIndo($date) {
                         </div>
                     </div>
                 </div>
+                
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                   <button class="btn btn-success" name="editapar" type="submit">Simpan</button>
+                   <input class="btn btn-success" name="apar" type="submit" value="Simpan"/>
                 </div>
+                </form>
         </div>
 
     </div>
@@ -238,12 +246,12 @@ function DateToIndo($date) {
             </div>
             <div class="modal-body">
 
-              <form method="POST" action="<?php echo base_url() ?>mt/apar_mt/<?php echo $id_mobil?>">
+             <form method="POST" action="<?php echo base_url() ?>mt/apar_mt/<?php echo $id_mobil?>">
                     Apakah anda yakin ?
-                        <div class="modal-footer">
-			<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input type="hidden" value="" name="ID_SURAT2" id="ID_SURAT2"></input>
-			<input type="submit" value="Hapus" name="deleteapar" class="btn btn-danger danger"></input>
+					<div class="modal-footer">
+						<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+						<input type="hidden" value="" name="ID_APAR2" id="ID_APAR2"></input>
+						<input type="submit" value="Hapus" name="deleteapar" class="btn btn-danger danger"></input>
 					</div>
 					</form>
                 </div>
@@ -295,8 +303,9 @@ function DateToIndo($date) {
       
         var index;
         
-       function setapar(id_apar,id_jenis_apar, tanggal_apar, keterangan_apar) {
+       function setapar(id_apar,id_mobil,id_jenis_apar, tanggal_apar, keterangan_apar) {
                                                                 $("#ID_APAR").val(id_apar);
+                                                                $("#ID_MOBIL").val(id_mobil);
                                                                 $("#ID_JENIS_APAR").val(id_jenis_apar);
                                                                 $("#TANGGAL_APAR").val(tanggal_apar);
                                                                 $("#KETERANGAN_APAR2").val(keterangan_apar);

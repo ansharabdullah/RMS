@@ -136,8 +136,9 @@ foreach ($ban as $a) {
                             <td><?php echo $row->NO_SERI_BAN; ?></td>
                             <td><?php echo $row->JENIS_BAN; ?></td>
                             <td>
-                                <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit ban" href="#ModalEditBan"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus ban" href="javascript:hapus('<?php echo $row->ID_BAN ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
+                                <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Ban" href="#ModalEditBan"  data-toggle="modal"  onclick="cekban('<?php echo $row->ID_BAN ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->MERK_BAN ?>','<?php echo $row->NO_SERI_BAN ?>','<?php echo $row->JENIS_BAN ?>','<?php echo $row->POSISI_BAN ?>','<?php echo $row->TANGGAL_GANTI_BAN ?>')"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="setban('<?php echo $row->ID_BAN?>')" data-toggle="modal" href="#HapusBan"><i class="icon-remove"></i></a>
+                                       
                             </td>
                             </tr>
                             <?php
@@ -236,13 +237,16 @@ foreach ($ban as $a) {
 <div class="modal fade" id="ModalEditBan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="" >
+            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="<?php echo base_url()?>mt/ban_mt/<?php echo $id_mobil; ?>">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Form Edit Ban</h4>
                 </div>
                 <div class="modal-body">
                     <!-- form tambah-->
+                    <input class=" form-control input-sm m-bot15" id="ID_BAN" name="ID_BAN"  type="hidden" required />
+                       <input class=" form-control input-sm m-bot15" id="ID_MOBIL" name="ID_MOBIL"  type="hidden" required />
+                       
                     <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Posisi Ban</label>
                         <div class="col-lg-10">
@@ -315,7 +319,7 @@ foreach ($ban as $a) {
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                    <input class="btn btn-success" name="editban" type="submit" value="Simpan"/>
                 </div>
             </form> 
         </div>
@@ -330,13 +334,14 @@ foreach ($ban as $a) {
                 <h4 class="modal-title">Hapus Ban</h4>
             </div>
             <div class="modal-body">
-
-                Apakah anda yakin ?
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
+                <form method="POST" action="<?php echo base_url() ?>mt/ban_mt/<?php echo $id_mobil?>">
+                    Apakah anda yakin ?
+					<div class="modal-footer">
+						<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+						<input type="hidden" value="" name="ID_BAN2" id="ID_BAN2"></input>
+						<input type="submit" value="Hapus" name="deleteban" class="btn btn-danger danger"></input>
+					</div>
+					</form>
             </div>
         </div>
     </div>
@@ -395,5 +400,19 @@ foreach ($ban as $a) {
         $("#form-edit").attr("action",action ); 
            
     }
+    
+    function setban(id) {
+        $('#ID_BAN2').val(id);
+    }
+    
+    function cekban(id_ban, id_mobil, merk_ban, no_seri_ban, jenis_ban,posisi_ban,tanggal_ganti_ban) {
+                                                                $("#ID_BAN").val(id_ban);
+                                                                $("#ID_MOBIL").val(id_mobil);
+                                                                $("#MERK_BAN").val(merk_ban);
+                                                                $("#NO_SERI_BAN").val(no_seri_ban);
+                                                                $("#JENIS_BAN").val(jenis_ban);
+                                                                $("#POSISI_BAN").val(posisi_ban);
+                                                                $("#TANGGAL_GANTI_BAN").val(tanggal_ganti_ban);
+                                                            }
     
 </script>

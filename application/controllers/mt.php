@@ -377,7 +377,7 @@ class Mt extends CI_Controller {
                         $id_mobil = $this->input->post('id_mobil', true);
                         $nopol = $this->input->post('nopol', true);
                         $datalog = array(
-                            'keterangan' => 'HAPUS Mobil, Nopol : ' . $this->input->post('nopol', true),
+                            'keterangan' => 'Hapus Mobil, Nopol : ' . $this->input->post('nopol', true),
                             'id_pegawai' => $this->session->userdata("id_pegawai"),
                             'keyword' => 'Hapus'
                         );
@@ -826,7 +826,7 @@ class Mt extends CI_Controller {
 
                         $this->m_mt->insertSurat($data);
                         $data1['pesan'] = 1;
-			$data1['pesan_text'] = "Selamat Data Berhasil Ditambahkan!";
+			$data1['pesan_text'] = " Data Berhasil Ditambahkan!";
                          $a = $this->m_mt->getNopol($id_mobil);
                          $nopol = $a->nopol;
                          $datalog = array(
@@ -849,7 +849,7 @@ class Mt extends CI_Controller {
 
                             $this->m_mt->editSurat($data, $id);
                             $data1['pesan'] = 1;
-                            $data1['pesan_text'] = "Selamat Data Berhasil Diubah!";
+                            $data1['pesan_text'] = " Data Berhasil Diubah!";
                         
                              $a = $this->m_mt->getNopol($id_mobil);
                              $nopol = $a->nopol;
@@ -866,7 +866,7 @@ class Mt extends CI_Controller {
                               $this->m_mt->deleteSurat($id);
                               $a = $this->m_mt->getNopol($id_mobil);
                             $data1['pesan'] = 1;
-                            $data1['pesan_text'] = "Selamat Data Berhasil Dihapus!";
+                            $data1['pesan_text'] = " Data Berhasil Dihapus!";
                              $nopol = $a->nopol;
                              $datalog = array(
                                 'keterangan' => "Hapus data surat nopol :". $nopol,
@@ -903,7 +903,7 @@ class Mt extends CI_Controller {
 
                         $this->m_mt->insertApar($data);
                         $data1['pesan'] = 1;
-			$data1['pesan_text'] = "Selamat Data Berhasil Ditambahkan!";
+			$data1['pesan_text'] = " Data Berhasil Ditambahkan!";
                          $a = $this->m_mt->getNopol($id_mobil);
                          $nopol = $a->nopol;
                          $datalog = array(
@@ -913,10 +913,10 @@ class Mt extends CI_Controller {
                             );
                         $this->m_log_sistem->insertLog($datalog);
                     }
-                     if($this->input->post('editapar',true))
+                    
+                     if($this->input->post('apar',true))
                     {
                             $id = $this->input->post('ID_APAR', true);
-                            echo '<script type="text/javascript">alert("Data berhasil diubah.");';
                             
                            $data = array(
                             'id_mobil' => $id_mobil,
@@ -926,7 +926,8 @@ class Mt extends CI_Controller {
                                 );
                             $this->m_mt->editApar($data,$id);
                              $data1['pesan'] = 1;
-                            $data1['pesan_text'] = "Selamat Data Berhasil Diubah!";
+                            $data1['pesan_text'] = " Data Berhasil Diubah!";
+                            
                              $a = $this->m_mt->getNopol($id_mobil);
                              $nopol = $a->nopol;
                              $datalog = array(
@@ -936,6 +937,21 @@ class Mt extends CI_Controller {
                                 );
                              $this->m_log_sistem->insertLog($datalog);
                     }
+                     if($this->input->post('deleteapar',true))
+			{
+                             $id = $this->input->post('ID_APAR2', true);
+                              $this->m_mt->deleteApar($id);
+                              $a = $this->m_mt->getNopol($id_mobil);
+                            $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Dihapus!";
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Hapus data apar nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Hapus'
+                                );
+                            $this->m_log_sistem->insertLog($datalog);
+                        }
         $data1['id_mobil'] =  $id_mobil;
         $data1['apar'] = $this->m_mt->selectApar($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
@@ -946,56 +962,6 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_apar_mt',$data1);
         
         $this->footer();
-    }
-   
-    
-    public function edit_apar($id,$id_mobil) {
-        
-        
-        $tanggal_apar = $_POST['TANGGAL_APAR'];
-        $id_jenis= $_POST['ID_JENIS_APAR'];
-        $keterangan= $_POST['KETERANGAN_APAR'];
-        $status= $_POST['STATUS_APAR'];
-        
-        $data = array(
-            "TANGGAL_APAR"=>$tanggal_apar,
-            "ID_JENIS_APAR"=>$id_jenis,
-            "KETERANGAN_APAR" =>$keterangan,
-            "STATUS_APAR" =>$status,
-        );
-       
-        $this->m_mt->editApar($data,$id);
-         
-        $datalog = array(
-            'keterangan' => "Edit data Apar",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-            );
-                $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url()."mt/apar_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-        
-        
-    }
-    
-    public function delete_apar($id_apar,$id_mobil){
-        $this->m_mt->deleteApar($id_apar);
-        
-        
-        $link = base_url()."mt/apar_mt/".$id_mobil;
-         
-        $datalog = array(
-            'keterangan' => "Hapus data Apar",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Hapus'
-            );
-                $this->m_log_sistem->insertLog($datalog);
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
     }
     
 
@@ -1017,7 +983,7 @@ class Mt extends CI_Controller {
 
                     $this->m_mt->insertBan($data);
                     $data1['pesan'] = 1;
-			$data1['pesan_text'] = "Selamat Data Berhasil Ditambahkan!";
+			$data1['pesan_text'] = " Data Berhasil Ditambahkan!";
                          $a = $this->m_mt->getNopol($id_mobil);
                          $nopol = $a->nopol;
                          $datalog = array(
@@ -1027,6 +993,46 @@ class Mt extends CI_Controller {
                             );
                         $this->m_log_sistem->insertLog($datalog);
                     }
+                    if($this->input->post('editban',true))
+                    {
+                            $id = $this->input->post('ID_BAN', true);
+                            
+                           $data = array(
+                                'id_mobil' => $id_mobil,
+                                'MERK_BAN' => $this->input->post('MERK_BAN', true),
+                                'NO_SERI_BAN' => $this->input->post('NO_SERI_BAN', true),
+                                'JENIS_BAN' => $this->input->post('JENIS_BAN', true),
+                                'POSISI_BAN' => $this->input->post('POSISI_BAN', true),
+                                'TANGGAL_GANTI_BAN' => $this->input->post('TANGGAL_GANTI_BAN', true),
+                            );
+                            $this->m_mt->editBan($data, $id);
+                             $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Diubah!";
+                             $a = $this->m_mt->getNopol($id_mobil);
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Ubah data ban nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Edit'
+                                );
+                             $this->m_log_sistem->insertLog($datalog);
+                    } if($this->input->post('deleteban',true))
+			{
+                             $id = $this->input->post('ID_BAN2', true);
+                              $this->m_mt->deleteBan($id);
+                              $a = $this->m_mt->getNopol($id_mobil);
+                            $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Dihapus!";
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Hapus data ban nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Hapus'
+                                );
+                            $this->m_log_sistem->insertLog($datalog);
+                        }
+                    
+                    
         $data1['id_mobil'] =  $id_mobil;
         $data1['ban'] = $this->m_mt->selectBanMT($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
@@ -1039,79 +1045,7 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_ban($id_mobil) {
-
-      
-        $data = array(
-            'id_mobil' => $id_mobil,
-            'MERK_BAN' => $this->input->post('MERK_BAN', true),
-            'NO_SERI_BAN' => $this->input->post('NO_SERI_BAN', true),
-            'JENIS_BAN' => $this->input->post('JENIS_BAN', true),
-            'POSISI_BAN' => $this->input->post('POSISI_BAN', true),
-            'TANGGAL_GANTI_BAN' => $this->input->post('TANGGAL_GANTI_BAN', true),
-        );
-
-        $this->m_mt->insertBan($data);
-        $datalog = array(
-            'keterangan' => "Tambah data Ban",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Tambah'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        $link = base_url() . "mt/ban_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
     
-     public function edit_ban($id,$id_mobil) {
-
-        $merk = $_POST['MERK_BAN'];
-        $seri = $_POST['NO_SERI_BAN'];
-        $jenis = $_POST['JENIS_BAN'];
-        $posisi= $_POST['POSISI_BAN'];
-        $tgl_ganti= $_POST['TANGGAL_GANTI_BAN'];
-        
-        $data = array(
-            "MERK_BAN"=>$merk,
-            "NO_SERI_BAN"=>$seri,
-            "JENIS_BAN"=>$jenis,
-            "POSISI_BAN" =>$posisi,
-            "TANGGAL_GANTI_BAN" =>$tgl_ganti,
-            );
-        
-        $this->m_mt->editBan($data, $id);
-        $datalog = array(
-            'keterangan' => "Edit data Ban",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-         $link = base_url()."mt/ban_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-        
-    }
-    
-     public function delete_ban($id_ban,$id_mobil){
-         
-        $this->m_mt->deleteBan($id_ban);
-        $datalog = array(
-            'keterangan' => "Hapus data Ban",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Hapus'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url()."mt/ban_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-     }
-     
-     //oli
 
     public function oli_mt($id_mobil) {
           $data1['pesan'] = 0;
@@ -1130,7 +1064,7 @@ class Mt extends CI_Controller {
 
                         $this->m_mt->insertOli($data);
                         $data1['pesan'] = 1;
-			$data1['pesan_text'] = "Selamat Data Berhasil Ditambahkan!";
+			$data1['pesan_text'] = "Data Berhasil Ditambahkan!";
                          $a = $this->m_mt->getNopol($id_mobil);
                          $nopol = $a->nopol;
                          $datalog = array(
@@ -1140,6 +1074,46 @@ class Mt extends CI_Controller {
                             );
                         $this->m_log_sistem->insertLog($datalog);
                     }
+                    
+                    
+                    if($this->input->post('oli',true))
+                    {
+                            $id = $this->input->post('ID_OLI', true);
+                            
+                           $data = array(
+                            'id_mobil' => $id_mobil,
+                            'MERK_OLI' => $this->input->post('MERK_OLI', true),
+                            'KM_AWAL' => $this->input->post('KM_AWAL', true),
+                            'TANGGAL_GANTI_OLI' => $this->input->post('TANGGAL_GANTI_OLI', true),
+                            'TOTAL_VOLUME' => $this->input->post('TOTAL_VOLUME', true),
+
+                        );
+                            $this->m_mt->editOli($data, $id);
+                             $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Diubah!";
+                             $a = $this->m_mt->getNopol($id_mobil);
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Ubah data oli nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Edit'
+                                );
+                             $this->m_log_sistem->insertLog($datalog);
+                    } if($this->input->post('deleteoli',true))
+			{
+                             $id = $this->input->post('ID_OLI2', true);
+                              $this->m_mt->deleteOli($id);
+                              $a = $this->m_mt->getNopol($id_mobil);
+                            $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Dihapus!";
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Hapus data oli nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Hapus'
+                                );
+                            $this->m_log_sistem->insertLog($datalog);
+                        }
         $data1['id_mobil'] =  $id_mobil;
         $data1['oli'] = $this->m_mt->selectOli($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
@@ -1151,79 +1125,6 @@ class Mt extends CI_Controller {
         $this->load->view('mt/v_oli_mt',$data1);
         $this->footer();
     }
-    
-    public function tambah_oli($id_mobil) {
-
-        $data = array(
-            'id_mobil' => $id_mobil,
-            'MERK_OLI' => $this->input->post('MERK_OLI', true),
-            'TANGGAL_GANTI_OLI' => $this->input->post('TANGGAL_GANTI_OLI', true),
-            'KM_AWAL' => $this->input->post('KM_AWAL', true),
-            'TOTAL_VOLUME' => $this->input->post('TOTAL_VOLUME', true),
-            
-        );
-
-        $this->m_mt->insertOli($data);
-         $datalog = array(
-            'keterangan' => "Tambah data Oli",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Tambah'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url() . "mt/oli_mt/".$id_mobil;
-        
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
-    public function edit_oli($id,$id_mobil) {
-
-        $km = $_POST['KM_AWAL'];
-        $merk = $_POST['MERK_OLI'];
-        $tgl = $_POST['TANGGAL_GANTI_OLI'];
-        $total= $_POST['TOTAL_VOLUME'];
-       
-        
-        $data = array(
-            "KM_AWAL"=>$km,
-            "MERK_OLI"=>$merk,
-            "TANGGAL_GANTI_OLI" =>$tgl,
-            "TOTAL_VOLUME" =>$total,
-            );
-        
-        $this->m_mt->editOli($data, $id);
-         $datalog = array(
-            'keterangan' => "Edit data Oli",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-         $link = base_url()."mt/oli_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-        
-    }
-    
-    public function delete_oli($id_oli,$id_mobil){
-         
-        $this->m_mt->deleteOli($id_oli);
-         $datalog = array(
-            'keterangan' => "Hapus data oli",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Hapus'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url()."mt/oli_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-     }
-    
     
     
      //Data Grafik
@@ -1391,7 +1292,131 @@ class Mt extends CI_Controller {
     public function reminder() {
         
         $depot = $this->session->userdata("id_depot");
+        $data2['pesan'] = 0;            
         
+                    if($this->input->post('simpansurat',true))
+                    {
+                        
+                        $akhir_surat = $_POST['tgl_surat'];
+                        $id_jenis = $_POST['ID_JENIS_SURAT'];
+                        $keterangan = $_POST['KETERANGAN_SURAT'];
+                        $id_mobil = $_POST['id_mobil'];
+
+                        $data = array(
+                            "TANGGAL_AKHIR_SURAT"=>$akhir_surat,
+                            "ID_JENIS_SURAT"=>$id_jenis,
+                            "ID_MOBIL"=>$id_mobil,
+                            "KETERANGAN_SURAT"=>$keterangan
+                        
+                    );
+
+                    $this->m_pengingat->editReminderSurat($data);
+                    $data2['pesan'] = 1;
+			$data2['pesan_text'] = "Data Surat Berhasil Diupdate!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Update reminder surat nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Edit'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    if($this->input->post('simpanban',true))
+                    {
+                        
+                        $id= $this->input->post('id_ban');
+                        $id_mobil= $this->input->post('id_mobil_ban');
+                        $tgl_ganti= $_POST['tgl_ganti'];
+                        $posisi= $this->input->post('posisi_ban');
+                        $merk = $this->input->post('merk_ban');
+                        $seri = $this->input->post('no_seri_ban');
+                        $jenis = $this->input->post('jenis_ban');
+
+                        $data = array(
+                            "TANGGAL_GANTI_BAN"=>$tgl_ganti,
+                            "POSISI_BAN"=>$posisi,
+                            "MERK_BAN"=>$merk,
+                            "ID_MOBIL"=>$id_mobil,
+                            "NO_SERI_BAN"=>$seri,
+                            "JENIS_BAN"=>$jenis,
+
+                        );
+
+                        $this->m_pengingat->editReminderBan($data);
+
+                        $data2['pesan'] = 1;
+			$data2['pesan_text'] = "Data Ban Berhasil Diupdate!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Update reminder ban nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Edit'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    if($this->input->post('simpanoli',true))
+                    {
+                        
+                        $merk = $_POST['MERK_OLI'];
+                        $km = $_POST['KM_AWAL'];
+                        $tgl = $_POST['tgl_oli'];
+                        $id_mobil = $_POST['id_mobil_oli'];
+                        $total = $_POST['TOTAL_VOLUME'];
+
+                        $data = array(
+                            "MERK_OLI"=>$merk,
+                            "KM_AWAL"=>$km,
+                            "ID_MOBIL"=>$id_mobil,
+                            "TANGGAL_GANTI_OLI"=>$tgl,
+                            "TOTAL_VOLUME"=>$total
+                        );
+
+                        $this->m_pengingat->editReminderOli($data);
+
+                        $data2['pesan'] = 1;
+			$data2['pesan_text'] = "Data Oli Berhasil Diupdate!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Update reminder oli nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Edit'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    if($this->input->post('simpanapar',true))
+                    {
+                        
+                        $tgl = $_POST['tgl_apar'];
+                        $id_jenis= $_POST['ID_JENIS_APAR'];
+                        $keterangan = $_POST['KETERANGAN_APAR'];
+                        $id_mobil = $_POST['id_mobil_apar'];
+                        $data = array(
+                            "TANGGAL_APAR"=>$tgl,
+                            "ID_JENIS_APAR"=>$id_jenis,
+                            "KETERANGAN_APAR"=>$keterangan,
+                            "ID_MOBIL"=>$id_mobil
+
+                        );
+
+                        $this->m_pengingat->editReminderApar($data);
+
+                        $data2['pesan'] = 1;
+			$data2['pesan_text'] = "Data APAR Berhasil Diupdate!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Update reminder APAR nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Edit'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    
+                    
+                    
         $data2['mobil'] = $this->m_pengingat->mobil($depot)->result();
         $data2['apar'] = $this->m_pengingat->getAparReminder($depot)->result();
         $data2['surat'] = $this->m_pengingat->getSuratReminder($depot)->result();
@@ -1403,67 +1428,6 @@ class Mt extends CI_Controller {
         $this->header($data);
         $this->load->view('mt/v_pengingat', $data2);
         $this->footer();
-    }
-    
-    
-    public function edit_reminder_surat()
-    {
-        
-        $akhir_surat = $_POST['tgl_surat'];
-        $id_jenis = $_POST['ID_JENIS_SURAT'];
-        $keterangan = $_POST['KETERANGAN_SURAT'];
-        $id_mobil = $_POST['id_mobil'];
-        
-        $data = array(
-            "TANGGAL_AKHIR_SURAT"=>$akhir_surat,
-            "ID_JENIS_SURAT"=>$id_jenis,
-            "ID_MOBIL"=>$id_mobil,
-            "KETERANGAN_SURAT"=>$keterangan
-        );
-        
-        $this->m_pengingat->editReminderSurat($data);
-        
-         $datalog = array(
-            'keterangan' => "Ubah Reminder Surat ",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        //redirect('mt/reminder');
-        
-            echo '<script type="text/javascript">alert("Pengingat surat berhasil diubah");';
-            echo 'window.location.href="' . base_url() . 'mt/reminder";';
-            echo '</script>';
-    }
-    
-    public function edit_reminder_oli()
-    {
-        
-        $merk = $_POST['MERK_OLI'];
-        $km = $_POST['KM_AWAL'];
-        $tgl = $_POST['tgl_oli'];
-        $id_mobil = $_POST['id_mobil_oli'];
-        $total = $_POST['TOTAL_VOLUME'];
-        
-        $data = array(
-            "MERK_OLI"=>$merk,
-            "KM_AWAL"=>$km,
-            "ID_MOBIL"=>$id_mobil,
-            "TANGGAL_GANTI_OLI"=>$tgl,
-            "TOTAL_VOLUME"=>$total
-        );
-        
-        $this->m_pengingat->editReminderOli($data);
-        $datalog = array(
-            'keterangan' => "Ubah Reminder Oli ",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        //redirect('mt/reminder');
-          echo '<script type="text/javascript">alert("Pengingat oli berhasil diubah");';
-            echo 'window.location.href="' . base_url() . 'mt/reminder";';
-            echo '</script>';
     }
     
     public function edit_reminder_apar($id)
@@ -1492,41 +1456,6 @@ class Mt extends CI_Controller {
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
             echo '</script>';
     }
-    
-    public function edit_reminder_ban()
-    {
-        $id= $this->input->post('id_ban');
-        $id_mobil= $this->input->post('id_mobil_ban');
-        $tgl_ganti= $_POST['tgl_ganti'];
-        $posisi= $this->input->post('posisi_ban');
-        $merk = $this->input->post('merk_ban');
-        $seri = $this->input->post('no_seri_ban');
-        $jenis = $this->input->post('jenis_ban');
-        
-        echo $id_mobil;
-        $data = array(
-            "TANGGAL_GANTI_BAN"=>$tgl_ganti,
-            "POSISI_BAN"=>$posisi,
-            "MERK_BAN"=>$merk,
-            "ID_MOBIL"=>$id_mobil,
-            "NO_SERI_BAN"=>$seri,
-            "JENIS_BAN"=>$jenis,
-            
-        );
-        
-        $this->m_pengingat->editReminderBan($data);
-        $datalog = array(
-            'keterangan' => "Ubah Reminder Ban ",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        //redirect('mt/reminder');
-          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
-            echo 'window.location.href="' . base_url() . 'mt/reminder";';
-            echo '</script>';
-    }
-    
 
     private function header($data) {
         
