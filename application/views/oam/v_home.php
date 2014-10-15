@@ -476,12 +476,6 @@ foreach ($kpi['data'] as $data) {
                         id : '<?php echo $data['id_depot'] ?>',
                         data: set
                     });
-                     series_kpi_apms.push({
-                        name:'<?php echo $data['depot'] ?>',
-                        color : arrColorKpi[<?php echo $i ?>],
-                        id : '<?php echo $data['id_depot'] ?>',
-                        data: set
-                    });
     <?php
     $i++;
 }
@@ -551,7 +545,9 @@ foreach ($kpi['data'] as $data) {
                 tooltip: {
                     positioner: function () {
                         return { x: 10, y: 0};
-                    }
+                    },
+                    
+                    valueSuffix:' %'
                 },
                 labels: {
                     items: [{
@@ -563,10 +559,50 @@ foreach ($kpi['data'] as $data) {
                             }
                         }]
                 },
-                series: series_kpi_apms
+                series: series_kpi
             });
         });
-        
+<?php
+
+$i = 0;
+foreach($depot_apms as $dp)
+{
+    ?>
+        set = new Array();
+    <?php
+    foreach ($tahun_arr as $tahun) {
+        $status = 0;
+        foreach($kpi_apms as $k_apms)
+        {
+            if($k_apms->ID_DEPOT == $dp->ID_DEPOT && $k_apms->tahun == $tahun)
+            {
+                ?>
+                 set.push(<?php echo $k_apms->rata_rata?>);
+                <?php
+                $status = 1;
+                break;
+            }
+
+        }
+        if($status == 0)
+        {
+            ?>
+                set.push(0);
+            <?php
+            
+        }
+    }
+    ?>
+     series_kpi_apms.push({
+        name:'<?php echo $dp->NAMA_DEPOT ?>',
+        color : arrColorKpi[<?php echo $i ?>],
+        id : '<?php echo $dp->ID_DEPOT ?>',
+        data: set
+    });   
+        <?php
+    $i++;
+}
+?>
          var apms;
         $(function() {
             apms = new Highcharts.Chart({ 
@@ -586,8 +622,19 @@ foreach ($kpi['data'] as $data) {
                                     window.location = "<?php echo base_url() ?>depot/grafik_apms_bulan/"+ this.series.options.id +"/"+this.category;
                                 }
                             }
-                        }
-                    }
+                        },
+                         dataLabels: {
+                        enabled: true,
+                        useHTML: true,
+                        formatter: function() {
+                            if(this.y < 100 && this.y > 0){
+                                return "<span class='btn btn-warning' > <i class='icon-warning-sign'></i></span>"; 
+                            }
+                        },
+                        y: 100
+                         }
+                    } 
+                   
                 },
                 xAxis: [{
                         categories: tahun_kpi,
@@ -608,14 +655,22 @@ foreach ($kpi['data'] as $data) {
                             style: {
                                 color: '#89A54E'
                             }
-                        }
+                        },
+                         plotLines:[{
+                            value:100,
+                            color: '#ff0000',
+                            width:2,
+                            zIndex:4,
+                            label:{text:'Target'}
+                        }]
                     }],
            
-
+                    
                 tooltip: {
                     positioner: function () {
                         return { x: 10, y: 0};
-                    }
+                    },
+                    valueSuffix:' %'
                 },
                 labels: {
                     items: [{
@@ -627,7 +682,7 @@ foreach ($kpi['data'] as $data) {
                             }
                         }]
                 },
-                series: series_kpi
+                series: series_kpi_apms
             });
         });
         var arrKmAmt = new Array();

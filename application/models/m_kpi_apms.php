@@ -22,6 +22,11 @@ class m_kpi_apms extends CI_Model {
         $query = $this->db->query("select STATUS_KPI_APMS, ID_LOG_HARIAN from log_harian where ID_DEPOT =  $depot and   YEAR(TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(TANGGAL_LOG_HARIAN) = '$bulan' and day(TANGGAL_LOG_HARIAN) = '1'");
 		return $query->result();
 	}
+	public function jumlahNilai($id_log)
+	{
+		$query = $this->db->query("select sum(FINAL_SCORE) as jumlah from kpi_apms where ID_LOG_HARIAN = $id_log");
+		return $query->row();
+	}
 }
 
 ?>

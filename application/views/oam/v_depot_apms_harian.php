@@ -8,6 +8,7 @@
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
                     <li><a href="<?php echo base_url();?>depot/apms_depot/<?php echo $id_depot?>/<?php echo $tahun?>">Kinerja APMS Bulanan</a></li>
+                    <li>Kinerja APMS Harian</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>

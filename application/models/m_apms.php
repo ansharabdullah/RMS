@@ -42,6 +42,11 @@ class m_apms extends CI_Model {
 		}
 		
 	}
+	public function getID_APMS($no_apms,$depot)
+	{
+		$data = $this->db->query("select ID_APMS from apms where ID_DEPOT = $depot and NO_APMS = '$no_apms'");
+		return $data->result();
+	}
 	public function periksaeditApms($depot,$no_apms,$ship_to,$id_apms) {
 		$data = $this->db->query("select count(ID_APMS) as jumlah from apms  where ID_DEPOT = $depot and NO_APMS = '$no_apms' and ID_APMS != $id_apms");
 		$hasil = $data->row();
@@ -199,5 +204,13 @@ class m_apms extends CI_Model {
 		$result = $this->db->insert('nilai',$data);
 		return $result;
 	}
-	
+	public function updateNilai($id_log,$nilai){
+		$result = $this->db->query("update nilai set nilai = $nilai where ID_LOG_HARIAN = $id_log and ID_JENIS_PENILAIAN = 73");
+		return $result;
+	}
+	public function getLaporanRealisasi($depot,$tahun,$bulan)
+	{
+		$result = $this->db->query("select b.NO_DELIVERY, b.DESCRIPTION, a.SHIP_TO,a.NAMA_PENGUSAHA,b.DATE_PLAN_GI,b.SOLAR,b.PREMIUM from apms a, kinerja_apms b, log_harian i where b.ID_APMS = a.ID_APMS and i.ID_LOG_HARIAN = b.ID_LOG_HARIAN and i.ID_DEPOT = $depot and MONTH(i.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(i.TANGGAL_LOG_HARIAN) = '$tahun' order By a.NAMA_PENGUSAHA ASC, PREMIUM DESC, DATE_PLAN_GI ASC");
+		return $result->result();
+	}
 }

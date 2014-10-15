@@ -7,6 +7,8 @@
         <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
         <meta name="author" content="CobiLab">
         <link rel="shortcut icon" href="img/favicon.png">
+        <link rel="shortcut icon" href="<?php echo base_url()?>assets/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="<?php echo base_url()?>assets/img/favicon.ico" type="image/x-icon">
 
         <title>RMS PT PERTAMINA PATRA NIAGA JATENG</title>
 

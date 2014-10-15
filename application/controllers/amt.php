@@ -106,6 +106,7 @@ class amt extends CI_Controller {
                     'keyword' => 'HAPUS'
                 );
                 $this->m_kinerja->deleteKinerjaAMTPegawai($id_pegawai);
+                $this->m_peringatan->deletePeringatanPegawai($id_pegawai);
                 $this->m_amt->deletePegawai($id_pegawai);
                 $this->m_log_sistem->insertLog($datalog);
 
@@ -475,6 +476,74 @@ class amt extends CI_Controller {
 //KM
                 $jenis = "KM";
                 $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+                if ($a) {
+                    $koef_km = $a[0]->NILAI;
+
+//KL
+                    $jenis = "KL";
+                    $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+                    $koef_kl = $a[0]->NILAI;
+
+//RITASE
+                    $jenis = "RIT";
+                    $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+                    $koef_rit = $a[0]->NILAI;
+
+//SPBU
+                    $jenis = "SPBU";
+                    $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+                    $koef_spbu = $a[0]->NILAI;
+
+                    $km = $this->input->post('total_km', true);
+                    $kl = $this->input->post('total_kl', true);
+                    $ritase = $this->input->post('ritase_amt', true);
+                    $spbu = $this->input->post('spbu', true);
+
+                    $pendapatan = ($koef_km * $km) + ($koef_kl * $kl) + ($koef_rit * $ritase) + ($koef_spbu * $spbu);
+
+                    $data = array(
+                        'status_tugas' => $tugas,
+                        'total_km' => $km,
+                        'total_kl' => $kl,
+                        'ritase_amt' => $ritase,
+                        'pendapatan' => $pendapatan,
+                        'spbu' => $spbu
+                    );
+                    $this->m_kinerja->editKinerjaAMT($data, $id_kinerja_amt);
+
+                    $a = $this->m_amt->getNIP($id_pegawai);
+                    $nip = $a->nip;
+                    $datalog = array(
+                        'keterangan' => 'Ubah data kinerja, NIP : ' . $nip . ' tanggal : ' . $this->input->post('tanggal_kinerja', true),
+                        'id_pegawai' => $this->session->userdata("id_pegawai"),
+                        'keyword' => 'Edit'
+                    );
+                    $this->m_log_sistem->insertLog($datalog);
+
+                    $pesan = "Data berhasil diubah.";
+                    $data1['pesan'] = $pesan;
+                    $data1['feedback'] = 1;
+                } else {
+                    $thn = date('Y', strtotime($this->input->post('tanggal_kinerja', true)));
+                    $pesan = "Nilai Koefisien tahun $thn belum tersedia. Silakan mengisikan nilai koefisien terlebih dahulu.";
+                    $data1['pesan'] = $pesan;
+                    $data1['feedback'] = 2;
+                }
+            }
+        } else if ($this->input->post('add_kinerja', true)) {
+            $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
+            $id_pegawai = $this->input->post('id_pegawai', true);
+
+            $tugas = $this->input->post('status_tugas', true);
+            $k = $this->m_amt->getKlasifikasi($id_pegawai);
+            $klasifikasi = $k[0]->KLASIFIKASI;
+            $depot = $this->session->userdata('id_depot');
+            $tahun = date('Y', strtotime($this->input->post('tanggal_kinerja', true)));
+            //$tahun = 2013;
+//KM
+            $jenis = "KM";
+            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
+            if ($a) {
                 $koef_km = $a[0]->NILAI;
 
 //KL
@@ -499,7 +568,12 @@ class amt extends CI_Controller {
 
                 $pendapatan = ($koef_km * $km) + ($koef_kl * $kl) + ($koef_rit * $ritase) + ($koef_spbu * $spbu);
 
+                $tanggal = $this->input->post('tanggal_kinerja', true);
+                $a = $this->m_log_harian->getIdLogHarianTanggal($tanggal, $depot);
+                $id_log_harian = $a[0]->ID_LOG_HARIAN;
                 $data = array(
+                    'id_log_harian' => $id_log_harian,
+                    'id_pegawai' => $id_pegawai,
                     'status_tugas' => $tugas,
                     'total_km' => $km,
                     'total_kl' => $kl,
@@ -507,85 +581,26 @@ class amt extends CI_Controller {
                     'pendapatan' => $pendapatan,
                     'spbu' => $spbu
                 );
-                $this->m_kinerja->editKinerjaAMT($data, $id_kinerja_amt);
+                $this->m_kinerja->insertKinerjaAMT($data, $id_kinerja_amt);
 
                 $a = $this->m_amt->getNIP($id_pegawai);
                 $nip = $a->nip;
                 $datalog = array(
-                    'keterangan' => 'Ubah data kinerja, NIP : ' . $nip . ' tanggal : ' . $this->input->post('tanggal_kinerja', true),
+                    'keterangan' => 'Tambah data kinerja NIP : ' . $nip . ' tanggal : ' . $this->input->post('tanggal_kinerja', true),
                     'id_pegawai' => $this->session->userdata("id_pegawai"),
-                    'keyword' => 'Edit'
+                    'keyword' => 'Tambah'
                 );
                 $this->m_log_sistem->insertLog($datalog);
 
-                $pesan = "Data berhasil diubah.";
+                $pesan = "Data berhasil ditambahkan.";
                 $data1['pesan'] = $pesan;
                 $data1['feedback'] = 1;
+            } else {
+                $thn = date('Y', strtotime($this->input->post('tanggal_kinerja', true)));
+                $pesan = "Nilai Koefisien tahun $thn belum tersedia. Silakan mengisikan nilai koefisien terlebih dahulu.";
+                $data1['pesan'] = $pesan;
+                $data1['feedback'] = 2;
             }
-        } else if ($this->input->post('add_kinerja', true)) {
-            $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
-            $id_pegawai = $this->input->post('id_pegawai', true);
-
-            $tugas = $this->input->post('status_tugas', true);
-            $k = $this->m_amt->getKlasifikasi($id_pegawai);
-            $klasifikasi = $k[0]->KLASIFIKASI;
-            $depot = $this->session->userdata('id_depot');
-            $tahun = date('Y', strtotime($this->input->post('tanggal_kinerja', true)));
-            //$tahun = 2013;
-//KM
-            $jenis = "KM";
-            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
-            $koef_km = $a[0]->NILAI;
-
-//KL
-            $jenis = "KL";
-            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
-            $koef_kl = $a[0]->NILAI;
-
-//RITASE
-            $jenis = "RIT";
-            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
-            $koef_rit = $a[0]->NILAI;
-
-//SPBU
-            $jenis = "SPBU";
-            $a = $this->m_amt->getKoef($jenis, $tugas, $klasifikasi, $depot, $tahun);
-            $koef_spbu = $a[0]->NILAI;
-
-            $km = $this->input->post('total_km', true);
-            $kl = $this->input->post('total_kl', true);
-            $ritase = $this->input->post('ritase_amt', true);
-            $spbu = $this->input->post('spbu', true);
-
-            $pendapatan = ($koef_km * $km) + ($koef_kl * $kl) + ($koef_rit * $ritase) + ($koef_spbu * $spbu);
-
-            $tanggal = $this->input->post('tanggal_kinerja', true);
-            $a = $this->m_log_harian->getIdLogHarianTanggal($tanggal, $depot);
-            $id_log_harian = $a[0]->ID_LOG_HARIAN;
-            $data = array(
-                'id_log_harian' => $id_log_harian,
-                'id_pegawai' => $id_pegawai,
-                'status_tugas' => $tugas,
-                'total_km' => $km,
-                'total_kl' => $kl,
-                'ritase_amt' => $ritase,
-                'pendapatan' => $pendapatan,
-                'spbu' => $spbu
-            );
-            $this->m_kinerja->insertKinerjaAMT($data, $id_kinerja_amt);
-
-            $a = $this->m_amt->getNIP($id_pegawai);
-            $nip = $a->nip;
-            $datalog = array(
-                'keterangan' => 'Tambah data kinerja NIP : ' . $nip . ' tanggal : ' . $this->input->post('tanggal_kinerja', true),
-                'id_pegawai' => $this->session->userdata("id_pegawai"),
-                'keyword' => 'Tambah'
-            );
-            $this->m_log_sistem->insertLog($datalog);
-
-            $pesan = "Data berhasil ditambahkan.";
-            $data1['pesan'] = $pesan;
-            $data1['feedback'] = 1;
         } else if ($this->input->post('delete_kinerja', true)) {
             $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
             $this->m_kinerja->deleteKinerjaAMT($id_kinerja_amt);
@@ -598,6 +613,9 @@ class amt extends CI_Controller {
                 'keyword' => 'Tambah'
             );
             $this->m_log_sistem->insertLog($datalog);
+            $pesan = "Data berhasil dihapus.";
+            $data1['pesan'] = $pesan;
+            $data1['feedback'] = 1;
         }
 
         $depot = $this->session->userdata('id_depot');

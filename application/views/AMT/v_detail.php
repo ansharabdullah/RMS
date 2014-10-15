@@ -803,7 +803,7 @@ foreach ($grafik as $ka) {
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">Edit Kinerja</h4>
                                     </div>
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?>">
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?>/<?php echo $bulan?>/<?php echo $tahun?>/">
                                         <div class="modal-body">
                                             <div class="col-lg-12">
                                                 <section class="panel">
@@ -869,7 +869,7 @@ foreach ($grafik as $ka) {
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title">Edit Kinerja</h4>
                                     </div>
-                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?>">
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?><?php echo $row->ID_PEGAWAI ?>/<?php echo $bulan?>/<?php echo $tahun?>">
                                         <div class="modal-body">
                                             <div class="col-lg-12">
                                                 <section class="panel">
