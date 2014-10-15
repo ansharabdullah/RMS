@@ -78,6 +78,39 @@ class apms extends CI_Controller {
 						'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
 					);
 					$pesan = $this->m_apms->insertApms($data5);
+					
+					$a = $this->m_rencana_apms->cekRencana($depot,date('m'),date('Y'));
+					$cek1=0;
+					foreach($a as $k)
+					{
+						$cek1 = $k->STATUS_KUOTA_APMS;
+					}
+					$id_apms = $this->m_apms->getID_APMS($this->input->post('no_apms', true),$depot); 
+					$id_ap = 0;
+					foreach($id_apms as $id)
+					{
+						$id_ap = $id->ID_APMS;
+					}
+					if($cek1 > 0)
+					{
+						$tahun = date('Y');
+						$bulan = date('m');
+						$tanggal_log = date($tahun.'-'.$bulan.'-'.'1');
+						$id_log = $this->m_log_harian->getIdLogHarianTanggal($tanggal_log,$depot);
+						$id_log_h='';
+						foreach($id_log as $l)
+						{
+							$id_log_h = $l->ID_LOG_HARIAN;
+						}
+						$data = array(
+						'ID_LOG_HARIAN' => $id_log_h,
+						'ID_APMS' => $id_ap,
+						'K_SOLAR' => 0,
+						'K_PREMIUM' => 0,
+						);
+						
+						$pesan = $this->m_rencana_apms->insertRencanaAPMS0($data);
+					}
 					if($pesan)
 					{
 						$data1['pesan'] = 1;
@@ -984,7 +1017,7 @@ class apms extends CI_Controller {
 						'NILAI' => $jumlah_nilai,
 					);
 					
-					//$insert = $this->m_apms->insertnilaiApms($datanilai);
+					$insert = $this->m_apms->insertnilaiApms($datanilai);
 					
 					$datalog = array(
 						'keterangan' => 'Menambah Data KPI APMS',
@@ -1018,6 +1051,17 @@ class apms extends CI_Controller {
 				$bulan =  date('m',strtotime($tanggal_log));
 				$tahun =  date('Y',strtotime($tanggal_log));
 				
+				
+				$tanggal_log = date($tanggal_log.'-1');
+				$id_log = $this->m_log_harian->getIdLogHarianTanggal($tanggal_log,$depot);
+				//var_dump($tanggal_log);
+				$id_log_h='';
+				foreach($id_log as $l)
+				{
+					$id_log_h = $l->ID_LOG_HARIAN;
+				}
+				
+				$jumlah_nilai = 0;
 				$bobot = 5;
 				$deviasi =  $realisasi - $target;
 				$score =  (1 - ($deviasi/$target))*100;
@@ -1036,7 +1080,7 @@ class apms extends CI_Controller {
 				$nilai = $normal_score * $bobot / 100;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
-				
+				$jumlah_nilai = $jumlah_nilai + $nilai;
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 1,
 					'BOBOT' => $bobot,
@@ -1071,7 +1115,7 @@ class apms extends CI_Controller {
 				$nilai = $normal_score * $bobot / 100;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
-				
+				$jumlah_nilai = $jumlah_nilai + $nilai;
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 2,
 					'BOBOT' => $bobot,
@@ -1106,7 +1150,7 @@ class apms extends CI_Controller {
 				$nilai = $normal_score * $bobot / 100;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
-				
+				$jumlah_nilai = $jumlah_nilai + $nilai;
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 3,
 					'BOBOT' => $bobot,
@@ -1140,7 +1184,7 @@ class apms extends CI_Controller {
 				$nilai = $normal_score * $bobot / 100;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
-				
+				$jumlah_nilai = $jumlah_nilai + $nilai;
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 5,
 					'BOBOT' => $bobot,
@@ -1182,7 +1226,7 @@ class apms extends CI_Controller {
 				$nilai = $normal_score * $bobot / 100;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
-				
+				$jumlah_nilai = $jumlah_nilai + $nilai;
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 6,
 					'BOBOT' => $bobot,
@@ -1223,7 +1267,7 @@ class apms extends CI_Controller {
 				$nilai = $normal_score * $bobot / 100;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
-				
+				$jumlah_nilai = $jumlah_nilai + $nilai;
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 7,
 					'BOBOT' => $bobot,
@@ -1264,7 +1308,7 @@ class apms extends CI_Controller {
 				$nilai = $normal_score * $bobot / 100;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
-				
+				$jumlah_nilai = $jumlah_nilai + $nilai;
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 8,
 					'BOBOT' => $bobot,
@@ -1305,7 +1349,7 @@ class apms extends CI_Controller {
 				$nilai = $normal_score * $bobot / 100;
 				//var_dump($target,$realisasi,$deviasi,$score,$normal_score,$nilai);
 				//echo $deviasi;
-				
+				$jumlah_nilai = $jumlah_nilai + $nilai;
 				$data1 = Array(
 					'ID_JENIS_KPI_APMS' => 9,
 					'BOBOT' => $bobot,
@@ -1316,7 +1360,9 @@ class apms extends CI_Controller {
 					'FINAL_SCORE' => $nilai,
 				);
 				$edit = $this->m_kpi_apms->editKPIApms($data1,$id);
+				$jumlah =$this->m_kpi_apms->jumlahNilai($id_log_h); 
 				
+				$update = $this->m_apms->updateNilai($id_log_h,$jumlah->jumlah);
 				$datalog = array(
 					'keterangan' => 'Mengedit Data KPI APMS',
 					'id_pegawai' => $this->session->userdata("id_pegawai"),

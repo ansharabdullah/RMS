@@ -17,7 +17,17 @@
 <?php
     $j = 0;
     $index = 0;
-    for($i = 1 ; $i < date('n') ; $i++)
+    $bulan;
+    if($tahun < date('Y'))
+    {
+        $bulan = 12;
+    }
+    else
+    {
+        $bulan = date('n');
+        
+    }
+    for($i = 1 ; $i <= $bulan ; $i++)
     {
         ?>
         nomor_bulan.push(<?php echo $i ?>);
@@ -127,7 +137,9 @@
             tooltip: {
                  positioner: function () {
                     return { x: 10, y: 35 };
-                 }
+                 },
+                 
+                    valueSuffix:' %'
             },
             legend:{
                  enabled: false
@@ -168,6 +180,17 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        
+       <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li>KPI APMS Bulanan</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
                 <section class="panel">
                         <header class="panel-heading">
                             Grafik KPI APMS Bulanan Depot <?php echo $nama_depot?>

@@ -1,0 +1,17 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is behind 'origin/master' by 4 commits, and can be fast-forwarded.
+#   (use "git pull" to update your local branch)
+#
+# Changes to be committed:
+#	modified:   application/controllers/amt.php
+#	modified:   application/models/m_peringatan.php
+#	modified:   data_laporan/tahunan/Laporan Tahunan BOYOLALI 2013.xls
+#	modified:   nbproject/private/private.xml
+#
+# Untracked files:
+#	data_laporan/triwulan/Laporan Triwulan I BOYOLALI 2013.xls
+#
+

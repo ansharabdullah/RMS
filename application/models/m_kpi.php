@@ -254,5 +254,16 @@ class m_kpi extends CI_Model {
                                     order by month(lh.TANGGAL_LOG_HARIAN),ka.ID_JENIS_KPI_APMS asc");
         return $query->result();
     }
+    
+     public function get_kpi_apms_tahunan()
+    {
+        $query = $this->db->query("select *,YEAR(lh.TANGGAL_LOG_HARIAN) as tahun,ROUND(AVG(n.NILAI),1) as rata_rata 
+                                   from nilai n, jenis_penilaian jp , depot d , log_harian lh 
+                                   where n.ID_JENIS_PENILAIAN = jp.ID_JENIS_PENILAIAN and d.ID_DEPOT = lh.ID_DEPOT
+                                   and n.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and n.ID_JENIS_PENILAIAN = 73
+                                   and d.STATUS_APMS = 1 and YEAR(lh.TANGGAL_LOG_HARIAN) <= YEAR(CURDATE()) and YEAR(lh.TANGGAL_LOG_HARIAN) >= YEAR(CURDATE()) - 2
+                                   group by d.ID_DEPOT,YEAR(lh.TANGGAL_LOG_HARIAN) order by d.ID_DEPOT asc");
+         return $query->result();
+    }
 
 }
