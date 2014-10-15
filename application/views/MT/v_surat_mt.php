@@ -18,21 +18,7 @@ function DateToIndo($date) {
 <script>
     var surat = new Array();
     $(document).ready(function(){
-        var ap;
-        <?php
-             foreach($surat as $a)
-             {
-                 ?>
-                 ap = new Array();
-                 ap['id'] = "<?php echo $a->ID_SURAT?>";
-                 ap['ID_JENIS_SURAT'] = "<?php echo $a->ID_JENIS_SURAT?>";
-                 ap['TANGGAL_AKHIR_SURAT'] = "<?php echo $a->TANGGAL_AKHIR_SURAT?>";
-                 ap['KETERANGAN_SURAT'] = "<?php echo $a->KETERANGAN_SURAT?>";
-                 
-                 surat.push(ap);
-                 <?php
-             }
-                        ?>
+       
         
     });
 </script>
@@ -45,13 +31,24 @@ function DateToIndo($date) {
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
                     <li><a href="<?php echo base_url();?>mt/data_mt">Data Mobil</a></li>
-                    <li><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $dataMobil->id_mobil; ?>/<?php echo date("n")?>/<?php echo date("Y")?>">Detail Mobil</a></li>
+                    <li><a href="<?php echo base_url() ?>mt/detail/<?php echo $dataMobil->id_mobil; ?>/<?php echo date("n")?>/<?php echo date("Y")?>">Detail Mobil</a></li>
                     <li class="active">Surat Mobil</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
         </div>
         <!-- page start-->
+        <section class="panel">
+            
+        <?php if ($pesan==1) {  ?>
+            <div class="alert alert-block alert-success fade in">
+			<button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                <strong>Berhasil! </strong><?php echo $pesan_text;?>
+            </div>
+        <?php } ?>
+            </section>
         <section class="panel">
             <header class="panel-heading">
                 <i class="icon-envelope"></i> Surat MT
@@ -99,7 +96,7 @@ function DateToIndo($date) {
                                 <th>No.</th>
                                 <th>Jenis Surat</th>
                                 <th>Tanggal Berakhir Surat</th>
-                                <th>keterangan</th>
+                                <th>Keterangan</th>
                                 <th>Aksi</th>
 
                             </tr>
@@ -119,8 +116,8 @@ function DateToIndo($date) {
                                      
                                     <td><?php echo $row->KETERANGAN_SURAT; ?></td>
                                    
-                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Surat" href="#ModalEditSurat"  data-toggle="modal"  onclick="setDetail('<?php echo $j ?>')" ><i class="icon-pencil"></i></a>
-                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Surat" href="javascript:hapus('<?php echo $row->ID_SURAT ?>','<?php echo $id_mobil; ?>');"><i class="icon-remove"></i></a>
+                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Surat" href="#ModalEditSurat"  data-toggle="modal"  onclick="ceksurat('<?php echo $row->ID_SURAT ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->ID_JENIS_SURAT ?>','<?php echo $row->TANGGAL_AKHIR_SURAT ?>','<?php echo $row->KETERANGAN_SURAT ?>')"><i class="icon-pencil"></i></a>
+                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusSurat('<?php echo $row->ID_SURAT?>')" data-toggle="modal" href="#HapusSurat"><i class="icon-remove"></i></a>
                                        </td>
                                 </tr>
                                 <?php 
@@ -142,7 +139,7 @@ function DateToIndo($date) {
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/tambah_surat/<?php echo $id_mobil; ?>">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/surat_mt/<?php echo $id_mobil; ?>">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Form Surat</h4>
@@ -170,17 +167,15 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label for="keterangan" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                             <select class="form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT">
-                                <option value="Aktif">Aktif</option>
-                                <option value="Tidak Aktif">Tidak Aktif</option>
-                                
-                            </select></div>
+                            <input class=" form-control input-sm m-bot15" id="kut" name="KETERANGAN_SURAT" type="text" placeholder="Keterangan" required />
+                       
+                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" onclick="this.form.reset()">Batal</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                    <input class="btn btn-success" name="simpan" type="submit" value="Simpan"/>
                 </div>
             </form> 
 
@@ -191,7 +186,7 @@ function DateToIndo($date) {
 <div class="modal fade" id="ModalEditSurat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="" >
+            <form class="form-horizontal" role="form" id="form-edit" method="POST" action="<?php echo base_url()?>mt/surat_mt/<?php echo $id_mobil; ?>" >
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Form Edit Surat</h4>
@@ -202,6 +197,9 @@ function DateToIndo($date) {
                    <div class="form-group">
                         <label class="col-sm-2 control-label col-lg-2" for="tera">Jenis Surat</label>
                         <div class="col-lg-10">
+                            <input class=" form-control input-sm m-bot15" id="ID_SURAT" name="ID_SURAT"  type="hidden" required />
+                        <input class=" form-control input-sm m-bot15" id="ID_MOBIL" name="ID_MOBIL" type="hidden" required />
+                        
                             <select class="form-control input-sm m-bot15" id="ID_JENIS_SURAT" name="ID_JENIS_SURAT">
                                 <option <?php if($row->ID_JENIS_SURAT == "1")echo "selected"?> value="1">STNK</option>
                                 <option <?php if($row->ID_JENIS_SURAT == "2")echo "selected"?> value="2">PAJAK</option>
@@ -219,17 +217,15 @@ function DateToIndo($date) {
                     <div class="form-group">
                         <label for="stnk" class="col-lg-2 col-sm-2 control-label">Keterangan</label>
                         <div class="col-lg-10">
-                            <select class="form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT">
-                                <option <?php if($row->KETERANGAN_SURAT == "Aktif")echo "selected"?> value="Aktif">Aktif</option>
-                                <option <?php if($row->KETERANGAN_SURAT == "Tidak Aktif")echo "selected"?> value="Tidak Aktif">Tidak Aktif</option>
-                                
-                            </select> </div>
+                            <input class=" form-control input-sm m-bot15" id="KETERANGAN_SURAT" name="KETERANGAN_SURAT" minlength="2" type="text" required />
+                           
+                        </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                    <input class="btn btn-success" name="editsurat" type="submit" value="Simpan"/>
                 </div>
             </form> 
 
@@ -245,14 +241,15 @@ function DateToIndo($date) {
                 <h4 class="modal-title">Form Hapus Surat</h4>
             </div>
             <div class="modal-body">
-
-                Apakah anda yakin ?
-
-            </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
-            </div>
+                    <form method="POST" action="<?php echo base_url() ?>mt/surat_mt/<?php echo $id_mobil?>">
+                    Apakah anda yakin ?
+					<div class="modal-footer">
+						<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+						<input type="hidden" value="" name="ID_SURAT2" id="ID_SURAT2"></input>
+						<input type="submit" value="Hapus" name="deletesurat" class="btn btn-danger danger"></input>
+					</div>
+					</form>
+                </div>
         </div>
     </div>
 </div>
@@ -297,15 +294,16 @@ function DateToIndo($date) {
     
      var index;
         
-        function setDetail(index){
-            var action = "<?php echo base_url()?>mt/edit_surat/"+surat[index]['id']+"/"+<?php echo $id_mobil?>;
-           
-            
-            $("#ID_JENIS_SURAT").val(surat[index]['ID_JENIS_SURAT']);
-            $("#TANGGAL_AKHIR_SURAT").val(surat[index]['TANGGAL_AKHIR_SURAT']);
-            $("#KETERANGAN_SURAT").val(surat[index]['KETERANGAN_SURAT']);
-            $("#form-edit").attr("action",action ); 
-           
-        }
+        function hapusSurat(id) {
+        $('#ID_SURAT2').val(id);
+    }
+        
+        function ceksurat(id_surat, id_mobil, id_jenis_surat, tanggal_akhir_surat, keterangan_surat) {
+                                                                $("#ID_SURAT").val(id_surat);
+                                                                $("#ID_MOBIL").val(id_mobil);
+                                                                $("#ID_JENIS_SURAT").val(id_jenis_surat);
+                                                                $("#TANGGAL_AKHIR_SURAT").val(tanggal_akhir_surat);
+                                                                $("#KETERANGAN_SURAT").val(keterangan_surat);
+                                                            }
     
 </script>

@@ -53,24 +53,94 @@ function DateToIndo($date) {
     var hari = new Array();
     
      <?php
-        foreach($kinerja as $km){
-            ?>
-             
-                kl_mt.push(<?php echo $km->total_kl_mt ?>);
-                km_mt.push(<?php echo $km->total_km_mt ?>);
-                premium.push(<?php echo $km->premium ?>);
-                pertamax.push(<?php echo $km->pertamax ?>);
-                pertamax_plus.push(<?php echo $km->pertamax_plus ?>);
-                pertamina_dex.push(<?php echo $km->pertamina_dex ?>);
-                solar.push(<?php echo $km->solar ?>);
-                bio_solar.push(<?php echo $km->bio_solar ?>);
-                own_use_mt.push(<?php echo $km->own_use ?>);
-                ritase_mt.push(<?php echo $km->ritase_mt ?>);
-                hari.push(<?php echo $km->hari ?>);
-                
-            <?php
-        }
+	$status=0;
+	$tampung=0;
+	$jumlah = 0;
+	$bulansekarang = $tahun . "-" . $bulan;
+	if ($bulansekarang == date('Y-m',strtotime($tahun . "-" . $bulan))) {
+		$jumlah = date('d');
+	} else if ($bulan == 1 || $bulan == 3 || $bulan == 5 || $bulan == 7 || $bulan == 8 || $bulan == 10 || $bulan == 12) {
+		$jumlah = 31;
+	} else if ($bulan == 4 || $bulan == 6 || $bulan == 9 || $bulan == 11) {
+		$jumlah = 30;
+	} else if ($bulan == 2) {
+		$jumlah = 28;
+		//jika kabisat
+		if (date('L', strtotime($tahun . '-01-01'))) {
+			$jumlah = 29;
+		}
+	}
+        for($i=1;$i<=$jumlah;$i++)
+	{
+		$rit=0;
+                $km=0;
+                $kl=0;
+                $ownuse=0;
+                $prem=0;
+                $pertamax=0;
+                $pertamaxplus=0;
+                $pertaminadex=0;
+                $sol=0;
+                $bio=0;
+		$status=0;
+		$k=0;
+		?>
+               hari.push(<?php echo $i; ?>);
+        <?php
+		foreach($kinerja as $isi){
+				if($isi->hari == $i) 
+				{ 
+					$status =1;
+					$rit = $isi->ritase_mt;
+                                        $km = $isi->total_km_mt;
+                                        $kl = $isi->total_kl_mt;
+                                        $ownuse = $isi->own_use;
+                                        //$prem = $isi->premium;
+                                        //$pertamax = $isi->pertamax;
+                                        //$pertamaxplus = $isi->pertamax_plus;
+                                        //$pertaminadex = $isi->pertamina_dex;
+                                        //$bio = $isi->bio_solar;
+					$sol = $isi->solar;
+				}
+				$k++;
+		}
+		if($status==1&&$k!=0)
+		{
+					 ?> 
+                                       
+                                        ritase_mt.push(<?php echo $rit ?>);
+					total_km_mt.push(<?php echo $km ?>);
+                                        kl_mt.push(<?php echo $kl ?>);
+                                        km_mt.push(<?php echo $km ?>);
+                                        //premium.push(<?php echo $prem ?>);
+                                        //pertamax.push(<?php echo $pertamax ?>);
+                                        //pertamax_plus.push(<?php echo $pertamaxplus ?>);
+                                        //pertamina_dex.push(<?php echo $pertaminadex ?>);
+                                        //bio_solar.push(<?php echo $bio ?>);
+                                        own_use_mt.push(<?php echo $ownuse ?>);
+                                         solar.push(<?php echo $sol ?>);
+
+					 <?php
+		}else if($status==0&&$k!=0)
+		{
+					 ?> 
+                                        ritase_mt.push(0);
+					total_km_mt.push(0);
+                                        kl_mt.push(0);
+                                        km_mt.push(0);
+                                        //premium.push(0);
+                                        //pertamax.push(0);
+                                        //pertamax_plus.push(0);
+                                        //pertamina_dex.push(0);
+                                        //bio_solar.push(0);
+                                        own_use_mt.push(0); 
+                                        solar.push(0);
+					 <?php
+		}
+	}
     ?>
+    
+     
     
     $(function() {
         mt = new Highcharts.Chart({ 
@@ -123,7 +193,10 @@ function DateToIndo($date) {
                     type: 'spline',
                     name: 'Jumlah',
                     data: km_mt,
-                    visible : false
+                    visible : false,
+                    tooltip:{
+                        valueSuffix:" KM"
+                    }
                 }]
         });
     });
@@ -132,32 +205,137 @@ function DateToIndo($date) {
     function filterMt(title)
     {
         mt.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' Mobil Tangki'});  
+        mt.series[0].remove(true);
         if(title == "KM"){
-             mt.series[0].setData(total_km_mt);
+             //mt.series[0].setData(total_km_mt);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: total_km_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KM"
+                    }
+
+                }
+             );
         }
         else if(title == "KL"){
-            mt.series[0].setData(kl_mt);
-            
+            //mt.series[0].setData(kl_mt);
+            mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: kl_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
+        }else if(title == "Ritase"){
+            mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: ritase_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" Rit"
+                    }
+
+                }
+             );
         }else if(title == "Own Use"){
-            mt.series[0].setData(own_use_mt);
-                
+            //mt.series[0].setData(own_use_mt);
+              mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: own_use_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );  
         }else if(title == "Premium"){
-            mt.series[0].setData(premium);
-            
+            //mt.series[0].setData(premium);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: premium,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Pertamax"){
-            mt.series[0].setData(pertamax);
-            
+            //mt.series[0].setData(pertamax);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: pertamax,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Pertamax Plus") {
-            mt.series[0].setData(pertamax_plus);
-            
+           // mt.series[0].setData(pertamax_plus);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: pertamax_plus,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Pertamax Dex") {
-            mt.series[0].setData(pertamina_dex);
-            
+            //mt.series[0].setData(pertamina_dex);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: pertamina_dex,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Solar"){
-            mt.series[0].setData(solar);
-            
+            //mt.series[0].setData(solar);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: solar,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         }else if(title == "Bio Solar"){
-            mt.series[0].setData(bio_solar);
+            //mt.series[0].setData(bio_solar);
+             mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: bio_solar,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" KL"
+                    }
+
+                }
+             );
         } 
         
     }
@@ -195,9 +373,18 @@ function DateToIndo($date) {
 
 
             <!-- page start-->
-            
+            <section class="panel"> 
+                    <?php if ($pesan==1) {  ?>
+                        <div class="alert alert-block alert-success fade in">
+                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                            <strong>Berhasil! </strong><?php echo $pesan_text;?>
+                                </div>
+                <?php } ?></section>
 
             <section class="panel" id="ShowProfile">
+              
                 <header class="panel-heading">
                     <div class="col-lg-10">Detail MT
                     </div>
@@ -361,7 +548,7 @@ function DateToIndo($date) {
                     Edit MT  
                 </header>
                 <div class="panel-body bio-graph-primary" >
-                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/detail/<?php echo $row->ID_MOBIL ?>">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="POST" action="<?php echo base_url() ?>mt/detail/<?php echo $row->ID_MOBIL.'/'.$bulan.'/'.$tahun?>">
                         <div class="panel-body">
                             <input type="hidden" name="id" value="<?php echo $row->ID_MOBIL?>">
                             <div class="row">
@@ -632,7 +819,7 @@ function DateToIndo($date) {
 
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-default" onclick="ShowProfile()"value="Batal" />
-                            <input class="btn btn-success" type="submit" value="Simpan"/>
+                            <input class="btn btn-success" type="submit" value="Simpan" name="simpan"/>
                         </div>
                     </form>
 
@@ -668,6 +855,7 @@ function DateToIndo($date) {
                             <ul class="dropdown-menu pull-left">
                                 <li><a style="cursor: pointer" onclick="filterMt('KM')">KM</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('KL')">KL</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Ritase')">Ritase</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Own Use')">Own Use</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>
@@ -749,8 +937,8 @@ function DateToIndo($date) {
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo date('d M Y',  strtotime($row->tanggal_log_harian)); ?></td>
-                                    <td><?php echo $row->total_km_mt; ?></td>
                                     <td><?php echo $row->total_kl_mt; ?></td>
+                                    <td><?php echo $row->total_km_mt; ?></td>
                                     <td><?php echo $row->ritase_mt; ?></td>
                                     <td><?php echo $row->own_use; ?></td>
                                     <td><?php echo $row->premium; ?></td>
@@ -762,9 +950,10 @@ function DateToIndo($date) {
                                     <td><span class="label label-success">Hadir</span></td>
                                     
                                    <td>
-                                   <a onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo (DateToIndo($row->tanggal_log_harian)) ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                                           
-                                </tr>
+                                    <a onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo $row->tanggal_log_harian ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><br>
+                                    <br><a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusKinerja('<?php echo $row->id_kinerja_mt?>','<?php echo date('d M Y',  strtotime($row->tanggal_log_harian))?>')" data-toggle="modal" href="#ModalHapusKinerja"><i class="icon-remove"></i></a>                 
+                                   </td>
+                                    </tr>
                                 <?php
                                                 } else {
                                                     $day = 0;
@@ -817,21 +1006,23 @@ function DateToIndo($date) {
 
 
 
-    <div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalHapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Hapus Mobil Tangki</h4>
+                    <h4 class="modal-title">Hapus Kinerja</h4>
                 </div>
                 <div class="modal-body">
-
-                    Apakah anda yakin ?
-
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                    <a href="#" onclick="ok()" class="btn btn-danger danger">Hapus</a>
+                    <form method="POST" action="<?php echo base_url() ?>mt/detail/<?php echo $id_mobil.'/'.$bulan.'/'.$tahun ?>">
+                    Apakah anda yakin akan menghapus data kinerja mobil tanggal <span id="tanggal_log" name="tanggal_log"></span> ?
+					<div class="modal-footer">
+						<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+						<input type="hidden" value="" name="id_kinerja_mt" id="id_kinerja_mt"></input>
+                                                <input type="hidden" value="" name="tanggal" id="tanggal_log_hari"></input>
+						<input type="submit" value="Hapus" name="hapuskinerja" class="btn btn-danger danger"></input>
+					</div>
+					</form>
                 </div>
             </div>
         </div>
@@ -840,7 +1031,7 @@ function DateToIndo($date) {
 
     <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/edit_kinerja/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url() ?>mt/detail/<?php echo $id_mobil.'/'.$bulan.'/'.$tahun?>">
 
                 <div class="modal-content">
                     <div class="modal-header">
@@ -851,7 +1042,7 @@ function DateToIndo($date) {
                         <div class="form-group ">
                             <label for="nip" class="control-label col-lg-2">Tanggal</label>
                             <div class="col-lg-10">
-                                <input class=" form-control input-sm m-bot15" id="tanggal_kinerja" name="tanggal_kinerja" type="text" required readonly/>
+                                <input class=" form-control input-sm m-bot15" id="tanggal_kinerja" name="tanggal_kinerja" type="date" required readonly/>
                                 
                             </div>
                                 <input class=" form-control input-sm m-bot15" id="id_kinerja" name="id_kinerja_mt" minlength="1" type="hidden" required readonly/>
@@ -860,13 +1051,13 @@ function DateToIndo($date) {
 
                         </div>
                         <div class="form-group ">
-                            <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
+                            <label for="kl" class="control-label col-lg-2">Kilometer (km)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="kl" name="total_km_mt"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="km" name="total_km_mt"  type="number" required />
                             </div>
-                             <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
+                             <label for="km" class="control-label col-lg-2">Kiloliter (kl)</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="km" name="total_kl_mt"  type="number" required />
+                                <input class=" form-control input-sm m-bot15" id="kl" name="total_kl_mt"  type="number" required />
                             </div>
                         </div>
                         <div class="form-group ">
@@ -915,7 +1106,7 @@ function DateToIndo($date) {
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" name="edit_profil" type="submit" value="Simpan"/>
+                        <input class="btn btn-success" name="simpan2" type="submit" value="Simpan"/>
                     </div>
                 </div>
             </form>
@@ -925,7 +1116,7 @@ function DateToIndo($date) {
 
     <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="POST" action="<?php echo base_url()?>mt/tambah_kinerja/">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="POST" action="<?php echo base_url() ?>mt/detail/<?php echo $id_mobil.'/'.$bulan.'/'.$tahun?>">
 
                 <div class="modal-content">
                     <div class="modal-header">
@@ -946,14 +1137,15 @@ function DateToIndo($date) {
 
                         </div>
                         <div class="form-group ">
+                            <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
+                            <div class="col-lg-4">
+                                <input class=" form-control input-sm m-bot15" id="mkm" name="total_km_mt"  type="number" required />
+                            </div>
                             <label for="kl" class="control-label col-lg-2">Kiloliter (kl)</label>
                             <div class="col-lg-4">
                                 <input class=" form-control input-sm m-bot15" id="mkl" name="total_kl_mt"  type="number" required />
                             </div>
-                             <label for="km" class="control-label col-lg-2">Kilometer (km)</label>
-                            <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="mkm" name="total_km_mt"  type="number" required />
-                            </div>
+                             
                         </div>
                         <div class="form-group ">
                             <label for="ownuse" class="control-label col-lg-2">Own Use (kl)</label>
@@ -1001,7 +1193,7 @@ function DateToIndo($date) {
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
-                        <input class="btn btn-success" type="submit" value="Simpan"/>
+                        <input class="btn btn-success" name="simpan1" type="submit" value="Simpan"/>
                     </div>
                 </div>
             </form>
@@ -1009,7 +1201,7 @@ function DateToIndo($date) {
     </div>
 
     <!-- modal -->
-    <div class="modal fade" id="hapusKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalHapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1022,8 +1214,13 @@ function DateToIndo($date) {
 
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">No</button>
-                    <a href="#" onclick="klik()" class="btn btn-danger danger">Hapus</a>
+                   <form action="<?php echo base_url() ?>mt/data_mt/" method="POST">
+                                            <input type="hidden" name="id_mobil" id="h_id_mobil" value=""/>
+                                            <input type="hidden" name="nopol" id="h_nopol" value=""/>
+                                            <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                            <input type="Submit" class="btn btn-danger danger" name="delete" value="Hapus"/>
+                                            
+                                        </form>
                 </div>
             </div>
         </div>
@@ -1050,12 +1247,16 @@ function DateToIndo($date) {
     }
     
     var globalId;
+    var globalId2;
     $('#ModalHapus').on('show', function() {
 
     });
 
-    function hapus(id) {
+    function hapus(id,id2) {
         globalId = id;
+        globalId2 = id2;
+        $("#h_id_mobil").val(globalId);
+        $("#h_nopol").val(globalId2);
         $('#ModalHapus').data('id', id).modal('show');
  
     }
@@ -1073,11 +1274,10 @@ function DateToIndo($date) {
 
     });
 
-    function hapus_kinerja(id,id_mobil) {
-        global = id;
-        globalMobil=id_mobil;
-        $('#hapusKinerja').data('id', id).modal('show');
- 
+   function hapusKinerja(id,no) {
+        $('#id_kinerja_mt').val(id);
+        $('#tanggal_log').html(no);
+        $('#tanggal_log_hari').val(no);
     }
 
     function klik()

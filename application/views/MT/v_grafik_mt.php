@@ -100,7 +100,7 @@
     function filterMt(title)
     {
         mt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Mobil Tangki'});
-         mt.series[0].remove(true);
+        mt.series[0].remove(true);
         if(title == "KM"){
              //mt.series[0].setData(total_km_mt);
              mt.addSeries({
@@ -124,6 +124,18 @@
                     color : '#7cb5ec' ,
                     tooltip:{
                         valueSuffix:" KL"
+                    }
+
+                }
+             );
+        }else if(title == "Ritase"){
+            mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'column',
+                    data: ritase_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" Rit"
                     }
 
                 }
@@ -268,6 +280,7 @@
                             <ul class="dropdown-menu pull-left">
                                 <li><a style="cursor: pointer" onclick="filterMt('KM')">KM</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('KL')">KL</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Ritase')">Ritase</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Own Use')">Own Use</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>

@@ -45,14 +45,24 @@ function DateToIndo($date) {
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
                     <li><a href="<?php echo base_url();?>mt/data_mt">Data Mobil</a></li>
-                    <li><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $dataMobil->id_mobil; ?>/<?php echo date("n")?>/<?php echo date("Y")?>">Detail Mobil</a></li>
+                    <li><a href="<?php echo base_url() ?>mt/detail/<?php echo $dataMobil->id_mobil; ?>/<?php echo date("n")?>/<?php echo date("Y")?>">Detail Mobil</a></li>
                     <li class="active">Oli Mobil</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
         </div>
         <!-- page start-->
-
+  <section class="panel">
+            
+        <?php if ($pesan==1) {  ?>
+            <div class="alert alert-block alert-success fade in">
+			<button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                <strong>Berhasil! </strong><?php echo $pesan_text;?>
+            </div>
+        <?php } ?>
+            </section>
         <section class="panel">
             <header class="panel-heading">
                 <i class="icon-beer"></i> Oli MT
@@ -145,7 +155,7 @@ function DateToIndo($date) {
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Form Tambah Oli</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/tambah_oli/<?php echo $id_mobil; ?> ">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="POST" action="<?php echo base_url()?>mt/oli_mt/<?php echo $id_mobil; ?> ">
                 <div class="modal-body">
                     <!-- form tambah-->
 
@@ -177,7 +187,7 @@ function DateToIndo($date) {
 
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" onclick="this.form.reset()">Batal</button>
-                    <input class="btn btn-success" type="submit" value="Simpan"/>
+                    <input class="btn btn-success" name="simpan" type="submit" value="Simpan"/>
                 </div>
             </form> 
         </div>
