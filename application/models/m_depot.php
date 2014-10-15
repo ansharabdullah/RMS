@@ -30,6 +30,12 @@ class m_depot extends CI_Model {
         return $nama;
     }
     
+    public function getDetailDepot($id){
+        $this->db->where('ID_DEPOT',$id);
+        $data = $this->db->get("depot");
+        return $data->row();
+    }
+    
 }
 
 ?>
