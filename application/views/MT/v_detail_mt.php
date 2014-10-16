@@ -937,8 +937,8 @@ function DateToIndo($date) {
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo date('d M Y',  strtotime($row->tanggal_log_harian)); ?></td>
-                                    <td><?php echo $row->total_kl_mt; ?></td>
                                     <td><?php echo $row->total_km_mt; ?></td>
+                                    <td><?php echo $row->total_kl_mt; ?></td>
                                     <td><?php echo $row->ritase_mt; ?></td>
                                     <td><?php echo $row->own_use; ?></td>
                                     <td><?php echo $row->premium; ?></td>
