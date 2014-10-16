@@ -452,31 +452,48 @@ if ($kinerja_hari[0]->premium != NULL && $rencana_hari[0]->premium != NULL) {
     var set_apms = new Array();
     var arrColorKpi = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
 <?php
-foreach ($kpi['tahun'] as $tahun) {
+foreach ($tahun_arr as $tahun) {
     ?>
                     tahun_kpi.push("<?php echo $tahun ?>");
     <?php
 }
+
 $i = 0;
-foreach ($kpi['data'] as $data) {
+foreach($depot as $dp)
+{
     ?>
-                    set = new Array();
+        set = new Array();
     <?php
-    foreach ($data['kpi'] as $dt) {
-        ?>
-                            set.push(<?php echo round($dt, 2) ?>);
-                            set_apms.push(<?php echo rand(97, 105)?>);
-                            target.push(100);
-        <?php
+    foreach ($tahun_arr as $tahun) {
+        $status = 0;
+        foreach($kpi as $k)
+        {
+            if($k->ID_DEPOT == $dp->ID_DEPOT && $k->tahun == $tahun)
+            {
+                ?>
+                 set.push(<?php echo $k->rata_rata?>);
+                <?php
+                $status = 1;
+                break;
+            }
+
+        }
+        if($status == 0)
+        {
+            ?>
+                set.push(0);
+            <?php
+            
+        }
     }
     ?>
-                    series_kpi.push({
-                        name:'<?php echo $data['depot'] ?>',
-                        color : arrColorKpi[<?php echo $i ?>],
-                        id : '<?php echo $data['id_depot'] ?>',
-                        data: set
-                    });
-    <?php
+     series_kpi.push({
+        name:'<?php echo $dp->NAMA_DEPOT ?>',
+        color : arrColorKpi[<?php echo $i ?>],
+        id : '<?php echo $dp->ID_DEPOT ?>',
+        data: set
+    });   
+        <?php
     $i++;
 }
 ?>

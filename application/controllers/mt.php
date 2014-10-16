@@ -30,7 +30,6 @@ class Mt extends CI_Controller {
         $this->data_mt();
 
     }
-    
    
     public function rencana() {
         $depot = $this->session->userdata('id_depot');
@@ -370,7 +369,29 @@ class Mt extends CI_Controller {
                 $this->m_log_sistem->insertLog($datalog);
 		$pesan = $this->m_mt->insertMobil($data2);
                     $data1['pesan'] = 1;
-		}
+                    
+		}else if ($this->input->post('delete', true)) {
+                    if ($this->session->userdata('id_role') == 5) {
+                        redirect(base_url());
+                    } else {
+                        $id_mobil = $this->input->post('id_mobil', true);
+                        $nopol = $this->input->post('nopol', true);
+                        $datalog = array(
+                            'keterangan' => 'Hapus Mobil, Nopol : ' . $this->input->post('nopol', true),
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Hapus'
+                        );
+                         $this->m_kinerja->deleteKinerjaMTMobil($id_mobil);
+                        $this->m_mt->deleteMT($id_mobil);
+                        $this->m_mt->deleteMobilApar($id_mobil);
+                        $this->m_mt->deleteMobilSurat($id_mobil);
+                        $this->m_mt->deleteMobilBan($id_mobil);
+                        $this->m_mt->deleteMobilOli($id_mobil);
+                        $this->m_log_sistem->insertLog($datalog);
+
+                        $data1['pesan'] = 3;
+                    }
+             }
         $pesan = $data1['pesan'];
         $data3 = $this->m_mt->Nopol();
         $nopol =array();
@@ -379,6 +400,7 @@ class Mt extends CI_Controller {
             $nopol[]= $row->NOPOL;
             $jumlahbaris++;
         }
+        
         
         $depot = $this->session->userdata('id_depot');
         $data1['mt'] = $this->m_mt->selectMT($depot);
@@ -392,328 +414,196 @@ class Mt extends CI_Controller {
         $this->footer();
         
     }
-    
-    
-    public function detail($id_mobil,$bulan = 0, $tahun = 0) {
-        
-        $data1['pesan'] = 0;
-        $data1['feedback'] = 0;
+   
+    public function detail($id_mobil,$bulan,$tahun) {
+        $data1['pesan'] =0;
+	
+		if($this->input->post('simpan'))
+		{
+                    
+                    if($this->input->post('simpan')=="Simpan")
+			{
+				$depot = $this->session->userdata("id_depot");
+				$id = $this->input->post('id', true);
+                                $data = array(
+                                        'nopol' => $this->input->post('nopol', true),
+                                        'kapasitas' => $this->input->post('kapasitas', true),
+                                        'produk' => $this->input->post('produk', true),
+                                        'transportir' => $this->input->post('transportir', true),
+                                        'status_mobil' => $this->input->post('status_mobil', true),
+                                        'no_mesin' => $this->input->post('no_mesin', true),
+                                        'no_rangka' => $this->input->post('no_rangka', true),
+                                        'jenis_kendaraan' => $this->input->post('jenis_kendaraan', true),
+                                        'rasio' => $this->input->post('rasio', true),
+                                        'jenis_tangki' => $this->input->post('jenis_tangki', true),
+                                        'gps' => $this->input->post('gps', true),
+                                        'sensor_overfill' => $this->input->post('sensor_overfill', true),
+                                        'standar_volume' => $this->input->post('standar_volume', true),
+                                        'volume_1' => $this->input->post('volume_1', true),
+                                        'kategori_mobil' => $this->input->post('kategori_mobil', true),
+                                        'jumlah_segel' => $this->input->post('jumlah_segel', true),
+                                        'rk1_komp1' => $this->input->post('rk1_komp1', true),
+                                        'rk1_komp2' => $this->input->post('rk1_komp2', true),
+                                        'rk1_komp3' => $this->input->post('rk1_komp3', true),
+                                        'rk1_komp4' => $this->input->post('rk1_komp4', true),
+                                        'rk1_komp5' => $this->input->post('rk1_komp5', true),
+                                        'rk1_komp6' => $this->input->post('rk1_komp6', true),
+                                        'rk2_komp1' => $this->input->post('rk2_komp1', true),
+                                        'rk2_komp2' => $this->input->post('rk2_komp2', true),
+                                        'rk2_komp3' => $this->input->post('rk2_komp3', true),
+                                        'rk2_komp4' => $this->input->post('rk2_komp4', true),
+                                        'rk2_komp5' => $this->input->post('rk2_komp5', true),
+                                        'rk2_komp6' => $this->input->post('rk2_komp6', true),
+                                         'k_komp1' => $this->input->post('k1_komp1', true),
+                                        'k_komp2' => $this->input->post('k1_komp2', true),
+                                        'k_komp3' => $this->input->post('k1_komp3', true),
+                                        'k_komp4' => $this->input->post('k1_komp4', true),
+                                        'k_komp5' => $this->input->post('k1_komp5', true),
+                                        'k_komp6' => $this->input->post('k1_komp6', true),
+                                    );
+                                
+                                $this->m_mt->editMT($data, $id);
+					
+				$data1['pesan'] = 1;
+				$data1['pesan_text'] = "Data Berhasil Diubah.";
+				$datalog = array(
+                                    'keterangan' => 'Edit Data Mobil, Nopol : ' . $this->input->post('nopol', true),
+                                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                    'keyword' => 'Edit'
+                                      );
+                                 $this->m_log_sistem->insertLog($datalog);
+                                
+                                }
+                                
+                }
+                if($this->input->post('simpan1')=="Simpan"){
+                    $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
+                    $id_mobil = $this->input->post('id_mobil', true);
 
-        if ($bulan < 10) {
-            $bulan = "0" . $bulan;
-        }
 
-        if ($bulan == '00') {
-            $bulan = date('m');
-        }
-        if ($tahun == 0) {
-            $tahun = date('Y');
-        }
-        
-        $data1['tahun'] = $tahun;
-        $data1['bulan'] = $bulan;
-        
-        if ($this->input->post('edit_profile', true)) {
-              if ($this->session->userdata('id_role') == 5) {
-                redirect(base_url());
-            } else {
-            $id = $this->input->post('id', true);
-            $data = array(
-                'nopol' => $this->input->post('nopol', true),
-                'kapasitas' => $this->input->post('kapasitas', true),
-                'produk' => $this->input->post('produk', true),
-                'transportir' => $this->input->post('transportir', true),
-                'status_mobil' => $this->input->post('status_mobil', true),
-                'no_mesin' => $this->input->post('no_mesin', true),
-                'no_rangka' => $this->input->post('no_rangka', true),
-                'jenis_kendaraan' => $this->input->post('jenis_kendaraan', true),
-                'rasio' => $this->input->post('rasio', true),
-                'jenis_tangki' => $this->input->post('jenis_tangki', true),
-                'gps' => $this->input->post('gps', true),
-                'sensor_overfill' => $this->input->post('sensor_overfill', true),
-                'standar_volume' => $this->input->post('standar_volume', true),
-                'volume_1' => $this->input->post('volume_1', true),
-                'kategori_mobil' => $this->input->post('kategori_mobil', true),
-                'jumlah_segel' => $this->input->post('jumlah_segel', true),
-                'rk1_komp1' => $this->input->post('rk1_komp1', true),
-                'rk1_komp2' => $this->input->post('rk1_komp2', true),
-                'rk1_komp3' => $this->input->post('rk1_komp3', true),
-                'rk1_komp4' => $this->input->post('rk1_komp4', true),
-                'rk1_komp5' => $this->input->post('rk1_komp5', true),
-                'rk1_komp6' => $this->input->post('rk1_komp6', true),
-                'rk2_komp1' => $this->input->post('rk2_komp1', true),
-                'rk2_komp2' => $this->input->post('rk2_komp2', true),
-                'rk2_komp3' => $this->input->post('rk2_komp3', true),
-                'rk2_komp4' => $this->input->post('rk2_komp4', true),
-                'rk2_komp5' => $this->input->post('rk2_komp5', true),
-                'rk2_komp6' => $this->input->post('rk2_komp6', true),
-                 'k_komp1' => $this->input->post('k1_komp1', true),
-                'k_komp2' => $this->input->post('k1_komp2', true),
-                'k_komp3' => $this->input->post('k1_komp3', true),
-                'k_komp4' => $this->input->post('k1_komp4', true),
-                'k_komp5' => $this->input->post('k1_komp5', true),
-                'k_komp6' => $this->input->post('k1_komp6', true),
-        );
-        
-        $datalog = array(
-                'keterangan' => 'Edit Data Mobil, Nopol : ' . $this->input->post('nopol', true),
-                'id_pegawai' => $this->session->userdata("id_pegawai"),
-                'keyword' => 'Edit'
-            );
-            $this->m_log_sistem->insertLog($datalog);
-            
-        $this->m_mt->editMT($data, $id);
-                $pesan = "Data berhasil diubah.";
-                $data1['pesan'] = $pesan;
-                $data1['feedback'] = 1;
-            }
-         
-        } else if ($this->input->post('edit_kinerja', true)) {
-            $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
-        $id_mobil = $this->input->post('id_mobil', true);
-        
-        $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
-        $bulan = date('n',  strtotime($this->input->post('tanggal_kinerja', true)));
-        
-        $km = $this->input->post('total_km_mt', true);
-        $kl = $this->input->post('total_kl_mt', true);
-        $ritase = $this->input->post('ritase_mt', true);
-        $own_use = $this->input->post('own_use', true);
-        $premium = $this->input->post('premium', true);
-        $pertamax = $this->input->post('pertamax', true);
-        $pertamax_plus = $this->input->post('pertamax_plus', true);
-        $pertamina_dex = $this->input->post('pertamina_dex', true);
-        $solar = $this->input->post('solar', true);
-        $bio_solar = $this->input->post('bio_solar', true);
+                    $depot = $this->session->userdata('id_depot');
+                    $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+                    $bulan = date('n',  strtotime($this->input->post('tanggal_kinerja', true)));
 
-        $data = array(
-            'premium' => $premium,
-            'total_km_mt' => $km,
-            'total_kl_mt' => $kl,
-            'own_use' => $own_use,
-            'ritase_mt' => $ritase,
-            'pertamax' => $pertamax,
-            'pertamax_plus' => $pertamax_plus,
-            'pertamina_dex' => $pertamina_dex,
-            'solar' => $solar,
-            'bio_solar' => $bio_solar
-        );
-        $this->m_kinerja->editKinerjaMT($data, $id_kinerja_mt);
-         $a = $this->m_amt->getNopol($id_mobil);
-                $nopol = $a->nopol;
-                $datalog = array(
-                    'keterangan' => 'Ubah data kinerja, Nopol : ' . $nopol.' tanggal : '.$this->input->post('tanggal_kinerja', true),
-                    'id_pegawai' => $this->session->userdata("id_pegawai"),
-                    'keyword' => 'Edit'
-                );
-                $this->m_log_sistem->insertLog($datalog);
+                    
+                    $km = $this->input->post('total_km_mt', true);
+                    $kl = $this->input->post('total_kl_mt', true);
+                    $ritase = $this->input->post('ritase_mt', true);
+                    $own_use = $this->input->post('own_use', true);
+                    $premium = $this->input->post('premium', true);
+                    $pertamax = $this->input->post('pertamax', true);
+                    $pertamax_plus = $this->input->post('pertamax_plus', true);
+                    $pertamina_dex = $this->input->post('pertamina_dex', true);
+                    $solar = $this->input->post('solar', true);
+                    $bio_solar = $this->input->post('bio_solar', true);
 
-                $pesan = "Data berhasil diubah.";
-                $data1['pesan'] = $pesan;
-                $data1['feedback'] = 1;
-            
-        }
-        
-        
-        
-        
-        $data['lv1'] = 3;
-        $data['lv2'] = 1;
+                    $tanggal = date ("Y-m-d",strtotime($this->input->post('tanggal_kinerja', true)));
+                    $a = $this->m_log_harian->getIdLogHarianTanggal($tanggal, $depot);
+
+                    $id_log_harian = $a[0]->ID_LOG_HARIAN;
+                    $data = array(
+                        'id_log_harian' => $id_log_harian,
+                        'id_mobil' => $id_mobil,
+                        'premium' => $premium,
+                        'total_km_mt' => $km,
+                        'total_kl_mt' => $kl,
+                        'own_use' => $own_use,
+                        'ritase_mt' => $ritase,
+                        'pertamax' => $pertamax,
+                        'pertamax_plus' => $pertamax_plus,
+                        'pertamina_dex' => $pertamina_dex,
+                        'solar' => $solar,
+                        'bio_solar' => $bio_solar
+                    );
+
+                    $this->m_kinerja->insertKinerjaMT($data, $id_kinerja_mt);
+                    $a = $this->m_mt->getNopol($id_mobil);
+                    $nopol = $a->nopol;
+                    $datalog = array(
+                                    'keterangan' => 'Tambah data kinerja Nopol : ' . $nopol . ' tanggal : ' . $this->input->post('tanggal_kinerja', true),
+                                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                    'keyword' => 'Tambah'
+                                      );
+                                 $this->m_log_sistem->insertLog($datalog);
+                    $data1['pesan'] = 1;
+                    $data1['pesan_text'] = "Data Kinerja Berhasil Ditambahkan.";
+                    
+                }
+                if($this->input->post('simpan2')=="Simpan"){
+                    $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
+                    $id_mobil = $this->input->post('id_mobil', true);
+
+                    $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
+
+                    $km = $this->input->post('total_km_mt', true);
+                    $kl = $this->input->post('total_kl_mt', true);
+                    $ritase = $this->input->post('ritase_mt', true);
+                    $own_use = $this->input->post('own_use', true);
+                    $premium = $this->input->post('premium', true);
+                    $pertamax = $this->input->post('pertamax', true);
+                    $pertamax_plus = $this->input->post('pertamax_plus', true);
+                    $pertamina_dex = $this->input->post('pertamina_dex', true);
+                    $solar = $this->input->post('solar', true);
+                    $bio_solar = $this->input->post('bio_solar', true);
+
+                    $data = array(
+                        'premium' => $premium,
+                        'total_km_mt' => $km,
+                        'total_kl_mt' => $kl,
+                        'own_use' => $own_use,
+                        'ritase_mt' => $ritase,
+                        'pertamax' => $pertamax,
+                        'pertamax_plus' => $pertamax_plus,
+                        'pertamina_dex' => $pertamina_dex,
+                        'solar' => $solar,
+                        'bio_solar' => $bio_solar
+                    );
+                    $this->m_kinerja->editKinerjaMT($data, $id_kinerja_mt);
+                    $a = $this->m_mt->getNopol($id_mobil);
+                    $nopol = $a->nopol;
+                    $datalog = array(
+                                    'keterangan' => 'Ubah data kinerja Nopol : ' . $nopol . ' tanggal : ' . $this->input->post('tanggal_kinerja', true),
+                                    'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                    'keyword' => 'Edit'
+                                      );
+                                 $this->m_log_sistem->insertLog($datalog);
+                    $data1['pesan'] = 1;
+                    $data1['pesan_text'] = "Data Kinerja Berhasil Diubah.";
+                }
+                if($this->input->post('hapuskinerja')=="Hapus")
+			{
+				$id_kinerja_mt = $this->input->post('id_kinerja_mt');
+				
+				$this->m_mt->deleteKinerja($id_kinerja_mt);
+				
+					$data1['pesan'] = 1;
+					$data1['pesan_text'] = "Data Kinerja Mobil Berhasil Dihapus!";
+                                        $a = $this->m_mt->getNopol($id_mobil);
+                                        $nopol = $a->nopol;
+					$datalog = array(
+						'keterangan' => 'Menghapus Data Kinerja Mobil Nopol : '. $nopol . ' tanggal : ' . $this->input->post('tanggal', true),
+						'id_pegawai' => $this->session->userdata("id_pegawai"),
+						'keyword' => 'Hapus'
+					);
+                                        $this->m_log_sistem->insertLog($datalog);
+				
+			}
+                
+       
         
         $data1['id_mobil'] = $id_mobil;
-        
         $data1['tahun'] = $tahun;
         $data1['bulan'] = $bulan;
+        
         $depot = $this->session->userdata("id_depot");
         $data1['mt'] = $this->m_mt->detailMT($id_mobil);
         $data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil,$depot,$bulan,$tahun);
-        $this->header($data);
-        $this->load->view('mt/v_detail_mt', $data1);
-        $this->footer();
-    }
-
-    public function detail_mt($id_mobil,$bulan,$tahun) {
-
+        
         $data['lv1'] = 3;
         $data['lv2'] = 1;
-        
-        $data1['id_mobil'] = $id_mobil;
-        
-        $data1['tahun'] = $tahun;
-        $data1['bulan'] = $bulan;
-        $depot = $this->session->userdata("id_depot");
-        $data1['mt'] = $this->m_mt->detailMT($id_mobil);
-        $data1['kinerja'] = $this->m_mt->selectKinerjaMT($id_mobil,$depot,$bulan,$tahun);
         $this->header($data);
         $this->load->view('mt/v_detail_mt', $data1);
         $this->footer();
-    }
-    
-    public function edit_kinerja() {
-        
-        $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
-        $id_mobil = $this->input->post('id_mobil', true);
-        
-        $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
-        $bulan = date('n',  strtotime($this->input->post('tanggal_kinerja', true)));
-        
-        $km = $this->input->post('total_km_mt', true);
-        $kl = $this->input->post('total_kl_mt', true);
-        $ritase = $this->input->post('ritase_mt', true);
-        $own_use = $this->input->post('own_use', true);
-        $premium = $this->input->post('premium', true);
-        $pertamax = $this->input->post('pertamax', true);
-        $pertamax_plus = $this->input->post('pertamax_plus', true);
-        $pertamina_dex = $this->input->post('pertamina_dex', true);
-        $solar = $this->input->post('solar', true);
-        $bio_solar = $this->input->post('bio_solar', true);
-
-        $data = array(
-            'premium' => $premium,
-            'total_km_mt' => $km,
-            'total_kl_mt' => $kl,
-            'own_use' => $own_use,
-            'ritase_mt' => $ritase,
-            'pertamax' => $pertamax,
-            'pertamax_plus' => $pertamax_plus,
-            'pertamina_dex' => $pertamina_dex,
-            'solar' => $solar,
-            'bio_solar' => $bio_solar
-        );
-        $this->m_kinerja->editKinerjaMT($data, $id_kinerja_mt);
-
-        $link = base_url() . "mt/detail_mt/" . $id_mobil."/".$bulan."/".$tahun;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
-    public function tambah_kinerja() {
-        $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
-        $id_mobil = $this->input->post('id_mobil', true);
-
-       
-        $depot = $this->session->userdata('id_depot');
-        $tahun = date('Y',  strtotime($this->input->post('tanggal_kinerja', true)));
-        $bulan = date('n',  strtotime($this->input->post('tanggal_kinerja', true)));
-       
-
-        $km = $this->input->post('total_km_mt', true);
-        $kl = $this->input->post('total_kl_mt', true);
-        $ritase = $this->input->post('ritase_mt', true);
-        $own_use = $this->input->post('own_use', true);
-        $premium = $this->input->post('premium', true);
-        $pertamax = $this->input->post('pertamax', true);
-        $pertamax_plus = $this->input->post('pertamax_plus', true);
-        $pertamina_dex = $this->input->post('pertamina_dex', true);
-        $solar = $this->input->post('solar', true);
-        $bio_solar = $this->input->post('bio_solar', true);
-
-        $tanggal = date ("Y-m-d",strtotime($this->input->post('tanggal_kinerja', true)));
-        $a = $this->m_log_harian->getIdLogHarianTanggal($tanggal, $depot);
-       
-        $id_log_harian = $a[0]->ID_LOG_HARIAN;
-        $data = array(
-            'id_log_harian' => $id_log_harian,
-            'id_mobil' => $id_mobil,
-            'premium' => $premium,
-            'total_km_mt' => $km,
-            'total_kl_mt' => $kl,
-            'own_use' => $own_use,
-            'ritase_mt' => $ritase,
-            'pertamax' => $pertamax,
-            'pertamax_plus' => $pertamax_plus,
-            'pertamina_dex' => $pertamina_dex,
-            'solar' => $solar,
-            'bio_solar' => $bio_solar
-        );
-        
-        $this->m_kinerja->insertKinerjaMT($data, $id_kinerja_mt);
-
-        $link = base_url() . "mt/detail_mt/" . $id_mobil."/".$bulan."/".$tahun;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-
-    public function edit_mobil($id_mobil) {
-
-       
-        $id = $this->input->post('id', true);
-        $data = array(
-            'nopol' => $this->input->post('nopol', true),
-            'kapasitas' => $this->input->post('kapasitas', true),
-            'produk' => $this->input->post('produk', true),
-            'transportir' => $this->input->post('transportir', true),
-            'status_mobil' => $this->input->post('status_mobil', true),
-            'no_mesin' => $this->input->post('no_mesin', true),
-            'no_rangka' => $this->input->post('no_rangka', true),
-            'jenis_kendaraan' => $this->input->post('jenis_kendaraan', true),
-            'rasio' => $this->input->post('rasio', true),
-            'jenis_tangki' => $this->input->post('jenis_tangki', true),
-            'gps' => $this->input->post('gps', true),
-            'sensor_overfill' => $this->input->post('sensor_overfill', true),
-            'standar_volume' => $this->input->post('standar_volume', true),
-            'volume_1' => $this->input->post('volume_1', true),
-            'kategori_mobil' => $this->input->post('kategori_mobil', true),
-            'jumlah_segel' => $this->input->post('jumlah_segel', true),
-            'rk1_komp1' => $this->input->post('rk1_komp1', true),
-            'rk1_komp2' => $this->input->post('rk1_komp2', true),
-            'rk1_komp3' => $this->input->post('rk1_komp3', true),
-            'rk1_komp4' => $this->input->post('rk1_komp4', true),
-            'rk1_komp5' => $this->input->post('rk1_komp5', true),
-            'rk1_komp6' => $this->input->post('rk1_komp6', true),
-            'rk2_komp1' => $this->input->post('rk2_komp1', true),
-            'rk2_komp2' => $this->input->post('rk2_komp2', true),
-            'rk2_komp3' => $this->input->post('rk2_komp3', true),
-            'rk2_komp4' => $this->input->post('rk2_komp4', true),
-            'rk2_komp5' => $this->input->post('rk2_komp5', true),
-            'rk2_komp6' => $this->input->post('rk2_komp6', true),
-             'k_komp1' => $this->input->post('k1_komp1', true),
-            'k_komp2' => $this->input->post('k1_komp2', true),
-            'k_komp3' => $this->input->post('k1_komp3', true),
-            'k_komp4' => $this->input->post('k1_komp4', true),
-            'k_komp5' => $this->input->post('k1_komp5', true),
-            'k_komp6' => $this->input->post('k1_komp6', true),
-        );
-        
-        $datalog = array(
-                'keterangan' => 'Edit Data Mobil, Nopol : ' . $this->input->post('nopol', true),
-                'id_pegawai' => $this->session->userdata("id_pegawai"),
-                'keyword' => 'Edit'
-            );
-            $this->m_log_sistem->insertLog($datalog);
-            
-        $this->m_mt->editMT($data, $id);
-        
-         $link = base_url()."mt/detail_mt/".$id."/".date("n")."/". date("Y");
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-        
-    }
-    
-    public function delete_mobil($id_mobil){
-        
-        $this->m_kinerja->deleteKinerjaMTMobil($id_mobil);
-        $this->m_mt->deleteMT($id_mobil);
-        
-        
-        $link = base_url()."mt/data_mt/";
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
-    public function delete_kinerja($id_kinerja_mt,$id_mobil){
-        
-        
-        $this->m_mt->deleteKinerja($id_kinerja_mt);
-        
-        $link = base_url()."mt/detail_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
     }
     
 //Import MT
@@ -920,10 +810,148 @@ class Mt extends CI_Controller {
         echo 'window.location.href="' . $link . '"';
         echo '</script>';
     }
-    
+    //Data Surat
+    public function surat_mt($id_mobil) {
+        $data1['pesan'] = 0;
+		
+                    if($this->input->post('simpan',true))
+                    {
+                        $data = array(
+                            'id_mobil' => $id_mobil,
+                            'ID_JENIS_SURAT' => $this->input->post('ID_JENIS_SURAT', true),
+                            'TANGGAL_AKHIR_SURAT' => $this->input->post('TANGGAL_AKHIR_SURAT', true),
+                            'KETERANGAN_SURAT' => $this->input->post('KETERANGAN_SURAT', true),
+
+                        );
+
+                        $this->m_mt->insertSurat($data);
+                        $data1['pesan'] = 1;
+			$data1['pesan_text'] = " Data Berhasil Ditambahkan!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Tambah data surat nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Tambah'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                     }
+                     if($this->input->post('editsurat',true))
+			{
+                            $id = $this->input->post('ID_SURAT', true);
+                           $data = array(
+                            'id_mobil' => $id_mobil,
+                            'ID_JENIS_SURAT' => $this->input->post('ID_JENIS_SURAT', true),
+                            'TANGGAL_AKHIR_SURAT' => $this->input->post('TANGGAL_AKHIR_SURAT', true),
+                            'KETERANGAN_SURAT' => $this->input->post('KETERANGAN_SURAT', true),
+
+                            );
+
+                            $this->m_mt->editSurat($data, $id);
+                            $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Diubah!";
+                        
+                             $a = $this->m_mt->getNopol($id_mobil);
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Edit data surat nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Edit'
+                                );
+                            $this->m_log_sistem->insertLog($datalog);
+                        }
+                         if($this->input->post('deletesurat',true))
+			{
+                             $id = $this->input->post('ID_SURAT2', true);
+                              $this->m_mt->deleteSurat($id);
+                              $a = $this->m_mt->getNopol($id_mobil);
+                            $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Dihapus!";
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Hapus data surat nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Hapus'
+                                );
+                            $this->m_log_sistem->insertLog($datalog);
+                        }
+                        
+                
+                
+        $data1['id_mobil'] =  $id_mobil;
+        $data1['surat'] = $this->m_mt->selectSurat($id_mobil);
+        $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
+        
+        $data['lv1'] = 3;
+        $data['lv2'] = 1;
+        $this->header($data);
+        $this->load->view('mt/v_surat_mt',$data1);
+        $this->footer();
+    }
 //APAR MT
     public function apar_mt($id_mobil) {
-        
+         $data1['pesan'] = 0;
+		
+                    if($this->input->post('simpan',true))
+                    {
+                        $data = array(
+                        'id_mobil' => $id_mobil,
+                        'ID_JENIS_APAR' => $this->input->post('ID_JENIS_APAR', true),
+                        'TANGGAL_APAR' => $this->input->post('TANGGAL_APAR', true),
+                        'KETERANGAN_APAR' => $this->input->post('KETERANGAN_APAR', true),
+                    );
+
+                        $this->m_mt->insertApar($data);
+                        $data1['pesan'] = 1;
+			$data1['pesan_text'] = " Data Berhasil Ditambahkan!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Tambah data APAR nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Tambah'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    
+                     if($this->input->post('apar',true))
+                    {
+                            $id = $this->input->post('ID_APAR', true);
+                            
+                           $data = array(
+                            'id_mobil' => $id_mobil,
+                            'ID_JENIS_APAR' => $this->input->post('ID_JENIS_APAR', true),
+                            'TANGGAL_APAR' => $this->input->post('TANGGAL_APAR', true),
+                            'KETERANGAN_APAR' => $this->input->post('KETERANGAN_APAR2', true),
+                                );
+                            $this->m_mt->editApar($data,$id);
+                             $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Diubah!";
+                            
+                             $a = $this->m_mt->getNopol($id_mobil);
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Ubah data APAR nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Edit'
+                                );
+                             $this->m_log_sistem->insertLog($datalog);
+                    }
+                     if($this->input->post('deleteapar',true))
+			{
+                             $id = $this->input->post('ID_APAR2', true);
+                              $this->m_mt->deleteApar($id);
+                              $a = $this->m_mt->getNopol($id_mobil);
+                            $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Dihapus!";
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Hapus data apar nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Hapus'
+                                );
+                            $this->m_log_sistem->insertLog($datalog);
+                        }
         $data1['id_mobil'] =  $id_mobil;
         $data1['apar'] = $this->m_mt->selectApar($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
@@ -936,89 +964,75 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_apar($id_mobil) {
-
-        //$id_mobil = 1;
-        
-        $nopol = $this->input->post('nopol', true);
-        $data = array(
-            'id_mobil' => $id_mobil,
-            'ID_JENIS_APAR' => $this->input->post('ID_JENIS_APAR', true),
-            'TANGGAL_APAR' => $this->input->post('TANGGAL_APAR', true),
-            'KETERANGAN_APAR' => $this->input->post('KETERANGAN_APAR', true),
-            'STATUS_APAR' => $this->input->post('STATUS_APAR', true),
-        );
-
-        $this->m_mt->insert($data);
-        
-        $datalog = array(
-            'keterangan' => " Tambah data Apar ",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Tambah'
-            );
-                $this->m_log_sistem->insertLog($datalog);
-                
-        $link = base_url() . "mt/apar_mt/".$id_mobil;
-        
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
-    public function edit_apar($id,$id_mobil) {
-        
-        
-        $tanggal_apar = $_POST['TANGGAL_APAR'];
-        $id_jenis= $_POST['ID_JENIS_APAR'];
-        $keterangan= $_POST['KETERANGAN_APAR'];
-        $status= $_POST['STATUS_APAR'];
-        
-        $data = array(
-            "TANGGAL_APAR"=>$tanggal_apar,
-            "ID_JENIS_APAR"=>$id_jenis,
-            "KETERANGAN_APAR" =>$keterangan,
-            "STATUS_APAR" =>$status,
-        );
-       
-        $this->m_mt->editApar($data,$id);
-         
-        $datalog = array(
-            'keterangan' => "Edit data Apar",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-            );
-                $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url()."mt/apar_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-        
-        
-    }
-    
-    public function delete_apar($id_apar,$id_mobil){
-        $this->m_mt->deleteApar($id_apar);
-        
-        
-        $link = base_url()."mt/apar_mt/".$id_mobil;
-         
-        $datalog = array(
-            'keterangan' => "Hapus data Apar",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Hapus'
-            );
-                $this->m_log_sistem->insertLog($datalog);
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
 
 //Ban MT    
     
     public function ban_mt($id_mobil) {
-        
+         $data1['pesan'] = 0;
+		
+                    if($this->input->post('simpan',true))
+                    {
+                        $data = array(
+                        'id_mobil' => $id_mobil,
+                        'MERK_BAN' => $this->input->post('MERK_BAN', true),
+                        'NO_SERI_BAN' => $this->input->post('NO_SERI_BAN', true),
+                        'JENIS_BAN' => $this->input->post('JENIS_BAN', true),
+                        'POSISI_BAN' => $this->input->post('POSISI_BAN', true),
+                        'TANGGAL_GANTI_BAN' => $this->input->post('TANGGAL_GANTI_BAN', true),
+                    );
+
+                    $this->m_mt->insertBan($data);
+                    $data1['pesan'] = 1;
+			$data1['pesan_text'] = " Data Berhasil Ditambahkan!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Tambah data ban nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Tambah'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    if($this->input->post('editban',true))
+                    {
+                            $id = $this->input->post('ID_BAN', true);
+                            
+                           $data = array(
+                                'id_mobil' => $id_mobil,
+                                'MERK_BAN' => $this->input->post('MERK_BAN', true),
+                                'NO_SERI_BAN' => $this->input->post('NO_SERI_BAN', true),
+                                'JENIS_BAN' => $this->input->post('JENIS_BAN', true),
+                                'POSISI_BAN' => $this->input->post('POSISI_BAN', true),
+                                'TANGGAL_GANTI_BAN' => $this->input->post('TANGGAL_GANTI_BAN', true),
+                            );
+                            $this->m_mt->editBan($data, $id);
+                             $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Diubah!";
+                             $a = $this->m_mt->getNopol($id_mobil);
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Ubah data ban nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Edit'
+                                );
+                             $this->m_log_sistem->insertLog($datalog);
+                    } if($this->input->post('deleteban',true))
+			{
+                             $id = $this->input->post('ID_BAN2', true);
+                              $this->m_mt->deleteBan($id);
+                              $a = $this->m_mt->getNopol($id_mobil);
+                            $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Dihapus!";
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Hapus data ban nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Hapus'
+                                );
+                            $this->m_log_sistem->insertLog($datalog);
+                        }
+                    
+                    
         $data1['id_mobil'] =  $id_mobil;
         $data1['ban'] = $this->m_mt->selectBanMT($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
@@ -1031,82 +1045,75 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_ban($id_mobil) {
-
-      
-        $data = array(
-            'id_mobil' => $id_mobil,
-            'MERK_BAN' => $this->input->post('MERK_BAN', true),
-            'NO_SERI_BAN' => $this->input->post('NO_SERI_BAN', true),
-            'JENIS_BAN' => $this->input->post('JENIS_BAN', true),
-            'POSISI_BAN' => $this->input->post('POSISI_BAN', true),
-            'TANGGAL_GANTI_BAN' => $this->input->post('TANGGAL_GANTI_BAN', true),
-        );
-
-        $this->m_mt->insertBan($data);
-        $datalog = array(
-            'keterangan' => "Tambah data Ban",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Tambah'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        $link = base_url() . "mt/ban_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
     
-     public function edit_ban($id,$id_mobil) {
-
-        $merk = $_POST['MERK_BAN'];
-        $seri = $_POST['NO_SERI_BAN'];
-        $jenis = $_POST['JENIS_BAN'];
-        $posisi= $_POST['POSISI_BAN'];
-        $tgl_ganti= $_POST['TANGGAL_GANTI_BAN'];
-        
-        $data = array(
-            "MERK_BAN"=>$merk,
-            "NO_SERI_BAN"=>$seri,
-            "JENIS_BAN"=>$jenis,
-            "POSISI_BAN" =>$posisi,
-            "TANGGAL_GANTI_BAN" =>$tgl_ganti,
-            );
-        
-        $this->m_mt->editBan($data, $id);
-        $datalog = array(
-            'keterangan' => "Edit data Ban",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-         $link = base_url()."mt/ban_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-        
-    }
-    
-     public function delete_ban($id_ban,$id_mobil){
-         
-        $this->m_mt->deleteBan($id_ban);
-        $datalog = array(
-            'keterangan' => "Hapus data Ban",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Hapus'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url()."mt/ban_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-     }
-     
-     //oli
 
     public function oli_mt($id_mobil) {
+          $data1['pesan'] = 0;
+		
+                    if($this->input->post('simpan',true))
+                    {
+                        
+                        $data = array(
+                            'id_mobil' => $id_mobil,
+                            'MERK_OLI' => $this->input->post('MERK_OLI', true),
+                            'TANGGAL_GANTI_OLI' => $this->input->post('TANGGAL_GANTI_OLI', true),
+                            'KM_AWAL' => $this->input->post('KM_AWAL', true),
+                            'TOTAL_VOLUME' => $this->input->post('TOTAL_VOLUME', true),
 
+                        );
+
+                        $this->m_mt->insertOli($data);
+                        $data1['pesan'] = 1;
+			$data1['pesan_text'] = "Data Berhasil Ditambahkan!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Tambah data oli nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Tambah'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    
+                    
+                    if($this->input->post('oli',true))
+                    {
+                            $id = $this->input->post('ID_OLI', true);
+                            
+                           $data = array(
+                            'id_mobil' => $id_mobil,
+                            'MERK_OLI' => $this->input->post('MERK_OLI', true),
+                            'KM_AWAL' => $this->input->post('KM_AWAL', true),
+                            'TANGGAL_GANTI_OLI' => $this->input->post('TANGGAL_GANTI_OLI', true),
+                            'TOTAL_VOLUME' => $this->input->post('TOTAL_VOLUME', true),
+
+                        );
+                            $this->m_mt->editOli($data, $id);
+                             $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Diubah!";
+                             $a = $this->m_mt->getNopol($id_mobil);
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Ubah data oli nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Edit'
+                                );
+                             $this->m_log_sistem->insertLog($datalog);
+                    } if($this->input->post('deleteoli',true))
+			{
+                             $id = $this->input->post('ID_OLI2', true);
+                              $this->m_mt->deleteOli($id);
+                              $a = $this->m_mt->getNopol($id_mobil);
+                            $data1['pesan'] = 1;
+                            $data1['pesan_text'] = " Data Berhasil Dihapus!";
+                             $nopol = $a->nopol;
+                             $datalog = array(
+                                'keterangan' => "Hapus data oli nopol :". $nopol,
+                                'id_pegawai' => $this->session->userdata("id_pegawai"),
+                                'keyword' => 'Hapus'
+                                );
+                            $this->m_log_sistem->insertLog($datalog);
+                        }
         $data1['id_mobil'] =  $id_mobil;
         $data1['oli'] = $this->m_mt->selectOli($id_mobil);
         $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
@@ -1119,161 +1126,7 @@ class Mt extends CI_Controller {
         $this->footer();
     }
     
-    public function tambah_oli($id_mobil) {
-
-        $data = array(
-            'id_mobil' => $id_mobil,
-            'MERK_OLI' => $this->input->post('MERK_OLI', true),
-            'TANGGAL_GANTI_OLI' => $this->input->post('TANGGAL_GANTI_OLI', true),
-            'KM_AWAL' => $this->input->post('KM_AWAL', true),
-            'TOTAL_VOLUME' => $this->input->post('TOTAL_VOLUME', true),
-            
-        );
-
-        $this->m_mt->insertOli($data);
-         $datalog = array(
-            'keterangan' => "Tambah data Oli",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Tambah'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url() . "mt/oli_mt/".$id_mobil;
-        
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
     
-    public function edit_oli($id,$id_mobil) {
-
-        $km = $_POST['KM_AWAL'];
-        $merk = $_POST['MERK_OLI'];
-        $tgl = $_POST['TANGGAL_GANTI_OLI'];
-        $total= $_POST['TOTAL_VOLUME'];
-       
-        
-        $data = array(
-            "KM_AWAL"=>$km,
-            "MERK_OLI"=>$merk,
-            "TANGGAL_GANTI_OLI" =>$tgl,
-            "TOTAL_VOLUME" =>$total,
-            );
-        
-        $this->m_mt->editOli($data, $id);
-         $datalog = array(
-            'keterangan' => "Edit data Oli",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-         $link = base_url()."mt/oli_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-        
-    }
-    
-    public function delete_oli($id_oli,$id_mobil){
-         
-        $this->m_mt->deleteOli($id_oli);
-         $datalog = array(
-            'keterangan' => "Hapus data oli",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Hapus'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url()."mt/oli_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-     }
-
-    
-    //Data Surat
-    public function surat_mt($id_mobil) {
-        
-        $data1['id_mobil'] =  $id_mobil;
-        $data1['surat'] = $this->m_mt->selectSurat($id_mobil);
-        $data1['dataMobil']=$this->m_mt->selectMobil($id_mobil);
-        
-        $data['lv1'] = 3;
-        $data['lv2'] = 1;
-        $this->header($data);
-        $this->load->view('mt/v_surat_mt',$data1);
-        $this->footer();
-    }
-    
-    public function tambah_surat($id_mobil) {
-
-        $data = array(
-            'id_mobil' => $id_mobil,
-            'ID_JENIS_SURAT' => $this->input->post('ID_JENIS_SURAT', true),
-            'TANGGAL_AKHIR_SURAT' => $this->input->post('TANGGAL_AKHIR_SURAT', true),
-            'KETERANGAN_SURAT' => $this->input->post('KETERANGAN_SURAT', true),
-            
-        );
-
-        $this->m_mt->insertSurat($data);
-         $datalog = array(
-            'keterangan' => "Tambah data Surat",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Tambah'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url() . "mt/surat_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil ditambahkan.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-    }
-    
-    public function edit_surat($id,$id_mobil) {
-
-        $surat = $_POST['ID_JENIS_SURAT'];
-        $tgl = $_POST['TANGGAL_AKHIR_SURAT'];
-        $keterangan = $_POST['KETERANGAN_SURAT'];
-       
-        
-        $data = array(
-            "ID_JENIS_SURAT"=>$surat,
-            "TANGGAL_AKHIR_SURAT"=>$tgl,
-            "KETERANGAN_SURAT" =>$keterangan,
-            );
-        
-        $this->m_mt->editSurat($data, $id);
-         $datalog = array(
-            'keterangan' => "Edit data Surat",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-         $link = base_url()."mt/surat_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil diubah.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-        
-    }
-    
-      public function delete_surat($id_surat,$id_mobil){
-         
-        $this->m_mt->deleteSurat($id_surat);
-         $datalog = array(
-            'keterangan' => "Hapus data Surat",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Hapus'
-            );
-        $this->m_log_sistem->insertLog($datalog);
-        
-        $link = base_url()."mt/surat_mt/".$id_mobil;
-        echo '<script type="text/javascript">alert("Data berhasil dihapus.");';
-        echo 'window.location.href="' . $link . '"';
-        echo '</script>';
-     }
-     
      //Data Grafik
     
     
@@ -1313,7 +1166,7 @@ class Mt extends CI_Controller {
         $data1['tahun'] = $tahun;
         $data1['hari'] = $hari;
         $data1['grafik'] = $this->m_grafik_mt->get_kinerja_harian($depot ,$bulan_mt,$hari,$tahun);
-        
+        $data1['mt'] = $this->m_mt->selectMT($depot);
         
         $data['lv1'] = 3;
         $data['lv2'] = 2;
@@ -1341,7 +1194,7 @@ class Mt extends CI_Controller {
        $tanggal =  $_POST['bulan'];
        $bulan = date('n',strtotime($tanggal));
        $tahun = date('Y',strtotime($tanggal));
-       redirect('mt/detail_mt/'.$id_mobil."/".$bulan."/".$tahun);
+       redirect('mt/detail/'.$id_mobil."/".$bulan."/".$tahun);
     }
     
     public function ganti_harian_mt()
@@ -1375,8 +1228,7 @@ class Mt extends CI_Controller {
     }
     
     public function cek_presensi() {
-        $data['lv1'] = 3;
-        $data['lv2'] = 3;
+        
         $this->load->model("m_penjadwalan");
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
@@ -1386,6 +1238,8 @@ class Mt extends CI_Controller {
         $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);;
         
         $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
+        $data['lv1'] = 3;
+        $data['lv2'] = 3;
         $this->header($data);
         $this->load->view('mt/v_presensi',$data2);
         $this->footer();
@@ -1429,6 +1283,7 @@ class Mt extends CI_Controller {
             'status_presensi_mt' => $status
         );
        $this->m_log_harian->updateStatusPresensiMT($depot, $tanggal, $data2);
+       
 
         $link = base_url() . "mt/cek_presensi/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';
@@ -1439,7 +1294,131 @@ class Mt extends CI_Controller {
     public function reminder() {
         
         $depot = $this->session->userdata("id_depot");
+        $data2['pesan'] = 0;            
         
+                    if($this->input->post('simpansurat',true))
+                    {
+                        
+                        $akhir_surat = $_POST['tgl_surat'];
+                        $id_jenis = $_POST['ID_JENIS_SURAT'];
+                        $keterangan = $_POST['KETERANGAN_SURAT'];
+                        $id_mobil = $_POST['id_mobil'];
+
+                        $data = array(
+                            "TANGGAL_AKHIR_SURAT"=>$akhir_surat,
+                            "ID_JENIS_SURAT"=>$id_jenis,
+                            "ID_MOBIL"=>$id_mobil,
+                            "KETERANGAN_SURAT"=>$keterangan
+                        
+                    );
+
+                    $this->m_pengingat->editReminderSurat($data);
+                    $data2['pesan'] = 1;
+			$data2['pesan_text'] = "Data Surat Berhasil Diupdate!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Update reminder surat nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Edit'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    if($this->input->post('simpanban',true))
+                    {
+                        
+                        $id= $this->input->post('id_ban');
+                        $id_mobil= $this->input->post('id_mobil_ban');
+                        $tgl_ganti= $_POST['tgl_ganti'];
+                        $posisi= $this->input->post('posisi_ban');
+                        $merk = $this->input->post('merk_ban');
+                        $seri = $this->input->post('no_seri_ban');
+                        $jenis = $this->input->post('jenis_ban');
+
+                        $data = array(
+                            "TANGGAL_GANTI_BAN"=>$tgl_ganti,
+                            "POSISI_BAN"=>$posisi,
+                            "MERK_BAN"=>$merk,
+                            "ID_MOBIL"=>$id_mobil,
+                            "NO_SERI_BAN"=>$seri,
+                            "JENIS_BAN"=>$jenis,
+
+                        );
+
+                        $this->m_pengingat->editReminderBan($data);
+
+                        $data2['pesan'] = 1;
+			$data2['pesan_text'] = "Data Ban Berhasil Diupdate!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Update reminder ban nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Edit'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    if($this->input->post('simpanoli',true))
+                    {
+                        
+                        $merk = $_POST['MERK_OLI'];
+                        $km = $_POST['KM_AWAL'];
+                        $tgl = $_POST['tgl_oli'];
+                        $id_mobil = $_POST['id_mobil_oli'];
+                        $total = $_POST['TOTAL_VOLUME'];
+
+                        $data = array(
+                            "MERK_OLI"=>$merk,
+                            "KM_AWAL"=>$km,
+                            "ID_MOBIL"=>$id_mobil,
+                            "TANGGAL_GANTI_OLI"=>$tgl,
+                            "TOTAL_VOLUME"=>$total
+                        );
+
+                        $this->m_pengingat->editReminderOli($data);
+
+                        $data2['pesan'] = 1;
+			$data2['pesan_text'] = "Data Oli Berhasil Diupdate!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Update reminder oli nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Edit'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    if($this->input->post('simpanapar',true))
+                    {
+                        
+                        $tgl = $_POST['tgl_apar'];
+                        $id_jenis= $_POST['ID_JENIS_APAR'];
+                        $keterangan = $_POST['KETERANGAN_APAR'];
+                        $id_mobil = $_POST['id_mobil_apar'];
+                        $data = array(
+                            "TANGGAL_APAR"=>$tgl,
+                            "ID_JENIS_APAR"=>$id_jenis,
+                            "KETERANGAN_APAR"=>$keterangan,
+                            "ID_MOBIL"=>$id_mobil
+
+                        );
+
+                        $this->m_pengingat->editReminderApar($data);
+
+                        $data2['pesan'] = 1;
+			$data2['pesan_text'] = "Data APAR Berhasil Diupdate!";
+                         $a = $this->m_mt->getNopol($id_mobil);
+                         $nopol = $a->nopol;
+                         $datalog = array(
+                            'keterangan' => "Update reminder APAR nopol :". $nopol,
+                            'id_pegawai' => $this->session->userdata("id_pegawai"),
+                            'keyword' => 'Edit'
+                            );
+                        $this->m_log_sistem->insertLog($datalog);
+                    }
+                    
+                    
+                    
         $data2['mobil'] = $this->m_pengingat->mobil($depot)->result();
         $data2['apar'] = $this->m_pengingat->getAparReminder($depot)->result();
         $data2['surat'] = $this->m_pengingat->getSuratReminder($depot)->result();
@@ -1451,67 +1430,6 @@ class Mt extends CI_Controller {
         $this->header($data);
         $this->load->view('mt/v_pengingat', $data2);
         $this->footer();
-    }
-    
-    
-    public function edit_reminder_surat()
-    {
-        
-        $akhir_surat = $_POST['tgl_surat'];
-        $id_jenis = $_POST['ID_JENIS_SURAT'];
-        $keterangan = $_POST['KETERANGAN_SURAT'];
-        $id_mobil = $_POST['id_mobil'];
-        
-        $data = array(
-            "TANGGAL_AKHIR_SURAT"=>$akhir_surat,
-            "ID_JENIS_SURAT"=>$id_jenis,
-            "ID_MOBIL"=>$id_mobil,
-            "KETERANGAN_SURAT"=>$keterangan
-        );
-        
-        $this->m_pengingat->editReminderSurat($data);
-        
-         $datalog = array(
-            'keterangan' => "Ubah Reminder Surat ",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        //redirect('mt/reminder');
-        
-            echo '<script type="text/javascript">alert("Pengingat surat berhasil diubah");';
-            echo 'window.location.href="' . base_url() . 'mt/reminder";';
-            echo '</script>';
-    }
-    
-    public function edit_reminder_oli()
-    {
-        
-        $merk = $_POST['MERK_OLI'];
-        $km = $_POST['KM_AWAL'];
-        $tgl = $_POST['tgl_oli'];
-        $id_mobil = $_POST['id_mobil_oli'];
-        $total = $_POST['TOTAL_VOLUME'];
-        
-        $data = array(
-            "MERK_OLI"=>$merk,
-            "KM_AWAL"=>$km,
-            "ID_MOBIL"=>$id_mobil,
-            "TANGGAL_GANTI_OLI"=>$tgl,
-            "TOTAL_VOLUME"=>$total
-        );
-        
-        $this->m_pengingat->editReminderOli($data);
-        $datalog = array(
-            'keterangan' => "Ubah Reminder Oli ",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        //redirect('mt/reminder');
-          echo '<script type="text/javascript">alert("Pengingat oli berhasil diubah");';
-            echo 'window.location.href="' . base_url() . 'mt/reminder";';
-            echo '</script>';
     }
     
     public function edit_reminder_apar($id)
@@ -1540,41 +1458,6 @@ class Mt extends CI_Controller {
             echo 'window.location.href="' . base_url() . 'mt/reminder";';
             echo '</script>';
     }
-    
-    public function edit_reminder_ban()
-    {
-        $id= $this->input->post('id_ban');
-        $id_mobil= $this->input->post('id_mobil_ban');
-        $tgl_ganti= $_POST['tgl_ganti'];
-        $posisi= $this->input->post('posisi_ban');
-        $merk = $this->input->post('merk_ban');
-        $seri = $this->input->post('no_seri_ban');
-        $jenis = $this->input->post('jenis_ban');
-        
-        echo $id_mobil;
-        $data = array(
-            "TANGGAL_GANTI_BAN"=>$tgl_ganti,
-            "POSISI_BAN"=>$posisi,
-            "MERK_BAN"=>$merk,
-            "ID_MOBIL"=>$id_mobil,
-            "NO_SERI_BAN"=>$seri,
-            "JENIS_BAN"=>$jenis,
-            
-        );
-        
-        $this->m_pengingat->editReminderBan($data);
-        $datalog = array(
-            'keterangan' => "Ubah Reminder Ban ",
-            'id_pegawai' => $this->session->userdata("id_pegawai"),
-            'keyword' => 'Edit'
-        );
-        $this->m_log_sistem->insertLog($datalog);
-        //redirect('mt/reminder');
-          echo '<script type="text/javascript">alert("Pengingat apar berhasil diubah");';
-            echo 'window.location.href="' . base_url() . 'mt/reminder";';
-            echo '</script>';
-    }
-    
 
     private function header($data) {
         

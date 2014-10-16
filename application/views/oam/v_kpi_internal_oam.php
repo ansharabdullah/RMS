@@ -37,15 +37,18 @@
                 </form>
             </div>
         </section>
-        <section class="panel"> 
-            <header class="panel-heading">
-                KPI Internal OAM Tahun <?php echo $tahun ?>
-
-            </header>
-            <div class="panel-body">
-                <center>
+       
                     <?php
                     if (sizeof($kpi) > 0) {
+                        ?>
+           <section class="panel"> 
+                <header class="panel-heading">
+                    KPI Internal OAM Tahun <?php echo $tahun ?>
+
+                </header>      
+                    <div class="panel-body">
+                        <center>
+                        <?php
                         if($triwulan == 1 || $triwulan == 5) {
                             
                         ?>
@@ -1743,33 +1746,77 @@
                             </tbody>
                         </table>
                         <?php
-                            }
+                        }
+                    ?>
+                           </center>
+                      </div>
+                </section>
+                        <?php
                     } else {
-                        if($triwulan == 1 || $triwulan == 5){
-                            
-                             echo " <b>KPI TRIWULAN I</b><br/><br/> ";
+                        if($triwulan == 5)
+                        {
+                             ?>
+                                 <div class="alert alert-block alert-danger fade in">
+                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                                    <strong>Tidak Tersedia!</strong> KPI Internal tahun <strong><?php echo $tahun; ?></strong> belum diisi.
+                                </div>
+                                <?php
                         }
-                        if($triwulan == 2 || $triwulan == 5){
-                            
-                            echo " <b>KPI TRIWULAN II</b><br/><br/> ";
-                        }
-                        if($triwulan == 3 || $triwulan == 5){
-                            
-                             echo " <b>KPI TRIWULAN III</b><br/><br/> ";
-                        }
-                        if($triwulan == 4 || $triwulan == 5){
-                           
-                              echo " <b>KPI TRIWULAN IV</b><br/><br/> "; 
-                        }
+                        else
+                        {
+                            if($triwulan == 1){
+
+                                ?>
+                                 <div class="alert alert-block alert-danger fade in">
+                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                                    <strong>Tidak Tersedia!</strong> KPI Internal <strong>Triwulan I</strong> tahun <strong><?php echo $tahun; ?></strong> belum diisi.
+                                </div>
+                                <?php
+                            }
+                            if($triwulan == 2){
+
+                                 ?>
+                                 <div class="alert alert-block alert-danger fade in">
+                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                                    <strong>Tidak Tersedia!</strong> KPI Internal <strong>Triwulan II</strong> tahun <strong><?php echo $tahun; ?></strong> belum diisi.
+                                </div>
+                                <?php
+                            }
+                            if($triwulan == 3){
+
+                                 ?>
+                                 <div class="alert alert-block alert-danger fade in">
+                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                                    <strong>Tidak Tersedia!</strong> KPI Internal <strong>Triwulan III</strong> tahun <strong><?php echo $tahun; ?></strong> belum diisi.
+                                </div>
+                                <?php
+                            }
+                            if($triwulan == 4){
+
+                                  ?>
+                                 <div class="alert alert-block alert-danger fade in">
+                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                        <i class="icon-remove"></i>
+                                    </button>
+                                    <strong>Tidak Tersedia!</strong> KPI Internal <strong>Triwulan IV</strong> tahun <strong><?php echo $tahun; ?></strong> belum diisi.
+                                </div>
+                                <?php
+                            }
+                        }   
                         ?>
 
     <?php
 }
 ?>
-                </center>
-            </div>
-
-        </section>
+               
 
         <!-- page end-->
     </section>

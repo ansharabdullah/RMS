@@ -58,6 +58,14 @@ if(status == 1){
                         <strong>Sukses!</strong> Berhasil Tambah Mobil.
                     </div>
         <?php } ?>
+        <?php if ($pesan==3) {  ?>
+            <div class="alert alert-success fade in">
+                        <button data-dismiss="alert" class="close close-sm" type="button">
+                            <i class="icon-remove"></i>
+                        </button>
+                        <strong>Sukses!</strong> Berhasil Hapus Mobil.
+                    </div>
+        <?php } ?>
         
         <?php if ($pesan==2) { ?>
             <div class="alert alert-block alert-danger fade in">
@@ -101,7 +109,7 @@ if(status == 1){
                                 foreach ($mt as $row) { ?>
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
-                                    <td><a href="<?php echo base_url() ?>mt/detail_mt/<?php echo $row->ID_MOBIL; ?>/<?php echo date("n")?>/<?php echo date("Y")?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
+                                    <td><a href="<?php echo base_url() ?>mt/detail/<?php echo $row->ID_MOBIL; ?>/<?php echo date("n")?>/<?php echo date("Y")?>" style ="text-decoration: underline"><?php echo $row->NOPOL; ?></a></td>
 
                                     <td><?php echo $row->TRANSPORTIR; ?></td>
                                     <td><?php echo $row->KAPASITAS; ?></td>
