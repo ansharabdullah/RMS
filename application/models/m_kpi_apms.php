@@ -27,6 +27,47 @@ class m_kpi_apms extends CI_Model {
 		$query = $this->db->query("select sum(FINAL_SCORE) as jumlah from kpi_apms where ID_LOG_HARIAN = $id_log");
 		return $query->row();
 	}
+	
+	public function syncKPIAPMS($depot,$tahun,$bulan)
+	{
+		//rencana
+		$rencana = $this->db->query("select IFNULL((sum(a.K_SOLAR)+sum(a.K_PREMIUM)),0) as jumlah from rencana_apms a, log_harian b where a.ID_LOG_HARIAN = b.ID_LOG_HARIAN and b.ID_DEPOT = $depot and YEAR(b.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(b.TANGGAL_LOG_HARIAN) = '$bulan'");
+		
+		$kpi_nilai_r = $rencana->row();
+		
+		//kinerja
+		$query = $this->db->query("select IFNULL((sum(a.SOLAR)+sum(a.PREMIUM)),0) as jumlah from kinerja_apms a, log_harian b where a.ID_LOG_HARIAN = b.ID_LOG_HARIAN and b.ID_DEPOT = $depot and YEAR(b.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(b.TANGGAL_LOG_HARIAN) = '$bulan'");
+		$kpi_nilai_k = $query->row();
+		
+		//id_log_harian
+		//$now = date('y-m',$tanggal.'-'.$bulan);
+		$this->db->where('tanggal_log_harian', $tahun.'-'.$bulan.'-1');
+        $this->db->where('id_depot', $depot);
+        $id_log = $this->db->get('log_harian');
+        $id_log = $id_log->row();
+		
+		$score = (1 - (($kpi_nilai_r->jumlah - $kpi_nilai_k->jumlah)/$kpi_nilai_r->jumlah))*100;
+		
+		
+		
+		if($score < 80)
+		{
+			$normal_score = 80;
+		}else if($score > 120){
+			$normal_score = 120;
+		}else
+		{
+			$normal_score = $score;
+		}
+		$final_score = $normal_score*5/100;
+		$query= $this->db->query("update kpi_apms set TARGET = $kpi_nilai_r->jumlah,REALISASI = $kpi_nilai_k->jumlah,SCORE = $score,NORMAL_SCORE = $normal_score, FINAL_SCORE = $final_score where ID_JENIS_KPI_APMS = 4 and ID_LOG_HARIAN = $id_log->ID_LOG_HARIAN");
+		
+		$jumlah = $this->db->query("select sum(FINAL_SCORE) as jumlah from kpi_apms where ID_LOG_HARIAN = $id_log->ID_LOG_HARIAN");
+		$jumlah = $jumlah->row();
+		
+		$query = $this->db->query("update nilai set nilai = $jumlah->jumlah where ID_JENIS_PENILAIAN = 73 and ID_LOG_HARIAN = $id_log->ID_LOG_HARIAN");
+		
+	}
 }
 
 ?>

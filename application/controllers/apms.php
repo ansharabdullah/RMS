@@ -78,7 +78,6 @@ class apms extends CI_Controller {
 						'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
 					);
 					$pesan = $this->m_apms->insertApms($data5);
-					
 					$a = $this->m_rencana_apms->cekRencana($depot,date('m'),date('Y'));
 					$cek1=0;
 					foreach($a as $k)
@@ -144,8 +143,19 @@ class apms extends CI_Controller {
 			}
 			if($this->input->post('simpan')=="Hapus")
 			{
+				$depot = $this->session->userdata("id_depot");
 				$id_apms = $this->input->post('ID_APMS');
 				$pesan = $this->m_apms->deleteApms($id_apms);
+				$tahun = date('Y');
+				$bulan = date('m');
+				$tanggal_log = date($tahun.'-'.$bulan.'-'.'1');
+				$id_log = $this->m_log_harian->getIdLogHarianTanggal($tanggal_log,$depot);
+				$id_log_h='';
+				foreach($id_log as $l)
+				{
+					$id_log_h = $l->ID_LOG_HARIAN;
+				}
+				$pesan = $this->m_rencana_apms->deleteRencanabyIdAPMS($id_log_h,$id_apms);	
 				if($pesan)
 				{
 					$data1['pesan'] = 1;
@@ -266,6 +276,16 @@ class apms extends CI_Controller {
 						'DESCRIPTION' => $this->input->post('des', true),
 					);
 					$bisa = $this->m_apms->insertKinerjaApms($data_1);
+					$status3=0;
+					$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+					foreach($kpi as $kpi1)
+					{
+						$status3 = $kpi1->STATUS_KPI_APMS;
+					}
+					if($status3==1)
+					{
+						$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+					}
 					if($bisa)
 					{
 						$datalog = array(
@@ -321,6 +341,16 @@ class apms extends CI_Controller {
 						'DESCRIPTION' => $this->input->post('des1', true),
 					);
 					$bisa = $this->m_apms->editKinerjaApms($data_1,$id_kinerja);
+					$status3=0;
+					$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+					foreach($kpi as $kpi1)
+					{
+						$status3 = $kpi1->STATUS_KPI_APMS;
+					}
+					if($status3==1)
+					{
+						$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+					}
 					if($bisa)
 					{
 						$datalog = array(
@@ -347,6 +377,16 @@ class apms extends CI_Controller {
 				$id = $this->input->post('ID_KINERJA');
 				
 				$pesan = $this->m_apms->deleteKinerjaApms($id);
+				$status3=0;
+				$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+				foreach($kpi as $kpi1)
+				{
+					$status3 = $kpi1->STATUS_KPI_APMS;
+				}
+				if($status3==1)
+				{
+					$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+				}
 				if($pesan)
 				{
 					$data1['pesan'] = 1;
@@ -564,6 +604,16 @@ class apms extends CI_Controller {
 										
 			}
 			$hasil = $this->m_rencana_apms->editRencanaApms($data,$data_id);
+			$status3=0;
+			$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+			foreach($kpi as $kpi1)
+			{
+				$status3 = $kpi1->STATUS_KPI_APMS;
+			}
+			if($status3==1)
+			{
+				$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+			}
 			if($hasil)
 			{
 				$datalog = array(
@@ -584,6 +634,16 @@ class apms extends CI_Controller {
 		{
 			$id = $this->input->post('id_rencana',true);
 			$hasil = $this->m_rencana_apms->deleteRencanaApms($id);
+			$status3=0;
+			$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+			foreach($kpi as $kpi1)
+			{
+				$status3 = $kpi1->STATUS_KPI_APMS;
+			}
+			if($status3==1)
+			{
+				$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+			}
 			if($hasil)
 			{
 				$datalog = array(
