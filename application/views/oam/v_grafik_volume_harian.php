@@ -49,14 +49,18 @@ foreach ($volume as $row) {
                         }
                     },
                     title: {
-                        text: 'Total (%)',
+                        text: 'Total (KL)',
                         style: {
                             color: Highcharts.getOptions().colors[1]
                         }
                     }
                 }],
             tooltip: {
-                shared: true
+//                formatter: function() {
+//                    return this.x +' <?php echo strftime('%B', mktime(0, 0, 0, $bulan, 1, $tahun)) . " " . $tahun; ?>' + '<br/>' + this.series.name + " : " + this.y + 'KL' ;
+//                },
+                shared : true,
+                valueSuffix: ' KL'
             },
             series: [{
                     name: 'Rencana',

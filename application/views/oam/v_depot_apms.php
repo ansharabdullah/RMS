@@ -3,7 +3,16 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
-      
+       <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li>Kinerja APMS Bulanan</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-12">

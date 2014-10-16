@@ -151,8 +151,9 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-                    <li><a href="<?php echo base_url();?>depot/apms_depot_harian/<?php echo $id_depot?>/<?php echo $no_bulan?>/<?php echo $tahun?>">Kinerja AMT Bulanan</a></li>
-                    <li class="active">Kinerja APMS Harian</li>
+                    <li><a href="<?php echo base_url();?>depot/apms_depot/<?php echo $id_depot?>/<?php echo $tahun?>">Kinerja APMS Bulanan</a></li>
+                     <li><a href="<?php echo base_url();?>depot/apms_depot_harian/<?php echo $id_depot?>/<?php echo $no_bulan?>/<?php echo $tahun?>">Kinerja APMS Harian</a></li>
+                    <li class="active">Detail Kinerja APMS Harian</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>

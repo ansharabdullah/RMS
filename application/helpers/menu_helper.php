@@ -157,6 +157,7 @@ if ( ! function_exists('menu_ss'))
            }
         }
         $data['total_notifikasi'] = $totalNotif;
+        $data['depot'] = $CI->m_depot->getDetailDepot($id_depot);
         $data['notifikasi'] = $arrNotif;
         $data['rencana_bulan'] = $CI->m_rencana->get_rencana_bulan($id_depot, date("n"),date("Y"));
         $data['kinerja_bulan'] = $CI->m_kinerja->get_kinerja_bulan($id_depot, date("n"),date("Y"));
@@ -319,7 +320,7 @@ if ( ! function_exists('menu_oam'))
                    //cek KPI OAM 
                    if ($logHarian[$i]['kpi_oam'] == 0) {
                         $totalNotif++;
-                        array_push($arrNotif, "<a href='#'>
+                        array_push($arrNotif, "<a href='".base_url()."kpi/internal/".$logHarian[$i]['tahun']."/5'>
                                                 <span class='label label-warning'><i class='icon-check'></i></span>
                                               KPI OAM belum dibuat.
                                                 </a>");

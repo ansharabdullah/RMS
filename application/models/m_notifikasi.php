@@ -7,7 +7,7 @@ class m_notifikasi extends CI_Model {
         $notifikasi = array();
         //reminder apar
 
-        $query = $this->db->query("select a.ID_APAR,m.NOPOL,a.STATUS_APAR,DATEDIFF(a.TANGGAL_APAR,now()) as store_pressure,
+        $query = $this->db->query("select a.ID_APAR,m.NOPOL,DATEDIFF(a.TANGGAL_APAR,now()) as store_pressure,
                             a.TANGGAL_APAR as tgl_store
                           from apar a, mobil m, depot d 
                           where m.ID_MOBIL = a.ID_MOBIL 

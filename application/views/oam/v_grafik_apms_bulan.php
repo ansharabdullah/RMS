@@ -17,7 +17,17 @@
 <?php
     $j = 0;
     $index = 0;
-    for($i = 1 ; $i < date('n') ; $i++)
+    $bulan;
+    if($tahun < date('Y'))
+    {
+        $bulan = 12;
+    }
+    else
+    {
+        $bulan = date('n');
+        
+    }
+    for($i = 1 ; $i <= $bulan ; $i++)
     {
         ?>
         nomor_bulan.push(<?php echo $i ?>);
@@ -127,7 +137,9 @@
             tooltip: {
                  positioner: function () {
                     return { x: 10, y: 35 };
-                 }
+                 },
+                 
+                    valueSuffix:' %'
             },
             legend:{
                  enabled: false
@@ -168,6 +180,17 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+        
+       <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li>KPI APMS Bulanan</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
                 <section class="panel">
                         <header class="panel-heading">
                             Grafik KPI APMS Bulanan Depot <?php echo $nama_depot?>
@@ -207,15 +230,15 @@
                                 </button>
                                 <ul class="dropdown-menu pull-left">
 
-                                    <li><a style="cursor: pointer" onclick="filter('Laporan progres pembayaran ongkos angkut',1)">Laporan progres pembayaran ongkos angkut</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Laporan realisasi penyaluran VS LO Planing',2)">Laporan realisasi penyaluran VS LO Planing</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Laporan Progres Pembayaran Ongkos Angkut',1)">Laporan progres pembayaran ongkos angkut</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Laporan Realisasi Penyaluran VS LO Planing',2)">Laporan realisasi penyaluran VS LO Planing</a></li>
                                     <li><a style="cursor: pointer" onclick="filter('Laporan Kehandalan & Ketersediaan Alat angkut',3)">Laporan Kehandalan & Ketersediaan Alat angkut</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Realisasi penyaluran VS Alokasi',4)">Realisasi penyaluran VS Alokasi</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Realisasi Penyaluran VS Alokasi',4)">Realisasi penyaluran VS Alokasi</a></li>
                                     <li><a style="cursor: pointer" onclick="filter('Progress Pembayaran Ongkos Angkut Transportir',5)">Progress Pembayaran Ongkos Angkut Transportir</a></li>
                                     <li><a style="cursor: pointer" onclick="filter('Customer Transportir APMS',6)">Customer Transportir APMS</a></li>
                                     <li><a style="cursor: pointer" onclick="filter('Customer  APMS',7)">Customer  APMS</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Pelanggaran atas Integritas Kinerja',8)">Pelanggaran atas Integritas Kinerja</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Number of Accidents',9)"> Number of Accidents</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Pelanggaran Atas Integritas Kinerja',8)">Pelanggaran atas Integritas Kinerja</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Number Of Accidents',9)"> Number of Accidents</a></li>
 
                                 </ul>
                             </div>
