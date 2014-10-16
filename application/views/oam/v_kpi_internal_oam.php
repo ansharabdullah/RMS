@@ -1,6 +1,16 @@
 
 <section id="main-content">
     <section class="wrapper">
+         <div class="row">
+            <div class="col-lg-12">
+                  <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li>KPI Internal OAM</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
         <section class="panel"> 
             <header class="panel-heading">
@@ -77,98 +87,98 @@
                             <tbody>
                                 <tr>
                                     <td colspan="9"><b>1. Revenue</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 4]->RKAP_OAM_TW1 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 4]->RKAP_OAM_TW1,0, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Revenue Fleet Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
                                     <td><?php echo $kpi[0]->BOBOT ?></td>
-                                    <td><?php echo $kpi[0]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[0]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][0][0]?></td>
-                                    <td><?php echo $realisasi[0][0][1]?></td>
-                                    <td><?php echo $realisasi[0][0][2]?></td>
+                                    <td><?php echo number_format($kpi[0]->TW1_BASE,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[0]->TW1_STRETCH,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][0][0],0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][0][1],0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][0][2],0, ',', '.')?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Terminal Storage Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[1]->BOBOT ?></td>
-                                    <td><?php echo $kpi[1]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[1]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][1][0]?></td>
-                                    <td><?php echo $realisasi[0][1][1]?></td>
-                                    <td><?php echo $realisasi[0][1][2]?></td>
+                                    <td><?php echo number_format($kpi[1]->BOBOT,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[1]->TW1_BASE,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[1]->TW1_STRETCH,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][1][0],0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][1][1],0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][1][2],0, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="9"><b>2. Laba Usaha</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 3]->RKAP_OAM_TW1 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 3]->RKAP_OAM_TW1,0, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Laba Usaha Fleet Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[2]->BOBOT ?></td>
-                                    <td><?php echo $kpi[2]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[2]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][2][0]?></td>
-                                    <td><?php echo $realisasi[0][2][1]?></td>
-                                    <td><?php echo $realisasi[0][2][2]?></td>
+                                    <td><?php echo number_format($kpi[2]->BOBOT,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[2]->TW1_BASE,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[2]->TW1_STRETCH,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][2][0],0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][2][1],0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][2][2],0, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Laba Usaha Terminal Storage</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[3]->BOBOT ?></td>
-                                    <td><?php echo $kpi[3]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[3]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][3][0]?></td>
-                                    <td><?php echo $realisasi[0][3][1]?></td>
-                                    <td><?php echo $realisasi[0][3][2]?></td>
+                                    <td><?php echo number_format($kpi[3]->BOBOT,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[3]->TW1_BASE,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[3]->TW1_STRETCH,0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][3][0],0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][3][1],0, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][3][2],0, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="9"><b>3. Cost Effectiveness</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 2]->RKAP_OAM_TW1 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 2]->RKAP_OAM_TW1  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Cost/liter Fleet Management</td> 
                                     <td>USD/KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[4]->BOBOT ?></td>
-                                    <td><?php echo $kpi[4]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[4]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][4][0]?></td>
-                                    <td><?php echo $realisasi[0][4][1]?></td>
-                                    <td><?php echo $realisasi[0][4][2]?></td>
+                                    <td><?php echo number_format($kpi[4]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[4]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[4]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][4][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][4][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][4][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Cost/liter Terminal Storage</td> 
                                     <td>USD/KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[5]->BOBOT ?></td>
-                                    <td><?php echo $kpi[5]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[5]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][5][0]?></td>
-                                    <td><?php echo $realisasi[0][5][1]?></td>
-                                    <td><?php echo $realisasi[0][5][2]?></td>
+                                    <td><?php echo number_format($kpi[5]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[5]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[5]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][5][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][5][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][5][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><b>4. Collection Period</b></td> 
                                     <td>by date</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[6]->BOBOT ?></td>
-                                    <td><?php echo $kpi[6]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[6]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][6][0]?></td>
-                                    <td><?php echo $realisasi[0][6][1]?></td>
-                                    <td><?php echo $realisasi[0][6][2]?></td>
+                                    <td><?php echo number_format($kpi[6]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[6]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[6]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][6][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][6][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][6][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -178,63 +188,63 @@
                                     <td>Total Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[7]->BOBOT ?></td>
-                                    <td><?php echo $kpi[7]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[7]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][7][0]?></td>
-                                    <td><?php echo $realisasi[0][7][1]?></td>
-                                    <td><?php echo $realisasi[0][7][2]?></td>
+                                    <td><?php echo number_format($kpi[7]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[7]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[7]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][7][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][7][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][7][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Discharge Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[8]->BOBOT ?></td>
-                                    <td><?php echo $kpi[8]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[8]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][8][0]?></td>
-                                    <td><?php echo $realisasi[0][8][1]?></td>
-                                    <td><?php echo $realisasi[0][8][2]?></td>
+                                    <td><?php echo number_format($kpi[8]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[8]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[8]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][8][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][8][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][8][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Working Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[9]->BOBOT ?></td>
-                                    <td><?php echo $kpi[9]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[9]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][9][0]?></td>
-                                    <td><?php echo $realisasi[0][9][1]?></td>
-                                    <td><?php echo $realisasi[0][9][2]?></td>
+                                    <td><?php echo number_format($kpi[9]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[9]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[9]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][9][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][9][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][9][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr> <tr>
                                     <td colspan="9"><b>6. Volume Thruput BBM</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 1]->RKAP_OAM_TW1 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 1]->RKAP_OAM_TW1  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Fleet Management (BBM/BBK)</td> 
                                     <td>KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[10]->BOBOT ?></td>
-                                    <td><?php echo $kpi[10]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[10]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][10][0]?></td>
-                                    <td><?php echo $realisasi[0][10][1]?></td>
-                                    <td><?php echo $realisasi[0][10][2]?></td>
+                                    <td><?php echo number_format($kpi[10]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[10]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[10]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][10][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][10][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][10][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Terminal Storage</td> 
                                     <td>KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[11]->BOBOT ?></td>
-                                    <td><?php echo $kpi[11]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[11]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][11][0]?></td>
-                                    <td><?php echo $realisasi[0][11][1]?></td>
-                                    <td><?php echo $realisasi[0][11][2]?></td>
+                                    <td><?php echo number_format($kpi[11]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[11]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[11]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][11][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][11][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][11][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr> 
                                 <tr>
@@ -244,36 +254,36 @@
                                     <td>Fuel Retail Fleet Management (BBM/BBK)</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[12]->BOBOT ?></td>
-                                    <td><?php echo $kpi[12]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[12]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][12][0]?></td>
-                                    <td><?php echo $realisasi[0][12][1]?></td>
-                                    <td><?php echo $realisasi[0][12][2]?></td>
+                                    <td><?php echo number_format($kpi[12]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[12]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[12]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][12][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][12][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][12][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Fuel Retail Fleet Management (APMS)</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[13]->BOBOT ?></td>
-                                    <td><?php echo $kpi[13]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[13]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][13][0]?></td>
-                                    <td><?php echo $realisasi[0][13][1]?></td>
-                                    <td><?php echo $realisasi[0][13][2]?></td>
+                                    <td><?php echo number_format($kpi[13]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[13]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[13]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][13][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][13][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][13][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Gas & Aviation</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[14]->BOBOT ?></td>
-                                    <td><?php echo $kpi[14]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[14]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][14][0]?></td>
-                                    <td><?php echo $realisasi[0][14][1]?></td>
-                                    <td><?php echo $realisasi[0][14][2]?></td>
+                                    <td><?php echo number_format($kpi[14]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[14]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[14]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][14][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][14][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][14][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -286,48 +296,48 @@
                                     <td>- Mobil Tangki Kelola</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[15]->BOBOT ?></td>
-                                    <td><?php echo $kpi[15]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[15]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][15][0]?></td>
-                                    <td><?php echo $realisasi[0][15][1]?></td>
-                                    <td><?php echo $realisasi[0][15][2]?></td>
+                                    <td><?php echo number_format($kpi[15]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[15]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[15]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][15][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][15][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][15][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>- Mobil Tangki Milik</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[16]->BOBOT ?></td>
-                                    <td><?php echo $kpi[16]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[16]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][16][0]?></td>
-                                    <td><?php echo $realisasi[0][16][1]?></td>
-                                    <td><?php echo $realisasi[0][16][2]?></td>
+                                    <td><?php echo number_format($kpi[16]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[16]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[16]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][16][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][16][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][16][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>b. Terminal Storage (BBM/Depot)</td> 
                                     <td>kasus</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[17]->BOBOT ?></td>
-                                    <td><?php echo $kpi[17]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[17]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][17][0]?></td>
-                                    <td><?php echo $realisasi[0][17][1]?></td>
-                                    <td><?php echo $realisasi[0][17][2]?></td>
+                                    <td><?php echo number_format($kpi[17]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[17]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[17]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][17][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][17][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][17][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><b>9. Progress Pelaksaan Pekerjaan (BD/Non BD)<b/></td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[18]->BOBOT ?></td>
-                                    <td><?php echo $kpi[18]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[18]->TW1_STRETCH ?></td>
-                                    <td><?php echo $realisasi[0][18][0]?></td>
-                                    <td><?php echo $realisasi[0][18][1]?></td>
-                                    <td><?php echo $realisasi[0][18][2]?></td>
+                                    <td><?php echo number_format($kpi[18]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[18]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[18]->TW1_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][18][0] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][18][1] , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[0][18][2] , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -337,8 +347,8 @@
                                     <td>1. TRIR Patra Niaga</td>
                                     <td>Ratio</td>
                                     <td></td>
-                                    <td><?php echo $kpi[19]->TW1_BASE ?></td>
-                                    <td><?php //echo $kpi[19]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[19]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[19]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -349,8 +359,8 @@
                                     <td>2. NOA Patra Niaga</td>
                                     <td>Cases</td>
                                     <td></td>
-                                    <td><?php echo $kpi[20]->TW1_BASE ?></td>
-                                    <td><?php //echo $kpi[20]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[20]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[20]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -361,8 +371,8 @@
                                     <td>3. GCG compliance</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[21]->TW1_BASE ?></td>
-                                    <td><?php //echo $kpi[21]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[21]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[21]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -388,8 +398,8 @@
                                     <td>1. Proper PPN</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[23]->TW1_BASE ?>/green</td>
-                                    <td><?php //echo $kpi[23]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[23]->TW1_BASE  , 2, ',', '.')?>/green</td>
+                                    <td><?php //echo number_format($kpi[23]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -400,8 +410,8 @@
                                     <td>2. Learning Index</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[24]->TW1_BASE ?></td>
-                                    <td><?php //echo $kpi[24]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[24]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[24]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -412,8 +422,8 @@
                                     <td>3. Follow up audit findings</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[25]->TW1_BASE ?></td>
-                                    <td><?php //echo $kpi[25]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[25]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[25]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -424,8 +434,8 @@
                                     <td>4. Akurasi dan kelengkapan Laporan Keuangan</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[26]->TW1_BASE ?></td>
-                                    <td><?php //echo $kpi[26]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[26]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[26]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -436,8 +446,8 @@
                                     <td>5. Utilisasi ERP (MySAP)</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[27]->TW1_BASE ?></td>
-                                    <td><?php //echo $kpi[27]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[27]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[27]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -448,8 +458,8 @@
                                     <td>6. Knowledge & Innovation Program</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[28]->TW1_BASE ?></td>
-                                    <td><?php //echo $kpi[28]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[28]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[28]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -460,8 +470,8 @@
                                     <td>7. Penyelesaian OFI to AFIPQA</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[29]->TW1_BASE ?></td>
-                                    <td><?php echo $kpi[29]->TW1_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[29]->TW1_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[29]->TW1_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -502,98 +512,98 @@
                             <tbody>
                                 <tr>
                                     <td colspan="9"><b>1. Revenue</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 4]->RKAP_OAM_TW2 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 4]->RKAP_OAM_TW2  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Revenue Fleet Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[0]->BOBOT ?></td>
-                                    <td><?php echo $kpi[0]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[0]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][0][0] ?></td>
-                                    <td><?php echo $realisasi[1][0][1] ?></td>
-                                    <td><?php echo $realisasi[1][0][2] ?></td>
+                                    <td><?php echo number_format($kpi[0]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[0]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[0]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][0][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][0][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][0][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Terminal Storage Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[1]->BOBOT ?></td>
-                                    <td><?php echo $kpi[1]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[1]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][1][0] ?></td>
-                                    <td><?php echo $realisasi[1][1][1] ?></td>
-                                    <td><?php echo $realisasi[1][1][2] ?></td>
+                                    <td><?php echo number_format($kpi[1]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[1]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[1]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][1][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][1][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][1][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="9"><b>2. Laba Usaha</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 3]->RKAP_OAM_TW2 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 3]->RKAP_OAM_TW2  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Laba Usaha Fleet Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[2]->BOBOT ?></td>
-                                    <td><?php echo $kpi[2]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[2]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][2][0] ?></td>
-                                    <td><?php echo $realisasi[1][2][1] ?></td>
-                                    <td><?php echo $realisasi[1][2][2] ?></td>
+                                    <td><?php echo number_format($kpi[2]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[2]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[2]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][2][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][2][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][2][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Laba Usaha Terminal Storage</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[3]->BOBOT ?></td>
-                                    <td><?php echo $kpi[3]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[3]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][3][0] ?></td>
-                                    <td><?php echo $realisasi[1][3][1] ?></td>
-                                    <td><?php echo $realisasi[1][3][2] ?></td>
+                                    <td><?php echo number_format($kpi[3]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[3]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[3]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][3][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][3][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][3][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="9"><b>3. Cost Effectiveness</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 2]->RKAP_OAM_TW2 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 2]->RKAP_OAM_TW2  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Cost/liter Fleet Management</td> 
                                     <td>USD/KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[4]->BOBOT ?></td>
-                                    <td><?php echo $kpi[4]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[4]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][4][0] ?></td>
-                                    <td><?php echo $realisasi[1][4][1] ?></td>
-                                    <td><?php echo $realisasi[1][4][2] ?></td>
+                                    <td><?php echo number_format($kpi[4]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[4]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[4]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][4][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][4][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][4][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Cost/liter Terminal Storage</td> 
                                     <td>USD/KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[5]->BOBOT ?></td>
-                                    <td><?php echo $kpi[5]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[5]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][5][0] ?></td>
-                                    <td><?php echo $realisasi[1][5][1] ?></td>
-                                    <td><?php echo $realisasi[1][5][2] ?></td>
+                                    <td><?php echo number_format($kpi[5]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[5]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[5]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][5][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][5][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][5][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><b>4. Collection Period</b></td> 
                                     <td>by date</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[6]->BOBOT ?></td>
-                                    <td><?php echo $kpi[6]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[6]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][6][0] ?></td>
-                                    <td><?php echo $realisasi[1][6][1] ?></td>
-                                    <td><?php echo $realisasi[1][6][2] ?></td>
+                                    <td><?php echo number_format($kpi[6]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[6]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[6]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][6][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][6][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][6][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -603,63 +613,63 @@
                                     <td>Total Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[7]->BOBOT ?></td>
-                                    <td><?php echo $kpi[7]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[7]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][7][0] ?></td>
-                                    <td><?php echo $realisasi[1][7][1] ?></td>
-                                    <td><?php echo $realisasi[1][7][2] ?></td>
+                                    <td><?php echo number_format($kpi[7]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[7]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[7]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][7][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][7][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][7][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Discharge Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[8]->BOBOT ?></td>
-                                    <td><?php echo $kpi[8]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[8]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][8][0] ?></td>
-                                    <td><?php echo $realisasi[1][8][1] ?></td>
-                                    <td><?php echo $realisasi[1][8][2] ?></td>
+                                    <td><?php echo number_format($kpi[8]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[8]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[8]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][8][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][8][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][8][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Working Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[9]->BOBOT ?></td>
-                                    <td><?php echo $kpi[9]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[9]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][9][0] ?></td>
-                                    <td><?php echo $realisasi[1][9][1] ?></td>
-                                    <td><?php echo $realisasi[1][9][2] ?></td>
+                                    <td><?php echo number_format($kpi[9]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[9]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[9]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][9][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][9][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][9][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr> <tr>
                                     <td colspan="9"><b>6. Volume Thruput BBM</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 1]->RKAP_OAM_TW2 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 1]->RKAP_OAM_TW2  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Fleet Management (BBM/BBK)</td> 
                                     <td>KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[10]->BOBOT ?></td>
-                                    <td><?php echo $kpi[10]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[10]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][10][0] ?></td>
-                                    <td><?php echo $realisasi[1][10][1] ?></td>
-                                    <td><?php echo $realisasi[1][10][2] ?></td>
+                                    <td><?php echo number_format($kpi[10]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[10]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[10]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][10][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][10][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][10][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Terminal Storage</td> 
                                     <td>KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[11]->BOBOT ?></td>
-                                    <td><?php echo $kpi[11]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[11]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][11][0] ?></td>
-                                    <td><?php echo $realisasi[1][11][1] ?></td>
-                                    <td><?php echo $realisasi[1][11][2] ?></td>
+                                    <td><?php echo number_format($kpi[11]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[11]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[11]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][11][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][11][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][11][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr> 
                                 <tr>
@@ -669,36 +679,36 @@
                                     <td>Fuel Retail Fleet Management (BBM/BBK)</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[12]->BOBOT ?></td>
-                                    <td><?php echo $kpi[12]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[12]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][12][0] ?></td>
-                                    <td><?php echo $realisasi[1][12][1] ?></td>
-                                    <td><?php echo $realisasi[1][12][2] ?></td>
+                                    <td><?php echo number_format($kpi[12]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[12]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[12]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][12][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][12][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][12][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Fuel Retail Fleet Management (APMS)</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[13]->BOBOT ?></td>
-                                    <td><?php echo $kpi[13]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[13]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][13][0] ?></td>
-                                    <td><?php echo $realisasi[1][13][1] ?></td>
-                                    <td><?php echo $realisasi[1][13][2] ?></td>
+                                    <td><?php echo number_format($kpi[13]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[13]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[13]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][13][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][13][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][13][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Gas & Aviation</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[14]->BOBOT ?></td>
-                                    <td><?php echo $kpi[14]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[14]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][14][0] ?></td>
-                                    <td><?php echo $realisasi[1][14][1] ?></td>
-                                    <td><?php echo $realisasi[1][14][2] ?></td>
+                                    <td><?php echo number_format($kpi[14]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[14]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[14]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][14][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][14][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][14][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -711,48 +721,48 @@
                                     <td>- Mobil Tangki Kelola</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[15]->BOBOT ?></td>
-                                    <td><?php echo $kpi[15]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[15]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][15][0] ?></td>
-                                    <td><?php echo $realisasi[1][15][1] ?></td>
-                                    <td><?php echo $realisasi[1][15][2] ?></td>
+                                    <td><?php echo number_format($kpi[15]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[15]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[15]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][15][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][15][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][15][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>- Mobil Tangki Milik</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[16]->BOBOT ?></td>
-                                    <td><?php echo $kpi[16]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[16]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][16][0] ?></td>
-                                    <td><?php echo $realisasi[1][16][1] ?></td>
-                                    <td><?php echo $realisasi[1][16][2] ?></td>
+                                    <td><?php echo number_format($kpi[16]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[16]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[16]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][16][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][16][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][16][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>b. Terminal Storage (BBM/Depot)</td> 
                                     <td>kasus</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[17]->BOBOT ?></td>
-                                    <td><?php echo $kpi[17]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[17]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][17][0] ?></td>
-                                    <td><?php echo $realisasi[1][17][1] ?></td>
-                                    <td><?php echo $realisasi[1][17][2] ?></td>
+                                    <td><?php echo number_format($kpi[17]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[17]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[17]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][17][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][17][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][17][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><b>9. Progress Pelaksaan Pekerjaan (BD/Non BD)<b/></td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[18]->BOBOT ?></td>
-                                    <td><?php echo $kpi[18]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[18]->TW2_STRETCH ?></td>
-                                    <td><?php echo $realisasi[1][18][0] ?></td>
-                                    <td><?php echo $realisasi[1][18][1] ?></td>
-                                    <td><?php echo $realisasi[1][18][2] ?></td>
+                                    <td><?php echo number_format($kpi[18]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[18]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[18]->TW2_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][18][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][18][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[1][18][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -762,8 +772,8 @@
                                     <td>1. TRIR Patra Niaga</td>
                                     <td>Ratio</td>
                                     <td></td>
-                                    <td><?php echo $kpi[19]->TW2_BASE ?></td>
-                                    <td><?php //echo $kpi[19]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[19]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[19]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -774,8 +784,8 @@
                                     <td>2. NOA Patra Niaga</td>
                                     <td>Cases</td>
                                     <td></td>
-                                    <td><?php echo $kpi[20]->TW2_BASE ?></td>
-                                    <td><?php //echo $kpi[20]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[20]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[20]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -786,8 +796,8 @@
                                     <td>3. GCG compliance</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[21]->TW2_BASE ?></td>
-                                    <td><?php //echo $kpi[21]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[21]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[21]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -813,8 +823,8 @@
                                     <td>1. Proper PPN</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[23]->TW2_BASE ?>/green</td>
-                                    <td><?php //echo $kpi[23]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[23]->TW2_BASE  , 2, ',', '.')?>/green</td>
+                                    <td><?php //echo number_format($kpi[23]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -825,8 +835,8 @@
                                     <td>2. Learning Index</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[24]->TW2_BASE ?></td>
-                                    <td><?php //echo $kpi[24]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[24]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[24]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -837,8 +847,8 @@
                                     <td>3. Follow up audit findings</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[25]->TW2_BASE ?></td>
-                                    <td><?php //echo $kpi[25]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[25]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[25]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -849,8 +859,8 @@
                                     <td>4. Akurasi dan kelengkapan Laporan Keuangan</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[26]->TW2_BASE ?></td>
-                                    <td><?php //echo $kpi[26]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[26]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[26]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -861,8 +871,8 @@
                                     <td>5. Utilisasi ERP (MySAP)</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[27]->TW2_BASE ?></td>
-                                    <td><?php //echo $kpi[27]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[27]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[27]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -873,8 +883,8 @@
                                     <td>6. Knowledge & Innovation Program</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[28]->TW2_BASE ?></td>
-                                    <td><?php //echo $kpi[28]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[28]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[28]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -885,8 +895,8 @@
                                     <td>7. Penyelesaian OFI to AFIPQA</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[29]->TW2_BASE ?></td>
-                                    <td><?php echo $kpi[29]->TW2_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[29]->TW2_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[29]->TW2_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -926,98 +936,98 @@
                             <tbody>
                                 <tr>
                                     <td colspan="9"><b>1. Revenue</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 4]->RKAP_OAM_TW3 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 4]->RKAP_OAM_TW3  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Revenue Fleet Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[0]->BOBOT ?></td>
-                                    <td><?php echo $kpi[0]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[0]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][0][0] ?></td>
-                                    <td><?php echo $realisasi[2][0][1] ?></td>
-                                    <td><?php echo $realisasi[2][0][2] ?></td>
+                                    <td><?php echo number_format($kpi[0]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[0]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[0]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][0][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][0][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][0][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Terminal Storage Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[1]->BOBOT ?></td>
-                                    <td><?php echo $kpi[1]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[1]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][1][0] ?></td>
-                                    <td><?php echo $realisasi[2][1][1] ?></td>
-                                    <td><?php echo $realisasi[2][1][2] ?></td>
+                                    <td><?php echo number_format($kpi[1]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[1]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[1]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][1][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][1][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][1][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="9"><b>2. Laba Usaha</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 3]->RKAP_OAM_TW3 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 3]->RKAP_OAM_TW3  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Laba Usaha Fleet Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[2]->BOBOT ?></td>
-                                    <td><?php echo $kpi[2]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[2]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][2][0] ?></td>
-                                    <td><?php echo $realisasi[2][2][1] ?></td>
-                                    <td><?php echo $realisasi[2][2][2] ?></td>
+                                    <td><?php echo number_format($kpi[2]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[2]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[2]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][2][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][2][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][2][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Laba Usaha Terminal Storage</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[3]->BOBOT ?></td>
-                                    <td><?php echo $kpi[3]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[3]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][3][0] ?></td>
-                                    <td><?php echo $realisasi[2][3][1] ?></td>
-                                    <td><?php echo $realisasi[2][3][2] ?></td>
+                                    <td><?php echo number_format($kpi[3]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[3]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[3]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][3][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][3][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][3][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="9"><b>3. Cost Effectiveness</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 2]->RKAP_OAM_TW3 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 2]->RKAP_OAM_TW3  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Cost/liter Fleet Management</td> 
                                     <td>USD/KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[4]->BOBOT ?></td>
-                                    <td><?php echo $kpi[4]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[4]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][4][0] ?></td>
-                                    <td><?php echo $realisasi[2][4][1] ?></td>
-                                    <td><?php echo $realisasi[2][4][2] ?></td>
+                                    <td><?php echo number_format($kpi[4]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[4]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[4]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][4][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][4][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][4][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Cost/liter Terminal Storage</td> 
                                     <td>USD/KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[5]->BOBOT ?></td>
-                                    <td><?php echo $kpi[5]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[5]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][5][0] ?></td>
-                                    <td><?php echo $realisasi[2][5][1] ?></td>
-                                    <td><?php echo $realisasi[2][5][2] ?></td>
+                                    <td><?php echo number_format($kpi[5]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[5]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[5]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][5][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][5][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][5][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><b>4. Collection Period</b></td> 
                                     <td>by date</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[6]->BOBOT ?></td>
-                                    <td><?php echo $kpi[6]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[6]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][6][0] ?></td>
-                                    <td><?php echo $realisasi[2][6][1] ?></td>
-                                    <td><?php echo $realisasi[2][6][2] ?></td>
+                                    <td><?php echo number_format($kpi[6]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[6]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[6]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][6][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][6][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][6][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -1027,63 +1037,63 @@
                                     <td>Total Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[7]->BOBOT ?></td>
-                                    <td><?php echo $kpi[7]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[7]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][7][0] ?></td>
-                                    <td><?php echo $realisasi[2][7][1] ?></td>
-                                    <td><?php echo $realisasi[2][7][2] ?></td>
+                                    <td><?php echo number_format($kpi[7]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[7]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[7]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][7][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][7][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][7][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Discharge Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[8]->BOBOT ?></td>
-                                    <td><?php echo $kpi[8]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[8]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][8][0] ?></td>
-                                    <td><?php echo $realisasi[2][8][1] ?></td>
-                                    <td><?php echo $realisasi[2][8][2] ?></td>
+                                    <td><?php echo number_format($kpi[8]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[8]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[8]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][8][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][8][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][8][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Working Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[9]->BOBOT ?></td>
-                                    <td><?php echo $kpi[9]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[9]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][9][0] ?></td>
-                                    <td><?php echo $realisasi[2][9][1] ?></td>
-                                    <td><?php echo $realisasi[2][9][2] ?></td>
+                                    <td><?php echo number_format($kpi[9]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[9]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[9]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][9][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][9][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][9][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr> <tr>
                                     <td colspan="9"><b>6. Volume Thruput BBM</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 1]->RKAP_OAM_TW3 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 1]->RKAP_OAM_TW3  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Fleet Management (BBM/BBK)</td> 
                                     <td>KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[10]->BOBOT ?></td>
-                                    <td><?php echo $kpi[10]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[10]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][10][0] ?></td>
-                                    <td><?php echo $realisasi[2][10][1] ?></td>
-                                    <td><?php echo $realisasi[2][10][2] ?></td>
+                                    <td><?php echo number_format($kpi[10]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[10]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[10]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][10][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][10][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][10][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Terminal Storage</td> 
                                     <td>KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[11]->BOBOT ?></td>
-                                    <td><?php echo $kpi[11]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[11]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][11][0] ?></td>
-                                    <td><?php echo $realisasi[2][11][1] ?></td>
-                                    <td><?php echo $realisasi[2][11][2] ?></td>
+                                    <td><?php echo number_format($kpi[11]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[11]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[11]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][11][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][11][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][11][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr> 
                                 <tr>
@@ -1093,36 +1103,36 @@
                                     <td>Fuel Retail Fleet Management (BBM/BBK)</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[12]->BOBOT ?></td>
-                                    <td><?php echo $kpi[12]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[12]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][12][0] ?></td>
-                                    <td><?php echo $realisasi[2][12][1] ?></td>
-                                    <td><?php echo $realisasi[2][12][2] ?></td>
+                                    <td><?php echo number_format($kpi[12]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[12]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[12]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][12][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][12][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][12][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Fuel Retail Fleet Management (APMS)</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[13]->BOBOT ?></td>
-                                    <td><?php echo $kpi[13]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[13]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][13][0] ?></td>
-                                    <td><?php echo $realisasi[2][13][1] ?></td>
-                                    <td><?php echo $realisasi[2][13][2] ?></td>
+                                    <td><?php echo number_format($kpi[13]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[13]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[13]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][13][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][13][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][13][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Gas & Aviation</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[14]->BOBOT ?></td>
-                                    <td><?php echo $kpi[14]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[14]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][14][0] ?></td>
-                                    <td><?php echo $realisasi[2][14][1] ?></td>
-                                    <td><?php echo $realisasi[2][14][2] ?></td>
+                                    <td><?php echo number_format($kpi[14]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[14]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[14]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][14][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][14][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][14][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -1135,48 +1145,48 @@
                                     <td>- Mobil Tangki Kelola</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[15]->BOBOT ?></td>
-                                    <td><?php echo $kpi[15]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[15]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][15][0] ?></td>
-                                    <td><?php echo $realisasi[2][15][1] ?></td>
-                                    <td><?php echo $realisasi[2][15][2] ?></td>
+                                    <td><?php echo number_format($kpi[15]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[15]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[15]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][15][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][15][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][15][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>- Mobil Tangki Milik</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[16]->BOBOT ?></td>
-                                    <td><?php echo $kpi[16]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[16]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][16][0] ?></td>
-                                    <td><?php echo $realisasi[2][16][1] ?></td>
-                                    <td><?php echo $realisasi[2][16][2] ?></td>
+                                    <td><?php echo number_format($kpi[16]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[16]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[16]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][16][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][16][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][16][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>b. Terminal Storage (BBM/Depot)</td> 
                                     <td>kasus</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[17]->BOBOT ?></td>
-                                    <td><?php echo $kpi[17]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[17]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][17][0] ?></td>
-                                    <td><?php echo $realisasi[2][17][1] ?></td>
-                                    <td><?php echo $realisasi[2][17][2] ?></td>
+                                    <td><?php echo number_format($kpi[17]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[17]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[17]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][17][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][17][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][17][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><b>9. Progress Pelaksaan Pekerjaan (BD/Non BD)<b/></td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[18]->BOBOT ?></td>
-                                    <td><?php echo $kpi[18]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[18]->TW3_STRETCH ?></td>
-                                    <td><?php echo $realisasi[2][18][0] ?></td>
-                                    <td><?php echo $realisasi[2][18][1] ?></td>
-                                    <td><?php echo $realisasi[2][18][2] ?></td>
+                                    <td><?php echo number_format($kpi[18]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[18]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[18]->TW3_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][18][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][18][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[2][18][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -1185,8 +1195,8 @@
                                 <tr>
                                     <td>1. TRIR Patra Niaga</td>
                                     <td>Ratio</td>
-                                    <td><?php echo $kpi[19]->BOBOT ?></td>
-                                    <td><?php //echo $kpi[19]->TW3_BASE ?></td>
+                                    <td><?php echo number_format($kpi[19]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[19]->TW3_BASE  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1197,8 +1207,8 @@
                                 <tr>
                                     <td>2. NOA Patra Niaga</td>
                                     <td>Cases</td>
-                                    <td><?php echo $kpi[20]->BOBOT ?></td>
-                                    <td><?php //echo $kpi[20]->TW3_BASE ?></td>
+                                    <td><?php echo number_format($kpi[20]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[20]->TW3_BASE  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1209,8 +1219,8 @@
                                 <tr>
                                     <td>3. GCG compliance</td>
                                     <td>%</td>
-                                    <td><?php echo $kpi[21]->BOBOT ?></td>
-                                    <td><?php //echo $kpi[21]->TW3_BASE ?></td>
+                                    <td><?php echo number_format($kpi[21]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[21]->TW3_BASE  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1237,8 +1247,8 @@
                                     <td>1. Proper PPN</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[23]->TW3_BASE ?>/green</td>
-                                    <td><?php // echo $kpi[23]->TW3_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[23]->TW3_BASE  , 2, ',', '.')?>/green</td>
+                                    <td><?php // echo number_format($kpi[23]->TW3_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1249,8 +1259,8 @@
                                     <td>2. Learning Index</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[24]->TW3_BASE ?></td>
-                                    <td><?php //echo $kpi[24]->TW3_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[24]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[24]->TW3_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1261,8 +1271,8 @@
                                     <td>3. Follow up audit findings</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[25]->TW3_BASE ?></td>
-                                    <td><?php //echo $kpi[25]->TW3_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[25]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[25]->TW3_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1273,8 +1283,8 @@
                                     <td>4. Akurasi dan kelengkapan Laporan Keuangan</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[26]->TW3_BASE ?></td>
-                                    <td><?php //echo $kpi[26]->TW3_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[26]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[26]->TW3_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1285,8 +1295,8 @@
                                     <td>5. Utilisasi ERP (MySAP)</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[27]->TW3_BASE ?></td>
-                                    <td><?php //echo $kpi[27]->TW3_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[27]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[27]->TW3_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1297,8 +1307,8 @@
                                     <td>6. Knowledge & Innovation Program</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[28]->TW3_BASE ?></td>
-                                    <td><?php //echo $kpi[28]->TW3_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[28]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[28]->TW3_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1309,8 +1319,8 @@
                                     <td>7. Penyelesaian OFI to AFIPQA</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[29]->TW3_BASE ?></td>
-                                    <td><?php echo $kpi[29]->TW3_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[29]->TW3_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[29]->TW3_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1350,98 +1360,98 @@
                             <tbody>
                                 <tr>
                                     <td colspan="9"><b>1. Revenue</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 4]->RKAP_OAM_TW4 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 4]->RKAP_OAM_TW4  , 2, ',', '.') ?></td>
                                 </tr>
                                   <tr>
                                     <td>Revenue Fleet Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[0]->BOBOT ?></td>
-                                    <td><?php echo $kpi[0]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[0]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][0][0] ?></td>
-                                    <td><?php echo $realisasi[3][0][1] ?></td>
-                                    <td><?php echo $realisasi[3][0][2] ?></td>
+                                    <td><?php echo number_format($kpi[0]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[0]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[0]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][0][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][0][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][0][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Terminal Storage Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[1]->BOBOT ?></td>
-                                    <td><?php echo $kpi[1]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[1]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][1][0] ?></td>
-                                    <td><?php echo $realisasi[3][1][1] ?></td>
-                                    <td><?php echo $realisasi[3][1][2] ?></td>
+                                    <td><?php echo number_format($kpi[1]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[1]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[1]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][1][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][1][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][1][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="9"><b>2. Laba Usaha</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 3]->RKAP_OAM_TW4 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 3]->RKAP_OAM_TW4  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Laba Usaha Fleet Management</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[2]->BOBOT ?></td>
-                                    <td><?php echo $kpi[2]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[2]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][2][0] ?></td>
-                                    <td><?php echo $realisasi[3][2][1] ?></td>
-                                    <td><?php echo $realisasi[3][2][2] ?></td>
+                                    <td><?php echo number_format($kpi[2]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[2]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[2]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][2][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][2][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][2][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Laba Usaha Terminal Storage</td> 
                                     <td>USD</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[3]->BOBOT ?></td>
-                                    <td><?php echo $kpi[3]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[3]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][3][0] ?></td>
-                                    <td><?php echo $realisasi[3][3][1] ?></td>
-                                    <td><?php echo $realisasi[3][3][2] ?></td>
+                                    <td><?php echo number_format($kpi[3]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[3]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[3]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][3][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][3][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][3][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="9"><b>3. Cost Effectiveness</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 2]->RKAP_OAM_TW4 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 2]->RKAP_OAM_TW4  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Cost/liter Fleet Management</td> 
                                     <td>USD/KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[4]->BOBOT ?></td>
-                                    <td><?php echo $kpi[4]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[4]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][4][0] ?></td>
-                                    <td><?php echo $realisasi[3][4][1] ?></td>
-                                    <td><?php echo $realisasi[3][4][2] ?></td>
+                                    <td><?php echo number_format($kpi[4]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[4]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[4]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][4][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][4][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][4][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Cost/liter Terminal Storage</td> 
                                     <td>USD/KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[5]->BOBOT ?></td>
-                                    <td><?php echo $kpi[5]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[5]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][5][0] ?></td>
-                                    <td><?php echo $realisasi[3][5][1] ?></td>
-                                    <td><?php echo $realisasi[3][5][2] ?></td>
+                                    <td><?php echo number_format($kpi[5]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[5]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[5]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][5][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][5][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][5][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><b>4. Collection Period</b></td> 
                                     <td>by date</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[6]->BOBOT ?></td>
-                                    <td><?php echo $kpi[6]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[6]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][6][0] ?></td>
-                                    <td><?php echo $realisasi[3][6][1] ?></td>
-                                    <td><?php echo $realisasi[3][6][2] ?></td>
+                                    <td><?php echo number_format($kpi[6]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[6]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[6]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][6][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][6][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][6][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -1451,63 +1461,63 @@
                                     <td>Total Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[7]->BOBOT ?></td>
-                                    <td><?php echo $kpi[7]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[7]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][7][0] ?></td>
-                                    <td><?php echo $realisasi[3][7][1] ?></td>
-                                    <td><?php echo $realisasi[3][7][2] ?></td>
+                                    <td><?php echo number_format($kpi[7]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[7]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[7]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][7][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][7][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][7][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Discharge Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[8]->BOBOT ?></td>
-                                    <td><?php echo $kpi[8]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[8]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][8][0] ?></td>
-                                    <td><?php echo $realisasi[3][8][1] ?></td>
-                                    <td><?php echo $realisasi[3][8][2] ?></td>
+                                    <td><?php echo number_format($kpi[8]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[8]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[8]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][8][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][8][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][8][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Working Loss</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[9]->BOBOT ?></td>
-                                    <td><?php echo $kpi[9]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[9]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][9][0] ?></td>
-                                    <td><?php echo $realisasi[3][9][1] ?></td>
-                                    <td><?php echo $realisasi[3][9][2] ?></td>
+                                    <td><?php echo number_format($kpi[9]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[9]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[9]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][9][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][9][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][9][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr> <tr>
                                     <td colspan="9"><b>6. Volume Thruput BBM</b></td>
-                                    <td><?php echo $kpi[sizeof($kpi) - 1]->RKAP_OAM_TW4 ?></td>
+                                    <td><?php echo number_format($kpi[sizeof($kpi) - 1]->RKAP_OAM_TW4  , 2, ',', '.') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Fleet Management (BBM/BBK)</td> 
                                     <td>KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[10]->BOBOT ?></td>
-                                    <td><?php echo $kpi[10]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[10]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][10][0] ?></td>
-                                    <td><?php echo $realisasi[3][10][1] ?></td>
-                                    <td><?php echo $realisasi[3][10][2] ?></td>
+                                    <td><?php echo number_format($kpi[10]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[10]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[10]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][10][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][10][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][10][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Terminal Storage</td> 
                                     <td>KL</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[11]->BOBOT ?></td>
-                                    <td><?php echo $kpi[11]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[11]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][11][0] ?></td>
-                                    <td><?php echo $realisasi[3][11][1] ?></td>
-                                    <td><?php echo $realisasi[3][11][2] ?></td>
+                                    <td><?php echo number_format($kpi[11]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[11]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[11]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][11][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][11][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][11][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr> 
                                 <tr>
@@ -1517,36 +1527,36 @@
                                     <td>Fuel Retail Fleet Management (BBM/BBK)</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[12]->BOBOT ?></td>
-                                    <td><?php echo $kpi[12]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[12]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][12][0] ?></td>
-                                    <td><?php echo $realisasi[3][12][1] ?></td>
-                                    <td><?php echo $realisasi[3][12][2] ?></td>
+                                    <td><?php echo number_format($kpi[12]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[12]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[12]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][12][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][12][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][12][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Fuel Retail Fleet Management (APMS)</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[13]->BOBOT ?></td>
-                                    <td><?php echo $kpi[13]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[13]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][13][0] ?></td>
-                                    <td><?php echo $realisasi[3][13][1] ?></td>
-                                    <td><?php echo $realisasi[3][13][2] ?></td>
+                                    <td><?php echo number_format($kpi[13]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[13]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[13]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][13][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][13][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][13][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>Gas & Aviation</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[14]->BOBOT ?></td>
-                                    <td><?php echo $kpi[14]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[14]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][14][0] ?></td>
-                                    <td><?php echo $realisasi[3][14][1] ?></td>
-                                    <td><?php echo $realisasi[3][14][2] ?></td>
+                                    <td><?php echo number_format($kpi[14]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[14]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[14]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][14][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][14][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][14][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -1559,48 +1569,48 @@
                                     <td>- Mobil Tangki Kelola</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[15]->BOBOT ?></td>
-                                    <td><?php echo $kpi[15]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[15]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][15][0] ?></td>
-                                    <td><?php echo $realisasi[3][15][1] ?></td>
-                                    <td><?php echo $realisasi[3][15][2] ?></td>
+                                    <td><?php echo number_format($kpi[15]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[15]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[15]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][15][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][15][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][15][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>- Mobil Tangki Milik</td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[16]->BOBOT ?></td>
-                                    <td><?php echo $kpi[16]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[16]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][16][0] ?></td>
-                                    <td><?php echo $realisasi[3][16][1] ?></td>
-                                    <td><?php echo $realisasi[3][16][2] ?></td>
+                                    <td><?php echo number_format($kpi[16]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[16]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[16]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][16][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][16][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][16][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td>b. Terminal Storage (BBM/Depot)</td> 
                                     <td>kasus</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[17]->BOBOT ?></td>
-                                    <td><?php echo $kpi[17]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[17]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][17][0] ?></td>
-                                    <td><?php echo $realisasi[3][17][1] ?></td>
-                                    <td><?php echo $realisasi[3][17][2] ?></td>
+                                    <td><?php echo number_format($kpi[17]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[17]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[17]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][17][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][17][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][17][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><b>9. Progress Pelaksaan Pekerjaan (BD/Non BD)<b/></td> 
                                     <td>%</td>
                                     <td>Monthly</td>
-                                    <td><?php echo $kpi[18]->BOBOT ?></td>
-                                    <td><?php echo $kpi[18]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[18]->TW4_STRETCH ?></td>
-                                    <td><?php echo $realisasi[3][18][0] ?></td>
-                                    <td><?php echo $realisasi[3][18][1] ?></td>
-                                    <td><?php echo $realisasi[3][18][2] ?></td>
+                                    <td><?php echo number_format($kpi[18]->BOBOT  , 0, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[18]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[18]->TW4_STRETCH  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][18][0]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][18][1]  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($realisasi[3][18][2]  , 2, ',', '.') ?></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -1610,8 +1620,8 @@
                                     <td>1. TRIR Patra Niaga</td>
                                     <td>Ratio</td>
                                     <td></td>
-                                    <td><?php echo $kpi[19]->TW4_BASE ?></td>
-                                    <td><?php //echo $kpi[19]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[19]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[19]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1622,8 +1632,8 @@
                                     <td>2. NOA Patra Niaga</td>
                                     <td>Cases</td>
                                     <td></td>
-                                    <td><?php echo $kpi[20]->TW4_BASE ?></td>
-                                    <td><?php //echo $kpi[20]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[20]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[20]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1634,8 +1644,8 @@
                                     <td>3. GCG compliance</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[21]->TW4_BASE ?></td>
-                                    <td><?php //echo $kpi[21]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[21]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[21]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1661,8 +1671,8 @@
                                     <td>1. Proper PPN</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[23]->TW4_BASE ?>/green</td>
-                                    <td><?php //echo $kpi[23]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[23]->TW4_BASE  , 2, ',', '.')?>/green</td>
+                                    <td><?php //echo number_format($kpi[23]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1673,8 +1683,8 @@
                                     <td>2. Learning Index</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[24]->TW4_BASE ?></td>
-                                    <td><?php //echo $kpi[24]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[24]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[24]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1685,8 +1695,8 @@
                                     <td>3. Follow up audit findings</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[25]->TW4_BASE ?></td>
-                                    <td><?php //echo $kpi[25]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[25]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[25]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1697,8 +1707,8 @@
                                     <td>4. Akurasi dan kelengkapan Laporan Keuangan</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[26]->TW4_BASE ?></td>
-                                    <td><?php //echo $kpi[26]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[26]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[26]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1709,8 +1719,8 @@
                                     <td>5. Utilisasi ERP (MySAP)</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[27]->TW4_BASE ?></td>
-                                    <td><?php //echo $kpi[27]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[27]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[27]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1721,8 +1731,8 @@
                                     <td>6. Knowledge & Innovation Program</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[28]->TW4_BASE ?></td>
-                                    <td><?php //echo $kpi[28]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[28]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php //echo number_format($kpi[28]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1733,8 +1743,8 @@
                                     <td>7. Penyelesaian OFI to AFIPQA</td>
                                     <td>%</td>
                                     <td></td>
-                                    <td><?php echo $kpi[29]->TW4_BASE ?></td>
-                                    <td><?php echo $kpi[29]->TW4_STRETCH ?></td>
+                                    <td><?php echo number_format($kpi[29]->TW4_BASE  , 2, ',', '.') ?></td>
+                                    <td><?php echo number_format($kpi[29]->TW4_STRETCH  , 2, ',', '.') ?></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

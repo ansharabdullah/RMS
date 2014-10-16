@@ -168,6 +168,12 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+          <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li>KPI Bulanan</li>
+                </ul>
+                <!--breadcrumbs end -->
                 <section class="panel">
                         <header class="panel-heading">
                             Grafik KPI Bulanan Depot <?php echo $nama_depot?>

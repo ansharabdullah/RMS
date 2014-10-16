@@ -320,7 +320,7 @@ if ( ! function_exists('menu_oam'))
                    //cek KPI OAM 
                    if ($logHarian[$i]['kpi_oam'] == 0) {
                         $totalNotif++;
-                        array_push($arrNotif, "<a href='#'>
+                        array_push($arrNotif, "<a href='".base_url()."kpi/internal/".$logHarian[$i]['tahun']."/5'>
                                                 <span class='label label-warning'><i class='icon-check'></i></span>
                                               KPI OAM belum dibuat.
                                                 </a>");
