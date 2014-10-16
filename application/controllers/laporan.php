@@ -3335,16 +3335,18 @@ class laporan extends CI_Controller {
                     $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
                     $sheetData->setCellValue('N' . '' . ($k + $i + 2) . '', $premium);
                     $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1) . '', $solar);
+					$t_premium = $t_premium + $premium;
+					$t_solar = $t_solar + $solar;
                     $sheetData->setCellValue('N' . '' . ($k + $i) . '', "=SUM(N" . ($k + $i - $j + 1) . ":" . 'N' . ($k + $i - 1) . ")");
 
 
 
-                    for ($h = ($k + $i + 2 + 1 + 1); $h <= 181; $h++) {
+                    for ($h = ($k + $i + 2 + 1 + 1); $h <= 183; $h++) {
                         $objPHPExcel->getActiveSheet()->removeRow($k + $i + 2 + 1 + 1 + 1, 1);
                     }
 
-                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 4) . '', $t_premium);
-                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1 + 4) . '', $t_solar);
+                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 3) . '', $t_premium);
+                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1 + 3) . '', $t_solar);
 
                     /*
                      * Realisasi Penyaluran
@@ -3358,11 +3360,11 @@ class laporan extends CI_Controller {
 
                     $sheetData->setCellValue('A16', "Terminal BBM " . $data_depot->NAMA_DEPOT);
                     $sheetData->setCellValue('A20', $data_depot->NAMA_OH);
-                    $sheetData->setCellValue('AI14', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+                    $sheetData->setCellValue('AK14', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
                     if ($pjs != "") {
-                        $sheetData->setCellValue('AI20', $pjs);
+                        $sheetData->setCellValue('AK20', $pjs);
                     } else {
-                        $sheetData->setCellValue('AI20', $data_depot->NAMA_PEGAWAI);
+                        $sheetData->setCellValue('AK20', $data_depot->NAMA_PEGAWAI);
                     }
 
 
@@ -3416,7 +3418,7 @@ class laporan extends CI_Controller {
                     for ($i = 0; $i < $last_day; $i++) {
                         $dw = date("w", strtotime($tahun . "-" . $bulan . "-" . ($i + 1)));
                         if ($dw == 0) {
-                            for ($j = 7; $j < (7 + (2 * $l) + 1); $j++) {
+                            for ($j = 7; $j < (7 + (2 * $l) + 3); $j++) {
                                 $sheetData->getStyle($column_name[$i + 5] . $j)->getFill()->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID, 'startcolor' => array('rgb' => 'FF0000')));
                             }
                         }
