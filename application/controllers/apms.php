@@ -186,7 +186,7 @@ class apms extends CI_Controller {
 		
     }	
 	public function detail_apms($id_apms,$bulan,$tahun){
-				
+		$depot = $this->session->userdata('id_depot');
 		$data1['pesan'] =0;
 		
 		if($this->input->post('simpan'))

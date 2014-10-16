@@ -505,7 +505,7 @@ function DateToIndo($date) {
 											</div>
 										</div>
 										<div class="form-group ">
-											<label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
+											<label for="ps" class="control-label col-lg-2">Produk</label>
 											<div class="col-lg-4">
 												<select class="form-control input-sm m-bot15" id="bh" name="bh">
 													<option value="Premium">Premium
@@ -599,7 +599,7 @@ function DateToIndo($date) {
                             </div>
 						</div>
                         <div class="form-group ">
-                            <label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
+                            <label for="ps" class="control-label col-lg-2">Produk</label>
                             <div class="col-lg-4">
 								<select class="form-control input-sm m-bot15" id="bh1" name="bh1">
 									<option value="Premium">Premium</option>
