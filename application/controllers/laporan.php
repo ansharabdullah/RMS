@@ -3120,7 +3120,7 @@ class laporan extends CI_Controller {
                     }
                     $objPHPExcel->getActiveSheet()->removeRow($k + 2 + $i, 2);
                     $sheetData->setCellValue('G' . '' . ($k + 2 + $i) . '', "=SUM(G" . $k . ":" . 'G' . ($k + 1 + $i) . ")");
-                    for ($j = ($k + $i); $j < 147; $j++) {
+                    for ($j = ($k + $i); $j < 145; $j++) {
                         $objPHPExcel->getActiveSheet()->removeRow($k + 4 + $i, 1);
                     }
 
@@ -3177,7 +3177,7 @@ class laporan extends CI_Controller {
                     $sheetData = $objPHPExcel->getActiveSheet();
 
                     $laporanBiaya = $this->m_laporan->getRealisasiBiayaAPMS($depot, $tahun, $bulan);
-                    $sheetData->setCellValue('A3', "WILAYAH S & D REGION III TERMINAL BBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A3', "WILAYAH S & D REGION ".AREA_OAM_ROMAWI." TERMINAL BBM " . $data_depot->NAMA_DEPOT);
                     $sheetData->setCellValue('A4', "Bulan : " . $month_name[$bulan] . " " . $tahun);
 
                     $sheetData->setCellValue('A23', "TBBM " . $data_depot->NAMA_DEPOT);
@@ -3341,7 +3341,7 @@ class laporan extends CI_Controller {
 
 
 
-                    for ($h = ($k + $i + 2 + 1 + 1); $h <= 183; $h++) {
+                    for ($h = ($k + $i + 2+1); $h <= 183; $h++) {
                         $objPHPExcel->getActiveSheet()->removeRow($k + $i + 2 + 1 + 1 + 1, 1);
                     }
 
