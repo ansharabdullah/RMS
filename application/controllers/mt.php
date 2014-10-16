@@ -1228,8 +1228,7 @@ class Mt extends CI_Controller {
     }
     
     public function cek_presensi() {
-        $data['lv1'] = 3;
-        $data['lv2'] = 3;
+        
         $this->load->model("m_penjadwalan");
         $depot = $this->session->userdata('id_depot');
         $tanggal = $this->input->get('tanggal', true);
@@ -1239,6 +1238,8 @@ class Mt extends CI_Controller {
         $data2['presensi'] = $this->m_penjadwalan->getPresensiMT($depot, $tanggal);;
         
         $data2['kinerja'] = $this->m_kinerja->getKinerjaPresensiMT($depot,$tanggal);
+        $data['lv1'] = 3;
+        $data['lv2'] = 3;
         $this->header($data);
         $this->load->view('mt/v_presensi',$data2);
         $this->footer();
@@ -1282,6 +1283,7 @@ class Mt extends CI_Controller {
             'status_presensi_mt' => $status
         );
        $this->m_log_harian->updateStatusPresensiMT($depot, $tanggal, $data2);
+       
 
         $link = base_url() . "mt/cek_presensi/?tanggal=" . $tanggal;
         echo '<script type="text/javascript">alert("Data berhasil diubah.");';

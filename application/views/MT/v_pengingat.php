@@ -198,6 +198,7 @@
                                 <th style="display: none;"></th>
                                 <th>No.</th>
                                 <th>Nopol</th>
+                                <th>Posisi Ban</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -218,6 +219,7 @@
                                     <th style="display: none;"></th>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1; ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row->bannopol ?></td>
+                                    <td style="background-color: <?php echo $color ?>;"><?php echo $row->POSISI_BAN ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><a onclick="cekreminderban('<?php echo $row->ID_BAN ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->bannopol ?>','<?php echo $row->tanggal_ban ?>','<?php echo $row->tgl_ganti ?>','<?php echo $row->POSISI_BAN ?>','<?php echo $row->MERK_BAN ?>','<?php echo $row->JENIS_BAN ?>','<?php echo $row->NO_SERI_BAN ?>')" data-placement="top" data-toggle="modal" href="#modalBan" class="btn btn-warning btn-xs tooltips" data-original-title="Edit">Cek Ban</i></a>
                                     
                                 </tr>
@@ -419,11 +421,26 @@
 
 
                     <div class="form-group">
-                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">No. Polisi</label>
-                        <div class="col-lg-10">
+                        <label for="nopol" class="control-label col-lg-2 control-label">No. Polisi</label>
+                        <div class="col-lg-4">
                             <input type="text" class="form-control"  id="bannopol" readonly="readonly" name="bannopol" placeholder="Nopol">
                         </div>
+                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">No Seri Ban</label>
+                        <div class="col-lg-4">
+                            <input type="text" class=" form-control input-sm m-bot15" id="no_seri_ban" name="no_seri_ban" value="" required/>
+                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="nopol" class="col-lg-2 col-sm-2 control-label">Merk Ban</label>
+                        <div class="col-lg-4">
+                            <input type="text" class=" form-control input-sm m-bot15" id="merk_ban" name="merk_ban" value="" required/>
+                         </div>
+                         <label for="nopol" class="col-lg-2 col-sm-2 control-label">Jenis Ban</label>
+                        <div class="col-lg-4">
+                            <input type="text" class=" form-control input-sm m-bot15" id="jenis_ban" name="jenis_ban" value="" required/>
+                         </div>
+                    </div>
+                    
                  <input type="hidden" class="form-control"  id="id_mobil_ban"  name="id_mobil_ban" placeholder="">
                 <table class="table table-bordered" >
                     <tr>
@@ -438,9 +455,6 @@
                             </td>
                              <input type="hidden" class=" form-control input-sm m-bot15" id="id_ban" name="id_ban" value="" required/>
                              <input type="hidden" class=" form-control input-sm m-bot15" id="id_mobil" name="id_mobil" value="" required/>
-                             <input type="hidden" class=" form-control input-sm m-bot15" id="merk_ban" name="merk_ban" value="" required/>
-                               <input type="hidden" class=" form-control input-sm m-bot15" id="jenis_ban" name="jenis_ban" value="" required/>
-                             <input type="hidden" class=" form-control input-sm m-bot15" id="no_seri_ban" name="no_seri_ban" value="" required/>
                                              
                             <td><input class="form-control" type="date" id="tgl_ganti" size="16" name="tgl_ganti" required="required"/></td>
                              </tr>
