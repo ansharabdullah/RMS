@@ -8,7 +8,7 @@ class m_apms extends CI_Model {
         return $data->result();
     }
 	public function selectnoApms($depot) {
-        $data = $this->db->query("select NO_APMS, ID_APMS from apms where ID_DEPOT = $depot");
+        $data = $this->db->query("select NO_APMS, ID_APMS,NAMA_PENGUSAHA from apms where ID_DEPOT = $depot");
 		//var_dump ($data->result());
         return $data->result();
     }
