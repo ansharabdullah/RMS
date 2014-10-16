@@ -897,7 +897,9 @@ function DateToIndo($date) {
                                     <th>Solar</th>
                                     <th>Bio Solar</th>
                                     <th>Kehadiran</th>
-                                    <th colspan="2">Aksi</th>
+
+                                    <th colspan='2' >Aksi</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -951,11 +953,11 @@ function DateToIndo($date) {
                                     
                                    <td>
                                     <a onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo $row->tanggal_log_harian ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><br>
-                                              
-                                   </td>
+
+                                    </td>
                                    <td>
                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusKinerja('<?php echo $row->id_kinerja_mt?>','<?php echo date('d M Y',  strtotime($row->tanggal_log_harian))?>')" data-toggle="modal" href="#ModalHapusKinerja"><i class="icon-remove"></i></a>       
-                                       
+
                                    </td>
                                     </tr>
                                 <?php
