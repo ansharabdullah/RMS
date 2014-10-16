@@ -170,15 +170,30 @@ foreach($depot as $dp)
                                         <td><?php echo $i?></td>  
                                         <td><?php echo $dp->NAMA_DEPOT ?></td>
                                         <?php
-                                        foreach ($kpi as $k) {
-                                            if($k->ID_DEPOT == $dp->ID_DEPOT)
-                                            {
-                                            ?>
-                                            
-                                            <td><?php echo round($k->rata_rata,2) ?></td>
-                                            <?php
+                                        $total = 0;
+                                        while($total < sizeof($tahun_arr))
+                                        {
+                                            $status = 0;
+                                            foreach ($kpi as $k) {
+                                                if($k->ID_DEPOT == $dp->ID_DEPOT && $k->tahun == $tahun_arr[$total])
+                                                {
+                                                ?>
+                                                    <td><?php echo round($k->rata_rata,2) ?></td>
+                                                <?php
+                                                    $status = 1;
+                                                    break;
+                                                }
                                             }
+                                            if($status == 0)
+                                            {
+                                                 ?>
+                                                    <td>0</td>
+                                                <?php
+                                            }
+                                            
+                                            $total++;
                                         }
+                                        
                                         ?>
 
                                     </tr>
