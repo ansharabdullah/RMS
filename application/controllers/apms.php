@@ -738,7 +738,13 @@ class apms extends CI_Controller {
 					$target = $jumlah_rencana->jumlah;
 					$realisasi = $jumlah_kinerja->jumlah;
 					$deviasi =  $realisasi - $target;
-					$score =  (1 - ($deviasi/$target))*100;
+					if($target!=0)
+					{
+						$score =  round((1 - (($deviasi/$target)))*100,2);
+					}else{
+						$score =80;
+					}
+					
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -773,7 +779,7 @@ class apms extends CI_Controller {
 					$target = $this->input->post('kpitarget1', true);
 					$realisasi = $this->input->post('kpirealisasi1', true);
 					$deviasi =  $realisasi - $target;
-					$score =  (1 - ($deviasi/$target))*100;
+					$score =  round((1 - ($deviasi/$target))*100,2);
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -807,7 +813,7 @@ class apms extends CI_Controller {
 					$target = $this->input->post('kpitarget2', true);
 					$realisasi = $this->input->post('kpirealisasi2', true);
 					$deviasi =  $realisasi - $target;
-					$score =  (1 - ($deviasi/$target))*100;
+					$score =  round((1 - ($deviasi/$target))*100,2);
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -841,7 +847,7 @@ class apms extends CI_Controller {
 					$target = $this->input->post('kpitarget3', true);
 					$realisasi = $this->input->post('kpirealisasi3', true);
 					$deviasi =  $realisasi - $target;
-					$score =  (1 - ($deviasi/$target))*100;
+					$score =  round((1 - ($deviasi/$target))*100,2);
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -875,7 +881,7 @@ class apms extends CI_Controller {
 					$target = $this->input->post('kpitarget4', true);
 					$realisasi = $this->input->post('kpirealisasi4', true);
 					$deviasi =  $target - $realisasi;
-					$score =  (1 - ($deviasi/$target))*100;
+					$score =  round((1 - ($deviasi/$target))*100,2);
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -1124,7 +1130,7 @@ class apms extends CI_Controller {
 				$jumlah_nilai = 0;
 				$bobot = 5;
 				$deviasi =  $realisasi - $target;
-				$score =  (1 - ($deviasi/$target))*100;
+				$score =  round((1 - ($deviasi/$target))*100,2);
 				if($score < 80)
 				{
 					$normal_score = 80;
@@ -1159,7 +1165,7 @@ class apms extends CI_Controller {
 				$id = $this->input->post('idkpi2', true);
 				
 				$deviasi =  $realisasi - $target;
-				$score =  (1 - ($deviasi/$target))*100;
+				$score =  round((1 - ($deviasi/$target))*100,2);
 				if($score < 80)
 				{
 					$normal_score = 80;
@@ -1194,7 +1200,7 @@ class apms extends CI_Controller {
 				$id = $this->input->post('idkpi3', true);
 				
 				$deviasi =  $realisasi - $target;
-				$score =  (1 - ($deviasi/$target))*100;
+				$score =  round((1 - ($deviasi/$target))*100,2);
 				if($score < 80)
 				{
 					$normal_score = 80;
@@ -1228,7 +1234,7 @@ class apms extends CI_Controller {
 				$id = $this->input->post('idkpi4', true);
 				
 				$deviasi =  $target - $realisasi;
-				$score =  (1 - ($deviasi/$target))*100;
+				$score =  round((1 - ($deviasi/$target))*100,2);
 				if($score < 80)
 				{
 					$normal_score = 80;

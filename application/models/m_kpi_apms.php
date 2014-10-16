@@ -45,8 +45,12 @@ class m_kpi_apms extends CI_Model {
         $this->db->where('id_depot', $depot);
         $id_log = $this->db->get('log_harian');
         $id_log = $id_log->row();
-		
-		$score = (1 - (($kpi_nilai_r->jumlah - $kpi_nilai_k->jumlah)/$kpi_nilai_r->jumlah))*100;
+		if($kpi_nilai_r->jumlah!=0)
+		{
+			$score = round((1 - (($kpi_nilai_r->jumlah - $kpi_nilai_k->jumlah)/$kpi_nilai_r->jumlah))*100,2);
+		}else{
+			$score = 80;
+		}
 		
 		
 		
@@ -59,7 +63,7 @@ class m_kpi_apms extends CI_Model {
 		{
 			$normal_score = $score;
 		}
-		$final_score = $normal_score*5/100;
+		$final_score = $normal_score*20/100;
 		$query= $this->db->query("update kpi_apms set TARGET = $kpi_nilai_r->jumlah,REALISASI = $kpi_nilai_k->jumlah,SCORE = $score,NORMAL_SCORE = $normal_score, FINAL_SCORE = $final_score where ID_JENIS_KPI_APMS = 4 and ID_LOG_HARIAN = $id_log->ID_LOG_HARIAN");
 		
 		$jumlah = $this->db->query("select sum(FINAL_SCORE) as jumlah from kpi_apms where ID_LOG_HARIAN = $id_log->ID_LOG_HARIAN");
