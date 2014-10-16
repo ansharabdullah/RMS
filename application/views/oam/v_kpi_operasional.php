@@ -6,30 +6,48 @@
     var target = new Array();
     var arrColorKpi = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
 <?php
-foreach ($kpi['tahun'] as $tahun) {
+foreach ($tahun_arr as $tahun) {
     ?>
-            tahun_kpi.push("<?php echo $tahun ?>");
+                    tahun_kpi.push("<?php echo $tahun ?>");
     <?php
 }
+
 $i = 0;
-foreach ($kpi['data'] as $data) {
+foreach($depot as $dp)
+{
     ?>
-            set = new Array();
+        set = new Array();
     <?php
-    foreach ($data['kpi'] as $dt) {
-        ?>
-                    set.push(<?php echo round($dt, 2) ?>);
-                    target.push(100);
-        <?php
+    foreach ($tahun_arr as $tahun) {
+        $status = 0;
+        foreach($kpi as $k)
+        {
+            if($k->ID_DEPOT == $dp->ID_DEPOT && $k->tahun == $tahun)
+            {
+                ?>
+                 set.push(<?php echo $k->rata_rata?>);
+                <?php
+                $status = 1;
+                break;
+            }
+
+        }
+        if($status == 0)
+        {
+            ?>
+                set.push(0);
+            <?php
+            
+        }
     }
     ?>
-            series_kpi.push({
-                name:'<?php echo $data['depot'] ?>',
-                color : arrColorKpi[<?php echo $i ?>],
-                id : '<?php echo $data['id_depot'] ?>',
-                data: set
-            });
-    <?php
+     series_kpi.push({
+        name:'<?php echo $dp->NAMA_DEPOT ?>',
+        color : arrColorKpi[<?php echo $i ?>],
+        id : '<?php echo $dp->ID_DEPOT ?>',
+        data: set
+    });   
+        <?php
     $i++;
 }
 ?>
@@ -135,7 +153,7 @@ foreach ($kpi['data'] as $data) {
                                     <th>No.</th>
                                     <th>Depot</th>
                                     <?php
-                                    foreach ($kpi['tahun'] as $tahun) {
+                                    foreach ($tahun_arr as $tahun) {
                                         ?>
                                         <th>Tahun <?php echo $tahun ?></th>
                                     <?php } ?>
@@ -144,18 +162,22 @@ foreach ($kpi['data'] as $data) {
                             <tbody>
                                 <?php
                                 $i = 1;
-                                foreach ($kpi['data'] as $data) {
+                                foreach ($depot as $dp) {
                                     ?>
 
                                     <tr>
                                         <td style="display:none;"></td>
                                         <td><?php echo $i?></td>  
-                                        <td><?php echo $data['depot'] ?></td>
+                                        <td><?php echo $dp->NAMA_DEPOT ?></td>
                                         <?php
-                                        foreach ($data['kpi'] as $dt) {
+                                        foreach ($kpi as $k) {
+                                            if($k->ID_DEPOT == $dp->ID_DEPOT)
+                                            {
                                             ?>
-                                            <td><?php echo round($dt,2) ?></td>
+                                            
+                                            <td><?php echo round($k->rata_rata,2) ?></td>
                                             <?php
+                                            }
                                         }
                                         ?>
 
