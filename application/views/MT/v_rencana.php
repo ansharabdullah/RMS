@@ -139,7 +139,7 @@ function DateToIndo($date) {
                                         <th>Solar</th>
                                         <th>Bio Solar</th>
                                         <th>Own Use</th>
-                                        <th>Miss (Tidak Terkirim Hari Sebelumnya)</th>
+                                        <th>Miss</th>
                                         <th>Tambahan/HO/HI</th>
                                         <th>Pembatalan/Cancel</th>
                                         <th>Aksi</th>
@@ -261,7 +261,7 @@ function DateToIndo($date) {
                                             <div class="col-lg-4">
                                                 <input class=" form-control input-sm m-bot15" id="r_own_use" name="r_own_use"  type="number" required />
                                             </div>
-                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Miss (Tidak Terkirim)</label>
+                                             <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Miss</label>
                                             <div class="col-lg-4">
                                                 <input class=" form-control input-sm m-bot15" id="miss" name="miss"  type="number" required />
                                             </div>
@@ -276,10 +276,8 @@ function DateToIndo($date) {
                                             <div class="col-lg-4">
                                                 <input class=" form-control input-sm m-bot15" id="pembatalan" name="pembatalan"  type="number" required />
                                             </div>
-                                           
                                         </div>
                                         
-
                                     </div>
                                 </section>
                             </div>

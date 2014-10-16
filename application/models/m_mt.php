@@ -67,7 +67,7 @@ class m_mt extends CI_Model {
     }
 
     public function selectApar($id_mobil) {
-        $data = $this->db->query("select a.ID_APAR,m.NOPOL,m.KAPASITAS,m.PRODUK,a.ID_JENIS_APAR,a.TANGGAL_APAR,a.KETERANGAN_APAR,a.STATUS_APAR from apar a, mobil m where (m.kapasitas='8' or m.kapasitas='16' or m.kapasitas='24' or m.kapasitas='32') and a.id_mobil=m.id_mobil and m.id_mobil = $id_mobil order by a.TANGGAL_APAR ASC");
+        $data = $this->db->query("select a.ID_APAR,a.ID_MOBIL,m.NOPOL,m.KAPASITAS,m.PRODUK,a.ID_JENIS_APAR,a.TANGGAL_APAR,a.KETERANGAN_APAR from apar a, mobil m where (m.kapasitas='8' or m.kapasitas='16' or m.kapasitas='24' or m.kapasitas='32') and a.id_mobil=m.id_mobil and m.id_mobil = $id_mobil order by a.TANGGAL_APAR ASC");
         return $data->result();
     }
 
@@ -83,7 +83,7 @@ class m_mt extends CI_Model {
 
     //Data Ban
     public function selectBanMT($id_mobil) {
-        $data = $this->db->query("select T.ID_BAN,T.MERK_BAN, T.NO_SERI_BAN,T.JENIS_BAN,T.POSISI_BAN,T.TANGGAL_GANTI_BAN,M.nopol,M.kapasitas,M.produk from ban T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil order by T.POSISI_BAN ASC");
+        $data = $this->db->query("select T.ID_BAN,T.ID_MOBIL,T.MERK_BAN, T.NO_SERI_BAN,T.JENIS_BAN,T.POSISI_BAN,T.TANGGAL_GANTI_BAN,M.nopol,M.kapasitas,M.produk from ban T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil order by T.POSISI_BAN ASC");
         return $data->result();
     }
 
@@ -109,7 +109,7 @@ class m_mt extends CI_Model {
 
     //Data Oli
     public function selectOli($id_mobil) {
-        $data = $this->db->query("select T.ID_OLI,T.MERK_OLI, T.KM_AWAL,T.TANGGAL_GANTI_OLI,T.TOTAL_VOLUME,M.nopol,M.kapasitas,M.produk from oli T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil order by T.TANGGAL_GANTI_OLI DESC ");
+        $data = $this->db->query("select T.ID_OLI,T.ID_MOBIL,T.MERK_OLI, T.KM_AWAL,T.TANGGAL_GANTI_OLI,T.TOTAL_VOLUME,M.nopol,M.kapasitas,M.produk from oli T, mobil M where (M.kapasitas='8' or M.kapasitas='16' or M.kapasitas='24' or M.kapasitas='32') and T.id_mobil=M.id_mobil and M.id_mobil = $id_mobil order by T.TANGGAL_GANTI_OLI DESC ");
         return $data->result();
     }
 
@@ -129,18 +129,16 @@ class m_mt extends CI_Model {
 
     //Data Surat
     public function selectSurat($id_mobil) {
-        $data = $this->db->query("select s.ID_SURAT,m.nopol,m.kapasitas,m.produk,s.TANGGAL_AKHIR_SURAT,s.KETERANGAN_SURAT,j.ID_JENIS_SURAT from mobil m, surat s,jenis_surat j where j.id_jenis_surat=s.id_jenis_surat and s.id_mobil=m.id_mobil and m.id_mobil = $id_mobil and (m.kapasitas='8' or m.kapasitas='16' or m.kapasitas='24' or m.kapasitas='32') order by s.TANGGAL_AKHIR_SURAT DESC");
+        $data = $this->db->query("select s.ID_SURAT,s.ID_MOBIL,m.nopol,m.kapasitas,m.produk,s.TANGGAL_AKHIR_SURAT,s.KETERANGAN_SURAT,j.ID_JENIS_SURAT from mobil m, surat s,jenis_surat j where j.id_jenis_surat=s.id_jenis_surat and s.id_mobil=m.id_mobil and m.id_mobil = $id_mobil and (m.kapasitas='8' or m.kapasitas='16' or m.kapasitas='24' or m.kapasitas='32') order by s.TANGGAL_AKHIR_SURAT DESC");
         return $data->result();
     }
-    
-    
     
     public function insertSurat($data) {
         $this->db->insert('surat', $data);
     }
 
      public function editSurat($data, $id) {
-        $this->db->where('id_surat', $id);
+        $this->db->where('ID_SURAT', $id);
         $this->db->update('surat', $data);
     }
     
@@ -169,6 +167,31 @@ class m_mt extends CI_Model {
     public function deleteKinerja($id) {
         $this->db->where('id_kinerja_mt', $id);
         $this->db->delete('kinerja_mt');
+    }
+    
+    public function deleteMobilApar($id){
+        $this->db->where('id_mobil', $id);
+        $this->db->delete('apar');
+    }
+    public function deleteMobilSurat($id){
+        $this->db->where('id_mobil', $id);
+        $this->db->delete('surat');
+    }
+    public function deleteMobilBan($id){
+        $this->db->where('id_mobil', $id);
+        $this->db->delete('ban');
+    }
+    public function deleteMobilOli($id){
+        $this->db->where('id_mobil', $id);
+        $this->db->delete('oli');
+    }
+    public function deleteMobilJenisSurat($id){
+        $this->db->where('id_surat', $id);
+        $this->db->delete('jenis_surat');
+    }
+    public function deleteMobilJenisApar($id){
+        $this->db->where('id_apar', $id);
+        $this->db->delete('jenis_apar');
     }
     
     
