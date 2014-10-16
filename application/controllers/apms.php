@@ -289,9 +289,9 @@ class apms extends CI_Controller {
 					if($bisa)
 					{
 						$datalog = array(
-							'keterangan' => 'Menambah Data Kinerja APMS',
+							'keterangan' => 'Menambah Data Kinerja APMS dengan Nomor LO '.$this->input->post('no_delivery', true),
 							'id_pegawai' => $this->session->userdata("id_pegawai"),
-							'keyword' => 'Hapus'
+							'keyword' => 'Tambah'
 						);
 						$this->m_log_sistem->insertLog($datalog);
 						$data1['pesan'] = 1;
@@ -354,7 +354,7 @@ class apms extends CI_Controller {
 					if($bisa)
 					{
 						$datalog = array(
-							'keterangan' => 'Mengedit Data Kinerja APMS',
+							'keterangan' => 'Mengedit Data Kinerja APMS dengan Nomor LO '.$this->input->post('no_delivery1', true),
 							'id_pegawai' => $this->session->userdata("id_pegawai"),
 							'keyword' => 'Edit'
 						);
@@ -392,7 +392,7 @@ class apms extends CI_Controller {
 					$data1['pesan'] = 1;
 					$data1['pesan_text'] = "Selamat Data Kinerja APMS Berhasil Dihapus!";
 					$datalog = array(
-						'keterangan' => 'Menghapus Data Kinerja APMS',
+						'keterangan' => 'Menghapus Data Kinerja APMS dengan Nomor LO '.$id,
 						'id_pegawai' => $this->session->userdata("id_pegawai"),
 						'keyword' => 'Hapus'
 					);
@@ -577,9 +577,9 @@ class apms extends CI_Controller {
 			if($hasil)
 			{
 				$datalog = array(
-					'keterangan' => 'Menambah Data Rencana APMS',
+					'keterangan' => 'Menambah Data Rencana APMS '. $data1['nama_bulan'].' '.$tahun,
 					'id_pegawai' => $this->session->userdata("id_pegawai"),
-					'keyword' => 'Edit'
+					'keyword' => 'Tambah'
 				);
 				$this->m_log_sistem->insertLog($datalog);
 				$this->m_log_harian->updateKoutaLog($depot,$tahun,$bulan);
@@ -617,7 +617,7 @@ class apms extends CI_Controller {
 			if($hasil)
 			{
 				$datalog = array(
-					'keterangan' => 'Mengedit Data Rencana APMS',
+					'keterangan' => 'Mengedit Data Rencana APMS '.$data1['nama_bulan'].' '.$tahun,
 					'id_pegawai' => $this->session->userdata("id_pegawai"),
 					'keyword' => 'Edit'
 				);
@@ -647,7 +647,7 @@ class apms extends CI_Controller {
 			if($hasil)
 			{
 				$datalog = array(
-					'keterangan' => 'Menghapus Data Rencana APMS',
+					'keterangan' => 'Menghapus Data Rencana APMS '. $data1['nama_bulan'].' '.$tahun,
 					'id_pegawai' => $this->session->userdata("id_pegawai"),
 					'keyword' => 'Hapus'
 				);
