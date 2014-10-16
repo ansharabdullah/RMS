@@ -42,6 +42,7 @@
                             <ul class="dropdown-menu pull-left">
                                 <li><a style="cursor: pointer" onclick="filterMt('KM')">KM</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('KL')">KL</a></li>
+                                <li><a style="cursor: pointer" onclick="filterMt('Ritase')">Ritase</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Own Use')">Own Use</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Premium')">Premium</a></li>
                                 <li><a style="cursor: pointer" onclick="filterMt('Pertamax')">Pertamax</a></li>
@@ -76,6 +77,7 @@
                                                     <th >Tanggal</th>
                                                     <th >Jumlah KM</th>
                                                     <th >Jumlah KL</th>
+                                                    <th >Ritase</th>
                                                     <th >Own Use</th>
                                                     <th >Premium</th>
                                                     <th >Pertamax</th>
@@ -96,6 +98,7 @@
                                                         <td style="white-space: nowrap"><?php echo date_format(date_create($km->TANGGAL_LOG_HARIAN),'d F Y');?></td>
                                                         <td><?php echo $km->total_km ?> KM</td>
                                                         <td><?php echo $km->total_kl ?> KL</td>
+                                                        <td><?php echo $km->ritase ?></td>
                                                         <td><?php echo $km->own_use ?></td>
                                                         <td><?php echo $km->premium ?></td>
                                                         <td><?php echo $km->pertamax ?></td>
@@ -136,6 +139,7 @@
     var pertamina_dex = new Array();
     var solar = new Array();
     var bio_solar = new Array();
+    var ritase_mt = new Array();
     var own_use_mt = new Array();
     
     <?php
@@ -151,6 +155,7 @@
                 pertamina_dex.push(<?php echo $km->pertamina_dex ?>);
                 solar.push(<?php echo $km->solar ?>);
                 bio_solar.push(<?php echo $km->bio_solar ?>);
+                ritase_mt.push(<?php echo $km->ritase ?>);
                 own_use_mt.push(<?php echo $km->own_use ?>);
             <?php
         }
@@ -244,6 +249,19 @@
                     color : '#7cb5ec' ,
                     tooltip:{
                         valueSuffix:" KL"
+                    }
+
+                }
+             );
+        }else if(title == "Ritase"){
+            //mt.series[0].setData(kl_mt);
+            mt.addSeries({
+                    name: 'Jumlah',
+                    type: 'spline',
+                    data: ritase_mt,
+                    color : '#7cb5ec' ,
+                    tooltip:{
+                        valueSuffix:" Ritase"
                     }
 
                 }

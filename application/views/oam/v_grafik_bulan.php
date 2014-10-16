@@ -55,7 +55,7 @@
                 renderTo:'grafik2'
             },
             title: {
-                text: 'Rencana pengiriman vs realisasi (MS2 Compliance) <?php echo $nama_depot?>'
+                text: 'Rencana Pengiriman Vs Realisasi (MS2 Compliance) <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Tahun <?php echo $tahun?>'
@@ -168,6 +168,12 @@
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
+          <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li>KPI Bulanan</li>
+                </ul>
+                <!--breadcrumbs end -->
                 <section class="panel">
                         <header class="panel-heading">
                             Grafik KPI Bulanan Depot <?php echo $nama_depot?>
@@ -207,16 +213,16 @@
                                 </button>
                                 <ul class="dropdown-menu pull-left">
 
-                                    <li><a style="cursor: pointer" onclick="filter('Rencana pengiriman vs realisasi (MS2 Compliance)',1)">Rencana pengiriman vs realisasi (MS2 Compliance)</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Rencana volume angkutan vs realisasi',2)">Rencana volume angkutan vs realisasi</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Laporan tagihan ongkos angkut',3)">Laporan tagihan ongkos angkut </a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Rencana Pengiriman Vs Realisasi (MS2 Compliance)',1)">Rencana pengiriman vs realisasi (MS2 Compliance)</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Rencana Volume Angkutan vs Realisasi',2)">Rencana volume angkutan vs realisasi</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Laporan Tagihan Ongkos Angkut',3)">Laporan tagihan ongkos angkut </a></li>
                                     <li><a style="cursor: pointer" onclick="filter('Customer  Satisfaction (Lembaga Penyalur)',4)">Customer  Satisfaction (Lembaga Penyalur)</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Jumlah temuan, keluhan atau komplain terkait pengelolaan MT',5)">Jumlah temuan, keluhan atau komplain terkait pengelolaan MT</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Tindak lanjut penyelesaian keluhan atau komplain yang diterima',6)">Tindak lanjut penyelesaian keluhan atau komplain yang diterima</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Jumlah pekerja pengelola MT  yang mengikuti pelatihan',7)">Jumlah pekerja pengelola MT  yang mengikuti pelatihan</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Number of Incidents',8)">Number of Incidents</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Waktu penyelesaian Incidents',9)">Waktu penyelesaian Incidents</a></li>
-                                    <li><a style="cursor: pointer" onclick="filter('Number of Accident',10)">Number of Accident</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Jumlah Temuan, Keluhan Atau Komplain Terkait Pengelolaan MT',5)">Jumlah temuan, keluhan atau komplain terkait pengelolaan MT</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Tindak Lanjut Penyelesaian Keluhan Atau Komplain yang Diterima',6)">Tindak lanjut penyelesaian keluhan atau komplain yang diterima</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Jumlah Pekerja Pengelola MT  yang Mengikuti Pelatihan',7)">Jumlah pekerja pengelola MT  yang mengikuti pelatihan</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Number Of Incidents',8)">Number of Incidents</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Waktu Penyelesaian Incidents',9)">Waktu penyelesaian Incidents</a></li>
+                                    <li><a style="cursor: pointer" onclick="filter('Number Of Accident',10)">Number of Accident</a></li>
 
                                 </ul>
                             </div>

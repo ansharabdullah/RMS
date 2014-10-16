@@ -41,8 +41,8 @@
                                             { 
                                                 if ($logHarian[$i]['kpi_oam'] == 0) 
                                                 {
-                                                 echo " <span class='label label-warning'><i class='icon-check'></i></span>
-                                                   KPI OAM belum dibuat.<br/><br/>";
+                                                 echo "<a href='".base_url()."kpi/internal/".$logHarian[$i]['tahun']."/5'><span class='label label-warning'><i class='icon-check'></i></span>
+                                                   KPI OAM belum dibuat.</a><br/><br/>";
                                                 }
                                             }
                                             else

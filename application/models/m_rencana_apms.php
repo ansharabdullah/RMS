@@ -24,6 +24,10 @@ class m_rencana_apms extends CI_Model {
 		}
 		return $result;
 	}
+	public function insertRencanaAPMS0($data) {
+		$result = $this->db->insert('rencana_apms',$data);
+		return $result;
+	}
 	
 	public function editRencanaAPMS($data,$data_id) {
         for($i=0;$i<count($data);$i++)
@@ -35,9 +39,15 @@ class m_rencana_apms extends CI_Model {
 		}
 		return $result;
 	}
-		public function deleteRencanaAPMS($id) {
+	public function deleteRencanaAPMS($id) {
         $this->db->where('ID_LOG_HARIAN', $id);
           $result =$this->db->delete('rencana_apms');
+		  return $result;
+	}
+	public function deleteRencanabyIdAPMS($id,$id_apms) {
+        $this->db->where('ID_LOG_HARIAN', $id);
+		$this->db->where('ID_APMS', $id_apms);
+         $result =$this->db->delete('rencana_apms');
 		  return $result;
 	}
 	

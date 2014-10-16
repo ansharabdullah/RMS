@@ -84,6 +84,22 @@ class presentasi extends CI_Controller {
         $slide['depot'] = $this->m_depot->get_depot();
         $slide['tahun'] = $tahun;
         $slide['triwulan'] = floor(($bulan / 3) + 1);
+         if($slide['triwulan'] == 1)
+        {
+            $slide['triwulan'] = "I";
+        }
+        else if($slide['triwulan'] == 2)
+        {
+            $slide['triwulan'] = "II";
+        }
+        else if($slide['triwulan'] == 3)
+        {
+            $slide['triwulan'] = "III";
+        }
+        else 
+        {
+            $slide['triwulan'] = "IV";
+        }
         $slide['log_harian'] = $log_harian;
         $slide['nama_depot'] = $this->m_depot->get_nama_depot($depot);
         $slide['bulan'] = array();
@@ -173,6 +189,22 @@ class presentasi extends CI_Controller {
         $slide['depot'] = $this->m_depot->get_depot();
         $slide['tahun'] = $tahun;
         $slide['triwulan'] = floor(($bulan / 3) + 1);
+        if($slide['triwulan'] == 1)
+        {
+            $slide['triwulan'] = "I";
+        }
+        else if($slide['triwulan'] == 2)
+        {
+            $slide['triwulan'] = "II";
+        }
+        else if($slide['triwulan'] == 3)
+        {
+            $slide['triwulan'] = "III";
+        }
+        else 
+        {
+            $slide['triwulan'] = "IV";
+        }
         $slide['log_harian'] = $log_harian;
         $slide['bulan'] = array();
         array_push($slide['bulan'],strftime("%B", mktime(null, null, null, $bulan)));

@@ -1246,7 +1246,7 @@ class laporan extends CI_Controller {
         } else if ($this->input->post('sinkron')) {
             $tahun = $this->input->post('tahun');
             $jenis = $this->input->post('jenis');
-            $this->m_laporan->SyncKPIInternal($depot, $tahun,$jenis);
+            $this->m_laporan->SyncKPIInternal($depot, $tahun, $jenis);
         }
 
         $data2['tahun_kpi'] = $tahun;
@@ -1360,13 +1360,13 @@ class laporan extends CI_Controller {
             $last_day = date('t', strtotime($tanggal));
             $data_depot = $this->m_laporan->getInfoDepot($depot);
             $hasil_rencana_realisasi = $this->m_laporan->getRencanaRealisasi($depot, $tahun, $bulan);
-            $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);// RITASE, KM, KL, SPBU untuk AMT
+            $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan); // RITASE, KM, KL, SPBU untuk AMT
             $jumlah_data_performansi = $data_performansi->num_rows();
             $hasil_data_performansi = $data_performansi->result();
             $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan); // Ritase, KM, KL, OU untuk MT
             $jumlah_data = $data->num_rows();
             $hasil_data = $data->result();
-            
+
             $column_name = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO");
             $month_name = array("01" => "Januari", "02" => "Februari", "03" => "Maret", "04" => "April", "05" => "Mei", "06" => "Juni", "07" => "Juli", "08" => "Agustus", "09" => "September", "10" => "Oktober", "11" => "November", "12" => "Desember");
 
@@ -1794,7 +1794,7 @@ class laporan extends CI_Controller {
                 $no = $jumlah_data_performansi;
                 foreach ($hasil_data_performansi as $row) {
                     $array = (array) $row;
-                    
+
                     //Untul laporan harian lokasi 
                     if ($array['JABATAN'] == "SUPIR") {
                         $jumlah_sopir++;
@@ -2063,14 +2063,16 @@ class laporan extends CI_Controller {
             $data_performansi = $this->m_laporan->getPerformansiHarian($depot, $tahun, $bulan);
             $jumlah_data_performansi = $data_performansi->num_rows();
             $hasil_data_performansi = $data_performansi->result();
-            $data_depot = $this->m_laporan->getInfoDepot($depot);
             $data = $this->m_laporan->getLaporanHarian($depot, $tahun, $bulan);
+            $data_depot = $this->m_laporan->getInfoDepot($depot);
             $jumlah_data = $data->num_rows();
             $hasil_data = $data->result();
             $interpolasi = $this->m_laporan->getInterpolasi($depot, $tahun, $bulan);
 
             $column_name = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO");
             $month_name = array("01" => "Januari", "02" => "Februari", "03" => "Maret", "04" => "April", "05" => "Mei", "06" => "Juni", "07" => "Juli", "08" => "Agustus", "09" => "September", "10" => "Oktober", "11" => "November", "12" => "Desember");
+
+//			var_dump($data_realisasi_apms);
 
             if ($jumlah_data > 0) {
                 $data2['laporan_ada'] = true;
@@ -2080,9 +2082,11 @@ class laporan extends CI_Controller {
                 $objReader = PHPExcel_IOFactory::createReader('Excel5');
                 $objPHPExcel = $objReader->load($inputFileName);
 
+
                 /*
                  * KM
                  */
+
                 $objPHPExcel->setActiveSheetIndexByName('KM');
                 $sheetData = $objPHPExcel->getActiveSheet();
 
@@ -2459,7 +2463,7 @@ class laporan extends CI_Controller {
                     $array = (array) $row;
 
 
-                    //Untul laporan harian lokasi 
+                    //Untul laporan harian lokasi
                     if ($array['JABATAN'] == "SUPIR") {
                         $jumlah_sopir++;
                     } else if ($array['JABATAN'] == "KERNET") {
@@ -2499,7 +2503,7 @@ class laporan extends CI_Controller {
                             $rupiah = $rupiah + $array['RUPIAH' . $i];
                         }
 
-                        //Untul laporan harian lokasi 
+                        //Untul laporan harian lokasi
                         if ($array['JABATAN'] == "SUPIR") {
                             if ($array['RIT' . $i] != "") {
                                 $sopir_ops[$i - 1] ++;
@@ -2859,36 +2863,35 @@ class laporan extends CI_Controller {
 
                 $sheetData->setCellValue('B4', "Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                 $sheetData->setCellValue('H4', "Bulan " . $month_name[$bulan] . " " . $tahun);
-                /*
-                  $objConditional1 = new PHPExcel_Style_Conditional();
-                  $objConditional1->setConditionType(PHPExcel_Style_Conditional::CONDITION_CELLIS);
-                  $objConditional1->setOperatorType(PHPExcel_Style_Conditional::OPERATOR_LESSTHAN);
-                  $objConditional1->addCondition('0');
-                  //$objConditional1->getStyle()->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_RED);
-                  $objConditional1->getStyle()->getFont()->setBold(true);
-                  $objConditional1->getStyle()->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB("FFFF00FF");
 
-                  //$sheetData->setCellValue('N8', $sheetData->getStyle('N8')->getFill()->getStartColor()->getRGB());
-                  //$sheetData->setCellValue('N9', $sheetData->getStyle('N9')->getFill()->getStartColor()->getRGB());
-                  //$sheetData->setCellValue('N11', $sheetData->getStyle('N11')->getFill()->getStartColor()->getRGB());
+                $objConditional1 = new PHPExcel_Style_Conditional();
+                $objConditional1->setConditionType(PHPExcel_Style_Conditional::CONDITION_CELLIS);
+                $objConditional1->setOperatorType(PHPExcel_Style_Conditional::OPERATOR_LESSTHAN);
+                $objConditional1->addCondition('0');
+                //$objConditional1->getStyle()->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_RED);
+                $objConditional1->getStyle()->getFont()->setBold(true);
+                $objConditional1->getStyle()->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB("FFFF00FF");
 
-                  //$objPHPExcel->getActiveSheet()->getStyle('N13:N16')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF0000');
-
-
-                  $objConditional2 = new PHPExcel_Style_Conditional();
-                  $objConditional2->setConditionType(PHPExcel_Style_Conditional::CONDITION_CELLIS);
-                  $objConditional2->setOperatorType(PHPExcel_Style_Conditional::OPERATOR_GREATERTHANOREQUAL);
-                  $objConditional2->addCondition('0');
-                  //$objConditional2->getStyle()->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_GREEN);
-                  //$objConditional2->getStyle()->getFont()->setBold(true);
-                  $objConditional2->getStyle()->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB("FF808080");
+                //$sheetData->setCellValue('N8', $sheetData->getStyle('N8')->getFill()->getStartColor()->getRGB());
+                //$sheetData->setCellValue('N9', $sheetData->getStyle('N9')->getFill()->getStartColor()->getRGB());
+                //$sheetData->setCellValue('N11', $sheetData->getStyle('N11')->getFill()->getStartColor()->getRGB());
+                //$objPHPExcel->getActiveSheet()->getStyle('N13:N16')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF0000');
 
 
-                  $conditionalStyles = $objPHPExcel->getActiveSheet()->getStyle('K8')->getConditionalStyles();
-                  array_push($conditionalStyles, $objConditional1);
-                  array_push($conditionalStyles, $objConditional2);
-                  $objPHPExcel->getActiveSheet()->getStyle('K8')->setConditionalStyles($conditionalStyles);
-                 */
+                $objConditional2 = new PHPExcel_Style_Conditional();
+                $objConditional2->setConditionType(PHPExcel_Style_Conditional::CONDITION_CELLIS);
+                $objConditional2->setOperatorType(PHPExcel_Style_Conditional::OPERATOR_GREATERTHANOREQUAL);
+                $objConditional2->addCondition('0');
+                //$objConditional2->getStyle()->getFont()->getColor()->setARGB(PHPExcel_Style_Color::COLOR_GREEN);
+                //$objConditional2->getStyle()->getFont()->setBold(true);
+                $objConditional2->getStyle()->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB("FF808080");
+
+
+                $conditionalStyles = $objPHPExcel->getActiveSheet()->getStyle('K8')->getConditionalStyles();
+                array_push($conditionalStyles, $objConditional1);
+                array_push($conditionalStyles, $objConditional2);
+                $objPHPExcel->getActiveSheet()->getStyle('K8')->setConditionalStyles($conditionalStyles);
+
 
                 $sheetData->setCellValue('G8', $hasil_kpi_operational[0]->TARGET);
                 $sheetData->setCellValue('I8', $hasil_kpi_operational[0]->REALISASI);
@@ -2944,22 +2947,22 @@ class laporan extends CI_Controller {
                 $hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
                 $dw = date("w", strtotime($tahun . "-" . $bulan . "-" . $last_day));
                 $sheetData->setCellValue('C2', "NOMOR : ...../...../" . $romawi_bln[$bulan] . "/" . $tahun);
-                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi pengangkutan/pengiriman BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D ". AREA_OAM_ROMAWI ." Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi pengangkutan/pengiriman BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D " . AREA_OAM_ROMAWI . " Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
                 $sheetData->setCellValue('C4', $kata);
 
-                $sheetData->setCellValue('C11', "01 - 14 ".$month_name[$bulan]." ".$tahun);
-                $sheetData->setCellValue('C12', "15 - ".$last_day. " ".$month_name[$bulan]." ".$tahun);
+                $sheetData->setCellValue('C11', "01 - 14 " . $month_name[$bulan] . " " . $tahun);
+                $sheetData->setCellValue('C12', "15 - " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
                 $sheetData->setCellValue('E11', $interpolasi[0]->NILAI);
                 $sheetData->setCellValue('E12', $interpolasi[1]->NILAI);
                 $sheetData->setCellValue('F11', $interpolasi[2]->NILAI);
                 $sheetData->setCellValue('F12', $interpolasi[3]->NILAI);
-                $sheetData->setCellValue('G11', "=SUM(KL!E".($jumlah_data+4).":R".($jumlah_data+4).")*1000");
-                $sheetData->setCellValue('G12', "=SUM(KL!S".($jumlah_data+4).":".$column_name[$last_day + 3].($jumlah_data+4).")*1000");
+                $sheetData->setCellValue('G11', "=SUM(KL!E" . ($jumlah_data + 4) . ":R" . ($jumlah_data + 4) . ")*1000");
+                $sheetData->setCellValue('G12', "=SUM(KL!S" . ($jumlah_data + 4) . ":" . $column_name[$last_day + 3] . ($jumlah_data + 4) . ")*1000");
 
                 $sheetData->setCellValue('C26', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                 $sheetData->setCellValue('H26', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                 $sheetData->setCellValue('C34', $data_depot->NAMA_OH);
-                
+
                 if ($pjs != "") {
                     $sheetData->setCellValue('H25', "Pjs Site Supervisor Fleet TBBM");
                     $sheetData->setCellValue('H34', $pjs);
@@ -2968,12 +2971,12 @@ class laporan extends CI_Controller {
                     $sheetData->setCellValue('H34', $data_depot->NAMA_PEGAWAI);
                 }
 
-                $sheetData->setCellValue('C39', "Per Tanggal 1 - ".$last_day." Berdasarkan Good Issue");
-                $sheetData->setCellValue('C40', "Lokasi Depot ".ucfirst(strtolower($data_depot->NAMA_DEPOT))." Bulan ".$month_name[$bulan]." ".$tahun);
-                
+                $sheetData->setCellValue('C39', "Per Tanggal 1 - " . $last_day . " Berdasarkan Good Issue");
+                $sheetData->setCellValue('C40', "Lokasi Depot " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " Bulan " . $month_name[$bulan] . " " . $tahun);
+
                 $sheetData->setCellValue('C80', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                 $sheetData->setCellValue('G80', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
-                
+
                 if ($pjs != "") {
                     $sheetData->setCellValue('G79', "Pjs Site Supervisor Fleet TBBM");
                     $sheetData->setCellValue('G86', $pjs);
@@ -2982,32 +2985,32 @@ class laporan extends CI_Controller {
                     $sheetData->setCellValue('G86', $data_depot->NAMA_PEGAWAI);
                 }
 
-                $sheetData->setCellValue('C88', "TERMINAL BBM ".strtoupper($data_depot->NAMA_DEPOT));
-                
-                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi penyerahan produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D ". AREA_OAM_ROMAWI ." Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $sheetData->setCellValue('C88', "TERMINAL BBM " . strtoupper($data_depot->NAMA_DEPOT));
+
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA  menyatakan bahwa realisasi penyerahan produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D " . AREA_OAM_ROMAWI . " Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
                 $sheetData->setCellValue('C91', $kata);
-                
-                $sheetData->setCellValue('D97', "Terminal BBM ".ucfirst(strtolower($data_depot->NAMA_DEPOT)));
-                $sheetData->setCellValue('F97', $month_name[$bulan]." ".$tahun);
-                
-                $sheetData->setCellValue('C118', "TERMINAL BBM ".strtoupper($data_depot->NAMA_DEPOT));
-                
-                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA menyatakan bahwa realisasi penyelesaian perkerjaan 100% bulanan penyaluran produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D ". AREA_OAM_ROMAWI ." Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+
+                $sheetData->setCellValue('D97', "Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('F97', $month_name[$bulan] . " " . $tahun);
+
+                $sheetData->setCellValue('C118', "TERMINAL BBM " . strtoupper($data_depot->NAMA_DEPOT));
+
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA menyatakan bahwa realisasi penyelesaian perkerjaan 100% bulanan penyaluran produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D " . AREA_OAM_ROMAWI . " Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
                 $sheetData->setCellValue('C120', $kata);
-                $sheetData->setCellValue('C141', "S & D Region Manager ". AREA_OAM_ROMAWI);
-                
-                $sheetData->setCellValue('C150', "TERMINAL BBM ".strtoupper($data_depot->NAMA_DEPOT));
-                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA menyatakan bahwa realisasi penyerahan produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D ". AREA_OAM_ROMAWI ." Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
+                $sheetData->setCellValue('C141', "S & D Region Manager " . AREA_OAM_ROMAWI);
+
+                $sheetData->setCellValue('C150', "TERMINAL BBM " . strtoupper($data_depot->NAMA_DEPOT));
+                $kata = "Pada hari ini " . $hari[$dw] . " tanggal " . $last_day . " bulan " . $month_name[$bulan] . " tahun " . $tahun . ", yang bertanda tangan dibawah ini PIHAK PERTAMA dan PIHAK KEDUA menyatakan bahwa realisasi penyerahan produk BBM/BBK untuk Bulan " . $month_name[$bulan] . " " . $tahun . " tanggal 1 s/d " . $last_day . ", dari  PT PERTAMINA (PERSERO) Region S&D " . AREA_OAM_ROMAWI . " Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)) . " kepada Pelanggan/SPBU yang diangkut oleh mobil tangki yang dikelola oleh PT. PERTAMINA PATRA NIAGA dengan data - data sebagai berikut :";
                 $sheetData->setCellValue('C153', $kata);
-                
-                $sheetData->setCellValue('D159', "Terminal BBM ".ucfirst(strtolower($data_depot->NAMA_DEPOT)));
-                $sheetData->setCellValue('F159', $month_name[$bulan]." ".$tahun);
-                
-                
+
+                $sheetData->setCellValue('D159', "Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
+                $sheetData->setCellValue('F159', $month_name[$bulan] . " " . $tahun);
+
+
                 $sheetData->setCellValue('C172', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                 $sheetData->setCellValue('H172', ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                 $sheetData->setCellValue('C178', $data_depot->NAMA_OH);
-                
+
                 if ($pjs != "") {
                     $sheetData->setCellValue('H171', "Pjs Site Supervisor Fleet TBBM");
                     $sheetData->setCellValue('H178', $pjs);
@@ -3015,7 +3018,7 @@ class laporan extends CI_Controller {
                     $sheetData->setCellValue('H171', "Site Supervisor Fleet TBBM");
                     $sheetData->setCellValue('H178', $data_depot->NAMA_PEGAWAI);
                 }
-                
+
                 if ($last_day == 28) {
                     $sheetData->removeRow(73, 1);
                     $sheetData->removeRow(72, 1);
@@ -3040,13 +3043,431 @@ class laporan extends CI_Controller {
                     $sheetData->setCellValue('G73', "=SUM(G43:G72)");
                     $sheetData->setCellValue('H73', "=SUM(H43:H72)");
                     $sheetData->setCellValue('I73', "=SUM(I43:I72)");
-                }                
-                
-                
-                // Bagian APMS
-                if($data_depot->STATUS_APMS == 1){
-                    
-                }else{
+                }
+
+
+                if ($data_depot->STATUS_APMS == 1) {
+                    /*
+                      Realisasi Volume APMS
+                     */
+                    $objPHPExcel->setActiveSheetIndexByName('Realisasi Volume APMS');
+                    $sheetData = $objPHPExcel->getActiveSheet();
+
+                    $sheetData->setCellValue('A151', "TBBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A158', $data_depot->NAMA_OH);
+                    $sheetData->setCellValue('E149', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+                    if ($pjs != "") {
+                        //$sheetData->setCellValue('E151', "Pjs SITE MANAGER/SITE SUPERVISOR");
+                        $sheetData->setCellValue('E158', $pjs);
+                    } else {
+                        //$sheetData->setCellValue('E151', "SITE MANAGER/SITE SUPERVISOR");
+                        $sheetData->setCellValue('E158', $data_depot->NAMA_PEGAWAI);
+                    }
+
+                    $data_realisasi_apms = $this->m_laporan->getLaporanRealisasiAPMS($depot, $tahun, $bulan);
+                    $data_apms = $this->m_laporan->getAPMS($depot, $tahun, $bulan);
+                    $sheetData->setCellValue('A2', "1 s/d " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+                    $k = 4;
+                    $l = 0;
+                    $i = 0;
+                    foreach ($data_apms as $row) {
+                        $sheetData->setCellValue('A' . $k, 'APMS ' . $row->NO_APMS);
+                        $k = $k + 6;
+                    }
+                    $k = 4;
+                    $i = 0;
+                    foreach ($data_realisasi_apms as $row) {
+                        if ($sheetData->getCell('A' . $k)->getValue() == 'APMS ' . $row->NO_APMS) {
+                            $sheetData->insertNewRowBefore($k + 3 + $i, 1);
+
+                            $sheetData->setCellValue('B' . '' . ($k + 2 + $i) . '', $row->NO_DELIVERY);
+                            $sheetData->setCellValue('A' . '' . ($k + 2 + $i) . '', $i + 1);
+                            $sheetData->setCellValue('D' . '' . ($k + 2 + $i) . '', $row->SHIP_TO);
+                            $sheetData->setCellValue('E' . '' . ($k + 2 + $i) . '', $row->NAMA_PENGUSAHA);
+                            $sheetData->setCellValue('F' . '' . ($k + 2 + $i) . '', $row->DATE_PLAN_GI);
+                            if ($row->SOLAR == 0) {
+                                $sheetData->setCellValue('G' . '' . ($k + 2 + $i) . '', $row->PREMIUM);
+                                $sheetData->setCellValue('C' . '' . ($k + 2 + $i) . '', 'PREMIUM');
+                            } else {
+                                $sheetData->setCellValue('G' . '' . ($k + 2 + $i) . '', $row->SOLAR);
+                                $sheetData->setCellValue('C' . '' . ($k + 2 + $i) . '', 'BIO SOLAR');
+                            }
+                            /*
+                             */
+                            $i++;
+                        } else {
+                            $objPHPExcel->getActiveSheet()->removeRow($k + 2 + $i, 2);
+                            $sheetData->setCellValue('G' . '' . ($k + 2 + $i) . '', "=SUM(G" . $k . ":" . 'G' . ($k + 1 + $i) . ")");
+                            $k = $k + 4 + $i;
+                            $i = 0;
+                            $sheetData->insertNewRowBefore($k + 3 + $i, 1);
+                            $sheetData->setCellValue('B' . '' . ($k + 2 + $i) . '', $row->NO_DELIVERY);
+                            $sheetData->setCellValue('A' . '' . ($k + 2 + $i) . '', $i + 1);
+                            $sheetData->setCellValue('D' . '' . ($k + 2 + $i) . '', $row->SHIP_TO);
+                            $sheetData->setCellValue('E' . '' . ($k + 2 + $i) . '', $row->NAMA_PENGUSAHA);
+                            $sheetData->setCellValue('F' . '' . ($k + 2 + $i) . '', $row->DATE_PLAN_GI);
+                            if ($row->SOLAR == 0) {
+                                $sheetData->setCellValue('G' . '' . ($k + 2 + $i) . '', $row->PREMIUM);
+                                $sheetData->setCellValue('C' . '' . ($k + 2 + $i) . '', 'PREMIUM');
+                            } else {
+                                $sheetData->setCellValue('G' . '' . ($k + 2 + $i) . '', $row->SOLAR);
+                                $sheetData->setCellValue('C' . '' . ($k + 2 + $i) . '', 'BIO SOLAR');
+                            }
+                            /*
+                             */
+                            $i++;
+                        }
+                    }
+                    $objPHPExcel->getActiveSheet()->removeRow($k + 2 + $i, 2);
+                    $sheetData->setCellValue('G' . '' . ($k + 2 + $i) . '', "=SUM(G" . $k . ":" . 'G' . ($k + 1 + $i) . ")");
+                    for ($j = ($k + $i); $j < 147; $j++) {
+                        $objPHPExcel->getActiveSheet()->removeRow($k + 4 + $i, 1);
+                    }
+
+                    /*
+                      BIAYA Angkut
+                     */
+                    $objPHPExcel->setActiveSheetIndexByName('Biaya Angkutan APMS');
+                    $sheetData = $objPHPExcel->getActiveSheet();
+
+                    $laporanBiaya = $this->m_laporan->getRealisasiBiayaAPMS($depot, $tahun, $bulan);
+                    $sheetData->setCellValue('A1', "BIAYA ANGKUTAN APMS TERMINAL BBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A2', "1 s/d " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+
+                    $sheetData->setCellValue('A19', "TBBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A24', $data_depot->NAMA_OH);
+                    $sheetData->setCellValue('J17', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+                    if ($pjs != "") {
+                        //$sheetData->setCellValue('E151', "Pjs SITE MANAGER/SITE SUPERVISOR");
+                        $sheetData->setCellValue('J24', $pjs);
+                    } else {
+                        //$sheetData->setCellValue('E151', "SITE MANAGER/SITE SUPERVISOR");
+                        $sheetData->setCellValue('J24', $data_depot->NAMA_PEGAWAI);
+                    }
+
+                    $i = 0;
+                    $k = 7;
+                    foreach ($laporanBiaya as $row) {
+                        $sheetData->insertNewRowBefore($i + $k + 1, 1);
+                        $sheetData->setCellValue('A' . '' . ($k + $i) . '', $i + 1);
+                        $sheetData->setCellValue('B' . '' . ($k + $i) . '', $row->NO_APMS);
+                        $sheetData->setCellValue('C' . '' . ($k + $i) . '', $row->NAMA_PENGUSAHA);
+                        $sheetData->setCellValue('D' . '' . ($k + $i) . '', $row->SUPPLY_POINT);
+                        $sheetData->setCellValue('E' . '' . ($k + $i) . '', $row->ALAMAT);
+                        $sheetData->setCellValue('F' . '' . ($k + $i) . '', $row->NAMA_TRANSPORTIR);
+                        $sheetData->setCellValue('G' . '' . ($k + $i) . '', $row->NO_PERJANJIAN);
+                        $sheetData->setCellValue('H' . '' . ($k + $i) . '', $row->PREMIUM);
+                        $sheetData->setCellValue('I' . '' . ($k + $i) . '', $row->SOLAR);
+                        $sheetData->setCellValue('J' . '' . ($k + $i) . '', $row->SOLAR + $row->PREMIUM);
+                        $sheetData->setCellValue('K' . '' . ($k + $i) . '', $row->TARIF_PATRA_NIAGA);
+                        $sheetData->setCellValue('L' . '' . ($k + $i) . '', "=J" . ($k + $i) . "*" . 'K' . ($k + $i));
+                        $i++;
+                    }
+                    $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
+                    $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
+                    $sheetData->setCellValue('H' . '' . ($k + $i) . '', "=SUM(H" . $k . ":" . 'H' . ($k + $i - 1) . ")");
+                    $sheetData->setCellValue('I' . '' . ($k + $i) . '', "=SUM(I" . $k . ":" . 'I' . ($k + $i - 1) . ")");
+                    $sheetData->setCellValue('J' . '' . ($k + $i) . '', "=SUM(J" . $k . ":" . 'J' . ($k + $i - 1) . ")");
+                    $sheetData->setCellValue('L' . '' . ($k + $i) . '', "=SUM(L" . $k . ":" . 'L' . ($k + $i - 1) . ")");
+
+                    /*
+                      kpi
+                     */
+                    $objPHPExcel->setActiveSheetIndexByName('KPI APMS');
+                    $sheetData = $objPHPExcel->getActiveSheet();
+
+                    $laporanBiaya = $this->m_laporan->getRealisasiBiayaAPMS($depot, $tahun, $bulan);
+                    $sheetData->setCellValue('A3', "WILAYAH S & D REGION III TERMINAL BBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A4', "Bulan : " . $month_name[$bulan] . " " . $tahun);
+
+                    $sheetData->setCellValue('A23', "TBBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A30', $data_depot->NAMA_OH);
+                    $sheetData->setCellValue('K21', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+                    if ($pjs != "") {
+                        //$sheetData->setCellValue('E151', "Pjs SITE MANAGER/SITE SUPERVISOR");
+                        $sheetData->setCellValue('A30', $pjs);
+                    } else {
+                        //$sheetData->setCellValue('E151', "SITE MANAGER/SITE SUPERVISOR");
+                        $sheetData->setCellValue('K30', $data_depot->NAMA_PEGAWAI);
+                    }
+
+                    $data_kpi = $this->m_laporan->selectKPIApms($depot, $tahun, $bulan);
+                    $i = 1;
+                    $k = 6;
+                    $j = 0;
+                    foreach ($data_kpi as $row) {
+                        //echo $row->ID_JENIS_KPI_APMS ;
+                        if ($row->ID_JENIS_KPI_APMS == $i) {
+                            if ($row->ID_JENIS_KPI_APMS > 5) {
+                                $sheetData->setCellValue('F' . '' . ($k + $i + 1) . '', $row->TARGET);
+                                $sheetData->setCellValue('H' . '' . ($k + $i + 1) . '', $row->REALISASI);
+                            } else {
+                                $sheetData->setCellValue('F' . '' . ($k + $i) . '', $row->TARGET);
+                                $sheetData->setCellValue('H' . '' . ($k + $i) . '', $row->REALISASI);
+                            }
+                        }
+                        $i++;
+                    }
+                    /*
+                      Data Pengiriman APMS
+                     */
+                    $objPHPExcel->setActiveSheetIndexByName('Data Pengiriman APMS');
+                    $sheetData = $objPHPExcel->getActiveSheet();
+
+                    $laporanBiaya = $this->m_laporan->getRealisasiBiayaAPMS($depot, $tahun, $bulan);
+                    $sheetData->setCellValue('A1', "Data Pengiriman BBM APMS DEPOT " . $data_depot->NAMA_DEPOT);
+
+
+                    $data_pengiriman = $this->m_laporan->selectDataPengiriman($depot, $tahun, $bulan);
+
+                    $i = 1;
+                    $j = 1;
+                    $k = 3;
+                    $t_premium = 0;
+                    $premium = 0;
+                    $t_solar = 0;
+                    $solar = 0;
+                    foreach ($data_pengiriman as $row) {
+                        if ($i == 1) {
+                            $sheetData->insertNewRowBefore($i + $k + 1, 1);
+                            $sheetData->setCellValue('A' . '' . ($k + $i) . '', $j);
+                            $sheetData->setCellValue('B' . '' . ($k + $i) . '', $row->NAMA_PENGUSAHA);
+                            $sheetData->setCellValue('C' . '' . ($k + $i) . '', $row->DATE_PLAN_GI);
+                            $sheetData->setCellValue('D' . '' . ($k + $i) . '', $row->NO_APMS);
+                            $sheetData->setCellValue('E' . '' . ($k + $i) . '', $row->ALAMAT);
+                            $sheetData->setCellValue('F' . '' . ($k + $i) . '', $row->NO_DELIVERY);
+                            $sheetData->setCellValue('G' . '' . ($k + $i) . '', $row->DATE_DELIVERY);
+                            $sheetData->setCellValue('H' . '' . ($k + $i) . '', $row->ORDER_NUMBER);
+                            $sheetData->setCellValue('I' . '' . ($k + $i) . '', $row->DATE_ORDER);
+                            $sheetData->setCellValue('J' . '' . ($k + $i) . '', $row->SHIP_TO);
+                            $sheetData->setCellValue('K' . '' . ($k + $i) . '', $row->DESCRIPTION);
+                            $sheetData->setCellValue('L' . '' . ($k + $i) . '', $data_depot->NAMA_DEPOT);
+                            if ($row->PREMIUM != 0) {
+                                $sheetData->setCellValue('M' . '' . ($k + $i) . '', "Premium");
+                                $sheetData->setCellValue('N' . '' . ($k + $i) . '', $row->PREMIUM);
+                                $sheetData->setCellValue('P' . '' . ($k + $i) . '', "Premium");
+                                $premium = $premium + $row->PREMIUM;
+                            } else {
+                                $sheetData->setCellValue('M' . '' . ($k + $i) . '', "Solar");
+                                $sheetData->setCellValue('N' . '' . ($k + $i) . '', $row->SOLAR);
+                                $sheetData->setCellValue('P' . '' . ($k + $i) . '', "Solar");
+                                $solar = $solar + $row->SOLAR;
+                            }
+                            $sheetData->setCellValue('O' . '' . ($k + $i) . '', $row->PENGIRIMAN_KAPAL);
+                            $sheetData->setCellValue('Q' . '' . ($k + $i) . '', $row->DATE_KAPAL_DATANG);
+                            $sheetData->setCellValue('R' . '' . ($k + $i) . '', $row->DATE_KAPAL_BERANGKAT);
+                            $j++;
+                        } else {
+                            if ($sheetData->getCell('D' . ($k + $i - 1))->getValue() == $row->NO_APMS) {
+                                $sheetData->insertNewRowBefore($i + $k + 1, 1);
+                                $sheetData->setCellValue('A' . '' . ($k + $i) . '', $j);
+                                $sheetData->setCellValue('B' . '' . ($k + $i) . '', $row->NAMA_PENGUSAHA);
+                                $sheetData->setCellValue('C' . '' . ($k + $i) . '', $row->DATE_PLAN_GI);
+                                $sheetData->setCellValue('D' . '' . ($k + $i) . '', $row->NO_APMS);
+                                $sheetData->setCellValue('E' . '' . ($k + $i) . '', $row->ALAMAT);
+                                $sheetData->setCellValue('F' . '' . ($k + $i) . '', $row->NO_DELIVERY);
+                                $sheetData->setCellValue('G' . '' . ($k + $i) . '', $row->DATE_DELIVERY);
+                                $sheetData->setCellValue('H' . '' . ($k + $i) . '', $row->ORDER_NUMBER);
+                                $sheetData->setCellValue('I' . '' . ($k + $i) . '', $row->DATE_ORDER);
+                                $sheetData->setCellValue('J' . '' . ($k + $i) . '', $row->SHIP_TO);
+                                $sheetData->setCellValue('K' . '' . ($k + $i) . '', $row->DESCRIPTION);
+                                $sheetData->setCellValue('L' . '' . ($k + $i) . '', $data_depot->NAMA_DEPOT);
+                                $j++;
+                                if ($row->PREMIUM != 0) {
+                                    $sheetData->setCellValue('M' . '' . ($k + $i) . '', "Premium");
+                                    $sheetData->setCellValue('N' . '' . ($k + $i) . '', $row->PREMIUM);
+                                    $sheetData->setCellValue('P' . '' . ($k + $i) . '', "Premium");
+                                    $premium = $premium + $row->PREMIUM;
+                                } else {
+                                    $sheetData->setCellValue('M' . '' . ($k + $i) . '', "Solar");
+                                    $sheetData->setCellValue('N' . '' . ($k + $i) . '', $row->SOLAR);
+                                    $sheetData->setCellValue('P' . '' . ($k + $i) . '', "Solar");
+                                    $solar = $solar + $row->SOLAR;
+                                }
+                                $sheetData->setCellValue('O' . '' . ($k + $i) . '', $row->PENGIRIMAN_KAPAL);
+                                $sheetData->setCellValue('Q' . '' . ($k + $i) . '', $row->DATE_KAPAL_DATANG);
+                                $sheetData->setCellValue('R' . '' . ($k + $i) . '', $row->DATE_KAPAL_BERANGKAT);
+                            } else {
+                                $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
+                                $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
+                                $sheetData->setCellValue('N' . '' . ($k + $i + 2) . '', $premium);
+                                $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1) . '', $solar);
+                                $sheetData->setCellValue('N' . '' . ($k + $i) . '', "=SUM(N" . ($k + $i - $j + 1) . ":" . 'N' . ($k + $i - 1) . ")");
+                                $t_premium = $t_premium + $premium;
+                                $t_solar = $t_solar + $solar;
+                                $premium = 0;
+                                $solar = 0;
+                                $k = $k + 7;
+                                $j = 1;
+                                $sheetData->insertNewRowBefore($i + $k + 1, 1);
+                                $sheetData->setCellValue('A' . '' . ($k + $i) . '', $j);
+                                $sheetData->setCellValue('B' . '' . ($k + $i) . '', $row->NAMA_PENGUSAHA);
+                                $sheetData->setCellValue('C' . '' . ($k + $i) . '', $row->DATE_PLAN_GI);
+                                $sheetData->setCellValue('D' . '' . ($k + $i) . '', $row->NO_APMS);
+                                $sheetData->setCellValue('E' . '' . ($k + $i) . '', $row->ALAMAT);
+                                $sheetData->setCellValue('F' . '' . ($k + $i) . '', $row->NO_DELIVERY);
+                                $sheetData->setCellValue('G' . '' . ($k + $i) . '', $row->DATE_DELIVERY);
+                                $sheetData->setCellValue('H' . '' . ($k + $i) . '', $row->ORDER_NUMBER);
+                                $sheetData->setCellValue('I' . '' . ($k + $i) . '', $row->DATE_ORDER);
+                                $sheetData->setCellValue('J' . '' . ($k + $i) . '', $row->SHIP_TO);
+                                $sheetData->setCellValue('K' . '' . ($k + $i) . '', $row->DESCRIPTION);
+                                $sheetData->setCellValue('L' . '' . ($k + $i) . '', $data_depot->NAMA_DEPOT);
+                                if ($row->PREMIUM != 0) {
+                                    $sheetData->setCellValue('M' . '' . ($k + $i) . '', "Premium");
+                                    $sheetData->setCellValue('N' . '' . ($k + $i) . '', $row->PREMIUM);
+                                    $sheetData->setCellValue('P' . '' . ($k + $i) . '', "Premium");
+                                    $premium = $premium + $row->PREMIUM;
+                                } else {
+                                    $sheetData->setCellValue('M' . '' . ($k + $i) . '', "Solar");
+                                    $sheetData->setCellValue('N' . '' . ($k + $i) . '', $row->SOLAR);
+                                    $sheetData->setCellValue('P' . '' . ($k + $i) . '', "Solar");
+                                    $solar = $solar + $row->SOLAR;
+                                }
+                                $sheetData->setCellValue('O' . '' . ($k + $i) . '', $row->PENGIRIMAN_KAPAL);
+                                $sheetData->setCellValue('Q' . '' . ($k + $i) . '', $row->DATE_KAPAL_DATANG);
+                                $sheetData->setCellValue('R' . '' . ($k + $i) . '', $row->DATE_KAPAL_BERANGKAT);
+                                $j++;
+                            }
+                        }
+                        $i++;
+                    }
+                    $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
+                    $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
+                    $sheetData->setCellValue('N' . '' . ($k + $i + 2) . '', $premium);
+                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1) . '', $solar);
+                    $sheetData->setCellValue('N' . '' . ($k + $i) . '', "=SUM(N" . ($k + $i - $j + 1) . ":" . 'N' . ($k + $i - 1) . ")");
+
+
+
+                    for ($h = ($k + $i + 2 + 1 + 1); $h <= 181; $h++) {
+                        $objPHPExcel->getActiveSheet()->removeRow($k + $i + 2 + 1 + 1 + 1, 1);
+                    }
+
+                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 4) . '', $t_premium);
+                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1 + 4) . '', $t_solar);
+
+                    /*
+                     * Realisasi Penyaluran
+                     */
+
+                    $objPHPExcel->setActiveSheetIndexByName('Realisasi Penyaluran APMS');
+                    $sheetData = $objPHPExcel->getActiveSheet();
+
+                    $sheetData->setCellValue('A2', "REALISASI PENYALURAN HARIAN APMS TERMINAL BBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A3', "1 s/d " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+
+                    $sheetData->setCellValue('A16', "Terminal BBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A20', $data_depot->NAMA_OH);
+                    $sheetData->setCellValue('AI14', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+                    if ($pjs != "") {
+                        $sheetData->setCellValue('AI20', $pjs);
+                    } else {
+                        $sheetData->setCellValue('AI20', $data_depot->NAMA_PEGAWAI);
+                    }
+
+
+                    if ($last_day == 28) {
+                        $sheetData->removeColumn('AJ', 1);
+                        $sheetData->removeColumn('AI', 1);
+                        $sheetData->removeColumn('AH', 1);
+                    } else if ($last_day == 29) {
+                        $sheetData->removeColumn('AJ', 1);
+                        $sheetData->removeColumn('AI', 1);
+                    } else if ($last_day == 30) {
+                        $sheetData->removeColumn('AJ', 1);
+                    }
+
+                    $hasil_realisasi = $this->m_laporan->realisasiAPMS1($depot, $tahun, $bulan);
+                    $l = 1;
+                    $k = 10;
+                    $no_apms_temp = "kosong";
+                    foreach ($hasil_realisasi as $row) {
+                        if ($no_apms_temp != $row->NO_APMS) {
+                            $sheetData->insertNewRowBefore(9, 1);
+                            $sheetData->insertNewRowBefore(9, 1);
+                            $sheetData->setCellValue('A9', $l);
+                            $sheetData->setCellValue('B9', $row->NO_APMS);
+                            $sheetData->setCellValue('C9', $row->NAMA_PENGUSAHA);
+                            $sheetData->setCellValue('D9', "Premium");
+                            $sheetData->setCellValue('D10', "Solar");
+                            $sheetData->setCellValue('E9', $row->K_PREMIUM);
+                            $sheetData->setCellValue('E10', $row->K_SOLAR);
+
+                            $sheetData->mergeCells('A9:A10');
+                            $sheetData->mergeCells('B9:B10');
+                            $sheetData->mergeCells('C9:C10');
+
+                            $no_apms_temp = $row->NO_APMS;
+                            $l++;
+                        } else {
+                            $col_no = $row->tanggal + 4;
+                            if ($row->j_solar == 0) {
+                                $nilai = $sheetData->getCell($column_name[$col_no] . '9')->getValue();
+                                $nilai = + $row->j_premium;
+                                $sheetData->setCellValue($column_name[$col_no] . '9', $nilai);
+                            } else {
+                                $nilai = $sheetData->getCell($column_name[$col_no] . '10')->getValue();
+                                $nilai = + $row->j_solar;
+                                $sheetData->setCellValue($column_name[$col_no] . '10', $nilai);
+                            }
+                        }
+                    }
+
+                    for ($i = 0; $i < $last_day; $i++) {
+                        $dw = date("w", strtotime($tahun . "-" . $bulan . "-" . ($i + 1)));
+                        if ($dw == 0) {
+                            for ($j = 7; $j < (7 + (2 * $l) + 1); $j++) {
+                                $sheetData->getStyle($column_name[$i + 5] . $j)->getFill()->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID, 'startcolor' => array('rgb' => 'FF0000')));
+                            }
+                        }
+                    }
+
+                    for ($j = 8; $j < (8 + (2 * $l)); $j++) {
+                        $sheetData->setCellValue($column_name[$last_day + 5] . $j, "=SUM(F" . $j . ":" . $column_name[$last_day + 4] . $j . ")");
+                        $sheetData->setCellValue($column_name[$last_day + 6] . $j, "=E" . $j . "-" . $column_name[$last_day + 5] . $j);
+                        $sheetData->setCellValue($column_name[$last_day + 7] . $j, "=(" . $column_name[$last_day + 5] . $j . "/E" . $j . ")*100");
+                    }
+
+                    for ($i = 0; $i <= $last_day + 1; $i++) {
+                        $formula_premium = "";
+                        $formula_solar = "";
+                        for ($j = 9; $j < (7 + (2 * $l)); $j++) {
+                            if ($j % 2 == 1) {
+                                $formula_premium = $formula_premium . "+" . $column_name[$i + 4] . $j;
+                            } else {
+                                $formula_solar = $formula_solar . "+" . $column_name[$i + 4] . $j;
+                            }
+                        }
+                        $formula_premium[0] = "=";
+                        $formula_solar[0] = "=";
+
+                        $sheetData->setCellValue($column_name[$i + 4] . (8 + ($l * 2)), $formula_premium);
+                        $sheetData->setCellValue($column_name[$i + 4] . (9 + ($l * 2)), $formula_solar);
+                    }
+
+                    $objPHPExcel->getActiveSheet()->removeRow(8, 1);
+                    $objPHPExcel->getActiveSheet()->removeRow((6 + ($l * 2)), 1);
+
+                    $e = 1;
+                    for ($j = 8; $j < (6 + ($l * 2)); $j+=2) {
+                        $sheetData->setCellValue('A' . $j, $e);
+                        $e++;
+                    }
+
+                    for ($i = 0; $i < $last_day; $i++) {
+                        for ($j = 0; $j < ($l * 2); $j++) {
+                            $nilai = $sheetData->getCell($column_name[$i + 5] . ($j + 8))->getValue();
+                            if ($nilai == "") {
+                                $sheetData->setCellValue($column_name[$i + 5] . ($j + 8), 0);
+                            }
+                        }
+                    }
+
+
+
+                    $objPHPExcel->setActiveSheetIndexByName('BA');
+                    $sheetData = $objPHPExcel->getActiveSheet();
+                } else {
                     $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Realisasi Volume APMS'));
                     $objPHPExcel->removeSheetByIndex($sheetIndex);
                     $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Biaya Angkutan APMS'));
@@ -3058,11 +3479,8 @@ class laporan extends CI_Controller {
                     $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI APMS'));
                     $objPHPExcel->removeSheetByIndex($sheetIndex);
                 }
-                
-                
-                
-                
-                
+
+
                 $nama_file = 'data_laporan/bulanan/Laporan Bulanan ' . $data_depot->NAMA_DEPOT . " " . $month_name[$bulan] . " " . $tahun . '.xls';
 
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');

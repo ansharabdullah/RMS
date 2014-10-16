@@ -1038,7 +1038,41 @@ from pegawai p where p.ID_DEPOT = '$depot' and (p.JABATAN = 'SUPIR' or p.JABATAN
 from log_harian l where MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and l.ID_DEPOT = '$depot' order by l.TANGGAL_LOG_HARIAN");
         return $query->result();
     }
-
+	public function getLaporanRealisasiAPMS($depot,$tahun,$bulan)
+	{
+		$result = $this->db->query("select b.NO_DELIVERY, b.DESCRIPTION, a.SHIP_TO,a.NO_APMS,a.NAMA_PENGUSAHA,b.DATE_PLAN_GI,b.SOLAR,b.PREMIUM from apms a, kinerja_apms b, log_harian i where b.ID_APMS = a.ID_APMS and i.ID_LOG_HARIAN = b.ID_LOG_HARIAN and i.ID_DEPOT = $depot and MONTH(i.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(i.TANGGAL_LOG_HARIAN) = '$tahun' order By a.NAMA_PENGUSAHA ASC, PREMIUM DESC, DATE_PLAN_GI ASC");
+		return $result->result();
+	}
+	public function getAPMS($depot,$tahun,$bulan)
+	{
+		$data = $this->db->query("select a.NO_APMS from apms a, kinerja_apms b, log_harian i where b.ID_APMS = a.ID_APMS and i.ID_LOG_HARIAN = b.ID_LOG_HARIAN and i.ID_DEPOT = $depot and MONTH(i.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(i.TANGGAL_LOG_HARIAN) = '$tahun' group by a.NO_APMS order By a.NAMA_PENGUSAHA ASC, PREMIUM DESC, DATE_PLAN_GI ASC");
+        return $data->result();
+	}
+	public function getRealisasiBiayaAPMS($depot,$tahun,$bulan)
+	{
+		$data = $this->db->query("select a.NO_APMS,a.NAMA_PENGUSAHA,a.SUPPLY_POINT,a.ALAMAT,a.NAMA_TRANSPORTIR,a.NO_PERJANJIAN,a.TARIF_PATRA_NIAGA,sum(b.SOLAR) as SOLAR,sum(b.PREMIUM) as PREMIUM from apms a, kinerja_apms b, log_harian i where b.ID_APMS = a.ID_APMS and i.ID_LOG_HARIAN = b.ID_LOG_HARIAN and i.ID_DEPOT = $depot and MONTH(i.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(i.TANGGAL_LOG_HARIAN) = '$tahun' group by a.ID_APMS order By a.NAMA_PENGUSAHA ASC, PREMIUM DESC, DATE_PLAN_GI ASC");
+        return $data->result();
+	}
+	public function selectKPIApms($depot,$tahun,$bulan){
+	//	var_dump($depot,$tahun,$bulan);
+		$query = $this->db->query("select MONTH(lh.TANGGAL_LOG_HARIAN) as nama_bulan,YEAR(lh.TANGGAL_LOG_HARIAN)as nama_tahun,ka.ID_KPI_APMS, ka.TARGET, ka.BOBOT, ka.REALISASI, ka.SCORE, ka.NORMAL_SCORE, ka.FINAL_SCORE, jka.JENIS_KPI_APMS, jka.ID_JENIS_KPI_APMS, jka.SATUAN, jka.ASPEK, jka.FREKUENSI,jka.KETERANGAN, lh.ID_LOG_HARIAN  from kpi_apms ka, jenis_kpi_apms jka, log_harian lh where ka.ID_JENIS_KPI_APMS = jka.ID_JENIS_KPI_APMS and ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and lh.ID_DEPOT = $depot and YEAR(lh.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(lh.TANGGAL_LOG_HARIAN) = '$bulan' order by jka.ID_JENIS_KPI_APMS ASC");
+		//var_dump($bulan);
+        return $query->result();
+	}
+	public function selectDataPengiriman($depot,$tahun,$bulan){
+		$query = $this->db->query("select a.NAMA_PENGUSAHA,b.DATE_PLAN_GI, a.NO_APMS, a.ALAMAT, b.NO_DELIVERY, b.DATE_DELIVERY, b.ORDER_NUMBER, b.DATE_ORDER, a.SHIP_TO, b.DESCRIPTION, b.PREMIUM, b.SOLAR, b.DATE_KAPAL_DATANG,b.DATE_KAPAL_BERANGKAT,b.PENGIRIMAN_KAPAL from apms a, kinerja_apms b,log_harian c where a.ID_APMS = b.ID_APMS and b.ID_LOG_HARIAN = c.ID_LOG_HARIAN and a.ID_DEPOT = $depot and MONTH(c.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(c.TANGGAL_LOG_HARIAN) = '$tahun' order By a.NAMA_PENGUSAHA ASC, b.PREMIUM DESC, b.DATE_PLAN_GI ASC");
+		return $query->result();
+	}
+	public function realisasiAPMS($depot,$tahun,$bulan)
+	{
+		$query = $this->db->query("select d.NO_APMS, d.NAMA_PENGUSAHA, b.K_PREMIUM, b.K_SOLAR, DAY(c.TANGGAL_LOG_HARIAN) as tanggal, sum(a.PREMIUM) as j_premium, sum(a.SOLAR) as j_solar from kinerja_apms a, rencana_apms b, log_harian c, apms d where a.ID_LOG_HARIAN = c.ID_LOG_HARIAN and a.ID_APMS = d.ID_APMS and b.ID_APMS = d.ID_APMS and d.ID_DEPOT = $depot and MONTH(c.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(c.TANGGAL_LOG_HARIAN) = '$tahun' group by d.NO_APMS order by d.NO_APMS, j_premium DESC, tanggal ");
+		return $query->result();
+	}
+	public function realisasiAPMS1($depot,$tahun,$bulan)
+	{
+		$query = $this->db->query("select d.NO_APMS, d.NAMA_PENGUSAHA, b.K_PREMIUM, b.K_SOLAR, DAY(c.TANGGAL_LOG_HARIAN) as tanggal, PREMIUM as j_premium, SOLAR as j_solar from kinerja_apms a, rencana_apms b, log_harian c, apms d where a.ID_LOG_HARIAN = c.ID_LOG_HARIAN and a.ID_APMS = d.ID_APMS and b.ID_APMS = d.ID_APMS and d.ID_DEPOT = $depot and MONTH(c.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(c.TANGGAL_LOG_HARIAN) = '$tahun' group by d.NO_APMS, a.ID_KINERJA_APMS order by d.NO_APMS, j_premium DESC, tanggal ");
+		return $query->result();
+	}
     /*
       public function dummy_kinerja_amt($id_kinerja, $id_log_harian, $id_pegawai, $status_tugas, $total_km, $total_kl, $ritase, $pendapatan, $spbu) {
       $query = $this->db->query("insert into kinerja_amt(ID_KINERJA_AMT,ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,PENDAPATAN,SPBU) values('$id_kinerja','$id_log_harian','$id_pegawai','$status_tugas','$total_km','$total_kl','$ritase','$pendapatan','$spbu')");

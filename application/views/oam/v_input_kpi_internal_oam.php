@@ -1,6 +1,17 @@
 
 <section id="main-content">
     <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>kpi/internal/<?php echo date('Y')?>/5">KPI Internal OAM</a></li>
+                   <li class="active">Tambah KPI Internal OAM</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
         <!-- page start-->
         <section class="panel"> 
             <header class="panel-heading">

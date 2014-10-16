@@ -35,7 +35,7 @@
                     <li <?php if ($lv2 == 5 && $lv1 == 3) echo "class='active'" ?>><a  href="<?php echo base_url() ?>mt/rencana">Rencana</a></li>
                 </ul>
             </li>
-            
+            <?php if($depot->STATUS_APMS == 1) { ?>
             <li class="sub-menu">
                 <a href="javascript:;"  <?php if ($lv1 == 4) echo "class='active'" ?>>
                     <i class="icon-anchor"></i>
@@ -48,6 +48,7 @@
                     <li <?php if ($lv2 == 4 && $lv1 == 4) echo "class='active'" ?>><a  href="<?php echo base_url() ?>apms/kpi_apms" >KPI APMS</a></li>
                 </ul>
             </li>
+            <?php } ?>
             
             <li>
                 <a  href="<?php echo base_url() ?>kinerja"  <?php if ($lv1 == 5) echo "class='active'" ?>>

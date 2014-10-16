@@ -6,7 +6,8 @@ class m_peringatan extends CI_Model {
         parent::__construct();
     }
     
-    public function getPeringatan($id_pegawai){
+    public function getPeringatan($id){
+        $this->db->where("id_pegawai", $id);
         $data = $this->db->get("log_peringatan");
         return $data->result();
     }
@@ -22,6 +23,11 @@ class m_peringatan extends CI_Model {
     
     public function deletePeringatan($id){
         $this->db->where("id_log_peringatan", $id);
+        $this->db->delete("log_peringatan");
+    }
+    
+    public function deletePeringatanPegawai($id){
+        $this->db->where("id_pegawai", $id);
         $this->db->delete("log_peringatan");
     }
     

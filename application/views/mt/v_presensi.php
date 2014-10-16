@@ -47,6 +47,19 @@ function DateToIndo($date) {
                 <!--breadcrumbs end -->
             </div>
         </div>
+        <?php
+            if($status == 1)
+            {
+                ?>
+                    <div class="alert alert-block alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Berhasil!</strong> data presensi telah diubah.
+                </div>
+                <?php
+            }
+        ?>
         <section class="panel">
             <header class="panel-heading">
                 Presensi Mobil Tangki
