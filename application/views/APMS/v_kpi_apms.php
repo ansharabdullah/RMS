@@ -168,7 +168,7 @@
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Error!</strong> Data KPI Operasional tidak ditemukan.
+                    <strong>Error!</strong> Data KPI APMS tidak ditemukan.
                 </div>
 			
 			

@@ -387,7 +387,7 @@ function DateToIndo($date) {
                                     <th>Solar</th>
                                     <th>Nomor Order</th>
                                     <th>Tanggal Order</th>
-                                    <th>Tanggal Pengiriman</th>
+                                    <th>Pengiriman Kapal</th>
                                     <th>Tanggal Kapal Datang</th>
                                     <th>Tanggal Kapal Berangkat</th>
                                     <th>Description</th>
@@ -494,7 +494,7 @@ function DateToIndo($date) {
 										<div class="form-group ">
 											<label for="NO_DELIVERY" class="control-label col-lg-2">No. Delivery</label>
 											<div class="col-lg-4">
-												<input class=" form-control input-sm m-bot15" id="no_delivery" name="no_delivery" type="text" required />
+												<input class=" form-control input-sm m-bot15" id="no_delivery" name="no_delivery" type="text" maxlength="11" required />
 												
 											</div>
 
@@ -505,7 +505,7 @@ function DateToIndo($date) {
 											</div>
 										</div>
 										<div class="form-group ">
-											<label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
+											<label for="ps" class="control-label col-lg-2">Produk</label>
 											<div class="col-lg-4">
 												<select class="form-control input-sm m-bot15" id="bh" name="bh">
 													<option value="Premium">Premium
@@ -535,10 +535,9 @@ function DateToIndo($date) {
 												<input class=" form-control input-sm m-bot15" id="tgl_order" name="tgl_order"  type="date" required />
 												<span class="help-block">Pilih Tanggal</span>
 											</div>
-											<label for="tgl_kirim" class="control-label col-lg-2">Tanggal Pengiriman</label>
+											<label for="tgl_kirim" class="control-label col-lg-2">Pengiriman Kapal</label>
 											<div class="col-lg-4">
-												<input class=" form-control input-sm m-bot15" id="tgl_kirim" name="tgl_kirim"  type="date" required />
-												<span class="help-block">Pilih Tanggal</span>
+												<input class=" form-control input-sm m-bot15" id="tgl_kirim" name="tgl_kirim"  type="text" required />
 											</div>
 										</div>
 										<div class="form-group ">
@@ -588,7 +587,7 @@ function DateToIndo($date) {
 							<input type="hidden" name="id" value="<?php echo $row->ID_APMS?>">
                             <label for="NO_DELIVERY" class="control-label col-lg-2">No. Delivery</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="no_delivery1" name="no_delivery1" type="text" />
+                                <input class=" form-control input-sm m-bot15" id="no_delivery1" name="no_delivery1" type="text" maxlength="11"/>
                                 
                             </div>
 
@@ -599,7 +598,7 @@ function DateToIndo($date) {
                             </div>
 						</div>
                         <div class="form-group ">
-                            <label for="ps" class="control-label col-lg-2">Bahan Bakar</label>
+                            <label for="ps" class="control-label col-lg-2">Produk</label>
                             <div class="col-lg-4">
 								<select class="form-control input-sm m-bot15" id="bh1" name="bh1">
 									<option value="Premium">Premium</option>
@@ -628,10 +627,9 @@ function DateToIndo($date) {
                                 <input class=" form-control input-sm m-bot15" id="tgl_order1" name="tgl_order1"  type="date" required />
 								<span class="help-block">Pilih Tanggal</span>
                             </div>
-							<label for="tgl_kirim" class="control-label col-lg-2">Tanggal Pengiriman</label>
+							<label for="tgl_kirim" class="control-label col-lg-2">Pengiriman Kapal</label>
                             <div class="col-lg-4">
-                                <input class=" form-control input-sm m-bot15" id="tgl_kirim1" name="tgl_kirim1"  type="date" required />
-								<span class="help-block">Pilih Tanggal</span>
+                                <input class=" form-control input-sm m-bot15" id="tgl_kirim1" name="tgl_kirim1"  type="text" required />
                             </div>
                         </div>
 						<div class="form-group ">
