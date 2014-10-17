@@ -17,7 +17,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Harian AMT Depot <?php echo $nama_depot?>
+                        Grafik Harian APMS Depot <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
 <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
@@ -37,6 +37,14 @@
                             </div>
                             <?php echo form_close()?>
                         <br/><br/>
+                         <div class="btn-group pull-right">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">Filter APMS<i class="icon-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-left">
+                                <li><a style="cursor: pointer" onclick="filterApms('Premium')">Premium</a></li>
+                                <li><a style="cursor: pointer" onclick="filterApms('Solar')">Solar</a></li>
+                            </ul>
+                        </div><br/><br/>
                         <div id="grafik"></div>
 
                     </div>
@@ -202,7 +210,8 @@
             },
 
             tooltip: {
-                shared: true
+                shared: true,
+                valueSuffix: ' KL'
             },
             legend: {
                 enabled:true
@@ -216,7 +225,7 @@
     });
     
     
-    function filterAPMS(title)
+    function filterApms(title)
     {
         apms.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' APMS'});  
         if(title == "Premium"){

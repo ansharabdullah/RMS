@@ -33,6 +33,7 @@ class kpi extends CI_Controller {
         $data2 = menu_oam();
         $data3['kpi'] = $this->m_kpi->kpi_pertahun();
         $data3['depot'] = $this->m_depot->get_depot();
+            $data3['tahun_arr'] = array(date('Y')-2,date('Y')-1,date('Y'));
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data2);
         $this->navbar($data['lv1'], $data['lv2']);

@@ -558,9 +558,7 @@ for ($i = 0; $i < $jumlah; $i++) {
                                                         <td>-</td>
                                                         <td><span class="label label-danger">Absen</span></td>
                                                         <td>
-                                                            <?php if ($this->session->userdata('id_role') != 5) { ?>
                                                                 <a onclick="tambahKinerja('<?php echo $tanggal ?>', '<?php echo $id_pegawai ?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-            <?php } ?>
                                                         </td>
                                                     </tr>
                                                     <?php

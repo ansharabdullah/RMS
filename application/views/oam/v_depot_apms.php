@@ -272,7 +272,7 @@
                     }]
             },
             tooltip: {
-                valueSuffix: ''
+                valueSuffix: ' KL'
             },
             legend: {
                 enabled: true

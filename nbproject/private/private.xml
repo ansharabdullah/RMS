@@ -3,15 +3,11 @@
 <<<<<<< HEAD
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-    </open-files>
-=======
-<<<<<<< HEAD
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/profile/v_profile.php</file>
+        </group>
     </open-files>
 =======
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
->>>>>>> c057a60794630a9b44145a8f88d30a8905f6cf2a
->>>>>>> bc230261c7ea9dad63a56e629e333d5d36b77af3
+>>>>>>> 93699fc36851c264f956d96c47451d93fb217017
 </project-private>

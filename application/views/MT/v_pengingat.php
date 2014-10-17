@@ -174,8 +174,10 @@
                                         </td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_APAR ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->tanggal_apar; ?> hari</td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit" href="#myModal"  data-toggle="modal"  onclick="cekapar('<?php echo $row->ID_APAR ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->NOPOL ?>','<?php echo $row->ID_JENIS_APAR ?>','<?php echo $row->KETERANGAN_APAR ?>','<?php echo $row->tanggal_apar ?>','<?php echo $row->tgl_apar ?>')"><i class="icon-pencil"></i></a>
-                                        
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>">
+                                            <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                            <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit" href="#myModal"  data-toggle="modal"  onclick="cekapar('<?php echo $row->ID_APAR ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->NOPOL ?>','<?php echo $row->ID_JENIS_APAR ?>','<?php echo $row->KETERANGAN_APAR ?>','<?php echo $row->tanggal_apar ?>','<?php echo $row->tgl_apar ?>')"><i class="icon-pencil"></i></a>
+                                        <?php }?>
                                         </tr>
                                     <?php
                                 $i++;
@@ -220,8 +222,10 @@
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $i + 1; ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><span id="bannopol<?php echo $i ?>"><?php echo $row->bannopol ?></td>
                                     <td style="background-color: <?php echo $color ?>;"><?php echo $row->POSISI_BAN ?></td>
-                                    <td style="background-color: <?php echo $color ?>;"><a onclick="cekreminderban('<?php echo $row->ID_BAN ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->bannopol ?>','<?php echo $row->tanggal_ban ?>','<?php echo $row->tgl_ganti ?>','<?php echo $row->POSISI_BAN ?>','<?php echo $row->MERK_BAN ?>','<?php echo $row->JENIS_BAN ?>','<?php echo $row->NO_SERI_BAN ?>')" data-placement="top" data-toggle="modal" href="#modalBan" class="btn btn-warning btn-xs tooltips" data-original-title="Edit">Cek Ban</i></a>
-                                    
+                                    <td style="background-color: <?php echo $color ?>;">
+                                        <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                        <a onclick="cekreminderban('<?php echo $row->ID_BAN ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->bannopol ?>','<?php echo $row->tanggal_ban ?>','<?php echo $row->tgl_ganti ?>','<?php echo $row->POSISI_BAN ?>','<?php echo $row->MERK_BAN ?>','<?php echo $row->JENIS_BAN ?>','<?php echo $row->NO_SERI_BAN ?>')" data-placement="top" data-toggle="modal" href="#modalBan" class="btn btn-warning btn-xs tooltips" data-original-title="Edit">Cek Ban</i></a>
+                                    <?php }?>
                                 </tr>
                                  <?php
                                 $i++;
@@ -276,7 +280,10 @@
                                     </td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->tanggal_akhir_surat; ?> hari</div></a></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->KETERANGAN_SURAT ?></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Surat" href="#modalSurat"  data-toggle="modal"  onclick="ceksurat('<?php echo $row->ID_SURAT ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->suratnopol ?>','<?php echo $row->tanggal_akhir_surat ?>','<?php echo $row->ID_JENIS_SURAT ?>','<?php echo $row->tgl_surat ?>','<?php echo $row->KETERANGAN_SURAT ?>')"><i class="icon-pencil"></i></a>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>">
+                                            <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                            <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Surat" href="#modalSurat"  data-toggle="modal"  onclick="ceksurat('<?php echo $row->ID_SURAT ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->suratnopol ?>','<?php echo $row->tanggal_akhir_surat ?>','<?php echo $row->ID_JENIS_SURAT ?>','<?php echo $row->tgl_surat ?>','<?php echo $row->KETERANGAN_SURAT ?>')"><i class="icon-pencil"></i></a>
+                                        <?php }?>
                                         </td>
                                         
                                         
@@ -328,8 +335,11 @@
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->MERK_OLI ?></td>
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->TOTAL_VOLUME ?></td> 
                                         <td <?php echo $color?> class="peringatan<?php echo $i ?>"><?php echo $row->tanggal_ganti_oli; ?> hari</div></a></td>
-                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>"><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Oli" href="#modalOli"  data-toggle="modal"  onclick="cekoli('<?php echo $row->ID_OLI ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->olinopol ?>','<?php echo $row->KM_AWAL ?>','<?php echo $row->MERK_OLI ?>','<?php echo $row->TOTAL_VOLUME ?>','<?php echo $row->tanggal_ganti_oli ?>','<?php echo $row->tgl_oli ?>')"><i class="icon-pencil"></i></a>
-                                        </tr>
+                                        <td <?php echo $color?> class="peringatan<?php echo $i ?>">
+                                            <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                            <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Oli" href="#modalOli"  data-toggle="modal"  onclick="cekoli('<?php echo $row->ID_OLI ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->olinopol ?>','<?php echo $row->KM_AWAL ?>','<?php echo $row->MERK_OLI ?>','<?php echo $row->TOTAL_VOLUME ?>','<?php echo $row->tanggal_ganti_oli ?>','<?php echo $row->tgl_oli ?>')"><i class="icon-pencil"></i></a>
+                                        <?php }?>
+                                            </tr>
                                     <?php
                                 $i++;
                             }
