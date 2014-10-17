@@ -90,7 +90,7 @@ class m_apms extends CI_Model {
 		
 	}
 	public function periksaeditKinerjaApms($depot,$id_log,$no_delivery,$id_kinerja) {
-		$data = $this->db->query("select count(i.ID_KINERJA_APMS) as jumlah from kinerja_apms i, log_harian l where i.ID_LOG_HARIAN = l.ID_LOG_HARIAN and l.ID_DEPOT = $depot and i.NO_DELIVERY = $no_delivery");
+		$data = $this->db->query("select count(i.ID_KINERJA_APMS) as jumlah from kinerja_apms i, log_harian l where i.ID_LOG_HARIAN = l.ID_LOG_HARIAN and l.ID_DEPOT = $depot and i.NO_DELIVERY = $no_delivery and i.ID_KINERJA_APMS != $id_kinerja");
 		$hasil = $data->row();
 		if($hasil->jumlah>0)
 		{

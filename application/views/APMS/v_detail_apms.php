@@ -416,7 +416,7 @@ function DateToIndo($date) {
                                     
                                    <td><a onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->PREMIUM ?>', '<?php echo $row->SOLAR ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
 								   </td>
-								   <td><a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusKinerja('<?php echo $row->ID_KINERJA_APMS?>','<?php echo $row->NO_DELIVERY?>')" data-toggle="modal" href="#ModalHapusKinerja"><i class="icon-remove"></i></a>
+								   <td><a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusKinerja('<?php echo $row->ID_KINERJA_APMS?>','<?php echo $row->NO_DELIVERY?>','<?php echo $row->DATE_PLAN_GI ?>')" data-toggle="modal" href="#ModalHapusKinerja"><i class="icon-remove"></i></a>
                                    </td>
                                 </tr>
                                 <?php $i++;
@@ -467,6 +467,7 @@ function DateToIndo($date) {
 					<div class="modal-footer">
 						<button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
 						<input type="hidden" value="" name="ID_KINERJA" id="ID_KINERJA"></input>
+						<input type="hidden" value="" name="tgl_delivery" id="tgl_delivery"></input>
 						<input type="submit" value="Hapus" name="hapuskinerja" class="btn btn-danger danger"></input>
 					</div>
 					</form>
@@ -705,9 +706,10 @@ function DateToIndo($date) {
         jQuery('#editable-sample_wrapper .dataTables_filter input').keyup();
     }
     
-    function hapus(id,no) {
+    function hapus(id,no,tgl) {
         $('#ID_APMS').val(id);
         $('#NO_APMS').html(no);
+        $('#tgl_delivery').val(tgl);
     }
 	
 	function hapusKinerja(id,no) {

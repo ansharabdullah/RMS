@@ -3338,15 +3338,13 @@ class laporan extends CI_Controller {
 					$t_premium = $t_premium + $premium;
 					$t_solar = $t_solar + $solar;
                     $sheetData->setCellValue('N' . '' . ($k + $i) . '', "=SUM(N" . ($k + $i - $j + 1) . ":" . 'N' . ($k + $i - 1) . ")");
-
-
-
-                    for ($h = ($k + $i + 2+1); $h <= 183; $h++) {
-                        $objPHPExcel->getActiveSheet()->removeRow($k + $i + 2 + 1 + 1 + 1, 1);
+					echo ($k + $i + 2+1 +1);
+                    for ($h = 1; $h < (182-($k + $i + 2 + 1)); $h++) {
+                        $objPHPExcel->getActiveSheet()->removeRow(($k + $i + 2+1 +1) , 1);
                     }
+                    //$sheetData->setCellValue('N' . '' . ($k + $i + 2 + 3) . '', $t_premium);
+                    //$sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1 + 3) . '', $t_solar);
 
-                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 3) . '', $t_premium);
-                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1 + 3) . '', $t_solar);
 
                     /*
                      * Realisasi Penyaluran
@@ -3401,15 +3399,29 @@ class laporan extends CI_Controller {
 
                             $no_apms_temp = $row->NO_APMS;
                             $l++;
+							$col_no = $row->tanggal + 4;
+                            if ($row->j_solar == 0) {
+                                $nilai = $sheetData->getCell($column_name[$col_no] . '9')->getValue();
+								
+                                $nilai = $nilai+ $row->j_premium;
+                                $sheetData->setCellValue($column_name[$col_no] . '9', $nilai);
+                            } else {
+                                $nilai = $sheetData->getCell($column_name[$col_no] . '10')->getValue();
+								
+                                $nilai = $nilai + $row->j_solar;
+                                $sheetData->setCellValue($column_name[$col_no] . '10', $nilai);
+                            }
                         } else {
                             $col_no = $row->tanggal + 4;
                             if ($row->j_solar == 0) {
                                 $nilai = $sheetData->getCell($column_name[$col_no] . '9')->getValue();
-                                $nilai = + $row->j_premium;
+								
+                                $nilai = $nilai + $row->j_premium;
                                 $sheetData->setCellValue($column_name[$col_no] . '9', $nilai);
                             } else {
                                 $nilai = $sheetData->getCell($column_name[$col_no] . '10')->getValue();
-                                $nilai = + $row->j_solar;
+								
+                                $nilai = $nilai + $row->j_solar;
                                 $sheetData->setCellValue($column_name[$col_no] . '10', $nilai);
                             }
                         }
