@@ -133,8 +133,9 @@ function DateToIndo($date) {
 					}
 					else
 					{
-					
-					?>
+						if ($this->session->userdata('id_role') != 5) 
+						{ ?>
+                    
 				
 				
 				<div style="float:right;">
@@ -143,7 +144,7 @@ function DateToIndo($date) {
                     <a class="btn btn-danger" data-toggle="modal" href="#ModalHapusRencana"><i class="icon-eraser"></i> Hapus</a>
                 </div>
 					<?php
-					
+						}
 					}
 				}
 				?>

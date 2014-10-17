@@ -53,8 +53,11 @@
 		                <section class="panel">
                     <header class="panel-heading">
                         Tabel KPI APMS <strong><?php echo $nama_bulan." ".$tahun ?></strong>
+						<?php if ($this->session->userdata('id_role') != 5) { ?>
+                    
                         <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit KPI</a>
-                    </header>
+						<?php } ?>
+					</header>
                     <div class="panel-body" style="overflow-x: scroll">
                         <table class="table table-bordered">
                             <thead>
