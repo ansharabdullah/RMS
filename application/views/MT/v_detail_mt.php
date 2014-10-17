@@ -388,10 +388,11 @@ function DateToIndo($date) {
                 <header class="panel-heading">
                     <div class="col-lg-10">Detail MT
                     </div>
+                    <?php if ($this->session->userdata('id_role') != 5) { ?>
                     <a class="btn btn-warning" onclick="ShowEdit()" ><i class="icon-pencil"></i> Edit</a> 
 
                     <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_MOBIL ?>');"><i class="icon-eraser"></i> Hapus</a>
-
+<?php } ?>
                 </header>
                 <div class="panel-body bio-graph-primary" >
                     <div class="panel-body">
@@ -951,14 +952,17 @@ function DateToIndo($date) {
                                     <td><?php echo $row->bio_solar; ?></td>
                                     <td><span class="label label-success">Hadir</span></td>
                                     
-                                   <td>
+                                   <td
+                                       <?php if ($this->session->userdata('id_role') != 5) { ?> 
                                     <a onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo $row->tanggal_log_harian ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><br>
-
+                                       <?php } ?>
                                     </td>
                                    <td>
+                                       <?php if ($this->session->userdata('id_role') != 5) { ?> 
                                        <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusKinerja('<?php echo $row->id_kinerja_mt?>','<?php echo date('d M Y',  strtotime($row->tanggal_log_harian))?>')" data-toggle="modal" href="#ModalHapusKinerja"><i class="icon-remove"></i></a>       
-
+                                        <?php } ?>
                                    </td>
+                                   
                                     </tr>
                                 <?php
                                                 } else {

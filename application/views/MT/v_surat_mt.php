@@ -116,9 +116,12 @@ function DateToIndo($date) {
                                      
                                     <td><?php echo $row->KETERANGAN_SURAT; ?></td>
                                    
-                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Surat" href="#ModalEditSurat"  data-toggle="modal"  onclick="ceksurat('<?php echo $row->ID_SURAT ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->ID_JENIS_SURAT ?>','<?php echo $row->TANGGAL_AKHIR_SURAT ?>','<?php echo $row->KETERANGAN_SURAT ?>')"><i class="icon-pencil"></i></a>
+                                   <td>
+                                       <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                       <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Surat" href="#ModalEditSurat"  data-toggle="modal"  onclick="ceksurat('<?php echo $row->ID_SURAT ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->ID_JENIS_SURAT ?>','<?php echo $row->TANGGAL_AKHIR_SURAT ?>','<?php echo $row->KETERANGAN_SURAT ?>')"><i class="icon-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusSurat('<?php echo $row->ID_SURAT?>')" data-toggle="modal" href="#HapusSurat"><i class="icon-remove"></i></a>
-                                       </td>
+                                   <?php }?>    
+                                   </td>
                                 </tr>
                                 <?php 
                                 $i++;

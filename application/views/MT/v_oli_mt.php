@@ -129,9 +129,11 @@ function DateToIndo($date) {
                                     <td><?php echo $row->MERK_OLI; ?></td>
                                     <td><?php echo $row->TOTAL_VOLUME; ?></td>
                                    <td>
+                                       <?php if ($this->session->userdata('id_role') != 5) { ?>
                                     <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Oli" href="#ModalEditOli"  data-toggle="modal"  onclick="cekoli('<?php echo $row->ID_OLI ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->MERK_OLI ?>','<?php echo $row->KM_AWAL ?>','<?php echo $row->TANGGAL_GANTI_OLI ?>','<?php echo $row->TOTAL_VOLUME ?>')"><i class="icon-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusoli('<?php echo $row->ID_OLI?>')" data-toggle="modal" href="#HapusOli"><i class="icon-remove"></i></a>
-                                       </td>
+                                   <?php }?>    
+                                   </td>
                                 </tr>
                                 <?php $i++;
                                 $j++;

@@ -118,8 +118,10 @@ function DateToIndo($date) {
                 <section class="panel">
                     <header class="panel-heading">
                         Tabel Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong>
+                        <?php if ($this->session->userdata('id_role') != 5) { ?>
                     <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalHapusRencana" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Rencana"><i class="icon-remove"></i></a>
-                </header>
+                <?php }?>
+                    </header>
                 <div class="panel-body"  >
                     <div class="panel-body" >
                         <div class="adv-table editable-table " style="overflow-x: scroll">
@@ -166,8 +168,10 @@ function DateToIndo($date) {
                                             <td><?php echo $row->PEMBATALAN ?></td>
                                             
                                             <td>
+                                                <?php if ($this->session->userdata('id_role') != 5) { ?>
                                                 <a onclick="cekRencana('<?php echo $row->ID_RENCANA ?>','<?php echo (DateToIndo($row->TANGGAL_LOG_HARIAN)) ?>','<?php echo $row->R_PREMIUM ?>','<?php echo $row->R_PERTAMAX ?>','<?php echo $row->R_PERTAMAXPLUS ?>','<?php echo $row->R_PERTAMINADEX ?>','<?php echo $row->R_SOLAR ?>','<?php echo $row->R_BIOSOLAR ?>','<?php echo $row->R_OWN_USE ?>','<?php echo $row->MISS ?>','<?php echo $row->TAMBAHAN ?>','<?php echo $row->PEMBATALAN ?>')" data-placement="top" data-toggle="modal" href="#ModalRencana" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                        </td>
+                                        <?php }?>
+                                            </td>
                                         </tr>
 
                                         <?php
