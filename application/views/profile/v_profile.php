@@ -115,11 +115,11 @@
                                     <p><span>Tempat Lahir </span>: <?php echo $row->TEMPAT_LAHIR ?></p>
                                 </div>
                                 <div class="bio-row">
-                                    <p><span>Tanggal Lahir </span>: <?php echo date("d-M-Y", strtotime($row->TANGGAL_LAHIR)) ?></p>
+                                    <p><span>Tanggal Lahir </span>: <?php if(isset($row->TANGGAL_LAHIR) && $row->TANGGAL_LAHIR != '0000-00-00')echo date("d-M-Y", strtotime($row->TANGGAL_LAHIR)) ?></p>
                                 </div>
 
                                 <div class="bio-row">
-                                    <p><span>Tanggal Masuk </span>: <?php echo date("d-M-Y", strtotime($row->TANGGAL_MASUK)) ?></p>
+                                    <p><span>Tanggal Masuk </span>: <?php if(isset($row->TANGGAL_LAHIR) && $row->TANGGAL_LAHIR != '0000-00-00')echo date("d-M-Y", strtotime($row->TANGGAL_MASUK)) ?></p>
                                 </div>
 
                                 <div class="bio-row">
@@ -152,8 +152,6 @@
                                         <label for="cjabatan" class="control-label col-lg-4">Jabatan</label>
                                         <div class="col-lg-6">
                                             <select class="form-control input-sm m-bot15" id="cjabatan" name="jabatan" >
-                                                <option value="OAM" <?php if ($row->ID_ROLE == 1) echo"selected"; ?>>OAM</option>
-                                                <option value="STAF OAM" <?php if ($row->ID_ROLE == 2) echo"selected"; ?>>Staf OAM</option>
                                                 <option value="SITE SUPPERVISSOR" <?php if ($row->ID_ROLE == 3) echo"selected"; ?>>Site Suppervisor</option>
                                                 <option value="PENGAWAS OPERASI" <?php if ($row->ID_ROLE == 4) echo"selected"; ?>>Pengawas Operasi</option>
                                                 <option value="SUPPORTING" <?php if ($row->ID_ROLE == 5) echo"selected"; ?>>Supporting</option>
@@ -174,32 +172,32 @@
                                     <div class="bio-row">
                                         <label for="ctelp" class="control-label col-lg-4">No. Telp</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control input-sm m-bot15" id="ctelp" name="no_telepon" minlength="2" type="text" value="<?php echo $row->NO_TELEPON ?>" required />
+                                            <input class=" form-control input-sm m-bot15" id="ctelp" name="no_telepon" minlength="2" type="text" value="<?php echo $row->NO_TELEPON ?>" />
                                         </div>
                                     </div>
                                     <div class="bio-row">
                                         <label for="cktp" class="control-label col-lg-4">No. KTP</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control input-sm m-bot15" id="cktp" name="no_ktp" minlength="2" type="text" value="<?php echo $row->NO_KTP ?>" required />
+                                            <input class=" form-control input-sm m-bot15" id="cktp" name="no_ktp" minlength="2" type="text" value="<?php echo $row->NO_KTP ?>" />
                                         </div>
                                     </div>
                                     <div class="bio-row">
                                         <label for="csim" class="control-label col-lg-4">No. SIM</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control input-sm m-bot15" id="csim" name="no_sim" minlength="2" type="text" value="<?php echo $row->NO_SIM ?>" required />
+                                            <input class=" form-control input-sm m-bot15" id="csim" name="no_sim" minlength="2" type="text" value="<?php echo $row->NO_SIM ?>" />
                                         </div>
                                     </div>
 
                                     <div class="bio-row">
                                         <label for="ctempatlahir" class="control-label col-lg-4">Tempat Lahir</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempat_lahir" minlength="2" type="text" value="<?php echo $row->TEMPAT_LAHIR ?>" required />
+                                            <input class=" form-control input-sm m-bot15" id="ctempatlahir" name="tempat_lahir" minlength="2" type="text" value="<?php echo $row->TEMPAT_LAHIR ?>"/>
                                         </div>
                                     </div>
                                     <div class="bio-row">
                                         <label for="ctgllahir" class="control-label col-lg-4">Tanggal Lahir</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tanggal_lahir" size="16" type="date" value="<?php echo $row->TANGGAL_LAHIR ?>" required/>
+                                            <input class=" form-control input-sm m-bot15" id="ctgllahir" name="tanggal_lahir" size="16" type="date" value="<?php echo $row->TANGGAL_LAHIR ?>"/>
                                             <span class="help-block">Select date</span>
                                         </div>
                                     </div>
@@ -207,7 +205,7 @@
                                     <div class="bio-row">
                                         <label for="ctglmasuk" class="control-label col-lg-4">Tanggal Masuk</label>
                                         <div class="col-lg-6">
-                                            <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tanggal_masuk" type="date" size="16" type="text" value="<?php echo $row->TANGGAL_MASUK ?>" required/>
+                                            <input class=" form-control input-sm m-bot15" id="ctglmasuk" name="tanggal_masuk" type="date" size="16" type="text" value="<?php echo $row->TANGGAL_MASUK ?>"/>
                                             <span class="help-block">Select date</span>
                                         </div>
                                     </div>
