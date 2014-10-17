@@ -531,6 +531,8 @@ class amt extends CI_Controller {
                 }
             }
         } else if ($this->input->post('add_kinerja', true)) {
+            
+            if ($this->session->userdata('id_role') >= 3) {
             $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
             $id_pegawai = $this->input->post('id_pegawai', true);
 
@@ -601,7 +603,12 @@ class amt extends CI_Controller {
                 $data1['pesan'] = $pesan;
                 $data1['feedback'] = 2;
             }
+            }else{
+            redirect(base_url());
+            }
         } else if ($this->input->post('delete_kinerja', true)) {
+            
+            if ($this->session->userdata('id_role') >= 3 && $this->session->userdata('id_role') != 5) {
             $id_kinerja_amt = $this->input->post('id_kinerja_amt', true);
             $this->m_kinerja->deleteKinerjaAMT($id_kinerja_amt);
 
@@ -616,6 +623,9 @@ class amt extends CI_Controller {
             $pesan = "Data berhasil dihapus.";
             $data1['pesan'] = $pesan;
             $data1['feedback'] = 1;
+            }else{
+                redirect(base_url());
+            }
         }
 
         $depot = $this->session->userdata('id_depot');
