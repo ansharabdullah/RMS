@@ -83,9 +83,11 @@ function DateToIndo($date) {
             <div class="panel-body">
                 <div class="adv-table editable-table" style="overflow-x: scroll ">
                     <div class="clearfix">
+                        <?php if ($this->session->userdata('id_role') != 5) { ?>
                         <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Surat MT <i class="icon-plus"></i>
                         </a>
+                        <?php }?>
                     </div>
 
                     <div class="space15"></div>

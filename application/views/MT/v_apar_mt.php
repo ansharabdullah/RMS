@@ -82,9 +82,11 @@ function DateToIndo($date) {
             <div class="panel-body">
                 <div class="adv-table editable-table " style="overflow-x: scroll">
                     <div class="clearfix">
+                        <?php if ($this->session->userdata('id_role') != 5) { ?>
                         <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahApar">
                             Tambah APAR <i class="icon-plus"></i>
                         </a>
+                        <?php }?>
                     </div>
 
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">

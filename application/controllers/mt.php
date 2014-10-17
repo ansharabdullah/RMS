@@ -925,6 +925,9 @@ class Mt extends CI_Controller {
 		
                     if($this->input->post('simpan',true))
                     {
+                        if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         
                         $data = array(
                         'id_mobil' => $id_mobil,
@@ -944,7 +947,7 @@ class Mt extends CI_Controller {
                             'keyword' => 'Tambah'
                             );
                         $this->m_log_sistem->insertLog($datalog);
-                    
+                        }
                     
                     }
                     
@@ -1015,7 +1018,9 @@ class Mt extends CI_Controller {
 		
                     if($this->input->post('simpan',true))
                     {
-                         
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         $data = array(
                         'id_mobil' => $id_mobil,
                         'MERK_BAN' => $this->input->post('MERK_BAN', true),
@@ -1036,7 +1041,7 @@ class Mt extends CI_Controller {
                             'keyword' => 'Tambah'
                             );
                         $this->m_log_sistem->insertLog($datalog);
-                        
+                        }
                     }
                     if($this->input->post('editban',true))
                     {
@@ -1105,7 +1110,9 @@ class Mt extends CI_Controller {
 		
                     if($this->input->post('simpan',true))
                     {
-                        
+                        if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         $data = array(
                             'id_mobil' => $id_mobil,
                             'MERK_OLI' => $this->input->post('MERK_OLI', true),
@@ -1127,7 +1134,7 @@ class Mt extends CI_Controller {
                             );
                         $this->m_log_sistem->insertLog($datalog);
                     }
-                    
+                    }
                     
                     if($this->input->post('oli',true))
                     {

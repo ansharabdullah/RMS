@@ -102,10 +102,11 @@ foreach ($ban as $a) {
             <div class="panel-body">
                 <div class="adv-table editable-table " style="overflow-x: scroll">
                     <div class="clearfix">
-
+<?php if ($this->session->userdata('id_role') != 5) { ?>
                         <a class="btn btn-primary" data-toggle="modal" href="#myModal">
                             Tambah Ban MT <i class="icon-plus"></i>
                         </a>
+                        <?php }?>
                     </div>
                     <div class="space15"></div>
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
