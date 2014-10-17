@@ -163,6 +163,12 @@
     <section class="wrapper">       
         <div class="row">
             <div class="col-lg-12">
+                  <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+                    <li>KPI Internal</li>
+                </ul>
+                <!--breadcrumbs end -->
             </div>
         </div>
 

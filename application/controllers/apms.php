@@ -78,7 +78,6 @@ class apms extends CI_Controller {
 						'TARIF_PATRA_NIAGA' => $this->input->post('tarif', true),
 					);
 					$pesan = $this->m_apms->insertApms($data5);
-					
 					$a = $this->m_rencana_apms->cekRencana($depot,date('m'),date('Y'));
 					$cek1=0;
 					foreach($a as $k)
@@ -144,8 +143,19 @@ class apms extends CI_Controller {
 			}
 			if($this->input->post('simpan')=="Hapus")
 			{
+				$depot = $this->session->userdata("id_depot");
 				$id_apms = $this->input->post('ID_APMS');
 				$pesan = $this->m_apms->deleteApms($id_apms);
+				$tahun = date('Y');
+				$bulan = date('m');
+				$tanggal_log = date($tahun.'-'.$bulan.'-'.'1');
+				$id_log = $this->m_log_harian->getIdLogHarianTanggal($tanggal_log,$depot);
+				$id_log_h='';
+				foreach($id_log as $l)
+				{
+					$id_log_h = $l->ID_LOG_HARIAN;
+				}
+				$pesan = $this->m_rencana_apms->deleteRencanabyIdAPMS($id_log_h,$id_apms);	
 				if($pesan)
 				{
 					$data1['pesan'] = 1;
@@ -176,7 +186,7 @@ class apms extends CI_Controller {
 		
     }	
 	public function detail_apms($id_apms,$bulan,$tahun){
-				
+		$depot = $this->session->userdata('id_depot');
 		$data1['pesan'] =0;
 		
 		if($this->input->post('simpan'))
@@ -266,12 +276,22 @@ class apms extends CI_Controller {
 						'DESCRIPTION' => $this->input->post('des', true),
 					);
 					$bisa = $this->m_apms->insertKinerjaApms($data_1);
+					$status3=0;
+					$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+					foreach($kpi as $kpi1)
+					{
+						$status3 = $kpi1->STATUS_KPI_APMS;
+					}
+					if($status3==1)
+					{
+						$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+					}
 					if($bisa)
 					{
 						$datalog = array(
-							'keterangan' => 'Menambah Data Kinerja APMS',
+							'keterangan' => 'Menambah Data Kinerja APMS dengan Nomor LO '.$this->input->post('no_delivery', true),
 							'id_pegawai' => $this->session->userdata("id_pegawai"),
-							'keyword' => 'Hapus'
+							'keyword' => 'Tambah'
 						);
 						$this->m_log_sistem->insertLog($datalog);
 						$data1['pesan'] = 1;
@@ -321,10 +341,20 @@ class apms extends CI_Controller {
 						'DESCRIPTION' => $this->input->post('des1', true),
 					);
 					$bisa = $this->m_apms->editKinerjaApms($data_1,$id_kinerja);
+					$status3=0;
+					$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+					foreach($kpi as $kpi1)
+					{
+						$status3 = $kpi1->STATUS_KPI_APMS;
+					}
+					if($status3==1)
+					{
+						$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+					}
 					if($bisa)
 					{
 						$datalog = array(
-							'keterangan' => 'Mengedit Data Kinerja APMS',
+							'keterangan' => 'Mengedit Data Kinerja APMS dengan Nomor LO '.$this->input->post('no_delivery1', true),
 							'id_pegawai' => $this->session->userdata("id_pegawai"),
 							'keyword' => 'Edit'
 						);
@@ -347,12 +377,22 @@ class apms extends CI_Controller {
 				$id = $this->input->post('ID_KINERJA');
 				
 				$pesan = $this->m_apms->deleteKinerjaApms($id);
+				$status3=0;
+				$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+				foreach($kpi as $kpi1)
+				{
+					$status3 = $kpi1->STATUS_KPI_APMS;
+				}
+				if($status3==1)
+				{
+					$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+				}
 				if($pesan)
 				{
 					$data1['pesan'] = 1;
 					$data1['pesan_text'] = "Selamat Data Kinerja APMS Berhasil Dihapus!";
 					$datalog = array(
-						'keterangan' => 'Menghapus Data Kinerja APMS',
+						'keterangan' => 'Menghapus Data Kinerja APMS dengan Nomor LO '.$id,
 						'id_pegawai' => $this->session->userdata("id_pegawai"),
 						'keyword' => 'Hapus'
 					);
@@ -537,9 +577,9 @@ class apms extends CI_Controller {
 			if($hasil)
 			{
 				$datalog = array(
-					'keterangan' => 'Menambah Data Rencana APMS',
+					'keterangan' => 'Menambah Data Rencana APMS '. $data1['nama_bulan'].' '.$tahun,
 					'id_pegawai' => $this->session->userdata("id_pegawai"),
-					'keyword' => 'Edit'
+					'keyword' => 'Tambah'
 				);
 				$this->m_log_sistem->insertLog($datalog);
 				$this->m_log_harian->updateKoutaLog($depot,$tahun,$bulan);
@@ -564,10 +604,20 @@ class apms extends CI_Controller {
 										
 			}
 			$hasil = $this->m_rencana_apms->editRencanaApms($data,$data_id);
+			$status3=0;
+			$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+			foreach($kpi as $kpi1)
+			{
+				$status3 = $kpi1->STATUS_KPI_APMS;
+			}
+			if($status3==1)
+			{
+				$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+			}
 			if($hasil)
 			{
 				$datalog = array(
-					'keterangan' => 'Mengedit Data Rencana APMS',
+					'keterangan' => 'Mengedit Data Rencana APMS '.$data1['nama_bulan'].' '.$tahun,
 					'id_pegawai' => $this->session->userdata("id_pegawai"),
 					'keyword' => 'Edit'
 				);
@@ -584,10 +634,20 @@ class apms extends CI_Controller {
 		{
 			$id = $this->input->post('id_rencana',true);
 			$hasil = $this->m_rencana_apms->deleteRencanaApms($id);
+			$status3=0;
+			$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+			foreach($kpi as $kpi1)
+			{
+				$status3 = $kpi1->STATUS_KPI_APMS;
+			}
+			if($status3==1)
+			{
+				$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+			}
 			if($hasil)
 			{
 				$datalog = array(
-					'keterangan' => 'Menghapus Data Rencana APMS',
+					'keterangan' => 'Menghapus Data Rencana APMS '. $data1['nama_bulan'].' '.$tahun,
 					'id_pegawai' => $this->session->userdata("id_pegawai"),
 					'keyword' => 'Hapus'
 				);
@@ -678,7 +738,13 @@ class apms extends CI_Controller {
 					$target = $jumlah_rencana->jumlah;
 					$realisasi = $jumlah_kinerja->jumlah;
 					$deviasi =  $realisasi - $target;
-					$score =  (1 - ($deviasi/$target))*100;
+					if($target!=0)
+					{
+						$score =  round((1 - (($deviasi/$target)))*100,2);
+					}else{
+						$score =80;
+					}
+					
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -713,7 +779,7 @@ class apms extends CI_Controller {
 					$target = $this->input->post('kpitarget1', true);
 					$realisasi = $this->input->post('kpirealisasi1', true);
 					$deviasi =  $realisasi - $target;
-					$score =  (1 - ($deviasi/$target))*100;
+					$score =  round((1 - ($deviasi/$target))*100,2);
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -747,7 +813,7 @@ class apms extends CI_Controller {
 					$target = $this->input->post('kpitarget2', true);
 					$realisasi = $this->input->post('kpirealisasi2', true);
 					$deviasi =  $realisasi - $target;
-					$score =  (1 - ($deviasi/$target))*100;
+					$score =  round((1 - ($deviasi/$target))*100,2);
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -781,7 +847,7 @@ class apms extends CI_Controller {
 					$target = $this->input->post('kpitarget3', true);
 					$realisasi = $this->input->post('kpirealisasi3', true);
 					$deviasi =  $realisasi - $target;
-					$score =  (1 - ($deviasi/$target))*100;
+					$score =  round((1 - ($deviasi/$target))*100,2);
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -815,7 +881,7 @@ class apms extends CI_Controller {
 					$target = $this->input->post('kpitarget4', true);
 					$realisasi = $this->input->post('kpirealisasi4', true);
 					$deviasi =  $target - $realisasi;
-					$score =  (1 - ($deviasi/$target))*100;
+					$score =  round((1 - ($deviasi/$target))*100,2);
 					if($score < 80)
 					{
 						$normal_score = 80;
@@ -1064,7 +1130,7 @@ class apms extends CI_Controller {
 				$jumlah_nilai = 0;
 				$bobot = 5;
 				$deviasi =  $realisasi - $target;
-				$score =  (1 - ($deviasi/$target))*100;
+				$score =  round((1 - ($deviasi/$target))*100,2);
 				if($score < 80)
 				{
 					$normal_score = 80;
@@ -1099,7 +1165,7 @@ class apms extends CI_Controller {
 				$id = $this->input->post('idkpi2', true);
 				
 				$deviasi =  $realisasi - $target;
-				$score =  (1 - ($deviasi/$target))*100;
+				$score =  round((1 - ($deviasi/$target))*100,2);
 				if($score < 80)
 				{
 					$normal_score = 80;
@@ -1134,7 +1200,7 @@ class apms extends CI_Controller {
 				$id = $this->input->post('idkpi3', true);
 				
 				$deviasi =  $realisasi - $target;
-				$score =  (1 - ($deviasi/$target))*100;
+				$score =  round((1 - ($deviasi/$target))*100,2);
 				if($score < 80)
 				{
 					$normal_score = 80;
@@ -1168,7 +1234,7 @@ class apms extends CI_Controller {
 				$id = $this->input->post('idkpi4', true);
 				
 				$deviasi =  $target - $realisasi;
-				$score =  (1 - ($deviasi/$target))*100;
+				$score =  round((1 - ($deviasi/$target))*100,2);
 				if($score < 80)
 				{
 					$normal_score = 80;

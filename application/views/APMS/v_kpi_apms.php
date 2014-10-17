@@ -168,7 +168,7 @@
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Error!</strong> Data KPI Operasional tidak ditemukan.
+                    <strong>Error!</strong> Data KPI APMS tidak ditemukan.
                 </div>
 			
 			
@@ -260,7 +260,7 @@
                                 <td><input type="number" required="required" id="kpirealisasi7" name="kpirealisasi7" class="form-control"></td>
                             </tr>
                             <tr>
-                                <td>10</td>
+                                <td>9</td>
                                 <td>Number of Accident</td>
                                 <td><input type="number" required="required" id="kpitarget8" name="kpitarget8" class="form-control"></td>
                                 <td><input type="number" required="required" id="kpirealisasi8" name="kpirealisasi8" class="form-control"></td>

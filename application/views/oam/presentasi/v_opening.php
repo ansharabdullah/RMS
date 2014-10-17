@@ -13,7 +13,7 @@
         <div style="padding-left: 5%;height:80%;color: white;font-size: 30px;">
             <br/><br/><br/>FLEET MANAGEMENT FUEL RETAIL<br/>
             DIREKTORAT OPERASI<br/>
-            OPERATION AREA MANAGER (OAM) V<br/>
+            OPERATION AREA MANAGER (OAM) <?php echo AREA_OAM_ROMAWI ?><br/>
             TRIWULAN <?php echo $triwulan?> TAHUN <?php echo date('Y')?>
         </div>
         <div style="height:20%">

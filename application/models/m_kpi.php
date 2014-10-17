@@ -63,7 +63,7 @@ class m_kpi extends CI_Model {
                                    where n.ID_JENIS_PENILAIAN = jp.ID_JENIS_PENILAIAN and d.ID_DEPOT = lh.ID_DEPOT
                                    and n.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and n.ID_JENIS_PENILAIAN = 72
                                    and YEAR(lh.TANGGAL_LOG_HARIAN) <= YEAR(CURDATE()) and YEAR(lh.TANGGAL_LOG_HARIAN) >= YEAR(CURDATE()) - 2
-                                   group by d.ID_DEPOT,YEAR(lh.TANGGAL_LOG_HARIAN) order by d.ID_DEPOT asc");
+                                   group by d.ID_DEPOT,YEAR(lh.TANGGAL_LOG_HARIAN) order by d.ID_DEPOT,tahun asc");
          return $query->result();
     }
     

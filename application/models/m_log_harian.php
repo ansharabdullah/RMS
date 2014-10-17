@@ -120,7 +120,7 @@ class m_log_harian extends CI_Model {
 
     //notifikasi pengingat aktivitas yang belum dilakukan untuk oam
     public function get_log_peringatan_oam() {
-        $query = $this->db->query("select *,MONTH(TANGGAL_LOG_HARIAN) as bulan, DAY(TANGGAL_LOG_HARIAN) as tanggal 
+        $query = $this->db->query("select *,MONTH(TANGGAL_LOG_HARIAN) as bulan, DAY(TANGGAL_LOG_HARIAN) as tanggal, YEAR(TANGGAL_LOG_HARIAN) as tahun  
                                     from log_harian, depot 
                                     where tanggal_log_harian <= CURDATE() 
                                     and log_harian.ID_DEPOT = depot.ID_DEPOT 
@@ -137,6 +137,7 @@ class m_log_harian extends CI_Model {
             $set['bulan'] = $dt->bulan;
             $set['id_depot'] = $dt->ID_DEPOT;
             $set['depot'] = $dt->NAMA_DEPOT;
+            $set['tahun'] = $dt->tahun;
             $set['ms2'] = 1;
             $set['interpolasi'] = 1;
             $set['ba'] = 1;

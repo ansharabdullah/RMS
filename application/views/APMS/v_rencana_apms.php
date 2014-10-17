@@ -155,6 +155,7 @@ function DateToIndo($date) {
                                         <th style="display: none;">-</th>
                                         <th>No.</th>
                                         <th>No. APMS</th>
+                                        <th>Nama Pengusaha</th>
                                         <th>Premium</th>
                                         <th>Solar</th>
                                         <!--<th>Aksi</th>-->
@@ -169,6 +170,7 @@ function DateToIndo($date) {
                                             <th style="display: none;"></th>
                                             <td><?php echo $i ?></td>
                                              <td><?php echo $row->NO_APMS?></td>
+                                             <td><?php echo $row->NAMA_PENGUSAHA?></td>
                                             <td><?php echo $row->K_PREMIUM ?></td>
                                             <td><?php echo $row->K_SOLAR ?></td>
                                            <!-- <td>
@@ -220,7 +222,7 @@ function DateToIndo($date) {
 										?>
                                             <input type="hidden" class=" form-control input-sm m-bot15" name="<?php echo 'I_'.$k; ?>" value="<?php echo $no->ID_APMS; ?>"/>
 											<div class="form-group">
-												<label for="nomesin" class="col-lg-8 col-sm-8 control-label"><?php echo 'APMS '.$no->NO_APMS ?></label>
+												<label for="nomesin" class="col-lg-8 col-sm-8 control-label"><?php echo 'APMS '.$no->NAMA_PENGUSAHA.' '.$no->NO_APMS?></label>
 											</div>
 											<div class="form-group">
 												<label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
@@ -278,7 +280,7 @@ function DateToIndo($date) {
 										?>
                                             <input type="hidden" class=" form-control input-sm m-bot15" name="<?php echo 'I_'.$k; ?>" value="<?php echo $no->ID_RENCANA_APMS; ?>"/>
 											<div class="form-group">
-												<label for="nomesin" class="col-lg-8 col-sm-8 control-label"><?php echo 'APMS '.$no->NO_APMS ?></label>
+												<label for="nomesin" class="col-lg-8 col-sm-8 control-label"><?php echo 'APMS '.$no->NAMA_PENGUSAHA.' '.$no->NO_APMS?></label>
 											</div>
 											<div class="form-group">
 												<label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
