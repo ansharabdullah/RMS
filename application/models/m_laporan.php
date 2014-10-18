@@ -1060,7 +1060,7 @@ from log_harian l where MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGA
         return $query->result();
 	}
 	public function selectDataPengiriman($depot,$tahun,$bulan){
-		$query = $this->db->query("select a.NAMA_PENGUSAHA,b.DATE_PLAN_GI, a.NO_APMS, a.ALAMAT, b.NO_DELIVERY, b.DATE_DELIVERY, b.ORDER_NUMBER, b.DATE_ORDER, a.SHIP_TO, b.DESCRIPTION, b.PREMIUM, b.SOLAR, b.DATE_KAPAL_DATANG,b.DATE_KAPAL_BERANGKAT,b.PENGIRIMAN_KAPAL from apms a, kinerja_apms b,log_harian c where a.ID_APMS = b.ID_APMS and b.ID_LOG_HARIAN = c.ID_LOG_HARIAN and a.ID_DEPOT = $depot and MONTH(c.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(c.TANGGAL_LOG_HARIAN) = '$tahun' order By a.NAMA_PENGUSAHA ASC, b.PREMIUM DESC, b.DATE_PLAN_GI ASC");
+		$query = $this->db->query("select a.NAMA_PENGUSAHA,b.DATE_PLAN_GI, a.NO_APMS, a.ALAMAT, b.NO_DELIVERY, b.DATE_DELIVERY, b.ORDER_NUMBER, b.DATE_ORDER, a.SHIP_TO, b.DESCRIPTION, b.PREMIUM, b.SOLAR, b.DATE_KAPAL_DATANG,b.DATE_KAPAL_BERANGKAT,b.PENGIRIMAN_KAPAL from apms a, kinerja_apms b,log_harian c where a.ID_APMS = b.ID_APMS and b.ID_LOG_HARIAN = c.ID_LOG_HARIAN and a.ID_DEPOT = $depot and MONTH(c.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(c.TANGGAL_LOG_HARIAN) = '$tahun' order By a.NAMA_PENGUSAHA ASC,b.DATE_PLAN_GI, b.PREMIUM DESC, b.DATE_PLAN_GI ASC");
 		return $query->result();
 	}
 	public function realisasiAPMS($depot,$tahun,$bulan)

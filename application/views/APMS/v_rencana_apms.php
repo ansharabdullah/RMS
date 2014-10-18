@@ -133,8 +133,9 @@ function DateToIndo($date) {
 					}
 					else
 					{
-					
-					?>
+						if ($this->session->userdata('id_role') != 5) 
+						{ ?>
+                    
 				
 				
 				<div style="float:right;">
@@ -143,7 +144,7 @@ function DateToIndo($date) {
                     <a class="btn btn-danger" data-toggle="modal" href="#ModalHapusRencana"><i class="icon-eraser"></i> Hapus</a>
                 </div>
 					<?php
-					
+						}
 					}
 				}
 				?>
@@ -227,11 +228,11 @@ function DateToIndo($date) {
 											<div class="form-group">
 												<label for="nomesin" class="col-lg-2 col-sm-2 control-label">Premium</label>
 												<div class="col-lg-4">
-													<input class=" form-control input-sm m-bot15" id="<?php echo 'P_'.$k ?>" name="<?php echo 'P_'.$k ?>"  type="number" required />
+													<input class=" form-control input-sm m-bot15" id="<?php echo 'P_'.$k ?>" name="<?php echo 'P_'.$k ?>"  type="number" value="0" required />
 												</div>
 											   <label for="nomesin" class="col-lg-2 col-sm-2 control-label">Solar</label>
 												<div class="col-lg-4">
-													<input class=" form-control input-sm m-bot15" id="<?php echo 'R_'.$k ?>" name="<?php echo 'R_'.$k ?>"  type="number" required />
+													<input class=" form-control input-sm m-bot15" id="<?php echo 'R_'.$k ?>" name="<?php echo 'R_'.$k ?>"  type="number" value="0" required />
 												</div>	
 											</div>
 										<?php
@@ -319,7 +320,7 @@ function DateToIndo($date) {
                             <h4 class="modal-title">Konfirmasi Hapus Rencana APMS</h4>
                         </div>
                         <div class="modal-body">
-                            Yakin Hapus Rencana <strong><?php echo $bulan . ' ' . $tahun; ?></strong> ?
+                            Yakin Hapus Rencana <strong><?php echo $nama_bulan . ' ' . $tahun; ?></strong> ?
 							<?php
 							foreach($STATUS_RENCANA as $ka)
 							{

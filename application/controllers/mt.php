@@ -42,6 +42,9 @@ class Mt extends CI_Controller {
             $data2['submit'] = true;
             $tanggal = $this->input->post('bln');
         } else if ($this->input->post('edit')) {
+             if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
             $id_rencana = $this->input->post('id_rencana');
 
             $tanggal = $this->input->post('bln');
@@ -83,8 +86,11 @@ class Mt extends CI_Controller {
                 
             $data2['submit'] = true;
             $data2['edit'] = true;
+                        }
         } else if ($this->input->post('hapus')) {
-            
+             if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
             
             $datalog = array(
             'keterangan' => 'Hapus Rencana Mobil bulan ' .date("M - Y", strtotime($tanggal)),
@@ -96,7 +102,7 @@ class Mt extends CI_Controller {
             $data2['hapus'] = true;
             $rencana = unserialize($this->input->post('id_rencana'));
             $this->m_rencana_mt->deleteRencana($rencana);
-            
+              }
         } else {
             $data2['submit'] = true;
             $tanggal = date('Y-m-d');
@@ -423,6 +429,9 @@ class Mt extends CI_Controller {
                     
                     if($this->input->post('simpan')=="Simpan")
 			{
+                        if ($this->session->userdata('id_role') == 5) {
+                                redirect(base_url());
+                            } else {
 				$depot = $this->session->userdata("id_depot");
 				$id = $this->input->post('id', true);
                                 $data = array(
@@ -475,8 +484,11 @@ class Mt extends CI_Controller {
                                 
                                 }
                                 
+                           }
+                                
                 }
                 if($this->input->post('simpan1')=="Simpan"){
+                    
                     $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
                     $id_mobil = $this->input->post('id_mobil', true);
 
@@ -527,9 +539,12 @@ class Mt extends CI_Controller {
                                  $this->m_log_sistem->insertLog($datalog);
                     $data1['pesan'] = 1;
                     $data1['pesan_text'] = "Data Kinerja Berhasil Ditambahkan.";
-                    
+                        
                 }
                 if($this->input->post('simpan2')=="Simpan"){
+                     if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                     $id_kinerja_mt = $this->input->post('id_kinerja_mt', true);
                     $id_mobil = $this->input->post('id_mobil', true);
 
@@ -569,9 +584,13 @@ class Mt extends CI_Controller {
                                  $this->m_log_sistem->insertLog($datalog);
                     $data1['pesan'] = 1;
                     $data1['pesan_text'] = "Data Kinerja Berhasil Diubah.";
+                        }
                 }
                 if($this->input->post('hapuskinerja')=="Hapus")
 			{
+                     if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
 				$id_kinerja_mt = $this->input->post('id_kinerja_mt');
 				
 				$this->m_mt->deleteKinerja($id_kinerja_mt);
@@ -586,7 +605,7 @@ class Mt extends CI_Controller {
 						'keyword' => 'Hapus'
 					);
                                         $this->m_log_sistem->insertLog($datalog);
-				
+                            }
 			}
                 
        
@@ -816,6 +835,9 @@ class Mt extends CI_Controller {
 		
                     if($this->input->post('simpan',true))
                     {
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         $data = array(
                             'id_mobil' => $id_mobil,
                             'ID_JENIS_SURAT' => $this->input->post('ID_JENIS_SURAT', true),
@@ -835,9 +857,13 @@ class Mt extends CI_Controller {
                             'keyword' => 'Tambah'
                             );
                         $this->m_log_sistem->insertLog($datalog);
+                        }
                      }
                      if($this->input->post('editsurat',true))
 			{
+                          if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                             $id = $this->input->post('ID_SURAT', true);
                            $data = array(
                             'id_mobil' => $id_mobil,
@@ -859,9 +885,13 @@ class Mt extends CI_Controller {
                                 'keyword' => 'Edit'
                                 );
                             $this->m_log_sistem->insertLog($datalog);
+                            }
                         }
                          if($this->input->post('deletesurat',true))
 			{
+                          if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                              $id = $this->input->post('ID_SURAT2', true);
                               $this->m_mt->deleteSurat($id);
                               $a = $this->m_mt->getNopol($id_mobil);
@@ -875,6 +905,7 @@ class Mt extends CI_Controller {
                                 );
                             $this->m_log_sistem->insertLog($datalog);
                         }
+                      }
                         
                 
                 
@@ -894,6 +925,10 @@ class Mt extends CI_Controller {
 		
                     if($this->input->post('simpan',true))
                     {
+                        if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
+                        
                         $data = array(
                         'id_mobil' => $id_mobil,
                         'ID_JENIS_APAR' => $this->input->post('ID_JENIS_APAR', true),
@@ -912,10 +947,15 @@ class Mt extends CI_Controller {
                             'keyword' => 'Tambah'
                             );
                         $this->m_log_sistem->insertLog($datalog);
+                        }
+                    
                     }
                     
                      if($this->input->post('apar',true))
                     {
+                          if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                             $id = $this->input->post('ID_APAR', true);
                             
                            $data = array(
@@ -937,8 +977,12 @@ class Mt extends CI_Controller {
                                 );
                              $this->m_log_sistem->insertLog($datalog);
                     }
+                    }
                      if($this->input->post('deleteapar',true))
-			{
+			{ 
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                              $id = $this->input->post('ID_APAR2', true);
                               $this->m_mt->deleteApar($id);
                               $a = $this->m_mt->getNopol($id_mobil);
@@ -951,6 +995,8 @@ class Mt extends CI_Controller {
                                 'keyword' => 'Hapus'
                                 );
                             $this->m_log_sistem->insertLog($datalog);
+                        }
+                        
                         }
         $data1['id_mobil'] =  $id_mobil;
         $data1['apar'] = $this->m_mt->selectApar($id_mobil);
@@ -972,6 +1018,9 @@ class Mt extends CI_Controller {
 		
                     if($this->input->post('simpan',true))
                     {
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         $data = array(
                         'id_mobil' => $id_mobil,
                         'MERK_BAN' => $this->input->post('MERK_BAN', true),
@@ -992,9 +1041,13 @@ class Mt extends CI_Controller {
                             'keyword' => 'Tambah'
                             );
                         $this->m_log_sistem->insertLog($datalog);
+                        }
                     }
                     if($this->input->post('editban',true))
                     {
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                             $id = $this->input->post('ID_BAN', true);
                             
                            $data = array(
@@ -1016,8 +1069,12 @@ class Mt extends CI_Controller {
                                 'keyword' => 'Edit'
                                 );
                              $this->m_log_sistem->insertLog($datalog);
+                        }
                     } if($this->input->post('deleteban',true))
 			{
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                              $id = $this->input->post('ID_BAN2', true);
                               $this->m_mt->deleteBan($id);
                               $a = $this->m_mt->getNopol($id_mobil);
@@ -1030,6 +1087,7 @@ class Mt extends CI_Controller {
                                 'keyword' => 'Hapus'
                                 );
                             $this->m_log_sistem->insertLog($datalog);
+                        }
                         }
                     
                     
@@ -1052,7 +1110,9 @@ class Mt extends CI_Controller {
 		
                     if($this->input->post('simpan',true))
                     {
-                        
+                        if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         $data = array(
                             'id_mobil' => $id_mobil,
                             'MERK_OLI' => $this->input->post('MERK_OLI', true),
@@ -1074,10 +1134,13 @@ class Mt extends CI_Controller {
                             );
                         $this->m_log_sistem->insertLog($datalog);
                     }
-                    
+                    }
                     
                     if($this->input->post('oli',true))
                     {
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                             $id = $this->input->post('ID_OLI', true);
                             
                            $data = array(
@@ -1099,8 +1162,12 @@ class Mt extends CI_Controller {
                                 'keyword' => 'Edit'
                                 );
                              $this->m_log_sistem->insertLog($datalog);
+                        }
                     } if($this->input->post('deleteoli',true))
 			{
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                              $id = $this->input->post('ID_OLI2', true);
                               $this->m_mt->deleteOli($id);
                               $a = $this->m_mt->getNopol($id_mobil);
@@ -1113,6 +1180,8 @@ class Mt extends CI_Controller {
                                 'keyword' => 'Hapus'
                                 );
                             $this->m_log_sistem->insertLog($datalog);
+                        }
+                        
                         }
         $data1['id_mobil'] =  $id_mobil;
         $data1['oli'] = $this->m_mt->selectOli($id_mobil);
@@ -1304,6 +1373,9 @@ class Mt extends CI_Controller {
         
                     if($this->input->post('simpansurat',true))
                     {
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         
                         $akhir_surat = $_POST['tgl_surat'];
                         $id_jenis = $_POST['ID_JENIS_SURAT'];
@@ -1330,8 +1402,12 @@ class Mt extends CI_Controller {
                             );
                         $this->m_log_sistem->insertLog($datalog);
                     }
+                    }
                     if($this->input->post('simpanban',true))
                     {
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         
                         $id= $this->input->post('id_ban');
                         $id_mobil= $this->input->post('id_mobil_ban');
@@ -1364,9 +1440,12 @@ class Mt extends CI_Controller {
                             );
                         $this->m_log_sistem->insertLog($datalog);
                     }
+                    }
                     if($this->input->post('simpanoli',true))
                     {
-                        
+                      if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {   
                         $merk = $_POST['MERK_OLI'];
                         $km = $_POST['KM_AWAL'];
                         $tgl = $_POST['tgl_oli'];
@@ -1394,8 +1473,12 @@ class Mt extends CI_Controller {
                             );
                         $this->m_log_sistem->insertLog($datalog);
                     }
+                    }
                     if($this->input->post('simpanapar',true))
                     {
+                         if ($this->session->userdata('id_role') == 5) {
+                            redirect(base_url());
+                        } else {
                         
                         $tgl = $_POST['tgl_apar'];
                         $id_jenis= $_POST['ID_JENIS_APAR'];
@@ -1421,6 +1504,7 @@ class Mt extends CI_Controller {
                             'keyword' => 'Edit'
                             );
                         $this->m_log_sistem->insertLog($datalog);
+                    }
                     }
                     
                     

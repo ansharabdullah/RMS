@@ -3120,7 +3120,7 @@ class laporan extends CI_Controller {
                     }
                     $objPHPExcel->getActiveSheet()->removeRow($k + 2 + $i, 2);
                     $sheetData->setCellValue('G' . '' . ($k + 2 + $i) . '', "=SUM(G" . $k . ":" . 'G' . ($k + 1 + $i) . ")");
-                    for ($j = ($k + $i); $j < 147; $j++) {
+                    for ($j = ($k + $i); $j < 145; $j++) {
                         $objPHPExcel->getActiveSheet()->removeRow($k + 4 + $i, 1);
                     }
 
@@ -3177,7 +3177,7 @@ class laporan extends CI_Controller {
                     $sheetData = $objPHPExcel->getActiveSheet();
 
                     $laporanBiaya = $this->m_laporan->getRealisasiBiayaAPMS($depot, $tahun, $bulan);
-                    $sheetData->setCellValue('A3', "WILAYAH S & D REGION III TERMINAL BBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A3', "WILAYAH S & D REGION ".AREA_OAM_ROMAWI." TERMINAL BBM " . $data_depot->NAMA_DEPOT);
                     $sheetData->setCellValue('A4', "Bulan : " . $month_name[$bulan] . " " . $tahun);
 
                     $sheetData->setCellValue('A23', "TBBM " . $data_depot->NAMA_DEPOT);
@@ -3219,7 +3219,7 @@ class laporan extends CI_Controller {
 
 
                     $data_pengiriman = $this->m_laporan->selectDataPengiriman($depot, $tahun, $bulan);
-
+					//$x=0;
                     $i = 1;
                     $j = 1;
                     $k = 3;
@@ -3227,18 +3227,21 @@ class laporan extends CI_Controller {
                     $premium = 0;
                     $t_solar = 0;
                     $solar = 0;
+					$apm=0;
+					$last = "=0";
+					$last1 = "=0";
                     foreach ($data_pengiriman as $row) {
                         if ($i == 1) {
-                            $sheetData->insertNewRowBefore($i + $k + 1, 1);
+						   $sheetData->insertNewRowBefore($i + $k + 1, 1);
                             $sheetData->setCellValue('A' . '' . ($k + $i) . '', $j);
                             $sheetData->setCellValue('B' . '' . ($k + $i) . '', $row->NAMA_PENGUSAHA);
-                            $sheetData->setCellValue('C' . '' . ($k + $i) . '', $row->DATE_PLAN_GI);
+                            $sheetData->setCellValue('C' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_PLAN_GI)));
                             $sheetData->setCellValue('D' . '' . ($k + $i) . '', $row->NO_APMS);
                             $sheetData->setCellValue('E' . '' . ($k + $i) . '', $row->ALAMAT);
                             $sheetData->setCellValue('F' . '' . ($k + $i) . '', $row->NO_DELIVERY);
-                            $sheetData->setCellValue('G' . '' . ($k + $i) . '', $row->DATE_DELIVERY);
+                            $sheetData->setCellValue('G' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_DELIVERY)));
                             $sheetData->setCellValue('H' . '' . ($k + $i) . '', $row->ORDER_NUMBER);
-                            $sheetData->setCellValue('I' . '' . ($k + $i) . '', $row->DATE_ORDER);
+                            $sheetData->setCellValue('I' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_ORDER)));
                             $sheetData->setCellValue('J' . '' . ($k + $i) . '', $row->SHIP_TO);
                             $sheetData->setCellValue('K' . '' . ($k + $i) . '', $row->DESCRIPTION);
                             $sheetData->setCellValue('L' . '' . ($k + $i) . '', $data_depot->NAMA_DEPOT);
@@ -3254,21 +3257,22 @@ class laporan extends CI_Controller {
                                 $solar = $solar + $row->SOLAR;
                             }
                             $sheetData->setCellValue('O' . '' . ($k + $i) . '', $row->PENGIRIMAN_KAPAL);
-                            $sheetData->setCellValue('Q' . '' . ($k + $i) . '', $row->DATE_KAPAL_DATANG);
-                            $sheetData->setCellValue('R' . '' . ($k + $i) . '', $row->DATE_KAPAL_BERANGKAT);
+                           $sheetData->setCellValue('Q' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_KAPAL_DATANG)));
+                           $sheetData->setCellValue('R' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_KAPAL_BERANGKAT)));
                             $j++;
+							$apm++;
                         } else {
                             if ($sheetData->getCell('D' . ($k + $i - 1))->getValue() == $row->NO_APMS) {
                                 $sheetData->insertNewRowBefore($i + $k + 1, 1);
                                 $sheetData->setCellValue('A' . '' . ($k + $i) . '', $j);
                                 $sheetData->setCellValue('B' . '' . ($k + $i) . '', $row->NAMA_PENGUSAHA);
-                                $sheetData->setCellValue('C' . '' . ($k + $i) . '', $row->DATE_PLAN_GI);
+                                $sheetData->setCellValue('C' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_PLAN_GI)));
                                 $sheetData->setCellValue('D' . '' . ($k + $i) . '', $row->NO_APMS);
                                 $sheetData->setCellValue('E' . '' . ($k + $i) . '', $row->ALAMAT);
                                 $sheetData->setCellValue('F' . '' . ($k + $i) . '', $row->NO_DELIVERY);
-                                $sheetData->setCellValue('G' . '' . ($k + $i) . '', $row->DATE_DELIVERY);
+                                $sheetData->setCellValue('G' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_DELIVERY)));
                                 $sheetData->setCellValue('H' . '' . ($k + $i) . '', $row->ORDER_NUMBER);
-                                $sheetData->setCellValue('I' . '' . ($k + $i) . '', $row->DATE_ORDER);
+                                $sheetData->setCellValue('I' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_ORDER)));
                                 $sheetData->setCellValue('J' . '' . ($k + $i) . '', $row->SHIP_TO);
                                 $sheetData->setCellValue('K' . '' . ($k + $i) . '', $row->DESCRIPTION);
                                 $sheetData->setCellValue('L' . '' . ($k + $i) . '', $data_depot->NAMA_DEPOT);
@@ -3285,15 +3289,18 @@ class laporan extends CI_Controller {
                                     $solar = $solar + $row->SOLAR;
                                 }
                                 $sheetData->setCellValue('O' . '' . ($k + $i) . '', $row->PENGIRIMAN_KAPAL);
-                                $sheetData->setCellValue('Q' . '' . ($k + $i) . '', $row->DATE_KAPAL_DATANG);
-                                $sheetData->setCellValue('R' . '' . ($k + $i) . '', $row->DATE_KAPAL_BERANGKAT);
-                            } else {
+                               $sheetData->setCellValue('Q' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_KAPAL_DATANG)));
+                                $sheetData->setCellValue('R' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_KAPAL_BERANGKAT)));
+                            } else{
+								$apm++;
                                 $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
                                 $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
                                 $sheetData->setCellValue('N' . '' . ($k + $i + 2) . '', $premium);
                                 $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1) . '', $solar);
                                 $sheetData->setCellValue('N' . '' . ($k + $i) . '', "=SUM(N" . ($k + $i - $j + 1) . ":" . 'N' . ($k + $i - 1) . ")");
-                                $t_premium = $t_premium + $premium;
+                                $last = $last.'+N' . '' . ($k + $i + 2);
+								$last1 = $last1.'+N' . '' . ($k + $i + 2 + 1);
+								$t_premium = $t_premium + $premium;
                                 $t_solar = $t_solar + $solar;
                                 $premium = 0;
                                 $solar = 0;
@@ -3302,13 +3309,13 @@ class laporan extends CI_Controller {
                                 $sheetData->insertNewRowBefore($i + $k + 1, 1);
                                 $sheetData->setCellValue('A' . '' . ($k + $i) . '', $j);
                                 $sheetData->setCellValue('B' . '' . ($k + $i) . '', $row->NAMA_PENGUSAHA);
-                                $sheetData->setCellValue('C' . '' . ($k + $i) . '', $row->DATE_PLAN_GI);
+                                $sheetData->setCellValue('C' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_PLAN_GI)));
                                 $sheetData->setCellValue('D' . '' . ($k + $i) . '', $row->NO_APMS);
                                 $sheetData->setCellValue('E' . '' . ($k + $i) . '', $row->ALAMAT);
                                 $sheetData->setCellValue('F' . '' . ($k + $i) . '', $row->NO_DELIVERY);
-                                $sheetData->setCellValue('G' . '' . ($k + $i) . '', $row->DATE_DELIVERY);
+                                $sheetData->setCellValue('G' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_DELIVERY)));
                                 $sheetData->setCellValue('H' . '' . ($k + $i) . '', $row->ORDER_NUMBER);
-                                $sheetData->setCellValue('I' . '' . ($k + $i) . '', $row->DATE_ORDER);
+                                $sheetData->setCellValue('I' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_ORDER)));
                                 $sheetData->setCellValue('J' . '' . ($k + $i) . '', $row->SHIP_TO);
                                 $sheetData->setCellValue('K' . '' . ($k + $i) . '', $row->DESCRIPTION);
                                 $sheetData->setCellValue('L' . '' . ($k + $i) . '', $data_depot->NAMA_DEPOT);
@@ -3324,13 +3331,14 @@ class laporan extends CI_Controller {
                                     $solar = $solar + $row->SOLAR;
                                 }
                                 $sheetData->setCellValue('O' . '' . ($k + $i) . '', $row->PENGIRIMAN_KAPAL);
-                                $sheetData->setCellValue('Q' . '' . ($k + $i) . '', $row->DATE_KAPAL_DATANG);
-                                $sheetData->setCellValue('R' . '' . ($k + $i) . '', $row->DATE_KAPAL_BERANGKAT);
+                                $sheetData->setCellValue('Q' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_KAPAL_DATANG)));
+                                $sheetData->setCellValue('R' . '' . ($k + $i) . '', date('d-m-Y',strtotime($row->DATE_KAPAL_BERANGKAT)));
                                 $j++;
                             }
                         }
                         $i++;
                     }
+					
                     $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
                     $objPHPExcel->getActiveSheet()->removeRow($k + $i, 1);
                     $sheetData->setCellValue('N' . '' . ($k + $i + 2) . '', $premium);
@@ -3338,15 +3346,23 @@ class laporan extends CI_Controller {
 					$t_premium = $t_premium + $premium;
 					$t_solar = $t_solar + $solar;
                     $sheetData->setCellValue('N' . '' . ($k + $i) . '', "=SUM(N" . ($k + $i - $j + 1) . ":" . 'N' . ($k + $i - 1) . ")");
+					$last = $last.'+N' . '' . ($k + $i + 2);
+					$last1 = $last1.'+N' . '' . ($k + $i + 2 + 1);
+					$sp =0;
+					if($apm!=0)
+					{
+						$sp = (($i-1)-$apm*2);
+					}
+					//echo $x;
+                    for ($h = ($k + $i + 2 + 1);$h < 180 + (($i-1)-$apm*2);$h++){
+                       $objPHPExcel->getActiveSheet()->removeRow(($k + $i + 2+1+1) , 1);
+						
+					}
+                    //$sheetData->setCellValue('N' . '' . ($k + $i + 2 + 3) . '', $t_premium);
+                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 3) . '', $last);
+                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1 + 3) . '', $last1);
+                    //$sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1 + 3) . '', $t_solar);
 
-
-
-                    for ($h = ($k + $i + 2 + 1 + 1); $h <= 183; $h++) {
-                        $objPHPExcel->getActiveSheet()->removeRow($k + $i + 2 + 1 + 1 + 1, 1);
-                    }
-
-                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 3) . '', $t_premium);
-                    $sheetData->setCellValue('N' . '' . ($k + $i + 2 + 1 + 3) . '', $t_solar);
 
                     /*
                      * Realisasi Penyaluran
@@ -3401,15 +3417,29 @@ class laporan extends CI_Controller {
 
                             $no_apms_temp = $row->NO_APMS;
                             $l++;
+							$col_no = $row->tanggal + 4;
+                            if ($row->j_solar == 0) {
+                                $nilai = $sheetData->getCell($column_name[$col_no] . '9')->getValue();
+								
+                                $nilai = $nilai+ $row->j_premium;
+                                $sheetData->setCellValue($column_name[$col_no] . '9', $nilai);
+                            } else {
+                                $nilai = $sheetData->getCell($column_name[$col_no] . '10')->getValue();
+								
+                                $nilai = $nilai + $row->j_solar;
+                                $sheetData->setCellValue($column_name[$col_no] . '10', $nilai);
+                            }
                         } else {
                             $col_no = $row->tanggal + 4;
                             if ($row->j_solar == 0) {
                                 $nilai = $sheetData->getCell($column_name[$col_no] . '9')->getValue();
-                                $nilai = + $row->j_premium;
+								
+                                $nilai = $nilai + $row->j_premium;
                                 $sheetData->setCellValue($column_name[$col_no] . '9', $nilai);
                             } else {
                                 $nilai = $sheetData->getCell($column_name[$col_no] . '10')->getValue();
-                                $nilai = + $row->j_solar;
+								
+                                $nilai = $nilai + $row->j_solar;
                                 $sheetData->setCellValue($column_name[$col_no] . '10', $nilai);
                             }
                         }
