@@ -84,7 +84,9 @@
             <section class="panel">
                 <header class="panel-heading">
                     Tabel Tarif Interpolasi dan FRM bulan <strong><?php echo $interpolasi['bulan_tahun']; ?></strong>
+                    <?php if($this->session->userdata('id_role')!=5){?>
                     <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit</a>
+                    <?php } ?>
                 </header>
                 <div class="panel-body">
                     <div class="adv-table editable-table ">

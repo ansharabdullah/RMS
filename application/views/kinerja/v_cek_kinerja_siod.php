@@ -217,7 +217,7 @@
                                         <th>Bio Solar</th>
                                         <th>Pertamina Dex</th>
                                         <th>Solar</th>
-                                        <th>Aksi</th>
+                                        <?php if($this->session->userdata('id_role')!=5){?><th>Aksi</th><?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -239,9 +239,11 @@
                                             <td><?php echo $row->BIO_SOLAR; ?></td>
                                             <td><?php echo $row->PERTAMINA_DEX; ?></td>
                                             <td><?php echo $row->SOLAR; ?></td>
+                                            <?php if($this->session->userdata('id_role')!=5){?>
                                             <td>
                                                 <a data-placement="top" data-toggle="modal" href="#ModalEditKinerjaMT" onclick="setKinerjaMT('<?php echo ($no - 1) ?>')" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                             </td>
+                                            <?php } ?>
                                         </tr>
                                         <?php
                                         $no++;
@@ -277,7 +279,7 @@
                                         <th>Rit</th>
                                         <th>SPBU</th>
                                         <th>Pendapatan</th>
-                                        <th>Aksi</th>
+                                        <?php if($this->session->userdata('id_role')!=5){?><th>Aksi</th><?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -298,9 +300,11 @@
                                             <td><?php echo $row->RITASE_AMT; ?></td>
                                             <td><?php echo $row->SPBU; ?></td>
                                             <td><?php echo $row->PENDAPATAN; ?></td>
+                                            <?php if($this->session->userdata('id_role')!=5){?>
                                             <td>
                                                 <a data-placement="top" data-toggle="modal" href="#ModalEditKinerjaAMT" onclick="setKinerjaAMT('<?php echo ($no - 1) ?>')" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                             </td>
+                                            <?php } ?>
                                         </tr>
                                         <?php
                                         $no++;
@@ -313,20 +317,20 @@
                         </div>
                     </div>
                 </section>
-
+            <?php if($this->session->userdata('id_role')!=5){?>
                 <section class="panel">
                     <div class="panel-body">
                         <form class="cmxform form-horizontal tasi-form" id="signupForm2" action="#" method="POST">
                             <input type="hidden" required="required" id="tanggalSIOD" class="form-control" name="tanggalSIOD" value="<?php echo $tanggal_cek; ?>">
                             <div class="form-group">
                                 <div class="col-lg-12 col-sm-6">
-                                    <input type="submit" style="float: right;" class="btn btn-danger" value="Hapus" name="submit">
+                                   <input type="submit" style="float: right;" class="btn btn-danger" value="Hapus" name="submit">
                                 </div>
                             </div>
                         </form>
                     </div>
                 </section>
-
+                <?php } ?>
             <?php } ?>
         <?php } ?>
     </section>

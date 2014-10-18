@@ -282,7 +282,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -297,7 +297,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -323,7 +323,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -338,7 +338,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -353,7 +353,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -379,7 +379,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -394,7 +394,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -409,7 +409,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -425,7 +425,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -454,7 +454,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -469,7 +469,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -484,7 +484,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -520,7 +520,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -535,7 +535,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -550,7 +550,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -565,7 +565,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -601,7 +601,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -616,7 +616,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -641,7 +641,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -656,7 +656,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -681,7 +681,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -697,7 +697,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -723,7 +723,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -738,7 +738,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -753,7 +753,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -789,7 +789,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -804,7 +804,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -820,7 +820,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -836,7 +836,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -852,7 +852,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -881,7 +881,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -900,7 +900,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',4)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -917,7 +917,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -933,7 +933,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -949,7 +949,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -979,7 +979,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -995,7 +995,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -1011,7 +1011,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -1027,7 +1027,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -1044,7 +1044,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -1061,7 +1061,7 @@
                                         <td>--</td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -1078,7 +1078,7 @@
                                         <td><?php echo number_format($data_kpi[$index]->TAHUN_STRETCH, 2, ',', '.'); ?></td>
                                         
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',3)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',3)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3078,7 +3078,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3117,7 +3117,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3170,7 +3170,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3209,7 +3209,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3248,7 +3248,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3301,7 +3301,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3340,7 +3340,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3379,7 +3379,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3419,7 +3419,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3475,7 +3475,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3514,7 +3514,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3553,7 +3553,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3619,7 +3619,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3658,7 +3658,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3697,7 +3697,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3736,7 +3736,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3802,7 +3802,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3841,7 +3841,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3893,7 +3893,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3932,7 +3932,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -3984,7 +3984,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4024,7 +4024,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4077,7 +4077,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4116,7 +4116,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4155,7 +4155,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4221,7 +4221,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4260,7 +4260,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4300,7 +4300,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',1)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4340,7 +4340,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4380,7 +4380,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4436,7 +4436,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4479,7 +4479,7 @@
                                         <?php } ?>
 
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',0)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4510,7 +4510,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4539,7 +4539,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4568,7 +4568,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4625,7 +4625,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4654,7 +4654,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4683,7 +4683,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4712,7 +4712,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4742,7 +4742,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php } ?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4772,7 +4772,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',2)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>
@@ -4802,7 +4802,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',3)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                             <?php if($this->session->userdata('id_role')!=5){?><a data-placement="top" data-toggle="modal" href="#ModalEditKPI" onclick="setDetailKPI('<?php echo $data_kpi[$index]->ID_KPI_INTERNAL; ?>',3)" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><?php }?>
                                         </td>
 
                                         <?php $index++; ?>

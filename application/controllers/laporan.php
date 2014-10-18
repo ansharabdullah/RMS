@@ -511,7 +511,7 @@ class laporan extends CI_Controller {
         }
 
 
-        $this->header(7, 4);
+        $this->header(7, 2);
         $this->load->view('laporan/v_frm', $data2);
         $this->footer();
     }

@@ -116,8 +116,9 @@
                 <section class="panel">
                     <header class="panel-heading">
                         Tabel MS2 Complience <strong><?php echo $bulan . ' ' . $tahun; ?></strong>
-
+                        <?php if($this->session->userdata('id_role')!=5){?>
                         <a style="float:right;" data-placement="top" data-toggle="modal" href="#ModalHapusMs2" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus MS2"><i class="icon-remove"></i></a>
+                        <?PHP } ?>
                     </header>
                     <div class="panel-body">
                         <div class="adv-table editable-table " style="overflow-x: scroll">
@@ -134,7 +135,7 @@
                                         <th colspan="3">Lambat (Setelah MS2)</th>
                                         <th colspan="3">Tidak Terkirim Sesuai Jadwal MS2</th>
                                         <th colspan="3">Total LO</th>
-                                        <th rowspan="2">Aksi</th>
+                                        <?php if($this->session->userdata('id_role')!=5){?><th rowspan="2">Aksi</th><?php } ?>
                                     </tr>
                                     <tr>
                                         <th style="display:none;"></th>
@@ -185,9 +186,11 @@
                                             <td><?php echo ($row->SESUAI_PREMIUM + $row->CEPAT_PREMIUM + $row->CEPAT_SHIFT1_PREMIUM + $row->LAMBAT_PREMIUM + $row->TIDAK_TERKIRIM_PREMIUM); ?>%</td>
                                             <td><?php echo ($row->SESUAI_SOLAR + $row->CEPAT_SOLAR + $row->CEPAT_SHIFT1_SOLAR + $row->LAMBAT_SOLAR + $row->TIDAK_TERKIRIM_SOLAR); ?>%</td>
                                             <td><?php echo ($row->SESUAI_PERTAMAX + $row->CEPAT_PERTAMAX + $row->CEPAT_SHIFT1_PERTAMAX + $row->LAMBAT_PERTAMAX + $row->TIDAK_TERKIRIM_PERTAMAX); ?>%</td>
+                                            <?php if($this->session->userdata('id_role')!=5){?>
                                             <td>
                                                 <a data-placement="top" data-toggle="modal" href="#ModalMs2" onclick="setDetailMS2('<?php echo ($no - 1) ?>')" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                             </td>
+                                            <?php } ?>
                                         </tr>
                                         <?php
                                         $no++;
@@ -203,14 +206,14 @@
                                             <td colspan="3"><strong><font size="2"><?php echo $total_ms2[3]->NILAI;?>%</font></strong></td>
                                             <td colspan="3"><strong><font size="2"><?php echo $total_ms2[4]->NILAI;?>%</font></strong></td>
                                             <td colspan="3"><strong><font size="2"><?php echo $total_ms2[5]->NILAI;?>%</font></strong></td>
-                                            <td></td>                                            
+                                            <?php if($this->session->userdata('id_role')!=5){?><td></td><?php } ?>                                            
                                         </tr>
                                         <tr>
                                             <td style="display:none;"></td>
                                             <td colspan="2"><strong><font size="3">Hasil</font></strong></td>
                                             <td colspan="9"><strong><font size="3"><?php echo $total_ms2[6]->NILAI;?>%</font></strong></td>
                                             <td colspan="9"></td>
-                                            <td></td>                                            
+                                            <?php if($this->session->userdata('id_role')!=5){?><td></td><?php } ?>                                            
                                         </tr>
                                 </tbody>
                             </table>
