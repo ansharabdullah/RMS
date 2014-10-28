@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="<?php echo base_url()?>assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="<?php echo base_url()?>assets/img/favicon.ico" type="image/x-icon">
 
-        <title>RMS PT PERTAMINA PATRA NIAGA JATENG</title>
+        <title>OSCRMS</title>
 
         <!-- Bootstrap core CSS -->
         <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
