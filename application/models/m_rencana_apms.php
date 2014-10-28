@@ -7,7 +7,7 @@ class m_rencana_apms extends CI_Model {
     }
 
     function selectRencanaApms($depot,$tahun,$bulan) {
-        $data = $this->db->query("SELECT R.ID_APMS, K.NO_APMS,K.NAMA_PENGUSAHA ,L.ID_LOG_HARIAN, R.ID_RENCANA_APMS,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%M-%Y')as TANGGAL,R.K_PREMIUM,R.K_SOLAR from rencana_apms R, log_harian L, apms K where R.ID_LOG_HARIAN = L.ID_LOG_HARIAN and R.ID_APMS = K.ID_APMS and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
+        $data = $this->db->query("SELECT r.ID_APMS, k.NO_APMS,k.NAMA_PENGUSAHA ,l.ID_LOG_HARIAN, r.ID_RENCANA_APMS,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%M-%Y')as TANGGAL,r.K_PREMIUM,r.K_SOLAR from rencana_apms r, log_harian l, apms k where r.ID_LOG_HARIAN = l.ID_LOG_HARIAN and r.ID_APMS = k.ID_APMS and l.ID_DEPOT= $depot and  YEAR(l.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
         
         return $data->result();
     }
