@@ -277,14 +277,17 @@ class apms extends CI_Controller {
 					);
 					$bisa = $this->m_apms->insertKinerjaApms($data_1);
 					$status3=0;
-					$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+					$tahun_1 = date('Y',strtotime(($this->input->post('tgl_delivery', true))));
+					$bulan_1 = date('m',strtotime(($this->input->post('tgl_delivery', true))));
+					
+					$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun_1,$bulan_1);
 					foreach($kpi as $kpi1)
 					{
 						$status3 = $kpi1->STATUS_KPI_APMS;
 					}
 					if($status3==1)
 					{
-						$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+						$this->m_kpi_apms->syncKPIAPMS($depot,$tahun_1,$bulan_1);
 					}
 					if($bisa)
 					{
@@ -342,14 +345,17 @@ class apms extends CI_Controller {
 					);
 					$bisa = $this->m_apms->editKinerjaApms($data_1,$id_kinerja);
 					$status3=0;
-					$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+					$tahun_1 = date('Y',strtotime(($this->input->post('tgl_delivery1', true))));
+					$bulan_1 = date('m',strtotime(($this->input->post('tgl_delivery1', true))));
+					
+					$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun_1,$bulan_1);
 					foreach($kpi as $kpi1)
 					{
 						$status3 = $kpi1->STATUS_KPI_APMS;
 					}
 					if($status3==1)
 					{
-						$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+						$this->m_kpi_apms->syncKPIAPMS($depot,$tahun_1,$bulan_1);
 					}
 					if($bisa)
 					{
@@ -574,6 +580,17 @@ class apms extends CI_Controller {
 			}
 			
 			$hasil = $this->m_rencana_apms->insertRencanaApms($data);
+			
+			$status3=0;
+			$kpi = $this->m_kpi_apms->statusKPIApms($depot,$tahun,$bulan);
+			foreach($kpi as $kpi1)
+			{
+				$status3 = $kpi1->STATUS_KPI_APMS;
+			}
+			if($status3==1)
+			{
+				$this->m_kpi_apms->syncKPIAPMS($depot,$tahun,$bulan);
+			}
 			if($hasil)
 			{
 				$datalog = array(

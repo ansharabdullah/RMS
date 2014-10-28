@@ -107,8 +107,11 @@
                         <form style="float:right;" class="cmxform form-horizontal tasi-form" method="post" action="<?php echo base_url(); ?>laporan/kpi_operasional">
                             <input class=" form-control input-sm m-bot15" name="bln_kpi" min="0" type="hidden" value="<?php echo $kpi['bln_kpi']; ?>" placeholder="Tahun" required readonly/>
                             <input type="submit"  name="sinkron" data-placement="top" class="btn btn-primary btn-xs tooltips" data-original-title="Sinkronisasi Data" value="Sinkronisasi">
+                            <?php if($this->session->userdata('id_role')!=5){?>
                             <a data-placement="top" data-toggle="modal" href="#ModalEdit" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i> Edit KPI</a>
+                            <?php } ?>
                         </form> 
+                        
                     </header>
                     <div class="panel-body" style="overflow-x: scroll">
                         <table class="table table-bordered">

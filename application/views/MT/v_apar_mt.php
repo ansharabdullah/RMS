@@ -82,9 +82,11 @@ function DateToIndo($date) {
             <div class="panel-body">
                 <div class="adv-table editable-table " style="overflow-x: scroll">
                     <div class="clearfix">
+                        <?php if ($this->session->userdata('id_role') != 5) { ?>
                         <a class="btn btn-primary" data-toggle="modal" href="#ModalTambahApar">
                             Tambah APAR <i class="icon-plus"></i>
                         </a>
+                        <?php }?>
                     </div>
 
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
@@ -115,10 +117,11 @@ function DateToIndo($date) {
                                     <?php echo $row->KETERANGAN_APAR; ?></td>
                                     
                                        <td> 
+                                           <?php if ($this->session->userdata('id_role') != 5) { ?>
                                       
                                         <a class="btn btn-warning btn-xs tooltips" data-original-title="Edit Apar" href="#ModalEditApar"  data-toggle="modal"  onclick="setapar('<?php echo $row->ID_APAR ?>','<?php echo $row->ID_MOBIL ?>','<?php echo $row->ID_JENIS_APAR ?>','<?php echo $row->TANGGAL_APAR ?>','<?php echo $row->KETERANGAN_APAR ?>')"><i class="icon-pencil"></i></a>
                                         <a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus Apar" href="#ModalHapusApar" data-placement="top" data-toggle="modal" onclick="hapusapar('<?php echo $row->ID_APAR; ?>')"><i class="icon-remove"></i></a>
-                                       
+                                       <?php } ?>
                                     </td>
 
                                 </tr>
