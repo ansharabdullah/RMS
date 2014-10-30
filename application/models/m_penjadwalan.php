@@ -7,7 +7,7 @@ class m_penjadwalan extends CI_Model {
     }
 
     function getJadwal($depot, $tanggal) {
-        $data = $this->db->query("SELECT P.ID_PEGAWAI, L.ID_LOG_HARIAN, J.ID_JADWAL, M.ID_MOBIL, P.NIP, P.NAMA_PEGAWAI, P.JABATAN, J.STATUS_MASUK, L.TANGGAL_LOG_HARIAN, M.NOPOL from pegawai P, jadwal J, log_harian L, mobil M where P.id_pegawai=J.id_pegawai and J.id_log_harian=L.id_log_harian and J.id_mobil=M.id_mobil and P.ID_DEPOT=$depot and l.tanggal_log_harian='$tanggal'");
+        $data = $this->db->query("SELECT P.ID_PEGAWAI, L.ID_LOG_HARIAN, J.ID_JADWAL, mobil.ID_MOBIL, P.NIP, P.NAMA_PEGAWAI, P.JABATAN, J.STATUS_MASUK, L.TANGGAL_LOG_HARIAN, mobil.NOPOL from pegawai P, log_harian L, jadwal J left join mobil on J.id_mobil=mobil.id_mobil where P.id_pegawai=J.id_pegawai and J.id_log_harian=L.id_log_harian and P.ID_DEPOT=$depot and L.tanggal_log_harian='$tanggal'");
         return $data->result();
     }
 
@@ -16,7 +16,8 @@ class m_penjadwalan extends CI_Model {
     }
 
     function updateJadwal($data, $id) {
-        $this->db->where('id_jadwal', $id);
+	//print_r($id);
+        $this->db->where('ID_JADWAL', $id);
         $this->db->update('jadwal', $data);
     }
 

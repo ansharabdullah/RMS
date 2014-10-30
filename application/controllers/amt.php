@@ -914,6 +914,7 @@ class amt extends CI_Controller {
         $data2['pesan'] = 0;
         if ($this->input->post('edit_presensi', true)) {
             $id_jadwal = $this->input->post('id_jadwal', true);
+			//echo $this->input->post('alasan', true);
             $nip = $this->input->post('nip', true);
             $data = array(
                 'alasan' => $this->input->post('alasan', true),
