@@ -561,6 +561,15 @@ for ($date = strtotime($kinerja_mt[0]->TANGGAL_LOG_HARIAN); $date <= strtotime($
         
         mt.setTitle({text: "Grafik MT Indikator " + title});
 //        mt.legend.allItems[0].update({name:title});
+        mt.series[0].remove(true); 
+        mt.addSeries({
+                    type: 'area',
+                    name: title,
+                    pointInterval: 24 * 3600 * 1000,
+                    pointStart: Date.UTC(start_tahun, start_bulan, start_tanggal),
+                    data: total_km_amt
+                
+        });
         if(title == "KM"){
              mt.series[0].setData(total_km_mt);
         }
@@ -594,6 +603,15 @@ for ($date = strtotime($kinerja_mt[0]->TANGGAL_LOG_HARIAN); $date <= strtotime($
     function filterAmt(title)
     {
         amt.setTitle({text: "Grafik AMT Indikator " + title});
+        amt.series[0].remove(true); 
+        amt.addSeries({
+                    type: 'area',
+                    name: title,
+                    pointInterval: 24 * 3600 * 1000,
+                    pointStart: Date.UTC(start_tahun, start_bulan, start_tanggal),
+                    data: total_km_amt
+                
+        });
 //        amt.legend.allItems[0].update({name:title});
         if(title == "KM"){
              amt.series[0].setData(total_km_amt);

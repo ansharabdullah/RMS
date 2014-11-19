@@ -13,7 +13,7 @@
         <div style="padding-left: 5%;height:80%;color: white;font-size: 30px;">
             <br/><br/><br/>FLEET MANAGEMENT FUEL RETAIL<br/>
             SITE SUPERVISOR <?php echo strtoupper($nama_depot); ?><br/>
-            TRIWULAN <?php echo $triwulan?> TAHUN <?php echo date('Y')?>
+            TRIWULAN <?php echo $triwulan_?> TAHUN <?php echo date('Y')?>
         </div>
         <div style="height:20%">
             <div style="float: right;padding-right: 20px;">

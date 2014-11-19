@@ -86,19 +86,19 @@ class presentasi extends CI_Controller {
         $slide['triwulan'] = floor(($bulan / 3) + 1);
          if($slide['triwulan'] == 1)
         {
-            $slide['triwulan'] = "I";
+            $slide['triwulan_'] = "I";
         }
         else if($slide['triwulan'] == 2)
         {
-            $slide['triwulan'] = "II";
+            $slide['triwulan_'] = "II";
         }
         else if($slide['triwulan'] == 3)
         {
-            $slide['triwulan'] = "III";
+            $slide['triwulan_'] = "III";
         }
         else 
         {
-            $slide['triwulan'] = "IV";
+            $slide['triwulan_'] = "IV";
         }
         $slide['log_harian'] = $log_harian;
         $slide['nama_depot'] = $this->m_depot->get_nama_depot($depot);
@@ -191,19 +191,19 @@ class presentasi extends CI_Controller {
         $slide['triwulan'] = floor(($bulan / 3) + 1);
         if($slide['triwulan'] == 1)
         {
-            $slide['triwulan'] = "I";
+            $slide['triwulan_'] = "I";
         }
         else if($slide['triwulan'] == 2)
         {
-            $slide['triwulan'] = "II";
+            $slide['triwulan_'] = "II";
         }
         else if($slide['triwulan'] == 3)
         {
-            $slide['triwulan'] = "III";
+            $slide['triwulan_'] = "III";
         }
         else 
         {
-            $slide['triwulan'] = "IV";
+            $slide['triwulan_'] = "IV";
         }
         $slide['log_harian'] = $log_harian;
         $slide['bulan'] = array();

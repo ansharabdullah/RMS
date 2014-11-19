@@ -3044,9 +3044,10 @@ class laporan extends CI_Controller {
                     $sheetData->setCellValue('H73', "=SUM(H43:H72)");
                     $sheetData->setCellValue('I73', "=SUM(I43:I72)");
                 }
-
-
-                if ($data_depot->STATUS_APMS == 1) {
+				$cek_kinerja=0;
+				$cek_kinerja = $this->m_laporan->cekKinerjaAPMS($depot,$tahun,$bulan);
+				//echo $cek_kinerja;
+                if ($data_depot->STATUS_APMS == 1 && $cek_kinerja!=0) {
                     /*
                       Realisasi Volume APMS
                      */
@@ -3506,7 +3507,7 @@ class laporan extends CI_Controller {
                     $objPHPExcel->removeSheetByIndex($sheetIndex);
                     $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Realisasi Penyaluran APMS'));
                     $objPHPExcel->removeSheetByIndex($sheetIndex);
-                    $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Daya Pengiriman APMS'));
+                    $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('Data Pengiriman APMS'));
                     $objPHPExcel->removeSheetByIndex($sheetIndex);
                     $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI APMS'));
                     $objPHPExcel->removeSheetByIndex($sheetIndex);

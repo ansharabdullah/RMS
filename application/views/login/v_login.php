@@ -29,11 +29,11 @@
                     <div class="row">
 
                         <div class="col-lg-4">
-                           logo
+                            <img src="<?=  base_url().'assets/img/logo_oscrms.png'?>" width="150">
                         </div>
 
                         <div class="col-lg-8" align="justify">
-                            RMS (Reporting Management System) merupakan sistem pengelolaan kinerja crew awak mobil tangki dan mobil tangki untuk depot-depot PT  Pertamina Patra Niaga wilayah Jawa Tengah  berbasis web dimana pada akhirnya keluaran dari sistem berupa laporan serta tampilan grafik.
+                            OSCRMS (One Single Click Report Management System) merupakan sistem pengelolaan kinerja crew awak mobil tangki dan mobil tangki untuk depot-depot PT  Pertamina Patra Niaga berbasis web dimana pada akhirnya keluaran dari sistem berupa laporan serta tampilan grafik.
                         </div>
                     </div>
                 </div>

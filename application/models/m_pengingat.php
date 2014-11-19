@@ -1,4 +1,3 @@
-
 <?php
 
 class m_pengingat extends CI_Model {

@@ -1073,6 +1073,11 @@ from log_harian l where MONTH(l.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(l.TANGGA
 		$query = $this->db->query("select d.NO_APMS, d.NAMA_PENGUSAHA, b.K_PREMIUM, b.K_SOLAR, DAY(c.TANGGAL_LOG_HARIAN) as tanggal, PREMIUM as j_premium, SOLAR as j_solar from kinerja_apms a, rencana_apms b, log_harian c, apms d where a.ID_LOG_HARIAN = c.ID_LOG_HARIAN and a.ID_APMS = d.ID_APMS and b.ID_APMS = d.ID_APMS and d.ID_DEPOT = $depot and MONTH(c.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(c.TANGGAL_LOG_HARIAN) = '$tahun' group by d.NO_APMS, a.ID_KINERJA_APMS order by d.NO_APMS, j_premium DESC, tanggal ");
 		return $query->result();
 	}
+	public function cekKinerjaAPMS($depot,$tahun,$bulan)
+	{
+		$query = $this->db->query("select a.ID_KINERJA_APMS from kinerja_apms a,log_harian b where a.ID_LOG_HARIAN = b.ID_LOG_HARIAN and b.ID_DEPOT = $depot and MONTH(b.TANGGAL_LOG_HARIAN) = '$bulan' and YEAR(b.TANGGAL_LOG_HARIAN) = '$tahun'");
+		return $query->num_rows;
+	}
     /*
       public function dummy_kinerja_amt($id_kinerja, $id_log_harian, $id_pegawai, $status_tugas, $total_km, $total_kl, $ritase, $pendapatan, $spbu) {
       $query = $this->db->query("insert into kinerja_amt(ID_KINERJA_AMT,ID_LOG_HARIAN,ID_PEGAWAI,STATUS_TUGAS,TOTAL_KM,TOTAL_KL,RITASE_AMT,PENDAPATAN,SPBU) values('$id_kinerja','$id_log_harian','$id_pegawai','$status_tugas','$total_km','$total_kl','$ritase','$pendapatan','$spbu')");

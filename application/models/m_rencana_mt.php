@@ -7,7 +7,7 @@ class m_rencana_mt extends CI_Model {
     }
 
     function getRencana($depot,$tahun,$bulan) {
-        $data = $this->db->query("SELECT L.ID_LOG_HARIAN, R.ID_RENCANA,DATE_FORMAT(l.TANGGAL_LOG_HARIAN, '%d-%m-%Y')as TANGGAL,R.R_PREMIUM,R.R_PERTAMAX,R.R_PERTAMAXPLUS,R.R_PERTAMINADEX,R.R_SOLAR,R.R_BIOSOLAR,R.R_OWN_USE,R.MISS,R.TAMBAHAN,R.PEMBATALAN,L.TANGGAL_LOG_HARIAN from rencana R, log_harian L where R.id_log_harian=L.id_log_harian and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
+        $data = $this->db->query("SELECT L.ID_LOG_HARIAN, R.ID_RENCANA,DATE_FORMAT(L.TANGGAL_LOG_HARIAN, '%d-%m-%Y')as TANGGAL,R.R_PREMIUM,R.R_PERTAMAX,R.R_PERTAMAXPLUS,R.R_PERTAMINADEX,R.R_SOLAR,R.R_BIOSOLAR,R.R_OWN_USE,R.MISS,R.TAMBAHAN,R.PEMBATALAN,L.TANGGAL_LOG_HARIAN from rencana R, log_harian L where R.id_log_harian=L.id_log_harian and L.ID_DEPOT= $depot and  YEAR(L.TANGGAL_LOG_HARIAN) = '$tahun' and MONTH(L.TANGGAL_LOG_HARIAN) = '$bulan' order by TANGGAL ASC");
         return $data->result();
     }
 

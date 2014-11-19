@@ -11,12 +11,12 @@ class m_log_sistem extends CI_Model {
     }
 
     public function getAllLog($id_depot,$bulan,$tahun) {
-        $query = $this->db->query("SELECT * FROM pegawai P, log_sistem LS WHERE P.ID_PEGAWAI=LS.ID_PEGAWAI AND P.ID_DEPOT=$id_depot AND MONTH(LS.TANGGAL_LOG)='$bulan' AND YEAR(LS.TANGGAL_LOG)='$tahun' order by ls.tanggal_log desc");
+        $query = $this->db->query("SELECT * FROM pegawai P, log_sistem LS WHERE P.ID_PEGAWAI=LS.ID_PEGAWAI AND P.ID_DEPOT=$id_depot AND MONTH(LS.TANGGAL_LOG)='$bulan' AND YEAR(LS.TANGGAL_LOG)='$tahun' order by LS.tanggal_log desc");
         return $query->result();
     }
 
     public function getLogOAM($bulan,$tahun) {
-        $query = $this->db->query("SELECT * FROM pegawai P, log_sistem LS, depot d WHERE P.ID_PEGAWAI=LS.ID_PEGAWAI and d.ID_DEPOT=P.ID_DEPOT AND MONTH(LS.TANGGAL_LOG)='$bulan' AND YEAR(LS.TANGGAL_LOG)='$tahun' order by ls.tanggal_log desc");
+        $query = $this->db->query("SELECT * FROM pegawai P, log_sistem LS, depot d WHERE P.ID_PEGAWAI=LS.ID_PEGAWAI and d.ID_DEPOT=P.ID_DEPOT AND MONTH(LS.TANGGAL_LOG)='$bulan' AND YEAR(LS.TANGGAL_LOG)='$tahun' order by LS.tanggal_log desc");
         return $query->result();
     }
 
