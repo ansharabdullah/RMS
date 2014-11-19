@@ -304,7 +304,7 @@ class kinerja extends CI_Controller {
 
                             //KLASIFIKASI
                             $klas = $sheetData->getCell('G' . $row_baca)->getFormattedValue();
-                            if ($klas != '8' && $klas != '16' && $klas != '24' && $klas != '32' && $klas != '40') {
+                            if ($klas != '8' && $klas != '16' && $klas != '24' && $klas != '32' && $klas != '40'&& $klas != '41') {
                                 $data_error = true;
                                 $pesan_error[] = 'Klasifikasi salah';
                             }
@@ -339,23 +339,30 @@ class kinerja extends CI_Controller {
                             $data_kinerja['SUPIR']['ritase'][] = $nilai;
 
                             //SPBU
-                            $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), $depot, $sheetData->getCell('F' . $row_baca)->getFormattedValue() . ' ' . $sheetData->getCell('G' . $row_baca)->getFormattedValue());
+                            $nilai = $sheetData->getCell('K' . $row_baca)->getValue();
+                            if (!is_numeric($nilai)) {
+                                $data_error = true;
+                                $error_hitung = true;
+                                $pesan_error[] = 'Nilai SPBU bukan angka';
+                            }
+                            $data_kinerja['SUPIR']['jumlah_spbu'][] = $nilai;
+                            
+                            //Pendapatan
+                            
+                            if($sheetData->getCell('G' . $row_baca)->getFormattedValue() == "41"){
+                                $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), $depot, $sheetData->getCell('F' . $row_baca)->getFormattedValue() . ' 40');
+                            }else{
+                                $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), $depot, $sheetData->getCell('F' . $row_baca)->getFormattedValue() . ' ' . $sheetData->getCell('G' . $row_baca)->getFormattedValue());
+                            }
+                            
                             if ($koefisien['error'] == true) {
                                 $data_kinerja['SUPIR']['koefisien_error'] = true;
                             }
                             if ($error_hitung == true) {
-                                $data_kinerja['SUPIR']['jumlah_spbu'][] = 0;
+                                $data_kinerja['SUPIR']['pendapatan'][] = 0;
                             } else {
-                                $data_kinerja['SUPIR']['jumlah_spbu'][] = floor(($sheetData->getCell('L' . $row_baca)->getValue() - ($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) - ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) - ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue())) / $koefisien['spbu']); //hasil hitung koefisien
+                                $data_kinerja['SUPIR']['pendapatan'][] = floor(($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) + ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) + ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue()) + ($koefisien['spbu'] * $sheetData->getCell('K' . $row_baca)->getValue())); //hasil hitung koefisien
                             }
-
-                            //Pendapatan
-                            $nilai = $sheetData->getCell('L' . $row_baca)->getValue();
-                            if (!is_numeric($nilai)) {
-                                $data_error = true;
-                                $pesan_error[] = 'Nilai Pendapatan bukan angka';
-                            }
-                            $data_kinerja['SUPIR']['pendapatan'][] = $nilai;
 
                             //Setting Error
                             if ($data_error == true) {
@@ -448,7 +455,7 @@ class kinerja extends CI_Controller {
 
                             //KLASIFIKASI
                             $klas = $sheetData->getCell('G' . $row_baca)->getFormattedValue();
-                            if ($klas != '8' && $klas != '16' && $klas != '24' && $klas != '32' && $klas != '40') {
+                            if ($klas != '8' && $klas != '16' && $klas != '24' && $klas != '32' && $klas != '40'&& $klas != '41') {
                                 $data_error = true;
                                 $pesan_error[] = 'Klasifikasi salah';
                             }
@@ -483,25 +490,30 @@ class kinerja extends CI_Controller {
                             $data_kinerja['KERNET']['ritase'][] = $nilai;
 
                             //SPBU
-                            $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), $depot, $sheetData->getCell('F' . $row_baca)->getFormattedValue() . ' ' . $sheetData->getCell('G' . $row_baca)->getFormattedValue());
+                            $nilai = $sheetData->getCell('K' . $row_baca)->getValue();
+                            if (!is_numeric($nilai)) {
+                                $data_error = true;
+                                $error_hitung = true;
+                                $pesan_error[] = 'Nilai SPBU bukan angka';
+                            }
+                            $data_kinerja['KERNET']['jumlah_spbu'][] = $nilai;
+                            
+                            //Pendapatan
+                            if($sheetData->getCell('G' . $row_baca)->getFormattedValue() == "41"){
+                                $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), $depot, $sheetData->getCell('F' . $row_baca)->getFormattedValue() . ' 40');
+                            }else{
+                                $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($tanggalSIOD)), $depot, $sheetData->getCell('F' . $row_baca)->getFormattedValue() . ' ' . $sheetData->getCell('G' . $row_baca)->getFormattedValue());
+                            }
+                            
                             if ($koefisien['error'] == true) {
                                 $data_kinerja['KERNET']['koefisien_error'] = true;
                             }
                             if ($error_hitung == true) {
-                                $data_kinerja['KERNET']['jumlah_spbu'][] = 0;
+                                $data_kinerja['KERNET']['pendapatan'][] = 0;
                             } else {
-                                $data_kinerja['KERNET']['jumlah_spbu'][] = floor(($sheetData->getCell('L' . $row_baca)->getValue() - ($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) - ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) - ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue())) / $koefisien['spbu']); //hasil hitung koefisien
+                                $data_kinerja['KERNET']['pendapatan'][] = floor(($koefisien['km'] * $sheetData->getCell('H' . $row_baca)->getValue()) + ($koefisien['kl'] * $sheetData->getCell('I' . $row_baca)->getValue()) + ($koefisien['rit'] * $sheetData->getCell('J' . $row_baca)->getValue()) + ($koefisien['spbu'] * $sheetData->getCell('K' . $row_baca)->getValue())); //hasil hitung koefisien
                             }
-
-
-                            //Pendapatan
-                            $nilai = $sheetData->getCell('L' . $row_baca)->getValue();
-                            if (!is_numeric($nilai)) {
-                                $data_error = true;
-                                $pesan_error[] = 'Nilai Pendapatan bukan angka';
-                            }
-                            $data_kinerja['KERNET']['pendapatan'][] = $nilai;
-
+                            
                             //Setting Error
                             if ($data_error == true) {
                                 $data_kinerja['KERNET']['data_error'][] = true;
