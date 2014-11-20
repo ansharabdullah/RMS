@@ -1199,7 +1199,7 @@ class amt extends CI_Controller {
                             'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
                             'id_jenis_penilaian' => 25 + ($i * 4),
                             'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                            'nilai' => $sheetData->getCell('C' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('C' . $no)->getValue(),
                             'status_error' => $error,
                             'error' => $e
                         );
@@ -1209,7 +1209,7 @@ class amt extends CI_Controller {
                             'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
                             'id_jenis_penilaian' => 25 + ($i * 4 + 1),
                             'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                            'nilai' => $sheetData->getCell('D' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('D' . $no)->getValue(),
                             'status_error' => $error,
                             'error' => $e
                         );
@@ -1219,7 +1219,7 @@ class amt extends CI_Controller {
                             'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
                             'id_jenis_penilaian' => 25 + ($i * 4 + 2),
                             'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                            'nilai' => $sheetData->getCell('E' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('E' . $no)->getValue(),
                             'status_error' => $error,
                             'error' => $e
                         );
@@ -1229,7 +1229,7 @@ class amt extends CI_Controller {
                             'id_log_harian' => $id_log_harian[0]->ID_LOG_HARIAN,
                             'id_jenis_penilaian' => 25 + ($i * 4 + 3),
                             'jenis_jabatan' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                            'nilai' => $sheetData->getCell('F' . $no)->getFormattedValue(),
+                            'nilai' => $sheetData->getCell('F' . $no)->getValue(),
                             'status_error' => $error,
                             'error' => $e
                         );

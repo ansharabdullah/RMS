@@ -58,7 +58,8 @@ class login extends CI_Controller {
                     date_default_timezone_set('UTC');
 
                     // Start date
-                    $date = date('Y') . '-01-01';
+                    
+                    $date = date('Y-m') .'-01';
                     // End date
                     $end_date = date('Y') . '-12-31';
                     $i = 0;
