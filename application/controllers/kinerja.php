@@ -38,6 +38,7 @@ class kinerja extends CI_Controller {
 
         $data_kinerja['submit'] = false;
         $data_kinerja['simpan'] = false;
+        $data_kinerja['simpan_libur'] = false;
 
         if ($this->input->post('cek')) {
             $data_kinerja['submit'] = true;
@@ -567,6 +568,25 @@ class kinerja extends CI_Controller {
             }
             $data_kinerja['submit'] = false;
             $data_kinerja['simpan'] = true;
+        }else if($this->input->post('simpan_libur')){
+            $data_kinerja['simpan_libur'] = true;
+            
+            $tanggaltemp = $this->input->post('tglLibur');            
+            $tglLibur = date("d-m-Y", strtotime($tanggaltemp));
+            $statusLibur = $this->input->post('statusLibur');
+            
+            $data_kinerja['tglLibur'] = $tglLibur;
+            $data_kinerja['statusLibur'] = $statusLibur;
+            
+            if($this->m_kinerja->getIdLogHarian($depot, $tglLibur)!= -1){
+                $data_kinerja['status_ganti_libur'] = "berhasil";
+                $id_log_harian = $this->m_kinerja->getIdLogHarian($depot, $tglLibur);
+                $this->m_kinerja->settingLibur($id_log_harian, $statusLibur);
+                $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Ubah tanggal ' . $tglLibur . ' menjadi hari ' . $statusLibur, 'Edit');
+            }else{
+                $data_kinerja['status_ganti_libur'] = "gagal";
+            }
+            
         }
 
         $this->header(5, 1);

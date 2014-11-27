@@ -398,6 +398,14 @@ class m_kinerja extends CI_Model {
         $data = $this->db->query("select m.ID_MOBIL, l.ID_LOG_HARIAN,l.TANGGAL_LOG_HARIAN, k.ID_KINERJA_MT from mobil m, log_harian l, kinerja_mt k where m.ID_MOBIL=k.ID_MOBIL and k.ID_LOG_HARIAN=l.ID_LOG_HARIAN and m.id_depot='$depot' and l.tanggal_log_harian='$tanggal'");
         return $data->result();
     }
+    
+    public function settingLibur($id_log_harian, $status) {
+        $ubah = 0;
+        if($status=="Libur"){
+            $ubah=1;
+        }
+        $data = $this->db->query("update log_harian l set l.STATUS_INPUT_KINERJA = '$ubah' where l.ID_LOG_HARIAN = '$id_log_harian'");        
+    }
 
     //detail amt
     public function editKinerjaAMT($data, $id) {
