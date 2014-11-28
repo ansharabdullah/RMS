@@ -76,27 +76,108 @@ class laporan extends CI_Controller {
             $bulan = date("m", strtotime($tanggalms2));
             $tahun = date("Y", strtotime($tanggalms2));
 
+            
+            $total_lo_premium=0;
+            $total_lo_solar=0;
+            $total_lo_pertamax=0;
+            
             $sesuai_premium = $this->input->post('premium1');
+            if($sesuai_premium == ""){
+                $sesuai_premium = "NULL";
+            }else{
+                $total_lo_premium = $total_lo_premium + $sesuai_premium;
+            }
             $sesuai_solar = $this->input->post('solar1');
+            if($sesuai_solar == ""){
+                $sesuai_solar = "NULL";
+            }else{
+                $total_lo_solar = $total_lo_solar + $sesuai_solar;
+            }
             $sesuai_pertamax = $this->input->post('pertamax1');
-
+            if($sesuai_pertamax == ""){
+                $sesuai_pertamax = "NULL";
+            }else{
+                $total_lo_pertamax = $total_lo_pertamax + $sesuai_pertamax;
+            }
+            
             $cepat_premium = $this->input->post('premium2');
+            if($cepat_premium == ""){
+                $cepat_premium = "NULL";
+            }else{
+                $total_lo_premium = $total_lo_premium + $cepat_premium;
+            }
             $cepat_solar = $this->input->post('solar2');
+            if($cepat_solar == ""){
+                $cepat_solar = "NULL";
+            }else{
+                $total_lo_solar = $total_lo_solar + $cepat_solar;
+            }
             $cepat_pertamax = $this->input->post('pertamax2');
+            if($cepat_pertamax == ""){
+                $cepat_pertamax = "NULL";
+            }else{
+                $total_lo_pertamax = $total_lo_pertamax + $cepat_pertamax;
+            }
 
             $cepat_shift1_premium = $this->input->post('premium3');
+            if($cepat_shift1_premium == ""){
+                $cepat_shift1_premium = "NULL";
+            }else{
+                $total_lo_premium = $total_lo_premium + $cepat_shift1_premium;
+            }
             $cepat_shift1_solar = $this->input->post('solar3');
+            if($cepat_shift1_solar == ""){
+                $cepat_shift1_solar = "NULL";
+            }else{
+                $total_lo_solar = $total_lo_solar + $cepat_shift1_solar;
+            }
             $cepat_shift1_pertamax = $this->input->post('pertamax3');
+            if($cepat_shift1_pertamax == ""){
+                $cepat_shift1_pertamax = "NULL";
+            }else{
+                $total_lo_pertamax = $total_lo_pertamax + $cepat_shift1_pertamax;
+            }
 
             $lambat_premium = $this->input->post('premium4');
+            if($lambat_premium == ""){
+                $lambat_premium = "NULL";
+            }else{
+                $total_lo_premium = $total_lo_premium + $lambat_premium;
+            }
             $lambat_solar = $this->input->post('solar4');
+            if($lambat_solar == ""){
+                $lambat_solar = "NULL";
+            }else{
+                $total_lo_solar = $total_lo_solar + $lambat_solar;
+            }
             $lambat_pertamax = $this->input->post('pertamax4');
+            if($lambat_pertamax == ""){
+                $lambat_pertamax = "NULL";
+            }else{
+                $total_lo_pertamax = $total_lo_pertamax + $lambat_pertamax;
+            }
 
             $tidak_terkirim_premium = $this->input->post('premium5');
+            if($tidak_terkirim_premium == ""){
+                $tidak_terkirim_premium = "NULL";
+            }else{
+                $total_lo_premium = $total_lo_premium + $tidak_terkirim_premium;
+            }
             $tidak_terkirim_solar = $this->input->post('solar5');
+            if($tidak_terkirim_solar == ""){
+                $tidak_terkirim_solar = "NULL";
+            }else{
+                $total_lo_solar = $total_lo_solar + $tidak_terkirim_solar;
+            }
             $tidak_terkirim_pertamax = $this->input->post('pertamax5');
+            if($tidak_terkirim_pertamax == ""){
+                $tidak_terkirim_pertamax = "NULL";
+            }else{
+                $total_lo_pertamax = $total_lo_pertamax + $tidak_terkirim_pertamax;
+            }
+            
 
-            $this->m_laporan->editMS2($id, $sesuai_premium, $sesuai_solar, $sesuai_pertamax, $cepat_premium, $cepat_solar, $cepat_pertamax, $cepat_shift1_premium, $cepat_shift1_solar, $cepat_shift1_pertamax, $lambat_premium, $lambat_solar, $lambat_pertamax, $tidak_terkirim_premium, $tidak_terkirim_solar, $tidak_terkirim_pertamax, $depot, $tahun, $bulan);
+            $this->m_laporan->editMS2($id, $sesuai_premium, $sesuai_solar, $sesuai_pertamax, $cepat_premium, $cepat_solar, $cepat_pertamax, $cepat_shift1_premium, $cepat_shift1_solar, $cepat_shift1_pertamax, $lambat_premium, $lambat_solar, $lambat_pertamax, $tidak_terkirim_premium, $tidak_terkirim_solar, $tidak_terkirim_pertamax,$total_lo_premium,$total_lo_solar,$total_lo_pertamax, $depot, $tahun, $bulan);
             $this->m_laporan->SyncKPIOperasional($depot, $tahun, $bulan);
             $this->m_laporan->InsertLogSistem($this->session->userdata('id_pegawai'), 'Edit MS2 Complience tanggal ' . $tanggal, 'Edit');
 
@@ -286,6 +367,61 @@ class laporan extends CI_Controller {
                             $data2['ms2']['tidak_terkirim_solar'] [] = $tidak_terkirim_solar;
                             $data2['ms2']['tidak_terkirim_pertamax'] [] = $tidak_terkirim_pertamax;
 
+                            $temp_total_lo = 0;
+                            if($sesuai_premium > 0){
+                                $temp_total_lo = $temp_total_lo + $sesuai_premium;
+                            }
+                            if($cepat_premium > 0){
+                                $temp_total_lo = $temp_total_lo + $cepat_premium;
+                            }
+                            if($cepat_shift1_premium > 0){
+                                $temp_total_lo = $temp_total_lo + $cepat_shift1_premium;
+                            }
+                            if($lambat_premium > 0){
+                                $temp_total_lo = $temp_total_lo + $lambat_premium;
+                            }
+                            if($tidak_terkirim_premium > 0){
+                                $temp_total_lo = $temp_total_lo + $tidak_terkirim_premium;
+                            }
+                            $data2['ms2']['total_lo_premium'] [] = $temp_total_lo;
+                            
+                            $temp_total_lo = 0;
+                            if($sesuai_solar > 0){
+                                $temp_total_lo = $temp_total_lo + $sesuai_solar;
+                            }
+                            if($cepat_solar > 0){
+                                $temp_total_lo = $temp_total_lo + $cepat_solar;
+                            }
+                            if($cepat_shift1_solar > 0){
+                                $temp_total_lo = $temp_total_lo + $cepat_shift1_solar;
+                            }
+                            if($lambat_solar > 0){
+                                $temp_total_lo = $temp_total_lo + $lambat_solar;
+                            }
+                            if($tidak_terkirim_solar > 0){
+                                $temp_total_lo = $temp_total_lo + $tidak_terkirim_solar;
+                            }
+                            $data2['ms2']['total_lo_solar'] [] = $temp_total_lo;
+                            
+                            $temp_total_lo = 0;
+                            if($sesuai_pertamax > 0){
+                                $temp_total_lo = $temp_total_lo + $sesuai_pertamax;
+                            }
+                            if($cepat_pertamax > 0){
+                                $temp_total_lo = $temp_total_lo + $cepat_pertamax;
+                            }
+                            if($cepat_shift1_pertamax > 0){
+                                $temp_total_lo = $temp_total_lo + $cepat_shift1_pertamax;
+                            }
+                            if($lambat_pertamax > 0){
+                                $temp_total_lo = $temp_total_lo + $lambat_pertamax;
+                            }
+                            if($tidak_terkirim_pertamax > 0){
+                                $temp_total_lo = $temp_total_lo + $tidak_terkirim_pertamax;
+                            }
+                            $data2['ms2']['total_lo_pertamax'] [] = $temp_total_lo;
+                            
+                            /*
                             if ($sesuai_premium == -1 || $cepat_premium == -1 || $cepat_shift1_premium == -1 || $lambat_premium == -1 || $tidak_terkirim_premium == -1) {
                                 $data2['ms2']['total_lo_premium'] [] = -1;
                             } else {
@@ -301,44 +437,107 @@ class laporan extends CI_Controller {
                             } else {
                                 $data2['ms2']['total_lo_pertamax'] [] = $sesuai_pertamax + $cepat_pertamax + $cepat_shift1_pertamax + $lambat_pertamax + $tidak_terkirim_pertamax;
                             }
+                            */
+                            
                         }
                         $nilai_sesuai = 0;
+                        $banyak_nilai_sesuai=0;
                         $nilai_cepat = 0;
+                        $banyak_nilai_cepat=0;
                         $nilai_cepat_shift1 = 0;
+                        $banyak_nilai_cepat_shift1=0;
                         $nilai_lambat = 0;
+                        $banyak_nilai_lambat=0;
                         $nilai_tidak_terkirim = 0;
+                        $banyak_nilai_tidak_terkirim=0;
                         $nilai_total_lo = 0;
+                        $banyak_nilai_total_lo=0;
                         for ($i = 0; $i < $last_day; $i++) {
-                            $nilai_sesuai = $nilai_sesuai + $data2['ms2']['sesuai_premium'] [$i];
-                            $nilai_sesuai = $nilai_sesuai + $data2['ms2']['sesuai_solar'] [$i];
-                            $nilai_sesuai = $nilai_sesuai + $data2['ms2']['sesuai_pertamax'] [$i];
+                            if($data2['ms2']['sesuai_premium'] [$i] != -1){
+                                $nilai_sesuai = $nilai_sesuai + $data2['ms2']['sesuai_premium'] [$i];
+                                $banyak_nilai_sesuai++;
+                            }                            
+                            if($data2['ms2']['sesuai_solar'] [$i] != -1){
+                                $nilai_sesuai = $nilai_sesuai + $data2['ms2']['sesuai_solar'] [$i];
+                                $banyak_nilai_sesuai++;
+                            }                            
+                            if($data2['ms2']['sesuai_pertamax'] [$i] != -1){
+                                $nilai_sesuai = $nilai_sesuai + $data2['ms2']['sesuai_pertamax'] [$i];
+                                $banyak_nilai_sesuai++;
+                            }
+                            
+                            if($data2['ms2']['cepat_premium'] [$i] != -1){
+                                $nilai_cepat = $nilai_cepat + $data2['ms2']['cepat_premium'] [$i];
+                                $banyak_nilai_cepat++;
+                            }
+                            if($data2['ms2']['cepat_solar'] [$i] != -1){
+                                $nilai_cepat = $nilai_cepat + $data2['ms2']['cepat_solar'] [$i];
+                                $banyak_nilai_cepat++;
+                            }
+                            if($data2['ms2']['cepat_pertamax'] [$i] != -1){
+                                $nilai_cepat = $nilai_cepat + $data2['ms2']['cepat_pertamax'] [$i];
+                                $banyak_nilai_cepat++;
+                            }
+                            
+                            if($data2['ms2']['cepat_shift1_premium'] [$i] != -1){
+                                $nilai_cepat_shift1 = $nilai_cepat_shift1 + $data2['ms2']['cepat_shift1_premium'] [$i];
+                                $banyak_nilai_cepat_shift1++;
+                            }
+                            if($data2['ms2']['cepat_shift1_solar'] [$i] != -1){
+                                $nilai_cepat_shift1 = $nilai_cepat_shift1 + $data2['ms2']['cepat_shift1_solar'] [$i];
+                                $banyak_nilai_cepat_shift1++;
+                            }
+                            if($data2['ms2']['cepat_shift1_pertamax'] [$i] != -1){
+                                $nilai_cepat_shift1 = $nilai_cepat_shift1 + $data2['ms2']['cepat_shift1_pertamax'] [$i];
+                                $banyak_nilai_cepat_shift1++;
+                            }
 
-                            $nilai_cepat = $nilai_cepat + $data2['ms2']['cepat_premium'] [$i];
-                            $nilai_cepat = $nilai_cepat + $data2['ms2']['cepat_solar'] [$i];
-                            $nilai_cepat = $nilai_cepat + $data2['ms2']['cepat_pertamax'] [$i];
-
-                            $nilai_cepat_shift1 = $nilai_cepat_shift1 + $data2['ms2']['cepat_shift1_premium'] [$i];
-                            $nilai_cepat_shift1 = $nilai_cepat_shift1 + $data2['ms2']['cepat_shift1_solar'] [$i];
-                            $nilai_cepat_shift1 = $nilai_cepat_shift1 + $data2['ms2']['cepat_shift1_pertamax'] [$i];
-
-                            $nilai_lambat = $nilai_lambat + $data2['ms2']['lambat_premium'] [$i];
-                            $nilai_lambat = $nilai_lambat + $data2['ms2']['lambat_solar'] [$i];
-                            $nilai_lambat = $nilai_lambat + $data2['ms2']['lambat_pertamax'] [$i];
-
-                            $nilai_tidak_terkirim = $nilai_tidak_terkirim + $data2['ms2']['tidak_terkirim_premium'] [$i];
-                            $nilai_tidak_terkirim = $nilai_tidak_terkirim + $data2['ms2']['tidak_terkirim_solar'] [$i];
-                            $nilai_tidak_terkirim = $nilai_tidak_terkirim + $data2['ms2']['tidak_terkirim_pertamax'] [$i];
-
-                            $nilai_total_lo = $nilai_total_lo + $data2['ms2']['total_lo_premium'] [$i];
-                            $nilai_total_lo = $nilai_total_lo + $data2['ms2']['total_lo_solar'] [$i];
-                            $nilai_total_lo = $nilai_total_lo + $data2['ms2']['total_lo_pertamax'] [$i];
+                            if($data2['ms2']['lambat_premium'] [$i] != -1){
+                                $nilai_lambat = $nilai_lambat + $data2['ms2']['lambat_premium'] [$i];
+                                $banyak_nilai_lambat++;
+                            }
+                            if($data2['ms2']['lambat_solar'] [$i] != -1){
+                                $nilai_lambat = $nilai_lambat + $data2['ms2']['lambat_solar'] [$i];
+                                $banyak_nilai_lambat++;
+                            }
+                            if($data2['ms2']['lambat_pertamax'] [$i] != -1){
+                                $nilai_lambat = $nilai_lambat + $data2['ms2']['lambat_pertamax'] [$i];
+                                $banyak_nilai_lambat++;
+                            }
+                            
+                            if($data2['ms2']['tidak_terkirim_premium'] [$i] != -1){
+                                $nilai_tidak_terkirim = $nilai_tidak_terkirim + $data2['ms2']['tidak_terkirim_premium'] [$i];
+                                $banyak_nilai_tidak_terkirim++;
+                            }
+                            if($data2['ms2']['tidak_terkirim_solar'] [$i] != -1){
+                                $nilai_tidak_terkirim = $nilai_tidak_terkirim + $data2['ms2']['tidak_terkirim_solar'] [$i];
+                                $banyak_nilai_tidak_terkirim++;
+                            }
+                            if($data2['ms2']['tidak_terkirim_pertamax'] [$i] != -1){
+                                $nilai_tidak_terkirim = $nilai_tidak_terkirim + $data2['ms2']['tidak_terkirim_pertamax'] [$i];
+                                $banyak_nilai_tidak_terkirim++;
+                            }
+                            
+                            if($data2['ms2']['total_lo_premium'] [$i] != -1){
+                                $nilai_total_lo = $nilai_total_lo + $data2['ms2']['total_lo_premium'] [$i];
+                                $banyak_nilai_total_lo++;
+                            }
+                            if($data2['ms2']['total_lo_solar'] [$i] != -1){
+                                $nilai_total_lo = $nilai_total_lo + $data2['ms2']['total_lo_solar'] [$i];
+                                $banyak_nilai_total_lo++;
+                            }
+                            if($data2['ms2']['total_lo_pertamax'] [$i] != -1){                                
+                                $nilai_total_lo = $nilai_total_lo + $data2['ms2']['total_lo_pertamax'] [$i];
+                                $banyak_nilai_total_lo++;
+                            }
+                            
                         }
-                        $data2['ms2']['rata_sesuai'] = round($nilai_sesuai / ($last_day * 3), 2);
-                        $data2['ms2']['rata_cepat'] = round($nilai_cepat / ($last_day * 3), 2);
-                        $data2['ms2']['rata_cepat_shift1'] = round($nilai_cepat_shift1 / ($last_day * 3), 2);
-                        $data2['ms2']['rata_lambat'] = round($nilai_lambat / ($last_day * 3), 2);
-                        $data2['ms2']['rata_tidak_terkirim'] = round($nilai_tidak_terkirim / ($last_day * 3), 2);
-                        $data2['ms2']['rata_total_lo'] = round($nilai_total_lo / ($last_day * 3), 2);
+                        $data2['ms2']['rata_sesuai'] = round($nilai_sesuai / ($banyak_nilai_sesuai), 2);
+                        $data2['ms2']['rata_cepat'] = round($nilai_cepat / ($banyak_nilai_cepat), 2);
+                        $data2['ms2']['rata_cepat_shift1'] = round($nilai_cepat_shift1 / ($banyak_nilai_cepat_shift1), 2);
+                        $data2['ms2']['rata_lambat'] = round($nilai_lambat / ($banyak_nilai_lambat), 2);
+                        $data2['ms2']['rata_tidak_terkirim'] = round($nilai_tidak_terkirim / ($banyak_nilai_tidak_terkirim), 2);
+                        $data2['ms2']['rata_total_lo'] = round($nilai_total_lo / ($banyak_nilai_total_lo), 2);
                         $data2['ms2']['hasil_akhir'] = $data2['ms2']['rata_sesuai'] + $data2['ms2']['rata_cepat'] + $data2['ms2']['rata_cepat_shift1'];
                     }
                 }
@@ -1199,9 +1398,6 @@ class laporan extends CI_Controller {
                 $data2['kpi']['error'] = true;
             }
         }
-
-
-
 
 
         $this->header(7, 2);
@@ -2788,50 +2984,50 @@ class laporan extends CI_Controller {
                     if ($hasil_rencana_realisasi[$i]->SESUAI_PREMIUM != "") {
                         $sheetData->setCellValue('C' . (9 + $i), $hasil_rencana_realisasi[$i]->SESUAI_PREMIUM / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->SESUAI_PERTAMAX != "") {
+                    if ($hasil_rencana_realisasi[$i]->SESUAI_SOLAR != "") {
                         $sheetData->setCellValue('D' . (9 + $i), $hasil_rencana_realisasi[$i]->SESUAI_PERTAMAX / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->SESUAI_SOLAR != "") {
+                    if ($hasil_rencana_realisasi[$i]->SESUAI_PERTAMAX != "") {
                         $sheetData->setCellValue('E' . (9 + $i), $hasil_rencana_realisasi[$i]->SESUAI_SOLAR / 100);
                     }
 
                     if ($hasil_rencana_realisasi[$i]->CEPAT_PREMIUM != "") {
                         $sheetData->setCellValue('F' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_PREMIUM / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->CEPAT_PERTAMAX != "") {
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_SOLAR != "") {
                         $sheetData->setCellValue('G' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_PERTAMAX / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->CEPAT_SOLAR != "") {
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_PERTAMAX != "") {
                         $sheetData->setCellValue('H' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_SOLAR / 100);
                     }
 
                     if ($hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PREMIUM != "") {
                         $sheetData->setCellValue('I' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PREMIUM / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PERTAMAX != "") {
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_SOLAR != "") {
                         $sheetData->setCellValue('J' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PERTAMAX / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_SOLAR != "") {
+                    if ($hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_PERTAMAX != "") {
                         $sheetData->setCellValue('K' . (9 + $i), $hasil_rencana_realisasi[$i]->CEPAT_SHIFT1_SOLAR / 100);
                     }
 
                     if ($hasil_rencana_realisasi[$i]->LAMBAT_PREMIUM != "") {
                         $sheetData->setCellValue('L' . (9 + $i), $hasil_rencana_realisasi[$i]->LAMBAT_PREMIUM / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->LAMBAT_PERTAMAX != "") {
+                    if ($hasil_rencana_realisasi[$i]->LAMBAT_SOLAR != "") {
                         $sheetData->setCellValue('M' . (9 + $i), $hasil_rencana_realisasi[$i]->LAMBAT_PERTAMAX / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->LAMBAT_SOLAR != "") {
+                    if ($hasil_rencana_realisasi[$i]->LAMBAT_PERTAMAX != "") {
                         $sheetData->setCellValue('N' . (9 + $i), $hasil_rencana_realisasi[$i]->LAMBAT_SOLAR / 100);
                     }
 
                     if ($hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PREMIUM != "") {
                         $sheetData->setCellValue('O' . (9 + $i), $hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PREMIUM / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PERTAMAX != "") {
+                    if ($hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_SOLAR != "") {
                         $sheetData->setCellValue('P' . (9 + $i), $hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PERTAMAX / 100);
                     }
-                    if ($hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_SOLAR != "") {
+                    if ($hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_PERTAMAX != "") {
                         $sheetData->setCellValue('Q' . (9 + $i), $hasil_rencana_realisasi[$i]->TIDAK_TERKIRIM_SOLAR / 100);
                     }
                 }

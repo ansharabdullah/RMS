@@ -168,21 +168,21 @@
                                             <td style="display:none;"></td>
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $row->TANGGAL; ?></td>
-                                            <td><?php echo $row->SESUAI_PREMIUM; ?>%</td>
-                                            <td><?php echo $row->SESUAI_SOLAR; ?>%</td>    
-                                            <td><?php echo $row->SESUAI_PERTAMAX; ?>%</td>
-                                            <td><?php echo $row->CEPAT_PREMIUM; ?>%</td>
-                                            <td><?php echo $row->CEPAT_SOLAR; ?>%</td>    
-                                            <td><?php echo $row->CEPAT_PERTAMAX; ?>%</td>
-                                            <td><?php echo $row->CEPAT_SHIFT1_PREMIUM; ?>%</td>
-                                            <td><?php echo $row->CEPAT_SHIFT1_SOLAR; ?>%</td>    
-                                            <td><?php echo $row->CEPAT_SHIFT1_PERTAMAX; ?>%</td>
-                                            <td><?php echo $row->LAMBAT_PREMIUM; ?>%</td>
-                                            <td><?php echo $row->LAMBAT_SOLAR; ?>%</td>    
-                                            <td><?php echo $row->LAMBAT_PERTAMAX; ?>%</td>
-                                            <td><?php echo $row->TIDAK_TERKIRIM_PREMIUM; ?>%</td>
-                                            <td><?php echo $row->TIDAK_TERKIRIM_SOLAR; ?>%</td>    
-                                            <td><?php echo $row->TIDAK_TERKIRIM_PERTAMAX; ?>%</td>
+                                            <td><?php echo $row->SESUAI_PREMIUM; ?><?php if($row->SESUAI_PREMIUM != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->SESUAI_SOLAR; ?><?php if($row->SESUAI_SOLAR != ""){ ?>%<?php }?></td>    
+                                            <td><?php echo $row->SESUAI_PERTAMAX; ?><?php if($row->SESUAI_PERTAMAX != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->CEPAT_PREMIUM; ?><?php if($row->CEPAT_PREMIUM != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->CEPAT_SOLAR; ?><?php if($row->CEPAT_SOLAR != ""){ ?>%<?php }?></td>    
+                                            <td><?php echo $row->CEPAT_PERTAMAX; ?><?php if($row->CEPAT_PERTAMAX != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->CEPAT_SHIFT1_PREMIUM; ?><?php if($row->CEPAT_SHIFT1_PREMIUM != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->CEPAT_SHIFT1_SOLAR; ?><?php if($row->CEPAT_SHIFT1_SOLAR != ""){ ?>%<?php }?></td>    
+                                            <td><?php echo $row->CEPAT_SHIFT1_PERTAMAX; ?><?php if($row->CEPAT_SHIFT1_PERTAMAX != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->LAMBAT_PREMIUM; ?><?php if($row->LAMBAT_PREMIUM != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->LAMBAT_SOLAR; ?><?php if($row->LAMBAT_SOLAR != ""){ ?>%<?php }?></td>    
+                                            <td><?php echo $row->LAMBAT_PERTAMAX; ?><?php if($row->LAMBAT_PERTAMAX != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->TIDAK_TERKIRIM_PREMIUM; ?><?php if($row->TIDAK_TERKIRIM_PREMIUM != ""){ ?>%<?php }?></td>
+                                            <td><?php echo $row->TIDAK_TERKIRIM_SOLAR; ?><?php if($row->TIDAK_TERKIRIM_SOLAR != ""){ ?>%<?php }?></td>    
+                                            <td><?php echo $row->TIDAK_TERKIRIM_PERTAMAX; ?><?php if($row->TIDAK_TERKIRIM_PERTAMAX != ""){ ?>%<?php }?></td>
                                             <td><?php echo ($row->SESUAI_PREMIUM + $row->CEPAT_PREMIUM + $row->CEPAT_SHIFT1_PREMIUM + $row->LAMBAT_PREMIUM + $row->TIDAK_TERKIRIM_PREMIUM); ?>%</td>
                                             <td><?php echo ($row->SESUAI_SOLAR + $row->CEPAT_SOLAR + $row->CEPAT_SHIFT1_SOLAR + $row->LAMBAT_SOLAR + $row->TIDAK_TERKIRIM_SOLAR); ?>%</td>
                                             <td><?php echo ($row->SESUAI_PERTAMAX + $row->CEPAT_PERTAMAX + $row->CEPAT_SHIFT1_PERTAMAX + $row->LAMBAT_PERTAMAX + $row->TIDAK_TERKIRIM_PERTAMAX); ?>%</td>
@@ -272,65 +272,65 @@
                                             <p>Sesuai Dengan MS2</p>
 
                                             <div class="col-lg-4">
-                                                Premium <input class=" form-control input-sm m-bot15" id="premium1" name="premium1" min="0" type="number" value="" placeholder="Premium"required/>
+                                                Premium <input class=" form-control input-sm m-bot15" id="premium1" name="premium1" min="0" type="number" value="" placeholder="Premium"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Solar <input class=" form-control input-sm m-bot15" id="solar1" name="solar1" min="0" type="number" value="" placeholder="Solar"required/>
+                                                Solar <input class=" form-control input-sm m-bot15" id="solar1" name="solar1" min="0" type="number" value="" placeholder="Solar"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax1" min="0" type="number" value="" placeholder="Pertamax"required/>
+                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax1" name="pertamax1" min="0" type="number" value="" placeholder="Pertamax"/>
                                             </div>
                                         </div>
 
                                         <div class="form-group "> 
                                             <p>Cepat (Sebelum Jadwal MS2)</p>
                                             <div class="col-lg-4">
-                                                Premium <input class=" form-control input-sm m-bot15" id="premium2" name="premium2" min="0" type="number" value="" placeholder="Premium"required/>
+                                                Premium <input class=" form-control input-sm m-bot15" id="premium2" name="premium2" min="0" type="number" value="" placeholder="Premium"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Solar <input class=" form-control input-sm m-bot15" id="solar2" name="solar2" min="0" type="number" value="" placeholder="Solar"required/>
+                                                Solar <input class=" form-control input-sm m-bot15" id="solar2" name="solar2" min="0" type="number" value="" placeholder="Solar"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax2" name="pertamax2" min="0" type="number" value="" placeholder="Pertamax"required/>
+                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax2" name="pertamax2" min="0" type="number" value="" placeholder="Pertamax"/>
                                             </div>
                                         </div>
 
                                         <div class="form-group "> 
                                             <p>Lebih Cepat (Sebelum Shift 1)</p>
                                             <div class="col-lg-4">
-                                                Premium <input class=" form-control input-sm m-bot15" id="premium3" name="premium3" min="0" type="number" value="" placeholder="Premium"required/>
+                                                Premium <input class=" form-control input-sm m-bot15" id="premium3" name="premium3" min="0" type="number" value="" placeholder="Premium"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Solar <input class=" form-control input-sm m-bot15" id="solar3" name="solar3" min="0" type="number" value="" placeholder="Solar"required/>
+                                                Solar <input class=" form-control input-sm m-bot15" id="solar3" name="solar3" min="0" type="number" value="" placeholder="Solar"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax3" name="pertamax3" min="0" type="number" value="" placeholder="Pertamax"required/>
+                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax3" name="pertamax3" min="0" type="number" value="" placeholder="Pertamax"/>
                                             </div>
                                         </div>
 
                                         <div class="form-group "> 
                                             <p>Lambat (Setelah MS2)</p>
                                             <div class="col-lg-4">
-                                                Premium <input class=" form-control input-sm m-bot15" id="premium4" name="premium4" min="0" type="number" value="" placeholder="Premium"required/>
+                                                Premium <input class=" form-control input-sm m-bot15" id="premium4" name="premium4" min="0" type="number" value="" placeholder="Premium"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Solar <input class=" form-control input-sm m-bot15" id="solar4" name="solar4" min="0" type="number" value="" placeholder="Solar"required/>
+                                                Solar <input class=" form-control input-sm m-bot15" id="solar4" name="solar4" min="0" type="number" value="" placeholder="Solar"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax4" name="pertamax4" min="0" type="number" value="" placeholder="Pertamax"required/>
+                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax4" name="pertamax4" min="0" type="number" value="" placeholder="Pertamax"/>
                                             </div>
                                         </div>
 
                                         <div class="form-group "> 
                                             <p>Tidak Terkirim Sesuai</p>
                                             <div class="col-lg-4">
-                                                Premium <input class=" form-control input-sm m-bot15" id="premium5" name="premium5" min="0" type="number" value="" placeholder="Premium"required/>
+                                                Premium <input class=" form-control input-sm m-bot15" id="premium5" name="premium5" min="0" type="number" value="" placeholder="Premium"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Solar <input class=" form-control input-sm m-bot15" id="solar5" name="solar5" min="0" type="number" value="" placeholder="Solar"required/>
+                                                Solar <input class=" form-control input-sm m-bot15" id="solar5" name="solar5" min="0" type="number" value="" placeholder="Solar"/>
                                             </div>
                                             <div class="col-lg-4">
-                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax5" name="pertamax5" min="0" type="number" value="" placeholder="Pertamax"required/>
+                                                Pertamax <input class=" form-control input-sm m-bot15" id="pertamax5" name="pertamax5" min="0" type="number" value="" placeholder="Pertamax"/>
                                             </div>
                                         </div>
 
