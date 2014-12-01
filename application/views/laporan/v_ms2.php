@@ -168,24 +168,24 @@
                                             <td style="display:none;"></td>
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $row->TANGGAL; ?></td>
-                                            <td><?php echo $row->SESUAI_PREMIUM; ?><?php if($row->SESUAI_PREMIUM != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->SESUAI_SOLAR; ?><?php if($row->SESUAI_SOLAR != ""){ ?>%<?php }?></td>    
-                                            <td><?php echo $row->SESUAI_PERTAMAX; ?><?php if($row->SESUAI_PERTAMAX != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->CEPAT_PREMIUM; ?><?php if($row->CEPAT_PREMIUM != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->CEPAT_SOLAR; ?><?php if($row->CEPAT_SOLAR != ""){ ?>%<?php }?></td>    
-                                            <td><?php echo $row->CEPAT_PERTAMAX; ?><?php if($row->CEPAT_PERTAMAX != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->CEPAT_SHIFT1_PREMIUM; ?><?php if($row->CEPAT_SHIFT1_PREMIUM != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->CEPAT_SHIFT1_SOLAR; ?><?php if($row->CEPAT_SHIFT1_SOLAR != ""){ ?>%<?php }?></td>    
-                                            <td><?php echo $row->CEPAT_SHIFT1_PERTAMAX; ?><?php if($row->CEPAT_SHIFT1_PERTAMAX != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->LAMBAT_PREMIUM; ?><?php if($row->LAMBAT_PREMIUM != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->LAMBAT_SOLAR; ?><?php if($row->LAMBAT_SOLAR != ""){ ?>%<?php }?></td>    
-                                            <td><?php echo $row->LAMBAT_PERTAMAX; ?><?php if($row->LAMBAT_PERTAMAX != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->TIDAK_TERKIRIM_PREMIUM; ?><?php if($row->TIDAK_TERKIRIM_PREMIUM != ""){ ?>%<?php }?></td>
-                                            <td><?php echo $row->TIDAK_TERKIRIM_SOLAR; ?><?php if($row->TIDAK_TERKIRIM_SOLAR != ""){ ?>%<?php }?></td>    
-                                            <td><?php echo $row->TIDAK_TERKIRIM_PERTAMAX; ?><?php if($row->TIDAK_TERKIRIM_PERTAMAX != ""){ ?>%<?php }?></td>
-                                            <td><?php echo ($row->SESUAI_PREMIUM + $row->CEPAT_PREMIUM + $row->CEPAT_SHIFT1_PREMIUM + $row->LAMBAT_PREMIUM + $row->TIDAK_TERKIRIM_PREMIUM); ?>%</td>
-                                            <td><?php echo ($row->SESUAI_SOLAR + $row->CEPAT_SOLAR + $row->CEPAT_SHIFT1_SOLAR + $row->LAMBAT_SOLAR + $row->TIDAK_TERKIRIM_SOLAR); ?>%</td>
-                                            <td><?php echo ($row->SESUAI_PERTAMAX + $row->CEPAT_PERTAMAX + $row->CEPAT_SHIFT1_PERTAMAX + $row->LAMBAT_PERTAMAX + $row->TIDAK_TERKIRIM_PERTAMAX); ?>%</td>
+                                            <td><?php if($row->SESUAI_PREMIUM != ""){ ?><?php echo number_format($row->SESUAI_PREMIUM,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->SESUAI_SOLAR != ""){ ?><?php echo number_format($row->SESUAI_SOLAR,0,',','.'); ?>%<?php }?></td>    
+                                            <td><?php if($row->SESUAI_PERTAMAX != ""){ ?><?php echo number_format($row->SESUAI_PERTAMAX,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->CEPAT_PREMIUM != ""){ ?><?php echo number_format($row->CEPAT_PREMIUM,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->CEPAT_SOLAR != ""){ ?><?php echo number_format($row->CEPAT_SOLAR,0,',','.'); ?>%<?php }?></td>    
+                                            <td><?php if($row->CEPAT_PERTAMAX != ""){ ?><?php echo number_format($row->CEPAT_PERTAMAX,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->CEPAT_SHIFT1_PREMIUM != ""){ ?><?php echo number_format($row->CEPAT_SHIFT1_PREMIUM,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->CEPAT_SHIFT1_SOLAR != ""){ ?><?php echo number_format($row->CEPAT_SHIFT1_SOLAR,0,',','.'); ?>%<?php }?></td>    
+                                            <td><?php if($row->CEPAT_SHIFT1_PERTAMAX != ""){ ?><?php echo number_format($row->CEPAT_SHIFT1_PERTAMAX,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->LAMBAT_PREMIUM != ""){ ?><?php echo number_format($row->LAMBAT_PREMIUM,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->LAMBAT_SOLAR != ""){ ?><?php echo number_format($row->LAMBAT_SOLAR,0,',','.'); ?>%<?php }?></td>    
+                                            <td><?php if($row->LAMBAT_PERTAMAX != ""){ ?><?php echo number_format($row->LAMBAT_PERTAMAX,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->TIDAK_TERKIRIM_PREMIUM != ""){ ?><?php echo number_format($row->TIDAK_TERKIRIM_PREMIUM,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php if($row->TIDAK_TERKIRIM_SOLAR != ""){ ?><?php echo number_format($row->TIDAK_TERKIRIM_SOLAR,0,',','.'); ?>%<?php }?></td>    
+                                            <td><?php if($row->TIDAK_TERKIRIM_PERTAMAX != ""){ ?><?php echo number_format($row->TIDAK_TERKIRIM_PERTAMAX,0,',','.'); ?>%<?php }?></td>
+                                            <td><?php echo number_format(($row->SESUAI_PREMIUM + $row->CEPAT_PREMIUM + $row->CEPAT_SHIFT1_PREMIUM + $row->LAMBAT_PREMIUM + $row->TIDAK_TERKIRIM_PREMIUM),0,',','.'); ?>%</td>
+                                            <td><?php echo number_format(($row->SESUAI_SOLAR + $row->CEPAT_SOLAR + $row->CEPAT_SHIFT1_SOLAR + $row->LAMBAT_SOLAR + $row->TIDAK_TERKIRIM_SOLAR),0,',','.'); ?>%</td>
+                                            <td><?php echo number_format(($row->SESUAI_PERTAMAX + $row->CEPAT_PERTAMAX + $row->CEPAT_SHIFT1_PERTAMAX + $row->LAMBAT_PERTAMAX + $row->TIDAK_TERKIRIM_PERTAMAX),0,',','.'); ?>%</td>
                                             <?php if($this->session->userdata('id_role')!=5){?>
                                             <td>
                                                 <a data-placement="top" data-toggle="modal" href="#ModalMs2" onclick="setDetailMS2('<?php echo ($no - 1) ?>')" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>

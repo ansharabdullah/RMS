@@ -199,29 +199,29 @@ class m_laporan extends CI_Model {
             
             //round($nilai_sesuai / ($banyak_nilai_sesuai), 2)s
             
-            $sesuai_premium = (($ms2['sesuai_premium'][$no]!= -1) ? (round($ms2['sesuai_premium'][$no],0)) : "NULL");
-            $sesuai_solar = (($ms2['sesuai_solar'][$no]!=-1) ? (round($ms2['sesuai_solar'][$no],0)) : "NULL");
-            $sesuai_pertamax = (($ms2['sesuai_pertamax'][$no]!= -1) ? (round($ms2['sesuai_pertamax'][$no],0)) : "NULL");
+            $sesuai_premium = (($ms2['sesuai_premium'][$no]!= -1) ? ($ms2['sesuai_premium'][$no]) : "NULL");
+            $sesuai_solar = (($ms2['sesuai_solar'][$no]!=-1) ? ($ms2['sesuai_solar'][$no]) : "NULL");
+            $sesuai_pertamax = (($ms2['sesuai_pertamax'][$no]!= -1) ? ($ms2['sesuai_pertamax'][$no]) : "NULL");
 
-            $cepat_premium = (($ms2['cepat_premium'][$no]!=-1) ? (round($ms2['cepat_premium'][$no],0)) : "NULL");
-            $cepat_solar = (($ms2['cepat_solar'][$no]!=-1) ? (round($ms2['cepat_solar'][$no],0)) : "NULL");
-            $cepat_pertamax = (($ms2['cepat_pertamax'][$no]!=-1) ? (round($ms2['cepat_pertamax'][$no],0)) : "NULL");
+            $cepat_premium = (($ms2['cepat_premium'][$no]!=-1) ? ($ms2['cepat_premium'][$no]) : "NULL");
+            $cepat_solar = (($ms2['cepat_solar'][$no]!=-1) ? ($ms2['cepat_solar'][$no]) : "NULL");
+            $cepat_pertamax = (($ms2['cepat_pertamax'][$no]!=-1) ? ($ms2['cepat_pertamax'][$no]) : "NULL");
 
-            $cepat_shift1_premium = (($ms2['cepat_shift1_premium'][$no]!=-1) ? (round($ms2['cepat_shift1_premium'][$no],0)) : "NULL");
-            $cepat_shift1_solar = (($ms2['cepat_shift1_solar'][$no]!=-1) ? (round($ms2['cepat_shift1_solar'][$no],0)) : "NULL");
-            $cepat_shift1_pertamax = (($ms2['cepat_shift1_pertamax'][$no]!=-1) ? (round($ms2['cepat_shift1_pertamax'][$no],0)) : "NULL");
+            $cepat_shift1_premium = (($ms2['cepat_shift1_premium'][$no]!=-1) ? ($ms2['cepat_shift1_premium'][$no]) : "NULL");
+            $cepat_shift1_solar = (($ms2['cepat_shift1_solar'][$no]!=-1) ? ($ms2['cepat_shift1_solar'][$no]) : "NULL");
+            $cepat_shift1_pertamax = (($ms2['cepat_shift1_pertamax'][$no]!=-1) ? ($ms2['cepat_shift1_pertamax'][$no]) : "NULL");
 
-            $lambat_premium = (($ms2['lambat_premium'][$no]!=-1) ? (round($ms2['lambat_premium'][$no],0)) : "NULL");
-            $lambat_solar = (($ms2['lambat_solar'][$no]!=-1) ? (round($ms2['lambat_solar'][$no],0)) : "NULL");
-            $lambat_pertamax = (($ms2['lambat_pertamax'][$no]!=-1) ? (round($ms2['lambat_pertamax'][$no],0)) : "NULL");
+            $lambat_premium = (($ms2['lambat_premium'][$no]!=-1) ? ($ms2['lambat_premium'][$no]) : "NULL");
+            $lambat_solar = (($ms2['lambat_solar'][$no]!=-1) ? ($ms2['lambat_solar'][$no]) : "NULL");
+            $lambat_pertamax = (($ms2['lambat_pertamax'][$no]!=-1) ? ($ms2['lambat_pertamax'][$no]) : "NULL");
 
-            $tidak_terkirim_premium = (($ms2['tidak_terkirim_premium'][$no]!=-1) ? (round($ms2['tidak_terkirim_premium'][$no],0)) : "NULL");
-            $tidak_terkirim_solar = (($ms2['tidak_terkirim_solar'][$no]!=-1) ? (round($ms2['tidak_terkirim_solar'][$no],0)) : "NULL");
-            $tidak_terkirim_pertamax = (($ms2['tidak_terkirim_pertamax'][$no]!=-1) ? (round($ms2['tidak_terkirim_pertamax'][$no],0)) : "NULL");
+            $tidak_terkirim_premium = (($ms2['tidak_terkirim_premium'][$no]!=-1) ? ($ms2['tidak_terkirim_premium'][$no]) : "NULL");
+            $tidak_terkirim_solar = (($ms2['tidak_terkirim_solar'][$no]!=-1) ? ($ms2['tidak_terkirim_solar'][$no]) : "NULL");
+            $tidak_terkirim_pertamax = (($ms2['tidak_terkirim_pertamax'][$no]!=-1) ? ($ms2['tidak_terkirim_pertamax'][$no]) : "NULL");
 
-            $total_lo_premium = (($ms2['total_lo_premium'][$no]!=-1) ? (round($ms2['total_lo_premium'][$no],0)) : "NULL");
-            $total_lo_solar = (($ms2['total_lo_solar'][$no]!=-1) ? (round($ms2['total_lo_solar'][$no],0)) : "NULL");
-            $total_lo_pertamax = (($ms2['total_lo_pertamax'][$no]!=-1) ? (round($ms2['total_lo_pertamax'][$no],0)) : "NULL");
+            $total_lo_premium = (($ms2['total_lo_premium'][$no]!=-1) ? ($ms2['total_lo_premium'][$no]) : "NULL");
+            $total_lo_solar = (($ms2['total_lo_solar'][$no]!=-1) ? ($ms2['total_lo_solar'][$no]) : "NULL");
+            $total_lo_pertamax = (($ms2['total_lo_pertamax'][$no]!=-1) ? ($ms2['total_lo_pertamax'][$no]) : "NULL");
             
             $query = $this->db->query("insert into ms2(ID_LOG_HARIAN,SESUAI_PREMIUM,SESUAI_SOLAR,SESUAI_PERTAMAX,CEPAT_PREMIUM,CEPAT_SOLAR,CEPAT_PERTAMAX,CEPAT_SHIFT1_PREMIUM,CEPAT_SHIFT1_SOLAR,CEPAT_SHIFT1_PERTAMAX,LAMBAT_PREMIUM,LAMBAT_SOLAR,LAMBAT_PERTAMAX,TIDAK_TERKIRIM_PREMIUM,TIDAK_TERKIRIM_SOLAR,TIDAK_TERKIRIM_PERTAMAX,TOTAL_LO_PREMIUM,TOTAL_LO_SOLAR,TOTAL_LO_PERTAMAX)values('" . $id_log_harian . "'," . $sesuai_premium . "," . $sesuai_solar . "," . $sesuai_pertamax . "," . $cepat_premium . "," . $cepat_solar . "," . $cepat_pertamax . "," . $cepat_shift1_premium . "," . $cepat_shift1_solar . "," . $cepat_shift1_pertamax . "," . $lambat_premium . "," . $lambat_solar . "," . $lambat_pertamax . "," . $tidak_terkirim_premium . "," . $tidak_terkirim_solar . "," . $tidak_terkirim_pertamax . ",". $total_lo_premium .",".$total_lo_solar.",".$total_lo_pertamax.")");
             $query = $this->db->query("update log_harian set STATUS_MS2 = 1 where ID_LOG_HARIAN = '" . $ms2['id_log_harian'][$no] . "'");
