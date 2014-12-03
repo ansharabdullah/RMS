@@ -25,24 +25,25 @@
 </script>
 <section id="main-content">
     <section class="wrapper">
-         <div class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-                    <li><a href="<?php echo base_url();?>kinerja">Kinerja</a></li>
+                    <li><a href="<?php echo base_url(); ?>kinerja">Kinerja</a></li>
                     <li class="active">Import SIOD</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
         </div>
-        
-        
+
+
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
                 Input Kinerja dari SIOD
                 <div style="float:right;">
+                    <a  data-placement="left" href="#ModalLibur"  data-toggle="modal" class="btn btn-danger btn-xs tooltips" data-original-title="Libur"><i class="icon-check-minus"></i></a>
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/manual" class="btn btn-primary btn-xs tooltips" data-original-title="Tambah Manual"><i class="icon-plus"></i></a>
                     <a  data-placement="left" href="<?php echo base_url() ?>kinerja/cek" class="btn btn-warning btn-xs tooltips" data-original-title="Cek Kinerja SIOD"><i class="icon-check-sign"></i></a>
                     <a  data-placement="left" class="btn btn-xs btn-success tooltips" data-original-title="Download Format" href="<?php echo base_url() ?>downloads/format_oscrms_siod.xlsx"><i class="icon-download-alt"></i></a>
@@ -389,10 +390,66 @@
             <?php } ?>
 
         <?php } ?>
+                
+        <?php if($data_kinerja['simpan_libur'] == true){?>
+            <?php if($data_kinerja['status_ganti_libur'] == "berhasil"){?>
+                <div class="alert alert-success fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Sukses!</strong> Berhasil ubah tanggal <strong><?php echo $data_kinerja['tglLibur']; ?></strong> menjadi hari <strong><?php echo $data_kinerja['statusLibur']; ?></strong>.
+                </div>
+            <?php }else{ ?>
+                <div class="alert alert-block alert-danger fade in">
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <strong>Error!</strong> Gagal ubah tanggal <strong><?php echo $data_kinerja['tglLibur']; ?></strong> menjadi hari <strong><?php echo $data_kinerja['statusLibur']; ?></strong>.
+                </div>
+            <?php } ?>
+        <?php } ?>
 
         <!-- page end-->
     </section>
 </section>
+
+
+<div class="modal fade" id="ModalLibur" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>kinerja/siod">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Pengaturan Libur</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group ">
+                        <label for="tgllibur" class="control-label col-lg-2">Tanggal</label>
+                        <div class="col-lg-4">
+                            <input class=" form-control input-sm m-bot15" id="tglLibur" name="tglLibur" type="date" size="16" required/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label for="statusLibur" class="control-label col-lg-2">Status</label>
+                        <div class="col-lg-4">
+                            <select class="form-control input-sm m-bot15" id="statusLibur" name="statusLibur">
+                                <option value="Libur">Libur</option>
+                                <option value="Kerja">Kerja</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Kembali</button>
+                    <input class="btn btn-warning" type="submit" name="simpan_libur" value="Simpan"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!--script for this page only-->
 <script src="<?php echo base_url(); ?>assets/js/editable-table.js"></script>
