@@ -133,168 +133,101 @@
                                                     <td><?php echo date("d-m-Y", strtotime($ms2['tanggal'][$no])); ?></td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['sesuai_premium'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['sesuai_premium'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['sesuai_premium'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['sesuai_premium'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['sesuai_solar'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['sesuai_solar'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['sesuai_solar'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['sesuai_solar'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['sesuai_pertamax'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['sesuai_pertamax'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['sesuai_pertamax'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['sesuai_pertamax'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['cepat_premium'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['cepat_premium'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['cepat_premium'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['cepat_premium'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['cepat_solar'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['cepat_solar'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['cepat_solar'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['cepat_solar'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['cepat_pertamax'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['cepat_pertamax'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['cepat_pertamax'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['cepat_pertamax'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['cepat_shift1_premium'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['cepat_shift1_premium'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['cepat_shift1_premium'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['cepat_shift1_premium'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['cepat_shift1_solar'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['cepat_shift1_solar'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['cepat_shift1_solar'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['cepat_shift1_solar'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['cepat_shift1_pertamax'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['cepat_shift1_pertamax'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['cepat_shift1_pertamax'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['cepat_shift1_pertamax'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
 
-                                                <?php
-                                                if ($ms2['lambat_premium'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['lambat_premium'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['lambat_premium'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['lambat_premium'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['lambat_solar'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['lambat_solar'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['lambat_solar'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['lambat_solar'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['lambat_pertamax'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['lambat_pertamax'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['lambat_pertamax'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['lambat_pertamax'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['tidak_terkirim_premium'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['tidak_terkirim_premium'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['tidak_terkirim_premium'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['tidak_terkirim_premium'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['tidak_terkirim_solar'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['tidak_terkirim_solar'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['tidak_terkirim_solar'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['tidak_terkirim_solar'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
 
-                                                <?php
-                                                if ($ms2['tidak_terkirim_pertamax'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
+                                                <?php if ($ms2['tidak_terkirim_pertamax'][$no] == -1) { ?>
+                                                    <td></td>
                                                 <?php } else { ?>
-                                                    <td><?php echo $ms2['tidak_terkirim_pertamax'][$no]; ?>%</td>
+                                                    <td><?php echo number_format($ms2['tidak_terkirim_pertamax'][$no],0,',','.'); ?>%</td>
                                                 <?php } ?>
                                                     
-                                                    <?php
-                                                if ($ms2['total_lo_premium'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
-                                                <?php } else { ?>
-                                                    <td><?php echo $ms2['total_lo_premium'][$no]; ?>%</td>
-                                                <?php } ?>
-
-                                                <?php
-                                                if ($ms2['total_lo_solar'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
-                                                <?php } else { ?>
-                                                    <td><?php echo $ms2['total_lo_solar'][$no]; ?>%</td>
-                                                <?php } ?>
-
-                                                <?php
-                                                if ($ms2['total_lo_pertamax'][$no] == -1) {
-                                                    $simpan = false;
-                                                    ?>
-                                                    <td><span class="label label-warning tooltips" data-placement="top" data-original-title="Data yang dibaca bukan angka">ERROR</span></td>
-                                                <?php } else { ?>
-                                                    <td><?php echo $ms2['total_lo_pertamax'][$no]; ?>%</td>
-                                                <?php } ?>
+                                                <td><?php echo number_format($ms2['total_lo_premium'][$no],0,',','.'); ?>%</td>
+                                                <td><?php echo number_format($ms2['total_lo_solar'][$no],0,',','.'); ?>%</td>
+                                                <td><?php echo number_format($ms2['total_lo_pertamax'][$no],0,',','.'); ?>%</td>
+                                                
 
                                             </tr>
                                         <?php } ?>
