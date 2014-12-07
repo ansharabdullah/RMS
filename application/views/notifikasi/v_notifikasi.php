@@ -98,13 +98,13 @@
                                         </a><br/><br/>";
                                 }
                                 //cek ba
-                                if ($logHarian[$i]['ba'] == 0) {
-
-                                    echo "<a href='".base_url()."laporan/bulanan'>
-                                        <span class='label label-warning'><i class='icon-check'></i></span>
-                                      Berita Acara belum dibuat.
-                                        </a><br/><br/>";
-                                }
+//                                if ($logHarian[$i]['ba'] == 0) {
+//
+//                                    echo "<a href='".base_url()."laporan/bulanan'>
+//                                        <span class='label label-warning'><i class='icon-check'></i></span>
+//                                      Berita Acara belum dibuat.
+//                                        </a><br/><br/>";
+//                                }
                                 
                                   //cek kuota apms
                                 if ($logHarian[$i]['kuota_apms'] == 0) {
