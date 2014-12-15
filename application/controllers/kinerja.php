@@ -818,20 +818,22 @@ class kinerja extends CI_Controller {
             $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Edit kinerja MT dengan nopol ' . $nopol_mt . ' untuk tanggal ' . $data2['tanggal'], 'Edit');
             $data2['edit_kinerja_mt'] = true;
         }       
-
-        $id = $this->m_kinerja->getIdLogHarian($depot, $data2['tanggal']);
-        if ($id != -1) {//data ada
-            $cek = $this->m_kinerja->cekStatusLogHarian($depot, $data2['tanggal']);
-            if ($cek == 1) {
-                $data2['status_hapus'] = true;
-                //get jumlah spbu
-                $data2 ['alokasi_spbu'] = $this->m_kinerja->getAlokasiSPBU($id);
-                //get kinerja mt
-                $data2 ['kinerja_mt'] = $this->m_kinerja->getKinerjaMT($id);
-                //get kinerja amt
-                $data2 ['kinerja_amt'] = $this->m_kinerja->getKinerjaAMT($id);
-            } else {
-                $data2['status_hapus'] = false;
+        
+        if($data2['klik_hapus'] == false){
+            $id = $this->m_kinerja->getIdLogHarian($depot, $data2['tanggal']);
+            if ($id != -1) {//data ada
+                $cek = $this->m_kinerja->cekStatusLogHarian($depot, $data2['tanggal']);
+                if ($cek == 1) {
+                    $data2['status_hapus'] = true;
+                    //get jumlah spbu
+                    $data2 ['alokasi_spbu'] = $this->m_kinerja->getAlokasiSPBU($id);
+                    //get kinerja mt
+                    $data2 ['kinerja_mt'] = $this->m_kinerja->getKinerjaMT($id);
+                    //get kinerja amt
+                    $data2 ['kinerja_amt'] = $this->m_kinerja->getKinerjaAMT($id);
+                } else {
+                    $data2['status_hapus'] = false;
+                }
             }
         }
 
