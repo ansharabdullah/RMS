@@ -426,12 +426,14 @@ class kinerja extends CI_Controller {
                                         $sama = 1;
                                     }
                                 }
-                            }
-                            foreach ($data_kinerja['SUPIR']['id'] as $row) {
-                                if ($row == $id) {
-                                    $sama = 1;
+                                
+                                foreach ($data_kinerja['SUPIR']['id'] as $row) {
+                                    if ($row == $id) {
+                                        $sama = 1;
+                                    }
                                 }
                             }
+                            
                             if ($sama == 1) {
                                 $data_error = true;
                                 $pesan_error[] = 'NIP ganda dalam file';
