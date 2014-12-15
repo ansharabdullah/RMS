@@ -30,9 +30,9 @@ class m_mt extends CI_Model {
         return $data->result();
     }
     
-    public function Nopol ()
+    public function Nopol ($depot)
     {
-        $data = $this->db->query("select NOPOL from mobil ");
+        $data = $this->db->query("select NOPOL from mobil where id_depot = $depot");
         return $data->result();
     }
 
