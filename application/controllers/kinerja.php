@@ -260,7 +260,7 @@ class kinerja extends CI_Controller {
                                 $data_error = true;
                                 $pesan_error[] = 'NIP tidak ada';
                             }
-
+                               /*
                             //CEK NIP GANDA
                             if ($row_baca > 14 && $id != -1) {
                                 $sama = 0;
@@ -274,6 +274,8 @@ class kinerja extends CI_Controller {
                                     $pesan_error[] = 'NIP ganda dalam file';
                                 }
                             }
+                                * 
+                                */
                             $data_kinerja['SUPIR']['id'][] = $id;
 
                             //id_kinerja
@@ -417,7 +419,7 @@ class kinerja extends CI_Controller {
                                 $data_error = true;
                                 $pesan_error[] = 'NIP tidak ada';
                             }
-
+                            /*
                             //CEK NIP GANDA DI KERNET DAN SUPIR
                             $sama = 0;
                             if ($row_baca > 14 && $id != -1) {
@@ -438,6 +440,8 @@ class kinerja extends CI_Controller {
                                 $data_error = true;
                                 $pesan_error[] = 'NIP ganda dalam file';
                             }
+                             * 
+                             */
                             $data_kinerja['KERNET']['id'][] = $id;
 
 
@@ -645,7 +649,7 @@ class kinerja extends CI_Controller {
             $data2['KLIK_SIMPAN_MOBIL'] = false;
 
             $data2['error_id_log_harian'] = false;
-            $data2['error_id_kinerja_amt'] = false;
+            //$data2['error_id_kinerja_amt'] = false;
             $data2['error_koefisien'] = false;
             $data2['error_tanggal'] = false;
 
@@ -664,8 +668,8 @@ class kinerja extends CI_Controller {
             $id_log_harian = $this->m_kinerja->getIdLogHarian($depot, $tanggal);
             if ($id_log_harian != -1) {
                 //cek id_kinerja_amt jika ada
-                $id_kinerja = $this->m_kinerja->getIdKinerjaAMT($id_log_harian, $id_pegawai);
-                if ($id_kinerja == 0) {
+                //$id_kinerja = $this->m_kinerja->getIdKinerjaAMT($id_log_harian, $id_pegawai);
+                //if ($id_kinerja == 0) {
                     //cek koefisien
                     $koefisien = $this->m_kinerja->getKoefisien(date("Y", strtotime($this->input->post('tgl'))), $depot, $status_tugas . ' ' . $klas_pegawai);
                     if ($koefisien['error'] == true) {
@@ -680,9 +684,9 @@ class kinerja extends CI_Controller {
                             $this->m_kinerja->InsertLogSistem($this->session->userdata('id_pegawai'), 'Tambah kinerja ' . $nama_pegawai . ' dengan nip ' . $nip_pegawai . ' secara manual untuk tanggal ' . $tanggal, 'Tambah');
                         }
                     }
-                } else {
-                    $data2['error_id_kinerja_amt'] = true;
-                }
+                //} else {
+                    //$data2['error_id_kinerja_amt'] = true;
+                //}
             } else {
                 $data2['error_id_log_harian'] = true;
             }
@@ -691,13 +695,9 @@ class kinerja extends CI_Controller {
             $data2['MT'] = $this->m_kinerja->getMobil($depot);
             //var_dump($data2);
 
-            $data['lv1'] = 4;
-            $data['lv2'] = 1;
-            $this->load->view('layouts/header');
-            $this->load->view('layouts/menu');
-            $this->load->view('layouts/navbar', $data);
+            $this->header(5, 1);
             $this->load->view('kinerja/v_kinerja_manual', $data2);
-            $this->load->view('layouts/footer');
+            $this->footer();
         } else if ($this->input->post('submit_mobil')) {
             $data2['KLIK_SIMPAN'] = true;
             $data2['KLIK_SIMPAN_PEGAWAI'] = false;
