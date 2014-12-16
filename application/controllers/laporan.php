@@ -3071,6 +3071,7 @@ class laporan extends CI_Controller {
                 $sheetData->setCellValue('B4', "Terminal BBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                 $sheetData->setCellValue('H4', "Bulan " . $month_name[$bulan] . " " . $tahun);
 
+                /*
                 $objConditional1 = new PHPExcel_Style_Conditional();
                 $objConditional1->setConditionType(PHPExcel_Style_Conditional::CONDITION_CELLIS);
                 $objConditional1->setOperatorType(PHPExcel_Style_Conditional::OPERATOR_LESSTHAN);
@@ -3098,7 +3099,7 @@ class laporan extends CI_Controller {
                 array_push($conditionalStyles, $objConditional1);
                 array_push($conditionalStyles, $objConditional2);
                 $objPHPExcel->getActiveSheet()->getStyle('K8')->setConditionalStyles($conditionalStyles);
-
+                */
 
                 $sheetData->setCellValue('G8', $hasil_kpi_operational[0]->TARGET);
                 $sheetData->setCellValue('I8', $hasil_kpi_operational[0]->REALISASI);
