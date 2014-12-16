@@ -130,7 +130,8 @@ class m_laporan extends CI_Model {
                 $normal_score1 = 120.00;
             } else {
                 $normal_score1 = $performance_score1;
-            } $weighted_score1 = round($normal_score1 * $bobot1, 2);
+            } 
+            $weighted_score1 = round($normal_score1 * $bobot1, 2);
             $this->editKPIOperasional($id_kpi1, $kpitarget1, $kpirealisasi1, $deviasi1, $performance_score1, $normal_score1, $weighted_score1);
 
             //KPI 2

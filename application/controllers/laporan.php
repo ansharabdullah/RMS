@@ -1350,6 +1350,17 @@ class laporan extends CI_Controller {
                 $normal_score10 = 0;
                 $weighted_score10 = 0;
 
+                $bobot1 = $bobot1 * 100;
+                $bobot2 = $bobot2 * 100;
+                $bobot3 = $bobot3 * 100;
+                $bobot4 = $bobot4 * 100;
+                $bobot5 = $bobot5 * 100;
+                $bobot6 = $bobot6 * 100;
+                $bobot7 = $bobot7 * 100;
+                $bobot8 = $bobot8 * 100;
+                $bobot9 = $bobot9 * 100;
+                $bobot10 = $bobot10 * 100;
+                
                 //TOTAL KPI
                 $total_kpi = $weighted_score1 + $weighted_score2 + $weighted_score3 + $weighted_score4 + $weighted_score5 + $weighted_score6 + $weighted_score7 + $weighted_score8 + $weighted_score9 + $weighted_score10;
 
