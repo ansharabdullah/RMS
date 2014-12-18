@@ -324,10 +324,10 @@ class Mt extends CI_Controller {
  
     public function data_mt() {
         
-        
+        $depot = $this->session->userdata("id_depot");
         $data1['pesan'] = 0;
 	if($this->input->post('simpan')){
-            $depot = $this->session->userdata("id_depot");
+            
 
                 $data2 = array(
                     'id_depot' => $depot,
@@ -399,7 +399,7 @@ class Mt extends CI_Controller {
                     }
              }
         $pesan = $data1['pesan'];
-        $data3 = $this->m_mt->Nopol();
+        $data3 = $this->m_mt->Nopol($depot);
         $nopol =array();
         $jumlahbaris=0;
         foreach ($data3 as $row){

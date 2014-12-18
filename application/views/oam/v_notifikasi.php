@@ -121,12 +121,12 @@
                                                         <br/><br/>";
                                                 }
                                                 //cek ba
-                                                if ($logHarian[$i]['ba'] == 0) {
-
-                                                    echo "<span class='label label-warning'><i class='icon-check'></i></span>
-                                                      Berita Acara belum dibuat.
-                                                        <br/><br/>";
-                                                }
+//                                                if ($logHarian[$i]['ba'] == 0) {
+//
+//                                                    echo "<span class='label label-warning'><i class='icon-check'></i></span>
+//                                                      Berita Acara belum dibuat.
+//                                                        <br/><br/>";
+//                                                }
                                                 
                                                  //cek kuota apms
                                                 if ($logHarian[$i]['kuota_apms'] == 0) {

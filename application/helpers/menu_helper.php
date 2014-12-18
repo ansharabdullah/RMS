@@ -124,14 +124,14 @@ if ( ! function_exists('menu_ss'))
                      $set['keterangan'] = $set['keterangan']. "<a href='".base_url()."frm'>Data Tarif Interpolasi belum ada.</a><br/>";
                 }
                 //cek ba
-                if ($logHarian[$i]['ba'] == 0) {
-                    $totalNotif++;
-                    array_push($arrNotif, "<a href='".base_url()."ba/berita_acara'>
-                                            <span class='label label-warning'><i class='icon-check'></i></span>
-                                          Berita Acara belum dibuat.
-                                            </a>");
-                     $set['keterangan'] = $set['keterangan']. "<a href='".base_url()."laporan/bulanan'>Berita Acara belum dibuat.</a><br/>";
-                }
+//                if ($logHarian[$i]['ba'] == 0) {
+//                    $totalNotif++;
+//                    array_push($arrNotif, "<a href='".base_url()."ba/berita_acara'>
+//                                            <span class='label label-warning'><i class='icon-check'></i></span>
+//                                          Berita Acara belum dibuat.
+//                                            </a>");
+//                     $set['keterangan'] = $set['keterangan']. "<a href='".base_url()."laporan/bulanan'>Berita Acara belum dibuat.</a><br/>";
+//                }
                 
                  //cek kuota apms
                 if ($logHarian[$i]['kuota_apms'] == 0) {
@@ -289,13 +289,13 @@ if ( ! function_exists('menu_oam'))
                                                 </a>");
                      }
                     //cek ba
-                    if ($logHarian[$i]['ba'] == 0) {
-                        $totalNotif++;
-                        array_push($arrNotif, "<a href='#'>
-                                                <span class='label label-warning'><i class='icon-check'></i></span>
-                                              Berita Acara belum dibuat.
-                                                </a>");
-                     }
+//                    if ($logHarian[$i]['ba'] == 0) {
+//                        $totalNotif++;
+//                        array_push($arrNotif, "<a href='#'>
+//                                                <span class='label label-warning'><i class='icon-check'></i></span>
+//                                              Berita Acara belum dibuat.
+//                                                </a>");
+//                     }
                      
                      //cek kuota apms
                     if ($logHarian[$i]['kuota_apms'] == 0) {
