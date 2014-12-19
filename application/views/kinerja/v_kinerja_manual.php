@@ -44,7 +44,7 @@
         $("#nip_pegawai").val(amt[index]['nip']);
         $("#nama_pegawai").val(amt[index]['nama_pegawai']);
         $("#jabatan").val(amt[index]['jabatan']);
-        $("#klas_pegawai").val(amt[index]['klas']);
+        //$("#klas_pegawai").val(amt[index]['klas']);
     }
 
     function setDetailMobil(index) {
@@ -94,14 +94,16 @@
                         <strong>Error!</strong> ID log harian tidak ditemukan.
                     </div>
                 <?php } ?>
-                <?php if ($error_id_kinerja_amt == true) { ?>
+                <?php //if ($error_id_kinerja_amt == true) { ?>
+        <!--
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
                         </button>
                         <strong>Error!</strong> Kinerja AMT untuk tanggal yang dipilih telah diinput, tidak dapat input dua kali.
                     </div>
-                <?php } ?>
+        -->
+                <?php //} ?>
                 <?php if ($error_koefisien == true) { ?>
                     <div class="alert alert-block alert-danger fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
@@ -119,7 +121,7 @@
                     </div>
                 <?php } ?>
 
-                <?php if ($error_id_log_harian == false && $error_id_kinerja_amt == false && $error_koefisien == false && $error_tanggal == false) { ?>
+                <?php if ($error_id_log_harian == false && $error_koefisien == false && $error_tanggal == false) { ?>
                     <div class="alert alert-success fade in">
                         <button data-dismiss="alert" class="close close-sm" type="button">
                             <i class="icon-remove"></i>
@@ -392,7 +394,13 @@
 
                         <label for="klas_pegawai" class="col-lg-2 col-sm-2 control-label">Klas</label>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" id="klas_pegawai" name="klas_pegawai" required readonly>
+                            <select class="form-control input-sm m-bot15" id="klas_pegawai" name="klas_pegawai">
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                                <option value="24">24</option>
+                                <option value="32">32</option>
+                                <option value="40">40</option>
+                            </select>
                         </div>
                     </div>
 
