@@ -446,5 +446,10 @@ class m_kinerja extends CI_Model {
         $this->db->where('id_kinerja_mt', $id);
         $this->db->delete('kinerja_mt');
     }
+    
+    public function cekKoefisien2($klasifikasi, $depot, $tanggal){
+        $query = $this->db->query("select * from nilai n, jenis_penilaian jp, log_harian lh where jp.ID_JENIS_PENILAIAN=n.ID_JENIS_PENILAIAN and n.ID_LOG_HARIAN=lh.ID_LOG_HARIAN and jp.jenis_penilaian='KOEFISIEN KM $klasifikasi' and YEAR('$tanggal')=2014 and lh.ID_DEPOT=$depot");
+        return $query->row();
+    }
 
 }
