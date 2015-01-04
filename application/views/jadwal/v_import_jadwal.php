@@ -108,7 +108,7 @@
                                     <tr class="">
                                         <th style="display: none;"></th>
                                         <td><?php echo ($i + 1) ?></td>
-                                        <td><?php echo $jadwal[$i]['tanggal_log_harian'] ?></td>
+                                        <td><?php echo date('d-m-Y',strtotime($jadwal[$i]['tanggal_log_harian'])) ?></td>
                                         <td><?php echo $jadwal[$i]['nip'] ?></td>
                                         <td><?php echo $jadwal[$i]['nama_pegawai'] ?></td>
                                         <td><?php echo $jadwal[$i]['jabatan'] ?></td>

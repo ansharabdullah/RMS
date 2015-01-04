@@ -158,7 +158,7 @@ class jadwal extends CI_Controller {
         $data2 = array();
         $j = 0;
         foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
-            if ($loadedSheetName == 'JADWAL') {
+            if (strtoupper($loadedSheetName) == 'JADWAL') {
                 $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
                 $sheetData = $objPHPExcel->getActiveSheet();
                 $i = 1;
@@ -171,10 +171,9 @@ class jadwal extends CI_Controller {
                 $month = date('m', strtotime($bulanJadwal));
                 $bulanDB = $this->m_penjadwalan->cekJadwal($year, $month);
                 if (sizeof($bulanDB) == 0) {
-                    
-                        $no = $i + 3;
-                    while ($status == 0) {
 
+                    $no = $i + 3;
+                    while ($status == 0) {
                         $depot = $this->session->userdata('id_depot');
                         $error = "Error : ";
                         $nip_pegawai = "";
@@ -193,13 +192,13 @@ class jadwal extends CI_Controller {
                         $nip_kernet = $this->m_amt->cekNIP($nipk);
 
                         //jika sell tidak ada isi
-                        if (!$sheetData->getCell('A4')->getFormattedValue() && !$sheetData->getCell('B4')->getFormattedValue() && !$sheetData->getCell('C4')->getFormattedValue() && !$sheetData->getCell('D4')->getFormattedValue() && !$sheetData->getCell('E4')->getFormattedValue() ) {
+                        if (!$sheetData->getCell('A4')->getFormattedValue() && !$sheetData->getCell('B4')->getFormattedValue() && !$sheetData->getCell('C4')->getFormattedValue() && !$sheetData->getCell('D4')->getFormattedValue() && !$sheetData->getCell('E4')->getFormattedValue()) {
                             $status = 1;
                             $data['amt'] = 0;
                             $data2['jadwal'] = 0;
                             break;
                         }
-                                                
+
                         if (($sheetData->getCell('A' . ($no + 1))->getFormattedValue() == '') && ($sheetData->getCell('A' . ($no + 2))->getFormattedValue() == '')) {
                             $status = 1;
                         }
@@ -260,7 +259,7 @@ class jadwal extends CI_Controller {
                         }
 
                         //baris satu dua
-                        if ($i % 4 <= 2) {
+                        if ($i % 4 < 3) {
                             $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . $no)->getFormattedValue()));
                             $nopol = $this->m_mt->cekNopol($no_polisi, $depot);
                             //cek nopol
@@ -329,30 +328,31 @@ class jadwal extends CI_Controller {
                         } else if ($i % 4 == 3) {
                             //loop per hari
                             for ($column = 'F'; $column != $jumlahHari; $column++) {
-
+                                $index = 0;
                                 $tanggal = $bulanJadwal . '-' . $sheetData->getCell($column . 3)->getFormattedValue();
                                 //cek absen
-                                if ((strtoupper($sheetData->getCell($column . $no)->getFormattedValue())) == (strtoupper($sheetData->getCell($column . ($no - 1))->getFormattedValue()))) {
-                                    $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . ($no - 2))->getFormattedValue()));
-                                    $index = $no-2;
-                                } else if ((strtoupper($sheetData->getCell($column . $no)->getFormattedValue())) == (strtoupper($sheetData->getCell($column . ($no - 2))->getFormattedValue()))) {
-                                    $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . ($no - 1))->getFormattedValue()));
-                                    $index = $no-1;
+                                if (strtoupper($sheetData->getCell($column . $no)->getFormattedValue()) == "T") {
+                                    if ((strtoupper($sheetData->getCell($column . $no)->getFormattedValue())) == (strtoupper($sheetData->getCell($column . ($no - 1))->getFormattedValue()))) {
+                                        $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . ($no - 2))->getFormattedValue()));
+                                        $index = $no - 2;
+                                    } else if ((strtoupper($sheetData->getCell($column . $no)->getFormattedValue())) == (strtoupper($sheetData->getCell($column . ($no - 2))->getFormattedValue()))) {
+                                        $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . ($no - 1))->getFormattedValue()));
+                                        $index = $no - 1;
+                                    }
+
+                                    $nopol = $this->m_mt->cekNopol($no_polisi, $depot);
+                                    //echo 'E' . $index;
+                                    //cek nopol
+                                    if ($sheetData->getCell('E' . $index)->getFormattedValue() == "") {
+                                        $error = $error . " NO Polisi tidak boleh kosong,";
+                                        $e = 1;
+                                    } else if (sizeof($nopol) == 0) {
+                                        $error = $error . " No Polisi tidak ditemukan dalam database,";
+                                        $e = 1;
+                                    } else {
+                                        $id_mobil = $nopol[0]->ID_MOBIL;
+                                    }
                                 }
-
-                                $nopol = $this->m_mt->cekNopol($no_polisi, $depot);
-
-                                //cek nopol
-                                if ($sheetData->getCell('E' . $index)->getFormattedValue() == "") {
-                                    $error = $error . " NO Polisi tidak boleh kosong,";
-                                    $e = 1;
-                                } else if (sizeof($nopol) == 0) {
-                                    $error = $error . " No Polisi tidak ditemukan dalam database,";
-                                    $e = 1;
-                                } else {
-                                    $id_mobil = $nopol[0]->ID_MOBIL;
-                                }
-
                                 if (strtoupper($sheetData->getCell($column . $no)->getFormattedValue()) == "X") {
                                     $hadir = "Libur";
                                 } else if (strtoupper($sheetData->getCell($column . $no)->getFormattedValue()) == "T") {
@@ -399,12 +399,8 @@ class jadwal extends CI_Controller {
                                 );
                                 $j++;
                             }
-                            if(($sheetData->getCell('A' . ($no + 1))->getFormattedValue() == '') && ($sheetData->getCell('A' . ($no + 2))->getFormattedValue() != '')){
-                                $no +=2;
-                            }
-                        } else {
-                            $no++;
-                            //do nothing
+                            $no +=2;
+                            $i++;
                         }
                         //jika baris selanjutnya kosong
                         $i++;
@@ -455,8 +451,7 @@ class jadwal extends CI_Controller {
 
     public function lihat_jadwal() {
         $depot = $this->session->userdata('id_depot');
-        $tanggal = $this->input->get('tanggal', true);
-        echo $tanggal;
+        $tanggal = $this->input->get('tanggal', true)
         redirect(base_url() . "jadwal/penjadwalan/" . $tanggal);
     }
 
