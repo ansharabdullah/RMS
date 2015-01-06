@@ -19,11 +19,11 @@
                 $status = 1;
         ?>
             pegawai.push("<?php echo $a->NAMA_PEGAWAI?>");    
-            km.push(<?php echo $k->TOTAL_KM?>);       
-            kl.push(<?php echo $k->TOTAL_KL?>);       
-            ritase.push(<?php echo $k->RITASE_AMT?>);       
-            pendapatan.push(<?php echo $k->PENDAPATAN?>);       
-            spbu.push(<?php echo $k->SPBU?>);    
+            km.push(<?php echo $k->total_km?>);       
+            kl.push(<?php echo $k->total_kl?>);       
+            ritase.push(<?php echo $k->ritase_amt?>);       
+            pendapatan.push(<?php echo $k->pendapatan?>);       
+            spbu.push(<?php echo $k->spbu?>);    
         <?php 
                 break;
             }
@@ -90,11 +90,11 @@
                     data: ritase.slice(start,start + limit),
                     visible : false
                     },{
-                    name: 'PENDAPATAN',
+                    name: 'pendapatan',
                     data: pendapatan.slice(start,start + limit),
                     visible : false
                     },{
-                    name: 'SPBU',
+                    name: 'spbu',
                     data: spbu.slice(start,start + limit),
                     visible : false
                 }]
@@ -229,8 +229,8 @@
                                         <th>KM</th>
                                         <th>KL</th>
                                         <th>RITASE</th>
-                                        <th>PENDAPATAN</th>
-                                        <th>SPBU</th>
+                                        <th>pendapatan</th>
+                                        <th>spbu</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -256,11 +256,11 @@
                                                 <td><?php echo $a->TRANSPORTIR_ASAL ?></td>
                                                 <td><?php echo $a->ALAMAT ?></td>
                                                 <td><?php echo $a->NO_TELEPON ?></td>
-                                                <td><?php echo $k->TOTAL_KM?></td>
-                                                <td><?php echo $k->TOTAL_KL?></td>
-                                                <td><?php echo $k->RITASE_AMT?></td>
-                                                <td><?php echo $k->PENDAPATAN?></td>
-                                                <td><?php echo $k->SPBU?></td>
+                                                <td><?php echo $k->total_km?></td>
+                                                <td><?php echo $k->total_kl?></td>
+                                                <td><?php echo $k->ritase_amt?></td>
+                                                <td><?php echo $k->pendapatan?></td>
+                                                <td><?php echo $k->spbu?></td>
                                             </tr>
                                             <?php
                                                 break;

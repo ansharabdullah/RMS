@@ -380,7 +380,9 @@ class m_kinerja extends CI_Model {
     }
 
     public function get_kinerja_amt_detail($id_depot, $tanggal) {
-        $query = $this->db->query("select * 
+        $query = $this->db->query("select *,sum(total_km) as total_km ,sum(total_kl) as total_kl , 
+                                    sum(ritase_amt) as ritase_amt , sum(pendapatan) as pendapatan,
+                                    sum(spbu) as spbu
                                     from kinerja_amt ka,log_harian lh,pegawai p 
                                     where p.ID_PEGAWAI = ka.ID_PEGAWAI 
                                     and ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN 
