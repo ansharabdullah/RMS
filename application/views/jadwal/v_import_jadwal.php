@@ -35,7 +35,7 @@
         <section class="panel" id="tambahJadwal">
             <header class="panel-heading">
                 Tambah Jadwal
-                <a style="float:right;" href="<?php echo base_url() ?>downloads/format_oscrms_penjadwalan.xlsx" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
+                <a style="float:right;" href="<?php echo base_url() ?>downloads/format_oscrms_jadwal.xlsx" data-placement="left" class="btn btn-success btn-xs tooltips" data-original-title="Download Format" onclick="downloadCsv()"><i class="icon-download-alt"></i></a>
             </header>
             <div class="panel-body" >
 
@@ -70,6 +70,14 @@
                 <strong>Error!</strong> <?php echo $error ?>
             </div>
         <?php } ?>
+        <?php if (!$jadwal) { ?>
+            <div class="alert alert-block alert-danger fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="icon-remove"></i>
+                </button>
+                <strong>Error!</strong> File Kosong
+            </div>
+        <?php } ?>
         <?php if ($jadwal) { ?>
             <section class="panel"id="tabelTambahJadwal1">
                 <header class="panel-heading">
@@ -100,7 +108,7 @@
                                     <tr class="">
                                         <th style="display: none;"></th>
                                         <td><?php echo ($i + 1) ?></td>
-                                        <td><?php echo $jadwal[$i]['tanggal_log_harian'] ?></td>
+                                        <td><?php echo date('d-m-Y',strtotime($jadwal[$i]['tanggal_log_harian'])) ?></td>
                                         <td><?php echo $jadwal[$i]['nip'] ?></td>
                                         <td><?php echo $jadwal[$i]['nama_pegawai'] ?></td>
                                         <td><?php echo $jadwal[$i]['jabatan'] ?></td>

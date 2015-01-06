@@ -108,7 +108,7 @@
                                             <td><?php echo $row->NOPOL ?></td>
                                             <td><?php
                                                 if ($row->STATUS_MASUK == "Libur")
-                                                    echo "<b>" . $row->STATUS_MASUK . "</b>";else {
+                                                    echo "<span class='label label-danger'>" . $row->STATUS_MASUK . "</span>";else {
                                                     echo $row->STATUS_MASUK;
                                                 }
                                                 ?></td>

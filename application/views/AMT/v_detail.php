@@ -72,7 +72,7 @@ for ($i = 0; $i < $jumlah; $i++) {
             ritase.push(0);
             spbu.push(0);
     <?php } ?>
-            tanggal.push("<?php echo ($i + 1); ?>");
+        tanggal.push("<?php echo ($i + 1); ?>");
 <?php } ?>
     $(function () {
         amt = new Highcharts.Chart({
@@ -149,14 +149,14 @@ for ($i = 0; $i < $jumlah; $i++) {
         </div>
 
         <?php if ($feedback) { ?>
-    <?php if ($feedback == 1) { ?>
+            <?php if ($feedback == 1) { ?>
                 <div class="alert alert-block alert-success fade in">
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
                     </button>
                     <strong>Berhasil!</strong> <?php echo $pesan ?>
                 </div>
-    <?php } else if ($feedback == 2) { ?>
+            <?php } else if ($feedback == 2) { ?>
                 <div class="alert alert-block alert-danger fade in">
                     <button data-dismiss="alert" class="close close-sm" type="button">
                         <i class="icon-remove"></i>
@@ -166,7 +166,7 @@ for ($i = 0; $i < $jumlah; $i++) {
             <?php } ?>
         <?php } ?>
 
-<?php foreach ($amt as $row) { ?>
+        <?php foreach ($amt as $row) { ?>
             <section class="panel">
                 <header class="panel-heading">
                     Detail Awak Mobil Tangki
@@ -176,7 +176,7 @@ for ($i = 0; $i < $jumlah; $i++) {
 
                     <?php if ($this->session->userdata('id_role') != 5) { ?>
                         <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_PEGAWAI ?>','<?php echo $row->NIP ?>');"><i class="icon-eraser"></i> Hapus</a>
-    <?php } ?>
+                    <?php } ?>
 
                 </div>
             </section>
@@ -193,7 +193,7 @@ for ($i = 0; $i < $jumlah; $i++) {
                                     <img src="<?php echo base_url() ?>assets/img/photo/<?php echo $row->PHOTO; ?>" alt="<?php echo $row->NAMA_PEGAWAI ?>">
                                 <?php } else { ?>
                                     <img src="<?php echo base_url() ?>assets/img/photo/default.png" alt="<?php echo $row->NAMA_PEGAWAI ?>">
-    <?php } ?>
+                                <?php } ?>
                             </a>
                             <h1><?php echo $row->NAMA_PEGAWAI; ?></h1>
                             <p></p>
@@ -203,7 +203,7 @@ for ($i = 0; $i < $jumlah; $i++) {
                             <li id="btnProf" class="active"><a href="javascript:ShowProfile();"> <i class="icon-user" ></i> Profile</a></li>
                             <?php if ($this->session->userdata('id_role') != 5) { ?>
                                 <li id="btnEdit"><a href="javascript:EditProfile();" > <i class="icon-edit"></i> Edit profile</a></li>
-    <?php } ?>
+                            <?php } ?>
                         </ul>
 
                     </section>
@@ -431,7 +431,7 @@ for ($i = 0; $i < $jumlah; $i++) {
                                     <input type="submit" class="btn btn-danger" value="Submit">
                                 </div>
 
-    <?php echo form_close() ?>
+                                <?php echo form_close() ?>
                                 <div class="btn-group pull-right">
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">Filter Grafik<i class="icon-angle-down"></i>
                                     </button>
@@ -453,6 +453,9 @@ for ($i = 0; $i < $jumlah; $i++) {
                         <section class="panel">
                             <header class="panel-heading">
                                 Tabel Kinerja Bulan <b><?php echo date("M-Y", strtotime($tahun . "-" . $bulan)) ?></b>
+                                <div style="float:right">
+                                    <a class="btn btn-xs btn-success tooltips" data-original-title="Tambah Kinerja" data-toggle="modal" onclick='kinerja(<?=$id_pegawai?>)' href="#ModalKinerja"><i class="icon-plus"></i></a>
+                                </div>
                             </header>
                             <div class="panel-body">
                                 <div class="adv-table editable-table "  style="overflow-x: scroll">
@@ -504,40 +507,36 @@ for ($i = 0; $i < $jumlah; $i++) {
                                                     $jumlah = 29;
                                                 }
                                             }
-
-                                            $status = 0;
+                                            
                                             for ($i = 1; $i <= $jumlah; $i++) {
-                                                foreach ($grafik as $row) {
-                                                    $status = 0;
+                                                $status=0;
+                                                foreach ($tabel as $row) {
                                                     if ($i == $row->tanggal) {
                                                         $status = 1;
-                                                        break;
-                                                    } else {
-                                                        $status = 0;
+                                                        // print lgs
+                                                        ?>
+                                                            <tr class="">
+                                                                <td style="display:none;"></td>
+                                                                <td><?php echo $i ?></td>
+                                                                <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_LOG_HARIAN)) ?></td>
+                                                                <td><?php echo $row->total_km ?></td>
+                                                                <td><?php echo $row->total_kl ?></td>
+                                                                <td><?php echo $row->ritase ?></td>
+                                                                <td><?php echo $row->spbu ?></td>
+                                                                <td>Rp. <?php echo number_format($row->pendapatan, 0, ',', '.') ?></td>
+                                                                <td><?php echo $row->status_tugas ?></td>
+                                                                <td><span class="label label-success">Hadir</span></td>
+                                                                <td>
+                                                                    <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                                                        <a onclick="editKinerja('<?php echo $row->status_tugas ?>', '<?php echo $id_pegawai ?>', '<?php echo $row->ID_KINERJA_AMT ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->total_km ?>', '<?php echo $row->total_kl ?>', '<?php echo $row->ritase ?>', '<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                                        <a href="javascript:hapusKinerja('<?php echo $row->ID_KINERJA_AMT ?>','<?php echo $row->TANGGAL_LOG_HARIAN ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
+                                                                    <?php } ?>
+                                                                </td>
+                                                            </tr>
+                                                        <?php
                                                     }
                                                 }
-                                                if ($status == 1) {
-                                                    ?>
-                                                    <tr class="">
-                                                        <td style="display:none;"></td>
-                                                        <td><?php echo $i ?></td>
-                                                        <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_LOG_HARIAN)) ?></td>
-                                                        <td><?php echo $row->total_km ?></td>
-                                                        <td><?php echo $row->total_kl ?></td>
-                                                        <td><?php echo $row->ritase ?></td>
-                                                        <td><?php echo $row->spbu ?></td>
-                                                        <td>Rp. <?php echo number_format($row->pendapatan, 0, ',', '.') ?></td>
-                                                        <td><?php echo $row->status_tugas ?></td>
-                                                        <td><span class="label label-success">Hadir</span></td>
-                                                        <td>
-            <?php if ($this->session->userdata('id_role') != 5) { ?>
-                                                                <a onclick="editKinerja('<?php echo $row->status_tugas ?>', '<?php echo $id_pegawai ?>', '<?php echo $row->ID_KINERJA_AMT ?>', '<?php echo $row->TANGGAL_LOG_HARIAN ?>', '<?php echo $row->total_km ?>', '<?php echo $row->total_kl ?>', '<?php echo $row->ritase ?>', '<?php echo $row->spbu ?>')" data-placement="top" data-toggle="modal" href="#ModalEditKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
-                                                                <a href="javascript:hapusKinerja('<?php echo $row->ID_KINERJA_AMT ?>','<?php echo $row->TANGGAL_LOG_HARIAN ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
-            <?php } ?>
-                                                        </td>
-                                                    </tr>
-                                                    <?php
-                                                } else {
+                                                if($status == 0){
                                                     $day = 0;
                                                     if ($i < 10) {
                                                         $day = $day . $i;
@@ -558,12 +557,16 @@ for ($i = 0; $i < $jumlah; $i++) {
                                                         <td>-</td>
                                                         <td><span class="label label-danger">Absen</span></td>
                                                         <td>
-                                                                <a onclick="tambahKinerja('<?php echo $tanggal ?>', '<?php echo $id_pegawai ?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                                            <a onclick="tambahKinerja('<?php echo $tanggal ?>', '<?php echo $id_pegawai ?>')" data-placement="top" data-toggle="modal" href="#ModalTambahKinerja" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                         </td>
                                                     </tr>
                                                     <?php
                                                 }
                                             }
+                                            
+                                            
+                                            
+                                            
                                             ?>
                                         </tbody>
                                     </table>
@@ -604,10 +607,10 @@ for ($i = 0; $i < $jumlah; $i++) {
                                                     <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_BERLAKU)) ?></td>
                                                     <td><?php echo date('d-M-Y', strtotime($row->TANGGAL_BERAKHIR)) ?></td>
                                                     <td>
-        <?php if ($this->session->userdata('id_role') != 5) { ?>
+                                                        <?php if ($this->session->userdata('id_role') != 5) { ?>
                                                             <a onclick="editPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>', '<?php echo $row->ID_PEGAWAI ?>', '<?php echo $row->PERINGATAN_PEGAWAI ?>', '<?php echo $row->JENIS_PERINGATAN ?>', '<?php echo $row->TANGGAL_BERLAKU ?>', '<?php echo $row->TANGGAL_BERAKHIR ?>')" data-placement="top" data-toggle="modal" href="#ModalEditPeringatan" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
                                                             <a href="javascript:hapusPeringatan('<?php echo $row->ID_LOG_PERINGATAN ?>','<?php echo $row->ID_PEGAWAI ?>');" class="btn btn-danger btn-xs tooltips" data-original-title="Hapus"><i class="icon-remove"></i></a>
-        <?php } ?>
+                                                        <?php } ?>
                                                     </td>
                                                 </tr>
                                                 <?php
@@ -668,7 +671,7 @@ for ($i = 0; $i < $jumlah; $i++) {
 
                                                         <?php foreach ($amt as $row) { ?>
                                                             <input name="id_pegawai" size="16" type="hidden" value="<?php echo $row->ID_PEGAWAI ?>" required/>
-    <?php } ?>
+                                                        <?php } ?>
                                                         <div class="form-group ">
                                                             <label for="calasan" class="control-label col-lg-4">Alasan</label>
                                                             <div class="col-lg-8">
@@ -877,11 +880,19 @@ for ($i = 0; $i < $jumlah; $i++) {
                                                                     <option value="SUPIR">SUPIR</option>
                                                                     <option value="KERNET">KERNET</option>
                                                                 </select>
-                                                            </div>
-                                                            <label for="chadir" class="control-label col-lg-2">Kehadiran</label>
+                                                            </div>                                                            
+                                                            <label for="chadir" class="control-label col-lg-2">Klasifikasi</label>
                                                             <div class="col-lg-4">
-                                                                <input class=" form-control input-sm m-bot15" id="kehadiran" name="kehadiran" minlength="1" type="text" value="Hadir" readonly />
+                                                                <select name="klasifikasi" class=" form-control input-sm m-bot15">
+                                                                    <option value="8">8</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="32">32</option>
+                                                                    <option value="40">40</option>
+                                                                </select>
                                                             </div>
+                                                                <input class=" form-control input-sm m-bot15" id="kehadiran" name="kehadiran" minlength="1" type="hidden" value="Hadir" readonly />
+                                                            
                                                         </div>
                                                     </div>
                                                 </section>
@@ -944,9 +955,16 @@ for ($i = 0; $i < $jumlah; $i++) {
                                                                     <option value="KERNET">KERNET</option>
                                                                 </select>
                                                             </div>
-                                                            <label for="chadir" class="control-label col-lg-2">Kehadiran</label>
+                                                            <label for="chadir" class="control-label col-lg-2">Klasifikasi</label>
                                                             <div class="col-lg-4">
-                                                                <input class=" form-control input-sm m-bot15" id="tkehadiran" name="kehadiran" minlength="1" type="text" value="Hadir" readonly />
+                                                                <select name="klasifikasi" class=" form-control input-sm m-bot15">
+                                                                    <option value="8">8</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="32">32</option>
+                                                                    <option value="40">40</option>
+                                                                </select>
+                                                                <input class=" form-control input-sm m-bot15" id="tkehadiran" name="kehadiran" minlength="1" type="hidden" value="Hadir" readonly />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -956,6 +974,79 @@ for ($i = 0; $i < $jumlah; $i++) {
                                         <div class="modal-footer">
                                             <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
                                             <input class="btn btn-success" type="submit" name="add_kinerja" value="Simpan"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="ModalKinerja" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Tambah Kinerja</h4>
+                                    </div>
+                                    <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url() ?>amt/detail/<?php echo $row->ID_PEGAWAI ?><?php echo $row->ID_PEGAWAI ?>/<?php echo $bulan ?>/<?php echo $tahun ?>">
+                                        <div class="modal-body">
+                                            <div class="col-lg-12">
+                                                <section class="panel">
+                                                    <div class="panel-body">
+                                                        <div class="form-group ">                                            
+                                                            <label for="ctglkinerja" class="control-label col-lg-4">Tanggal Kinerja</label>
+                                                            <div class="col-lg-8">
+                                                                <input class=" form-control input-sm m-bot15" id="ktanggal_kinerja" name="tanggal_kinerja" size="16" type="date"/>
+                                                            </div>
+                                                        </div>
+                                                        <input class=" form-control input-sm m-bot15" id="kid_kinerja" name="id_kinerja_amt" minlength="1" type="hidden" required />
+                                                        <input class=" form-control input-sm m-bot15" id="kid_pegawai" name="id_pegawai" minlength="1" type="hidden" required />
+                                                        <div class="form-group ">
+                                                            <label for="ckm" class="control-label col-lg-2">Kilometer</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="kkm" name="total_km" minlength="1" type="number" required />
+                                                            </div>
+                                                            <label for="ckl" class="control-label col-lg-2">Kiloliter</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="kkl" name="total_kl" minlength="1" type="number" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="crit" class="control-label col-lg-2">Ritase</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="krit" name="ritase_amt" minlength="1" type="number" required />
+                                                            </div>
+                                                            <label for="cspbu" class="control-label col-lg-2">Jumlah SPBU</label>
+                                                            <div class="col-lg-4">
+                                                                <input class=" form-control input-sm m-bot15" id="kspbu" name="spbu" minlength="1" type="number" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="crit" class="control-label col-lg-2">Status Tugas</label>
+                                                            <div class="col-lg-4">
+                                                                <select class=" form-control input-sm m-bot15" id="tstatus_tugas" name="status_tugas" required>
+                                                                    <option value="SUPIR">SUPIR</option>
+                                                                    <option value="KERNET">KERNET</option>
+                                                                </select>
+                                                            </div>
+                                                            <label for="chadir" class="control-label col-lg-2">Klasifikasi</label>
+                                                            <div class="col-lg-4">
+                                                                <select name="klasifikasi" class=" form-control input-sm m-bot15">
+                                                                    <option value="8">8</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="32">32</option>
+                                                                    <option value="40">40</option>
+                                                                </select>
+                                                                <input class=" form-control input-sm m-bot15" id="kkehadiran" name="kehadiran" minlength="1" type="hidden" value="Hadir" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button data-dismiss="modal" class="btn btn-default" type="button">Batal</button>
+                                            <input class="btn btn-success" type="submit" name="tambah_kinerja" value="Simpan"/>
                                         </div>
                                     </form>
                                 </div>
@@ -983,7 +1074,7 @@ for ($i = 0; $i < $jumlah; $i++) {
                             </div>
                         </div>
 
-<?php } ?>
+                    <?php } ?>
                     <!--script for this page only-->
                     <script src="<?php echo base_url() ?>assets/js/editable-table.js"></script>
 
@@ -1041,6 +1132,17 @@ for ($i = 0; $i < $jumlah; $i++) {
                                                         $("#tkl").val("");
                                                         $("#trit").val("");
                                                         $("#tspbu").val("");
+                                                    }
+
+                                                    function kinerja(id_pegawai) {
+                                                        $("#kstatus_tugas").val("");
+                                                        $("#kid_pegawai").val(id_pegawai);
+                                                        $("#kid_kinerja").val("");
+                                                        $("#ktanggal_kinerja").val(tanggal);
+                                                        $("#kkm").val("");
+                                                        $("#kkl").val("");
+                                                        $("#krit").val("");
+                                                        $("#kspbu").val("");
                                                     }
 
                                                     var id_kinerja;
