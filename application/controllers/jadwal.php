@@ -158,7 +158,7 @@ class jadwal extends CI_Controller {
         $data2 = array();
         $j = 0;
         foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
-            if ($loadedSheetName == 'JADWAL') {
+            if (strtoupper($loadedSheetName) == 'JADWAL') {
                 $objPHPExcel->setActiveSheetIndexByName($loadedSheetName);
                 $sheetData = $objPHPExcel->getActiveSheet();
                 $i = 1;
@@ -167,147 +167,261 @@ class jadwal extends CI_Controller {
                 if ($month < 10) {
                     $month = "0" . $month;
                 }
-                $year = $sheetData->getCell('B1')->getFormattedValue();
-                $bulan = $year . '-' . $month;
-                if ($bulanJadwal == $bulan) {
-                    $bulanDB = $this->m_penjadwalan->cekJadwal($year, $month);
-                    if (sizeof($bulanDB) == 0) {
-                        while ($status == 0) {
-                            $no = $i + 5;
-                            $nip = $this->m_amt->cekNIP($sheetData->getCell('B' . $no)->getFormattedValue());
-                            $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . $no)->getFormattedValue()));
-                            $depot = $this->session->userdata('id_depot');
-                            $nopol = $this->m_mt->cekNopol($no_polisi, $depot);
-                            $error = "Error : ";
-                            $nip_pegawai = "";
-                            $nama_pegawai = "";
-                            $jabatan = "";
-                            $id_pegawai = "";
-                            $id_mobil = "";
-                            //jika sell tidak ada isi
-//                    if (!$sheetData->getCell('B3')->getFormattedValue() && !$sheetData->getCell('C3')->getFormattedValue() && !$sheetData->getCell('D3')->getFormattedValue() && !$sheetData->getCell('E3')->getFormattedValue() && !$sheetData->getCell('F3')->getFormattedValue() && !$sheetData->getCell('G3')->getFormattedValue() && !$sheetData->getCell('H3')->getFormattedValue() && !$sheetData->getCell('I3')->getFormattedValue() && !$sheetData->getCell('J3')->getFormattedValue() && !$sheetData->getCell('K3')->getFormattedValue() && !$sheetData->getCell('L3')->getFormattedValue() && !$sheetData->getCell('M3')->getFormattedValue() && !$sheetData->getCell('N3')->getFormattedValue()) {
-//                        $status = 1;
-//                        $data['amt'] = 0;
-//                        break;
-//                    }
-                            //cek nip
-                            if ($sheetData->getCell('B' . $no)->getFormattedValue() == "") {
-                                $error = $error . " NIP tidak boleh kosong,";
-                                $e = 1;
-                            } else if (sizeof($nip) == 0) {
-                                $error = $error . " NIP tidak ditemukan dalam database,";
-                                $e = 1;
-                            } else {
-                                $nip_pegawai = $nip[0]->NIP;
-                                $nama_pegawai = $nip[0]->NAMA_PEGAWAI;
-                                $jabatan = $nip[0]->JABATAN;
-                                $id_pegawai = $nip[0]->ID_PEGAWAI;
-                            }
+                $year = date('Y', strtotime($bulanJadwal));
+                $month = date('m', strtotime($bulanJadwal));
+                $bulanDB = $this->m_penjadwalan->cekJadwal($year, $month);
+                if (sizeof($bulanDB) == 0) {
 
+                    $no = $i + 3;
+                    while ($status == 0) {
+                        $depot = $this->session->userdata('id_depot');
+                        $error = "Error : ";
+                        $nip_pegawai = "";
+                        $nama_pegawai = "";
+                        $jabatan = "";
+                        $id_pegawai = "";
+                        $id_mobil = "";
+                        $e = 0;
+
+                        //supir
+                        $nips = $sheetData->getCell('A' . $no)->getFormattedValue();
+                        $nip_supir = $this->m_amt->cekNIP($nips);
+
+                        //kernet
+                        $nipk = $sheetData->getCell('C' . $no)->getFormattedValue();
+                        $nip_kernet = $this->m_amt->cekNIP($nipk);
+
+                        //jika sell tidak ada isi
+                        if (!$sheetData->getCell('A4')->getFormattedValue() && !$sheetData->getCell('B4')->getFormattedValue() && !$sheetData->getCell('C4')->getFormattedValue() && !$sheetData->getCell('D4')->getFormattedValue() && !$sheetData->getCell('E4')->getFormattedValue()) {
+                            $status = 1;
+                            $data['amt'] = 0;
+                            $data2['jadwal'] = 0;
+                            break;
+                        }
+
+                        if (($sheetData->getCell('A' . ($no + 1))->getFormattedValue() == '') && ($sheetData->getCell('A' . ($no + 2))->getFormattedValue() == '')) {
+                            $status = 1;
+                        }
+
+                        //cek nip supir
+                        if ($sheetData->getCell('A' . $no)->getFormattedValue() == "") {
+                            $error = $error . " NIP Supir tidak boleh kosong,";
+                            $e = 1;
+                        } else if (sizeof($nip_supir) == 0) {
+                            $error = $error . " NIP Supir tidak ditemukan dalam database,";
+                            $e = 1;
+                        } else {
+                            $nip_pegawai_supir = $nip_supir[0]->NIP;
+                            $nama_pegawai_supir = $nip_supir[0]->NAMA_PEGAWAI;
+                            $jabatan_supir = $nip_supir[0]->JABATAN;
+                            $id_pegawai_supir = $nip_supir[0]->ID_PEGAWAI;
+                        }
+
+                        //cek nip kernet
+                        if ($sheetData->getCell('C' . $no)->getFormattedValue() == "") {
+                            $error = $error . " NIP Kernet tidak boleh kosong,";
+                            $e = 1;
+                        } else if (sizeof($nip_kernet) == 0) {
+                            $error = $error . " NIP Kernet tidak ditemukan dalam database,";
+                            $e = 1;
+                        } else {
+                            $nip_pegawai_kernet = $nip_kernet[0]->NIP;
+                            $nama_pegawai_kernet = $nip_kernet[0]->NAMA_PEGAWAI;
+                            $jabatan_kernet = $nip_kernet[0]->JABATAN;
+                            $id_pegawai_kernet = $nip_kernet[0]->ID_PEGAWAI;
+                        }
+
+
+                        $hadir = "Libur";
+
+                        //jika tidak ada error
+                        if ($error == "Error : ") {
+                            $error = "Sukses";
+                            $e = 0;
+                        }
+
+
+                        //loop column
+                        $cekbulan = $month;
+                        $cektahun = $year;
+
+                        //cek jumlah hari dalam satu bulan
+                        if ($cekbulan == 1 || $cekbulan == 3 || $cekbulan == 5 || $cekbulan == 7 || $cekbulan == 8 || $cekbulan == 10 || $cekbulan == 12) {
+                            $jumlahHari = 'AK';
+                        } else if ($cekbulan == 2) {
+                            if (date('L', strtotime($cektahun . '-01-01')) == 1) {
+                                $jumlahHari = 'AH';
+                            } else {
+                                $jumlahHari = 'AI';
+                            }
+                        } else {
+                            $jumlahHari = 'AJ';
+                        }
+
+                        //baris satu dua
+                        if ($i % 4 < 3) {
+                            $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . $no)->getFormattedValue()));
+                            $nopol = $this->m_mt->cekNopol($no_polisi, $depot);
                             //cek nopol
-                            if ($sheetData->getCell('C' . $no)->getFormattedValue() == "") {
-                                $error = $error . " NOPOL tidak boleh kosong,";
+                            if ($sheetData->getCell('E' . $no)->getFormattedValue() == "") {
+                                $error = $error . " NO Polisi tidak boleh kosong,";
                                 $e = 1;
                             } else if (sizeof($nopol) == 0) {
-                                $error = $error . " NOPOL tidak ditemukan dalam database,";
+                                $error = $error . " No Polisi tidak ditemukan dalam database,";
                                 $e = 1;
                             } else {
                                 $id_mobil = $nopol[0]->ID_MOBIL;
                             }
 
-                            $hadir = "Libur";
-
-                            //jika tidak ada error
-                            if ($error == "Error : ") {
-                                $error = "Sukses";
-                                $e = 0;
-                            }
-
-                            //jika lebih dari batas row
-                            if ($i >= $sheetData->getHighestRow() - 3) {
-                                $status = 1;
-                                break;
-                            }
-
-
-                            //loop column
-                            $cekbulan = $sheetData->getCell('B2')->getFormattedValue();
-                            $cektahun = $sheetData->getCell('B1')->getFormattedValue();
-
-                            //cek jumlah hari dalam satu bulan
-                            if ($cekbulan == 1 || $cekbulan == 3 || $cekbulan == 5 || $cekbulan == 7 || $cekbulan == 8 || $cekbulan == 10 || $cekbulan == 12) {
-                                $jumlahHari = 'AK';
-                            } else if ($cekbulan == 2) {
-                                if (date('L', strtotime($cektahun . '-01-01')) == 1) {
-                                    $jumlahHari = 'AH';
-                                } else {
-                                    $jumlahHari = 'AI';
-                                }
-                            } else {
-                                $jumlahHari = 'AJ';
-                            }
-
+                            //loop per hari
                             for ($column = 'F'; $column != $jumlahHari; $column++) {
-                                $tanggal = $sheetData->getCell('B1')->getFormattedValue() . '-' . $sheetData->getCell('B2')->getFormattedValue() . '-' . $sheetData->getCell($column . 5)->getFormattedValue();
+                                $tanggal = $bulanJadwal . '-' . $sheetData->getCell($column . 3)->getFormattedValue();
                                 //cek absen
-                                if ($sheetData->getCell($column . $no)->getFormattedValue() == "0") {
+                                if (strtoupper($sheetData->getCell($column . $no)->getFormattedValue()) == "X") {
                                     $hadir = "Libur";
-                                } else if ($sheetData->getCell($column . $no)->getFormattedValue() == "1") {
+                                } else if (strtoupper($sheetData->getCell($column . $no)->getFormattedValue()) == "T") {
                                     $hadir = "Hadir";
                                 } else {
                                     $hadir = "Kosong";
-                                    $error = $error . "Jadwal hanya boleh diisi dengan 0 atau 1, ";
+                                    $error = $error . "Jadwal hanya boleh diisi dengan T atau X, ";
                                     $e = 1;
                                 }
+                                //echo $tanggal."<br/>";
                                 $log_harian = $this->m_log_harian->cekTanggal($tanggal, $this->session->userdata('id_depot'));
                                 $id_log_harian = $log_harian[0]->ID_LOG_HARIAN;
 
-                                //masukan ke array
-                                $data2['jadwal'][($j)] = array(
-                                    'nip' => $sheetData->getCell('B' . $no)->getFormattedValue(),
-                                    'nama_pegawai' => $nama_pegawai,
-                                    'id_pegawai' => $id_pegawai,
-                                    'jabatan' => $jabatan,
+                                //masukan ke array supir
+                                $data2['jadwal'][($j * 2)] = array(
+                                    'nip' => $nips,
+                                    'nama_pegawai' => $nama_pegawai_supir,
+                                    'id_pegawai' => $id_pegawai_supir,
+                                    'jabatan' => $jabatan_supir,
                                     'id_mobil' => $id_mobil,
                                     'id_log_harian' => $id_log_harian,
                                     'id_depot' => $this->session->userdata('id_depot'),
-                                    'nopol' => str_replace(" ", "", $sheetData->getCell('E' . $no)->getFormattedValue()),
+                                    'nopol' => $no_polisi,
+                                    'tanggal_log_harian' => $tanggal,
+                                    'status_error' => $error,
+                                    'status_masuk' => $hadir,
+                                    'error' => $e
+                                );
+
+                                //kernet
+                                $data2['jadwal'][($j * 2 + 1)] = array(
+                                    'nip' => $nipk,
+                                    'nama_pegawai' => $nama_pegawai_kernet,
+                                    'id_pegawai' => $id_pegawai_kernet,
+                                    'jabatan' => $jabatan_kernet,
+                                    'id_mobil' => $id_mobil,
+                                    'id_log_harian' => $id_log_harian,
+                                    'id_depot' => $this->session->userdata('id_depot'),
+                                    'nopol' => $no_polisi,
                                     'tanggal_log_harian' => $tanggal,
                                     'status_error' => $error,
                                     'status_masuk' => $hadir,
                                     'error' => $e
                                 );
                                 $j++;
-                                //print_r($data2);
                             }
+                            //baris ke 3
+                            $no++;
+                        } else if ($i % 4 == 3) {
+                            //loop per hari
+                            for ($column = 'F'; $column != $jumlahHari; $column++) {
+                                $index = 0;
+                                $tanggal = $bulanJadwal . '-' . $sheetData->getCell($column . 3)->getFormattedValue();
+                                //cek absen
+                                if (strtoupper($sheetData->getCell($column . $no)->getFormattedValue()) == "T") {
+                                    if ((strtoupper($sheetData->getCell($column . $no)->getFormattedValue())) == (strtoupper($sheetData->getCell($column . ($no - 1))->getFormattedValue()))) {
+                                        $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . ($no - 2))->getFormattedValue()));
+                                        $index = $no - 2;
+                                    } else if ((strtoupper($sheetData->getCell($column . $no)->getFormattedValue())) == (strtoupper($sheetData->getCell($column . ($no - 2))->getFormattedValue()))) {
+                                        $no_polisi = strtoupper(str_replace(" ", "", $sheetData->getCell('E' . ($no - 1))->getFormattedValue()));
+                                        $index = $no - 1;
+                                    }
 
+                                    $nopol = $this->m_mt->cekNopol($no_polisi, $depot);
+                                    //echo 'E' . $index;
+                                    //cek nopol
+                                    if ($sheetData->getCell('E' . $index)->getFormattedValue() == "") {
+                                        $error = $error . " NO Polisi tidak boleh kosong,";
+                                        $e = 1;
+                                    } else if (sizeof($nopol) == 0) {
+                                        $error = $error . " No Polisi tidak ditemukan dalam database,";
+                                        $e = 1;
+                                    } else {
+                                        $id_mobil = $nopol[0]->ID_MOBIL;
+                                    }
+                                }
+                                if (strtoupper($sheetData->getCell($column . $no)->getFormattedValue()) == "X") {
+                                    $hadir = "Libur";
+                                } else if (strtoupper($sheetData->getCell($column . $no)->getFormattedValue()) == "T") {
+                                    $hadir = "Hadir";
+                                } else {
+                                    $hadir = "Kosong";
+                                    $error = $error . "Jadwal hanya boleh diisi dengan T atau X, ";
+                                    $e = 1;
+                                }
+                                //echo $tanggal."<br/>";
+                                $log_harian = $this->m_log_harian->cekTanggal($tanggal, $this->session->userdata('id_depot'));
+                                $id_log_harian = $log_harian[0]->ID_LOG_HARIAN;
 
-                            //jika baris selanjutnya kosong
+                                //masukan ke array supir
+                                $data2['jadwal'][($j * 2)] = array(
+                                    'nip' => $nips,
+                                    'nama_pegawai' => $nama_pegawai_supir,
+                                    'id_pegawai' => $id_pegawai_supir,
+                                    'jabatan' => $jabatan_supir,
+                                    'id_mobil' => $id_mobil,
+                                    'id_log_harian' => $id_log_harian,
+                                    'id_depot' => $this->session->userdata('id_depot'),
+                                    'nopol' => $no_polisi,
+                                    'tanggal_log_harian' => $tanggal,
+                                    'status_error' => $error,
+                                    'status_masuk' => $hadir,
+                                    'error' => $e
+                                );
+
+                                //kernet
+                                $data2['jadwal'][($j * 2 + 1)] = array(
+                                    'nip' => $nipk,
+                                    'nama_pegawai' => $nama_pegawai_kernet,
+                                    'id_pegawai' => $id_pegawai_kernet,
+                                    'jabatan' => $jabatan_kernet,
+                                    'id_mobil' => $id_mobil,
+                                    'id_log_harian' => $id_log_harian,
+                                    'id_depot' => $this->session->userdata('id_depot'),
+                                    'nopol' => $no_polisi,
+                                    'tanggal_log_harian' => $tanggal,
+                                    'status_error' => $error,
+                                    'status_masuk' => $hadir,
+                                    'error' => $e
+                                );
+                                $j++;
+                            }
+                            $no +=2;
                             $i++;
-                            if ($no == 10 + 5)
-                                $status = 1;
-//                    if (!$sheetData->getCell('B' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('C' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('D' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('E' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('F' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('G' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('H' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('I' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('J' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('K' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('L' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('M' . ($no + 1))->getFormattedValue() && !$sheetData->getCell('N' . ($no + 1))->getFormattedValue()) {
-//                        $status = 1;
-//                    }
                         }
-                    }else {
-                        $data2['jadwal'] = 0;
-                        $data2['error'] = "Jadwal pada bulan tersebut telah terisi.";
+                        //jika baris selanjutnya kosong
+                        $i++;
                     }
+
+                    //print_r($data2['jadwal'][180]);
                 } else {
                     $data2['jadwal'] = 0;
-                    $data2['error'] = "Bulan yang dipilih tidak sama dengan yang ada di file. Mohon cek kembali.";
+                    $data2['error'] = "Jadwal pada bulan tersebut telah terisi.";
                 }
             }
             $data['error'] = 0;
         }
+
         unlink($file_target);
         $data['lv1'] = 6;
         $data['lv2'] = 1;
         $data3 = menu_ss();
+
         $this->load->view('layouts/header');
         $this->load->view('layouts/menu', $data3);
-
         $this->load->view('layouts/navbar', $data);
         $this->load->view('jadwal/v_import_jadwal', $data2);
         $this->load->view('layouts/footer');
@@ -337,8 +451,7 @@ class jadwal extends CI_Controller {
 
     public function lihat_jadwal() {
         $depot = $this->session->userdata('id_depot');
-        $tanggal = $this->input->get('tanggal', true);
-        echo $tanggal;
+        $tanggal = $this->input->get('tanggal', true)
         redirect(base_url() . "jadwal/penjadwalan/" . $tanggal);
     }
 

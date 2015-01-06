@@ -58,7 +58,9 @@ class m_amt extends CI_Model {
     }
 
     public function cekNIP($nip) {
-        $data = $this->db->query("select * from pegawai where nip='$nip'");
+        $this->db->where('nip',$nip);
+        $data = $this->db->get('pegawai');
+        //$data = $this->db->query("select * from pegawai where nip='$nip'");
         return $data->result();
     }
     
@@ -138,6 +140,19 @@ class m_amt extends CI_Model {
                                     lh.id_depot = $id_depot and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
                                     and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun 
                                     group by lh.TANGGAL_LOG_HARIAN order by tanggal asc");
+        return $query->result();
+    }
+    
+    public function get_kinerja_amt_tabel($id_depot, $bulan, $tahun, $id_pegawai) {
+        $query = $this->db->query("select sum(total_km) as total_km, sum(total_kl) as total_kl , ka.ID_KINERJA_AMT, ka.status_tugas,
+                                    sum(ka.RITASE_AMT) as ritase , sum(ka.SPBU) as spbu, sum(ka.PENDAPATAN) as pendapatan,
+                                    lh.TANGGAL_LOG_HARIAN, DAY(lh.TANGGAL_LOG_HARIAN) as tanggal  
+                                    from kinerja_amt ka, log_harian lh 
+                                    where ka.ID_LOG_HARIAN = lh.ID_LOG_HARIAN and
+                                    ka.ID_PEGAWAI=$id_pegawai and
+                                    lh.id_depot = $id_depot and MONTH(lh.TANGGAL_LOG_HARIAN) = $bulan 
+                                    and YEAR(lh.TANGGAL_LOG_HARIAN) = $tahun 
+                                    group by ka.ID_KINERJA_AMT order by tanggal asc");
         return $query->result();
     }
     

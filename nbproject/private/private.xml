@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_penjadwalan.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/jadwal/v_import_jadwal.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/jadwal/v_jadwal.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/views/AMT/v_presensi.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/models/m_amt.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/config/database.php</file>
+            <file>file:/C:/xampp/htdocs/RMS/application/controllers/jadwal.php</file>
+        </group>
+>>>>>>> 27971df36a17f19a6560e47c37e58f5d5618fb95
     </open-files>
 </project-private>
