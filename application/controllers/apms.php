@@ -519,10 +519,10 @@ class apms extends CI_Controller {
     }
 	
 	
-    public function apms_tahun($depot)
+    public function apms_tahun()
     {
        $tahun =  $_POST['tahun'];
-       redirect('apms/grafik_apms/'.$tahun);
+       redirect("apms/grafik_apms/".$tahun."/");
     }
 	public function apms_masuk($id_apms)
     {
