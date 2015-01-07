@@ -122,7 +122,7 @@
                                 <tr>
                                     <th style="display:none;"></th>
                                     <th >No</th>
-                                    <th >Tanggal</th>
+                                    <th >Bulan</th>
                                     <th >Jumlah KM</th>
                                     <th >Jumlah KL</th>
                                     <th >Jumlah Ritase</th>
@@ -137,7 +137,7 @@
                                     <tr class="">
                                         <td style="display:none;"></td>
                                         <td><?php echo $i ?></td>
-                                        <td style="white-space: nowrap"><?php echo strftime('%B',strtotime($ka->TANGGAL_LOG_HARIAN));?></td>
+                                        <td style="white-space: nowrap"><?php echo strftime('%B %Y',strtotime($ka->TANGGAL_LOG_HARIAN));?></td>
                                        <td><?php echo $ka->total_km ?> KM</td>
                                          <td><?php echo $ka->total_kl ?> KL</td>
                                         <td><?php echo $ka->ritase ?> Rit</td>
