@@ -721,7 +721,6 @@ function DateToIndo($date) {
 	function hapusKinerja(id,no) {
         $('#ID_KINERJA').val(id);
         $('#ID_NO').html(no);
-		trace("1");
     }
 
 </script>
