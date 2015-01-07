@@ -228,10 +228,10 @@
                                 <td>4</td>
                                 <td>Customer Satisfaction Agen BBM</td>
                                 <td>
-                                    <input type="number" required="required" id="kpitarget1" name="kpitarget1" class="form-control">
+                                    <input type="number"  step="0.01" required="required" id="kpitarget1" name="kpitarget1" class="form-control">
                                 </td>
 								<td>
-                                    <input type="number" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control">
+                                    <input type="number"  step="0.01" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control">
                                 </td>
                             </tr>
                             <tr>
@@ -288,13 +288,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Edit Data</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url(); ?>apms/kpi_apms">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url(); ?>apms/kpi_apms">
 
                 <div class="modal-body">
                     <div class="form-group ">                                            
                         <label for="bln_kpi" class="control-label col-lg-4">Bulan</label>
                         <div class="col-lg-8">
-                            <input class=" form-control input-sm m-bot15" name="bln_kpi1" type="month" value="<?php  echo $nama_bulan.' '.$tahun;?>" readonly/>
+                            <input class=" form-control input-sm m-bot15" name="bln_kpi1" type="month" value="<?php  echo $tahun.'-'.$bulan;?>" readonly/>
                             <input type="hidden" name="bln_kpi" type="month" value="<?php  echo $tahun.'-'.$bulan;?>"/>
                             <span class="help-block">Pilih bulan</span>
                         </div>
@@ -373,12 +373,12 @@
                                 <td>Customer Satisfaction Agen BBM
 </td>
                                  <td>
-                                    <input type="number" required="required" id="kpitarget1" name="kpitarget1" class="form-control" value="<?php echo $row->TARGET ?>">
+                                    <input type="number"  step="0.01" required="required" id="kpitarget1" name="kpitarget1" class="form-control" value="<?php echo $row->TARGET ?>">
                                      
                              <input type="hidden" required="required" id="idkpi1" name="idkpi1" class="form-control" value="<?php echo $row->ID_KPI_APMS ?>">
                                 </td>
 								<td>
-                                    <input type="number" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control" value="<?php echo $row->REALISASI ?>">
+                                    <input type="number"  step="0.01" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control" value="<?php echo $row->REALISASI ?>">
                                 </td>
                             </tr>
 							<?php
