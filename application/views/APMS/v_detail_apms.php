@@ -410,15 +410,17 @@ function DateToIndo($date) {
                                     <td><?php echo $row->SOLAR; ?></td>
                                     <td><?php echo $row->ORDER_NUMBER; ?></td>
                                     <td><?php echo date('d-m-Y',strtotime($row->DATE_ORDER)); ?></td>
-                                    <td><?php echo date('d-m-Y',strtotime($row->PENGIRIMAN_KAPAL)); ?></td>
+                                    <td><?php echo $row->PENGIRIMAN_KAPAL; ?></td>
                                     <td><?php echo date('d-m-Y',strtotime($row->DATE_KAPAL_DATANG)); ?></td>
                                     <td><?php echo date('d-m-Y',strtotime($row->DATE_KAPAL_BERANGKAT)); ?></td>
                                     <td><?php echo $row->DESCRIPTION; ?></td>
                                     
 
                                     <?php if ($this->session->userdata('id_role') != 5) { ?>
-                                   <td><a onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->PREMIUM ?>', '<?php echo $row->SOLAR ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')" data-placement="top" data-toggle="modal" href="#Modal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a>
+                                   <td><a class="btn btn-warning btn-xs tooltips" data-original-title="Edit" data-placement="top" onclick="editKinerja('<?php echo $row->ID_KINERJA_APMS ?>','<?php echo $row->ID_LOG_HARIAN ?>','<?php echo $row->NO_DELIVERY ?>', '<?php echo $row->DATE_DELIVERY ?>', '<?php echo $row->DATE_PLAN_GI ?>', '<?php echo $row->PREMIUM ?>', '<?php echo $row->SOLAR ?>', '<?php echo $row->ORDER_NUMBER ?>', '<?php echo $row->DATE_ORDER ?>', '<?php echo $row->PENGIRIMAN_KAPAL ?>', '<?php echo $row->DATE_KAPAL_DATANG ?>', '<?php echo $row->DATE_KAPAL_BERANGKAT ?>','<?php echo $row->DESCRIPTION ?>')"  data-toggle="modal" href="#Modal"><i class="icon-pencil"></i></a>
 								   </td>
+								   
+								   
 								   <td><a class="btn btn-danger btn-xs tooltips" data-original-title="Hapus" data-placement="top" onclick="hapusKinerja('<?php echo $row->ID_KINERJA_APMS?>','<?php echo $row->NO_DELIVERY?>','<?php echo $row->DATE_PLAN_GI ?>')" data-toggle="modal" href="#ModalHapusKinerja"><i class="icon-remove"></i></a>
                                    </td>
 								   <?php } ?>
@@ -682,7 +684,7 @@ function DateToIndo($date) {
     
 	//kinerja
 	function editKinerja(id_kinerja_apms,id_log_harian,no_delivery, tgl_delivery, tgl_plan_gi, bh, jml, nomor_order, tgl_order, tgl_kirim,tgl_kpl_dtg,tgl_kpl_brgkt,des) {
-
+		
 		$("#id_log").val(id_log_harian);
 		$("#id_kinerja_apms").val(id_kinerja_apms);
 		$("#no_delivery1").val(no_delivery);
@@ -719,6 +721,7 @@ function DateToIndo($date) {
 	function hapusKinerja(id,no) {
         $('#ID_KINERJA').val(id);
         $('#ID_NO').html(no);
+		trace("1");
     }
 
 </script>
