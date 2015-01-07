@@ -320,7 +320,7 @@
 							?>
                             <tr>
                                 <td>1</td>
-                                <input type="hidden" required="required" id="idkpi1" name="idkpi1" class="form-control" value="<?php echo $row->ID_KPI_APMS ?>">
+                               
                                 <td>Pencapaian Realisasi LO Planning vs Realisasi Penyaluran
 
 									</td>
@@ -375,7 +375,7 @@
                                  <td>
                                     <input type="number" required="required" id="kpitarget1" name="kpitarget1" class="form-control" value="<?php echo $row->TARGET ?>">
                                      
-                            
+                             <input type="hidden" required="required" id="idkpi1" name="idkpi1" class="form-control" value="<?php echo $row->ID_KPI_APMS ?>">
                                 </td>
 								<td>
                                     <input type="number" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control" value="<?php echo $row->REALISASI ?>">
