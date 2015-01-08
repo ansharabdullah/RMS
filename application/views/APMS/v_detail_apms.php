@@ -562,7 +562,7 @@ function DateToIndo($date) {
 										<div class="form-group ">
 											<label for="des" class="control-label col-lg-2">Description</label>
 											<div class="col-lg-10">
-												<textarea class=" form-control input-sm m-bot15" id="des" name="des" required ></textarea>
+												<input type="text" class=" form-control input-sm m-bot15" id="des" name="des" required ></input>
 											</div>
 										</div>
 									</div>
@@ -654,7 +654,7 @@ function DateToIndo($date) {
 						<div class="form-group ">
                             <label for="des" class="control-label col-lg-2">Description</label>
                             <div class="col-lg-10">
-                                <textarea class=" form-control input-sm m-bot15" id="des1" name="des1" required ></textarea>
+                                <input type="text" class=" form-control input-sm m-bot15" id="des1" name="des1" required ></input>
                             </div>
                         </div>
                     </div>

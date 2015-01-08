@@ -64,7 +64,7 @@ class m_kpi_apms extends CI_Model {
 			$normal_score = $score;
 		}
 		$final_score = $normal_score*20/100;
-		$query= $this->db->query("update kpi_apms set TARGET = $kpi_nilai_r->jumlah,REALISASI = $kpi_nilai_k->jumlah,SCORE = $score,NORMAL_SCORE = $normal_score, FINAL_SCORE = $final_score where ID_JENIS_KPI_APMS = 4 and ID_LOG_HARIAN = $id_log->ID_LOG_HARIAN");
+		$query= $this->db->query("update kpi_apms set TARGET = $kpi_nilai_r->jumlah,REALISASI = $kpi_nilai_k->jumlah,SCORE = $score,NORMAL_SCORE = $normal_score, FINAL_SCORE = $final_score where ID_JENIS_KPI_APMS = 1 and ID_LOG_HARIAN = $id_log->ID_LOG_HARIAN");
 		
 		$jumlah = $this->db->query("select sum(FINAL_SCORE) as jumlah from kpi_apms where ID_LOG_HARIAN = $id_log->ID_LOG_HARIAN");
 		$jumlah = $jumlah->row();
