@@ -3417,6 +3417,48 @@ class laporan extends CI_Controller {
                         }
                         $i++;
                     }
+					
+					/*
+                      kpi Madiun
+                     */
+                    $objPHPExcel->setActiveSheetIndexByName('KPI APMS');
+                    $sheetData = $objPHPExcel->getActiveSheet();
+
+                    $laporanBiaya = $this->m_laporan->getRealisasiBiayaAPMS($depot, $tahun, $bulan);
+                    //$sheetData->setCellValue('A3', "WILAYAH S & D REGION ".AREA_OAM_ROMAWI." TERMINAL BBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('A5', "Terminal". $data_depot->NAMA_DEPOT ."Bulan : " . $month_name[$bulan] . " " . $tahun);
+
+                    //$sheetData->setCellValue('A23', "TBBM " . $data_depot->NAMA_DEPOT);
+                    $sheetData->setCellValue('J52', $data_depot->NAMA_OH);
+                    //$sheetData->setCellValue('K21', ucfirst(strtolower($data_depot->NAMA_DEPOT)) . ", " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
+                    if ($pjs != "") {
+                        $sheetData->setCellValue('B47', "Pjs SITE MANAGER/SITE SUPERVISOR");
+                        $sheetData->setCellValue('B52', $pjs);
+                    } else {
+                        $sheetData->setCellValue('B47', "SITE MANAGER/SITE SUPERVISOR");
+                        $sheetData->setCellValue('B52', $data_depot->NAMA_PEGAWAI);
+                    }
+
+                    $data_kpi = $this->m_laporan->selectKPIApms($depot, $tahun, $bulan);
+					$sheetData->setCellValue('F9', $data_kpi[0]->TARGET);
+					$sheetData->setCellValue('H9', $data_kpi[0]->REALISASI);
+					$sheetData->setCellValue('F10', $data_kpi[1]->TARGET);
+					$sheetData->setCellValue('H10', $data_kpi[1]->REALISASI);
+					$sheetData->setCellValue('F12', $data_kpi[2]->TARGET);
+					$sheetData->setCellValue('H12', $data_kpi[2]->REALISASI);
+					$sheetData->setCellValue('F14', $data_kpi[3]->TARGET);
+					$sheetData->setCellValue('H14', $data_kpi[3]->REALISASI);
+					$sheetData->setCellValue('F15', $data_kpi[4]->TARGET);
+					$sheetData->setCellValue('H15', $data_kpi[4]->REALISASI);
+					$sheetData->setCellValue('F16', $data_kpi[5]->TARGET);
+					$sheetData->setCellValue('H16', $data_kpi[5]->REALISASI);
+					$sheetData->setCellValue('F18', $data_kpi[6]->TARGET);
+					$sheetData->setCellValue('H18', $data_kpi[6]->REALISASI);
+					$sheetData->setCellValue('F19', $data_kpi[7]->TARGET);
+					$sheetData->setCellValue('H19', $data_kpi[7]->REALISASI);
+                    $sheetData->setCellValue('F25', $data_kpi[8]->TARGET);
+					$sheetData->setCellValue('H25', $data_kpi[8]->REALISASI);        
+					
                     /*
                       Data Pengiriman APMS
                      */
@@ -3704,7 +3746,8 @@ class laporan extends CI_Controller {
                         }
                     }
 
-
+					$sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI APMS Tanjung Wangi'));
+                    $objPHPExcel->removeSheetByIndex($sheetIndex);
 
                     $objPHPExcel->setActiveSheetIndexByName('BA');
                     $sheetData = $objPHPExcel->getActiveSheet();
@@ -3719,6 +3762,9 @@ class laporan extends CI_Controller {
                     $objPHPExcel->removeSheetByIndex($sheetIndex);
                     $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI APMS'));
                     $objPHPExcel->removeSheetByIndex($sheetIndex);
+                    $sheetIndex = $objPHPExcel->getIndex($objPHPExcel->getSheetByName('KPI APMS Tanjung Wangi'));
+                    $objPHPExcel->removeSheetByIndex($sheetIndex);
+					
                 }
 
 

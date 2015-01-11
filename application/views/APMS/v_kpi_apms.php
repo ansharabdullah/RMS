@@ -1,4 +1,3 @@
-
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
@@ -74,7 +73,6 @@
                                     <th>Score</th>
                                     <th>Normal Score</th>
                                     <th>Hasil Nilai</th>
-                                    <th width="230">Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,7 +112,7 @@
 										</td>
 										<td>
 										<?php
-										if($row->ID_JENIS_KPI_APMS<5)
+										if($row->ID_JENIS_KPI_APMS!=4)
 										{
 											echo $row->REALISASI-$row->TARGET; 
 										}else
@@ -136,9 +134,8 @@
 										<?php echo $row->FINAL_SCORE; 
 										$jumlah_nilai = $jumlah_nilai + $row->FINAL_SCORE;?>
 										</td>
-										<td>
-										<?php echo $row->KETERANGAN; ?>
-										</td>
+										<?php //echo $row->KETERANGAN; 
+										?>
 								
 								</tr>
 								<?php
@@ -208,56 +205,58 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Laporan progres pembayaran ongkos angkut
+                                <td>Pencapaian Realisasi LO Planning vs Realisasi Penyaluran
 									</td>
-                                <td>
-                                    <input type="number" required="required" id="kpitarget1" name="kpitarget1" class="form-control">
-                                </td>
-								<td>
-                                    <input type="number" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control">
-                                </td>
+				<td>X</td>
+                                <td>X</td>
+                                
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Laporan realisasi penyaluran VS LO Planing 
+                                <td>Jumlah Alat angkut Standar 
 								</td>
                                 <td><input type="number" required="required" id="kpitarget2" name="kpitarget2" class="form-control"></td>
 								<td><input type="number" required="required" id="kpirealisasi2" name="kpirealisasi2" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Laporan Kehandalan dan Ketersediaan Alat angkut</td>
+                                <td>Laporan tagihan ongkos angkut (tepat waktu dan dokumen lengkap)</td>
                                 <td><input type="number" required="required" id="kpitarget3" name="kpitarget3" class="form-control"></td>
                                 <td><input type="number" required="required" id="kpirealisasi3" name="kpirealisasi3" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>Realisasi penyaluran VS Alokasi</td>
-                                <td>X</td>
-                                <td>X</td>
+                                <td>Customer Satisfaction Agen BBM</td>
+                                <td>
+                                    <input type="number"  step="0.01" required="required" id="kpitarget1" name="kpitarget1" class="form-control">
+                                </td>
+								<td>
+                                    <input type="number"  step="0.01" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control">
+                                </td>
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td>Progress Pembayaran Ongkos Angkut Transportir
+                                <td>Jumlah temuan, keluhan atau komplain terkait angkutan BBM ke Agen BBM
 </td>
                                 <td><input type="number" required="required" id="kpitarget4" name="kpitarget4" class="form-control"></td>
                                 <td><input type="number" required="required" id="kpirealisasi4" name="kpirealisasi4" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td>Customer Transportir APMS</td>
+                                <td>Tindak lanjut penyelesaian keluhan atau komplain yang diterima</td>
                                 <td><input type="number" required="required" id="kpitarget5" name="kpitarget5" class="form-control"></td>
                                 <td><input type="number" required="required" id="kpirealisasi5" name="kpirealisasi5" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td>Customer APMS</td>
+                                <td>Number of Incidents</td>
                                 <td><input type="number" required="required" id="kpitarget6" name="kpitarget6" class="form-control"></td>
                                 <td><input type="number" required="required" id="kpirealisasi6" name="kpirealisasi6" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td>Pelanggaran atas Integritas Kinerja:
+                                <td>Waktu penyelesaian Incidents
+
 </td>
                                 <td><input type="number" required="required" id="kpitarget7" name="kpitarget7" class="form-control"></td>
                                 <td><input type="number" required="required" id="kpirealisasi7" name="kpirealisasi7" class="form-control"></td>
@@ -289,13 +288,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Edit Data</h4>
             </div>
-            <form class="cmxform form-horizontal tasi-form" id="signupForm1" method="post" action="<?php echo base_url(); ?>apms/kpi_apms">
+            <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url(); ?>apms/kpi_apms">
 
                 <div class="modal-body">
                     <div class="form-group ">                                            
                         <label for="bln_kpi" class="control-label col-lg-4">Bulan</label>
                         <div class="col-lg-8">
-                            <input class=" form-control input-sm m-bot15" name="bln_kpi1" type="month" value="<?php  echo $nama_bulan.' '.$tahun;?>" readonly/>
+                            <input class=" form-control input-sm m-bot15" name="bln_kpi1" type="month" value="<?php  echo $tahun.'-'.$bulan;?>" readonly/>
                             <input type="hidden" name="bln_kpi" type="month" value="<?php  echo $tahun.'-'.$bulan;?>"/>
                             <span class="help-block">Pilih bulan</span>
                         </div>
@@ -321,15 +320,13 @@
 							?>
                             <tr>
                                 <td>1</td>
-                                <td>Laporan progres pembayaran ongkos angkut
+                               
+                                <td>Pencapaian Realisasi LO Planning vs Realisasi Penyaluran
+
 									</td>
-                                <td>
-                                    <input type="number" required="required" id="kpitarget1" name="kpitarget1" class="form-control" value="<?php echo $row->TARGET ?>">
-                                    <input type="hidden" required="required" id="idkpi1" name="idkpi1" class="form-control" value="<?php echo $row->ID_KPI_APMS ?>">
-                                </td>
-								<td>
-                                    <input type="number" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control" value="<?php echo $row->REALISASI ?>">
-                                </td>
+                               
+                                <td>X</td>
+                                <td>X</td>
                             </tr>
 							<?php
 								}
@@ -340,7 +337,8 @@
 							?>
                             <tr>
                                 <td>2</td>
-                                <td>Laporan realisasi penyaluran VS LO Planing 
+                                <td>Jumlah Alat angkut Standar
+
 								</td>
                                 <td><input type="number" required="required" id="kpitarget2" name="kpitarget2" class="form-control"value="<?php echo $row->TARGET ?>"></td>
 								<td><input type="number" required="required" id="kpirealisasi2" name="kpirealisasi2" class="form-control" value="<?php echo $row->REALISASI ?>"></td>
@@ -356,7 +354,8 @@
 							?>
                             <tr>
                                 <td>3</td>
-                                <td>Laporan Kehandalan dan Ketersediaan Alat angkut</td>
+                                <td>Laporan tagihan ongkos angkut (tepat waktu dan dokumen lengkap)
+</td>
                                 <td><input type="number" required="required" id="kpitarget3" name="kpitarget3" class="form-control"value="<?php echo $row->TARGET ?>"></td>
                                 <td><input type="number" required="required" id="kpirealisasi3" name="kpirealisasi3" class="form-control" value="<?php echo $row->REALISASI ?>"></td>
 								
@@ -371,9 +370,16 @@
 							?>
                             <tr>
                                 <td>4</td>
-                                <td>Realisasi penyaluran VS Alokasi</td>
-                                <td>X</td>
-                                <td>X</td>
+                                <td>Customer Satisfaction Agen BBM
+</td>
+                                 <td>
+                                    <input type="number"  step="0.01" required="required" id="kpitarget1" name="kpitarget1" class="form-control" value="<?php echo $row->TARGET ?>">
+                                     
+                             <input type="hidden" required="required" id="idkpi1" name="idkpi1" class="form-control" value="<?php echo $row->ID_KPI_APMS ?>">
+                                </td>
+								<td>
+                                    <input type="number"  step="0.01" required="required" id="kpirealisasi1" name="kpirealisasi1" class="form-control" value="<?php echo $row->REALISASI ?>">
+                                </td>
                             </tr>
 							<?php
 								}
@@ -384,7 +390,8 @@
 							?>
                             <tr>
                                 <td>5</td>
-                                <td>Progress Pembayaran Ongkos Angkut Transportir
+                                <td>Jumlah temuan, keluhan atau komplain terkait angkutan BBM ke Agen BBM
+
 </td>
                                 <td><input type="number" required="required" id="kpitarget4" name="kpitarget4" class="form-control"value="<?php echo $row->TARGET ?>"></td>
                                 <td><input type="number" required="required" id="kpirealisasi4" name="kpirealisasi4" class="form-control" value="<?php echo $row->REALISASI ?>"></td>
@@ -400,7 +407,8 @@
 							?>
                             <tr>
                                 <td>6</td>
-                                <td>Customer Transportir APMS</td>
+                                <td>Tindak lanjut penyelesaian keluhan atau komplain yang diterima
+</td>
                                 <td><input type="number" required="required" id="kpitarget5" name="kpitarget5" class="form-control"value="<?php echo $row->TARGET ?>"></td>
                                 <td><input type="number" required="required" id="kpirealisasi5" name="kpirealisasi5" class="form-control" value="<?php echo $row->REALISASI ?>"></td>
 								
@@ -415,7 +423,8 @@
 							?>
                             <tr>
                                 <td>7</td>
-                                <td>Customer APMS</td>
+                                <td>Number of Incidents
+</td>
                                 <td><input type="number" required="required" id="kpitarget6" name="kpitarget6" class="form-control"value="<?php echo $row->TARGET ?>"></td>
                                 <td><input type="number" required="required" id="kpirealisasi6" name="kpirealisasi6" class="form-control" value="<?php echo $row->REALISASI ?>"></td>
 								
