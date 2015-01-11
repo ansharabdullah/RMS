@@ -199,7 +199,7 @@ class m_mt extends CI_Model {
 
     //oam
     public function getAllMt() {
-        $data = $this->db->query("select * from mobil");
+        $data = $this->db->query("select * from mobil where nopol <> '' && id_depot > 0");
         return $data;
     }
 
@@ -217,7 +217,7 @@ class m_mt extends CI_Model {
 
     //ss
     public function getAllMtByDepot($id_depot) {
-        $data = $this->db->query("select * from mobil where id_depot=$id_depot");
+        $data = $this->db->query("select * from mobil where id_depot=$id_depot and nopol <> '' ");
         return $data;
     }
 
