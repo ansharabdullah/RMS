@@ -391,7 +391,7 @@ function DateToIndo($date) {
                     <?php if ($this->session->userdata('id_role') != 5) { ?>
                     <a class="btn btn-warning" onclick="ShowEdit()" ><i class="icon-pencil"></i> Edit</a> 
 
-                    <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_MOBIL ?>');"><i class="icon-eraser"></i> Hapus</a>
+                    <a class="btn btn-danger" href="javascript:hapus('<?php echo $row->ID_MOBIL ?>','<?php echo $row->NOPOL ?>');"><i class="icon-eraser"></i> Hapus</a>
 <?php } ?>
                 </header>
                 <div class="panel-body bio-graph-primary" >
@@ -828,7 +828,6 @@ function DateToIndo($date) {
   <?php } ?>              
             
             <section class="panel">
-                <div class="panel-body">
                     <div class="col-lg-12"><header class="panel-heading">
                             Grafik Harian MT
                         </header>
@@ -871,25 +870,25 @@ function DateToIndo($date) {
                         <div id="grafik"></div>
                     </div>
                 </div>
+             </div>    
             </section>
 
             <section class="panel">
                 <header class="panel-heading">
-                    Tabel Kinerja MT
+                    Tabel Kinerja MT <b><?php echo date("M-Y", strtotime($tahun . "-" . $bulan)) ?></b>
                 </header>
                 <div class="panel-body">
-                    <div class="adv-table editable-table ">
-                        
-                        <div class="adv-table editable-table " style="overflow-x: scroll; overflow-y:hidden">
+                    <div class="adv-table editable-table "  style="overflow-x: scroll">
+                        <div class="space15"></div>
                         <table class="table table-striped table-hover table-bordered" id="editable-sample">
                             <thead>
-                                <tr>
+                                <tr class="">
                                     <th style="display: none;">-</th>
                                     <th>No.</th>
                                     <th>Tanggal</th>
                                     <th>Km</th>
                                     <th>Kl</th>
-                                    <th>Rit </th>
+                                    <th>Rit</th>
                                     <th>Own Use</th>
                                     <th>Premium</th>
                                     <th>Pertamax</th>
@@ -937,6 +936,7 @@ function DateToIndo($date) {
                                                 }
                                                 if ($status == 1) {
                                                     ?>
+                                <tr class="">
                                     <td style="display:none;"></td>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo date('d M Y',  strtotime($row->tanggal_log_harian)); ?></td>
@@ -952,9 +952,9 @@ function DateToIndo($date) {
                                     <td><?php echo $row->bio_solar; ?></td>
                                     <td><span class="label label-success">Hadir</span></td>
                                     
-                                   <td
+                                   <td>
                                        <?php if ($this->session->userdata('id_role') != 5) { ?> 
-                                    <a onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo $row->tanggal_log_harian ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" class="btn btn-warning btn-xs tooltips" data-original-title="Edit"><i class="icon-pencil"></i></a><br>
+                                    <a class="btn btn-warning btn-xs tooltips" onclick="editKinerja('<?php echo $id_mobil ?>','<?php echo $row->id_kinerja_mt ?>','<?php echo $row->tanggal_log_harian ?>','<?php echo $row->total_km_mt ?>','<?php echo $row->total_kl_mt ?>','<?php echo $row->ritase_mt ?>','<?php echo $row->own_use ?>','<?php echo $row->premium ?>','<?php echo $row->pertamax ?>','<?php echo $row->pertamax_plus ?>','<?php echo $row->pertamina_dex ?>','<?php echo $row->solar ?>','<?php echo $row->bio_solar ?>')" data-placement="top" data-toggle="modal" href="#MyModal" data-original-title="Edit"><i class="icon-pencil"></i></a><br>
                                        <?php } ?>
                                     </td>
                                    <td>
@@ -1001,7 +1001,6 @@ function DateToIndo($date) {
                         </table>
                        </div>
                     </div>
-                </div>
 
 
             </section>

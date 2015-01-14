@@ -451,7 +451,7 @@ class jadwal extends CI_Controller {
 
     public function lihat_jadwal() {
         $depot = $this->session->userdata('id_depot');
-        $tanggal = $this->input->get('tanggal', true)
+        $tanggal = $this->input->get('tanggal', true);
         redirect(base_url() . "jadwal/penjadwalan/" . $tanggal);
     }
 
