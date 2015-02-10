@@ -276,68 +276,101 @@
                     </header>
                     <div class="panel-body">
                         <?php
+                        $r_premium = 0;
                             if($rencana_bulan[0]->r_premium > 0)
                             {
+                            $r_premium = (($kinerja_bulan[0]->premium / $rencana_bulan[0]->r_premium) * 100);
                         ?>
                         <p class="text-muted">
                             Kilo Liter Premium (<?php echo $kinerja_bulan[0]->premium ?>/<?php echo $rencana_bulan[0]->r_premium ?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->premium / $rencana_bulan[0]->r_premium) * 100) ?>%">
+                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $r_premium; ?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
-
+<?php
+$r_pertamax = 0;
+if($rencana_bulan[0]->r_pertamax > 0){
+$r_pertamax = (($kinerja_bulan[0]->pertamax / $rencana_bulan[0]->r_pertamax) * 100);
+}
+?>
                         <p class="text-muted">
                             Kilo Liter Pertamax (<?php echo $kinerja_bulan[0]->pertamax ?>/<?php echo $rencana_bulan[0]->r_pertamax ?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->pertamax / $rencana_bulan[0]->r_pertamax) * 100) ?>%">
+                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo   $r_pertamax;?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
-
+<?php
+$r_pertamax_plus = 0;
+if($rencana_bulan[0]->r_pertamax_plus > 0){
+$r_pertamax_plus = (($kinerja_bulan[0]->pertamax_plus / $rencana_bulan[0]->r_pertamax_plus) * 100);
+}
+?>
                         <p class="text-muted">
-                            Kilo Liter Pertamax Plus (<?php echo $kinerja_bulan[0]->pertamax_plus ?>/<?php echo $rencana_bulan[0]->r_pertamax_plus ?> Kl)
+                            Kilo Liter Pertamax Plus (<?php
+                             echo $kinerja_bulan[0]->pertamax_plus ?>/<?php echo $rencana_bulan[0]->r_pertamax_plus ?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->pertamax_plus / $rencana_bulan[0]->r_pertamax_plus) * 100) ?>%">
+                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $r_pertamax_plus ?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
-
+<?php
+$r_pertamax_dex = 0;
+if($rencana_bulan[0]->r_pertamina_dex > 0){
+$r_pertamax_dex = (($kinerja_bulan[0]->pertamina_dex / $rencana_bulan[0]->r_pertamina_dex) * 100);
+}
+?>
                         <p class="text-muted">
                             Kilo Liter Pertamax Dex (<?php echo $kinerja_bulan[0]->pertamina_dex ?>/<?php echo $rencana_bulan[0]->r_pertamina_dex ?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->pertamina_dex / $rencana_bulan[0]->r_pertamina_dex) * 100) ?>%">
+                            <div class="progress-bar progress-bar-primary"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $r_pertamax_dex; ?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
-
+<?php
+$r_solar = 0;
+if($rencana_bulan[0]->r_solar > 0){
+$r_solar = (($kinerja_bulan[0]->solar / $rencana_bulan[0]->r_solar) * 100);
+}
+?>
                         <p class="text-muted">
                             Kilo Liter Solar (<?php echo $kinerja_bulan[0]->solar ?>/<?php echo $rencana_bulan[0]->r_solar ?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->solar / $rencana_bulan[0]->r_solar) * 100) ?>%">
+                            <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $r_solar;?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
-
+<?php
+$r_bio_solar = 0;
+if($rencana_bulan[0]->r_bio_solar > 0){
+$r_bio_solar = (($kinerja_bulan[0]->bio_solar / $rencana_bulan[0]->r_bio_solar) * 100);
+}
+?>
                         <p class="text-muted">
                             Kilo Liter Bio Solar (<?php echo $kinerja_bulan[0]->bio_solar ?>/<?php echo $rencana_bulan[0]->r_bio_solar ?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->bio_solar / $rencana_bulan[0]->r_bio_solar) * 100) ?>%">
+                            <div class="progress-bar progress-bar-danger"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $r_bio_solar; ?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
-
+<?php
+$r_own_use = 0;
+if($rencana_bulan[0]->r_own_use > 0){
+$r_own_use = (($kinerja_bulan[0]->own_use / $rencana_bulan[0]->r_own_use) * 100);
+}
+?>
                         <p class="text-muted">
                             Kilo Liter Own Use (<?php echo $kinerja_bulan[0]->own_use ?>/<?php echo $rencana_bulan[0]->r_own_use ?> Kl)
                         </p>
                         <div class="progress progress-striped progress-sm active">
-                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (($kinerja_bulan[0]->own_use / $rencana_bulan[0]->r_own_use) * 100) ?>%">
+                            <div class="progress-bar progress-bar-warning"  role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $r_own_use; ?>%">
                                 <span class="sr-only">45% Complete</span>
                             </div>
                         </div>
