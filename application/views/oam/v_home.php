@@ -614,7 +614,7 @@ foreach($depot as $dp)
                     type:'column'
                 },
                 title: {
-                    text: 'Nilai KPI Depot Pertahun'
+                    text: 'Nilai KPI TBBM Pertahun'
                 },
                 plotOptions: {
                
@@ -738,7 +738,7 @@ foreach($depot_apms as $dp)
                     type:'column'
                 },
                 title: {
-                    text: 'Nilai KPI APMS Depot Pertahun'
+                    text: 'Nilai KPI APMS TBBM Pertahun'
                 },
                 plotOptions: {
                

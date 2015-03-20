@@ -18,7 +18,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Bulanan APMS Depot <?php echo $nama_depot?>
+                        Grafik Bulanan APMS TBBM <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
                          <?php
@@ -56,7 +56,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                      <header class="panel-heading">
-                        Data APMS Depot <?php echo $nama_depot?>
+                        Data APMS TBBM <?php echo $nama_depot?>
                     </header>
                      <div class="panel-body">
 

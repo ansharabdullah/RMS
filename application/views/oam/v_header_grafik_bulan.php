@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik KPI Bulanan Depot 1
+                        Grafik KPI Bulanan TBBM 1
                     </header>
                     <div class="panel-body" >
                         <?php $attr = array("class"=>"cmxform form-horizontal tasi-form");

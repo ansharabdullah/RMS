@@ -17,7 +17,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Harian MT Depot <?php echo $nama_depot?>
+                        Grafik Harian MT TBBM <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
                         <?php
@@ -70,7 +70,7 @@
                         <div id="filePreview">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    Tabel Kinerja Mobil Tangki Depot <?php echo $nama_depot?>
+                                    Tabel Kinerja Mobil Tangki TBBM <?php echo $nama_depot?>
                                 </header>
                                 <div class="panel-body">
 
@@ -166,7 +166,7 @@
                 renderTo:'grafik'
             },
             title: {
-                text: 'Grafik Kinerja Harian Jumlah KM Mobil Tangki Depot <?php echo $nama_depot?>'
+                text: 'Grafik Kinerja Harian Jumlah KM Mobil Tangki TBBM <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, 2005))?> Tahun <?php echo $tahun?>'
@@ -217,7 +217,7 @@
     
     function filterMt(title)
     {
-        mt.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' Mobil Tangki Depot <?php echo $nama_depot?>'});  
+        mt.setTitle({text: 'Grafik Kinerja Harian Jumlah '+title+' Mobil Tangki TBBM <?php echo $nama_depot?>'});  
         if(title == "KM"){
              mt.series[0].setData(total_km_mt);
         }

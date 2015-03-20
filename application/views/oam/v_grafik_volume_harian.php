@@ -115,7 +115,7 @@ foreach ($volume as $row) {
         
         <section class="panel">
             <header class="panel-heading">
-                Grafik Rencana Volume vs Realisasi Harian Depot <?php echo $nama_depot?>
+                Grafik Rencana Volume vs Realisasi Harian TBBM <?php echo $nama_depot?>
             </header>
             <div class="panel-body" >
                 <?php
@@ -176,7 +176,7 @@ foreach ($volume as $row) {
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Tabel Rencana Volume vs Realisasi Harian Depot <?php echo $nama_depot ?> Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>
+                            Tabel Rencana Volume vs Realisasi Harian TBBM <?php echo $nama_depot ?> Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>
                         </header>
                         <div class="panel-body">
                             <div class="space15">
@@ -266,7 +266,7 @@ foreach ($volume as $row) {
             },
 
             title: {
-                text: "Nilai KPI Depot <?php echo $nama_depot; ?>",
+                text: "Nilai KPI TBBM <?php echo $nama_depot; ?>",
                 x: -80
             },
 

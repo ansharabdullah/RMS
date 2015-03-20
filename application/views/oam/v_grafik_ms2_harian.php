@@ -160,7 +160,7 @@ foreach ($ms2 as $row) {
         </div>
         <section class="panel">
             <header class="panel-heading">
-                Grafik Harian Depot <?php  echo $nama_depot; ?>
+                Grafik Harian TBBM <?php  echo $nama_depot; ?>
             </header>
             <div class="panel-body" >
                 <?php
@@ -336,7 +336,7 @@ foreach ($ms2 as $row) {
             },
 
             title: {
-                text: "Nilai KPI Depot <?php echo $nama_depot; ?>",
+                text: "Nilai KPI TBBM <?php echo $nama_depot; ?>",
                 x: -80
             },
 

@@ -149,7 +149,7 @@ foreach ($ms2 as $row) {
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Grafik Harian Depot <?php if (sizeof($kpi) > 0)
+                Grafik Harian TBBM <?php if (sizeof($kpi) > 0)
     echo $kpi[0]->NAMA_DEPOT; ?>
             </header>
             <div class="panel-body" >

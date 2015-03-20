@@ -5,14 +5,14 @@
         <!-- page start-->
         <ul class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-            <li><a href="<?php echo base_url(); ?>pengaturan/pengaturan_depot/"> Pengaturan Depot</a></li>
-            <li class="active">Tambah Depot</li>
+            <li><a href="<?php echo base_url(); ?>pengaturan/pengaturan_depot/"> Pengaturan TBBM</a></li>
+            <li class="active">Tambah TBBM</li>
         </ul>
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Tambah Depot
+                        Tambah TBBM
                     </header>
                     <div class="panel-body">
                         <div class="stepy-tab">
@@ -33,13 +33,13 @@
                             <fieldset title="Data Depot" class="step" id="default-step-0">
                                 <legend> </legend>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Nama Depot</label>
+                                    <label class="col-lg-2 control-label">Nama TBBM</label>
                                     <div class="col-lg-10">
                                         <input type="text" class="form-control" name="nama_depot" placeholder="Nama Depot" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Alamat Depot</label>
+                                    <label class="col-lg-2 control-label">Alamat TBBM</label>
                                     <div class="col-lg-10">
                                         <textarea class="form-control" name="alamat_depot" placeholder="Alamat Depot" required></textarea>
                                     </div>

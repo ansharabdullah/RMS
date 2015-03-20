@@ -175,7 +175,7 @@
 
         <section class="panel" >
             <header class="panel-heading">
-                KPI Internal Depot <?php echo $nama_depot;?>
+                KPI Internal TBBM <?php echo $nama_depot;?>
             </header>
             <div class="panel-body">
                 <form class="cmxform form-horizontal tasi-form" id="signupForm" method="post" action="<?php echo base_url(); ?>depot/kpi_internal/<?php echo $id_depot?>">

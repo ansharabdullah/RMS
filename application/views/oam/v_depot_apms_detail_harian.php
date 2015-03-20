@@ -162,7 +162,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Detail Realisasi Penyaluran APMS Harian Depot <?php echo $nama_depot ?>
+                        Grafik Detail Realisasi Penyaluran APMS Harian TBBM <?php echo $nama_depot ?>
                     </header>
                     <div class="panel-body" >
                         <?php

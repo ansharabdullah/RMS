@@ -232,7 +232,7 @@ foreach($mt as $m)
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Detail Harian MT Depot <?php echo $nama_depot ?>
+                        Grafik Detail Harian MT TBBM <?php echo $nama_depot ?>
                     </header>
                     <div class="panel-body" >
                         <?php

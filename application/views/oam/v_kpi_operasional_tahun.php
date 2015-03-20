@@ -4,32 +4,51 @@
     var series_kpi = new Array();
     var set = new Array();
     var target = new Array();
-    var dataKpi = new Array();
     var arrColorKpi = new Array('#FF002B','#2C88D4','#23C906','#F5A905');
-    
 <?php
-
 foreach ($tahun_arr as $tahun) {
-    $jml = 0;
-    $i = 0;
-    foreach($depot as $dp){
+    ?>
+                    tahun_kpi.push("<?php echo $tahun ?>");
+    <?php
+}
+
+$i = 0;
+foreach($depot as $dp)
+{
+    ?>
+        set = new Array();
+    <?php
+    foreach ($tahun_arr as $tahun) {
         $status = 0;
         foreach($kpi as $k)
         {
             if($k->ID_DEPOT == $dp->ID_DEPOT && $k->tahun == $tahun)
             {
-                $jml+= $k->rata_rata;
+                ?>
+                 set.push(<?php echo $k->rata_rata?>);
+                <?php
                 $status = 1;
                 break;
             }
 
         }
-        $i++;
+        if($status == 0)
+        {
+            ?>
+                set.push(0);
+            <?php
+            
+        }
     }
     ?>
-        dataKpi.push(<?php echo ($jml / $i);?>);
-        tahun_kpi.push("<?php echo $tahun ?>");
-    <?php
+     series_kpi.push({
+        name:'<?php echo $dp->NAMA_DEPOT ?>',
+        color : arrColorKpi[<?php echo $i ?>],
+        id : '<?php echo $dp->ID_DEPOT ?>',
+        data: set
+    });   
+        <?php
+    $i++;
 }
 ?>
     $(function() {
@@ -39,7 +58,7 @@ foreach ($tahun_arr as $tahun) {
                 type:'column'
             },
             title: {
-                text: 'Nilai KPI Operasional TBBM Pertahun'
+                text: 'Nilai KPI Operasional TBBM Tahun <?php echo $tahun;?>'
             },
             plotOptions: {
                
@@ -47,7 +66,7 @@ foreach ($tahun_arr as $tahun) {
                     point:{
                         events:{
                             click: function(event) {
-                                window.location = "<?php echo base_url() ?>kpi/operasional_tahun/"+ this.category;
+                                window.location = "<?php echo base_url() ?>kpi/operasional_bulan/"+ this.series.options.id +"/"+this.category;
                             }
                         }
                     },
@@ -72,8 +91,6 @@ foreach ($tahun_arr as $tahun) {
 
             yAxis: [{ // Primary yAxis
                     gridLineWidth: 1,
-                    min: 0,
-                    minRange : 110,
                     labels: {
 
                         style: {
@@ -111,11 +128,7 @@ foreach ($tahun_arr as $tahun) {
                         }
                     }]
             },
-            series: [{
-                    name: 'Rata - rata KPI',
-                    type: 'column',
-                    data: dataKpi
-                }]
+            series: series_kpi
         });
     });
 </script>

@@ -17,7 +17,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Harian AMT Depot <?php echo $nama_depot?>
+                        Grafik Harian AMT TBBM <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
 <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->
@@ -143,7 +143,7 @@
                 renderTo:'grafik'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM Awak Mobil Tangki Depot <?php echo $nama_depot?>'
+                text: 'Grafik Kinerja Jumlah KM Awak Mobil Tangki TBBM <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun))?> Tahun <?php echo $tahun?>'
@@ -193,7 +193,7 @@
     
     function filterAmt(title)
     {
-        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Awak Mobil Tangki Depot <?php echo $nama_depot?>'});  
+        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' Awak Mobil Tangki TBBM <?php echo $nama_depot?>'});  
         if(title == "KM"){
              amt.series[0].setData(total_km);
         }else if(title == "KL"){

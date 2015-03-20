@@ -9,7 +9,7 @@
                 <section class="panel">
                     <div class="panel-body">
                         <header class="panel-heading">
-                            Key Performance Indicator (KPI) Depot 1 (Tahun 2014)
+                            Key Performance Indicator (KPI) TBBM 1 (Tahun 2014)
                         </header>
                         <div class="adv-table editable-table " style="overflow: scroll;">
                             <table class="table table-striped table-hover table-bordered" id="editable-sample">

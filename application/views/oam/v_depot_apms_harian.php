@@ -17,7 +17,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Harian APMS Depot <?php echo $nama_depot?>
+                        Grafik Harian APMS TBBM <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
 <!--                        <form class="cmxform form-horizontal tasi-form" action="" role="form" method="POST">-->

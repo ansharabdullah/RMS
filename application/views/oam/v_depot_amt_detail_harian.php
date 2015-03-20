@@ -181,7 +181,7 @@
                 <section class="panel">
                     
                     <header class="panel-heading">
-                        Grafik Detail Harian AMT Depot <?php echo $nama_depot ?>
+                        Grafik Detail Harian AMT TBBM <?php echo $nama_depot ?>
                     </header>
                   <div class="panel-body" >
                         <?php

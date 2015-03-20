@@ -69,7 +69,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Bulanan Kinerja AMT Depot <?php echo $nama_depot?>
+                        Grafik Bulanan Kinerja AMT TBBM <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
                          <?php
@@ -112,7 +112,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Awak Mobil Tangki Depot <?php echo $nama_depot?>
+                        Awak Mobil Tangki TBBM <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body">
                         <div class="space15">
@@ -189,7 +189,7 @@
                 renderTo:'grafik2'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM AMT Depot <?php echo $nama_depot?>'
+                text: 'Grafik Kinerja Jumlah KM AMT TBBM <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Tahun <?php echo $tahun;?>'
@@ -243,7 +243,7 @@
     
     function filterAmt(title)
     {
-        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' AMT Depot <?php echo $nama_depot?>'});  
+        amt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' AMT TBBM <?php echo $nama_depot?>'});  
         amt.series[0].remove(true);
        if(title == "KM"){
              //amt.series[0].setData(total_km);

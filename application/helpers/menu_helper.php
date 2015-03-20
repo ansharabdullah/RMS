@@ -190,7 +190,7 @@ if ( ! function_exists('menu_oam'))
                    $id_depot = $logHarian[$i]['id_depot']; 
                     if($logHarian[$i]['id_depot'] > 0) 
                     {
-                        array_push($arrNotif,"<b>&nbsp; DEPOT ".$logHarian[$i]['depot']."</b>");
+                        array_push($arrNotif,"<b>&nbsp; TBBM ".$logHarian[$i]['depot']."</b>");
                     }
                     else
                     {

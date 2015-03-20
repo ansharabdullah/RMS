@@ -15,7 +15,7 @@
                 <li class="sub-menu">
                     <a  href="javascript:;" <?php if ($lv1 == $level) echo "class='active'" ?>>
                         <i class="icon-building"></i>
-                        <span>Depot <?php echo ucfirst(strtolower($depot[$i]->NAMA_DEPOT)); ?></span>
+                        <span>TBBM <?php echo ucfirst(strtolower($depot[$i]->NAMA_DEPOT)); ?></span>
                     </a>
                     <ul class="sub">
                         <li <?php if ($lv2 == 1 && $lv1 == $level) echo "class='active'" ?>><a  href="<?php echo base_url() ?>depot/amt_depot/<?php echo $depot[$i]->ID_DEPOT ?>/<?php echo date("Y")?>">AMT</a></li>
@@ -53,7 +53,7 @@
             <?php $level++; ?>
             <li class="sub-menu">
                 <a href="<?php echo base_url() ?>pengaturan/pengaturan_depot/"  <?php if ($lv1 == $level) echo "class='active'" ?>>
-                    <i class="icon-gears"></i><span>Pengaturan Depot</span>
+                    <i class="icon-gears"></i><span>Pengaturan TBBM</span>
                 </a>
             </li>
             <?php $level++; ?>

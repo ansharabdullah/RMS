@@ -22,7 +22,7 @@
                                         <header class="panel-heading">
                                         <?php
                                                 if( $logHarian[$i]['id_depot'] > 0) {
-                                                    echo"<i class='icon-building'></i>&nbsp;DEPOT " . $logHarian[$i]['depot'] . "";
+                                                    echo"<i class='icon-building'></i>&nbsp;TBBM " . $logHarian[$i]['depot'] . "";
                                                 }
                                                 else
                                                 {

@@ -71,7 +71,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Grafik Bulanan MT Depot <?php echo $nama_depot?>
+                        Grafik Bulanan MT TBBM <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
                          <?php
@@ -116,7 +116,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                      <header class="panel-heading">
-                        Data MT Depot <?php echo $nama_depot?>
+                        Data MT TBBM <?php echo $nama_depot?>
                     </header>
                     <div class="panel-body" >
                         <div class="adv-table editable-table " style="overflow-x: scroll" >
@@ -220,7 +220,7 @@
                 renderTo: 'grafik'
             },
             title: {
-                text: 'Grafik Kinerja Jumlah KM MT Depot <?php echo $nama_depot?>'
+                text: 'Grafik Kinerja Jumlah KM MT TBBM <?php echo $nama_depot?>'
             },
             subtitle: {
                 text: 'Tahun <?php echo $tahun?>'
@@ -273,7 +273,7 @@
     
     function filterMt(title)
     {
-        mt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' MT Depot <?php echo $nama_depot?>'});  
+        mt.setTitle({text: 'Grafik Kinerja Jumlah '+title+' MT TBBM <?php echo $nama_depot?>'});  
         //mt.legend.allItems[0].update({name:title});
         mt.series[0].remove(true);
        

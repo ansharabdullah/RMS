@@ -154,7 +154,7 @@
     
     function filter(title,index){
         activeIndex = index;
-        kpi.setTitle({text: title+' Depot <?php echo $nama_depot?>'});
+        kpi.setTitle({text: title+' TBBM <?php echo $nama_depot?>'});
         switch (index) {
             case 1:
                 kpi.series[0].setData(pembayaran);break;
@@ -193,7 +193,7 @@
         </div>
                 <section class="panel">
                         <header class="panel-heading">
-                            Grafik KPI APMS Bulanan Depot <?php echo $nama_depot?>
+                            Grafik KPI APMS Bulanan TBBM <?php echo $nama_depot?>
                         </header>
                         <div class="panel-body" >
                             <?php $attr = array("class"=>"cmxform form-horizontal tasi-form");
@@ -250,7 +250,7 @@
             </section>
                 <section class="panel">
                         <header class="panel-heading">
-                            Key Performance Indicator (KPI) Depot <?php echo $nama_depot?> (Tahun <?php echo $tahun?>)
+                            Key Performance Indicator (KPI) TBBM <?php echo $nama_depot?> (Tahun <?php echo $tahun?>)
                         </header>
                     <div class="panel-body">
                         <div class="space15">

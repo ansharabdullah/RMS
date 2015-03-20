@@ -99,7 +99,7 @@ foreach ($volume as $row) {
         <!-- page start-->
         <section class="panel">
             <header class="panel-heading">
-                Grafik Rencana Volume vs Realisasi Harian Depot <?php echo $volume[0]->NAMA_DEPOT ?>
+                Grafik Rencana Volume vs Realisasi Harian TBBM <?php echo $volume[0]->NAMA_DEPOT ?>
             </header>
             <div class="panel-body" >
                 <?php
@@ -161,7 +161,7 @@ foreach ($volume as $row) {
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Tabel Rencana Volume vs Realisasi Harian Depot <?php echo $volume[0]->NAMA_DEPOT ?> Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>
+                            Tabel Rencana Volume vs Realisasi Harian TBBM <?php echo $volume[0]->NAMA_DEPOT ?> Bulan <?php echo strftime("%B", mktime(0, 0, 0, $bulan, 1, $tahun)) ?> Tahun <?php echo $tahun ?>
                         </header>
                         <div class="panel-body">
                             <div class="space15">

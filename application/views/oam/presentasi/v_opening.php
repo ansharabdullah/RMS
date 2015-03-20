@@ -13,7 +13,7 @@
         <div style="padding-left: 5%;height:80%;color: white;font-size: 30px;">
             <br/><br/><br/>FLEET MANAGEMENT FUEL RETAIL<br/>
             DIREKTORAT OPERASI<br/>
-            OPERATION AREA MANAGER (OAM) <?php echo AREA_OAM_ROMAWI ?><br/>
+            OPERATION AREA <?php echo AREA_OAM_ROMAWI ?><br/>
             TRIWULAN <?php echo $triwulan_?> TAHUN <?php echo date('Y')?>
         </div>
         <div style="height:20%">
@@ -21,8 +21,8 @@
                 <img src="<?php echo base_url()?>assets/img/logo-patraniaga.png">
             </div>
             <div style="width: 45%;color: black;font-size: 20px;padding-left: 5%;">
-                <?php echo $this->session->userdata('nama_pegawai') ?><br/><br/>
-                Fuel Retail Manager
+                <?php //echo $this->session->userdata('nama_pegawai') ?><br/><br/>
+<!--                Fuel Retail Manager-->
             </div>
         </div>
     </section>
