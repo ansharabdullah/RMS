@@ -2281,7 +2281,7 @@ class laporan extends CI_Controller {
 
 //			var_dump($data_realisasi_apms);
 
-            if ($jumlah_data > 0) {
+            //if ($jumlah_data > 0) {
                 $data2['laporan_ada'] = true;
                 $this->load->library('PHPExcel/Classes/PHPExcel');
                 $inputFileName = './data_laporan/template/bulanan.xls';
@@ -3100,39 +3100,39 @@ class laporan extends CI_Controller {
                 array_push($conditionalStyles, $objConditional2);
                 $objPHPExcel->getActiveSheet()->getStyle('K8')->setConditionalStyles($conditionalStyles);
                 */
+                if($hasil_kpi_operational){
+                    $sheetData->setCellValue('G8', $hasil_kpi_operational[0]->TARGET);
+                    $sheetData->setCellValue('I8', $hasil_kpi_operational[0]->REALISASI);
 
-                $sheetData->setCellValue('G8', $hasil_kpi_operational[0]->TARGET);
-                $sheetData->setCellValue('I8', $hasil_kpi_operational[0]->REALISASI);
+                    $sheetData->setCellValue('G9', $hasil_kpi_operational[1]->TARGET);
+                    $sheetData->setCellValue('I9', $hasil_kpi_operational[1]->REALISASI);
 
-                $sheetData->setCellValue('G9', $hasil_kpi_operational[1]->TARGET);
-                $sheetData->setCellValue('I9', $hasil_kpi_operational[1]->REALISASI);
+                    $sheetData->setCellValue('G11', $hasil_kpi_operational[2]->TARGET);
+                    $sheetData->setCellValue('I11', $hasil_kpi_operational[2]->REALISASI);
 
-                $sheetData->setCellValue('G11', $hasil_kpi_operational[2]->TARGET);
-                $sheetData->setCellValue('I11', $hasil_kpi_operational[2]->REALISASI);
+                    $sheetData->setCellValue('G13', $hasil_kpi_operational[3]->TARGET);
+                    $sheetData->setCellValue('I13', $hasil_kpi_operational[3]->REALISASI);
 
-                $sheetData->setCellValue('G13', $hasil_kpi_operational[3]->TARGET);
-                $sheetData->setCellValue('I13', $hasil_kpi_operational[3]->REALISASI);
+                    $sheetData->setCellValue('G14', $hasil_kpi_operational[4]->TARGET);
+                    $sheetData->setCellValue('I14', $hasil_kpi_operational[4]->REALISASI);
 
-                $sheetData->setCellValue('G14', $hasil_kpi_operational[4]->TARGET);
-                $sheetData->setCellValue('I14', $hasil_kpi_operational[4]->REALISASI);
+                    $sheetData->setCellValue('G15', $hasil_kpi_operational[5]->TARGET);
+                    $sheetData->setCellValue('I15', $hasil_kpi_operational[5]->REALISASI);
 
-                $sheetData->setCellValue('G15', $hasil_kpi_operational[5]->TARGET);
-                $sheetData->setCellValue('I15', $hasil_kpi_operational[5]->REALISASI);
+                    $sheetData->setCellValue('G16', $hasil_kpi_operational[6]->TARGET);
+                    $sheetData->setCellValue('I16', $hasil_kpi_operational[6]->REALISASI);
 
-                $sheetData->setCellValue('G16', $hasil_kpi_operational[6]->TARGET);
-                $sheetData->setCellValue('I16', $hasil_kpi_operational[6]->REALISASI);
+                    $sheetData->setCellValue('G18', $hasil_kpi_operational[7]->TARGET);
+                    $sheetData->setCellValue('I18', $hasil_kpi_operational[7]->REALISASI);
 
-                $sheetData->setCellValue('G18', $hasil_kpi_operational[7]->TARGET);
-                $sheetData->setCellValue('I18', $hasil_kpi_operational[7]->REALISASI);
+                    $sheetData->setCellValue('G19', $hasil_kpi_operational[8]->TARGET);
+                    $sheetData->setCellValue('I19', $hasil_kpi_operational[8]->REALISASI);
 
-                $sheetData->setCellValue('G19', $hasil_kpi_operational[8]->TARGET);
-                $sheetData->setCellValue('I19', $hasil_kpi_operational[8]->REALISASI);
+                    $sheetData->setCellValue('G22', $hasil_kpi_operational[9]->TARGET);
+                    $sheetData->setCellValue('I22', $hasil_kpi_operational[9]->REALISASI);
 
-                $sheetData->setCellValue('G22', $hasil_kpi_operational[9]->TARGET);
-                $sheetData->setCellValue('I22', $hasil_kpi_operational[9]->REALISASI);
-
-                $sheetData->setCellValue('E27', "=KL!" . $column_name[$last_day + 4] . ($jumlah_data + 4) . "*1000");
-
+                    $sheetData->setCellValue('E27', "=KL!" . $column_name[$last_day + 4] . ($jumlah_data + 4) . "*1000");
+                }
                 if ($pjs != "") {
                     $sheetData->setCellValue('C36', "Pjs Site Supervisor TBBM " . ucfirst(strtolower($data_depot->NAMA_DEPOT)));
                     $sheetData->setCellValue('C41', $pjs);
@@ -3160,10 +3160,12 @@ class laporan extends CI_Controller {
 
                 $sheetData->setCellValue('C11', "01 - 14 " . $month_name[$bulan] . " " . $tahun);
                 $sheetData->setCellValue('C12', "15 - " . $last_day . " " . $month_name[$bulan] . " " . $tahun);
-                $sheetData->setCellValue('E11', $interpolasi[0]->NILAI);
-                $sheetData->setCellValue('E12', $interpolasi[1]->NILAI);
-                $sheetData->setCellValue('F11', $interpolasi[2]->NILAI);
-                $sheetData->setCellValue('F12', $interpolasi[3]->NILAI);
+                if($interpolasi){
+                    $sheetData->setCellValue('E11', $interpolasi[0]->NILAI);
+                    $sheetData->setCellValue('E12', $interpolasi[1]->NILAI);
+                    $sheetData->setCellValue('F11', $interpolasi[2]->NILAI);
+                    $sheetData->setCellValue('F12', $interpolasi[3]->NILAI);
+                }
                 $sheetData->setCellValue('G11', "=SUM(KL!E" . ($jumlah_data + 4) . ":R" . ($jumlah_data + 4) . ")*1000");
                 $sheetData->setCellValue('G12', "=SUM(KL!S" . ($jumlah_data + 4) . ":" . $column_name[$last_day + 3] . ($jumlah_data + 4) . ")*1000");
 
@@ -3775,7 +3777,7 @@ class laporan extends CI_Controller {
                 $objWriter->save('./' . $nama_file);
 
                 $data2['nama_file'] = base_url() . $nama_file;
-            }
+            //}
             $this->header(7, 2);
             $this->load->view('laporan/v_preview_bulanan', $data2);
             $this->footer();
